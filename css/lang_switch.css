@@ -1,0 +1,75 @@
+/* Language Switcher Component */
+.lang-switch {
+  position: absolute;
+  right: 1.5%;
+  top: 1.35rem;
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d0dbe5;
+  border-radius: 20px;
+  padding: 3px 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  z-index: 999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  height: 26px;
+  box-sizing: border-box;
+}
+
+.lang-switch .lang-icon {
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 13px;
+  line-height: 1;
+  user-select: none;
+}
+
+.lang-switch a {
+  font-size: 12px;
+  line-height: 18px;
+  color: #555555;
+  padding: 0 6px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.lang-switch a:hover {
+  color: #008ed1;
+  text-decoration: none;
+}
+
+.lang-switch a.active {
+  background: #7fb435;
+  color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(127,180,53,0.3);
+}
+
+.lang-switch .lang-sep {
+  color: #ccc;
+  font-size: 11px;
+  margin: 0 1px;
+  user-select: none;
+}
+
+/* Adjust header telephone position so it doesn't overlap */
+.g_top .tel {
+  right: 8.5% !important;
+}
+
+/* Sticky Header compatibility */
+.g_top.headFix .lang-switch {
+  top: 1.1rem;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .lang-switch {
+    position: static !important;
+    display: inline-flex !important;
+    margin: 6px auto 10px auto !important;
+    float: none !important;
+  }
+}

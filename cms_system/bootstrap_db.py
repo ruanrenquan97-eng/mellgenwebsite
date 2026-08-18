@@ -3,7 +3,7 @@ import re
 import json
 from urllib.parse import unquote
 
-WORKSPACE_DIR = r"d:\Administrator\webapp\美尔健官网"
+WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 
 os.makedirs(DATA_DIR, exist_ok=True)

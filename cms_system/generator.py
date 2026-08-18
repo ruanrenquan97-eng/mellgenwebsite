@@ -4,7 +4,7 @@ import json
 import shutil
 from urllib.parse import urlparse
 
-WORKSPACE_DIR = r"d:\Administrator\webapp\美尔健官网"
+WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 
 def load_db():
@@ -421,8 +421,7 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
 
 def update_all_footers_headers_and_nav(settings, nav_links):
     for root, dirs, files in os.walk(WORKSPACE_DIR):
-        if "cms_system" in root:
-            continue
+        dirs[:] = [d for d in dirs if d not in ['.git', 'en', 'cms_system', '.gemini', 'node_modules', '__pycache__']]
         for file in files:
             if file.endswith('.html'):
                 file_path = os.path.join(root, file)
@@ -521,7 +520,21 @@ def publish_site():
     # 6. Sitemaps
     update_sitemaps(products, articles)
     
+    # 7. Auto-sync English site & Language switchers
+    try:
+        import sys
+        scripts_dir = os.path.join(WORKSPACE_DIR, "scripts")
+        if scripts_dir not in sys.path:
+            sys.path.insert(0, scripts_dir)
+        import build_full_en_site
+        build_full_en_site.main()
+        import deep_translate_en
+        deep_translate_en.main()
+    except Exception as e:
+        print(f"[-] Notice on English site sync: {e}")
+    
     print("[OK] Site publishing complete!")
 
 if __name__ == "__main__":
     publish_site()
+

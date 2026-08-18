@@ -1,0 +1,876 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Cache-control" content="no-cache"/>
+  <title>NS-GEO 双引擎智能网站 - 登录</title>
+  <style>
+    :root {
+      --color-primary: #499c7c;
+      --color-primary-dark: #146850;
+      --color-secondary: #499c7c;
+      --color-danger: #EF4444;
+      --color-success: #10B981;
+      --color-warning: #F59E0B;
+      --color-bg-page: #F9FAFB;
+      --color-bg-card: #FFFFFF;
+      --color-text-primary: #111827;
+      --color-text-secondary: #6B7280;
+      --color-text-placeholder: #9CA3AF;
+      --color-border: #E5E7EB;
+      --color-border-dark: #D1D5DB;
+      --font-family: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-size-h1: 28px;
+      --font-size-h2: 24px;
+      --font-size-h3: 18px;
+      --font-size-body: 14px;
+      --font-size-small: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--font-family); }
+
+    /* ===== Layout ===== */
+    .login-container {
+      display: flex; flex-direction: row; min-height: 100vh;
+    }
+
+    /* ===== Left Panel ===== */
+    .login-left {
+        position: relative;
+      flex: 1;
+      background: var(--color-bg-page);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 56px;
+      min-height: 100vh;
+    }
+    .login-left-inner {
+      max-width: 480px; margin: 0 auto; width: 100%;
+    }
+
+    .brand-header { margin-bottom: 32px; }
+    .brand-row {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .logo-box {
+      width: 40px; height: 40px;
+      background: var(--color-primary);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 14px; padding: 6px;
+    }
+    .logo-box img { width: 100%; height: 100%; object-fit: contain; }
+    .brand-name {
+      font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text-primary);
+    }
+    .login-subtitle {
+      font-size: var(--font-size-h3); color: var(--color-text-secondary);
+    }
+
+    /* ===== Form Elements ===== */
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; margin-bottom: 8px;
+      font-size: var(--font-size-body); font-weight: 500; color: var(--color-text-primary);
+    }
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input.form-input {
+      width: 100%; height: 36px;
+      border: 1px solid var(--color-border-dark); border-radius: 6px;
+      padding: 0 16px; font-size: var(--font-size-body); color: var(--color-text-primary);
+      background: var(--color-bg-card);
+      transition: border-color .15s, box-shadow .15s;
+      outline: none;
+    }
+    .form-group input::placeholder { color: var(--color-text-placeholder); }
+    .form-group input:focus {
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.15);
+    }
+    .form-group input.field-error { border-color: var(--color-danger); }
+
+    .input-wrap { position: relative; }
+    .eye-btn {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px;
+      color: var(--color-text-placeholder); font-size: 16px;
+      transition: background .15s;
+    }
+    .eye-btn:hover { background: #f3f4f6; }
+
+    /* Verification Code行 */
+    .captcha-row { display: flex; gap: 10px; align-items: center; }
+    .captcha-row input { flex: 1; }
+    .captcha-img {
+      height: 36px; border-radius: 6px; cursor: pointer; border: 1px solid var(--color-border-dark);
+      flex-shrink: 0;
+    }
+
+    /* 手机号下拉 */
+    #mobileSelect {
+      width: 100%; height: 36px;
+      border: 1px solid #dde2f0; border-radius: 6px;
+      padding: 0 28px 0 16px; font-size: var(--font-size-body); color: var(--color-text-primary);
+      background: #fafbff; transition: border-color .15s; outline: none;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239CA3AF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+      cursor: pointer;
+    }
+    #mobileSelect:focus { border-color: var(--color-secondary); box-shadow: 0 0 0 4px rgba(73,156,124,.15); background-color: #fff; }
+
+    /* ===== Form Options ===== */
+    .form-options {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .remember-wrap {
+      display: flex; align-items: center; gap: 8px;
+      font-size: var(--font-size-body); color: var(--color-text-secondary); cursor: pointer;
+    }
+    .remember-wrap input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--color-primary);
+    }
+    .forgot-link {
+      font-size: var(--font-size-body); color: var(--color-secondary); text-decoration: none;
+    }
+    .forgot-link:hover { text-decoration: underline; }
+
+    /* ===== Buttons ===== */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; height: 44px; padding: 10px 20px;
+      background: var(--color-primary); color: #fff;
+      border: none; border-radius: 6px;
+      font-size: var(--font-size-body); font-weight: 500;
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -2px rgba(0,0,0,.1);
+    }
+    .btn-primary:active:not(:disabled) { transform: translateY(0); }
+    .btn-primary:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    .btn-login {
+      width: 100%; height: 44px;
+      background: var(--color-primary); color: #fff;
+      border: none; border-radius: 6px;
+      font-size: var(--font-size-body); font-weight: 500;
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-login:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -2px rgba(0,0,0,.1);
+    }
+    .btn-login:active { transform: translateY(0); }
+
+    /* ===== Error / Alert ===== */
+    .alert-error {
+      background: #FEF2F2; border-left: 4px solid var(--color-danger);
+      padding: 12px 16px; border-radius: 0 6px 6px 0;
+      margin-bottom: 16px; display: none;
+      font-size: var(--font-size-body); color: var(--color-danger);
+    }
+    .alert-error.show { display: block; }
+
+    /* ===== IP Verify ===== */
+    .ip-verify-section { display: none; margin-bottom: 16px; }
+    .ip-verify-section.show { display: block; }
+    .ip-tip {
+      font-size: var(--font-size-body); color: var(--color-warning);
+      margin-bottom: 12px; padding: 8px 12px;
+      background: #FFFBEB; border-left: 4px solid var(--color-warning);
+      border-radius: 0 6px 6px 0;
+    }
+    .code-row { display: flex; gap: 10px; align-items: center; }
+    .code-row input { flex: 1; }
+    .btn-send {
+      white-space: nowrap; height: 36px; padding: 0 16px;
+      background: var(--color-bg-card); border: 1px solid var(--color-primary);
+      border-radius: 6px; color: var(--color-primary); font-size: var(--font-size-body);
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-send:hover { background: #f0f2ff; }
+    .btn-send.disabled { border-color: var(--color-border); color: var(--color-text-placeholder); cursor: not-allowed; }
+
+    /* ===== Demo Accounts ===== */
+    .demo-accounts {
+    display: flex;
+        align-items: center;
+      margin-top: 16px; padding: 12px;
+      background: #efefef; border: 1px solid #dbdbdb;
+      border-radius: 8px;
+    }
+    .demo-accounts p { font-size: var(--font-size-small); }
+    .demo-accounts .demo-title { color: var(--color-primary); font-weight: 500; margin-bottom: 4px; }
+    .demo-accounts .demo-item { color: var(--color-text-secondary); line-height: 1.6; margin-left: 20px; }
+
+    /* ===== Footer ===== */
+    .login-footer {
+        position: absolute;
+        bottom: 28px; width: 480px;
+        padding-top: 16px;
+        border-top: 1px solid var(--color-border); text-align: center;
+    }
+    .login-footer, .login-footer a {
+      font-size: var(--font-size-small); color: var(--color-text-secondary);
+    }
+    .login-footer a { text-decoration: none; margin: 0 6px; }
+    .login-footer a:hover { color: var(--color-secondary); }
+
+    .hidden-submit { display: none; }
+
+    /* ===== Right Panel ===== */
+    .login-right {
+      flex: 1.5;
+      background: #000;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+    }
+    .particle-canvas { position: absolute; inset: 0; z-index: 1; }
+    .right-overlay {
+      position: absolute; inset: 0; z-index: 10; pointer-events: none;
+      background: linear-gradient(to right, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 40%, transparent 70%);
+    }
+    .hero-content {
+      position: relative; z-index: 20; max-width: 540px; padding: 0 48px; margin-right: auto;
+    }
+    .hero-title {
+      font-size: 32px; font-weight: 700; color: #fff; line-height: 1.25;
+      margin-bottom: 16px; text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
+    .hero-desc {
+      font-size: var(--font-size-body); color: rgba(255,255,255,.8);
+      line-height: 1.8; margin-bottom: 32px; max-width: 420px;
+    }
+    .hero-tags {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,.1); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px; padding: 8px 16px;
+      color: #fff; font-size: var(--font-size-body); font-weight: 500;
+    }
+    .hero-slogan {
+      font-size: var(--font-size-small); color: rgba(255,255,255,.5);
+    }
+
+    /* ===== Loading Spinner ===== */
+    .spin-loader {
+      display: inline-block; width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 900px) {
+      .login-left { flex: 0 0 100%; max-width: 100%; padding: 32px 24px; }
+      .login-right { display: none; }
+    }
+  </style>
+
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css"></head>
+<body>
+
+<div class="login-container">
+
+<!-- ===== Left: Login Form ===== -->
+<div class="login-left">
+  <div class="login-left-inner">
+
+    <!-- Brand Header -->
+    <div class="brand-header">
+      <div class="brand-row">
+        <div class="logo-box">
+          <img src="skins/img/logo-w.png?t=1585295696" alt="NS-GEO">
+        </div>
+        <span class="brand-name">NS-GEO 双引擎智能网站</span>
+      </div>
+      <div class="login-subtitle">登录中心</div>
+    </div>
+
+    <form id="fm1" action="/login;jsessionid=F50A0C55C4F496AD3D7F00492B60DDA0?service=http%3A%2F%2Fcmsn.nsw99.com%2Fpccms%2Fj_spring_cas_security_check" method="post">
+
+      <!-- CAS 必须隐藏字段 -->
+      <input type="hidden" name="lt" value="LT-67835-NGddxFo1KQrlHKCuoaMYeHCiH3hjUc-cas01.example.org"/>
+      <input type="hidden" name="execution" value="e1s1"/>
+      <input type="hidden" name="_eventId" value="submit"/>
+
+      <!-- 错误信息 -->
+      <div id="errorMsg" class="alert-error">
+        
+        <span id="jsErrorMsg"></span>
+      </div>
+
+      <!-- 账号 -->
+      <div class="form-group">
+        <label for="username">账号</label>
+        
+          
+          
+            <input id="username" name="username" class="form-input" placeholder="请输入邮箱账号" type="text" value="" autocomplete="off"/>
+          
+        
+      </div>
+
+      <!-- 密码 -->
+      <div class="form-group">
+        <label for="password">密码</label>
+        <div class="input-wrap">
+          <input id="password" name="password" class="form-input" placeholder="请输入密码（6-20位）" type="password" value="" autocomplete="off"/>
+          <button type="button" class="eye-btn" onclick="togglePwd(this)" title="显示/隐藏密码">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 图形Verification Code -->
+      <div class="form-group">
+        <label for="captcha">Verification Code</label>
+        <div class="captcha-row">
+          <input id="captcha" name="captcha" class="form-input" placeholder="请输入Verification Code" type="text" value="" autocomplete="off"/>
+          <img class="captcha-img" id="captchaImg" src="/Kaptcha.jpg"
+               alt="Verification Code" title="点击刷新"
+               onclick="this.src='/Kaptcha.jpg?'+Math.random()"/>
+        </div>
+      </div>
+
+      <!-- IP 校验 - 手机号二次验证 -->
+      <div class="ip-verify-section" id="ipVerifySection">
+        <div class="ip-tip">系统检测到您的登录地址有变化，请通过手机验证身份</div>
+        <div class="form-group">
+          <label>验证手机号</label>
+          <select id="mobileSelect">
+            <option value="-1">-</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="code">手机Verification Code</label>
+          <div class="code-row">
+            <input id="code" name="code" class="form-input" placeholder="请输入短信Verification Code" type="text" value="" autocomplete="off"/>
+            <button type="button" class="btn-send" id="btnSend" onclick="sendCode()">发送Verification Code</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 记住密码 / 忘记密码 -->
+      <div class="form-options">
+        <label class="remember-wrap">
+          <input type="checkbox" id="rememberMe" name="rememberMe"/>
+          记住密码
+        </label>
+        <!-- <a href="#" class="forgot-link">忘记密码</a> -->
+      </div>
+
+      <!-- 登录按钮 -->
+      <button type="button" class="btn-login" id="btnLogin" onclick="doLogin()">
+        <span id="btnLoginText">立即登录</span>
+      </button>
+
+      <!-- 真实 submit -->
+      <input type="submit" id="realSubmit" class="hidden-submit" value="submit"/>
+
+      <!-- 演示账号提示 -->
+      <div class="demo-accounts">
+<!--         <p class="demo-title">演示账号</p> -->
+        <img src="skins/img/slogan-new5.png?t=1585295696" />
+        <p class="demo-item">
+            Customer service and support platform for enterprise partners<br/>
+            致力于为客户提供专业的产品、课程与优质的服务<br/>
+            问题咨询/听课学习/产品试用/优惠领券/就找牛商帮
+        </p>
+
+      </div>
+
+    </form>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      &copy; 2026 单仁牛商集团 版权所有 &nbsp;|&nbsp;
+      <a href="#">隐私政策</a> &nbsp;|&nbsp;
+      <a href="#">服务协议</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== Right: Hero Panel ===== -->
+<div class="login-right" id="rightPanel">
+  <div class="particle-canvas" id="threeContainer"></div>
+  <div class="right-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-title">全域获客，智启未来</div>
+    <div class="hero-desc">百度大搜 SEO + AI 大模型推荐双赛道获客，一套系统承接全网流量与询盘</div>
+    <div class="hero-tags">
+      <span class="hero-tag">GEO AI 引擎</span>
+      <span class="hero-tag">BEO 百家号引擎</span>
+      <span class="hero-tag">全域数据仪表盘</span>
+    </div>
+    <div class="hero-slogan">19 年全网营销技术积淀 · 上市企业技术护航</div>
+  </div>
+</div>
+
+</div>
+
+<script src="/js/easyui/three.min.js"></script>
+<script src="/js/easyui/jquery.min.js"></script>
+<script>
+  /* ===== 密码显示/隐藏 ===== */
+  function togglePwd(btn) {
+    var input = document.getElementById('password');
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+    } else {
+      input.type = 'password';
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+    }
+  }
+
+  /* ===== 错误信息 ===== */
+  function showError(msg) {
+    var el = document.getElementById('errorMsg');
+    document.getElementById('jsErrorMsg').textContent = msg;
+    el.classList.add('show');
+  }
+  function hideError() {
+    document.getElementById('errorMsg').classList.remove('show');
+    document.getElementById('jsErrorMsg').textContent = '';
+  }
+
+  /* ===== 检查 CAS 服务端报错 ===== */
+  (function checkServerError(){
+    var el = document.getElementById('errorMsg');
+    if (el && el.textContent.trim()) {
+      el.classList.add('show');
+    }
+  })();
+
+  /* ===== 记住密码 ===== */
+  var REMEMBER_KEY = 'cas_remember';
+
+  function saveRemember() {
+    var username = $('#username').val().trim();
+    var password = $('#password').val();
+    if ($('#rememberMe').is(':checked') && username) {
+      localStorage.setItem(REMEMBER_KEY, JSON.stringify({ u: username, p: password }));
+    } else {
+      localStorage.removeItem(REMEMBER_KEY);
+    }
+  }
+
+  function loadRemember() {
+    try {
+      var data = JSON.parse(localStorage.getItem(REMEMBER_KEY));
+      if (data && data.u) {
+        $('#username').val(data.u);
+        $('#password').val(data.p || '');
+        $('#rememberMe').prop('checked', true);
+      }
+    } catch(e) {}
+  }
+
+  loadRemember();
+
+  /* ===== 登录入口 ===== */
+  var noClick = false;
+  var verifyCodeMode = false;
+  var currentTab = '';
+
+  function doLogin() {
+    if (noClick) return;
+    var username = $('#username').val().trim();
+    var password = $('#password').val();
+    var captcha  = $('#captcha').val().trim();
+    hideError();
+
+    if (!username) { showError('请输入账号'); $('#username').focus(); return; }
+    if (!password) { showError('请输入密码'); $('#password').focus(); return; }
+    if (!captcha)  { showError('请输入图形Verification Code'); $('#captcha').focus(); return; }
+
+    if (verifyCodeMode) { verifyMobileCodeFn(username); return; }
+
+    // 显示加载状态
+    $('#btnLoginText').html('<span class="spin-loader"></span>');
+    noClick = true;
+
+    $.ajax({
+      url: '/verifyLoginInfo',
+      type: 'POST', dataType: 'json',
+      data: { userName: username, password: password, captcha: captcha },
+      success: function(data) {
+        if (data.code === 200) {
+          saveRemember();
+          checkLoginIp(username);
+        } else {
+          showError(data.message || '账号或密码错误');
+          resetBtn();
+          $('#captchaImg').trigger('click');
+        }
+      },
+      error: function() { resetBtn(); showError('网络异常，请稍后重试'); }
+    });
+  }
+
+  function resetBtn() {
+    noClick = false;
+    $('#btnLoginText').text('立即登录');
+  }
+
+  /* ===== IP 校验 ===== */
+  function checkLoginIp(username) {
+    $.ajax({
+      url: '/verifyLoginIp',
+      type: 'POST', dataType: 'json',
+      data: { userName: username },
+      success: function(data) {
+        var needVerify = false;
+        if (data && data.length) {
+          var sel = $('#mobileSelect');
+          sel.empty();
+          data.forEach(function(v, i) {
+            if (!v.verify) needVerify = true;
+            if (v.mobile) {
+              sel.append('<option value="' + v.tab + '">' + v.mobile + '</option>');
+            }
+          });
+          if (sel.find('option').length === 0) {
+            sel.append('<option value="-1">-</option>');
+          } else {
+            currentTab = sel.val();
+          }
+        }
+        if (needVerify) {
+          $('#ipVerifySection').addClass('show');
+          verifyCodeMode = true;
+          resetBtn();
+        } else {
+          $('#realSubmit').trigger('click');
+        }
+      },
+      error: function() { $('#realSubmit').trigger('click'); }
+    });
+  }
+
+  /* ===== 发送Verification Code ===== */
+  var countdown = 0;
+  function sendCode() {
+    if (countdown > 0) return;
+    var username = $('#username').val().trim();
+    if (!username) { showError('请先填写账号'); return; }
+    $.ajax({
+      url: '/sendCode',
+      type: 'POST', dataType: 'json',
+      data: { userName: username, tab: $('#mobileSelect').val() },
+      success: function(data) {
+        if (data.isSuccess) { startCountdown(); }
+        else { showError(data.data || '发送失败，请稍后重试'); }
+      },
+      error: function() { showError('网络异常，请稍后重试'); }
+    });
+  }
+  function startCountdown() {
+    countdown = 60;
+    var btn = $('#btnSend');
+    btn.addClass('disabled');
+    var t = setInterval(function() {
+      if (countdown > 0) { countdown--; btn.text(countdown + 's'); }
+      else { clearInterval(t); btn.text('重新发送').removeClass('disabled'); }
+    }, 1000);
+  }
+
+  /* ===== 手机Verification Code校验 ===== */
+  function verifyMobileCodeFn(username) {
+    var code = $('#code').val().trim();
+    if (!code) { showError('请输入手机Verification Code'); $('#code').focus(); return; }
+    $('#btnLoginText').html('<span class="spin-loader"></span>');
+    noClick = true;
+    $.ajax({
+      url: '/verifyMobileCode',
+      type: 'POST', dataType: 'json',
+      data: { code: code, userName: username, tab: $('#mobileSelect').val() },
+      success: function(data) {
+        if (data.isSuccess) { hideError(); $('#realSubmit').trigger('click'); }
+        else { showError(data.data || 'Verification Code错误'); resetBtn(); }
+      },
+      error: function() { resetBtn(); showError('网络异常，请稍后重试'); }
+    });
+  }
+
+  /* ===== 回车登录 ===== */
+  document.addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) doLogin();
+  });
+
+  /* ===== 账号改变Reset状态 ===== */
+  $('#username').on('change', function() {
+    verifyCodeMode = false; noClick = false;
+    $('#ipVerifySection').removeClass('show');
+    $('#btnLoginText').text('立即登录');
+    hideError();
+    if (!$('#rememberMe').is(':checked')) {
+      localStorage.removeItem(REMEMBER_KEY);
+    }
+  });
+
+  /* ===== 手机号下拉切换 ===== */
+  $('#mobileSelect').on('change', function() {
+    currentTab = $(this).val();
+    $('#code').val('');
+  });
+
+  /* ===== 取消记住密码时清除存储 ===== */
+  $('#rememberMe').on('change', function() {
+    if (!$(this).is(':checked')) {
+      localStorage.removeItem(REMEMBER_KEY);
+    }
+  });
+
+  /* ===== 防 iframe 嵌套 ===== */
+  if (window !== window.top) { window.top.location.replace(window.location); }
+
+  /* ===== Three.js 螺旋粒子动画 ===== */
+  (function() {
+    var mountElement = document.getElementById('threeContainer');
+    if (!mountElement) return;
+
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x050510);
+    scene.fog = new THREE.Fog(0x050510, 10, 50);
+
+    var camera = new THREE.PerspectiveCamera(
+      60,
+      mountElement.clientWidth / mountElement.clientHeight,
+      0.1, 100
+    );
+    camera.position.set(0, 0, 12);
+    camera.lookAt(0, 0, 0);
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(mountElement.clientWidth, mountElement.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    mountElement.appendChild(renderer.domElement);
+
+    var clock = new THREE.Clock();
+    var particleData = [];
+    var glowSpheres = [];
+    var glowData = [];
+
+    // 背景粒子
+    var bgGeo = new THREE.BoxGeometry(0.6, 0.8, 0.05);
+    var bgMat = new THREE.MeshPhysicalMaterial({
+      color: 0x000000,
+      metalness: 0.1,
+      roughness: 0.1,
+      transmission: 0.6,
+      thickness: 0.5,
+      transparent: true,
+      opacity: 0.7,
+      side: THREE.DoubleSide,
+    });
+    var bgMesh = new THREE.InstancedMesh(bgGeo, bgMat, 150);
+    var dummy = new THREE.Object3D();
+
+    for (var i = 0; i < 150; i++) {
+      var data = {
+        angle: Math.random() * Math.PI * 2,
+        radius: 4 + Math.random() * 8,
+        speed: 0.05 + Math.random() * 0.1,
+        yOffset: (Math.random() - 0.5) * 12,
+        rotationSpeed: {
+          x: (Math.random() - 0.5) * 0.02,
+          y: (Math.random() - 0.5) * 0.02,
+        },
+        type: Math.random() > 0.5 ? 0 : 1,
+        phase: Math.random() * Math.PI * 2,
+      };
+      particleData.push(data);
+
+      var x = Math.cos(data.angle) * data.radius;
+      var y = (Math.random() - 0.5) * 10;
+      var z = Math.sin(data.angle) * data.radius;
+      dummy.position.set(x, y, z);
+      dummy.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      dummy.updateMatrix();
+      bgMesh.setMatrixAt(i, dummy.matrix);
+    }
+    bgMesh.instanceMatrix.needsUpdate = true;
+    scene.add(bgMesh);
+
+    // 螺旋链
+    var helixGeo = new THREE.PlaneGeometry(0.5, 0.5);
+    var helixMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      metalness: 0.9,
+      roughness: 0.1,
+      transparent: true,
+      opacity: 0.9,
+    });
+
+    var strand1 = new THREE.InstancedMesh(helixGeo, helixMat, 100);
+    var strand2 = new THREE.InstancedMesh(helixGeo, helixMat, 100);
+    scene.add(strand1);
+    scene.add(strand2);
+
+    var strand1Data = [];
+    var strand2Data = [];
+
+    for (var strandIndex = 0; strandIndex < 2; strandIndex++) {
+      var strand = strandIndex === 0 ? strand1 : strand2;
+      var dataArray = strandIndex === 0 ? strand1Data : strand2Data;
+      var strandOffset = strandIndex === 0 ? 0 : Math.PI;
+
+      for (var i = 0; i < 100; i++) {
+        var data = {
+          index: i,
+          strand: strandIndex,
+          angle: (i / 20) * Math.PI * 2,
+          radius: 2.5,
+          speed: 0.2,
+          yPos: (i / 100) * 10 - 5,
+          offset: strandOffset,
+          scalePhase: i * 0.1,
+          baseScale: 0.5 + Math.random() * 0.5,
+          highlightIntensity: 0,
+        };
+        dataArray.push(data);
+        particleData.push(data);
+
+        var x = Math.cos(data.angle + data.offset) * data.radius;
+        var y = data.yPos;
+        var z = Math.sin(data.angle + data.offset) * data.radius;
+        var scale = data.baseScale;
+        dummy.position.set(x, y, z);
+        dummy.scale.set(scale, scale, scale);
+        dummy.rotation.set(0, 0, -data.angle);
+        dummy.updateMatrix();
+        strand.setMatrixAt(i, dummy.matrix);
+      }
+      strand.instanceMatrix.needsUpdate = true;
+    }
+
+    // 发光球体
+    var sphereGeo = new THREE.SphereGeometry(0.08, 16, 16);
+    var glowMat = new THREE.MeshBasicMaterial({
+      color: 0x4d9fff,
+      transparent: true,
+      opacity: 0.8,
+    });
+
+    for (var i = 0; i < 100; i++) {
+      var data = {
+        index: i,
+        strand: i % 2,
+        angle: (i / 20) * Math.PI * 2,
+        radius: 2.5,
+        speed: 0.2,
+        yPos: (i / 100) * 10 - 5,
+        offset: i % 2 === 0 ? 0 : Math.PI,
+        scalePhase: i * 0.1,
+        baseScale: 1,
+        highlightIntensity: 0,
+      };
+      glowData.push(data);
+      particleData.push({ type: 'glow' });
+
+      var x = Math.cos(data.angle + data.offset) * data.radius;
+      var y = data.yPos;
+      var z = Math.sin(data.angle + data.offset) * data.radius;
+
+      var glowSphere = new THREE.Mesh(sphereGeo, glowMat);
+      glowSphere.position.set(x, y, z);
+      glowSphere.userData = data;
+      scene.add(glowSphere);
+      glowSpheres.push(glowSphere);
+    }
+
+    var animFrameId;
+
+    function animate() {
+      animFrameId = requestAnimationFrame(animate);
+      var delta = clock.getDelta();
+      var time = clock.getElapsedTime();
+
+      // 动画 - 螺旋链
+      for (var strandIndex = 0; strandIndex < 2; strandIndex++) {
+        var strand = strandIndex === 0 ? strand1 : strand2;
+        var dataArray = strandIndex === 0 ? strand1Data : strand2Data;
+
+        for (var i = 0; i < 100; i++) {
+          var data = dataArray[i];
+          data.angle += data.speed * delta;
+          var x = Math.cos(data.angle + data.offset) * data.radius;
+          var y = data.yPos;
+          var z = Math.sin(data.angle + data.offset) * data.radius;
+
+          strand.getMatrixAt(i, dummy.matrix);
+          dummy.matrix.decompose(dummy.position, dummy.quaternion, dummy.scale);
+          dummy.position.set(x, y, z);
+          dummy.rotation.set(0, 0, -data.angle);
+          var highlight = Math.sin(time * 2 + data.scalePhase) * 0.5 + 0.5;
+          var scale = data.baseScale * (1 + highlight * 0.3);
+          dummy.scale.set(scale, scale, scale);
+          dummy.updateMatrix();
+          strand.setMatrixAt(i, dummy.matrix);
+        }
+        strand.instanceMatrix.needsUpdate = true;
+      }
+
+      // 动画 - 发光球体
+      for (var i = 0; i < glowSpheres.length; i++) {
+        var sphere = glowSpheres[i];
+        var data = glowData[i];
+        data.angle += data.speed * delta;
+        var x = Math.cos(data.angle + data.offset) * data.radius;
+        var y = data.yPos + Math.sin(time + data.index) * 0.1;
+        var z = Math.sin(data.angle + data.offset) * data.radius;
+        sphere.position.set(x, y, z);
+      }
+
+      // 场景缓慢旋转
+      scene.rotation.y = Math.sin(time * 0.1) * 0.1;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    var handleResize = function() {
+      if (!mountElement) return;
+      var w = mountElement.clientWidth;
+      var h = mountElement.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+
+    window.addEventListener('resize', handleResize);
+  })();
+</script>
+</body>
+</html>

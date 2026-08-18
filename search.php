@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit"> 
   <title>水母胶原-重组蛋白-复合营养素-美尔健生物<../index.html../index.htmlindex.htmltitle>
 <meta name="keywords" content="水母胶原,重组蛋白,复合营养素">
-<meta name="description" content="水母胶原,重组蛋白,复合营养素认准美尔健（深圳）生物科技有限公司。美尔健生物美尔健生物基于合成生物学方法发明了第3代“透皮肽融合技术”；透皮吸收效率提高 10倍；应用成本降低 20倍；"> 
+<meta name="description" content="水母胶原,重组蛋白,复合营养素认准美尔健（深圳）生物科技有限公司。美尔健生物美尔健生物基于合成生物学方法发明了第3代“透皮肽融合技术”；显著提高活性成分透皮吸收效率，有效优化应用开发成本（*实验室科研对比数据）；"> 
   <link href=".../index.html../index.htmlindex.htmlcss../index.html../index.htmlindex.htmlreset.css" rel="stylesheet"> 
   <script src="js../index.html../index.htmlindex.htmlnsw.pc.min.js"><../index.html../index.htmlindex.htmlscript> 
   <link href=".../index.html../index.htmlindex.htmlcss../index.html../index.htmlindex.html67b2cbede4b03b204ca34c99.css" rel="stylesheet">
@@ -26,7 +26,7 @@ var _hmt = _hmt || [];
   <div class="g_top f_fw" id="head"> 
  <div class="m_top"> 
   <h1 class="lter tlogo"><a href=".../index.html../index.htmlindex.html../index.htmlindex.html" title="水母胶原-重组蛋白-复合营养素-美尔健生物"><img alt="美尔健（深圳）生物科技有限公司" src="resource../index.html../index.htmlindex.htmlimages../index.html../index.htmlindex.html967bbb92f01e4b14a89691e300570a47_4.png" title="美尔健（深圳）生物科技有限公司"><../index.html../index.htmlindex.htmla><../index.html../index.htmlindex.htmlh1> 
-  <h2 class="lter"> <em>重塑青春·锁住肌龄<../index.html../index.htmlindex.htmlem><b>全球生物透皮技术赢领者<../index.html../index.htmlindex.htmlb> <../index.html../index.htmlindex.htmlh2> 
+  <h2 class="lter"> <em>重塑青春·锁住肌龄<../index.html../index.htmlindex.htmlem><b>全球生物透皮技术深耕者<../index.html../index.htmlindex.htmlb> <../index.html../index.htmlindex.htmlh2> 
   <div class="tel rter"> 
    <b>186-9197-8530 ../index.html../index.htmlindex.html 0755-82926499<../index.html../index.htmlindex.htmlb> 
   <../index.html../index.htmlindex.htmldiv> 
@@ -139,7 +139,7 @@ var _hmt = _hmt || [];
 	       				 	                       <dd>
 	                           <h4><a class="t1-article-link" href="http:../index.html../index.htmlindex.html../index.html../index.htmlindex.htmlwww.mellgen.com../index.html../index.htmlindex.htmlarticles../index.html../index.htmlindex.htmlpdrnss.html" title="PDRN是什么？揭秘美尔健生物的合成生物学如何引领皮肤再生科技新纪元">PDRN是什么？揭秘美尔健生物的合成生物学如何引领皮肤再生科技新纪元<../index.html../index.htmlindex.htmla><../index.html../index.htmlindex.htmlh4>
 	                           <div class="xnznr-search-1-desc">
-	                            在现代皮肤医学和功效护肤品领域，**PDRN（多聚脱氧核糖核苷酸）**正迅速成为炙手可热的修复成分。作为一种源自鱼类或植物的<i style='color:red'>dna<../index.html../index.htmlindex.htmli>片段活性物质，它以其出色的细胞再生、抗炎修复和皮肤屏障重建能力，赢得全球医美和护肤界的广泛关注。那么，**PDRN到底是什么？它有什么作用？**而作为活性分子合成与透皮技术的先锋，美尔健生物又是如何通过合成生物学实现PDRN的高效、绿色产业化的？	                           <../index.html../index.htmlindex.htmldiv>
+	                            在现代皮肤医学和功效护肤品领域，**PDRN（多聚脱氧核糖核苷酸）**正迅速成为炙手可热的修复成分。作为一种源自鱼类或植物的<i style='color:red'>dna<../index.html../index.htmlindex.htmli>片段活性物质，它以其出色的肌肤焕活、舒缓修护和皮肤屏障维护能力，赢得全球医美和护肤界的广泛关注。那么，**PDRN到底是什么？它有什么作用？**而作为活性分子合成与透皮技术的先锋，美尔健生物又是如何通过合成生物学实现PDRN的高效、绿色产业化的？	                           <../index.html../index.htmlindex.htmldiv>
 	                       <../index.html../index.htmlindex.htmldd>
 	                   <../index.html../index.htmlindex.htmldl>
 	        	
@@ -256,7 +256,7 @@ var _hmt = _hmt || [];
   <div class="xban"> 
    <img src="images../index.html../index.htmlindex.htmlxban.jpg"> 
   <../index.html../index.htmlindex.htmldiv> 
-  <h3><b>重塑青春·锁住肌龄<../index.html../index.htmlindex.htmlb><em>全球生物透皮技术赢领者<../index.html../index.htmlindex.htmlem><../index.html../index.htmlindex.htmlh3> 
+  <h3><b>重塑青春·锁住肌龄<../index.html../index.htmlindex.htmlb><em>全球生物透皮技术深耕者<../index.html../index.htmlindex.htmlem><../index.html../index.htmlindex.htmlh3> 
  <../index.html../index.htmlindex.htmldiv> 
  <div class="m_ft"> 
   <div class="content"> 

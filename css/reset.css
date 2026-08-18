@@ -2,7 +2,9 @@
 /*模板设计小组人员修改以后注意本地备份一下*/
 /*最新更新人员：胡平2017-3-13*/   
 /* 清除内外边距 */
-@charset "utf-8";
+@charset "utf-8";
+@import url("./lang_switch.css");
+@import url("./en_layout.css");
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
 dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
 pre, /* text formatting elements 文本格式元素 */

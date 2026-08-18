@@ -1,9 +1,15 @@
 import os
+import sys
 import json
 import uuid
 import datetime
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 from werkzeug.utils import secure_filename
+
+# Ensure cms_system folder is in sys.path
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
 
 # Import the site generator
 import generator
@@ -11,7 +17,7 @@ import generator
 app = Flask(__name__)
 app.secret_key = "mellgen_cms_secret_key_12938"
 
-WORKSPACE_DIR = r"d:\Administrator\webapp\美尔健官网"
+WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 UPLOAD_FOLDER = os.path.join(WORKSPACE_DIR, "resource", "images")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

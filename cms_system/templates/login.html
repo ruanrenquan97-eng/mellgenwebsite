@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 | 美尔健GEO智能官网</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#499c7c',
+              dark: '#146850',
+              light: '#f0f9f5',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+    <!-- Header -->
+    <div class="px-8 pt-8 pb-6 bg-primary text-white text-center">
+      <div class="inline-block bg-white p-2 rounded-xl mb-3 shadow-md">
+        <!-- Leaf/Biotech icon placeholder -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+        </svg>
+      </div>
+      <h1 class="text-2xl font-bold">美尔健GEO智能官网</h1>
+      <p class="text-sm opacity-90 mt-1">后台管理控制系统</p>
+    </div>
+
+    <!-- Form -->
+    <form class="p-8 space-y-6" action="/login" method="POST">
+      {% if error %}
+      <div class="p-4 bg-red-50 text-red-600 rounded-lg text-sm border-l-4 border-red-500">
+        {{ error }}
+      </div>
+      {% endif %}
+
+      <div>
+        <label for="username" class="block text-sm font-medium text-slate-700 mb-2">管理员账号</label>
+        <input type="text" name="username" id="username" placeholder="请输入账号" required
+               class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition duration-150 text-sm text-slate-750">
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-slate-700 mb-2">登录密码</label>
+        <input type="password" name="password" id="password" placeholder="请输入密码" required
+               class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition duration-150 text-sm text-slate-750">
+      </div>
+
+      <div class="flex items-center justify-between text-sm">
+        <label class="flex items-center text-slate-600 cursor-pointer">
+          <input type="checkbox" class="rounded text-primary focus:ring-primary mr-2" checked>
+          记住登录状态
+        </label>
+      </div>
+
+      <button type="submit" 
+              class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary-dark/30 transform hover:-translate-y-0.5 transition duration-150 focus:outline-none">
+        安全登录
+      </button>
+    </form>
+  </div>
+</body>
+</html>

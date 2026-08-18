@@ -1,0 +1,294 @@
+/* Mobile Responsive Overrides for Mellgen Website */
+@media screen and (max-width: 768px) {
+  /* Global reset & box sizing */
+  * {
+    box-sizing: border-box !important;
+  }
+  
+  body, html {
+    width: 100% !important;
+    overflow-x: hidden !important;
+    font-size: 14px !important;
+    -webkit-text-size-adjust: 100% !important;
+  }
+  
+  /* Containers auto width */
+  .m_top, .w1200, .m_bottom, .tel, .Tel, .Tel_list, .banner, .footer, .links, 
+  .g_top, .main, .g_fa, .g_zzzx, .g_news, .m_news, .g_ft, .m_ft, .blk-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  
+  .clear, .clearafter, .clearfix {
+    float: none !important;
+    clear: both !important;
+    display: block !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Header & Navigation */
+  .g_top {
+    height: auto !important;
+    padding: 10px !important;
+  }
+  
+  .m_top {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  
+  .tlogo {
+    float: none !important;
+    margin: 0 auto 10px auto !important;
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  .tlogo a, .tlogo img {
+    margin: 0 auto !important;
+    max-height: 45px !important;
+    width: auto !important;
+    display: block !important;
+  }
+  
+  /* Hide slogan and phone on mobile header */
+  .m_top h2, .m_top .tel, .g_top h2, .g_top .tel {
+    display: none !important;
+  }
+  
+  /* Make navigation menu a horizontally scrollable bar on mobile */
+  .g_nav.menu {
+    float: none !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+    border-top: 1px solid #eee !important;
+    border-bottom: 1px solid #eee !important;
+    padding: 8px 0 !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+  }
+  
+  .g_nav.menu ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 5px !important;
+  }
+  
+  .g_nav.menu li {
+    display: inline-block !important;
+    float: none !important;
+    flex: 0 0 auto !important;
+    margin: 0 4px !important;
+  }
+  
+  .g_nav.menu li a {
+    display: block !important;
+    height: auto !important;
+    line-height: normal !important;
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    color: #499c7c !important;
+    background: #f0f7f4 !important;
+    border: 1px solid #d4eae0 !important;
+    border-radius: 20px !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+  
+  /* Hide subcategories on mobile horizontal menu bar */
+  .g_nav.menu li.sub-nav-item {
+    display: none !important;
+  }
+
+  /* Banner Swiper */
+  .banner, .swiper-container {
+    height: auto !important;
+    min-height: 160px !important;
+    width: 100% !important;
+  }
+  
+  .banner img, .swiper-slide img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .ban_txt {
+    display: none !important;
+  }
+
+  /* Homepage Product Showcase Section (.g_fa) */
+  .g_fa .fafl, .g_fa .faright {
+    width: 100% !important;
+    float: none !important;
+    margin: 10px 0 !important;
+  }
+  
+  .g_fa .fafl dl {
+    width: 100% !important;
+    float: none !important;
+    display: block !important;
+    margin-bottom: 15px !important;
+  }
+  
+  /* Showcase Tabs Nav */
+  .sup_nav {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
+    border-bottom: 2px solid #eee !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .sup_nav a, .sup_nav li {
+    flex: 0 0 auto !important;
+    float: none !important;
+    padding: 10px 15px !important;
+    font-size: 14px !important;
+    border-bottom: 2px solid transparent !important;
+  }
+  
+  .sup_nav a.cur, .sup_nav li.cur {
+    border-bottom-color: #499c7c !important;
+    color: #499c7c !important;
+  }
+  
+  /* Products List on homepage & detail pages */
+  .hyt-product-list-6, .f_cb, .g_yzsp {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    float: none !important;
+  }
+  
+  .hyt-product-list-6 dl, .g_yzsp dl {
+    width: 48% !important;
+    float: none !important;
+    display: block !important;
+    margin: 1% 0 !important;
+    padding: 8px !important;
+    background: #fdfdfd !important;
+    border: 1px solid #f0f0f0 !important;
+    border-radius: 6px !important;
+  }
+  
+  .hyt-product-list-6 dl dt img, .g_yzsp dl dt img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Case studies swiper slide */
+  .f_cb li {
+    width: 100% !important;
+  }
+
+  /* News lists on homepage */
+  .g_news, .m_news {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .g_news dl, .m_news dl {
+    width: 100% !important;
+    float: none !important;
+    margin-bottom: 15px !important;
+    padding: 10px !important;
+    border-bottom: 1px solid #f5f5f5 !important;
+  }
+  
+  /* Hide decorative animations on mobile to save performance and space */
+  .fa-spin, .fa-shake, .rotate, .rotatex, .rotatey, .rotatez {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Listing pages (Sidebar & Content split) */
+  .plc {
+    padding: 10px !important;
+  }
+  
+  .p102-fdh-1 {
+    display: none !important; /* Hide left category sidebar on mobile */
+  }
+  
+  .hyt-product-list, .p102-info-blk {
+    width: 100% !important;
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Detail pages (Sidebar & Content split) */
+  .p102-info-fdh-2 {
+    width: 100% !important;
+    float: none !important;
+    margin: 20px 0 !important;
+  }
+  
+  .endit-content, .p102-info-content {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .endit-content img, .p102-info-content img, img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Table responsive wrapper */
+  table {
+    width: 100% !important;
+    display: block !important;
+    overflow-x: auto !important;
+  }
+
+  /* Footer responsiveness */
+  .g_ft, .m_ft {
+    padding: 20px 10px !important;
+  }
+  
+  .footer_in, .footer_con, .m_ft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .flogo, .flogor {
+    float: none !important;
+    margin: 10px auto !important;
+    text-align: center !important;
+  }
+  
+  .ftnav, .ftmid, .ftd {
+    width: 100% !important;
+    float: none !important;
+    text-align: center !important;
+    margin: 10px 0 !important;
+  }
+  
+  .ftnav a {
+    display: inline-block !important;
+    margin: 5px 8px !important;
+  }
+  
+  .client-2112-cont {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}

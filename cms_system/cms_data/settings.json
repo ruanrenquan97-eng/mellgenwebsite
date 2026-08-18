@@ -1,0 +1,51 @@
+{
+  "company_name": "美尔健（深圳）生物科技有限公司",
+  "phone": "186-9197-8530 / 0755-82926499",
+  "email": "61791579@qq.com",
+  "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园",
+  "qq": "61791579",
+  "banners": [
+    {
+      "type": "video",
+      "link": "",
+      "title": "视频轮播",
+      "video": "http://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4",
+      "image": "images/ban_txt.png"
+    },
+    {
+      "type": "image",
+      "link": "product_index.html",
+      "title": "美尔健生物从源头做好产品",
+      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_2.jpg"
+    },
+    {
+      "type": "image",
+      "link": "helps/tptjs.html",
+      "title": "突破生物透皮技术在皮肤修复与抗衰应用",
+      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_4.jpg"
+    },
+    {
+      "type": "image",
+      "link": "article_hzal.html",
+      "title": "国内外1000+家品牌方携手2000+款化妆品品牌选用我们的原料",
+      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_6.jpg"
+    }
+  ],
+  "seo_title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+  "seo_keywords": "医用原料,化妆品原料,食品营养原料",
+  "seo_description": "医用原料,化妆品原料,食品营养原料提供商，美尔健生物拥有来自各大科研院所的高效透皮肽技术。",
+  "accounts": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "role": "管理员",
+      "name": "系统管理员"
+    },
+    {
+      "username": "kefu",
+      "password": "kefu888",
+      "role": "客服",
+      "name": "在线客服"
+    }
+  ]
+}

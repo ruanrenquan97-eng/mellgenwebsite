@@ -1,0 +1,185 @@
+[
+  {
+    "id": "node_1",
+    "name": "首页",
+    "url": "index.html",
+    "children": []
+  },
+  {
+    "id": "node_2",
+    "name": "化妆品原料",
+    "url": "product_hzpyl.html",
+    "children": [
+      {
+        "id": "node_2_1",
+        "name": "透皮型重组蛋白/多肽",
+        "url": "product_tpxzzd.html"
+      },
+      {
+        "id": "node_2_2",
+        "name": "重组仿生蛋白",
+        "url": "product_zzfsdb.html"
+      },
+      {
+        "id": "node_2_3",
+        "name": "植物源活性物",
+        "url": "product_zwyhxw.html"
+      },
+      {
+        "id": "node_2_4",
+        "name": "海洋源活性物",
+        "url": "product_hyyhxw.html"
+      },
+      {
+        "id": "node_2_5",
+        "name": "婴儿菌发酵源活性物",
+        "url": "product_yejfjy.html"
+      }
+    ]
+  },
+  {
+    "id": "node_3",
+    "name": "原料产品中心",
+    "url": "product_index.html",
+    "children": [
+      {
+        "id": "node_3_1",
+        "name": "化妆品原料",
+        "url": "product_hzpyl.html"
+      },
+      {
+        "id": "node_3_2",
+        "name": "医用原料",
+        "url": "product_yyyl.html"
+      },
+      {
+        "id": "node_3_3",
+        "name": "食品营养原料",
+        "url": "product_spyyyl.html"
+      }
+    ]
+  },
+  {
+    "id": "node_4",
+    "name": "原料OEM定制",
+    "url": "helps/yloemd.html",
+    "children": []
+  },
+  {
+    "id": "node_5",
+    "name": "透皮肽技术",
+    "url": "helps/tptjs.html",
+    "children": []
+  },
+  {
+    "id": "node_6",
+    "name": "合作案例",
+    "url": "article_hzal.html",
+    "children": [
+      {
+        "id": "node_6_1",
+        "name": "医美行业",
+        "url": "article_ymxy.html"
+      },
+      {
+        "id": "node_6_2",
+        "name": "医药行业",
+        "url": "article_yyxy.html"
+      },
+      {
+        "id": "node_6_3",
+        "name": "化妆品",
+        "url": "article_hzp.html"
+      },
+      {
+        "id": "node_6_4",
+        "name": "护肤品工厂",
+        "url": "article_hfpgc.html"
+      },
+      {
+        "id": "node_6_5",
+        "name": "功能类食品",
+        "url": "article_gnlsp.html"
+      },
+      {
+        "id": "node_6_6",
+        "name": "洗护用品",
+        "url": "article_xhyp.html"
+      },
+      {
+        "id": "node_6_7",
+        "name": "女性护理产品",
+        "url": "article_nxhlcp.html"
+      }
+    ]
+  },
+  {
+    "id": "node_7",
+    "name": "新闻资讯",
+    "url": "article_xwzx.html",
+    "children": [
+      {
+        "id": "node_7_1",
+        "name": "企业新闻",
+        "url": "article_qydt.html"
+      },
+      {
+        "id": "node_7_2",
+        "name": "技术知识",
+        "url": "article_cpbk.html"
+      },
+      {
+        "id": "node_7_3",
+        "name": "常见问答",
+        "url": "article_cjwt.html"
+      }
+    ]
+  },
+  {
+    "id": "node_8",
+    "name": "关于美尔健",
+    "url": "helps/gymej.html",
+    "children": [
+      {
+        "id": "node_8_1",
+        "name": "关于美尔健",
+        "url": "helps/gymej.html"
+      },
+      {
+        "id": "node_8_2",
+        "name": "创始人介绍",
+        "url": "helps/csrjs.html"
+      },
+      {
+        "id": "node_8_3",
+        "name": "企业相册",
+        "url": "help_qyxc.html"
+      },
+      {
+        "id": "node_8_4",
+        "name": "生产基地",
+        "url": "help_scjd.html"
+      },
+      {
+        "id": "node_8_5",
+        "name": "视频中心",
+        "url": "help_spzx.html"
+      },
+      {
+        "id": "node_8_6",
+        "name": "荣誉证书",
+        "url": "help_ryzs.html"
+      },
+      {
+        "id": "node_8_7",
+        "name": "公司资质",
+        "url": "help_gszz.html"
+      },
+      {
+        "id": "node_8_8",
+        "name": "发明专利",
+        "url": "help_fmzl.html"
+      }
+    ]
+  }
+]

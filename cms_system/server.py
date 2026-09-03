@@ -103,7 +103,7 @@ def login():
             session["username"] = matched.get("username")
             session["role"] = matched.get("role")
             session["name"] = matched.get("name")
-            return redirect(url_for("dashboard"))
+            return redirect("/dashboard")
         else:
             return render_template("login.html", error="用户名或密码错误")
     return render_template("login.html")
@@ -111,8 +111,10 @@ def login():
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("login"))
+    return redirect("/login")
 
+@app.route("/dashboard")
+@app.route("/admin")
 @app.route("/")
 @login_required
 def dashboard():

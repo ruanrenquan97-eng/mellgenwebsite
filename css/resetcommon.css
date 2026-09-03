@@ -79,3 +79,13 @@ em{ font-style: normal;}
 .f_oh{overflow:hidden;}
 .f_fa{font-family:Arial, Helvetica, sans-serif;}
 .f_fw{ font-family:"Microsoft Yahei" }
+
+
+/* Global Footer Fallback Style */
+.g_ft .m_ft {
+    background-color: #0b223c !important;
+    background-image: url(../images/ftbg2.jpg);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 1920px 100%;
+}

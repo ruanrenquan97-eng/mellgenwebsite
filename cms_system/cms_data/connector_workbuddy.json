@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "webhook_url": "https://example.com/test-webhook",
+  "secret_token": "test_token_123",
+  "api_key": "mb_sec_mellgen_8a7f92b3c4e1d5",
+  "events": {
+    "on_article_publish": false,
+    "on_new_inquiry": true,
+    "on_product_update": true
+  },
+  "last_tested_at": null,
+  "last_status": "not_tested",
+  "last_message": ""
+}

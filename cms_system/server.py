@@ -3,6 +3,9 @@ import sys
 import json
 import uuid
 import datetime
+import threading
+import urllib.request
+import urllib.error
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 from werkzeug.utils import secure_filename
 
@@ -373,6 +376,8 @@ def submit_message():
     
     messages.insert(0, new_msg)
     save_json("messages.json", messages)
+    # Trigger WorkBuddy Webhook Notification
+    push_to_workbuddy("on_new_inquiry", new_msg)
     
     return jsonify({"success": True, "msg": "留言提交成功！我们将在2小时内给您回复。"})
 
@@ -679,6 +684,271 @@ def batch_delete_categories():
     save_json("categories.json", categories)
     return jsonify({"success": True})
 
+
+
+# ==========================================================
+# WorkBuddy Connector Engine & APIs
+# ==========================================================
+def push_to_workbuddy(event_type, payload_data):
+    """
+    Asynchronously push event to WorkBuddy Webhook connector
+    """
+    def _worker():
+        try:
+            config = load_json("connector_workbuddy.json")
+            if not config or not config.get("enabled"):
+                return
+            
+            webhook_url = config.get("webhook_url", "").strip()
+            if not webhook_url:
+                return
+                
+            events = config.get("events", {})
+            if not events.get(event_type, True):
+                return
+            
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            if event_type == "on_new_inquiry":
+                title = "【美尔健官网】有新的客户在线询盘/留言线索"
+                content = f"### 🔔 {title}\n" \
+                          f"- **客户姓名**: {payload_data.get('name', '未填写')}\n" \
+                          f"- **联系电话**: {payload_data.get('phone', '未填写')}\n" \
+                          f"- **电子邮箱**: {payload_data.get('email', '未填写')}\n" \
+                          f"- **咨询内容**: {payload_data.get('content', '未填写')}\n" \
+                          f"- **访客 IP**: {payload_data.get('ip', '未知')}\n" \
+                          f"- **提交时间**: {timestamp}\n\n" \
+                          f"> 请销售/客服人员及时跟进。"
+                text_content = f"{title}\n姓名: {payload_data.get('name')}\n电话: {payload_data.get('phone')}\n内容: {payload_data.get('content')}"
+            elif event_type == "on_product_update":
+                title = "【美尔健官网】产品资料更新通知"
+                content = f"### 📦 {title}\n" \
+                          f"- **产品名称**: {payload_data.get('title', '未知产品')}\n" \
+                          f"- **所属分类**: {payload_data.get('category_name', '通用分类')}\n" \
+                          f"- **操作时间**: {timestamp}\n\n" \
+                          f"> 官网知识库已同步更新。"
+                text_content = f"{title}: {payload_data.get('title')}"
+            else:
+                title = f"【美尔健官网】业务事件通知: {event_type}"
+                content = f"### 📢 {title}\n时间: {timestamp}"
+                text_content = title
+            
+            body = {
+                "msgtype": "markdown",
+                "markdown": {
+                    "content": content,
+                    "title": title,
+                    "text": content
+                },
+                "text": {
+                    "content": text_content
+                },
+                "event": event_type,
+                "timestamp": timestamp,
+                "data": payload_data
+            }
+            
+            req = urllib.request.Request(
+                webhook_url,
+                data=json.dumps(body).encode("utf-8"),
+                headers={
+                    "Content-Type": "application/json; charset=utf-8",
+                    "User-Agent": "Mellgen-CMS-WorkBuddy-Connector/1.0",
+                    "X-Connector-Secret": config.get("secret_token", "")
+                }
+            )
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                pass
+        except Exception as e:
+            print(f"[WorkBuddy Connector Async Error] {e}")
+            
+    t = threading.Thread(target=_worker)
+    t.daemon = True
+    t.start()
+
+
+@app.route("/api/connector/workbuddy/config", methods=["GET"])
+@login_required
+def get_workbuddy_config():
+    config = load_json("connector_workbuddy.json")
+    if not config:
+        config = {
+            "enabled": False,
+            "webhook_url": "",
+            "secret_token": "",
+            "api_key": "mb_sec_" + uuid.uuid4().hex[:16],
+            "events": {"on_new_inquiry": True, "on_product_update": True, "on_article_publish": False},
+            "last_tested_at": None,
+            "last_status": "not_tested",
+            "last_message": ""
+        }
+        save_json("connector_workbuddy.json", config)
+    return jsonify(config)
+
+@app.route("/api/connector/workbuddy/config", methods=["POST"])
+@login_required
+def save_workbuddy_config():
+    data = request.json or {}
+    config = load_json("connector_workbuddy.json") or {}
+    config["enabled"] = bool(data.get("enabled", False))
+    config["webhook_url"] = data.get("webhook_url", "").strip()
+    config["secret_token"] = data.get("secret_token", "").strip()
+    if not config.get("api_key"):
+        config["api_key"] = "mb_sec_" + uuid.uuid4().hex[:16]
+    config["events"] = data.get("events", {
+        "on_new_inquiry": True,
+        "on_product_update": True,
+        "on_article_publish": False
+    })
+    save_json("connector_workbuddy.json", config)
+    return jsonify({"success": True, "message": "WorkBuddy 连接器配置已保存！", "config": config})
+
+@app.route("/api/connector/workbuddy/regenerate_key", methods=["POST"])
+@login_required
+def regenerate_workbuddy_key():
+    config = load_json("connector_workbuddy.json") or {}
+    config["api_key"] = "mb_sec_" + uuid.uuid4().hex[:16]
+    save_json("connector_workbuddy.json", config)
+    return jsonify({"success": True, "api_key": config["api_key"]})
+
+@app.route("/api/connector/workbuddy/test", methods=["POST"])
+@login_required
+def test_workbuddy_webhook():
+    data = request.json or {}
+    webhook_url = data.get("webhook_url", "").strip()
+    if not webhook_url:
+        return jsonify({"success": False, "message": "请先填写 WorkBuddy Webhook 回调地址！"}), 400
+    
+    secret_token = data.get("secret_token", "").strip()
+    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    test_title = "【测试】美尔健官网后台 ↔ WorkBuddy 连接器连通成功！"
+    test_content = f"### 🚀 {test_title}\n" \
+                   f"- **连通状态**: ✅ 通信正常 (200 OK)\n" \
+                   f"- **测试来源**: 美尔健GEO智能官网管理后台\n" \
+                   f"- **测试时间**: {now_str}\n" \
+                   f"- **通知机制**: 访客提交留言/询盘时，将在此群实时推送线索卡片。\n\n" \
+                   f"> 🎉 恭喜！您的官网后台与 WorkBuddy 连接器已就绪。"
+    
+    body = {
+        "msgtype": "markdown",
+        "markdown": {
+            "content": test_content,
+            "title": test_title,
+            "text": test_content
+        },
+        "text": {
+            "content": f"{test_title}\n连通状态: 正常\n测试时间: {now_str}"
+        },
+        "event": "connector_test",
+        "timestamp": now_str,
+        "data": {
+            "test": True,
+            "system": "Mellgen CMS v7.0"
+        }
+    }
+    
+    try:
+        req = urllib.request.Request(
+            webhook_url,
+            data=json.dumps(body).encode("utf-8"),
+            headers={
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": "Mellgen-CMS-WorkBuddy-Connector/1.0",
+                "X-Connector-Secret": secret_token
+            }
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            resp_code = resp.getcode()
+            resp_body = resp.read().decode("utf-8", errors="ignore")[:300]
+            
+            config = load_json("connector_workbuddy.json") or {}
+            config["last_tested_at"] = now_str
+            config["last_status"] = "success"
+            config["last_message"] = f"HTTP {resp_code}: {resp_body}"
+            save_json("connector_workbuddy.json", config)
+            
+            return jsonify({
+                "success": True, 
+                "message": "测试消息已成功送达！请查看 WorkBuddy 接收端。",
+                "status_code": resp_code,
+                "response": resp_body
+            })
+    except urllib.error.HTTPError as e:
+        err_msg = f"HTTP {e.code}: {e.read().decode('utf-8', errors='ignore')[:200]}"
+        return jsonify({"success": False, "message": f"连接 WorkBuddy 接口返回错误: {err_msg}"}), 400
+    except Exception as e:
+        return jsonify({"success": False, "message": f"连接失败，请检查 URL 是否正确或网络是否可达: {str(e)}"}), 400
+
+# ---------------- OpenAPI for WorkBuddy AI Agents ----------------
+def verify_workbuddy_api_key():
+    config = load_json("connector_workbuddy.json") or {}
+    expected_key = config.get("api_key", "").strip()
+    provided_key = request.headers.get("X-API-Key", "") or request.args.get("api_key", "")
+    return expected_key and (provided_key == expected_key)
+
+@app.route("/api/connector/v1/products", methods=["GET"])
+def connector_api_products():
+    if not verify_workbuddy_api_key():
+        return jsonify({"success": False, "message": "API Key 鉴权失败，请在请求头提供 X-API-Key 或 URL 参数携带 api_key"}), 401
+    
+    products = load_json("products.json")
+    cleaned = []
+    for p in products:
+        cleaned.append({
+            "id": p.get("id"),
+            "name": p.get("title"),
+            "category": p.get("category_name", p.get("category")),
+            "inci": p.get("inci", ""),
+            "appearance": p.get("appearance", ""),
+            "solubility": p.get("solubility", ""),
+            "description": p.get("desc", ""),
+            "summary": p.get("summary", ""),
+            "url": f"https://www.mellgen.com/products/{p.get('id')}.html"
+        })
+    return jsonify({
+        "success": True,
+        "total": len(cleaned),
+        "data": cleaned,
+        "source": "美尔健官方产品知识库",
+        "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
+
+@app.route("/api/connector/v1/articles", methods=["GET"])
+def connector_api_articles():
+    if not verify_workbuddy_api_key():
+        return jsonify({"success": False, "message": "API Key 鉴权失败"}), 401
+    
+    articles = load_json("articles.json")
+    cleaned = []
+    for a in articles:
+        cleaned.append({
+            "id": a.get("id"),
+            "title": a.get("title"),
+            "date": a.get("date"),
+            "author": a.get("author"),
+            "summary": a.get("summary", ""),
+            "url": f"https://www.mellgen.com/articles/{a.get('id')}.html"
+        })
+    return jsonify({
+        "success": True,
+        "total": len(cleaned),
+        "data": cleaned,
+        "source": "美尔健企业动态与新闻资讯",
+        "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
+
+@app.route("/api/connector/v1/inquiries", methods=["GET"])
+def connector_api_inquiries():
+    if not verify_workbuddy_api_key():
+        return jsonify({"success": False, "message": "API Key 鉴权失败"}), 401
+    
+    messages = load_json("messages.json")
+    return jsonify({
+        "success": True,
+        "total": len(messages),
+        "data": messages
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8001, debug=False, use_reloader=False)

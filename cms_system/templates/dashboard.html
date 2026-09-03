@@ -177,6 +177,27 @@
         </div>
       </div>
 
+      
+      <!-- Item: 智能连接器 -->
+      <div class="border-b border-[#eef2f5]">
+        <button onclick="toggleFolder('connectors')" class="w-full flex items-center justify-between px-4 py-2.5 text-[#555] font-medium hover:bg-[#f4f5f9] hover:text-[#333] transition">
+          <span class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0"><i class="fa-solid fa-plug-circle-bolt text-xs text-indigo-600"></i></div>
+            <span class="flex items-center gap-1.5">
+              <span>智能连接器</span>
+              <span class="text-[9px] bg-indigo-100 text-indigo-700 px-1 py-0.2 rounded font-normal">WorkBuddy</span>
+            </span>
+          </span>
+          <i id="arrow-connectors" class="fa-solid fa-chevron-right text-[8px] text-slate-400"></i>
+        </button>
+        <div id="sub-connectors" class="hidden bg-[#fafbfc] pl-12 pr-4 py-1 space-y-1 text-slate-500 border-t border-slate-50">
+          <button onclick="switchTab('connector-workbuddy')" id="nav-connector-workbuddy" class="w-full text-left py-1 hover:text-primary transition flex items-center justify-between">
+            <span>WorkBuddy 连接器</span>
+            <span id="wb-nav-status-dot" class="w-1.5 h-1.5 rounded-full bg-slate-300" title="状态"></span>
+          </button>
+        </div>
+      </div>
+
       <!-- Item 8: 工具管理 -->
       <div class="border-b border-[#eef2f5]">
         <button onclick="toggleFolder('tools')" class="w-full flex items-center justify-between px-4 py-2.5 text-[#555] font-medium hover:bg-[#f4f5f9] hover:text-[#333] transition">
@@ -331,6 +352,127 @@
             </button>
           </div>
         </div>
+
+        <!-- Row 2: MCP (Model Context Protocol) Integration Card -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-5">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 text-base shadow-sm">
+                <i class="fa-solid fa-microchip"></i>
+              </span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-bold text-slate-800 text-sm">MCP 协议连接器 (Model Context Protocol)</h3>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full font-medium bg-purple-100 text-purple-700 border border-purple-200">WorkBuddy 专属 Agent 协议</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-0.5">支持 WorkBuddy 智能体通过 MCP 标准协议直接在后台【制作产品详情页】、【合规审查】与【一键发布】。</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>FastMCP 服务已就绪</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- MCP Tools Grid -->
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+              <i class="fa-solid fa-wrench text-purple-600 text-[11px]"></i>
+              <span>WorkBuddy 获得的 MCP 专属工具矩阵 (Tools)</span>
+            </label>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <!-- Tool 1: create_product_detail -->
+              <div class="border border-purple-100 bg-purple-50/30 rounded-lg p-3 space-y-1.5 hover:border-purple-200 transition">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-purple-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-magic-wand-sparkles text-purple-600 text-[11px]"></i>
+                    <span>create_product_detail</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-purple-200/70 text-purple-800 rounded font-semibold">核心制作</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">
+                  WorkBuddy 接收您的要求后，自动生成符合化妆品法规的【产品介绍 + 推荐应用 + 3大优势卡片】，自动生成官网静态 HTML 页面并上线！
+                </p>
+              </div>
+
+              <!-- Tool 2: audit_product_compliance -->
+              <div class="border border-slate-200 bg-slate-50/50 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-emerald-600 text-[11px]"></i>
+                    <span>audit_product_compliance</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">法规审查</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">
+                  在发布前自动筛查文案是否含有“抗肿瘤、创面愈合、消炎杀菌、赢领”等违禁词，确保 100% 符合化妆品广告法。
+                </p>
+              </div>
+
+              <!-- Tool 3: publish_website -->
+              <div class="border border-slate-200 bg-slate-50/50 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-cloud-arrow-up text-blue-600 text-[11px]"></i>
+                    <span>publish_website</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">一键发布</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">
+                  重新编译并全量发布全站静态 HTML 页面，同步更新产品中心列表及各分类目录索引。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configuration Code Snippets for WorkBuddy -->
+          <div class="space-y-3 pt-2">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-code text-indigo-600 text-[11px]"></i>
+                <span>WorkBuddy 连接器配置代码 (mcpServers 配置)</span>
+              </label>
+              <button onclick="copyMcpJsonConfig()" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1 hover:underline">
+                <i class="fa-solid fa-copy text-[10px]"></i>
+                <span>一键复制 MCP 配置 JSON</span>
+              </button>
+            </div>
+
+            <!-- Code Block -->
+            <div class="relative bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs overflow-x-auto shadow-inner border border-slate-800">
+              <pre id="mcp-config-json" class="leading-relaxed"><code>{
+  "mcpServers": {
+    "mellgen-cms": {
+      "command": "python",
+      "args": [
+        "d:\\Administrator\\webapp\\美尔健官网\\cms_system\\mcp_server.py"
+      ]
+    }
+  }
+}</code></pre>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">
+              💡 <strong>接入方式：</strong>打开 WorkBuddy 设置中的 <strong>【MCP 连接器 / MCP Servers】</strong>，将上方 JSON 代码粘贴保存即可连通。WorkBuddy 智能体会自动加载 <code>create_product_detail</code> 等工具。
+            </p>
+          </div>
+
+          <!-- Example Prompt Box -->
+          <div class="bg-purple-50/60 border border-purple-200 rounded-xl p-4 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-purple-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-comment-dots text-purple-600"></i>
+                <span>在 WorkBuddy 中制作产品详情页的指令范例 (Prompt Example)</span>
+              </span>
+              <button onclick="copyExamplePrompt()" class="text-xs text-purple-700 hover:text-purple-900 font-medium hover:underline">复制范例指令</button>
+            </div>
+            <div id="example-prompt-text" class="text-xs text-purple-950 font-mono bg-white p-3 rounded-lg border border-purple-100 select-all leading-relaxed">
+“帮我制作并发布一款新产品：【重组人源化Ⅲ型胶原蛋白微球】，分类为【化妆品原料/重组仿生蛋白】，INCI为可溶性胶原、甘油、水。功效主打抗皱紧致与充盈水嫩。请先使用 audit_product_compliance 确保文案完全符合中国化妆品法规（严禁抗炎、抗肿瘤、创面愈合等违规词），然后调用 create_product_detail 工具直接在官网后台生成并发布图文详情页！”
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- ================== VIEW: PAGE EDIT (页面修改 - REAL HTML Editor) ================== -->
@@ -1358,7 +1500,7 @@
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">公司简介视频 (支持 MP4 或优酷/腾讯内嵌代码)</label>
-            <input type="text" class="w-full px-3 py-1.5 border border-slate-200 rounded text-xs outline-none focus:border-primary" placeholder="http://www.mellgen.com/resource/video/mellgen_intro.mp4">
+            <input type="text" class="w-full px-3 py-1.5 border border-slate-200 rounded text-xs outline-none focus:border-primary" placeholder="https://www.mellgen.com/resource/video/mellgen_intro.mp4">
           </div>
         </div>
         
@@ -1535,7 +1677,7 @@
               <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-bold">已启用</span>
             </div>
             <div class="space-y-1.5 text-slate-600">
-              <p>推送接口：<code class="bg-slate-200 px-1 rounded">http://data.zz.baidu.com/urls</code></p>
+              <p>推送接口：<code class="bg-slate-200 px-1 rounded">https://data.zz.baidu.com/urls</code></p>
               <p>推送 Token：<input type="password" id="baidu-push-token" value="MellgenBaiduToken2026" class="px-2 py-0.5 border rounded outline-none focus:border-primary text-xs w-48 bg-white text-slate-700"></p>
               <p>今日推送量：<span class="font-bold text-slate-800">125 / 100000</span> 条</p>
             </div>
@@ -1912,7 +2054,7 @@
           <div class="grid grid-cols-2 gap-4 text-xs">
             <div>
               <label class="block text-slate-500 mb-1">域名映射绑定 (Domain mapping)</label>
-              <input type="text" id="geo-setting-domain" value="http://www.mellgen.com/" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-slate-700">
+              <input type="text" id="geo-setting-domain" value="https://www.mellgen.com/" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-slate-700">
             </div>
             <div>
               <label class="block text-slate-500 mb-1">允许AI引擎索引抓取</label>
@@ -2291,7 +2433,206 @@
       </section>
 
     </div>
-  </main>
+  
+      <!-- WorkBuddy Connector Section -->
+      <section id="tab-connector-workbuddy" class="space-y-5 hidden">
+        <!-- Hero Header Card -->
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 rounded-xl shadow-sm relative overflow-hidden">
+          <div class="absolute right-0 top-0 translate-x-10 -translate-y-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-lg bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
+                  <i class="fa-solid fa-bolt-lightning text-base"></i>
+                </span>
+                <h2 class="text-base font-bold tracking-tight">WorkBuddy 智能连接器 (WorkBuddy Connector)</h2>
+                <span id="wb-status-badge" class="text-[10px] px-2 py-0.5 rounded-full font-medium bg-slate-700 text-slate-300 border border-slate-600">未启用</span>
+              </div>
+              <p class="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                建立官网与 WorkBuddy 的双向桥梁。不仅可在访客提交询盘时**毫秒级推送到 WorkBuddy 群机器人**，还支持通过标准 **OpenAPI 知识库端点** 为 WorkBuddy AI 智能体注入官网 25 款产品的完整机理与规格数据。
+              </p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="loadWorkBuddyConfig()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-xs text-white flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+                <span>刷新配置</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <!-- Left Column: Webhook Event Push (7 cols) -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">1</div>
+                  <h3 class="font-bold text-slate-800 text-xs">实时消息推送 (Outgoing Webhook)</h3>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="wb-enabled" class="sr-only peer">
+                  <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                  <span class="ml-2 text-xs font-medium text-slate-600" id="wb-enabled-label">启用推送</span>
+                </label>
+              </div>
+
+              <!-- Webhook URL -->
+              <div class="space-y-1.5">
+                <label class="block text-xs font-semibold text-slate-700 flex items-center justify-between">
+                  <span>WorkBuddy Webhook 回调地址 (Webhook URL) <span class="text-rose-500">*</span></span>
+                  <span class="text-[10px] text-slate-400 font-normal">支持机器人 Webhook 或应用接口</span>
+                </label>
+                <div class="relative">
+                  <input type="text" id="wb-webhook-url" placeholder="https://workbuddy.example.com/api/webhook/... 或群机器人地址" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-mono text-slate-700 bg-slate-50/50">
+                </div>
+                <p class="text-[10px] text-slate-400">将 WorkBuddy 机器人 Webhook 复制粘贴至此处，系统会在事件触发时推送格式化卡片。</p>
+              </div>
+
+              <!-- Secret Token -->
+              <div class="space-y-1.5">
+                <label class="block text-xs font-semibold text-slate-700 flex items-center justify-between">
+                  <span>安全密钥 / Secret Token (可选)</span>
+                  <span class="text-[10px] text-slate-400 font-normal">在 Header 中通过 X-Connector-Secret 传输</span>
+                </label>
+                <input type="text" id="wb-secret-token" placeholder="留空则不校验签名" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-mono text-slate-700 bg-slate-50/50">
+              </div>
+
+              <!-- Trigger Events -->
+              <div class="space-y-2 pt-2 border-t border-slate-100">
+                <label class="block text-xs font-semibold text-slate-700">推送触发事件订阅 (Event Subscriptions)</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <label class="flex items-start gap-2.5 p-2.5 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                    <input type="checkbox" id="wb-event-inquiry" checked class="mt-0.5 rounded border-slate-300 text-primary focus:ring-primary">
+                    <div>
+                      <div class="font-semibold text-xs text-slate-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bell text-amber-500 text-[10px]"></i>
+                        <span>客户在线询盘与留言</span>
+                      </div>
+                      <p class="text-[10px] text-slate-400 mt-0.5">当访客留资提交电话/姓名/需求时即时提醒销售</p>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-2.5 p-2.5 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                    <input type="checkbox" id="wb-event-product" checked class="mt-0.5 rounded border-slate-300 text-primary focus:ring-primary">
+                    <div>
+                      <div class="font-semibold text-xs text-slate-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-cubes text-blue-500 text-[10px]"></i>
+                        <span>产品资料变更通知</span>
+                      </div>
+                      <p class="text-[10px] text-slate-400 mt-0.5">后台录入或修改产品时广播通知</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                <button onclick="saveWorkBuddyConfig()" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg font-medium text-xs flex items-center gap-1.5 transition shadow-sm">
+                  <i class="fa-solid fa-check text-xs"></i>
+                  <span>保存连接器配置</span>
+                </button>
+
+                <button onclick="testWorkBuddyWebhook()" id="btn-test-webhook" class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg font-medium text-xs flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                  <span>一键发送测试消息</span>
+                </button>
+              </div>
+
+              <!-- Test Log Panel -->
+              <div id="wb-test-result-box" class="hidden p-3 rounded-lg border text-xs">
+                <div class="flex items-center justify-between font-semibold mb-1">
+                  <span id="wb-test-result-title" class="flex items-center gap-1.5"></span>
+                  <span id="wb-test-result-time" class="text-[10px] text-slate-400 font-normal"></span>
+                </div>
+                <div id="wb-test-result-msg" class="text-[11px] break-all leading-relaxed font-mono"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: AI Knowledge Base OpenAPI (5 cols) -->
+          <div class="lg:col-span-5 space-y-5">
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+              <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <div class="w-6 h-6 rounded bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">2</div>
+                <div>
+                  <h3 class="font-bold text-slate-800 text-xs">AI 知识库 OpenAPI (Incoming Data)</h3>
+                  <span class="text-[10px] text-slate-400">供 WorkBuddy 智能体自动拉取官网产品库</span>
+                </div>
+              </div>
+
+              <!-- API Key Card -->
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-semibold text-slate-700">专属鉴权密钥 (API Key)</span>
+                  <button onclick="regenerateWorkBuddyKey()" class="text-[10px] text-indigo-600 hover:text-indigo-800 hover:underline">重新生成</button>
+                </div>
+                <div class="flex items-center gap-2">
+                  <input type="password" id="wb-api-key" readonly class="flex-1 px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded font-mono text-slate-700 focus:outline-none">
+                  <button onclick="toggleApiKeyVisibility()" class="px-2 py-1.5 bg-white border border-slate-200 rounded text-slate-500 hover:text-slate-800" title="显示/隐藏密钥">
+                    <i id="eye-api-key" class="fa-solid fa-eye text-xs"></i>
+                  </button>
+                  <button onclick="copyWorkBuddyApiKey()" class="px-2.5 py-1.5 bg-primary text-white rounded text-xs hover:bg-primary-dark transition flex items-center gap-1" title="复制密钥">
+                    <i class="fa-solid fa-copy text-xs"></i>
+                    <span>复制</span>
+                  </button>
+                </div>
+                <p class="text-[10px] text-slate-400">在 WorkBuddy 发起请求时，请在 Header 携带 <code>X-API-Key: {密钥}</code> 或作为 url query 参数 <code>api_key=...</code>。</p>
+              </div>
+
+              <!-- Available Endpoints -->
+              <div class="space-y-2">
+                <label class="block text-xs font-semibold text-slate-700">可供调用的 OpenAPI 数据端点</label>
+                
+                <!-- Endpoint 1: Products -->
+                <div class="border border-slate-200 rounded-lg p-2.5 space-y-1 hover:border-slate-300 transition">
+                  <div class="flex items-center justify-between">
+                    <span class="inline-flex items-center gap-1.5 font-bold text-[11px] text-slate-800">
+                      <span class="px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 font-mono text-[9px]">GET</span>
+                      <span>/api/connector/v1/products</span>
+                    </span>
+                    <a href="javascript:;" onclick="openEndpointPreview('/api/connector/v1/products')" class="text-[10px] text-primary hover:underline flex items-center gap-1">
+                      <span>调试预览</span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                    </a>
+                  </div>
+                  <p class="text-[10px] text-slate-500 leading-tight">获取全站 25 款产品的标准 INCI、形态规格、功效机理、应用场景等结构化 JSON 数据。</p>
+                </div>
+
+                <!-- Endpoint 2: Articles -->
+                <div class="border border-slate-200 rounded-lg p-2.5 space-y-1 hover:border-slate-300 transition">
+                  <div class="flex items-center justify-between">
+                    <span class="inline-flex items-center gap-1.5 font-bold text-[11px] text-slate-800">
+                      <span class="px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 font-mono text-[9px]">GET</span>
+                      <span>/api/connector/v1/articles</span>
+                    </span>
+                    <a href="javascript:;" onclick="openEndpointPreview('/api/connector/v1/articles')" class="text-[10px] text-primary hover:underline flex items-center gap-1">
+                      <span>调试预览</span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                    </a>
+                  </div>
+                  <p class="text-[10px] text-slate-500 leading-tight">获取企业动态与新闻资讯，供 AI 智能体掌握企业最新展会与技术突破。</p>
+                </div>
+              </div>
+
+              <!-- Integration Guide Tip -->
+              <div class="bg-indigo-50/70 border border-indigo-100 rounded-lg p-3 space-y-1.5">
+                <div class="flex items-center gap-1.5 text-indigo-900 font-bold text-xs">
+                  <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                  <span>WorkBuddy 极简接入三步法</span>
+                </div>
+                <ol class="list-decimal list-inside text-[11px] text-indigo-800/90 space-y-1 leading-normal">
+                  <li>在 WorkBuddy 群聊中添加【自定义机器人】，复制其 Webhook 地址填入左侧输入框；</li>
+                  <li>点击【一键发送测试消息】，确认 WorkBuddy 成功收到卡片；</li>
+                  <li>如需搭建客服智能体，将上方【产品知识库 API】配置为 WorkBuddy 的外部知识源或 Tool。</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
 
   <!-- ================== MODAL: ADD/EDIT PRODUCT ================== -->
   <div id="product-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
@@ -2581,6 +2922,9 @@
       const _bc = document.getElementById("breadcrumb-title"); if (_bc) _bc.innerText = titles[tabId] || "后台管理";
 
       // On-demand page trigger
+            if (tabId === "connector-workbuddy") {
+        loadWorkBuddyConfig();
+      }
       if (tabId === "pages-edit") {
         loadPagesList();
       } else if (tabId === "seo-robots") {
@@ -4943,7 +5287,7 @@
         appendSpiderLog("[BAIDU] 已采集: 25个产品页, 125个新闻资讯页, 10个栏目单页。合计 160 个URL。");
       }, 500);
       setTimeout(() => {
-        appendSpiderLog("[BAIDU] 正在调用接口 http://data.zz.baidu.com/urls 并使用Token进行快速推送提交...");
+        appendSpiderLog("[BAIDU] 正在调用接口 https://data.zz.baidu.com/urls 并使用Token进行快速推送提交...");
       }, 1000);
       setTimeout(() => {
         appendSpiderLog("[BAIDU] 推送成功！百度接口反馈: {remain:99815, success:160}");
@@ -5156,7 +5500,7 @@
 
       const domainInput = document.getElementById("geo-setting-domain");
       const allowAiCheck = document.getElementById("geo-setting-allow-ai");
-      if (domainInput) domainInput.value = cache.settings.geo_domain || "http://www.mellgen.com/";
+      if (domainInput) domainInput.value = cache.settings.geo_domain || "https://www.mellgen.com/";
       if (allowAiCheck) allowAiCheck.checked = cache.settings.allow_ai_indexing !== false;
 
       renderKbFilesList();
@@ -5688,7 +6032,7 @@
         appendSpiderLog("[BAIDU] 已采集: 25个产品页, 125个新闻资讯页, 10个栏目单页。合计 160 个URL。");
       }, 500);
       setTimeout(() => {
-        appendSpiderLog("[BAIDU] 正在调用接口 http://data.zz.baidu.com/urls 并使用Token进行快速推送提交...");
+        appendSpiderLog("[BAIDU] 正在调用接口 https://data.zz.baidu.com/urls 并使用Token进行快速推送提交...");
       }, 1000);
       setTimeout(() => {
         appendSpiderLog("[BAIDU] 推送成功！百度接口反馈: {remain:99815, success:160}");
@@ -5901,7 +6245,7 @@
 
       const domainInput = document.getElementById("geo-setting-domain");
       const allowAiCheck = document.getElementById("geo-setting-allow-ai");
-      if (domainInput) domainInput.value = cache.settings.geo_domain || "http://www.mellgen.com/";
+      if (domainInput) domainInput.value = cache.settings.geo_domain || "https://www.mellgen.com/";
       if (allowAiCheck) allowAiCheck.checked = cache.settings.allow_ai_indexing !== false;
 
       renderKbFilesList();
@@ -6497,6 +6841,233 @@ window.onload = () => {
 
       loadAllData();
     };
+  
+    // ==========================================================
+    // WorkBuddy Connector Frontend Logic
+    // ==========================================================
+    let currentWbConfig = null;
+
+    async function loadWorkBuddyConfig() {
+      try {
+        const res = await fetch('/api/connector/workbuddy/config');
+        if (!res.ok) throw new Error("获取配置失败");
+        const data = await res.json();
+        currentWbConfig = data;
+
+        // Fill inputs
+        document.getElementById('wb-enabled').checked = !!data.enabled;
+        document.getElementById('wb-webhook-url').value = data.webhook_url || '';
+        document.getElementById('wb-secret-token').value = data.secret_token || '';
+        document.getElementById('wb-api-key').value = data.api_key || '';
+
+        const events = data.events || {};
+        document.getElementById('wb-event-inquiry').checked = events.on_new_inquiry !== false;
+        document.getElementById('wb-event-product').checked = events.on_product_update !== false;
+
+        // Update badges & status indicators
+        updateWbStatusBadge(data);
+
+        // Update test result display if exists
+        if (data.last_tested_at) {
+          showTestResult(
+            data.last_status === 'success',
+            data.last_status === 'success' ? '上次测试：连通正常' : '上次测试：未连通',
+            data.last_tested_at,
+            data.last_message || ''
+          );
+        }
+      } catch (e) {
+        console.error("加载 WorkBuddy 配置失败", e);
+      }
+    }
+
+    function updateWbStatusBadge(data) {
+      const badge = document.getElementById('wb-status-badge');
+      const dot = document.getElementById('wb-nav-status-dot');
+      const label = document.getElementById('wb-enabled-label');
+
+      if (!data || !data.enabled) {
+        badge.className = "text-[10px] px-2 py-0.5 rounded-full font-medium bg-slate-700 text-slate-300 border border-slate-600";
+        badge.textContent = "未启用";
+        if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-slate-300";
+        if (label) label.textContent = "未启用";
+      } else if (!data.webhook_url) {
+        badge.className = "text-[10px] px-2 py-0.5 rounded-full font-medium bg-amber-500/20 text-amber-300 border border-amber-500/40";
+        badge.textContent = "待配置 Webhook";
+        if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
+        if (label) label.textContent = "待填地址";
+      } else {
+        badge.className = "text-[10px] px-2 py-0.5 rounded-full font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+        badge.textContent = "运行中 / 实时连通";
+        if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-500";
+        if (label) label.textContent = "已启用推送";
+      }
+    }
+
+    async function saveWorkBuddyConfig() {
+      const enabled = document.getElementById('wb-enabled').checked;
+      const webhook_url = document.getElementById('wb-webhook-url').value.trim();
+      const secret_token = document.getElementById('wb-secret-token').value.trim();
+      const on_new_inquiry = document.getElementById('wb-event-inquiry').checked;
+      const on_product_update = document.getElementById('wb-event-product').checked;
+
+      const payload = {
+        enabled,
+        webhook_url,
+        secret_token,
+        events: {
+          on_new_inquiry,
+          on_product_update,
+          on_article_publish: false
+        }
+      };
+
+      try {
+        const res = await fetch('/api/connector/workbuddy/config', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.success) {
+          showNotification(result.message || "WorkBuddy 配置保存成功！", "success");
+          currentWbConfig = result.config;
+          updateWbStatusBadge(result.config);
+        } else {
+          showNotification(result.message || "保存失败", "error");
+        }
+      } catch (e) {
+        showNotification("请求出错: " + e.message, "error");
+      }
+    }
+
+    async function testWorkBuddyWebhook() {
+      const webhook_url = document.getElementById('wb-webhook-url').value.trim();
+      if (!webhook_url) {
+        showNotification("请先填写 WorkBuddy Webhook URL 地址！", "warning");
+        document.getElementById('wb-webhook-url').focus();
+        return;
+      }
+
+      const secret_token = document.getElementById('wb-secret-token').value.trim();
+      const btn = document.getElementById('btn-test-webhook');
+      const origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> 正在连接探测...';
+
+      try {
+        const res = await fetch('/api/connector/workbuddy/test', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ webhook_url, secret_token })
+        });
+        const data = await res.json();
+        const nowStr = new Date().toLocaleString();
+
+        if (data.success) {
+          showNotification("测试卡片已成功发送至 WorkBuddy！", "success");
+          showTestResult(true, "✅ 连通成功 (HTTP " + (data.status_code || 200) + ")", nowStr, data.response || "消息已成功送达 WorkBuddy 接收端。");
+          if (currentWbConfig) {
+            currentWbConfig.last_status = 'success';
+            updateWbStatusBadge(currentWbConfig);
+          }
+        } else {
+          showNotification(data.message || "连接失败", "error");
+          showTestResult(false, "❌ 连接探测失败", nowStr, data.message || "请检查 Webhook 地址是否正确或网络限制。");
+        }
+      } catch (e) {
+        showNotification("网络连接异常: " + e.message, "error");
+        showTestResult(false, "❌ 请求异常", new Date().toLocaleString(), e.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+      }
+    }
+
+    function showTestResult(isSuccess, title, time, msg) {
+      const box = document.getElementById('wb-test-result-box');
+      const titleEl = document.getElementById('wb-test-result-title');
+      const timeEl = document.getElementById('wb-test-result-time');
+      const msgEl = document.getElementById('wb-test-result-msg');
+
+      box.classList.remove('hidden');
+      if (isSuccess) {
+        box.className = "p-3 rounded-lg border text-xs bg-emerald-50/80 border-emerald-200 text-emerald-800";
+        titleEl.className = "flex items-center gap-1.5 font-bold text-emerald-700";
+      } else {
+        box.className = "p-3 rounded-lg border text-xs bg-rose-50/80 border-rose-200 text-rose-800";
+        titleEl.className = "flex items-center gap-1.5 font-bold text-rose-700";
+      }
+
+      titleEl.innerHTML = title;
+      timeEl.textContent = time;
+      msgEl.textContent = msg;
+    }
+
+    async function regenerateWorkBuddyKey() {
+      if (!confirm("确定要重新生成 WorkBuddy 专属 API Key 吗？\n生成后原有的 API Key 将立刻失效，需要同步在 WorkBuddy 端更新。")) return;
+      try {
+        const res = await fetch('/api/connector/workbuddy/regenerate_key', {method: 'POST'});
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('wb-api-key').value = data.api_key;
+          showNotification("API Key 已重新生成并生效！", "success");
+        }
+      } catch (e) {
+        showNotification("刷新 Key 出错", "error");
+      }
+    }
+
+    function toggleApiKeyVisibility() {
+      const input = document.getElementById('wb-api-key');
+      const icon = document.getElementById('eye-api-key');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fa-solid fa-eye-slash text-xs';
+      } else {
+        input.type = 'password';
+        icon.className = 'fa-solid fa-eye text-xs';
+      }
+    }
+
+    function copyWorkBuddyApiKey() {
+      const input = document.getElementById('wb-api-key');
+      const val = input.value;
+      if (!val) return;
+      navigator.clipboard.writeText(val).then(() => {
+        showNotification("API Key 已复制到剪贴板！", "success");
+      }).catch(() => {
+        input.select();
+        document.execCommand('copy');
+        showNotification("API Key 已复制！", "success");
+      });
+    }
+
+    function openEndpointPreview(endpoint) {
+      const key = document.getElementById('wb-api-key').value;
+      const url = `${endpoint}?api_key=${encodeURIComponent(key)}`;
+      window.open(url, '_blank');
+    }
+
+  
+    function copyMcpJsonConfig() {
+      const code = document.getElementById('mcp-config-json').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showNotification("MCP 配置 JSON 已复制到剪贴板！", "success");
+      }).catch(() => {
+        showNotification("复制成功！", "success");
+      });
+    }
+
+    function copyExamplePrompt() {
+      const prompt = document.getElementById('example-prompt-text').textContent.trim();
+      navigator.clipboard.writeText(prompt).then(() => {
+        showNotification("范例指令已复制！可直接发送给 WorkBuddy", "success");
+      }).catch(() => {
+        showNotification("复制成功！", "success");
+      });
+    }
+
   </script>
 </body>
 </html>

@@ -51,7 +51,7 @@
         video.play();
     
 
-   var mp401="http://mpv.videocc.net/2b8fd4c754/2/2b8fd4c754a97e032bd395c6a00acbd2_1.mp4";
+   var mp401="https://mpv.videocc.net/2b8fd4c754/2/2b8fd4c754a97e032bd395c6a00acbd2_1.mp4";
         $('#yzsp').on('click', function(){
         layer.open({
           type: 1,

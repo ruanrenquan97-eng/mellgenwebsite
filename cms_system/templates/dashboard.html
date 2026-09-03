@@ -2794,8 +2794,12 @@
     function getFrontUrl(path = '') {
       const host = window.location.hostname;
       const protocol = window.location.protocol;
+      const port = window.location.port;
       const cleanPath = path ? (path.startsWith('/') ? path.slice(1) : path) : '';
-      return `${protocol}//${host}:8000/${cleanPath}`;
+      if (port === '8001') {
+        return `${protocol}//${host}:8000/${cleanPath}`;
+      }
+      return port ? `${protocol}//${host}:${port}/${cleanPath}` : `${protocol}//${host}/${cleanPath}`;
     }
 
     let cache = {
@@ -3441,6 +3445,359 @@
       }, 800);
     }
 
+    // ==========================================================
+    // --- Product Management (Modal & Entry Form Handlers) ---
+    // ==========================================================
+    let editingProductId = null;
+
+    function openProductModal(id = null) {
+      editingProductId = id;
+      const modal = document.getElementById("product-modal");
+      const modalTitle = document.getElementById("product-modal-title");
+      const idInput = document.getElementById("prod-id");
+      const titleInput = document.getElementById("prod-title");
+      const catSelect = document.getElementById("prod-category");
+      const imgInput = document.getElementById("prod-image");
+      const descInput = document.getElementById("prod-desc");
+      const specsContainer = document.getElementById("prod-specs-container");
+
+      if (specsContainer) specsContainer.innerHTML = "";
+
+      if (id) {
+        const p = cache.products.find(prod => prod.id === id);
+        if (!p) return;
+        if (modalTitle) modalTitle.innerText = `编辑原料：${p.title}`;
+        if (idInput) { idInput.value = p.id; idInput.readOnly = true; }
+        if (titleInput) titleInput.value = p.title || "";
+        if (catSelect) catSelect.value = p.category || "化妆品原料";
+        if (imgInput) imgInput.value = p.image || "";
+        if (descInput) descInput.value = p.desc || "";
+
+        if (p.specs && typeof p.specs === "object") {
+          for (const [key, val] of Object.entries(p.specs)) {
+            addSpecRow(key, val);
+          }
+        }
+        if (quillProd) {
+          quillProd.root.innerHTML = p.content || "";
+        }
+      } else {
+        if (modalTitle) modalTitle.innerText = "添加新原料";
+        if (idInput) { idInput.value = ""; idInput.readOnly = false; }
+        if (titleInput) titleInput.value = "";
+        if (catSelect) catSelect.value = "化妆品原料";
+        if (imgInput) imgInput.value = "images/ban_txt.png";
+        if (descInput) descInput.value = "";
+        if (quillProd) quillProd.root.innerHTML = "";
+      }
+
+      if (modal) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById("product-modal");
+      if (modal) {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+      }
+      editingProductId = null;
+    }
+
+    function editProduct(id) {
+      openProductModal(id);
+    }
+
+    function addSpecRow(key = '', val = '') {
+      const container = document.getElementById("prod-specs-container");
+      if (!container) return;
+      const row = document.createElement("div");
+      row.className = "flex items-center gap-2 spec-row";
+      row.innerHTML = `
+        <input type="text" placeholder="参数名 (如 INCI)" value="${key}" class="spec-key w-1/3 px-2 py-1 border border-slate-200 rounded text-xs outline-none focus:border-primary">
+        <input type="text" placeholder="参数值 (如 可溶性胶原)" value="${val}" class="spec-val flex-1 px-2 py-1 border border-slate-200 rounded text-xs outline-none focus:border-primary">
+        <button type="button" onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-600 px-1 text-xs"><i class="fa-solid fa-trash"></i></button>
+      `;
+      container.appendChild(row);
+    }
+
+    async function saveProduct() {
+      const idInput = document.getElementById("prod-id");
+      const titleInput = document.getElementById("prod-title");
+      const catSelect = document.getElementById("prod-category");
+      const imgInput = document.getElementById("prod-image");
+      const descInput = document.getElementById("prod-desc");
+
+      const title = titleInput ? titleInput.value.trim() : "";
+      const id = idInput ? idInput.value.trim() : "";
+      if (!title) {
+        showToast("请输入原料标题！", "error");
+        return;
+      }
+      if (!id && !editingProductId) {
+        showToast("请输入唯一网页文件名ID！", "error");
+        return;
+      }
+
+      const specs = {};
+      const specRows = document.querySelectorAll("#prod-specs-container .spec-row");
+      specRows.forEach(row => {
+        const k = row.querySelector(".spec-key")?.value?.trim();
+        const v = row.querySelector(".spec-val")?.value?.trim();
+        if (k) specs[k] = v || "";
+      });
+
+      const content = quillProd ? quillProd.root.innerHTML : "";
+      const category = catSelect ? catSelect.value : "化妆品原料";
+      const image = imgInput && imgInput.value.trim() ? imgInput.value.trim() : "images/ban_txt.png";
+      const desc = descInput ? descInput.value.trim() : "";
+
+      const payload = {
+        title,
+        category,
+        image,
+        desc,
+        specs,
+        content
+      };
+
+      const isEdit = !!editingProductId;
+      const targetId = isEdit ? editingProductId : id;
+      const url = isEdit ? `/api/products/${targetId}` : "/api/products";
+      const method = isEdit ? "PUT" : "POST";
+
+      if (!isEdit) {
+        payload.id = targetId;
+      }
+
+      try {
+        showToast("正在保存产品...", "info");
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (res.ok && (result.success !== false)) {
+          showToast(isEdit ? "产品修改成功！" : "新产品创建成功！", "success");
+          closeProductModal();
+          await loadAllData();
+        } else {
+          showToast(result.message || "保存失败，请检查填写内容", "error");
+        }
+      } catch (err) {
+        showToast("网络请求异常：" + err.message, "error");
+      }
+    }
+
+    async function deleteProduct(id) {
+      const p = cache.products.find(prod => prod.id === id);
+      const name = p ? p.title : id;
+      if (!confirm(`确认要删除产品【${name}】吗？删除后对应的静态页面也将移除。`)) return;
+
+      try {
+        showToast("正在删除产品...", "info");
+        const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
+        const result = await res.json();
+        if (res.ok && result.success !== false) {
+          showToast("产品删除成功！", "success");
+          loadAllData();
+        } else {
+          showToast(result.message || "删除失败", "error");
+        }
+      } catch (err) {
+        showToast("删除异常：" + err.message, "error");
+      }
+    }
+
+    async function uploadImage(type) {
+      const fileInput = document.getElementById(type === 'prod' ? 'prod-image-file' : 'art-image-file');
+      const targetInput = document.getElementById(type === 'prod' ? 'prod-image' : 'art-image');
+      if (!fileInput || fileInput.files.length === 0) return;
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      try {
+        showToast("正在上传图片...", "info");
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const result = await res.json();
+        if (result.success) {
+          if (targetInput) targetInput.value = result.url;
+          showToast("图片上传成功！", "success");
+        } else {
+          showToast(result.message || "上传失败", "error");
+        }
+      } catch (err) {
+        showToast("上传异常：" + err.message, "error");
+      }
+    }
+
+    function switchFormTab(tab) {
+      ['basic', 'seo', 'others'].forEach(t => {
+        const sec = document.getElementById(`form-section-${t}`);
+        const btn = document.getElementById(`form-tab-${t}`);
+        if (sec) {
+          if (t === tab) {
+            sec.classList.remove("hidden");
+          } else {
+            sec.classList.add("hidden");
+          }
+        }
+        if (btn) {
+          if (t === tab) {
+            btn.className = "px-5 py-2 border-b-2 border-primary text-primary font-bold";
+          } else {
+            btn.className = "px-5 py-2 border-b-2 border-transparent text-slate-500 hover:text-primary";
+          }
+        }
+      });
+    }
+
+    async function saveEntryProduct() {
+      const idInput = document.getElementById("entry-prod-id");
+      const titleInput = document.getElementById("entry-prod-title");
+      const catSelect = document.getElementById("entry-prod-category");
+      const descInput = document.getElementById("entry-prod-desc");
+      const seoTitleInput = document.getElementById("entry-prod-seo-title");
+      const seoKeywordsInput = document.getElementById("entry-prod-seo-keywords");
+      const seoDescInput = document.getElementById("entry-prod-seo-desc");
+      const h1Input = document.getElementById("entry-prod-h1");
+      const imgPreview = document.getElementById("entry-img-preview");
+      const largePreview = document.getElementById("entry-large-preview");
+      const bannerPreview = document.getElementById("entry-banner-preview");
+      const videoPreview = document.getElementById("entry-video-preview");
+      const recommendInput = document.getElementById("entry-prod-recommend");
+      const topInput = document.getElementById("entry-prod-top");
+      const showYes = document.getElementById("entry-prod-show-yes");
+      const dateInput = document.getElementById("entry-prod-date");
+
+      const title = titleInput ? titleInput.value.trim() : "";
+      const id = idInput ? idInput.value.trim() : "";
+      if (!title) {
+        showToast("请输入产品标题名称！", "error");
+        switchFormTab('basic');
+        return;
+      }
+      if (!id) {
+        showToast("请输入网页访问地址文件名！", "error");
+        switchFormTab('seo');
+        return;
+      }
+
+      const specs = {};
+      document.querySelectorAll("#entry-prod-specs-container .entry-spec-row").forEach(row => {
+        const k = row.querySelector(".entry-spec-key")?.value?.trim();
+        const v = row.querySelector(".entry-spec-val")?.value?.trim();
+        if (k) specs[k] = v || "";
+      });
+
+      const payload = {
+        id,
+        title,
+        category: catSelect ? catSelect.value : "化妆品原料",
+        image: imgPreview && !imgPreview.classList.contains("hidden") && imgPreview.dataset.url ? imgPreview.dataset.url : "images/ban_txt.png",
+        largeImage: largePreview && !largePreview.classList.contains("hidden") && largePreview.dataset.url ? largePreview.dataset.url : "images/ban_txt.png",
+        fullBanner: bannerPreview && !bannerPreview.classList.contains("hidden") && bannerPreview.dataset.url ? bannerPreview.dataset.url : "",
+        video: videoPreview && !videoPreview.classList.contains("hidden") && videoPreview.dataset.url ? videoPreview.dataset.url : "",
+        desc: descInput ? descInput.value.trim() : "",
+        content: entryQuill ? entryQuill.root.innerHTML : "",
+        specs,
+        seoTitle: seoTitleInput ? seoTitleInput.value.trim() : "",
+        seoKeywords: seoKeywordsInput ? seoKeywordsInput.value.trim() : "",
+        seoDesc: seoDescInput ? seoDescInput.value.trim() : "",
+        h1: h1Input ? h1Input.value.trim() : "",
+        recommend: recommendInput ? recommendInput.checked : false,
+        top: topInput ? topInput.checked : false,
+        show: showYes ? showYes.checked : true,
+        date: dateInput && dateInput.value ? dateInput.value : undefined
+      };
+
+      const existing = cache.products.find(p => p.id === id);
+      const url = existing ? `/api/products/${id}` : "/api/products";
+      const method = existing ? "PUT" : "POST";
+
+      try {
+        showToast("正在保存产品...", "info");
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (res.ok && result.success !== false) {
+          showToast("产品保存成功！", "success");
+          await loadAllData();
+          switchTab("products");
+        } else {
+          showToast(result.message || "保存失败", "error");
+        }
+      } catch (err) {
+        showToast("保存异常：" + err.message, "error");
+      }
+    }
+
+    function previewEntryProduct() {
+      const idInput = document.getElementById("entry-prod-id");
+      const id = idInput ? idInput.value.trim() : "";
+      if (!id) {
+        showToast("请先在SEO选项卡中填写网页访问地址ID！", "warning");
+        return;
+      }
+      window.open(getFrontUrl(`products/${id}.html`), '_blank');
+    }
+
+    function addEntrySpecRow(key = '', val = '') {
+      const container = document.getElementById("entry-prod-specs-container");
+      if (!container) return;
+      const row = document.createElement("div");
+      row.className = "flex items-center gap-2 entry-spec-row";
+      row.innerHTML = `
+        <input type="text" placeholder="参数名 (如 纯度)" value="${key}" class="entry-spec-key w-1/3 px-2 py-1 border border-slate-200 rounded text-xs outline-none focus:border-primary">
+        <input type="text" placeholder="参数值 (如 99.8%)" value="${val}" class="entry-spec-val flex-1 px-2 py-1 border border-slate-200 rounded text-xs outline-none focus:border-primary">
+        <button type="button" onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-600 px-1 text-xs"><i class="fa-solid fa-trash"></i></button>
+      `;
+      container.appendChild(row);
+    }
+
+    async function uploadEntryImage(type) {
+      const inputMap = {
+        image: { fileId: 'entry-upload-image', previewId: 'entry-img-preview' },
+        large: { fileId: 'entry-upload-large', previewId: 'entry-large-preview' },
+        banner: { fileId: 'entry-upload-banner', previewId: 'entry-banner-preview', txtId: 'entry-banner-txt' }
+      };
+      const cfg = inputMap[type];
+      if (!cfg) return;
+      const fileInput = document.getElementById(cfg.fileId);
+      const preview = document.getElementById(cfg.previewId);
+      if (!fileInput || fileInput.files.length === 0) return;
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      try {
+        showToast("上传图片中...", "info");
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const result = await res.json();
+        if (result.success) {
+          if (preview) {
+            preview.src = "/" + result.url;
+            preview.dataset.url = result.url;
+            preview.classList.remove("hidden");
+          }
+          if (cfg.txtId) {
+            const txt = document.getElementById(cfg.txtId);
+            if (txt) txt.innerText = "已选择图片";
+          }
+          showToast("上传成功！", "success");
+        } else {
+          showToast(result.message || "上传失败", "error");
+        }
+      } catch (err) {
+        showToast("上传异常", "error");
+      }
+    }
+
     function renderArticlesTable() {
       const tbody = document.getElementById("articles-table-body");
       if (!tbody) return;
@@ -3670,6 +4027,146 @@
       }).catch(() => {
         showToast("复制链接失败，请手动复制：" + fullUrl, "error");
       });
+    }
+
+    // ==========================================================
+    // --- Article Management (Modal & Handlers) ---
+    // ==========================================================
+    let editingArticleId = null;
+
+    function openArticleModal(id = null) {
+      editingArticleId = id;
+      const modal = document.getElementById("article-modal");
+      const modalTitle = document.getElementById("article-modal-title");
+      const idInput = document.getElementById("art-id");
+      const titleInput = document.getElementById("art-title");
+      const catSelect = document.getElementById("art-category");
+      const dateInput = document.getElementById("art-date");
+      const imgInput = document.getElementById("art-image");
+      const descInput = document.getElementById("art-desc");
+
+      if (id) {
+        const a = cache.articles.find(art => art.id === id);
+        if (!a) return;
+        if (modalTitle) modalTitle.innerText = `编辑文章：${a.title}`;
+        if (idInput) { idInput.value = a.id; idInput.readOnly = true; }
+        if (titleInput) titleInput.value = a.title || "";
+        if (catSelect) catSelect.value = a.category || "新闻资讯";
+        if (dateInput) dateInput.value = a.date ? a.date.slice(0, 10) : "";
+        if (imgInput) imgInput.value = a.image || "";
+        if (descInput) descInput.value = a.desc || "";
+        if (quillArt) quillArt.root.innerHTML = a.content || "";
+      } else {
+        if (modalTitle) modalTitle.innerText = "发布新文章";
+        if (idInput) { idInput.value = ""; idInput.readOnly = false; }
+        if (titleInput) titleInput.value = "";
+        if (catSelect) catSelect.value = "新闻资讯";
+        if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10);
+        if (imgInput) imgInput.value = "images/ban_txt.png";
+        if (descInput) descInput.value = "";
+        if (quillArt) quillArt.root.innerHTML = "";
+      }
+
+      if (modal) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+    }
+
+    function closeArticleModal() {
+      const modal = document.getElementById("article-modal");
+      if (modal) {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+      }
+      editingArticleId = null;
+    }
+
+    function editArticle(id) {
+      openArticleModal(id);
+    }
+
+    async function saveArticle() {
+      const idInput = document.getElementById("art-id");
+      const titleInput = document.getElementById("art-title");
+      const catSelect = document.getElementById("art-category");
+      const dateInput = document.getElementById("art-date");
+      const imgInput = document.getElementById("art-image");
+      const descInput = document.getElementById("art-desc");
+
+      const title = titleInput ? titleInput.value.trim() : "";
+      const id = idInput ? idInput.value.trim() : "";
+      if (!title) {
+        showToast("请输入文章标题！", "error");
+        return;
+      }
+      if (!id && !editingArticleId) {
+        showToast("请输入唯一网页文件名ID！", "error");
+        return;
+      }
+
+      const category = catSelect ? catSelect.value : "新闻资讯";
+      const date = dateInput && dateInput.value ? dateInput.value : new Date().toISOString().slice(0, 10);
+      const image = imgInput && imgInput.value.trim() ? imgInput.value.trim() : "images/ban_txt.png";
+      const desc = descInput ? descInput.value.trim() : "";
+      const content = quillArt ? quillArt.root.innerHTML : "";
+
+      const payload = {
+        title,
+        category,
+        date,
+        image,
+        desc,
+        content
+      };
+
+      const isEdit = !!editingArticleId;
+      const targetId = isEdit ? editingArticleId : id;
+      const url = isEdit ? `/api/articles/${targetId}` : "/api/articles";
+      const method = isEdit ? "PUT" : "POST";
+
+      if (!isEdit) {
+        payload.id = targetId;
+      }
+
+      try {
+        showToast("正在保存文章...", "info");
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (res.ok && result.success !== false) {
+          showToast(isEdit ? "文章修改成功！" : "文章发布成功！", "success");
+          closeArticleModal();
+          await loadAllData();
+        } else {
+          showToast(result.message || "保存失败，请检查内容", "error");
+        }
+      } catch (err) {
+        showToast("网络请求异常：" + err.message, "error");
+      }
+    }
+
+    async function deleteArticle(id) {
+      const a = cache.articles.find(art => art.id === id);
+      const name = a ? a.title : id;
+      if (!confirm(`确认要删除文章【${name}】吗？`)) return;
+
+      try {
+        showToast("正在删除文章...", "info");
+        const res = await fetch(`/api/articles/${id}`, { method: "DELETE" });
+        const result = await res.json();
+        if (res.ok && result.success !== false) {
+          showToast("文章删除成功！", "success");
+          await loadAllData();
+        } else {
+          showToast(result.message || "删除失败", "error");
+        }
+      } catch (err) {
+        showToast("删除异常：" + err.message, "error");
+      }
     }
 
     function filterArticlesTable() {

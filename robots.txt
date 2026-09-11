@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+Disallow: /cms_system/
+
+# AI Search Engines & Scrapers for GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://www.mellgen.com/sitemap.xml
+# AI Data Source for GEO Engine (https://llmstxt.org/)
+LLM-Text: https://www.mellgen.com/llms.txt

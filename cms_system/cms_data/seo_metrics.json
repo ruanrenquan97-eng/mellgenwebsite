@@ -1,0 +1,250 @@
+{
+  "traffic": {
+    "pv": 1911,
+    "uv": 651,
+    "ip": 533,
+    "pv_growth": "+16.8%",
+    "uv_growth": "+12.4%",
+    "ip_growth": "+9.5%",
+    "avg_duration": "3分15秒",
+    "bounce_rate": "24.6%",
+    "peak_hour": "14:00 - 16:00",
+    "sources": [
+      {
+        "name": "搜索引擎(SEO)",
+        "pct": 68.5,
+        "count": 1296
+      },
+      {
+        "name": "直接访问(Direct)",
+        "pct": 18.2,
+        "count": 344
+      },
+      {
+        "name": "外部链接(Backlinks)",
+        "pct": 10.1,
+        "count": 191
+      },
+      {
+        "name": "其他渠道",
+        "pct": 3.2,
+        "count": 61
+      }
+    ],
+    "devices": {
+      "pc": 64.2,
+      "mobile": 35.8
+    },
+    "history_7d": [
+      {
+        "date": "09-06",
+        "pv": 1420,
+        "uv": 480,
+        "ip": 410
+      },
+      {
+        "date": "09-07",
+        "pv": 1580,
+        "uv": 510,
+        "ip": 435
+      },
+      {
+        "date": "09-08",
+        "pv": 1510,
+        "uv": 495,
+        "ip": 420
+      },
+      {
+        "date": "09-09",
+        "pv": 1690,
+        "uv": 560,
+        "ip": 475
+      },
+      {
+        "date": "09-10",
+        "pv": 1780,
+        "uv": 590,
+        "ip": 490
+      },
+      {
+        "date": "09-11",
+        "pv": 1820,
+        "uv": 615,
+        "ip": 505
+      },
+      {
+        "date": "09-12",
+        "pv": 1908,
+        "uv": 651,
+        "ip": 533
+      }
+    ],
+    "today_pv": 1251
+  },
+  "indexing": {
+    "total_pages": 156,
+    "indexed_pages": 152,
+    "overall_rate": 97.4,
+    "last_check_time": "2026-09-12 04:52:52",
+    "engines": [
+      {
+        "name": "百度 (Baidu)",
+        "icon": "fa-brands fa-paw",
+        "color": "text-blue-600 bg-blue-50 border-blue-200",
+        "indexed": 148,
+        "rate": 94.9,
+        "status": "正常抓取",
+        "status_tag": "秒级收录",
+        "spider": "Baiduspider",
+        "daily_crawl": 2350
+      },
+      {
+        "name": "谷歌 (Google)",
+        "icon": "fa-brands fa-google",
+        "color": "text-rose-600 bg-rose-50 border-rose-200",
+        "indexed": 152,
+        "rate": 97.4,
+        "status": "Indexing API 已连接",
+        "status_tag": "覆盖率第一",
+        "spider": "Googlebot",
+        "daily_crawl": 1420
+      },
+      {
+        "name": "必应 (Bing)",
+        "icon": "fa-brands fa-microsoft",
+        "color": "text-sky-600 bg-sky-50 border-sky-200",
+        "indexed": 144,
+        "rate": 92.3,
+        "status": "Sitemap 已提交",
+        "status_tag": "稳定爬行",
+        "spider": "Bingbot",
+        "daily_crawl": 680
+      },
+      {
+        "name": "360搜索",
+        "icon": "fa-solid fa-shield-halved",
+        "color": "text-emerald-600 bg-emerald-50 border-emerald-200",
+        "indexed": 139,
+        "rate": 89.1,
+        "status": "自动收录正常",
+        "status_tag": "正常索引",
+        "spider": "360Spider",
+        "daily_crawl": 320
+      },
+      {
+        "name": "搜狗 (Sogou)",
+        "icon": "fa-solid fa-dog",
+        "color": "text-amber-600 bg-amber-50 border-amber-200",
+        "indexed": 136,
+        "rate": 87.2,
+        "status": "持续增量抓取",
+        "status_tag": "抓取顺畅",
+        "spider": "Sogouspider",
+        "daily_crawl": 260
+      }
+    ],
+    "unindexed_pages": [
+      {
+        "url": "/articles/20260910-new-collagen.html",
+        "title": "2026年美尔健最新重组胶原蛋白研发成果公布",
+        "engine": "搜狗/360待抓取",
+        "submit_time": "2026-09-10"
+      },
+      {
+        "url": "/products/hyaluronic-acid-ultra.html",
+        "title": "超高分子量医药级玻尿酸原料规格参数",
+        "engine": "搜狗待抓取",
+        "submit_time": "2026-09-11"
+      }
+    ],
+    "last_push_time": "2026-09-12 05:11:57"
+  },
+  "authority": {
+    "rating_level": "AAA",
+    "rating_name": "优质高权重企业站",
+    "score": 96,
+    "domain_age": "7年深耕",
+    "icp_status": "正常认证",
+    "ssl_status": "安全有效",
+    "indexed_keywords_total": 158,
+    "top50_keywords_count": 86,
+    "top10_keywords_count": 32,
+    "last_evaluated": "2026-09-12 04:52:52",
+    "ratings": [
+      {
+        "platform": "百度PC权重",
+        "weight": "BR 3",
+        "level": "3",
+        "desc": "预估日均百度来路 850~1,200",
+        "badge": "bg-blue-600 text-white"
+      },
+      {
+        "platform": "百度移动权重",
+        "weight": "BR 3",
+        "level": "3",
+        "desc": "移动端适配指数极高",
+        "badge": "bg-blue-500 text-white"
+      },
+      {
+        "platform": "谷歌 DA / PR",
+        "weight": "DA 38",
+        "level": "PR 4",
+        "desc": "全球高信任度权威企业站",
+        "badge": "bg-rose-500 text-white"
+      },
+      {
+        "platform": "360搜索权重",
+        "weight": "PR 3",
+        "level": "3",
+        "desc": "360企业信誉认证",
+        "badge": "bg-emerald-600 text-white"
+      },
+      {
+        "platform": "搜狗评级",
+        "weight": "SR 4",
+        "level": "4",
+        "desc": "搜狗微信及网页高加权",
+        "badge": "bg-amber-500 text-white"
+      },
+      {
+        "platform": "神马搜索",
+        "weight": "SM 3",
+        "level": "3",
+        "desc": "UC移动端原料搜索前列",
+        "badge": "bg-purple-600 text-white"
+      }
+    ],
+    "core_keywords": [
+      {
+        "keyword": "医用原料供应商",
+        "rank": 3,
+        "engine": "百度",
+        "trend": "up"
+      },
+      {
+        "keyword": "重组胶原蛋白原料",
+        "rank": 2,
+        "engine": "百度",
+        "trend": "equal"
+      },
+      {
+        "keyword": "化妆品原料直销批发",
+        "rank": 5,
+        "engine": "百度",
+        "trend": "up"
+      },
+      {
+        "keyword": "透皮肽生产厂家",
+        "rank": 1,
+        "engine": "360",
+        "trend": "equal"
+      },
+      {
+        "keyword": "食品级玻尿酸原料",
+        "rank": 4,
+        "engine": "搜狗",
+        "trend": "up"
+      }
+    ]
+  }
+}

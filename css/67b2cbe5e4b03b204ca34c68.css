@@ -385,6 +385,14 @@ em{font-style:normal;}
         margin-bottom: 12px;
     }
     
+    .hyt-product-list-6 dd h4:last-child {
+        margin-bottom: 0;
+    }
+
+    .hyt-product-list-6 dd:not(:has(p)) {
+        padding: 30px 40px;
+    }
+    
     .hyt-product-list-6 dd h4 a {
         display: block;
         height: 40px;

@@ -1,7 +1,8 @@
 
     $(window).scroll(function (a) {
-
-      if ($(this).scrollTop() > 1) {
+      var isMobile = (window.innerWidth || document.documentElement.clientWidth) <= 768;
+      var threshold = isMobile ? 60 : 1;
+      if ($(this).scrollTop() > threshold) {
           $("#head").addClass("headFix")
       } else {
           $("#head").removeClass("headFix")
@@ -170,13 +171,22 @@
 
         $(function() {
             var videoSwi = new Swiper('.video-list .swiper-container', {
-                // autoplay: {
-                // 	delay: 3000,
-                // 	stopOnLastSlide: false,
-                // 	disableOnInteraction: false,
-                // },
                 slidesPerView: 4,
                 spaceBetween: 3 + '%',
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 10
+                    },
+                    480: {
+                        slidesPerView: 1.8,
+                        spaceBetween: 12
+                    },
+                    768: {
+                        slidesPerView: 4,
+                        spaceBetween: '3%'
+                    }
+                },
                 loop: true,
                 navigation: {
                     prevEl: '.video-btn-prev',
@@ -186,39 +196,62 @@
 
             $('.video-list').find("div.swiper-slide").each(function() {
                 var htmls = $(this).find('.video-pic').attr('data-html');
-                $(this).on('mouseenter', function(e) {
+                var $slide = $(this);
+                $slide.on('mouseenter', function(e) {
                     e.stopPropagation();
-                    $(this).find(".video-wrap").show();
-                    $(this).find(".video-wrap").append(`<video autoplay="ture" controls="" height="100%" preload="none" src="` + htmls + `" width="100%"></video>`)
-                })
-                $(this).on('mouseleave', function(e) {
+                    $slide.find(".video-wrap").show();
+                    if (!$slide.find(".video-wrap video").length) {
+                        $slide.find(".video-wrap").append(`<video autoplay="true" controls="" height="100%" preload="none" src="` + htmls + `" width="100%"></video>`);
+                    }
+                });
+                $slide.on('mouseleave', function(e) {
                     e.stopPropagation();
-                    $(this).find(".video-wrap").hide();
-                    $(this).find(".video-wrap").find('video').remove();
-                })
-            })
+                    $slide.find(".video-wrap").hide();
+                    $slide.find(".video-wrap").find('video').remove();
+                });
+                // 移动端点击播放
+                $slide.find('.video-pic-btn, .video-pic a').on('click', function(e) {
+                    e.preventDefault();
+                    $slide.find(".video-wrap").show();
+                    if (!$slide.find(".video-wrap video").length) {
+                        $slide.find(".video-wrap").append(`<video autoplay="true" controls="" height="100%" preload="auto" src="` + htmls + `" width="100%"></video>`);
+                    }
+                });
+            });
         });
     
 
      $(function () {
-    var ysSwiper = new Swiper('.anlst', {
-         autoplay:true,
-         paginationClickable: true,
-         slidesPerView :2,
-         spaceBetween:2+"%",
-         loop:true,
-        pagination: {
-            el: '.anlst .swiper-pagination',
-            clickable: true,
-        },
-           navigation: {
-             nextEl: '.anlst .swiper-button-next',
-             prevEl: '.anlst .swiper-button-prev',
-           },
-
+        var ysSwiper = new Swiper('.anlst', {
+            autoplay: true,
+            paginationClickable: true,
+            slidesPerView: 2,
+            spaceBetween: 2 + "%",
+            breakpoints: {
+                320: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 8
+                },
+                480: {
+                    slidesPerView: 2,
+                    spaceBetween: 10
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: '2%'
+                }
+            },
+            loop: true,
+            pagination: {
+                el: '.anlst .swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.anlst .swiper-button-next',
+                prevEl: '.anlst .swiper-button-prev',
+            },
+        });
     });
-
-})
  
 
                   $(".newcon dl").hover(function(){

@@ -6,6 +6,7 @@ Mellgen Biotechnology Full Website English Generator & Language Switcher
 import os
 import re
 import glob
+import json
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EN_DIR = os.path.join(WORKSPACE, "en")
@@ -302,8 +303,19 @@ DICT_ITEMS = [
     ("广东省深圳市大鹏新区葵涌街道生命科学产业园", "Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
 ]
 
+# Load external en_dictionary.json if available
+DICT_JSON_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "en_dictionary.json")
+ALL_DICT = dict(DICT_ITEMS)
+if os.path.exists(DICT_JSON_PATH):
+    try:
+        with open(DICT_JSON_PATH, "r", encoding="utf-8") as f:
+            ext_d = json.load(f)
+            ALL_DICT.update(ext_d)
+    except Exception as e:
+        print(f"[-] Warning loading en_dictionary.json: {e}")
+
 # Sort translations strictly by length of the Chinese string descending
-DICT_ITEMS_SORTED = sorted(DICT_ITEMS, key=lambda x: len(x[0]), reverse=True)
+DICT_ITEMS_SORTED = sorted(ALL_DICT.items(), key=lambda x: len(x[0]), reverse=True)
 
 def get_lang_switch_html(is_en=False, depth=0):
     if is_en:
@@ -423,14 +435,27 @@ def process_file(src_rel_path):
         f.write(en_html)
 
 def main():
+    global DICT_ITEMS_SORTED
     print("Building full English website & language switchers...")
     os.makedirs(EN_DIR, exist_ok=True)
+
+    # Reload external en_dictionary.json to ensure latest additions are used
+    if os.path.exists(DICT_JSON_PATH):
+        try:
+            with open(DICT_JSON_PATH, "r", encoding="utf-8") as f:
+                ext_d = json.load(f)
+                d = dict(DICT_ITEMS)
+                d.update(ext_d)
+                DICT_ITEMS_SORTED = sorted(d.items(), key=lambda x: len(x[0]), reverse=True)
+                print(f"Loaded {len(DICT_ITEMS_SORTED)} translation rules into build_full_en_site.")
+        except Exception as e:
+            print(f"[-] Warning reloading en_dictionary.json: {e}")
 
     all_htmls = []
     for root, dirs, files in os.walk(WORKSPACE):
         dirs[:] = [d for d in dirs if d not in ['.git', 'en', 'cms_system', '.gemini', 'node_modules', '__pycache__']]
         for f in files:
-            if f.endswith('.html'):
+            if f.endswith('.html') and f != 'backend_shell.html':
                 rel_path = os.path.relpath(os.path.join(root, f), WORKSPACE)
                 all_htmls.append(rel_path)
 

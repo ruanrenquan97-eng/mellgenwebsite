@@ -87,13 +87,14 @@
     // 触发按钮（胶囊型醒目展示“AI客服”与“AI在线”角标）
     var trigger = document.createElement("div");
     trigger.id = "mg-ai-trigger";
+    trigger.style.cssText = "position:fixed;bottom:30px;right:28px;height:52px;padding:0 20px 0 16px;border-radius:26px;background:linear-gradient(135deg,#10b981 0%,#047857 100%);box-shadow:0 8px 24px rgba(5,150,105,0.4);cursor:pointer;z-index:99998;display:flex;align-items:center;gap:10px;user-select:none;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Segoe UI',sans-serif;";
     trigger.setAttribute("title", isEn ? "Click to chat with AI Support (Online)" : "点击咨询AI客服 (AI在线)");
     trigger.innerHTML = 
-      '<svg class="mg-ai-icon" viewBox="0 0 24 24">' +
+      '<svg class="mg-ai-icon" viewBox="0 0 24 24" style="width:24px;height:24px;fill:currentColor;flex-shrink:0;">' +
         '<path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.2-1.3c1.43.76 3.05 1.3 4.8 1.3 5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>' +
       '</svg>' +
-      '<span class="mg-ai-btn-text">' + (isEn ? "AI Support" : "AI客服") + '</span>' +
-      '<span class="mg-ai-badge">' + (isEn ? "Online" : "AI在线") + '</span>';
+      '<span class="mg-ai-btn-text" style="font-size:15px;font-weight:700;letter-spacing:0.5px;white-space:nowrap;color:#fff;">' + (isEn ? "AI Support" : "AI客服") + '</span>' +
+      '<span class="mg-ai-badge" style="background:#ffffff;color:#047857;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,0.1);">' + (isEn ? "Online" : "AI在线") + '</span>';
 
     // 欢迎小气泡提示
     var hint = document.createElement("div");

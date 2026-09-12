@@ -529,7 +529,7 @@ $(function () {
             var prefix = "";
             var scripts = document.getElementsByTagName("script");
             for (var i = 0; i < scripts.length; i++) {
-                var src = scripts[i].getAttribute("src") || "";
+                var src = scripts[i].getAttribute("src") || scripts[i].src || "";
                 if (src.indexOf("public.js") !== -1) {
                     var idx = src.indexOf("public.js");
                     prefix = src.substring(0, idx);
@@ -547,7 +547,7 @@ $(function () {
                     prefix = "./js/";
                 }
             }
-            script.src = prefix + "ai_chat_widget.js?v=20260912_v8";
+            script.src = prefix + "ai_chat_widget.js?v=20260912_v11";
             script.async = true;
             if (document.body) {
                 document.body.appendChild(script);

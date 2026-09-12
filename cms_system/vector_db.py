@@ -15,7 +15,11 @@ import sys
 import json
 import math
 import sqlite3
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    np = None
+    print("[!] Warning: numpy is not installed. Run 'pip install numpy' to enable full dense vector search. Vector DB will run in keyword fallback mode.")
 from datetime import datetime
 
 try:

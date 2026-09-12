@@ -493,6 +493,19 @@ to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);opacity:1}
 }
 
 /* 5. 友情链接栏 (.g_link) 彻底消除负 margin-top 重叠，独占一行且优雅对齐 */
+.g_link[style*="none"],
+.g_link.hidden {
+  display: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  line-height: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 .g_link {
   background: transparent !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12) !important;

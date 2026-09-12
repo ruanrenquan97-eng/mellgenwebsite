@@ -184,9 +184,9 @@ def update_friendlinks(html_content, friendlinks):
     
     # If no active links, hide the entire friendly links block; otherwise ensure it is visible
     if not active_links:
-        html_content = re.sub(r'<div class="g_link f_fw"[^>]*>', '<div class="g_link f_fw" style="display: none;">', html_content)
+        html_content = re.sub(r'<div class="g_link f_fw[^"]*"[^>]*>', '<div class="g_link f_fw hidden" style="display: none !important;">', html_content)
     else:
-        html_content = re.sub(r'<div class="g_link f_fw"[^>]*>', '<div class="g_link f_fw">', html_content)
+        html_content = re.sub(r'<div class="g_link f_fw[^"]*"[^>]*>', '<div class="g_link f_fw">', html_content)
         
     return html_content
 

@@ -26,6 +26,11 @@ elif command -v pip &>/dev/null; then
     pip install -r requirements.txt
 fi
 
+echo "[2.5/4] Auto-configuring Nginx /mcp reverse proxy for WorkBuddy..."
+if [ -f "scripts/auto_config_nginx.py" ]; then
+    python3 scripts/auto_config_nginx.py || true
+fi
+
 echo "[3/4] Stopping existing processes on port 8001 (CMS) and port 8002 (MCP)..."
 pkill -9 -f "server.py" 2>/dev/null || true
 pkill -9 -f "mcp_server.py" 2>/dev/null || true

@@ -11,6 +11,8 @@
   <!-- Quill WYSIWYG Editor -->
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+  <!-- QRCode.js for Mobile QR Code Preview -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -267,6 +269,15 @@
         <span>页面修改</span>
       </button>
 
+      <!-- Item: 手机端预览 (快捷工具) -->
+      <button onclick="openMobilePreview()" class="w-full flex items-center justify-between px-4 py-2.5 text-[#555] font-medium border-b border-[#eef2f5] hover:bg-[#f4f5f9] hover:text-[#333] transition group">
+        <span class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 group-hover:bg-emerald-100 transition"><i class="fa-solid fa-mobile-screen-button text-xs text-emerald-600"></i></div>
+          <span>手机端预览</span>
+        </span>
+        <span class="text-[9px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-normal">多机型</span>
+      </button>
+
       <!-- Item 10: 回收站 -->
       <button onclick="switchTab('recycle-bin')" class="w-full flex items-center gap-3 px-4 py-2.5 text-[#555] font-medium border-b border-[#eef2f5] hover:bg-[#f4f5f9] hover:text-[#333] transition">
         <div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center shrink-0"><i class="fa-solid fa-trash-can text-xs text-slate-500"></i></div>
@@ -290,7 +301,12 @@
         <span class="text-[10px] text-slate-400">当前位置:</span>
         <span id="breadcrumb-title" class="text-[10px] font-bold text-slate-700">首页概览</span>
       </div>
-      <div class="flex items-center gap-4 text-[10px]">
+      <div class="flex items-center gap-3 text-[10px]">
+        <button type="button" onclick="openMobilePreview()" class="px-2.5 py-1 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 border border-emerald-200/90 rounded-md font-bold flex items-center gap-1.5 transition shadow-xs cursor-pointer">
+          <i class="fa-solid fa-mobile-screen-button text-xs text-emerald-600"></i>
+          <span>手机端预览</span>
+        </button>
+        <span class="text-slate-200">|</span>
         <a href="#" onclick="window.open(getFrontUrl(), '_blank'); return false;" class="text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> 预览前台
         </a>
@@ -1265,7 +1281,8 @@
           <!-- Bottom Actions -->
           <div class="flex justify-end gap-3 border-t border-slate-100 pt-4 mt-6">
             <button type="button" onclick="switchTab('products')" class="px-4 py-1.5 border border-slate-200 rounded hover:bg-slate-50 transition font-bold text-slate-600 text-xs">返回</button>
-            <button type="button" onclick="previewEntryProduct()" class="px-4 py-1.5 border border-slate-200 rounded hover:bg-slate-50 transition font-bold text-slate-600 text-xs">预览</button>
+            <button type="button" onclick="previewEntryProduct()" class="px-4 py-1.5 border border-slate-200 rounded hover:bg-slate-50 transition font-bold text-slate-600 text-xs">预览电脑版</button>
+            <button type="button" onclick="previewEntryProductMobile()" class="px-3.5 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded transition font-bold text-xs flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-mobile-screen-button text-xs"></i><span>手机端预览</span></button>
             <button type="button" onclick="saveEntryProduct()" class="px-5 py-1.5 bg-primary hover:bg-primary-dark text-white rounded transition font-bold shadow-sm text-xs">保存</button>
           </div>
         </form>
@@ -5979,6 +5996,212 @@ Disallow: /cms_system/
     </div>
   </div>
 
+  <!-- ================== MODAL: MOBILE DEVICE PREVIEW (手机端真机仿真预览) ================== -->
+  <div id="modal-mobile-preview" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex-col z-[130] text-slate-100 overflow-hidden transition-opacity select-none">
+    
+    <!-- 顶部极简控制工具栏 (Glass Toolbar) -->
+    <header class="h-14 bg-slate-900/95 border-b border-slate-800 px-4 flex items-center justify-between shrink-0 shadow-lg gap-3">
+      <!-- 左侧：标题与状态 -->
+      <div class="flex items-center gap-3 shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-sm shadow-inner">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-bold text-slate-100 text-xs tracking-wide">移动端自适应仿真预览</h3>
+            <span id="mobile-current-title-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 max-w-[140px] truncate font-mono">首页</span>
+          </div>
+          <p class="text-[10px] text-slate-400">实时加载前台移动版响应式页面与微交互</p>
+        </div>
+      </div>
+
+      <!-- 中间：地址栏与常用页面快速跳转 -->
+      <div class="flex-1 max-w-2xl flex items-center gap-2 bg-slate-950/70 border border-slate-800 rounded-lg p-1 text-xs">
+        <!-- 常用页面下拉选择 -->
+        <select id="mobile-quick-page-select" onchange="onMobilePageSelectChange(this.value)" class="bg-slate-900 text-slate-300 border border-slate-700/80 rounded px-2 py-1 text-[11px] outline-none hover:border-emerald-500 focus:border-emerald-500 transition cursor-pointer">
+          <option value="index.html">🏠 官网首页</option>
+          <option value="product_index.html">📦 产品中心</option>
+          <option value="product_hzpyl.html">🧪 化妆品原料</option>
+          <option value="product_dwyhxw.html">🧬 动物疫病检测</option>
+          <option value="article_xwzx.html">📰 新闻中心</option>
+          <option value="article_qydt.html">📈 企业动态</option>
+          <option value="help_spzx.html">🎬 视频中心</option>
+          <option value="help_gszz.html">🏛️ 关于我们</option>
+          <option value="help_ryzs.html">🏆 资质证书</option>
+          <option value="help_qyxc.html">📞 联系我们</option>
+          <option value="sitemap.html">🗺️ 网站地图</option>
+        </select>
+
+        <!-- 当前路径输入框 -->
+        <div class="flex-1 flex items-center bg-slate-900/90 rounded px-2 py-1 border border-slate-800 text-[11px] font-mono text-slate-300">
+          <span class="text-slate-500 mr-1 select-none">/</span>
+          <input type="text" id="mobile-preview-url-input" class="w-full bg-transparent outline-none text-slate-200 placeholder-slate-600" placeholder="index.html 或输入相对路径" onkeydown="if(event.key==='Enter') navigateMobileInputUrl()">
+        </div>
+
+        <!-- 刷新与跳转按钮 -->
+        <button type="button" onclick="reloadMobileFrame()" class="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-800 text-slate-400 hover:text-emerald-400 transition" title="重新加载页面 (Ctrl+R)">
+          <i class="fa-solid fa-arrow-rotate-right text-xs"></i>
+        </button>
+        <button type="button" onclick="navigateMobileInputUrl()" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded text-[11px] transition cursor-pointer">
+          访问
+        </button>
+      </div>
+
+      <!-- 右侧：控制器组 (机型/横竖屏/缩放/扫码/新窗口/关闭) -->
+      <div class="flex items-center gap-2 shrink-0 text-xs">
+        <!-- 机型切换 -->
+        <div class="flex items-center bg-slate-950/70 border border-slate-800 rounded-lg p-0.5">
+          <button type="button" onclick="setMobileDevice('iphone15')" id="btn-device-iphone15" class="px-2 py-1 rounded text-[11px] font-medium transition bg-emerald-600 text-white shadow-xs cursor-pointer" title="iPhone 15/16 Pro (393 × 852)">
+            iPhone 15
+          </button>
+          <button type="button" onclick="setMobileDevice('iphonese')" id="btn-device-iphonese" class="px-2 py-1 rounded text-[11px] font-medium transition text-slate-400 hover:text-slate-200 cursor-pointer" title="iPhone SE / 8 (375 × 667)">
+            iPhone SE
+          </button>
+          <button type="button" onclick="setMobileDevice('android')" id="btn-device-android" class="px-2 py-1 rounded text-[11px] font-medium transition text-slate-400 hover:text-slate-200 cursor-pointer" title="Android 旗舰 (360 × 800)">
+            Android
+          </button>
+          <button type="button" onclick="setMobileDevice('ipad')" id="btn-device-ipad" class="px-2 py-1 rounded text-[11px] font-medium transition text-slate-400 hover:text-slate-200 cursor-pointer" title="iPad Mini 平板 (768 × 1024)">
+            iPad
+          </button>
+        </div>
+
+        <!-- 屏幕横竖屏切换 -->
+        <button type="button" onclick="toggleMobileOrientation()" id="btn-mobile-orientation" class="h-8 px-2.5 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-lg text-slate-300 hover:text-white flex items-center gap-1.5 transition text-[11px] cursor-pointer" title="切换横屏 / 竖屏">
+          <i class="fa-solid fa-rotate text-xs text-emerald-400 transition duration-300" id="icon-mobile-orientation"></i>
+          <span id="text-mobile-orientation">竖屏</span>
+        </button>
+
+        <!-- 缩放比例 -->
+        <select id="mobile-scale-select" onchange="setMobileScale(this.value)" class="h-8 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg px-2 text-[11px] outline-none hover:border-slate-700 cursor-pointer">
+          <option value="fit" selected>自适应高度</option>
+          <option value="1">100%</option>
+          <option value="0.9">90%</option>
+          <option value="0.8">80%</option>
+          <option value="0.7">70%</option>
+        </select>
+
+        <!-- 分割线 -->
+        <div class="h-5 w-[1px] bg-slate-800"></div>
+
+        <!-- 真机扫码测试按钮 -->
+        <button type="button" onclick="openMobileQrModal()" class="h-8 px-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-lg flex items-center gap-1.5 transition text-[11px] font-bold cursor-pointer" title="生成局域网与公网二维码，用手机真实扫码体验">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>真机扫码</span>
+        </button>
+
+        <!-- 新标签页打开 -->
+        <button type="button" onclick="openMobileInNewTab()" class="h-8 w-8 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white rounded-lg flex items-center justify-center transition cursor-pointer" title="在新标签页中打开当前页面">
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </button>
+
+        <!-- 关闭 -->
+        <button type="button" onclick="closeMobilePreview()" class="h-8 w-8 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 hover:text-rose-300 rounded-lg flex items-center justify-center transition cursor-pointer" title="关闭 (ESC)">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- 主展示区 (带有平滑居中与缩放变换) -->
+    <div id="mobile-preview-viewport-container" class="flex-1 overflow-auto flex items-center justify-center p-4 relative bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
+      
+      <!-- 手机仿真外壳框架 Wrapper (根据机型与缩放控制) -->
+      <div id="mobile-frame-wrapper" class="transition-all duration-300 transform origin-center flex items-center justify-center">
+        
+        <!-- 手机外壳容器 (iPhone / Android) -->
+        <div id="mobile-device-case" class="relative bg-[#1a1d24] rounded-[52px] p-[10px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.12),inset_0_0_0_2px_rgba(0,0,0,0.9)] border-[3px] border-[#373e4b] flex flex-col items-center transition-all duration-300 select-none">
+          
+          <!-- 侧边按键装饰 (音量键与电源键) -->
+          <div class="absolute -left-[5px] top-[100px] w-[3px] h-[30px] bg-slate-600 rounded-l"></div>
+          <div class="absolute -left-[5px] top-[140px] w-[3px] h-[45px] bg-slate-600 rounded-l"></div>
+          <div class="absolute -left-[5px] top-[195px] w-[3px] h-[45px] bg-slate-600 rounded-l"></div>
+          <div class="absolute -right-[5px] top-[130px] w-[3px] h-[65px] bg-slate-600 rounded-r"></div>
+
+          <!-- 屏幕边框内胆 -->
+          <div id="mobile-screen-screen" class="relative bg-white rounded-[42px] overflow-hidden flex flex-col transition-all duration-300 shadow-inner" style="width: 393px; height: 852px;">
+            
+            <!-- 灵动岛 (Dynamic Island / 听筒镜头) -->
+            <div id="mobile-notch-container" class="absolute top-2.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none transition-all duration-200">
+              <div class="w-[106px] h-[28px] bg-black rounded-full flex items-center justify-between px-2.5 shadow-md">
+                <!-- 镜头与传感器指示微圆 -->
+                <div class="w-2.5 h-2.5 rounded-full bg-[#111] border border-[#222] flex items-center justify-center">
+                  <div class="w-1 h-1 rounded-full bg-[#0a1829]/60"></div>
+                </div>
+                <div class="w-2 h-2 rounded-full bg-[#141414]"></div>
+              </div>
+            </div>
+
+            <!-- iframe 页面承载器 -->
+            <iframe id="mobile-preview-iframe" class="w-full h-full border-0 bg-white" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+
+            <!-- 底部苹果 Home Bar 指示条 -->
+            <div id="mobile-home-bar" class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/40 hover:bg-black/70 rounded-full z-30 pointer-events-none transition"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 底部快捷机型尺寸提示 -->
+      <div class="absolute bottom-3 left-4 text-[11px] text-slate-500 font-mono flex items-center gap-2 bg-slate-900/70 px-3 py-1 rounded-full border border-slate-800/80 backdrop-blur-sm shadow-xs">
+        <i class="fa-solid fa-ruler-combined text-emerald-400"></i>
+        <span>当前视口:</span>
+        <span id="mobile-resolution-text" class="text-slate-300 font-bold">393 × 852 px (iPhone 15/16 Pro)</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================== MODAL: MOBILE QR CODE (真机扫码弹窗) ================== -->
+  <div id="modal-mobile-qr" class="fixed inset-0 bg-black/75 backdrop-blur-sm hidden items-center justify-center z-[150] p-4 select-none">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl text-slate-100 flex flex-col">
+      <header class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <h3 class="font-bold text-xs">手机真机扫码预览</h3>
+        </div>
+        <button type="button" onclick="closeMobileQrModal()" class="text-slate-400 hover:text-white transition cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+      </header>
+      
+      <div class="p-5 flex flex-col items-center space-y-3.5">
+        <!-- 二维码渲染容器 -->
+        <div class="p-3.5 bg-white rounded-xl shadow-lg border border-slate-200 flex items-center justify-center min-w-[210px] min-h-[210px]" id="mobile-qrcode-canvas-box">
+          <!-- QRCode 将注入此处 -->
+        </div>
+
+        <!-- 当前扫描 URL 与复制按钮 -->
+        <div class="w-full space-y-1.5 text-center">
+          <div class="text-[11px] font-mono text-emerald-400 bg-slate-950 p-2 rounded border border-slate-800 break-all select-all" id="mobile-qr-target-url">
+            http://localhost:8000/
+          </div>
+          <button type="button" onclick="copyMobileQrUrl()" class="text-[11px] text-slate-400 hover:text-slate-200 transition underline flex items-center justify-center gap-1 mx-auto cursor-pointer">
+            <i class="fa-regular fa-copy"></i> 复制访问链接
+          </button>
+        </div>
+
+        <!-- 局域网 IP 切换选择器 -->
+        <div class="w-full bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 space-y-1.5 text-[11px]">
+          <label class="text-slate-400 block font-medium flex items-center justify-between">
+            <span>局域网 (Wi-Fi) IP 地址:</span>
+            <span class="text-emerald-400 font-normal text-[10px]" id="qr-lan-status">已连接</span>
+          </label>
+          <select id="mobile-qr-ip-select" onchange="onMobileQrIpChange(this.value)" class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded px-2 py-1 outline-none focus:border-emerald-500 cursor-pointer">
+            <option value="auto">自动探测最佳局域网 IP</option>
+          </select>
+          <p class="text-[10px] text-slate-500 leading-relaxed">
+            💡 手机需与电脑连接至同一个 Wi-Fi 网络即可直接用自带相机或微信扫码打开。
+          </p>
+        </div>
+      </div>
+
+      <footer class="p-3 border-t border-slate-800 bg-slate-950/40 flex justify-end">
+        <button type="button" onclick="closeMobileQrModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold text-xs transition cursor-pointer">
+          关闭
+        </button>
+      </footer>
+    </div>
+  </div>
+
   <!-- Fullscreen Loading Spinner overlay (For syncing rebuilds) -->
   <div id="fullscreen-loader" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden flex-col items-center justify-center z-[200] text-white">
     <div class="animate-spin text-5xl mb-4 text-emerald-400"><i class="fa-solid fa-spinner"></i></div>
@@ -6050,6 +6273,468 @@ Disallow: /cms_system/
         return `${protocol}//${host}:8000/${cleanPath}`;
       }
       return port ? `${protocol}//${host}:${port}/${cleanPath}` : `${protocol}//${host}/${cleanPath}`;
+    }
+
+    /* ==========================================================
+       MOBILE PREVIEW & REAL DEVICE EMULATOR LOGIC (手机端仿真预览)
+       ========================================================== */
+    const MOBILE_DEVICES = {
+      iphone15: {
+        name: "iPhone 15/16 Pro",
+        width: 393,
+        height: 852,
+        radius: 42,
+        caseRadius: 52,
+        notch: true,
+        desc: "393 × 852 px (Retina Display)"
+      },
+      iphonese: {
+        name: "iPhone SE / 8",
+        width: 375,
+        height: 667,
+        radius: 24,
+        caseRadius: 36,
+        notch: false,
+        desc: "375 × 667 px (小屏经典)"
+      },
+      android: {
+        name: "Android 旗舰",
+        width: 360,
+        height: 800,
+        radius: 28,
+        caseRadius: 40,
+        notch: true,
+        desc: "360 × 800 px (主流安卓)"
+      },
+      ipad: {
+        name: "iPad Mini",
+        width: 768,
+        height: 1024,
+        radius: 20,
+        caseRadius: 32,
+        notch: false,
+        desc: "768 × 1024 px (平板端)"
+      }
+    };
+
+    let mobilePreviewState = {
+      currentPath: "index.html",
+      currentTitle: "首页",
+      deviceKey: "iphone15",
+      isLandscape: false,
+      scaleMode: "fit",
+      lanIps: [],
+      selectedIp: "",
+      qrcodeInstance: null
+    };
+
+    // 打开手机端仿真预览模态框
+    function openMobilePreview(path = "index.html", rawTitle = "") {
+      let title = rawTitle;
+      try {
+        if (title && title.includes("%")) {
+          title = decodeURIComponent(title);
+        }
+      } catch (e) {}
+
+      let cleanPath = (path || "index.html").trim();
+      if (cleanPath.startsWith("/")) cleanPath = cleanPath.slice(1);
+      if (cleanPath.startsWith("http://") || cleanPath.startsWith("https://")) {
+        try {
+          const u = new URL(cleanPath);
+          cleanPath = u.pathname.replace(/^\//, '') + u.search + u.hash;
+        } catch (e) {}
+      }
+      if (!cleanPath) cleanPath = "index.html";
+
+      mobilePreviewState.currentPath = cleanPath;
+      mobilePreviewState.currentTitle = title || cleanPath;
+
+      // 更新界面元素
+      const titleBadge = document.getElementById("mobile-current-title-badge");
+      if (titleBadge) {
+        titleBadge.innerText = title || cleanPath;
+        titleBadge.title = title || cleanPath;
+      }
+
+      const urlInput = document.getElementById("mobile-preview-url-input");
+      if (urlInput) urlInput.value = cleanPath;
+
+      const pageSelect = document.getElementById("mobile-quick-page-select");
+      if (pageSelect) {
+        let found = false;
+        for (let i = 0; i < pageSelect.options.length; i++) {
+          if (pageSelect.options[i].value === cleanPath) {
+            pageSelect.selectedIndex = i;
+            found = true;
+            break;
+          }
+        }
+        if (!found) pageSelect.selectedIndex = 0;
+      }
+
+      // 展现模态框
+      const modal = document.getElementById("modal-mobile-preview");
+      if (modal) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      // 更新尺寸与仿真外壳
+      updateMobileDeviceView();
+
+      // 加载 iframe 页面
+      const iframe = document.getElementById("mobile-preview-iframe");
+      if (iframe) {
+        iframe.src = getFrontUrl(cleanPath);
+      }
+
+      // 绑定全局自适应 resize
+      window.removeEventListener("resize", onMobileWindowResize);
+      window.addEventListener("resize", onMobileWindowResize);
+
+      // 绑定 ESC 关闭监听
+      window.removeEventListener("keydown", onMobileEscKeydown);
+      window.addEventListener("keydown", onMobileEscKeydown);
+    }
+
+    // 关闭手机端仿真预览
+    function closeMobilePreview() {
+      const modal = document.getElementById("modal-mobile-preview");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+      const iframe = document.getElementById("mobile-preview-iframe");
+      if (iframe) {
+        iframe.src = "about:blank"; // 释放页面与停止音视频
+      }
+      window.removeEventListener("resize", onMobileWindowResize);
+      window.removeEventListener("keydown", onMobileEscKeydown);
+      closeMobileQrModal();
+    }
+
+    function onMobileWindowResize() {
+      if (mobilePreviewState.scaleMode === "fit") {
+        updateMobileDeviceView();
+      }
+    }
+
+    function onMobileEscKeydown(e) {
+      if (e.key === "Escape") {
+        const qrModal = document.getElementById("modal-mobile-qr");
+        if (qrModal && !qrModal.classList.contains("hidden")) {
+          closeMobileQrModal();
+          return;
+        }
+        closeMobilePreview();
+      }
+    }
+
+    // 切换机型
+    function setMobileDevice(deviceKey) {
+      if (!MOBILE_DEVICES[deviceKey]) return;
+      mobilePreviewState.deviceKey = deviceKey;
+
+      // 更新按钮高亮
+      const keys = ["iphone15", "iphonese", "android", "ipad"];
+      keys.forEach(k => {
+        const btn = document.getElementById(`btn-device-${k}`);
+        if (btn) {
+          if (k === deviceKey) {
+            btn.className = "px-2 py-1 rounded text-[11px] font-medium transition bg-emerald-600 text-white shadow-xs cursor-pointer";
+          } else {
+            btn.className = "px-2 py-1 rounded text-[11px] font-medium transition text-slate-400 hover:text-slate-200 cursor-pointer";
+          }
+        }
+      });
+
+      updateMobileDeviceView();
+    }
+
+    // 切换横竖屏
+    function toggleMobileOrientation() {
+      mobilePreviewState.isLandscape = !mobilePreviewState.isLandscape;
+      const textEl = document.getElementById("text-mobile-orientation");
+      const iconEl = document.getElementById("icon-mobile-orientation");
+      if (textEl) {
+        textEl.innerText = mobilePreviewState.isLandscape ? "横屏" : "竖屏";
+      }
+      if (iconEl) {
+        iconEl.style.transform = mobilePreviewState.isLandscape ? "rotate(90deg)" : "rotate(0deg)";
+      }
+      updateMobileDeviceView();
+    }
+
+    // 切换缩放比例
+    function setMobileScale(mode) {
+      mobilePreviewState.scaleMode = mode;
+      updateMobileDeviceView();
+    }
+
+    // 更新手机外观与尺寸计算
+    function updateMobileDeviceView() {
+      const dev = MOBILE_DEVICES[mobilePreviewState.deviceKey] || MOBILE_DEVICES.iphone15;
+      const isLand = mobilePreviewState.isLandscape;
+      const screenW = isLand ? dev.height : dev.width;
+      const screenH = isLand ? dev.width : dev.height;
+
+      const screenEl = document.getElementById("mobile-screen-screen");
+      const caseEl = document.getElementById("mobile-device-case");
+      const notchEl = document.getElementById("mobile-notch-container");
+      const homeBarEl = document.getElementById("mobile-home-bar");
+      const resTextEl = document.getElementById("mobile-resolution-text");
+      const wrapperEl = document.getElementById("mobile-frame-wrapper");
+      const containerEl = document.getElementById("mobile-preview-viewport-container");
+
+      if (screenEl) {
+        screenEl.style.width = `${screenW}px`;
+        screenEl.style.height = `${screenH}px`;
+        screenEl.style.borderRadius = `${dev.radius}px`;
+      }
+
+      if (caseEl) {
+        caseEl.style.borderRadius = `${dev.caseRadius}px`;
+      }
+
+      // 灵动岛 / 刘海显示与隐藏
+      if (notchEl) {
+        if (!dev.notch || isLand) {
+          notchEl.style.display = "none";
+        } else {
+          notchEl.style.display = "block";
+        }
+      }
+
+      // 底部 Home Bar
+      if (homeBarEl) {
+        if (isLand) {
+          homeBarEl.style.width = "180px";
+          homeBarEl.style.bottom = "4px";
+        } else {
+          homeBarEl.style.width = "128px";
+          homeBarEl.style.bottom = "6px";
+        }
+      }
+
+      // 分辨率文本
+      if (resTextEl) {
+        resTextEl.innerText = `${screenW} × ${screenH} px (${dev.name} - ${isLand ? '横屏' : '竖屏'})`;
+      }
+
+      // 计算自适应缩放 Scale
+      if (wrapperEl && containerEl) {
+        let scale = 1;
+        if (mobilePreviewState.scaleMode === "fit") {
+          const availH = Math.max(200, containerEl.clientHeight - 40);
+          const availW = Math.max(200, containerEl.clientWidth - 40);
+          const totalH = screenH + 32;
+          const totalW = screenW + 32;
+          const scaleH = availH / totalH;
+          const scaleW = availW / totalW;
+          scale = Math.min(1, scaleH, scaleW);
+          // 保留两位小数
+          scale = Math.max(0.3, Math.round(scale * 100) / 100);
+        } else {
+          scale = parseFloat(mobilePreviewState.scaleMode) || 1;
+        }
+
+        wrapperEl.style.transform = `scale(${scale})`;
+      }
+    }
+
+    // 重新加载前台页面
+    function reloadMobileFrame() {
+      const iframe = document.getElementById("mobile-preview-iframe");
+      if (iframe) {
+        const currentSrc = iframe.src;
+        iframe.src = "about:blank";
+        setTimeout(() => {
+          iframe.src = currentSrc;
+          showToast("已刷新手机端预览页面", "info");
+        }, 100);
+      }
+    }
+
+    // 输入框回车或点击“访问”跳转
+    function navigateMobileInputUrl() {
+      const input = document.getElementById("mobile-preview-url-input");
+      if (!input) return;
+      let path = input.value.trim();
+      if (path.startsWith("/")) path = path.slice(1);
+      if (!path) path = "index.html";
+
+      mobilePreviewState.currentPath = path;
+      mobilePreviewState.currentTitle = path;
+
+      const badge = document.getElementById("mobile-current-title-badge");
+      if (badge) badge.innerText = path;
+
+      const iframe = document.getElementById("mobile-preview-iframe");
+      if (iframe) {
+        iframe.src = getFrontUrl(path);
+      }
+    }
+
+    // 常用页面下拉选择跳转
+    function onMobilePageSelectChange(val) {
+      if (!val) return;
+      const input = document.getElementById("mobile-preview-url-input");
+      if (input) input.value = val;
+      navigateMobileInputUrl();
+    }
+
+    // 在新标签页打开
+    function openMobileInNewTab() {
+      const url = getFrontUrl(mobilePreviewState.currentPath);
+      window.open(url, "_blank");
+    }
+
+    // 产品录入界面专属手机预览
+    function previewEntryProductMobile() {
+      const idInput = document.getElementById("entry-prod-id");
+      const titleInput = document.getElementById("entry-prod-title");
+      const id = idInput ? idInput.value.trim() : "";
+      const title = titleInput ? titleInput.value.trim() : "产品详情";
+      if (!id) {
+        showToast("请先在SEO选项卡中填写网页访问地址ID！", "warning");
+        return;
+      }
+      openMobilePreview(`products/${id}.html`, title);
+    }
+
+    /* ==========================================================
+       MOBILE QR CODE REAL DEVICE TESTING (真机扫码体验)
+       ========================================================== */
+    async function openMobileQrModal() {
+      const qrModal = document.getElementById("modal-mobile-qr");
+      if (!qrModal) return;
+
+      qrModal.classList.remove("hidden");
+      qrModal.classList.add("flex");
+
+      // 获取当前服务局域网 IP
+      try {
+        const resp = await fetch("/api/system/network-info");
+        const res = await resp.json();
+        if (res.success && res.lan_ips && res.lan_ips.length > 0) {
+          mobilePreviewState.lanIps = res.lan_ips;
+          populateMobileQrIps(res.lan_ips);
+        } else {
+          populateMobileQrIps([window.location.hostname]);
+        }
+      } catch (e) {
+        populateMobileQrIps([window.location.hostname]);
+      }
+
+      renderCurrentMobileQr();
+    }
+
+    function closeMobileQrModal() {
+      const qrModal = document.getElementById("modal-mobile-qr");
+      if (qrModal) {
+        qrModal.classList.add("hidden");
+        qrModal.classList.remove("flex");
+      }
+    }
+
+    function populateMobileQrIps(ips) {
+      const sel = document.getElementById("mobile-qr-ip-select");
+      if (!sel) return;
+      sel.innerHTML = "";
+
+      // 默认推荐 IP
+      let defaultIp = ips[0] || window.location.hostname;
+      mobilePreviewState.selectedIp = defaultIp;
+
+      ips.forEach((ip, idx) => {
+        const opt = document.createElement("option");
+        opt.value = ip;
+        opt.innerText = `${ip} ${idx === 0 ? '(推荐/主要Wi-Fi)' : ''}`;
+        sel.appendChild(opt);
+      });
+
+      // 添加当前 Host 选项
+      if (!ips.includes(window.location.hostname)) {
+        const opt = document.createElement("option");
+        opt.value = window.location.hostname;
+        opt.innerText = `${window.location.hostname} (当前后台访问地址)`;
+        sel.appendChild(opt);
+      }
+    }
+
+    function onMobileQrIpChange(val) {
+      mobilePreviewState.selectedIp = val;
+      renderCurrentMobileQr();
+    }
+
+    function getTargetMobileQrUrl() {
+      const host = mobilePreviewState.selectedIp || window.location.hostname;
+      const protocol = window.location.protocol;
+      const port = window.location.port;
+      const cleanPath = mobilePreviewState.currentPath ? (mobilePreviewState.currentPath.startsWith('/') ? mobilePreviewState.currentPath.slice(1) : mobilePreviewState.currentPath) : '';
+      
+      // 如果是在本地开发环境 (8001 -> 8000)
+      if (port === '8001') {
+        return `${protocol}//${host}:8000/${cleanPath}`;
+      }
+      return port ? `${protocol}//${host}:${port}/${cleanPath}` : `${protocol}//${host}/${cleanPath}`;
+    }
+
+    function renderCurrentMobileQr() {
+      const targetUrl = getTargetMobileQrUrl();
+      const targetUrlEl = document.getElementById("mobile-qr-target-url");
+      if (targetUrlEl) targetUrlEl.innerText = targetUrl;
+
+      const container = document.getElementById("mobile-qrcode-canvas-box");
+      if (!container) return;
+      container.innerHTML = "";
+
+      if (typeof QRCode !== "undefined") {
+        try {
+          new QRCode(container, {
+            text: targetUrl,
+            width: 200,
+            height: 200,
+            colorDark: "#0f172a",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          return;
+        } catch (e) {
+          console.warn("QRCode generation failed, using fallback img:", e);
+        }
+      }
+
+      // 备用 QR 生成 (在线稳定公共 API 生成)
+      const img = document.createElement("img");
+      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(targetUrl)}`;
+      img.alt = "真机扫码二维码";
+      img.className = "w-[200px] h-[200px] object-contain rounded-lg";
+      container.appendChild(img);
+    }
+
+    function copyMobileQrUrl() {
+      const targetUrl = getTargetMobileQrUrl();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(targetUrl).then(() => {
+          showToast("已成功复制移动端访问链接至剪贴板！", "success");
+        }).catch(() => {
+          fallbackCopyText(targetUrl);
+        });
+      } else {
+        fallbackCopyText(targetUrl);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const input = document.createElement("input");
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      showToast("已复制移动端链接！", "success");
     }
 
     let cache = {
@@ -6935,7 +7620,11 @@ Disallow: /cms_system/
             <td class="p-3 font-mono text-slate-500 font-medium">${p.path}</td>
             <td class="p-3 font-bold text-slate-800">${p.name}</td>
             <td class="p-3 text-xs font-semibold">
-              <button onclick="openCodeEditor('${p.path}')" class="text-primary hover:underline"><i class="fa-solid fa-code"></i> 编辑代码</button>
+              <div class="flex items-center gap-3">
+                <button onclick="openCodeEditor('${p.path}')" class="text-primary hover:underline cursor-pointer"><i class="fa-solid fa-code"></i> 编辑代码</button>
+                <a href="${getFrontUrl(p.path)}" target="_blank" class="text-slate-500 hover:text-slate-700 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> 预览</a>
+                <button type="button" onclick="openMobilePreview('${p.path}', '${p.name}')" class="text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"><i class="fa-solid fa-mobile-screen-button"></i> 手机端</button>
+              </div>
             </td>
           `;
           tbody.appendChild(tr);
@@ -7269,10 +7958,14 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
                 <i class="fa-solid fa-file-pen text-xs"></i>
                 <span class="text-[11px] font-medium mt-0.5">全页编辑</span>
               </button>
-              <a href="${getFrontUrl(p.link)}" target="_blank" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览">
+              <a href="${getFrontUrl(p.link)}" target="_blank" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览电脑版">
                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
                 <span class="text-[11px] font-medium mt-0.5">预览</span>
               </a>
+              <button type="button" onclick="openMobilePreview('${p.link}', '${encodeURIComponent(p.title || '')}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition cursor-pointer" title="手机端自适应预览">
+                <i class="fa-solid fa-mobile-screen-button text-xs"></i>
+                <span class="text-[11px] font-medium mt-0.5">手机端</span>
+              </button>
               <button onclick="deleteProduct('${p.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-rose-500 hover:bg-rose-50 transition" title="删除">
                 <i class="fa-solid fa-circle-xmark text-xs"></i>
                 <span class="text-[11px] font-medium mt-0.5">删除</span>
@@ -8286,10 +8979,14 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
                 <i class="fa-solid fa-pen-to-square text-xs"></i>
                 <span class="text-[11px] font-medium mt-0.5">修改</span>
               </button>
-              <a href="${getFrontUrl(a.link)}" target="_blank" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览">
+              <a href="${getFrontUrl(a.link)}" target="_blank" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览电脑版">
                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
                 <span class="text-[11px] font-medium mt-0.5">预览</span>
               </a>
+              <button type="button" onclick="openMobilePreview('${a.link}', '${encodeURIComponent(a.title || '')}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition cursor-pointer" title="手机端自适应预览">
+                <i class="fa-solid fa-mobile-screen-button text-xs"></i>
+                <span class="text-[11px] font-medium mt-0.5">手机端</span>
+              </button>
               <button onclick="deleteArticle('${a.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-rose-500 hover:bg-rose-50 transition" title="删除">
                 <i class="fa-solid fa-circle-xmark text-xs"></i>
                 <span class="text-[11px] font-medium mt-0.5">删除</span>

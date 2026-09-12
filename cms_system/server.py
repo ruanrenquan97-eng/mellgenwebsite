@@ -1472,13 +1472,6 @@ def delete_message(msg_id):
 @login_required
 def get_friendlinks():
     friendlinks = load_json("friendlinks.json")
-    if not friendlinks:
-        friendlinks = [
-            {"id": "1", "name": "单仁牛商", "url": "https://www.nsw88.com/", "show": True, "time": "2025-02-21 11:54:01"},
-            {"id": "2", "name": "文思子牙", "url": "https://juzhenai.srnsjt.com", "show": True, "time": "2025-02-21 11:53:52"},
-            {"id": "3", "name": "牛商学堂", "url": "http://kfb.nsw88.net.cn/", "show": True, "time": "2025-02-21 11:53:43"}
-        ]
-        save_json("friendlinks.json", friendlinks)
     return jsonify(friendlinks)
 
 @app.route("/api/friendlinks", methods=["POST"])
@@ -3924,6 +3917,34 @@ def api_vector_db_search():
         return jsonify({"code": 0, "success": True, "query": query, "data": results, "count": len(results)})
     except Exception as e:
         return jsonify({"code": 1, "success": False, "message": str(e)}), 500
+
+@app.route("/api/system/network-info", methods=["GET"])
+@login_required
+def get_network_info():
+    """获取服务器局域网 IP 与网络环境，用于移动端真机扫码测试"""
+    import socket
+    ips = []
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 80))
+        primary_ip = s.getsockname()[0]
+        s.close()
+        if primary_ip and not primary_ip.startswith("127."):
+            ips.append(primary_ip)
+    except Exception:
+        pass
+    try:
+        host_name = socket.gethostname()
+        for ip in socket.gethostbyname_ex(host_name)[2]:
+            if not ip.startswith("127.") and ip not in ips:
+                ips.append(ip)
+    except Exception:
+        pass
+    return jsonify({
+        "success": True,
+        "lan_ips": ips,
+        "hostname": socket.gethostname()
+    })
 
 # Start the background daily SEO scheduler daemon
 daily_scheduler.start_scheduler()

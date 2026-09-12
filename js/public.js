@@ -440,6 +440,20 @@ $(function () {
         }
     });
 
+    // 5. 移动端防跳出优化：移除站内链接上的 target="_blank"，防止在新标签页打开时浏览器退回到电脑端视图
+    function fixMobileLinkTargets() {
+        if ($(window).width() <= 768 || ('ontouchstart' in window)) {
+            $("a[target='_blank']").each(function () {
+                var href = $(this).attr("href") || "";
+                if (href.indexOf("://") === -1 || href.indexOf("mellgen.com") !== -1 || href.indexOf("localhost") !== -1 || href.indexOf("127.0.0.1") !== -1) {
+                    $(this).removeAttr("target");
+                }
+            });
+        }
+    }
+    fixMobileLinkTargets();
+    setTimeout(fixMobileLinkTargets, 300);
+
     // 6. 内页移动端横滑导航自动居中当前激活项 (Active Tab Auto Scroll)
     function autoScrollActiveTab() {
         var $activeTab = $(".p102-fdh-3 ul li.sidenavcur, .p102-fdh-3 ul li.cur, .p102-fdh-3 ul li.on, .p102-fdh-3 .content3 li.sidenavcur, .p102-fdh-3 .content3 li.cur, .p101a-fdh-02-nav ul li.cur");

@@ -3874,23 +3874,26 @@
      ------------------------------------------------------------------------ */
   .p102-fdh-3 {
     width: 100% !important;
-    overflow: hidden !important;
-    margin: 6px 0 12px 0 !important;
+    overflow: visible !important;
+    margin: 2px 0 8px 0 !important;
     background: #ffffff !important;
     border-bottom: 1px solid #eef2f6 !important;
+    padding: 6px 4px 8px 4px !important;
+    box-sizing: border-box !important;
   }
 
   .p102-fdh-3 ul,
   .p102-fdh-3 .content3 {
-    display: flex !important;
-    gap: 8px !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 8px 12px !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 5px 3px !important;
+    padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
-    scrollbar-width: none !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
   }
 
   .p102-fdh-3 ul::-webkit-scrollbar,
@@ -3900,32 +3903,51 @@
 
   .p102-fdh-3 ul li,
   .p102-fdh-3 .content3 li {
-    flex-shrink: 0 !important;
     float: none !important;
-    width: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
 
   .p102-fdh-3 ul li a,
   .p102-fdh-3 .content3 li a {
-    display: block !important;
-    padding: 6px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 1px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    line-height: 1.15 !important;
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
-    font-size: 12px !important;
+    border-radius: 14px !important;
+    font-size: clamp(10px, 2.7vw, 11px) !important;
+    letter-spacing: -0.3px !important;
     color: #475569 !important;
     text-decoration: none !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
     transition: all 0.2s !important;
   }
 
   .p102-fdh-3 ul li.cur a,
   .p102-fdh-3 .content3 li.cur a,
+  .p102-fdh-3 ul li.sidenavcur a,
+  .p102-fdh-3 .content3 li.sidenavcur a,
   .p102-fdh-3 ul li a:active,
   .p102-fdh-3 .content3 li a:active {
     background: #499c7c !important;
     border-color: #499c7c !important;
     color: #ffffff !important;
     font-weight: 600 !important;
+    box-shadow: 0 2px 5px rgba(73, 156, 124, 0.25) !important;
   }
 
   /* 资质证书与荣誉双列图鉴 */
@@ -4477,8 +4499,7 @@
     font-size: 11px !important;
   }
 
-  /* 3. 内页二级分类导航栏 (横滑胶囊药丸分类栏) */
-  .p102-fdh-3,
+  /* 3. 产品内页分类导航栏 (.p101a-fdh-02) */
   .p101a-fdh-02 {
     width: 100% !important;
     height: auto !important;
@@ -4491,8 +4512,6 @@
     box-sizing: border-box !important;
   }
 
-  .p102-fdh-3 .content3,
-  .p102-fdh-3 ul,
   .p101a-fdh-02-nav {
     width: 100% !important;
     max-width: 100% !important;
@@ -4503,14 +4522,12 @@
     box-sizing: border-box !important;
   }
 
-  .p102-fdh-3 .content3::-webkit-scrollbar,
-  .p102-fdh-3 ul::-webkit-scrollbar {
+  .p101a-fdh-02-nav::-webkit-scrollbar {
     display: none !important;
     height: 0 !important;
   }
 
-  .p102-fdh-3 ul,
-  .p102-fdh-3 .content3 {
+  .p101a-fdh-02-nav ul {
     display: flex !important;
     flex-wrap: nowrap !important;
     width: max-content !important;
@@ -4519,7 +4536,7 @@
     list-style: none !important;
   }
 
-  .p102-fdh-3 li {
+  .p101a-fdh-02-nav li {
     float: none !important;
     width: auto !important;
     height: auto !important;
@@ -4528,12 +4545,7 @@
     padding: 0 !important;
   }
 
-  .p102-fdh-3 li:after,
-  .p102-fdh-3 li::after {
-    display: none !important;
-  }
-
-  .p102-fdh-3 li a {
+  .p101a-fdh-02-nav li a {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -4550,11 +4562,11 @@
     transition: all 0.2s ease !important;
   }
 
-  .p102-fdh-3 li.cur a,
-  .p102-fdh-3 li.sidenavcur a,
-  .p102-fdh-3 li.on a,
-  .p102-fdh-3 li a:hover,
-  .p102-fdh-3 li a:active {
+  .p101a-fdh-02-nav li.cur a,
+  .p101a-fdh-02-nav li.sidenavcur a,
+  .p101a-fdh-02-nav li.on a,
+  .p101a-fdh-02-nav li a:hover,
+  .p101a-fdh-02-nav li a:active {
     background: #499c7c !important;
     color: #ffffff !important;
     font-weight: 600 !important;
@@ -5066,17 +5078,17 @@
   /* ------------------------------------------------------------------------
      16.11 "关于美尔健" 页面深度重构 (.p102-fdh-3, .qj_bj, .about1, .gssl, .qywh)
      ------------------------------------------------------------------------ */
-  /* 二级子栏目：移动端横向丝滑滑动药丸胶囊 */
+  /* 二级子栏目：移动端多行整齐自适应药丸胶囊（所有标签全部展示） */
   .p102-fdh-3 {
     height: auto !important;
     min-height: 0 !important;
     background: #ffffff !important;
-    padding: 6px 0 8px 0 !important;
+    padding: 8px 6px 10px 6px !important;
     margin: 0 0 10px 0 !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
     border-bottom: 1px solid #eef2f6 !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     width: 100% !important;
     max-width: 100% !important;
   }
@@ -5084,18 +5096,17 @@
   .p102-fdh-3 ul {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     align-items: center !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    gap: 8px !important;
-    padding: 2px 12px !important;
+    gap: 8px 6px !important;
+    padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
-    width: auto !important;
-    max-width: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
   }
   .p102-fdh-3 ul::-webkit-scrollbar,
   .p102-fdh-3 .content3::-webkit-scrollbar {
@@ -5134,11 +5145,11 @@
     height: 32px !important;
     min-height: 32px !important;
     line-height: 32px !important;
-    padding: 0 14px !important;
-    font-size: 13px !important;
+    padding: 0 11px !important;
+    font-size: 12.5px !important;
     letter-spacing: normal !important;
     color: #475569 !important;
-    background: #f1f5f9 !important;
+    background: #f8fafc !important;
     border-radius: 16px !important;
     white-space: nowrap !important;
     text-decoration: none !important;
@@ -5799,19 +5810,19 @@
   }
 }
 
-/* 移动端内页二级导航 (.p102-fdh-3)：单行横向丝滑滑动药丸胶囊 */
+/* 移动端内页二级导航 (.p102-fdh-3)：多行整齐自适应药丸胶囊（所有标签全部展示） */
 @media screen and (max-width: 768px) {
   .p102-fdh-3 {
     display: block !important;
     height: auto !important;
     min-height: 0 !important;
     background: #ffffff !important;
-    padding: 6px 0 8px 0 !important;
-    margin: 4px 0 8px 0 !important;
+    padding: 8px 6px 10px 6px !important;
+    margin: 4px 0 10px 0 !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
     border-bottom: 1px solid #eef2f6 !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     width: 100% !important;
     max-width: 100% !important;
   }
@@ -5819,18 +5830,17 @@
   .p102-fdh-3 ul {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     align-items: center !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    gap: 8px !important;
-    padding: 2px 12px !important;
+    gap: 8px 6px !important;
+    padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
-    width: auto !important;
-    max-width: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
   }
   .p102-fdh-3 ul::-webkit-scrollbar,
   .p102-fdh-3 .content3::-webkit-scrollbar {
@@ -5868,11 +5878,11 @@
     height: 32px !important;
     min-height: 32px !important;
     line-height: 32px !important;
-    padding: 0 14px !important;
-    font-size: 13px !important;
+    padding: 0 11px !important;
+    font-size: 12.5px !important;
     letter-spacing: normal !important;
     color: #475569 !important;
-    background: #f1f5f9 !important;
+    background: #f8fafc !important;
     border-radius: 16px !important;
     white-space: nowrap !important;
     text-decoration: none !important;
@@ -5881,6 +5891,8 @@
     text-align: center !important;
     position: static !important;
     font-weight: 500 !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
     transition: all 0.2s ease !important;
   }
   .p102-fdh-3 li.sidenavcur a,
@@ -5895,8 +5907,11 @@
   }
 
   html[lang="en"] .p102-fdh-3 li a {
-    padding: 0 12px !important;
-    font-size: 12px !important;
+    padding: 0 8px !important;
+    font-size: 11.5px !important;
+    height: auto !important;
+    min-height: 30px !important;
+    line-height: 1.25 !important;
   }
 }
 
@@ -7145,6 +7160,1308 @@ canvas[width="1920"] {
     border: none !important;
     cursor: pointer !important;
     box-shadow: 0 3px 10px rgba(73, 156, 124, 0.3) !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     16.12 透皮肽技术页面移动端深度重构 (helps/tptjs.html)
+     覆盖 .pingtai, .pro2, .js, .yunying, .duixiang, .tit, .content1 等桌面端硬编码
+     ------------------------------------------------------------------------ */
+  /* 面包屑与主容器重置 */
+  .p102-about-content {
+    padding-bottom: 0 !important;
+  }
+
+  .content1,
+  .p102-about-content .content1,
+  .pingtai .content1,
+  .pro2 .content1,
+  .yunying.content1,
+  .duixiang .content1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 12px !important;
+    margin: 0 auto !important;
+  }
+
+  .plc,
+  .blk-main .plc {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 12px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 标题区块重构：移除180px高度与40px字号 */
+  .tit {
+    height: auto !important;
+    padding: 24px 10px 10px !important;
+    margin: 0 !important;
+    clear: both !important;
+    text-align: center !important;
+  }
+
+  .tit h2 {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    padding-top: 0 !important;
+    white-space: normal !important;
+    text-align: center !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+  }
+
+  .duixiang .tit h2 {
+    color: #ffffff !important;
+  }
+
+  .tit em {
+    display: block !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    margin-top: 4px !important;
+    color: #64748b !important;
+    font-weight: normal !important;
+    text-transform: uppercase !important;
+  }
+
+  .duixiang .tit em {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  /* 模块 1：生物透皮给药平台 (.pingtai) */
+  .pingtai {
+    width: 100% !important;
+    padding: 10px 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .pingtai .desc {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 4px !important;
+    font-size: 13.5px !important;
+    line-height: 1.75 !important;
+    color: #475569 !important;
+    text-align: justify !important;
+    margin: 10px auto 14px !important;
+  }
+
+  .pingtai .pt_img {
+    width: 100% !important;
+    margin: 12px 0 16px !important;
+    text-align: center !important;
+  }
+
+  .pingtai .pt_img img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    display: block !important;
+    margin: 0 auto !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .pingtai .js_tit {
+    display: inline-block !important;
+    font-size: 14.5px !important;
+    font-weight: 600 !important;
+    padding: 6px 16px 6px 12px !important;
+    background: #174778 !important;
+    color: #ffffff !important;
+    border-radius: 0 18px 18px 0 !important;
+    border-left: 6px solid #80b436 !important;
+    margin: 16px 0 10px !important;
+  }
+
+  /* 模块 2：研发生产中心 (.pro2) - 告别桌面绝对定位错位，优雅纵向层叠 */
+  .pro2 {
+    background: #f8fafc !important;
+    padding: 10px 0 26px !important;
+    margin: 16px 0 !important;
+  }
+
+  .pro2 ul {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .pro2 li {
+    height: auto !important;
+    width: 100% !important;
+    list-style: none !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .pro2 li em {
+    height: auto !important;
+    display: block !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .pro2 li em img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 220px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .pro2 li .wz {
+    position: relative !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: calc(100% - 16px) !important;
+    height: auto !important;
+    margin: -24px auto 0 auto !important;
+    border-radius: 10px !important;
+    padding: 18px 16px 20px !important;
+    box-sizing: border-box !important;
+    background: #174778 !important;
+    box-shadow: 0 6px 20px rgba(23, 71, 120, 0.28) !important;
+  }
+
+  .pro2 li h4 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    padding: 0 0 8px 0 !important;
+    margin: 0 0 10px 0 !important;
+    color: #ffffff !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .pro2 li h4:before {
+    width: 36px !important;
+    height: 2px !important;
+    background: #80b436 !important;
+  }
+
+  .pro2 li p {
+    font-size: 12.5px !important;
+    line-height: 1.7 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-align: justify !important;
+    margin: 0 !important;
+  }
+
+  /* 模块 3：技术突破与学术成果/专利滑动展示 (.js, .yunying) */
+  .js {
+    padding: 10px 0 24px !important;
+  }
+
+  .js .desc {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 6px !important;
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    color: #475569 !important;
+    text-align: justify !important;
+    margin: 0 auto 14px !important;
+  }
+
+  .yunying {
+    width: 100% !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+  }
+
+  .yunying .tempWrap {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .yunying .tempWrap::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .yunying .nei {
+    width: max-content !important;
+    left: 0 !important;
+    display: flex !important;
+    position: static !important;
+  }
+
+  .yunying dl {
+    width: auto !important;
+    float: none !important;
+    padding: 6px 4px 14px 4px !important;
+    display: flex !important;
+  }
+
+  .yunying dl ul {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+
+  .yunying dl ul li {
+    width: 130px !important;
+    flex-shrink: 0 !important;
+    float: none !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+  }
+
+  .yunying dl ul li a {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .yunying dl ul li img {
+    width: 100% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .h_u1, .h_d1 {
+    display: none !important;
+  }
+
+  /* 模块 4：三大应用领域 (.duixiang) */
+  .duixiang {
+    background: #0f2742 !important;
+    background-image: none !important;
+    padding: 20px 10px 32px !important;
+    margin-top: 20px !important;
+  }
+
+  .duixiang .desc {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 8px !important;
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-align: justify !important;
+    margin: 0 auto 18px !important;
+  }
+
+  .duixiang ul.content1 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  .duixiang li {
+    width: 100% !important;
+    float: none !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+    background: #ffffff !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .duixiang li:nth-child(2) {
+    flex-direction: column !important;
+  }
+
+  .duixiang li img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    display: block !important;
+    order: 1 !important;
+  }
+
+  .duixiang li p {
+    height: auto !important;
+    padding: 16px 14px 20px !important;
+    order: 2 !important;
+    background: #ffffff !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .duixiang li b {
+    font-size: 17px !important;
+    padding: 0 !important;
+    color: #1e293b !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+  }
+
+  .duixiang li span {
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+    color: #64748b !important;
+    padding: 0 !important;
+    text-align: center !important;
+    display: block !important;
+  }
+
+  /* 8. 内页二级导航 (.p102-fdh-3)：全部标签完整平铺多行展示（最高优先级保障，彻底告别横向隐藏） */
+  .p102-fdh-3 {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: #ffffff !important;
+    padding: 8px 6px 10px 6px !important;
+    margin: 4px 0 10px 0 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+    border-bottom: 1px solid #eef2f6 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .p102-fdh-3 ul.content3,
+  .p102-fdh-3 ul {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px 6px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+  .p102-fdh-3 ul::-webkit-scrollbar,
+  .p102-fdh-3 .content3::-webkit-scrollbar {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+  .p102-fdh-3 li {
+    float: none !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    position: static !important;
+    box-sizing: border-box !important;
+  }
+  .p102-fdh-3 li:before,
+  .p102-fdh-3 li:after,
+  .p102-fdh-3 li a:before,
+  .p102-fdh-3 li a:after {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .p102-fdh-3 li a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    line-height: 32px !important;
+    padding: 0 11px !important;
+    font-size: 12.5px !important;
+    letter-spacing: normal !important;
+    color: #475569 !important;
+    background: #f8fafc !important;
+    border-radius: 16px !important;
+    white-space: nowrap !important;
+    text-decoration: none !important;
+    border: 1px solid #e2e8f0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    position: static !important;
+    font-weight: 500 !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    transition: all 0.2s ease !important;
+  }
+  .p102-fdh-3 li.sidenavcur a,
+  .p102-fdh-3 li.cur a,
+  .p102-fdh-3 li.on a,
+  .p102-fdh-3 li a.cur {
+    background: #499c7c !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-color: #499c7c !important;
+    box-shadow: 0 2px 6px rgba(73, 156, 124, 0.25) !important;
+  }
+
+  html[lang="en"] .p102-fdh-3 li a {
+    padding: 0 8px !important;
+    font-size: 11.5px !important;
+    height: auto !important;
+    min-height: 30px !important;
+    line-height: 1.25 !important;
+  }
+}
+
+/* ==========================================================================
+   美尔健手机端产品中心与产品列表/详情页全面移动端响应式重构
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+
+  /* 1. 严格防止页面水平溢出导致手机浏览器强制缩放成电脑端视图 */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+
+  .blk-main, .plc, .p102-search-1, .p102-fdh-1, .hyt-product-list, 
+  .p102-proShow-1, .p102-pro-content, .mellgen-b2b-section,
+  .k12-cx-xgcp-4pl-fx1-1-01, .p102-curmbs-1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* 2. 面包屑导航 .plc / .p102-curmbs-1 */
+  .plc {
+    padding: 8px 12px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #edf2f7 !important;
+  }
+  .p102-curmbs-1 {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    color: #64748b !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  .p102-curmbs-1 b {
+    color: #334155 !important;
+    font-weight: 600 !important;
+  }
+  .p102-curmbs-1 a {
+    color: #475569 !important;
+    text-decoration: none !important;
+  }
+  .p102-curmbs-1 span {
+    color: #cbd5e1 !important;
+    margin: 0 3px !important;
+  }
+  .p102-curmbs-1 i a {
+    color: #174778 !important;
+    font-weight: 500 !important;
+  }
+
+  /* 3. 产品分类导航二级栏 (.p102-fdh-1) - 胶囊标签式排版 */
+  .p102-fdh-1 {
+    background: #ffffff !important;
+    padding: 10px 12px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-sizing: border-box !important;
+  }
+  .p102-fdh-1-nav {
+    margin: 0 !important;
+  }
+  .p102-fdh-1-nav-one {
+    border-top: 1px solid #f1f5f9 !important;
+    padding: 10px 0 !important;
+  }
+  .p102-fdh-1-nav-one:first-child {
+    border-top: none !important;
+    padding-top: 0 !important;
+  }
+  .p102-fdh-1-nav-one h3 {
+    float: none !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+  .p102-fdh-1-nav-one h3 a {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #174778 !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+  .p102-fdh-1-nav-one dl {
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .p102-fdh-1-nav-one dd {
+    float: none !important;
+    display: inline-flex !important;
+    height: auto !important;
+    line-height: normal !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+  }
+  .p102-fdh-1-nav-one dd > a {
+    display: inline-block !important;
+    padding: 4px 10px !important;
+    font-size: 12.5px !important;
+    color: #475569 !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    white-space: nowrap !important;
+  }
+  .p102-fdh-1-nav-one dd:hover > a,
+  .p102-fdh-1-nav-one dd.sidenavcur > a,
+  .p102-fdh-1-nav-one dd.cur > a,
+  .p102-fdh-1-nav-one dd.on > a {
+    background: #174778 !important;
+    color: #ffffff !important;
+    border-color: #174778 !important;
+    font-weight: 600 !important;
+  }
+
+  /* 4. 产品列表卡片网格 (.hyt-product-list-6) - 手机端精致双列布局 */
+  .hyt-product-list {
+    padding: 15px 12px 25px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+  .p102-pros-1-title {
+    font-size: 17px !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 8px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    position: relative !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  .p102-pros-1-title:after {
+    content: '' !important;
+    position: absolute !important;
+    width: 28px !important;
+    height: 3px !important;
+    background: #174778 !important;
+    left: 0 !important;
+    bottom: -1px !important;
+  }
+  .hyt-product-list-6 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+    float: none !important;
+    box-sizing: border-box !important;
+  }
+  .hyt-product-list-6 .clear {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .hyt-product-list-6 dl {
+    float: none !important;
+    width: calc(50% - 5px) !important;
+    margin: 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+    transform: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  .hyt-product-list-6 dl:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    border-color: #cbd5e1 !important;
+    transform: translateY(-2px) !important;
+  }
+  .hyt-product-list-6 dt {
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    position: relative !important;
+    background: #f8fafc !important;
+    overflow: hidden !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .hyt-product-list-6 dt a {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .hyt-product-list-6 dt img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .hyt-product-list-6 dt em {
+    display: none !important;
+  }
+  .hyt-product-list-6 dd {
+    padding: 8px 10px 12px !important;
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+  }
+  .hyt-product-list-6 dd h4 {
+    height: auto !important;
+    margin-bottom: 4px !important;
+  }
+  .hyt-product-list-6 dd h4 a {
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    height: auto !important;
+    color: #1e293b !important;
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .hyt-product-list-6 dd p {
+    font-size: 11.5px !important;
+    line-height: 1.45 !important;
+    color: #64748b !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 0 !important;
+  }
+  .hyt-product-list-6 dd p a {
+    display: none !important;
+  }
+
+  /* 5. 产品详情页 B2B 技术与合规档案 (.mellgen-b2b-section) 响应式自适应 */
+  .mellgen-b2b-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 15px auto !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+  .mellgen-b2b-section > div:first-child h3 {
+    font-size: 19px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+  .mellgen-b2b-section > div:first-child p {
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+  }
+  .mellgen-b2b-section table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-collapse: collapse !important;
+    margin: 0 0 10px 0 !important;
+  }
+  .mellgen-b2b-section table tbody {
+    display: block !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+  .mellgen-b2b-section table tr {
+    display: flex !important;
+    flex-direction: column !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  .mellgen-b2b-section table td {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 4px 8px !important;
+    font-size: 12.5px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  .mellgen-b2b-section table td[style*="background"] {
+    font-weight: 700 !important;
+    color: #174778 !important;
+    background: transparent !important;
+    padding-top: 6px !important;
+  }
+
+  /* 6. 产品详情页底部推荐产品 (.k12-cx-xgcp-4pl-fx1-1-01) - 手机端精致双列 */
+  .k12-cx-xgcp-4pl-fx1-1-01 {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 20px auto 10px !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01 h4.p102-pro-content-title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+    color: #0f172a !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl {
+    float: none !important;
+    width: calc(50% - 5px) !important;
+    margin: 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl dt {
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    background: #f8fafc !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl dt a {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl dt img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl dd {
+    padding: 8px 10px 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl h4 {
+    height: auto !important;
+    margin: 0 0 4px 0 !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-list dl h4 a {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    color: #1e293b !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .k12-cx-xgcp-4pl-fx1-1-01-desc {
+    display: none !important;
+  }
+  .p15-product-2-date {
+    display: none !important;
+  }
+
+  /* 7. 分页控件手机端自适应 */
+  .p102-pagination-blk, .page {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 15px 0 25px !important;
+    box-sizing: border-box !important;
+  }
+  .p102-pagination-blk a, .p102-pagination-blk span,
+  .page a, .page span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    padding: 0 8px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #475569 !important;
+  }
+  .p102-pagination-blk a.cur, .page span.current {
+    background: #174778 !important;
+    color: #ffffff !important;
+    border-color: #174778 !important;
+    font-weight: 700 !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     16.13 "关于美尔健" 全部子标签页面移动端深度重构
+     重点覆盖：helps/csrjs.html (创始人介绍), help_qyxc.html (企业相册),
+     help_scjd.html (生产基地), help_ryzs.html (荣誉证书), help_gszz.html (公司资质),
+     help_fmzl.html (专利认证), help_gcjs.html (视频中心), helps/lxwm.html (联系我们)
+     ------------------------------------------------------------------------ */
+
+  /* 通用内页主容器、面包屑与搜索栏全宽响应 */
+  .p102-search-1 .blk-main,
+  .p102-curmbs-1,
+  .plc,
+  .blk-main .plc {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 12px !important;
+    margin: 0 auto !important;
+  }
+
+  /* ---------------------------------------------------------
+     (1) 创始人介绍 (helps/csrjs.html) 深度现代化移动重构
+     --------------------------------------------------------- */
+  /* 模块 1：创始人形象与核心简介卡片 (.factory) */
+  .factory {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 10px 24px !important;
+    background: #f8fafc !important;
+    background-image: none !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .factory .content1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 创始人肖像图顶部居中展示 */
+  .fac_img {
+    order: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 200px !important;
+    margin: 4px auto 14px auto !important;
+    display: block !important;
+    text-align: center !important;
+  }
+
+  .fac_img img {
+    width: 100% !important;
+    max-width: 200px !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+    display: block !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .factory .fac_con {
+    order: 2 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .factory .fac_con .tit {
+    height: auto !important;
+    padding: 0 0 12px 0 !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  .factory .fac_con .tit h2 {
+    font-size: 20px !important;
+    line-height: 1.35 !important;
+    color: #1e293b !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    white-space: normal !important;
+  }
+
+  .factory .fac_con .tit em {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    color: #499c7c !important;
+    font-weight: 600 !important;
+    margin-top: 5px !important;
+    text-align: center !important;
+    display: block !important;
+    text-transform: none !important;
+  }
+
+  .factory p {
+    font-size: 12.5px !important;
+    line-height: 1.8 !important;
+    color: #334155 !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 16px 14px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    text-align: justify !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    word-break: break-word !important;
+  }
+
+  /* 模块 2：核心荣誉奖励 (.about-csr) - 2列网格勋章流 */
+  .about-csr {
+    padding: 18px 10px 24px !important;
+    background: #eaf5fb !important;
+    border-radius: 12px !important;
+    margin: 16px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .about-csr .content1 {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-csr dl {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .about-csr dl dt {
+    order: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+    float: none !important;
+    margin: 0 0 14px 0 !important;
+    text-align: center !important;
+    overflow: visible !important;
+  }
+
+  .about-csr dl dt img {
+    width: auto !important;
+    max-width: 180px !important;
+    max-height: 140px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+  }
+
+  .about-csr dl dd {
+    order: 2 !important;
+    width: 100% !important;
+    height: auto !important;
+    float: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .about-csr dl dd h4 {
+    grid-column: span 2 !important;
+    height: auto !important;
+    margin: 0 0 10px 0 !important;
+    text-align: center !important;
+  }
+
+  .about-csr dl dd h4 i {
+    display: block !important;
+    font-size: 18px !important;
+    line-height: 24px !important;
+    color: #174778 !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    text-align: center !important;
+    padding: 0 !important;
+    background-image: none !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .about-csr dl dd span {
+    width: 100% !important;
+    float: none !important;
+    height: auto !important;
+    min-height: 46px !important;
+    padding: 8px 6px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    color: #174778 !important;
+    background: #ffffff !important;
+    border: 1px dashed #174778 !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    word-break: break-word !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .about-csr dl dd span.dd {
+    line-height: 1.35 !important;
+    padding-top: 8px !important;
+  }
+
+  .about-csr dl dd span[style*="width:72%"],
+  .about-csr dl dd span[style*="width: 72%"] {
+    grid-column: span 2 !important;
+    width: 100% !important;
+  }
+
+  /* 模块 3：科研成果选项卡与学术论文/专利列表 (.dzlc) */
+  .dzlc {
+    padding: 10px 0 20px !important;
+    background: #ffffff !important;
+    background-image: none !important;
+  }
+
+  .dzlc .tit {
+    height: auto !important;
+    padding: 14px 0 8px 0 !important;
+    text-align: center !important;
+  }
+
+  .dzlc .tit h2 {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-align: center !important;
+  }
+
+  .dzlc .tit em {
+    font-size: 11px !important;
+    color: #64748b !important;
+    display: block !important;
+    margin-top: 4px !important;
+  }
+
+  .lc_t {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 10px auto 14px auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    list-style: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .lc_t li {
+    flex: 1 !important;
+    float: none !important;
+    width: auto !important;
+    height: 36px !important;
+    line-height: 32px !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 18px !important;
+    color: #64748b !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    font-weight: 600 !important;
+  }
+
+  .lc_t li.on {
+    border-color: #499c7c !important;
+    background: #499c7c !important;
+    color: #ffffff !important;
+  }
+
+  .lc_con dt {
+    border-radius: 10px 10px 0 0 !important;
+    overflow: hidden !important;
+    border: none !important;
+  }
+
+  .lc_con dt img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 180px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .lc_con dd {
+    padding: 14px 12px !important;
+    background: #ffffff !important;
+    border-radius: 0 0 10px 10px !important;
+    border-bottom: 4px solid #174778 !important;
+    border-top: none !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+
+  .lc_con dd b {
+    font-size: 14px !important;
+    line-height: 22px !important;
+    font-weight: 700 !important;
+    color: #174778 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+
+  .lc_con dd p {
+    font-size: 12px !important;
+    line-height: 1.7 !important;
+    color: #475569 !important;
+    text-align: justify !important;
+    margin: 0 !important;
+    word-break: break-all !important;
+  }
+
+  /* 模块 4：成果奖励展示大图 (.cgjl) */
+  .cgjl {
+    padding: 10px 0 24px !important;
+    background: #ffffff !important;
+  }
+
+  .cgjl .content1 {
+    width: 100% !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .cgjl img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    display: block !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* ---------------------------------------------------------
+     (2) 企业相册、生产基地与证书资质卡片全维度强化
+     --------------------------------------------------------- */
+  .k12-gl-gslb-3nf1-1-01-left dl {
+    transition: transform 0.2s ease !important;
+  }
+
+  .k12-gl-gslb-3nf1-1-01-left dt {
+    height: 140px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    border-radius: 6px 6px 0 0 !important;
+  }
+
+  .k12-gl-gslb-3nf1-1-01-left dt img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  /* 企业相册与生产基地实景照片强化：饱满填充展示 */
+  .k12-gl-gslb-3nf1-1-01-left dl dt a.p2imga {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .k12-gl-gslb-3nf1-1-01-left dd {
+    padding: 8px 4px 6px 4px !important;
+    background: #ffffff !important;
+  }
+
+  .k12-gl-gslb-3nf1-1-01-left dd h4 {
+    margin: 0 !important;
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+  }
+
+  .k12-gl-gslb-3nf1-1-01-left dd h4 a {
+    color: #1e293b !important;
+    text-decoration: none !important;
   }
 }
 

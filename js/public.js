@@ -801,4 +801,30 @@ $(function () {
     setTimeout(flattenMobileFooterNav, 200);
 })();
 
+// 视频中心海报自动注入与播放优化（解决移动端黑屏与封面丢失）
+(function() {
+    function initVideoPosters() {
+        if (typeof $ === 'undefined') return;
+        $('.zxlb-3n-ts-02-list dl').each(function() {
+            var $dl = $(this);
+            var $video = $dl.find('video');
+            var $img = $dl.find('dt i img');
+            if ($video.length && $img.length) {
+                var imgSrc = $img.attr('src');
+                if (imgSrc && !$video.attr('poster')) {
+                    $video.attr('poster', imgSrc);
+                }
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initVideoPosters);
+    } else {
+        initVideoPosters();
+    }
+    setTimeout(initVideoPosters, 300);
+})();
+
+
 

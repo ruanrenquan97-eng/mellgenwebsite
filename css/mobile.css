@@ -1499,66 +1499,84 @@
 
   /* ------------------------------------------------------------------------
      9. 科研成果与荣誉责任模块 (.g_kycg)
-     100% 还原截图：白底悬浮卡片 + 左侧精炼文案/证书/4项数据平铺 + 右侧科学家照片与签名并排
+     移动端重构：延伸至两边 (Full Bleed)，去除浮动卡片侧边多余灰色间隙
      ------------------------------------------------------------------------ */
   .g_kycg {
-    background: #f1f5f9 !important;
+    background: #ffffff !important;
+    background-image: none !important;
     background-attachment: scroll !important;
-    padding: 16px 10px !important;
+    padding: 24px 0 16px 0 !important;
+    margin: 0 !important;
     position: relative !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    border-top: 1px solid #edf2f7 !important;
+    border-bottom: 1px solid #edf2f7 !important;
+  }
+
+  .g_kycg .content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
     box-sizing: border-box !important;
   }
 
-  /* 白底悬浮主卡片 */
+  /* 主内容容器：两边通栏铺满，内衬安全边距 */
   .g_kycg .m_kycg {
     position: relative !important;
     background: #ffffff !important;
-    border-radius: 12px !important;
-    padding: 16px 12px 14px 12px !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06) !important;
+    border-radius: 0 !important;
+    padding: 0 14px !important;
+    box-shadow: none !important;
     overflow: hidden !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: space-between !important;
     align-items: flex-end !important;
     box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
   }
 
   /* 顶部标题横跨整行 */
   .g_kycg .m_kycg h2 {
     width: 100% !important;
     padding: 0 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
     text-align: left !important;
   }
 
   .g_kycg .m_kycg h2 b {
-    font-size: 18px !important;
-    line-height: 24px !important;
+    font-size: 19px !important;
+    line-height: 26px !important;
     font-weight: 700 !important;
     color: #1a202c !important;
     display: block !important;
-    margin-bottom: 3px !important;
+    margin-bottom: 4px !important;
   }
 
   .g_kycg .m_kycg h2 em {
-    font-size: 11px !important;
-    line-height: 16px !important;
+    font-size: 11.5px !important;
+    line-height: 17px !important;
     color: #64748b !important;
     display: block !important;
     font-style: normal !important;
   }
 
-  /* 左侧内容区：占据约 62% 宽度 */
+  /* 左侧内容区：占据约 63% 宽度 */
   .g_kycg .m_kycg .kyleft {
-    width: 62% !important;
-    max-width: 62% !important;
+    width: 63% !important;
+    max-width: 63% !important;
     float: left !important;
     position: relative !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
     box-sizing: border-box !important;
+    padding-right: 6px !important;
   }
 
   .g_kycg .m_kycg .kyleft .kysha2 {
@@ -1578,10 +1596,10 @@
   /* 紧凑精致的小号段落文案 (满足“显示小点”需求) */
   .g_kycg .m_kycg .kyleft p {
     width: 100% !important;
-    font-size: 9px !important;
-    line-height: 1.45 !important;
+    font-size: 9.5px !important;
+    line-height: 1.5 !important;
     color: #475569 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     text-align: justify !important;
     letter-spacing: 0 !important;
   }
@@ -1589,7 +1607,7 @@
   /* 专利与荣誉证书长图自适应缩小排版 */
   .g_kycg .m_kycg .kyleft .rrzs {
     width: 100% !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     line-height: 0 !important;
   }
 
@@ -1612,7 +1630,7 @@
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     justify-content: space-between !important;
-    gap: 2px !important;
+    gap: 3px !important;
     margin: 0 !important;
     padding: 0 !important;
     background: none !important;
@@ -1620,7 +1638,8 @@
   }
 
   .g_kycg .number .numb {
-    flex: 1 !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
     width: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1635,7 +1654,7 @@
 
   /* 数据项小标题放上方 */
   .g_kycg .number .numb .nmh {
-    font-size: 7.5px !important;
+    font-size: 8px !important;
     line-height: 1.15 !important;
     color: #64748b !important;
     margin-bottom: 2px !important;
@@ -1647,36 +1666,97 @@
     -webkit-line-clamp: 2 !important;
     word-break: break-all !important;
     letter-spacing: -0.2px !important;
+    width: 100% !important;
   }
 
   .g_kycg .number .numb .nuop {
     width: 100% !important;
-    height: auto !important;
+    height: 22px !important;
     overflow: visible !important;
+    display: flex !important;
+    align-items: flex-end !important;
   }
 
   .g_kycg .number .numb .nuop .np {
-    height: auto !important;
+    height: 22px !important;
     display: inline-flex !important;
     align-items: baseline !important;
+    white-space: nowrap !important;
   }
 
   /* 黑色加粗数字与加号 (完全一致) */
   .g_kycg .number .numb .nuop .np .nm {
-    font-size: 15px !important;
-    line-height: 18px !important;
+    font-size: 16px !important;
+    line-height: 22px !important;
     color: #0f172a !important;
     font-weight: 700 !important;
     float: none !important;
+    display: inline-block !important;
+    vertical-align: bottom !important;
+  }
+
+  /* 数字滚动动画 (.dataNums) 移动端自适应 */
+  .g_kycg .number .numb .nuop .np .dataNums {
+    height: 22px !important;
+    line-height: 22px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    vertical-align: bottom !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .g_kycg .number .numb .nuop .np .dataNums .dataOne {
+    width: 9.5px !important;
+    height: 22px !important;
+    line-height: 22px !important;
+    display: inline-block !important;
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: top !important;
+  }
+
+  .g_kycg .number .numb .nuop .np .dataNums .dataBoc {
+    position: relative !important;
+    width: 100% !important;
+    height: 22px !important;
+    line-height: 22px !important;
+    overflow: hidden !important;
+  }
+
+  .g_kycg .number .numb .nuop .np .dataNums .dataBoc .tt {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+  }
+
+  .g_kycg .number .numb .nuop .np .dataNums .tt span {
+    width: 100% !important;
+    height: 22px !important;
+    line-height: 22px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    display: block !important;
+    text-align: center !important;
+    letter-spacing: normal !important;
   }
 
   .g_kycg .number .numb .nuop .np .nn {
-    font-size: 11px !important;
+    font-size: 12px !important;
+    line-height: 22px !important;
     font-weight: 700 !important;
     color: #0f172a !important;
     margin-left: 1px !important;
-    top: 0 !important;
+    display: inline-block !important;
+    vertical-align: bottom !important;
+    font-style: normal !important;
     float: none !important;
+    top: 0 !important;
   }
 
   /* 右侧科学家与签名区：占据约 35% 宽度，与左侧并排紧贴右下 */
@@ -1704,6 +1784,7 @@
     height: auto !important;
     display: block !important;
     object-fit: contain !important;
+    object-position: bottom center !important;
   }
 
   /* ------------------------------------------------------------------------
@@ -8937,6 +9018,347 @@ canvas[width="1920"] {
   .p102-curmbs-1 i:last-child a {
     color: #174778 !important;
     font-weight: 600 !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     16.14 "在线留言" 与 "视频中心" 移动端系统级深度重构
+     ------------------------------------------------------------------------ */
+
+  /* (1) 在线留言表单 (Tools/leaveword.html & en/Tools/leaveword.html) 现代微质感卡片化 */
+  .lyl-1k2-form-1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px 10px 24px !important;
+    background: #f8fafc !important;
+    box-sizing: border-box !important;
+  }
+
+  .lyl-1k2-form-con {
+    width: 100% !important;
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+    padding: 22px 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .lyl-1k2-form-left {
+    display: none !important;
+  }
+
+  .lyl-1k2-form-right {
+    width: 100% !important;
+    float: none !important;
+    padding: 0 !important;
+  }
+
+  .lyl-1k2-form-title {
+    text-align: center !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 14px !important;
+    border-bottom: 1px dashed #e2e8f0 !important;
+  }
+
+  .lyl-1k2-form-title b {
+    display: inline-block !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    color: #499c7c !important;
+    background: #ecfdf5 !important;
+    padding: 4px 12px !important;
+    border-radius: 12px !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .lyl-1k2-form-title span {
+    display: block !important;
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.35 !important;
+  }
+
+  .lyl-1k2-form-title p {
+    font-size: 12.5px !important;
+    color: #64748b !important;
+    margin-top: 6px !important;
+    line-height: 1.5 !important;
+  }
+
+  .findrow {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .lyl-1k2-form-li01,
+  .lyl-1k2-form-li-textarea {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+
+  .lyl-1k2-form-li01 label,
+  .lyl-1k2-form-li-textarea label {
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    margin-bottom: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .lyl-1k2-form-li01 label b,
+  .lyl-1k2-form-li-textarea label b {
+    color: #ef4444 !important;
+    margin-right: 3px !important;
+    font-weight: bold !important;
+  }
+
+  .lyl-1k2-form-li01 input.inputs,
+  .lyl-1k2-form-li-textarea textarea {
+    width: 100% !important;
+    font-size: 15px !important; /* 防iOS聚焦自动放大屏幕 */
+    color: #1e293b !important;
+    background: #f8fafc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 0 14px !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  .lyl-1k2-form-li01 input.inputs {
+    height: 46px !important;
+    line-height: 46px !important;
+  }
+
+  .lyl-1k2-form-li01 input.inputs:focus,
+  .lyl-1k2-form-li-textarea textarea:focus {
+    background: #ffffff !important;
+    border-color: #499c7c !important;
+    box-shadow: 0 0 0 3px rgba(73, 156, 124, 0.15) !important;
+  }
+
+  .lyl-1k2-form-li-textarea textarea {
+    height: 110px !important;
+    padding: 12px 14px !important;
+    line-height: 1.6 !important;
+    resize: vertical !important;
+  }
+
+  .lyl-1k2-form-li-button {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    margin-top: 4px !important;
+    float: none !important;
+  }
+
+  .lyl-1k2-form-li-button .fl {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    height: 46px !important;
+    float: none !important;
+  }
+
+  .lyl-1k2-form-li-button .fl label {
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    white-space: nowrap !important;
+  }
+
+  .lyl-1k2-form-li-button input.code_gg {
+    flex: 1 !important;
+    width: auto !important;
+    max-width: 130px !important;
+    height: 44px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 0 10px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    text-align: center !important;
+    background: #f8fafc !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  .lyl-1k2-form-li-button input.code_gg:focus {
+    border-color: #499c7c !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(73, 156, 124, 0.15) !important;
+  }
+
+  .lyl-1k2-form-li-button b {
+    display: block !important;
+    cursor: pointer !important;
+  }
+
+  .lyl-1k2-form-li-button b img {
+    height: 44px !important;
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    display: block !important;
+  }
+
+  .lyl-1k2-form-btn-1 {
+    width: 100% !important;
+    height: 48px !important;
+    background: linear-gradient(135deg, #499c7c, #357a5f) !important;
+    color: #ffffff !important;
+    font-size: 16.5px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 14px rgba(73, 156, 124, 0.35) !important;
+    transition: all 0.2s ease !important;
+    letter-spacing: 2px !important;
+    margin-top: 4px !important;
+    text-align: center !important;
+  }
+
+  .lyl-1k2-form-btn-1:active {
+    transform: scale(0.98) !important;
+  }
+
+  .form-tel-box {
+    margin-top: 20px !important;
+    padding: 14px 12px !important;
+    background: #f0fdf4 !important;
+    border: 1px dashed #86efac !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .form-tel-tip {
+    font-size: 12px !important;
+    color: #166534 !important;
+    margin: 0 0 6px 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  .form-tel-link {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #15803d !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+  }
+
+  /* (2) 视频中心 (help_spzx.html, help_gcjs.html 等) 现代海报流与沉浸式卡片 */
+  .zxlb-3n-ts-02 {
+    padding: 12px 10px 28px !important;
+    background: #f8fafc !important;
+    box-sizing: border-box !important;
+    margin-top: 0 !important;
+  }
+
+  .zxlb-3n-ts-02-list {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .zxlb-3n-ts-02-list dl {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid #e2e8f0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+  }
+
+  .zxlb-3n-ts-02-list dt {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+    border-radius: 12px 12px 0 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .zxlb-3n-ts-02-list dt video {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 240px !important;
+    display: block !important;
+    object-fit: cover !important;
+    background: #000000 !important;
+  }
+
+  .zxlb-3n-ts-02-list dd {
+    padding: 14px 16px !important;
+    background: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: static !important;
+    box-sizing: border-box !important;
+  }
+
+  .zxlb-3n-ts-02-list dd h4 {
+    margin: 0 !important;
+    font-size: 15.5px !important;
+    line-height: 1.4 !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+  }
+
+  .zxlb-3n-ts-02-list dd h4 b {
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    font-size: 15.5px !important;
+  }
+
+  .zxlb-3n-ts-02-list dd::after {
+    content: '▶ 播放' !important;
+    display: inline-block !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    color: #499c7c !important;
+    background: #ecfdf5 !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
+    white-space: nowrap !important;
+    margin-left: 8px !important;
+  }
+
+  html[lang="en"] .zxlb-3n-ts-02-list dd::after {
+    content: '▶ Play' !important;
   }
 }
 

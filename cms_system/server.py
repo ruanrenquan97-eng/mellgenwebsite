@@ -1828,7 +1828,8 @@ def push_to_workbuddy(event_type, payload_data):
     t.start()
 
 
-from mcp_server import get_or_init_account_tokens, verify_token_and_get_user
+import mcp_service
+from mcp_service import get_or_init_account_tokens, verify_token_and_get_user
 
 @app.route("/api/connector/workbuddy/config", methods=["GET"])
 @login_required
@@ -1899,7 +1900,7 @@ def get_workbuddy_accounts():
             "enabled": token_info.get("enabled", True),
             "last_used_at": token_info.get("last_used_at"),
             "created_at": token_info.get("created_at"),
-            "sse_url": f"https://www.mellgen.com/mcp/sse?token={token_info.get('token', '')}"
+            "sse_url": f"https://www.mellgen.com/api/mcp/sse?token={token_info.get('token', '')}"
         })
     return jsonify({
         "success": True,
@@ -1965,7 +1966,7 @@ def verify_workbuddy_account_api():
                 "verified": True,
                 "message": f"✅ Token 核验成功！有效网站账户：{user.get('name')} ({user.get('username')})，角色：{user.get('role')}",
                 "user": user,
-                "endpoint": "https://www.mellgen.com/mcp/sse"
+                "endpoint": "https://www.mellgen.com/api/mcp/sse"
             })
         else:
             return jsonify({
@@ -1991,7 +1992,7 @@ def verify_workbuddy_account_api():
                     "role": matched.get("role", "操作员"),
                     "token": tok_info.get("token", "")
                 },
-                "endpoint": f"https://www.mellgen.com/mcp/sse?token={tok_info.get('token', '')}"
+                "endpoint": f"https://www.mellgen.com/api/mcp/sse?token={tok_info.get('token', '')}"
             })
         else:
             return jsonify({
@@ -2020,6 +2021,89 @@ def regenerate_workbuddy_key():
     config["api_key"] = "mb_sec_" + uuid.uuid4().hex[:16]
     save_json("connector_workbuddy.json", config)
     return jsonify({"success": True, "api_key": config["api_key"]})
+
+# ==========================================================
+# 原生 WorkBuddy MCP (Model Context Protocol) 服务端
+# 基于标准 SSE 长连接协议，无需任何额外 Python 包与 Nginx 配置
+# ==========================================================
+
+import queue
+
+@app.route("/api/mcp/sse", methods=["GET"])
+@app.route("/mcp/sse", methods=["GET"])
+def api_mcp_sse_endpoint():
+    """WorkBuddy MCP SSE 长连接端点"""
+    token = mcp_service.extract_token_from_request(request)
+    user = mcp_service.verify_token_and_get_user(token)
+    if not user:
+        return jsonify({
+            "error": "Unauthorized",
+            "code": 401,
+            "message": "美尔健官网 MCP 连接器：网站账户核验失败！",
+            "hint": "请在 WorkBuddy 中配置已授权的网站账户专属 Token（详见 https://www.mellgen.com/admin 后台【WorkBuddy 连接器】）。"
+        }), 401
+
+    session = mcp_service.session_manager.create_session(user)
+
+    def event_stream():
+        try:
+            # 1. 发送 MCP endpoint 事件，告知客户端向 /api/mcp/messages?session_id=... 发送 JSON-RPC
+            yield f"event: endpoint\ndata: /api/mcp/messages?session_id={session.session_id}\n\n"
+            
+            # 2. 持续循环监听消息队列并推送给客户端
+            while session.is_active:
+                try:
+                    msg = session.queue.get(timeout=15)
+                    if msg is None:
+                        break
+                    json_str = json.dumps(msg, ensure_ascii=False)
+                    yield f"event: message\ndata: {json_str}\n\n"
+                except queue.Empty:
+                    # 每 15 秒发送一次 SSE 注释保持长连接心跳，防止 Nginx 超时关闭
+                    yield ": ping\n\n"
+        finally:
+            mcp_service.session_manager.remove_session(session.session_id)
+
+    response = Response(event_stream(), mimetype="text/event-stream")
+    response.headers["Cache-Control"] = "no-cache, no-transform"
+    response.headers["X-Accel-Buffering"] = "no"
+    response.headers["Connection"] = "keep-alive"
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+@app.route("/api/mcp/messages", methods=["POST", "OPTIONS"])
+@app.route("/mcp/messages", methods=["POST", "OPTIONS"])
+def api_mcp_messages_endpoint():
+    """WorkBuddy MCP JSON-RPC 消息接收端点"""
+    if request.method == "OPTIONS":
+        return Response("", status=204, headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Authorization, Content-Type, X-API-Key, X-Mellgen-Token"
+        })
+
+    session_id = request.args.get("session_id")
+    if not session_id:
+        data = request.get_json(force=True, silent=True) or {}
+        session_id = data.get("session_id")
+
+    if not session_id:
+        return jsonify({"error": "Missing session_id in query params"}), 400
+
+    session = mcp_service.session_manager.get_session(session_id)
+    if not session:
+        return jsonify({"error": f"Session {session_id} not found or expired"}), 404
+
+    try:
+        req_data = request.get_json(force=True, silent=True) or {}
+    except Exception:
+        req_data = {}
+
+    resp_data = mcp_service.handle_jsonrpc_request(req_data, session)
+    if resp_data is not None:
+        session.push(resp_data)
+
+    return Response("Accepted", status=202, mimetype="text/plain", headers={"Access-Control-Allow-Origin": "*"})
 
 # ==========================================================
 # 账户与权限管理 API (Account & Permission Management)

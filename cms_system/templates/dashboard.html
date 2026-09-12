@@ -674,10 +674,10 @@
             <div class="bg-indigo-50/70 border border-indigo-200 rounded-lg p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div class="space-y-0.5">
                 <span class="text-[10px] font-semibold uppercase tracking-wider text-indigo-700 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-                  <span>推荐：远程 SSE 直连端点 (WorkBuddy Remote MCP URL)</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>推荐：远程 SSE 直连端点 (零配置即连即通，已穿透 Nginx 反向代理)</span>
                 </span>
-                <div id="mcp-sse-url-text" class="text-xs font-mono text-indigo-950 font-semibold break-all">https://www.mellgen.com/mcp/sse?token=mb_tok_admin_xxxx</div>
+                <div id="mcp-sse-url-text" class="text-xs font-mono text-indigo-950 font-semibold break-all">https://www.mellgen.com/api/mcp/sse?token=mb_tok_admin_xxxx</div>
               </div>
               <button onclick="copyMcpSseUrl()" class="px-2.5 py-1 bg-white border border-indigo-200 hover:bg-indigo-100 text-indigo-800 rounded text-xs font-medium shrink-0 flex items-center gap-1 transition">
                 <i class="fa-solid fa-link text-[10px]"></i>
@@ -690,7 +690,7 @@
               <pre id="mcp-config-json" class="leading-relaxed"><code>{
   "mcpServers": {
     "mellgen-cms": {
-      "url": "https://www.mellgen.com/mcp/sse?token=mb_tok_admin_7a9f81bc24",
+      "url": "https://www.mellgen.com/api/mcp/sse?token=mb_tok_admin_7a9f81bc24",
       "headers": {
         "Authorization": "Bearer mb_tok_admin_7a9f81bc24"
       }
@@ -699,7 +699,7 @@
 }</code></pre>
             </div>
             <p class="text-[11px] text-slate-500 leading-relaxed">
-              💡 <strong>接入说明：</strong>打开 WorkBuddy 客户端设置中的 <strong>【MCP 连接器 / MCP Servers】</strong>，将上方配置粘贴保存即可。美尔健后台会在每次连接和操作时核验网站账户，并记录详情页制作与发布审计流水。
+              💡 <strong>接入说明：</strong>打开 WorkBuddy 客户端设置中的 <strong>【MCP 连接器 / MCP Servers】</strong>，将上方配置粘贴保存即可。该端点通过系统原生 <code>/api/</code> 路由直通后端，<strong>完全免配 Nginx</strong>，即连即通！
             </p>
           </div>
 
@@ -14102,7 +14102,7 @@ window.onload = () => {
       if (!acc) return;
 
       const token = acc.token || 'mb_tok_' + uname + '_token';
-      const sseUrl = `https://www.mellgen.com/mcp/sse?token=${token}`;
+      const sseUrl = `https://www.mellgen.com/api/mcp/sse?token=${token}`;
       
       const sseUrlEl = document.getElementById('mcp-sse-url-text');
       if (sseUrlEl) sseUrlEl.textContent = sseUrl;

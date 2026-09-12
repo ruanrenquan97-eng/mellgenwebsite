@@ -745,6 +745,11 @@ $(function () {
         }
 
         if (links.length >= 4) {
+            var oldFlats = ftnav.querySelectorAll(".m-ftnav-flat");
+            for (var m = 0; m < oldFlats.length; m++) {
+                oldFlats[m].parentNode.removeChild(oldFlats[m]);
+            }
+
             var flat = document.createElement("div");
             flat.className = "m-ftnav-flat";
 
@@ -762,6 +767,12 @@ $(function () {
                     row2.appendChild(links[j].cloneNode(true));
                 }
                 flat.appendChild(row2);
+            }
+
+            // 彻底隐藏原始的所有 dl 节点，防止文字在上方重复出现
+            var dls = ftnav.querySelectorAll("dl");
+            for (var k = 0; k < dls.length; k++) {
+                dls[k].style.setProperty("display", "none", "important");
             }
 
             ftnav.appendChild(flat);

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "453a7223",
+    "timestamp": "2026-09-12 13:33:48",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "verify_mellgen_account",
+    "details": "账户身份核验通过: admin",
+    "success": true
+  }
+]

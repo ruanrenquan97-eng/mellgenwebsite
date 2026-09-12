@@ -1492,6 +1492,10 @@ def add_friendlink():
     
     friendlinks.append(new_link)
     save_json("friendlinks.json", friendlinks)
+    try:
+        generator.sync_friendlinks_to_pages(friendlinks)
+    except Exception:
+        pass
     return jsonify({"success": True, "link": new_link})
 
 @app.route("/api/friendlinks/<link_id>", methods=["PUT"])
@@ -1506,6 +1510,10 @@ def edit_friendlink(link_id):
             l["url"] = data.get("url", l["url"]).strip()
             l["show"] = data.get("show", l["show"])
             save_json("friendlinks.json", friendlinks)
+            try:
+                generator.sync_friendlinks_to_pages(friendlinks)
+            except Exception:
+                pass
             return jsonify({"success": True, "link": l})
             
     return jsonify({"success": False, "message": "链接未找到"}), 404
@@ -1516,6 +1524,10 @@ def delete_friendlink(link_id):
     friendlinks = load_json("friendlinks.json")
     friendlinks = [l for l in friendlinks if l["id"] != link_id]
     save_json("friendlinks.json", friendlinks)
+    try:
+        generator.sync_friendlinks_to_pages(friendlinks)
+    except Exception:
+        pass
     return jsonify({"success": True})
 
 # 8. HTML Pages Listing API (for Page Edit feature)

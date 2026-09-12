@@ -174,14 +174,51 @@ def update_global_contact_info(html_content, settings):
     return html_content
 
 def update_friendlinks(html_content, friendlinks):
+    active_links = [fl for fl in friendlinks if fl.get("show", True)]
     links_html = ""
-    for fl in friendlinks:
-        if fl.get("show", True):
-            links_html += f'<a href="{fl["url"]}" title="{fl["name"]}">{fl["name"]}</a> '
+    for fl in active_links:
+        links_html += f'<a href="{fl["url"]}" title="{fl["name"]}">{fl["name"]}</a> '
     
     # Replace content inside <div class="link_c"> <li lastclass="lasta"> ... </li> </div>
     html_content = replace_group(r'(<div class="link_c">\s*<li[^>]*>)(.*?)(</li>\s*</div>)', links_html, html_content)
+    
+    # If no active links, hide the entire friendly links block; otherwise ensure it is visible
+    if not active_links:
+        html_content = re.sub(r'<div class="g_link f_fw"[^>]*>', '<div class="g_link f_fw" style="display: none;">', html_content)
+    else:
+        html_content = re.sub(r'<div class="g_link f_fw"[^>]*>', '<div class="g_link f_fw">', html_content)
+        
     return html_content
+
+def sync_friendlinks_to_pages(friendlinks=None):
+    if friendlinks is None:
+        friendlinks_path = os.path.join(DATA_DIR, "friendlinks.json")
+        friendlinks = []
+        if os.path.exists(friendlinks_path):
+            try:
+                with open(friendlinks_path, "r", encoding="utf-8") as f:
+                    friendlinks = json.load(f)
+            except Exception:
+                friendlinks = []
+                
+    target_files = [
+        os.path.join(WORKSPACE_DIR, "index.html"),
+        os.path.join(WORKSPACE_DIR, "mellgen_home.html"),
+        os.path.join(WORKSPACE_DIR, "en", "index.html"),
+        os.path.join(WORKSPACE_DIR, "en", "mellgen_home.html"),
+    ]
+    for fp in target_files:
+        if os.path.exists(fp):
+            try:
+                with open(fp, "r", encoding="utf-8") as f:
+                    content = f.read()
+                updated = update_friendlinks(content, friendlinks)
+                if updated != content:
+                    with open(fp, "w", encoding="utf-8") as f:
+                        f.write(updated)
+            except Exception as e:
+                print(f"[-] Error syncing friendlinks to {fp}: {e}")
+
 
 def update_navigation(html_content, nav_links, file_rel_path):
     if not nav_links:

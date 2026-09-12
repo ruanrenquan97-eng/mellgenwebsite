@@ -5078,12 +5078,12 @@
   /* ------------------------------------------------------------------------
      16.11 "关于美尔健" 页面深度重构 (.p102-fdh-3, .qj_bj, .about1, .gssl, .qywh)
      ------------------------------------------------------------------------ */
-  /* 二级子栏目：移动端多行整齐自适应药丸胶囊（所有标签全部展示） */
+  /* 二级子栏目：移动端整齐压缩成2行（5列 x 2行 = 10项），字体精简防截断 */
   .p102-fdh-3 {
     height: auto !important;
     min-height: 0 !important;
     background: #ffffff !important;
-    padding: 8px 6px 10px 6px !important;
+    padding: 6px 4px 8px 4px !important;
     margin: 0 0 10px 0 !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
     border-bottom: 1px solid #eef2f6 !important;
@@ -5094,12 +5094,9 @@
   }
   .p102-fdh-3 ul.content3,
   .p102-fdh-3 ul {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 8px 6px !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 5px 3px !important;
     padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
@@ -5116,8 +5113,7 @@
   }
   .p102-fdh-3 li {
     float: none !important;
-    flex: 0 0 auto !important;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
     margin: 0 !important;
@@ -5125,6 +5121,7 @@
     list-style: none !important;
     position: static !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
   }
   /* 彻底屏蔽桌面端所有伪元素（底部蓝点、圆环、横线等） */
   .p102-fdh-3 li:before,
@@ -5139,18 +5136,18 @@
     height: 0 !important;
   }
   .p102-fdh-3 li a {
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    line-height: 32px !important;
-    padding: 0 11px !important;
-    font-size: 12.5px !important;
-    letter-spacing: normal !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    line-height: 1.15 !important;
+    padding: 0 1px !important;
+    font-size: clamp(10px, 2.7vw, 11px) !important;
+    letter-spacing: -0.3px !important;
     color: #475569 !important;
     background: #f8fafc !important;
-    border-radius: 16px !important;
+    border-radius: 14px !important;
     white-space: nowrap !important;
     text-decoration: none !important;
     border: 1px solid #e2e8f0 !important;
@@ -5158,6 +5155,8 @@
     text-align: center !important;
     position: static !important;
     font-weight: 500 !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
     transition: all 0.2s ease !important;
   }
   /* 高亮当前选中/激活项 */
@@ -5810,14 +5809,14 @@
   }
 }
 
-/* 移动端内页二级导航 (.p102-fdh-3)：多行整齐自适应药丸胶囊（所有标签全部展示） */
+/* 移动端内页二级导航 (.p102-fdh-3)：整齐压缩成2行（5列 x 2行 = 10项），字体精简防截断 */
 @media screen and (max-width: 768px) {
   .p102-fdh-3 {
     display: block !important;
     height: auto !important;
     min-height: 0 !important;
     background: #ffffff !important;
-    padding: 8px 6px 10px 6px !important;
+    padding: 6px 4px 8px 4px !important;
     margin: 4px 0 10px 0 !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
     border-bottom: 1px solid #eef2f6 !important;
@@ -5828,12 +5827,9 @@
   }
   .p102-fdh-3 ul.content3,
   .p102-fdh-3 ul {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 8px 6px !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 5px 3px !important;
     padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
@@ -5850,8 +5846,7 @@
   }
   .p102-fdh-3 li {
     float: none !important;
-    flex: 0 0 auto !important;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
     margin: 0 !important;
@@ -5859,6 +5854,7 @@
     list-style: none !important;
     position: static !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
   }
   .p102-fdh-3 li:before,
   .p102-fdh-3 li:after,
@@ -5872,18 +5868,18 @@
     height: 0 !important;
   }
   .p102-fdh-3 li a {
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    line-height: 32px !important;
-    padding: 0 11px !important;
-    font-size: 12.5px !important;
-    letter-spacing: normal !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    line-height: 1.15 !important;
+    padding: 0 1px !important;
+    font-size: clamp(10px, 2.7vw, 11px) !important;
+    letter-spacing: -0.3px !important;
     color: #475569 !important;
     background: #f8fafc !important;
-    border-radius: 16px !important;
+    border-radius: 14px !important;
     white-space: nowrap !important;
     text-decoration: none !important;
     border: 1px solid #e2e8f0 !important;
@@ -5891,8 +5887,8 @@
     text-align: center !important;
     position: static !important;
     font-weight: 500 !important;
-    text-overflow: clip !important;
     overflow: visible !important;
+    text-overflow: clip !important;
     transition: all 0.2s ease !important;
   }
   .p102-fdh-3 li.sidenavcur a,
@@ -5903,15 +5899,22 @@
     color: #ffffff !important;
     font-weight: 600 !important;
     border-color: #499c7c !important;
-    box-shadow: 0 2px 6px rgba(73, 156, 124, 0.25) !important;
+    box-shadow: 0 2px 5px rgba(73, 156, 124, 0.25) !important;
   }
 
+  html[lang="en"] .p102-fdh-3 ul.content3,
+  html[lang="en"] .p102-fdh-3 ul {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 5px !important;
+  }
   html[lang="en"] .p102-fdh-3 li a {
-    padding: 0 8px !important;
-    font-size: 11.5px !important;
     height: auto !important;
-    min-height: 30px !important;
-    line-height: 1.25 !important;
+    min-height: 28px !important;
+    line-height: 1.2 !important;
+    padding: 3px 4px !important;
+    font-size: 10.5px !important;
+    white-space: normal !important;
+    text-align: center !important;
   }
 }
 

@@ -6306,14 +6306,16 @@ Disallow: /cms_system/
         const catRes = await fetch("/api/categories");
         cache.categories = await catRes.json();
         
-        // Unread Badge
-        const unreadCount = cache.messages.filter(m => !m.read).length;
+        // Unread Badge (if element exists)
+        const unreadCount = Array.isArray(cache.messages) ? cache.messages.filter(m => !m.read).length : 0;
         const badge = document.getElementById("badge-unread-orders");
-        if (unreadCount > 0) {
-          badge.innerText = unreadCount;
-          badge.classList.remove("hidden");
-        } else {
-          badge.classList.add("hidden");
+        if (badge) {
+          if (unreadCount > 0) {
+            badge.innerText = unreadCount;
+            badge.classList.remove("hidden");
+          } else {
+            badge.classList.add("hidden");
+          }
         }
         
         renderProductsTable();
@@ -7191,10 +7193,12 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
     // --- Products ---
     function renderProductsTable() {
       const tbody = document.getElementById("products-table-body");
+      if (!tbody) return;
       tbody.innerHTML = "";
       
-      const q = document.getElementById("search-products").value.toLowerCase();
-      const filtered = cache.products.filter(p => p.title.toLowerCase().includes(q));
+      const searchEl = document.getElementById("search-products");
+      const q = searchEl ? searchEl.value.toLowerCase().trim() : "";
+      const filtered = (cache.products || []).filter(p => (p.title || "").toLowerCase().includes(q));
       
       // Sort products by sort number ascending, then date descending
       filtered.sort((a, b) => {

@@ -488,23 +488,33 @@
 
   /* ------------------------------------------------------------------------
      4. 轮播 Banner 模块 (.banner, #banner-swiper)
+     响应用户要求：增高主图视觉高度，让轮播图更有张力与品质感
      ------------------------------------------------------------------------ */
   .banner, .swiper-container, .swiper0 {
-    height: auto !important;
-    min-height: 160px !important;
+    height: clamp(235px, 64vw, 295px) !important;
+    min-height: 235px !important;
     width: 100% !important;
     overflow: hidden !important;
     position: relative !important;
+    margin-bottom: 0 !important;
+  }
+
+  .banner .swiper-wrapper {
+    height: 100% !important;
+  }
+
+  .banner .swiper-slide {
+    height: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   .banner img, .swiper-slide img {
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
     display: block !important;
-  }
-
-  .banner .swiper-slide {
-    position: relative !important;
   }
 
   .ban_txt {
@@ -516,6 +526,9 @@
     height: 100% !important;
     z-index: 5 !important;
     pointer-events: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .ban_txt img {
@@ -529,8 +542,8 @@
 
   .banner video {
     width: 100% !important;
-    height: auto !important;
-    max-height: 220px !important;
+    height: 100% !important;
+    max-height: none !important;
     object-fit: cover !important;
     display: block !important;
   }
@@ -546,17 +559,34 @@
   .banner .swiper-button-prev { left: 5px !important; }
   .banner .swiper-button-next { right: 5px !important; }
 
+  .banner .swiper-pagination {
+    bottom: 6px !important;
+  }
+
   /* ------------------------------------------------------------------------
      5. 首页企业简介与视频直播模块 (.g_yzsp)
+     紧贴上方主 Banner，拉近与“美尔健生物”板块的距离
      ------------------------------------------------------------------------ */
   .g_yzsp {
     background: #f8fafb !important;
-    padding: 24px 12px !important;
+    padding: 14px 12px 20px 12px !important;
+    margin-top: 0 !important;
     overflow: hidden !important;
   }
 
+  .g_yzsp .content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .g_yzsp .yzup {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
   .g_yzsp .yzleft {
-    margin-bottom: 12px !important;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
     width: 100% !important;
     float: none !important;
   }
@@ -564,7 +594,8 @@
   .g_yzsp .yzleft h2 {
     float: none !important;
     width: 100% !important;
-    margin-bottom: 8px !important;
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
   }
 
   .g_yzsp .yzleft h2 em {

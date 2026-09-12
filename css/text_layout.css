@@ -132,11 +132,21 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. 产品分类栏与筛选标签 (.p102-fdh-1)
+   3. 产品分类栏与筛选标签 (.p102-fdh-1) - 上下收窄优化
    -------------------------------------------------------------------------- */
+.plc {
+  padding: 4px 0 12px !important;
+}
+
+.p102-fdh-1 {
+  padding: 4px 45px 8px !important;
+  margin: 0 auto 15px auto !important;
+}
+
 .p102-fdh-1-nav-one {
   display: flex !important;
-  align-items: flex-start !important;
+  align-items: center !important;
+  padding: 9px 0 !important;
 }
 
 .p102-fdh-1-nav-one h3 {
@@ -144,21 +154,26 @@
   white-space: nowrap !important;
   flex-shrink: 0 !important;
   margin-right: 15px !important;
+  margin-bottom: 0 !important;
 }
 
 .p102-fdh-1-nav-one h3 a {
   white-space: nowrap !important;
   word-break: keep-all !important;
   text-wrap: nowrap !important;
+  line-height: 28px !important;
+  height: 28px !important;
 }
 
 .p102-fdh-1-nav-one dl {
   float: none !important;
   display: flex !important;
   flex-wrap: wrap !important;
-  gap: 6px 12px !important;
+  gap: 4px 12px !important;
   max-width: 100% !important;
   align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .p102-fdh-1-nav-one dd {
@@ -167,8 +182,8 @@
   flex-shrink: 0 !important;
   margin: 0 !important;
   padding-bottom: 0 !important;
-  height: 32px !important;
-  line-height: 32px !important;
+  height: 28px !important;
+  line-height: 28px !important;
 }
 
 .p102-fdh-1-nav-one dd> a {
@@ -176,13 +191,17 @@
   word-break: keep-all !important;
   text-wrap: nowrap !important;
   display: inline-block !important;
-  padding: 0 12px !important;
-  line-height: 30px !important;
+  padding: 0 10px !important;
+  line-height: 26px !important;
 }
 
 .p102-fdh-1-nav-one .three-list a {
   white-space: nowrap !important;
   word-break: keep-all !important;
+}
+
+.hyt-product-list {
+  padding-top: 15px !important;
 }
 
 /* --------------------------------------------------------------------------

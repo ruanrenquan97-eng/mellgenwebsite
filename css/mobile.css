@@ -510,11 +510,13 @@
 
   /* ------------------------------------------------------------------------
      4. 轮播 Banner 模块 (.banner, #banner-swiper)
-     响应用户要求：增高主图视觉高度，让轮播图更有张力与品质感
+     响应用户要求：
+     - 主图/视频保持适度大气高度与满高半透明阴影
+     - 轮播大图(图文海报)调整为自适应完整显示(contain)，彻底解决文字裁剪与溢出问题
      ------------------------------------------------------------------------ */
-  .banner, .swiper-container, .swiper0 {
-    height: clamp(235px, 64vw, 295px) !important;
-    min-height: 235px !important;
+  .banner, .banner .swiper-container, .swiper0 {
+    height: clamp(210px, 55vw, 260px) !important;
+    min-height: 210px !important;
     width: 100% !important;
     overflow: hidden !important;
     position: relative !important;
@@ -531,12 +533,42 @@
     overflow: hidden !important;
   }
 
-  .banner img, .swiper-slide img {
+  /* 视频第一帧海报及视频主体保持铺满 (cover) */
+  .banner .swiper-slide:first-child img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     object-position: center !important;
     display: block !important;
+  }
+
+  /* 首页其他轮播大图 (含核心产品与技术文字介绍)：
+     采用 contain 保证整张大图在手机屏幕上100%完整呈现，文字零截断、零溢出 */
+  .banner .swiper-slide:not(:first-child) {
+    background: linear-gradient(180deg, #f8fbfe 0%, #e8f3fa 100%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .banner .swiper-slide:not(:first-child) a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-decoration: none !important;
+  }
+
+  .banner .swiper-slide:not(:first-child) img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 auto !important;
   }
 
   .ban_txt {
@@ -1686,22 +1718,39 @@
     box-sizing: border-box !important;
   }
 
-  .hyt-product-list-6 {
+  /* 网格内部所有清除浮动元素彻底隐藏，避免在 CSS Grid 中作为子项占位留白 */
+  .hyt-product-list .clear,
+  .hyt-product-list-6 .clear,
+  .hyt-product-list-5 .clear,
+  .hyt-product-list-6 > .clear,
+  .hyt-product-list-5 > .clear {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hyt-product-list-6,
+  .hyt-product-list-5 {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
     float: none !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    align-items: stretch !important;
   }
 
-  .hyt-product-list-6 dl {
+  .hyt-product-list-6 dl,
+  .hyt-product-list-5 dl {
     width: 100% !important;
+    height: 100% !important;
     float: none !important;
     margin: 0 !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
-    padding: 6px !important;
+    padding: 8px !important;
     background: #ffffff !important;
     border: 1px solid #eef2f6 !important;
     border-radius: 8px !important;
@@ -1712,9 +1761,10 @@
     overflow: hidden !important;
   }
 
-  .hyt-product-list-6 dt {
+  .hyt-product-list-6 dt,
+  .hyt-product-list-5 dt {
     width: 100% !important;
-    height: 125px !important;
+    height: 130px !important;
     border-bottom: 1px solid #f1f5f9 !important;
     position: relative !important;
     display: flex !important;
@@ -1723,9 +1773,11 @@
     background: #fafbfe !important;
     border-radius: 6px !important;
     overflow: hidden !important;
+    flex-shrink: 0 !important;
   }
 
-  .hyt-product-list-6 dt a {
+  .hyt-product-list-6 dt a,
+  .hyt-product-list-5 dt a {
     width: 100% !important;
     height: 100% !important;
     display: flex !important;
@@ -1733,7 +1785,8 @@
     justify-content: center !important;
   }
 
-  .hyt-product-list-6 dt img {
+  .hyt-product-list-6 dt img,
+  .hyt-product-list-5 dt img {
     max-width: 100% !important;
     max-height: 100% !important;
     width: auto !important;
@@ -1742,38 +1795,46 @@
     display: block !important;
   }
 
-  .hyt-product-list-6 dt em {
+  .hyt-product-list-6 dt em,
+  .hyt-product-list-5 dt em {
     display: none !important;
   }
 
-  .hyt-product-list-6 dd {
-    padding: 8px 4px 6px 4px !important;
+  .hyt-product-list-6 dd,
+  .hyt-product-list-5 dd {
+    padding: 8px 4px 4px 4px !important;
     text-align: left !important;
-    flex: 1 !important;
+    flex: 1 1 auto !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     box-sizing: border-box !important;
   }
 
   .hyt-product-list-6 dd h4,
-  .hyt-product-list-6 dd h3 {
-    height: auto !important;
+  .hyt-product-list-5 dd h4,
+  .hyt-product-list-6 dd h3,
+  .hyt-product-list-5 dd h3 {
+    height: 36px !important;
     min-height: 36px !important;
-    line-height: 1.3 !important;
+    max-height: 36px !important;
+    line-height: 1.35 !important;
     margin: 0 0 4px 0 !important;
     font-size: 13px !important;
     font-weight: 600 !important;
+    overflow: hidden !important;
   }
 
   .hyt-product-list-6 dd h4 a,
-  .hyt-product-list-6 dd h3 a {
+  .hyt-product-list-5 dd h4 a,
+  .hyt-product-list-6 dd h3 a,
+  .hyt-product-list-5 dd h3 a {
     display: -webkit-box !important;
     -webkit-box-orient: vertical !important;
     -webkit-line-clamp: 2 !important;
     overflow: hidden !important;
-    height: auto !important;
-    line-height: 1.3 !important;
+    height: 36px !important;
+    line-height: 1.35 !important;
     font-size: 13px !important;
     font-weight: 600 !important;
     color: #1e293b !important;
@@ -1782,7 +1843,8 @@
     text-overflow: ellipsis !important;
   }
 
-  .hyt-product-list-6 dd p {
+  .hyt-product-list-6 dd p,
+  .hyt-product-list-5 dd p {
     font-size: 11px !important;
     line-height: 1.4 !important;
     color: #64748b !important;
@@ -1791,10 +1853,14 @@
     -webkit-line-clamp: 2 !important;
     overflow: hidden !important;
     margin: 0 !important;
-    height: auto !important;
+    height: 31px !important;
+    min-height: 31px !important;
+    max-height: 31px !important;
+    text-overflow: ellipsis !important;
   }
 
-  .hyt-product-list-6 dd p a {
+  .hyt-product-list-6 dd p a,
+  .hyt-product-list-5 dd p a {
     color: #499c7c !important;
     font-weight: 600 !important;
     text-decoration: none !important;
@@ -2329,17 +2395,36 @@
     margin: 10px 0 14px 0 !important;
   }
 
-  .hyt-product-list-6 {
+  /* 彻底隐藏产品网格内部所有 .clear 标签，防止其充当 Grid Item 造成空格留白 */
+  .hyt-product-list-6 > .clear,
+  .hyt-product-list-6 .clear,
+  .hyt-product-list-5 > .clear,
+  .hyt-product-list-5 .clear,
+  .hyt-product-list > .clear,
+  .hyt-product-list .clear {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .hyt-product-list-6,
+  .hyt-product-list-5 {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    align-items: stretch !important;
   }
 
-  .hyt-product-list-6 dl {
+  .hyt-product-list-6 dl,
+  .hyt-product-list-5 dl {
     float: none !important;
     width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
     background: #ffffff !important;
     border-radius: 8px !important;
@@ -2351,7 +2436,8 @@
     box-sizing: border-box !important;
   }
 
-  .hyt-product-list-6 dt {
+  .hyt-product-list-6 dt,
+  .hyt-product-list-5 dt {
     width: 100% !important;
     height: 130px !important;
     overflow: hidden !important;
@@ -2359,53 +2445,86 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex-shrink: 0 !important;
   }
 
-  .hyt-product-list-6 dt img {
+  .hyt-product-list-6 dt a,
+  .hyt-product-list-5 dt a {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hyt-product-list-6 dt img,
+  .hyt-product-list-5 dt img {
     max-width: 100% !important;
     max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
     object-fit: contain !important;
     transition: transform 0.3s ease !important;
+    display: block !important;
   }
 
-  .hyt-product-list-6 dd {
+  .hyt-product-list-6 dd,
+  .hyt-product-list-5 dd {
     padding: 8px 10px !important;
-    flex: 1 !important;
+    flex: 1 1 auto !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     box-sizing: border-box !important;
   }
 
-  .hyt-product-list-6 dd h4 {
+  .hyt-product-list-6 dd h4,
+  .hyt-product-list-5 dd h4,
+  .hyt-product-list-6 dd h3,
+  .hyt-product-list-5 dd h3 {
     font-size: 13px !important;
-    line-height: 1.4 !important;
+    line-height: 1.35 !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
     font-weight: 600 !important;
-    margin: 0 0 4px 0 !important;
+    margin: 0 0 6px 0 !important;
     color: #1e293b !important;
+    overflow: hidden !important;
   }
 
-  .hyt-product-list-6 dd h4 a {
+  .hyt-product-list-6 dd h4 a,
+  .hyt-product-list-5 dd h4 a,
+  .hyt-product-list-6 dd h3 a,
+  .hyt-product-list-5 dd h3 a {
     color: #1e293b !important;
     text-decoration: none !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
+    line-height: 1.35 !important;
+    text-overflow: ellipsis !important;
   }
 
-  .hyt-product-list-6 dd p {
+  .hyt-product-list-6 dd p,
+  .hyt-product-list-5 dd p {
     font-size: 11px !important;
     line-height: 1.4 !important;
+    height: 31px !important;
+    min-height: 31px !important;
+    max-height: 31px !important;
     color: #64748b !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
+    text-overflow: ellipsis !important;
     margin: 0 !important;
   }
 
-  .hyt-product-list-6 dd p a {
+  .hyt-product-list-6 dd p a,
+  .hyt-product-list-5 dd p a {
     color: #499c7c !important;
     font-weight: 600 !important;
     text-decoration: none !important;

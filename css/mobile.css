@@ -512,7 +512,7 @@
      4. 轮播 Banner 模块 (.banner, #banner-swiper)
      响应用户要求：
      - 主图/视频保持适度大气高度与满高半透明阴影
-     - 轮播大图(图文海报)调整为自适应完整显示(contain)，彻底解决文字裁剪与溢出问题
+     - 轮播大图及视频文字图层(ban_txt)一律调整为自适应完整显示(contain)，彻底解决文字裁剪与溢出问题
      ------------------------------------------------------------------------ */
   .banner, .banner .swiper-container, .swiper0 {
     height: clamp(210px, 55vw, 260px) !important;
@@ -533,17 +533,23 @@
     overflow: hidden !important;
   }
 
-  /* 视频第一帧海报及视频主体保持铺满 (cover) */
-  .banner .swiper-slide:first-child img {
+  /* 轮播内所有图片（含视频文字图层与轮播图文海报）：
+     一律采用 contain 完整呈现，杜绝任何文字截断、裁剪与溢出屏幕 */
+  .banner img,
+  .banner .swiper-slide img,
+  .banner .ban_txt img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
     object-position: center !important;
     display: block !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
   }
 
-  /* 首页其他轮播大图 (含核心产品与技术文字介绍)：
-     采用 contain 保证整张大图在手机屏幕上100%完整呈现，文字零截断、零溢出 */
+  /* 首页其他轮播大图幻灯片容器背景及居中 */
   .banner .swiper-slide:not(:first-child) {
     background: linear-gradient(180deg, #f8fbfe 0%, #e8f3fa 100%) !important;
     display: flex !important;
@@ -571,7 +577,10 @@
     margin: 0 auto !important;
   }
 
-  .ban_txt {
+  /* 视频文字图层 (.ban_txt)：居中并保持半透明遮罩覆盖全屏 */
+  .ban_txt,
+  .banner .ban_txt,
+  .banner .swiper-slide .ban_txt {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -583,11 +592,17 @@
     z-index: 5 !important;
     background: rgba(0, 8, 17, 0.35) !important; /* 阴影铺满整个视频全高，消除中间断层阴影带 */
     pointer-events: none !important;
+    box-sizing: border-box !important;
+    padding: 0 8px !important; /* 留出安全边距，保证在所有手机边缘绝不贴边或溢出 */
   }
 
-  .ban_txt img {
+  .ban_txt img,
+  .banner .ban_txt img,
+  .banner .swiper-slide .ban_txt img {
     width: 100% !important;
     height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
     object-fit: contain !important;
     object-position: center !important;
     display: block !important;
@@ -1133,9 +1148,13 @@
     padding: 0 !important;
   }
 
+  /* 隐藏桌面端用于绝对定位的纯白占位垫底图 (.kysha2)，消除移动端大片空白 */
   .g_kycg .m_kycg .kyleft .kysha2 {
-    margin-bottom: 12px !important;
-    border-radius: 8px !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     overflow: hidden !important;
   }
 
@@ -2190,17 +2209,19 @@
 
   .p102-search-1 {
     width: 100% !important;
-    padding: 10px 12px !important;
+    padding: 6px 10px 8px !important;
     background: #f8fafc !important;
     border-bottom: 1px solid #eef2f6 !important;
     box-sizing: border-box !important;
+    min-height: 0 !important;
+    margin: 0 !important;
   }
 
   .p102-search-1 .blk-main {
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
+    gap: 4px !important;
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -2209,14 +2230,15 @@
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    gap: 6px !important;
-    font-size: 12px !important;
+    gap: 3px 6px !important;
+    font-size: 11px !important;
     color: #64748b !important;
     margin: 0 !important;
+    line-height: 1.3 !important;
   }
 
   .p102-search-1 p b {
-    font-size: 12px !important;
+    font-size: 11px !important;
     color: #334155 !important;
     margin-right: 2px !important;
     font-weight: 600 !important;
@@ -2225,12 +2247,12 @@
 
   .p102-search-1 p a {
     display: inline-block !important;
-    padding: 3px 9px !important;
+    padding: 2px 7px !important;
     background: #e2e8f0 !important;
     color: #475569 !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     font-size: 11px !important;
-    line-height: 1.4 !important;
+    line-height: 1.3 !important;
     text-decoration: none !important;
     white-space: nowrap !important;
   }
@@ -2238,19 +2260,19 @@
   .p102-search-1-inp {
     width: 100% !important;
     display: flex !important;
-    height: 38px !important;
-    margin-top: 4px !important;
+    height: 32px !important;
+    margin-top: 2px !important;
     position: relative !important;
   }
 
   .p102-search-1-inp1 {
     flex: 1 !important;
-    height: 38px !important;
+    height: 32px !important;
     border: 1px solid #cbd5e1 !important;
     border-right: none !important;
-    border-radius: 20px 0 0 20px !important;
-    padding: 0 14px !important;
-    font-size: 13px !important;
+    border-radius: 16px 0 0 16px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
     outline: none !important;
     background: #ffffff !important;
     color: #1e293b !important;
@@ -2258,50 +2280,67 @@
   }
 
   .p102-search-1-inp2 {
-    width: 60px !important;
-    height: 38px !important;
+    width: 48px !important;
+    height: 32px !important;
     background-color: #499c7c !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     border: none !important;
-    border-radius: 0 20px 20px 0 !important;
+    border-radius: 0 16px 16px 0 !important;
     cursor: pointer !important;
     outline: none !important;
     box-sizing: border-box !important;
   }
 
-  /* 面包屑导航自适应横滑 */
-  .plc, .p102-curmbs-1 {
+  /* 面包屑导航自适应横滑（去除双层边距与重叠边框） */
+  .plc {
     width: 100% !important;
-    padding: 8px 12px !important;
-    font-size: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  .p102-curmbs-1 {
+    width: 100% !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
     color: #94a3b8 !important;
     overflow-x: auto !important;
     white-space: nowrap !important;
     -webkit-overflow-scrolling: touch !important;
     border-bottom: 1px solid #f1f5f9 !important;
     margin: 0 !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+    height: auto !important;
   }
 
   .p102-curmbs-1 b {
-    font-size: 12px !important;
+    font-size: 11px !important;
     color: #64748b !important;
     font-weight: normal !important;
+    background: none !important;
+    padding: 0 !important;
   }
 
   .p102-curmbs-1 a {
-    font-size: 12px !important;
+    font-size: 11px !important;
     color: #475569 !important;
     text-decoration: none !important;
   }
 
   .p102-curmbs-1 span {
-    margin: 0 3px !important;
+    margin: 0 2px !important;
     color: #cbd5e1 !important;
+    font-size: 10px !important;
   }
 
-  .p102-curmbs-1 i {
+  .p102-curmbs-1 i,
+  .p102-curmbs-1 i a {
     font-style: normal !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
   }
 
   /* ------------------------------------------------------------------------
@@ -2310,22 +2349,34 @@
   .p102-fdh-1 {
     width: 100% !important;
     background: #ffffff !important;
-    border-radius: 8px !important;
-    margin: 8px 0 14px 0 !important;
-    padding: 8px 10px !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+    border-radius: 6px !important;
+    margin: 4px 0 6px 0 !important;
+    padding: 6px 8px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
     border: 1px solid #eef2f6 !important;
     box-sizing: border-box !important;
+    height: auto !important;
+    overflow: visible !important;
   }
 
   .p102-fdh-1-nav {
     width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
   }
 
   .p102-fdh-1-nav-one {
-    border-bottom: 1px dashed #e2e8f0 !important;
-    padding: 8px 0 !important;
+    border-bottom: 1px dashed #f1f5f9 !important;
+    padding: 3px 0 !important;
     width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 4px 6px !important;
+    box-sizing: border-box !important;
+    float: none !important;
   }
 
   .p102-fdh-1-nav-one:last-child {
@@ -2333,43 +2384,60 @@
   }
 
   .p102-fdh-1-nav-one h3 {
-    font-size: 13px !important;
-    font-weight: 600 !important;
+    float: none !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
     color: #1e293b !important;
-    margin: 0 0 6px 0 !important;
-    display: flex !important;
+    margin: 0 4px 0 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    display: inline-flex !important;
     align-items: center !important;
+    flex-shrink: 0 !important;
+    height: auto !important;
+    line-height: normal !important;
   }
 
   .p102-fdh-1-nav-one h3 a {
     color: #1e293b !important;
     text-decoration: none !important;
+    font-size: 12px !important;
+    line-height: normal !important;
+    height: auto !important;
   }
 
   .p102-fdh-1-nav-one dl {
-    display: flex !important;
+    float: none !important;
+    display: inline-flex !important;
     flex-wrap: wrap !important;
-    gap: 6px !important;
+    gap: 4px 6px !important;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100% !important;
+    width: auto !important;
+    max-width: 100% !important;
+    flex: 1 1 auto !important;
   }
 
   .p102-fdh-1-nav-one dd {
     margin: 0 !important;
     padding: 0 !important;
     float: none !important;
+    height: auto !important;
+    line-height: normal !important;
+    display: inline-block !important;
   }
 
   .p102-fdh-1-nav-one dd a {
     display: inline-block !important;
-    padding: 4px 10px !important;
+    padding: 3px 8px !important;
     background: #f1f5f9 !important;
-    border-radius: 14px !important;
-    font-size: 12px !important;
+    border-radius: 12px !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
     color: #475569 !important;
     text-decoration: none !important;
     transition: all 0.2s !important;
+    white-space: nowrap !important;
   }
 
   .p102-fdh-1-nav-one dd.cur a,
@@ -2378,21 +2446,34 @@
     color: #ffffff !important;
   }
 
-  /* 产品列表标题与双列栅格 */
+  /* 产品列表标题与紧凑间距（彻底消除 66px 虚高与底标线） */
   .hyt-product-list {
     width: 100% !important;
     padding: 0 4px !important;
+    margin: 2px 0 0 0 !important;
     box-sizing: border-box !important;
   }
 
   .p102-pros-1-title {
-    font-size: 17px !important;
+    font-size: 15px !important;
     font-weight: 700 !important;
     color: #1e293b !important;
-    padding: 6px 0 6px 10px !important;
-    border-left: 4px solid #499c7c !important;
+    padding: 0 0 0 8px !important;
+    border-left: 3px solid #499c7c !important;
+    border-bottom: none !important;
+    height: auto !important;
+    min-height: 0 !important;
     line-height: 1.2 !important;
-    margin: 10px 0 14px 0 !important;
+    margin: 4px 0 8px 0 !important;
+    position: relative !important;
+  }
+
+  .p102-pros-1-title::after,
+  .p102-pros-1-title:after {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   /* 彻底隐藏产品网格内部所有 .clear 标签，防止其充当 Grid Item 造成空格留白 */
@@ -3479,27 +3560,29 @@
   }
 
   /* 2. 面包屑导航自适应 */
-  .plc,
-  .p102-curmbs-1 {
+  .plc {
     width: 100% !important;
     max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
     box-sizing: border-box !important;
   }
 
-  .plc {
-    margin: 0 !important;
-    padding: 8px 12px !important;
-  }
-
   .p102-curmbs-1 {
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    line-height: 1.5 !important;
-    font-size: 12px !important;
+    line-height: 1.4 !important;
+    font-size: 11px !important;
     color: #64748b !important;
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 3px !important;
+    padding: 4px 8px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    box-sizing: border-box !important;
   }
 
   .p102-curmbs-1 b {
@@ -3507,19 +3590,19 @@
     padding-left: 0 !important;
     font-weight: normal !important;
     color: #94a3b8 !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
   }
 
   .p102-curmbs-1 a {
     color: #499c7c !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
     text-decoration: none !important;
   }
 
   .p102-curmbs-1 span {
     color: #cbd5e1 !important;
     margin: 0 2px !important;
-    font-size: 11px !important;
+    font-size: 10px !important;
   }
 
   .p102-curmbs-1 i,
@@ -3527,12 +3610,11 @@
     color: #1e293b !important;
     font-style: normal !important;
     font-weight: 600 !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
   }
 
   /* 3. 内页二级分类导航栏 (横滑胶囊药丸分类栏) */
   .p102-fdh-3,
-  .p102-fdh-1,
   .p101a-fdh-02 {
     width: 100% !important;
     height: auto !important;
@@ -3547,7 +3629,6 @@
 
   .p102-fdh-3 .content3,
   .p102-fdh-3 ul,
-  .p102-fdh-1-nav,
   .p101a-fdh-02-nav {
     width: 100% !important;
     max-width: 100% !important;
@@ -3559,8 +3640,7 @@
   }
 
   .p102-fdh-3 .content3::-webkit-scrollbar,
-  .p102-fdh-3 ul::-webkit-scrollbar,
-  .p102-fdh-1-nav::-webkit-scrollbar {
+  .p102-fdh-3 ul::-webkit-scrollbar {
     display: none !important;
     height: 0 !important;
   }
@@ -3575,8 +3655,7 @@
     list-style: none !important;
   }
 
-  .p102-fdh-3 li,
-  .p102-fdh-1 li {
+  .p102-fdh-3 li {
     float: none !important;
     width: auto !important;
     height: auto !important;
@@ -3590,8 +3669,7 @@
     display: none !important;
   }
 
-  .p102-fdh-3 li a,
-  .p102-fdh-1 li a {
+  .p102-fdh-3 li a {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -3612,9 +3690,7 @@
   .p102-fdh-3 li.sidenavcur a,
   .p102-fdh-3 li.on a,
   .p102-fdh-3 li a:hover,
-  .p102-fdh-3 li a:active,
-  .p102-fdh-1 li.cur a,
-  .p102-fdh-1 li.sidenavcur a {
+  .p102-fdh-3 li a:active {
     background: #499c7c !important;
     color: #ffffff !important;
     font-weight: 600 !important;

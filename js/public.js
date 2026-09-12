@@ -245,7 +245,7 @@ $(function () {
         }
     });
 
-    // 2. 移动端 Header 增加操作栏 (语言切换 + 汉堡按钮)
+    // 2. 移动端 Header 增加操作栏 (仅保留语言切换，按需移除右上角汉堡导航)
     var $mTop = $(".m_top");
     if ($mTop.length && !$(".mobile-header-actions").length) {
         var $actions = $('<div class="mobile-header-actions"></div>');
@@ -253,8 +253,7 @@ $(function () {
         if ($langSwitch.length) {
             $actions.append($langSwitch);
         }
-        var $toggleBtn = $('<div class="mobile-nav-toggle" id="mobileNavToggle" title="打开菜单">☰</div>');
-        $actions.append($toggleBtn);
+        // 右上角汉堡导航按钮已按需求彻底移除
         if ($mTop.find(".tlogo").length) {
             $mTop.find(".tlogo").after($actions);
         } else {

@@ -291,27 +291,9 @@
     font-weight: bold !important;
   }
 
-  /* 移动端汉堡菜单按钮 (☰) */
+  /* 移动端汉堡菜单按钮 (☰) - 按需求彻底隐藏右上角导航 */
   .mobile-nav-toggle {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 34px !important;
-    height: 34px !important;
-    background: #eef7f3 !important;
-    border: 1px solid #d1ebd9 !important;
-    border-radius: 8px !important;
-    color: #499c7c !important;
-    font-size: 20px !important;
-    line-height: 1 !important;
-    cursor: pointer !important;
-    user-select: none !important;
-    transition: all 0.2s ease !important;
-  }
-
-  .mobile-nav-toggle:active {
-    background: #499c7c !important;
-    color: #fff !important;
+    display: none !important;
   }
 
   /* 移动端顶部隐藏横向截断的一级分类栏（已由底部导航栏与抽屉菜单统一承载） */
@@ -7521,13 +7503,13 @@ canvas[width="1920"] {
     display: block !important;
   }
 
-  /* 8. 内页二级导航 (.p102-fdh-3)：全部标签完整平铺多行展示（最高优先级保障，彻底告别横向隐藏） */
+  /* 8. 内页二级导航 (.p102-fdh-3)：整齐压缩成2行（5列 x 2行 = 10项），字体精简防截断 */
   .p102-fdh-3 {
     display: block !important;
     height: auto !important;
     min-height: 0 !important;
     background: #ffffff !important;
-    padding: 8px 6px 10px 6px !important;
+    padding: 6px 4px 8px 4px !important;
     margin: 4px 0 10px 0 !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
     border-bottom: 1px solid #eef2f6 !important;
@@ -7538,12 +7520,9 @@ canvas[width="1920"] {
   }
   .p102-fdh-3 ul.content3,
   .p102-fdh-3 ul {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 8px 6px !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 5px 3px !important;
     padding: 0 !important;
     margin: 0 !important;
     list-style: none !important;
@@ -7560,8 +7539,7 @@ canvas[width="1920"] {
   }
   .p102-fdh-3 li {
     float: none !important;
-    flex: 0 0 auto !important;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
     margin: 0 !important;
@@ -7569,6 +7547,7 @@ canvas[width="1920"] {
     list-style: none !important;
     position: static !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
   }
   .p102-fdh-3 li:before,
   .p102-fdh-3 li:after,
@@ -7582,18 +7561,18 @@ canvas[width="1920"] {
     height: 0 !important;
   }
   .p102-fdh-3 li a {
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    line-height: 32px !important;
-    padding: 0 11px !important;
-    font-size: 12.5px !important;
-    letter-spacing: normal !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    line-height: 1.15 !important;
+    padding: 0 1px !important;
+    font-size: clamp(10px, 2.7vw, 11px) !important;
+    letter-spacing: -0.3px !important;
     color: #475569 !important;
     background: #f8fafc !important;
-    border-radius: 16px !important;
+    border-radius: 14px !important;
     white-space: nowrap !important;
     text-decoration: none !important;
     border: 1px solid #e2e8f0 !important;
@@ -7601,8 +7580,8 @@ canvas[width="1920"] {
     text-align: center !important;
     position: static !important;
     font-weight: 500 !important;
-    text-overflow: clip !important;
     overflow: visible !important;
+    text-overflow: clip !important;
     transition: all 0.2s ease !important;
   }
   .p102-fdh-3 li.sidenavcur a,
@@ -7613,15 +7592,20 @@ canvas[width="1920"] {
     color: #ffffff !important;
     font-weight: 600 !important;
     border-color: #499c7c !important;
-    box-shadow: 0 2px 6px rgba(73, 156, 124, 0.25) !important;
+    box-shadow: 0 2px 5px rgba(73, 156, 124, 0.25) !important;
   }
 
+  html[lang="en"] .p102-fdh-3 ul.content3,
+  html[lang="en"] .p102-fdh-3 ul {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 5px !important;
+  }
   html[lang="en"] .p102-fdh-3 li a {
-    padding: 0 8px !important;
-    font-size: 11.5px !important;
     height: auto !important;
-    min-height: 30px !important;
-    line-height: 1.25 !important;
+    min-height: 28px !important;
+    line-height: 1.2 !important;
+    padding: 3px 4px !important;
+    font-size: 10.5px !important;
   }
 }
 
@@ -8465,6 +8449,494 @@ canvas[width="1920"] {
   .k12-gl-gslb-3nf1-1-01-left dd h4 a {
     color: #1e293b !important;
     text-decoration: none !important;
+  }
+}
+
+/* ==========================================================================
+   美尔健手机端案例、新闻与资讯详情页（articles/*.html, article_*.html）全面深度重构
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+
+  /* 1. 彻底根除详情页主容器 888px 写死宽度与浮动导致的内容右偏截断 */
+  .p102-info-blk,
+  .p102-info-blk.fl,
+  .p102-info-blk.fr {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    float: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: none !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+  }
+
+  .p102-info-blk-con {
+    padding: 12px 14px 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. 文章标题与发布信息 */
+  .p102-info-blk-title,
+  h1.p102-info-blk-title {
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin: 0 0 10px 0 !important;
+    text-align: left !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .p102-info-blk-bool {
+    font-size: 11.5px !important;
+    color: #94a3b8 !important;
+    text-align: left !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    height: auto !important;
+    line-height: normal !important;
+  }
+
+  .p102-info-blk-bool span {
+    color: #64748b !important;
+    font-size: 11.5px !important;
+  }
+
+  .p102-info-blk-bool i {
+    margin: 0 2px !important;
+    color: #cbd5e1 !important;
+    font-style: normal !important;
+  }
+
+  /* 3. 核心导读框与文章排版美化 */
+  .article-lead-box {
+    background: #f8fafc !important;
+    border-left: 3.5px solid #174778 !important;
+    padding: 12px 14px !important;
+    margin: 0 0 16px 0 !important;
+    border-radius: 0 6px 6px 0 !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .article-lead-box p {
+    margin: 0 !important;
+    line-height: 1.65 !important;
+    color: #475569 !important;
+    text-indent: 0 !important;
+  }
+
+  .p102-info-content,
+  .endit-content,
+  .article-body-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+    color: #334155 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    padding: 0 !important;
+  }
+
+  .p102-info-content h2,
+  .p102-info-content h3,
+  .endit-content h2,
+  .endit-content h3,
+  .article-body-wrapper h2,
+  .article-body-wrapper h3 {
+    font-size: 15.5px !important;
+    font-weight: 700 !important;
+    color: #174778 !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+    line-height: 1.4 !important;
+    border-bottom: 1px solid #eef2f6 !important;
+    padding-bottom: 6px !important;
+    word-break: break-word !important;
+  }
+
+  .p102-info-content p,
+  .endit-content p,
+  .article-body-wrapper p {
+    margin-bottom: 12px !important;
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+    color: #334155 !important;
+    text-align: justify !important;
+    text-indent: 0 !important;
+    word-break: break-word !important;
+  }
+
+  .p102-info-content img,
+  .endit-content img,
+  .article-body-wrapper img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 12px auto !important;
+    border-radius: 6px !important;
+    object-fit: contain !important;
+  }
+
+  .article-footer-note {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px !important;
+    margin-top: 20px !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    background: #f8fafc !important;
+    border: 1px dashed #cbd5e1 !important;
+    border-radius: 6px !important;
+  }
+
+  .article-footer-note p {
+    margin: 0 !important;
+    text-indent: 0 !important;
+  }
+
+  /* 4. 上下篇切换条 (.p102-info-blk-paging) */
+  .p102-info-blk-paging {
+    height: auto !important;
+    padding: 12px 0 !important;
+    border-top: 1px solid #e2e8f0 !important;
+    margin-top: 16px !important;
+  }
+  .p102-info-blk-paging dl {
+    float: none !important;
+    width: 100% !important;
+    margin-bottom: 6px !important;
+  }
+  .p102-info-blk-paging dd {
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    color: #64748b !important;
+  }
+  .p102-info-blk-paging dd a {
+    color: #1e293b !important;
+    display: inline-block !important;
+    max-width: 80% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    vertical-align: middle !important;
+  }
+
+  /* 5. 详情页底部相关推荐与最新资讯 (.p102-info-related, .p102-info-latest) */
+  .p102-info-related,
+  .p102-info-latest {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    float: none !important;
+    margin-top: 16px !important;
+    padding: 14px 12px !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    border: 1px solid #edf2f7 !important;
+  }
+
+  .p102-info-11-title,
+  .p102-info-12-title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin-bottom: 12px !important;
+    border-left: 3px solid #174778 !important;
+    padding-left: 8px !important;
+  }
+
+  .p102-info-related-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .p102-info-related-list dl {
+    float: none !important;
+    width: calc(50% - 5px) !important;
+    margin: 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  .p102-info-related-list dt {
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    overflow: hidden !important;
+    background: #f1f5f9 !important;
+  }
+
+  .p102-info-related-list dt a,
+  .p102-info-related-list dt img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .p102-info-related-list dd {
+    padding: 6px 8px 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+  }
+
+  .p102-info-related-list dd h4 {
+    margin: 0 !important;
+    height: auto !important;
+  }
+
+  .p102-info-related-list dd h4 a {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    color: #1e293b !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .p102-info-related-list dd p {
+    display: none !important;
+  }
+
+  .p102-info-latest ul {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .p102-info-latest li {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .p102-info-latest h4 {
+    padding: 7px 0 !important;
+    border-bottom: 1px dashed #e2e8f0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+    height: auto !important;
+    line-height: normal !important;
+  }
+
+  .p102-info-latest h4 a {
+    font-size: 12.5px !important;
+    font-weight: normal !important;
+    color: #334155 !important;
+    line-height: 1.4 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex: 1 !important;
+  }
+
+  .p102-info-latest h4 em {
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    font-style: normal !important;
+    white-space: nowrap !important;
+  }
+
+  /* 6. 合作案例列表页卡片 (.hyt-product-list-5) 精致双列重构 */
+  .hyt-product-list-5 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+    float: none !important;
+    box-sizing: border-box !important;
+    padding: 10px 12px 25px !important;
+  }
+
+  .hyt-product-list-5 .clear {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hyt-product-list-5 dl {
+    float: none !important;
+    width: calc(50% - 5px) !important;
+    margin: 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .hyt-product-list-5 dt {
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+  }
+
+  .hyt-product-list-5 dt a,
+  .hyt-product-list-5 dt img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .hyt-product-list-5 dd {
+    padding: 8px 10px 10px !important;
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+  }
+
+  .hyt-product-list-5 dd h4 {
+    height: auto !important;
+    margin-bottom: 4px !important;
+  }
+
+  .hyt-product-list-5 dd h4 a {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    height: auto !important;
+    color: #1e293b !important;
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .hyt-product-list-5 dd p {
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+    color: #64748b !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 0 !important;
+  }
+
+  .hyt-product-list-5 dd a.details {
+    display: none !important;
+  }
+
+  /* 7. 面包屑导航 (.plc, .p102-curmbs-1) 完美自适应防溢出 */
+  .plc,
+  .blk-main .plc {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 8px 12px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #edf2f7 !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .p102-curmbs-1 {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: 1.6 !important;
+    font-size: 12px !important;
+    color: #64748b !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 2px 4px !important;
+    padding: 0 !important;
+  }
+
+  .p102-curmbs-1 b {
+    padding-left: 0 !important;
+    background: none !important;
+    font-size: 12px !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+  }
+
+  .p102-curmbs-1 a {
+    color: #475569 !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    max-width: 180px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  .p102-curmbs-1 span {
+    height: auto !important;
+    line-height: normal !important;
+    padding: 0 !important;
+    color: #cbd5e1 !important;
+    font-family: inherit !important;
+    font-size: 11px !important;
+  }
+
+  .p102-curmbs-1 i {
+    font-style: normal !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    max-width: 100% !important;
+  }
+
+  .p102-curmbs-1 i a {
+    max-width: 180px !important;
+  }
+
+  .p102-curmbs-1 i:last-child a {
+    color: #174778 !important;
+    font-weight: 600 !important;
   }
 }
 

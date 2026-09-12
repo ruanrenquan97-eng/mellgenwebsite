@@ -405,7 +405,19 @@ $(function () {
     }
 
     // 5. 修复移动端选项卡点击交互 (解决方案、制造中心等在移动端触摸点击切换)
-    $(".g_fa .fafl dl, .g_fa .dzoem").on("click", function () {
+    $(document).on("click touchend", ".g_fa .fafl dl", function () {
+        var $this = $(this);
+        var idx = $this.index();
+        $this.addClass("cur").siblings("dl").removeClass("cur");
+        var swiperContainer = document.querySelector('.g_fa .faright .js-swiper-tab');
+        if (swiperContainer && swiperContainer.swiper) {
+            swiperContainer.swiper.slideTo(idx);
+        } else {
+            $this.trigger('mouseover');
+        }
+    });
+
+    $(document).on("click touchend", ".g_fa .dzoem", function () {
         $(this).addClass("cur").siblings().removeClass("cur");
     });
 
@@ -703,4 +715,66 @@ $(function () {
     }
     setTimeout(injectBar, 300);
 })();
+
+// 移动端页脚导航扁平化重构，确保排成整齐的两行（第一行4个，第二行3个），彻底杜绝跨浏览器容器断层
+(function () {
+    function flattenMobileFooterNav() {
+        var ftnav = document.querySelector(".g_ft .ftmid .ftnav");
+        if (!ftnav || ftnav.getAttribute("data-flattened") === "true") return;
+
+        var links = [];
+        // 1. 快捷链接列表 (解决方案、透皮肽技术、联系我们、关于我们、视频中心)
+        var dl1 = ftnav.querySelector("dl:nth-child(1)");
+        if (dl1) {
+            var ddLinks = dl1.querySelectorAll("dd a");
+            for (var i = 0; i < ddLinks.length; i++) {
+                links.push(ddLinks[i]);
+            }
+        }
+        // 2. 产品中心
+        var dl2 = ftnav.querySelector("dl:nth-child(2)");
+        if (dl2) {
+            var dtLink = dl2.querySelector("dt a");
+            if (dtLink) links.push(dtLink);
+        }
+        // 3. 行业案例
+        var dl3 = ftnav.querySelector("dl:nth-child(3)");
+        if (dl3) {
+            var dtLink = dl3.querySelector("dt a");
+            if (dtLink) links.push(dtLink);
+        }
+
+        if (links.length >= 4) {
+            var flat = document.createElement("div");
+            flat.className = "m-ftnav-flat";
+
+            var row1 = document.createElement("div");
+            row1.className = "m-ftnav-row m-ftnav-row1";
+            for (var i = 0; i < Math.min(4, links.length); i++) {
+                row1.appendChild(links[i].cloneNode(true));
+            }
+            flat.appendChild(row1);
+
+            if (links.length > 4) {
+                var row2 = document.createElement("div");
+                row2.className = "m-ftnav-row m-ftnav-row2";
+                for (var j = 4; j < links.length; j++) {
+                    row2.appendChild(links[j].cloneNode(true));
+                }
+                flat.appendChild(row2);
+            }
+
+            ftnav.appendChild(flat);
+            ftnav.setAttribute("data-flattened", "true");
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", flattenMobileFooterNav);
+    } else {
+        flattenMobileFooterNav();
+    }
+    setTimeout(flattenMobileFooterNav, 200);
+})();
+
 

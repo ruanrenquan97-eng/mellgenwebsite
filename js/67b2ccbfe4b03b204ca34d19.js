@@ -55,7 +55,10 @@
 
 
                      $(function () {
+         var initSlide = $('.sup_nav dl.on').index();
+         if (initSlide < 0) initSlide = 5;
          var ysSwiper = new Swiper('.g_super .sup_qie', {
+              initialSlide: initSlide,
               autoplay:false,
               paginationClickable: true,
               effect: 'fade',
@@ -76,9 +79,11 @@
                  }
              }
          });
-         $(".sup_nav dl").on('mouseover', function(e) {
+         $(".sup_nav dl").on('mouseover click', function(e) {
              $(this).addClass('on').siblings('dl').removeClass('on');
-             ysSwiper.slideTo($(this).index());
+             if (ysSwiper && ysSwiper.slideTo) {
+                 ysSwiper.slideTo($(this).index());
+             }
          });
      })
          

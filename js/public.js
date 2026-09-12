@@ -2,6 +2,7 @@
 //副导航焦点定位
 var leftNavFocus = {
     init: function() {
+        if (typeof $ === 'undefined') return;
         var elnav = $("[navcrumbs]").find("a");
         var elbody = $("[navvicefocus]").find("a");
         if (elnav && elbody) {
@@ -19,6 +20,7 @@ var leftNavFocus = {
 };
 
 //主导航高亮
+if (typeof $ !== 'undefined') {
 $(function () {
     /*如果没有各栏目的中心页面(如产品的中心页面index.aspx),
     *就指定一个默认的替代导航选中 写上要选中主导航的索引
@@ -186,8 +188,13 @@ $(function () {
     } else {
     }
 });
+}
 (function(){
-    leftNavFocus.init();
+    try {
+        if (typeof leftNavFocus !== 'undefined') {
+            leftNavFocus.init();
+        }
+    } catch(e){}
 })();
 
 /* ==========================================================================
@@ -610,5 +617,90 @@ $(function () {
             injectAIChatWidget();
         }
     } catch(e) {}
+})();
+
+// 独立的移动端底部快捷触达工具条自动兜底保证 (Vanilla JS 零依赖，永不失效)
+(function ensureMobileBottomBarVanilla() {
+    function injectBar() {
+        if (document.getElementById("mobileBottomBar")) return;
+        if (!document.body) return;
+
+        var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
+        var currentPath = window.location.pathname || "";
+        var isHome = currentPath.endsWith("index.html") || currentPath === "/" || currentPath.endsWith("/");
+
+        var basePrefix = "./";
+        var mobileCssLink = document.querySelector("link[href*='mobile.css']");
+        if (mobileCssLink) {
+            var href = mobileCssLink.getAttribute("href") || "";
+            if (href.indexOf("../../") === 0) basePrefix = "../../";
+            else if (href.indexOf("../") === 0) basePrefix = "../";
+        }
+
+        var homeUrl = isEn ? (currentPath.indexOf("/en/") !== -1 ? (basePrefix === "../" ? "./index.html" : (basePrefix === "../../" ? "../index.html" : "./index.html")) : basePrefix + "en/index.html") : basePrefix + "index.html";
+
+        var bar = document.createElement("div");
+        bar.className = "mobile-bottom-bar";
+        bar.id = "mobileBottomBar";
+        bar.innerHTML = [
+            '  <a href="' + homeUrl + '" class="mobile-bottom-bar-item' + (isHome ? ' active' : '') + '" id="mobileHomeBtn">',
+            '    <span class="mobile-bottom-bar-icon">🏠</span>',
+            '    <span>' + (isEn ? "Home" : "首页") + '</span>',
+            '  </a>',
+            '  <a href="javascript:void(0);" class="mobile-bottom-bar-item" id="mobileNavBtn">',
+            '    <span class="mobile-bottom-bar-icon">☰</span>',
+            '    <span>' + (isEn ? "Menu" : "导航") + '</span>',
+            '  </a>',
+            '  <a href="javascript:void(0);" class="mobile-bottom-bar-item highlight" id="mobileAiBtn">',
+            '    <span class="mobile-bottom-bar-icon">🤖</span>',
+            '    <span>' + (isEn ? "AI Support" : "AI客服") + '</span>',
+            '  </a>',
+            '  <a href="javascript:void(0);" class="mobile-bottom-bar-item" id="mobileBackTopBtn">',
+            '    <span class="mobile-bottom-bar-icon">🔝</span>',
+            '    <span>' + (isEn ? "Top" : "回到顶部") + '</span>',
+            '  </a>'
+        ].join("");
+
+        document.body.appendChild(bar);
+
+        bar.addEventListener("click", function(e) {
+            var target = e.target.closest("a");
+            if (!target) return;
+            if (target.id === "mobileAiBtn") {
+                e.preventDefault();
+                if (window.MellgenAIChat) {
+                    window.MellgenAIChat.open();
+                } else {
+                    var t = document.getElementById("mg-ai-trigger");
+                    if (t) t.click();
+                }
+            } else if (target.id === "mobileNavBtn") {
+                e.preventDefault();
+                var drawer = document.getElementById("mobileDrawer");
+                var overlay = document.getElementById("mobileDrawerOverlay");
+                if (drawer && overlay) {
+                    if (drawer.classList.contains("active")) {
+                        drawer.classList.remove("active");
+                        overlay.classList.remove("active");
+                        document.body.style.overflow = "";
+                    } else {
+                        drawer.classList.add("active");
+                        overlay.classList.add("active");
+                        document.body.style.overflow = "hidden";
+                    }
+                }
+            } else if (target.id === "mobileBackTopBtn") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", injectBar);
+    } else {
+        injectBar();
+    }
+    setTimeout(injectBar, 300);
 })();
 

@@ -650,11 +650,15 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. 首页企业简介模块与核心优势衔接
-     隐藏桌面端抖音/企业简介冗余模块，让“美尔健生物”核心技术板块直接紧接在主图下方
+     5. 首页企业视频卡片模块 (#yzsp)
+     还原截图顶部：大圆角干净视频播放卡片，居中展示，点击唤起高清视频弹窗
      ------------------------------------------------------------------------ */
   .g_yzsp {
-    display: none !important;
+    display: block !important;
+    padding: 14px 14px 4px 14px !important;
+    background: #ffffff !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   /* 移动端全面解除 teaser 滚动透明度延迟，杜绝任何模块空白与隐形 */
@@ -665,221 +669,390 @@
     transition: none !important;
   }
 
+  .g_yzsp .content {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
   .g_yzsp .yzup {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
   }
 
+  /* 隐藏左侧繁杂文字和二维码，专注呈现截图中的高品质圆角视频卡片 */
   .g_yzsp .yzleft {
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
+    display: none !important;
+  }
+
+  /* 居中大圆角视频播放卡片，100%还原截图顶部 */
+  .g_yzsp .yzsp,
+  .g_yzsp #yzsp {
+    display: block !important;
     width: 100% !important;
-    float: none !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    cursor: pointer !important;
+    background: #000000 !important;
   }
 
-  .g_yzsp .yzleft h2 {
-    float: none !important;
+  .g_yzsp .yzsp span,
+  .g_yzsp #yzsp span {
+    display: block !important;
     width: 100% !important;
-    margin-top: 0 !important;
-    margin-bottom: 6px !important;
+    line-height: 0 !important;
   }
 
-  .g_yzsp .yzleft h2 em {
-    font-size: 13px !important;
-    line-height: 18px !important;
-    color: #499c7c !important;
-    margin-bottom: 2px !important;
-  }
-
-  .g_yzsp .yzleft h2 b {
-    font-size: 19px !important;
-    line-height: 26px !important;
-    color: #1a202c !important;
-  }
-
-  .g_yzsp .yzleft h2 span {
-    font-size: 14px !important;
-    line-height: 22px !important;
-    color: #499c7c !important;
-  }
-
-  .g_yzsp .yzleft .yzw {
-    float: none !important;
-    width: 100% !important;
-    margin-top: 10px !important;
-  }
-
-  .g_yzsp .yzleft .yzw .dysp {
-    margin: 0 0 10px 0 !important;
+  .g_yzsp .yzsp span img,
+  .g_yzsp #yzsp span img {
     width: 100% !important;
     height: auto !important;
-    display: flex !important;
-    gap: 8px !important;
-  }
-
-  .g_yzsp .yzleft .yzw .dysp li {
-    float: none !important;
-    flex: 1 !important;
-    width: auto !important;
-  }
-
-  .g_yzsp .yzleft .yzw .dysp li a,
-  .g_yzsp .yzleft .yzw .dysp li em {
-    font-size: 12px !important;
-    line-height: 28px !important;
-    border-radius: 14px !important;
-    text-align: center !important;
+    min-height: 180px !important;
+    max-height: 240px !important;
+    object-fit: cover !important;
     display: block !important;
-    border: 1px solid #cbd5e0 !important;
+    border-radius: 16px !important;
   }
 
-  .g_yzsp .yzleft .yzw p {
-    font-size: 13px !important;
-    line-height: 1.7 !important;
-    color: #4a5568 !important;
-    text-align: justify !important;
+  .g_yzsp .yzsp em,
+  .g_yzsp #yzsp em {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     margin: 0 !important;
+    width: 52px !important;
+    height: 52px !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  .yzsp {
+  .g_yzsp .yzsp em img,
+  .g_yzsp #yzsp em img {
     width: 100% !important;
-    position: relative !important;
-    margin-top: 12px !important;
-    border-radius: 8px !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  /* 移动端弹出视频弹窗全屏自适应 */
+  .layui-layer {
+    max-width: 95vw !important;
+    max-height: 85vh !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    border-radius: 12px !important;
     overflow: hidden !important;
   }
-
-  .yzsp em {
-    width: 48px !important;
-    height: 48px !important;
-    margin-left: -24px !important;
-    margin-top: -24px !important;
+  .layui-layer-content {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 80vh !important;
+  }
+  .layui-layer-content video {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 75vh !important;
+    object-fit: contain !important;
   }
 
   /* ------------------------------------------------------------------------
-     6. 核心优势与第三代透皮融合技术 (.g_js, .g_super)
+     6. 颠覆性第三代透皮肽融合技术与 6 大核心优势 (.g_js, .g_super)
+     100% 还原截图：美尔健生物(黑)+颠覆性第三代透皮肽融合技术(蓝)+居中阐释
+     下接实验室背景沉浸式 6 大研发能力卡片 (01-05玻璃立柱+06高光绿色激活卡)
      ------------------------------------------------------------------------ */
   .g_js {
-    background: #f1f5f9 !important;
-    padding: 16px 12px 20px 12px !important;
+    background: #f4f6f9 !important;
+    padding: 24px 14px 20px 14px !important;
     margin-top: 0 !important;
-  }
-
-  .g_js h2 b, .g_js h2 em {
-    display: block !important;
-    font-size: 18px !important;
-    line-height: 26px !important;
     text-align: center !important;
   }
 
-  .g_js h2 b { color: #1a202c !important; }
-  .g_js h2 em { color: #499c7c !important; }
+  .g_js a {
+    text-decoration: none !important;
+    display: block !important;
+  }
+
+  .g_js h2 {
+    text-align: center !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.35 !important;
+  }
+
+  .g_js h2 b {
+    display: inline-block !important;
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    color: #1a202c !important;
+    margin-right: 6px !important;
+    vertical-align: middle !important;
+  }
+
+  .g_js h2 em {
+    display: inline-block !important;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    color: #008ed1 !important;
+    vertical-align: middle !important;
+  }
 
   .g_js .jsjs {
-    margin-bottom: 16px !important;
+    margin-bottom: 20px !important;
   }
 
   .g_js .jsjs p {
-    padding: 0 !important;
-    font-size: 13px !important;
-    line-height: 1.65 !important;
-    color: #4a5568 !important;
-    text-align: justify !important;
-    -webkit-line-clamp: 4 !important;
-  }
-
-  .g_super {
-    position: relative !important;
-    height: auto !important;
+    padding: 0 4px !important;
+    font-size: 12.5px !important;
+    line-height: 1.7 !important;
+    color: #555555 !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    max-width: 96% !important;
+    -webkit-line-clamp: unset !important;
     overflow: visible !important;
   }
 
-  /* 隐藏桌面端大图背景切换 */
-  .sup_m {
-    display: none !important;
+  /* 6 大核心优势容器：沉浸式实验室背景图 + 磨砂遮罩 */
+  .g_super {
+    position: relative !important;
+    width: 100% !important;
+    height: 350px !important;
+    overflow: hidden !important;
+    background: #111a24 url('../images/jsbg6.jpg') center center / cover no-repeat !important;
   }
 
-  /* 6 大优势卡片重构为 2 列现代网格卡片 */
-  .sup_nav {
-    position: relative !important;
-    height: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
+  /* 桌面端 Swiper 背景保留在底层 */
+  .sup_m {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
+    height: 100% !important;
     z-index: 1 !important;
   }
 
-  .sup_nav dl {
+  .sup_m .sup_qie,
+  .sup_m .swiper-wrapper,
+  .sup_m .swiper-slide {
     width: 100% !important;
-    height: auto !important;
-    min-height: 85px !important;
+    height: 100% !important;
+  }
+
+  .sup_m p {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    position: relative !important;
+  }
+
+  .sup_m p img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .sup_m p:before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.6) 100%) !important;
+    z-index: 2 !important;
+  }
+
+  /* 6 大优势导航：横向滚动卡片组，完美匹配截图中的 6 列设计 */
+  .sup_nav {
+    position: relative !important;
+    z-index: 5 !important;
+    width: 100% !important;
+    height: 100% !important;
+    bottom: auto !important;
+    left: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    scrollbar-width: none !important;
+  }
+
+  .sup_nav::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  /* 普通未激活立柱卡片 (01-05)：半透明磨砂、白数字在顶、白线图标+标题在底 */
+  .sup_nav dl {
+    flex: 0 0 110px !important;
+    min-width: 110px !important;
+    height: 100% !important;
     float: none !important;
     position: relative !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    background: #ffffff !important;
-    padding: 12px 8px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.35) !important;
+    background: rgba(0, 0, 0, 0.22) !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+    scroll-snap-align: start !important;
+    padding: 18px 8px 22px 8px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
   }
 
   .sup_nav dl dt {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
     display: flex !important;
     flex-direction: column !important;
+    justify-content: space-between !important;
     align-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
   }
 
   .sup_nav dl dt i {
-    display: none !important;
-  }
-
-  .sup_nav dl dt em {
-    margin: 0 0 6px 0 !important;
-    width: 32px !important;
-    height: 32px !important;
     display: block !important;
-  }
-
-  .sup_nav dl dt em img {
-    width: 32px !important;
-    height: 32px !important;
-    display: block !important;
+    width: 36px !important;
     margin: 0 auto !important;
   }
 
+  .sup_nav dl dt i img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  .sup_nav dl dt em {
+    display: block !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin: auto auto 10px auto !important;
+  }
+
+  .sup_nav dl dt em img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    filter: none !important;
+  }
+
   .sup_nav dl dt h4 {
-    font-size: 13px !important;
-    line-height: 18px !important;
-    color: #2d3748 !important;
+    display: block !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.35 !important;
+    color: #ffffff !important;
+    text-align: center !important;
     margin: 0 !important;
-    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
+    white-space: normal !important;
   }
 
   .sup_nav dl dd {
     display: none !important;
   }
 
+  /* 激活状态卡片 (.on)：高亮饱满绿色背景，完整展示图标、标题、详述与箭头 (如截图 06) */
   .sup_nav dl.on {
-    background: #499c7c !important;
-    border-color: #499c7c !important;
+    flex: 0 0 215px !important;
+    min-width: 215px !important;
+    background: #7fb435 !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    padding: 18px 14px 18px 14px !important;
   }
 
-  .sup_nav dl.on dt h4 {
+  .sup_nav dl.on dt {
+    display: none !important;
+  }
+
+  .sup_nav dl.on dd {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: relative !important;
+    padding: 0 !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .sup_nav dl.on dd i {
+    display: block !important;
+    width: 36px !important;
+    margin: 0 0 4px 0 !important;
+  }
+
+  .sup_nav dl.on dd i img {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .sup_nav dl.on dd h4 {
+    display: block !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 20px !important;
     color: #ffffff !important;
+    margin: 4px 0 6px 0 !important;
+    text-align: left !important;
   }
 
-  .sup_nav dl.on dt em img {
-    filter: brightness(0) invert(1) !important;
+  .sup_nav dl.on dd em {
+    display: block !important;
+    width: 48px !important;
+    height: 48px !important;
+    margin: 4px 0 !important;
+  }
+
+  .sup_nav dl.on dd em img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    filter: none !important;
+  }
+
+  .sup_nav dl.on dd p {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 4 !important;
+    overflow: hidden !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    color: #ffffff !important;
+    opacity: 0.95 !important;
+    margin: 4px 0 6px 0 !important;
+    text-align: justify !important;
+  }
+
+  .sup_nav dl.on dd span {
+    display: block !important;
+    width: 22px !important;
+    margin: 0 !important;
+  }
+
+  .sup_nav dl.on dd span img {
+    width: 100% !important;
+    display: block !important;
   }
 
   /* ------------------------------------------------------------------------
@@ -4393,65 +4566,94 @@
   /* ------------------------------------------------------------------------
      16.11 "关于美尔健" 页面深度重构 (.p102-fdh-3, .qj_bj, .about1, .gssl, .qywh)
      ------------------------------------------------------------------------ */
-  /* 二级子栏目横向可滑动胶囊导航条 */
+  /* 二级子栏目：移动端多行整齐自适应换行排版 (4列网格) */
   .p102-fdh-3 {
     height: auto !important;
+    min-height: 0 !important;
     background: #ffffff !important;
-    padding: 10px 8px !important;
+    padding: 10px 10px 12px 10px !important;
     margin: 0 0 10px 0 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
     border-bottom: 1px solid #eef2f6 !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
   .p102-fdh-3 ul.content3 {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 8px !important;
-    padding: 2px 4px 6px 4px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px 6px !important;
+    padding: 0 !important;
     margin: 0 !important;
-    scrollbar-width: none !important;
+    list-style: none !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-  }
-  .p102-fdh-3 ul.content3::-webkit-scrollbar {
-    display: none !important;
+    overflow: visible !important;
   }
   .p102-fdh-3 li {
     float: none !important;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
-    flex-shrink: 0 !important;
+    min-height: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
     list-style: none !important;
+    position: static !important;
   }
+  /* 彻底屏蔽桌面端所有伪元素（底部蓝点、圆环、横线等） */
+  .p102-fdh-3 li:before,
   .p102-fdh-3 li:after,
-  .p102-fdh-3 li:before {
+  .p102-fdh-3 li a:before,
+  .p102-fdh-3 li a:after {
     display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   .p102-fdh-3 li a {
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     height: 32px !important;
     line-height: 32px !important;
-    padding: 0 14px !important;
-    font-size: 13px !important;
+    padding: 0 2px !important;
+    font-size: 12px !important;
     color: #475569 !important;
-    background: #f1f5f9 !important;
-    border-radius: 16px !important;
+    background: #f8fafc !important;
+    border-radius: 6px !important;
     white-space: nowrap !important;
     text-decoration: none !important;
-    border: 1px solid transparent !important;
+    border: 1px solid #e2e8f0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    position: static !important;
+    font-weight: 500 !important;
   }
-  .p102-fdh-3 li:first-child a,
-  .p102-fdh-3 li.cur a,
-  .p102-fdh-3 li.sidenavcur a {
+  /* 高亮当前选中/激活项 */
+  .p102-fdh-3 li.sidenavcur a,
+  .p102-fdh-3 li.cur a {
     background: #499c7c !important;
     color: #ffffff !important;
     font-weight: 600 !important;
+    border-color: #499c7c !important;
     box-shadow: 0 2px 6px rgba(73, 156, 124, 0.25) !important;
+  }
+
+  /* 英文版特别适配：英文单词较长，采用 2 列换行网格 */
+  html[lang="en"] .p102-fdh-3 ul.content3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  html[lang="en"] .p102-fdh-3 li a {
+    height: auto !important;
+    min-height: 34px !important;
+    line-height: 1.25 !important;
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+    white-space: normal !important;
+    text-align: center !important;
   }
 
   /* 1. 走进美尔健生物 (.qj_bj & .qj) */
@@ -5623,6 +5825,209 @@ canvas[width="1920"] {
 
   .g_link {
     display: none !important;
+  }
+
+  /* ==========================================================================
+     移动端搜索与面包屑极简重构：
+     1. 删除/隐藏搜索输入框与搜索按钮
+     2. 关键词紧凑压缩至一行（支持顺畅横滑，胶囊样式精致紧凑）
+     3. 极大缩减当前位置（面包屑）上下的空白留白
+     ========================================================================== */
+  /* 1. 彻底删除手机端搜索输入框及按钮 */
+  .p102-search-1-inp {
+    display: none !important;
+  }
+
+  /* 2. 搜索模块外层容器极简瘦身 */
+  .p102-search-1 {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 6px 10px !important;
+    margin: 0 !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #edf2f7 !important;
+    overflow: hidden !important;
+    clear: both !important;
+  }
+
+  .p102-search-1 .blk-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* 3. 关键词标签行：强制单行不折行，支持平滑横向滚动 */
+  .p102-search-1 p {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: normal !important;
+    margin: 0 !important;
+    padding: 1px 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+  }
+
+  .p102-search-1 p::-webkit-scrollbar {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+
+  /* “热搜关键词：” 标题紧凑不换行 */
+  .p102-search-1 p b {
+    font-size: 11px !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    padding: 0 2px 0 0 !important;
+    line-height: 22px !important;
+  }
+
+  /* 关键词药丸标签：高颜值紧凑胶囊按钮 */
+  .p102-search-1 p a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    padding: 2px 9px !important;
+    background: #e8eef3 !important;
+    color: #334155 !important;
+    border: 1px solid #dbe4ec !important;
+    border-radius: 12px !important;
+    font-size: 11px !important;
+    line-height: 18px !important;
+    height: 22px !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    margin: 0 !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .p102-search-1 p a:active,
+  .p102-search-1 p a:hover {
+    color: #174778 !important;
+    background: #dbeafe !important;
+    border-color: #bfdbfe !important;
+  }
+
+  /* 4. 面包屑容器及“当前位置”上下留白深度压缩 */
+  .blk-main.clearafter {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .plc {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 3px 12px 2px !important;
+    margin: 0 !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .p102-curmbs-1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    line-height: 22px !important;
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 4px !important;
+    padding: 3px 0 !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    box-sizing: border-box !important;
+  }
+
+  .p102-curmbs-1::-webkit-scrollbar {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+
+  .p102-curmbs-1 b {
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    font-weight: normal !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    line-height: 22px !important;
+  }
+
+  .p102-curmbs-1 a {
+    font-size: 11px !important;
+    color: #499c7c !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    line-height: 22px !important;
+  }
+
+  .p102-curmbs-1 span {
+    margin: 0 1px !important;
+    color: #cbd5e1 !important;
+    font-size: 10px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    line-height: 22px !important;
+  }
+
+  .p102-curmbs-1 i,
+  .p102-curmbs-1 i a {
+    font-style: normal !important;
+    font-size: 11px !important;
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    line-height: 22px !important;
+  }
+
+  /* 5. 紧邻面包屑下方的分类/内容容器外边距压缩 */
+  .p102-fdh-1,
+  .p102-fdh-3,
+  .p101a-fdh-02,
+  .p102-info-blk {
+    margin-top: 4px !important;
+  }
+
+  .p102-fdh-1 {
+    padding: 8px 10px !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+    margin-bottom: 8px !important;
   }
 }
 

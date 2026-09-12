@@ -267,18 +267,27 @@ $(function () {
         drawerHtml += '  <div class="mobile-drawer-body">';
         drawerHtml += '    <ul class="mobile-drawer-menu">';
 
+        var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
         for (var i = 0; i < navItems.length; i++) {
             var item = navItems[i];
-            drawerHtml += '      <li class="mobile-drawer-item">';
-            drawerHtml += '        <a class="mobile-drawer-link' + (item.isCur ? ' active' : '') + '" href="' + item.href + '">';
-            drawerHtml += '          <span>' + item.text + '</span>';
-            if (item.children && item.children.length > 0) {
-                drawerHtml += '          <span class="mobile-drawer-arrow" style="font-size:12px;color:#a0aec0;">▼</span>';
+            var hasChildren = item.children && item.children.length > 0;
+            drawerHtml += '      <li class="mobile-drawer-item' + (hasChildren ? ' has-children' : '') + '">';
+            drawerHtml += '        <div class="mobile-drawer-link-wrap">';
+            drawerHtml += '          <a class="mobile-drawer-link' + (item.isCur ? ' active' : '') + '" href="' + item.href + '">';
+            drawerHtml += '            <span>' + item.text + '</span>';
+            drawerHtml += '          </a>';
+            if (hasChildren) {
+                drawerHtml += '          <button type="button" class="mobile-drawer-toggle" aria-label="展开子菜单" title="展开/收起">';
+                drawerHtml += '            <svg class="mobile-drawer-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+                drawerHtml += '          </button>';
             }
-            drawerHtml += '        </a>';
+            drawerHtml += '        </div>';
 
-            if (item.children && item.children.length > 0) {
-                drawerHtml += '        <ul class="mobile-drawer-submenu">';
+            if (hasChildren) {
+                // 默认不展开：设置 style="display: none;"
+                drawerHtml += '        <ul class="mobile-drawer-submenu" style="display: none;">';
+                var allLabel = isEn ? ('View All ' + item.text + ' →') : ('查看全部 ' + item.text + ' →');
+                drawerHtml += '          <li class="mobile-drawer-sub-all"><a href="' + item.href + '">' + allLabel + '</a></li>';
                 for (var j = 0; j < item.children.length; j++) {
                     var sub = item.children[j];
                     drawerHtml += '          <li><a href="' + sub.href + '">' + sub.text + '</a></li>';
@@ -297,6 +306,23 @@ $(function () {
         drawerHtml += '</div>';
 
         $("body").append(drawerHtml);
+
+        // 抽屉子菜单折叠/展开交互 (默认全部收起，点击展开/收起)
+        $(document).on("click", ".mobile-drawer-toggle", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $item = $(this).closest(".mobile-drawer-item");
+            var $submenu = $item.find("> .mobile-drawer-submenu");
+            var isOpen = $item.hasClass("is-open");
+            
+            if (isOpen) {
+                $submenu.slideUp(200);
+                $item.removeClass("is-open");
+            } else {
+                $submenu.slideDown(200);
+                $item.addClass("is-open");
+            }
+        });
 
         // 抽屉开关交互
         $(document).on("click", "#mobileNavToggle", function () {

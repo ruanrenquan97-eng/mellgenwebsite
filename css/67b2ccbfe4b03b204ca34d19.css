@@ -178,9 +178,13 @@ em{font-style:normal;}
 	
 
     .p102-fdh-3 {
-        height: 100px;
-        box-shadow: 0 4px 6px #e9e9e9;
-        display:none;
+        display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     
     .p102-fdh-3 li {

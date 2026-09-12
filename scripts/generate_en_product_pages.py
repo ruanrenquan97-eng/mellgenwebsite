@@ -70,9 +70,9 @@ def render_b2b_dossier_en(p):
         for label1, val1, label2, val2 in rd_items:
             if val1 or val2:
                 out.append('        <tr style="border-bottom: 1px solid #f1f5f9;">')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569;">{label1}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569; white-space: nowrap;">{label1}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 34%; color: #1e293b;">{val1 or "—"}</td>')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569;">{label2}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569; white-space: nowrap;">{label2}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 34%; color: #1e293b;">{val2 or "—"}</td>')
                 out.append('        </tr>')
 
@@ -111,9 +111,9 @@ def render_b2b_dossier_en(p):
             if val1 or val2:
                 val1_display = f'<span style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: monospace; border: 1px solid #a7f3d0;">✓ {val1}</span>' if label1 == "NMPA Submission Code" and val1 else (val1 or "—")
                 out.append('        <tr style="border-bottom: 1px solid #f1f5f9;">')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569;">{label1}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569; white-space: nowrap;">{label1}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 34%; color: #1e293b;">{val1_display}</td>')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569;">{label2}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 16%; font-weight: 600; color: #475569; white-space: nowrap;">{label2}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 34%; color: #1e293b;">{val2 or "—"}</td>')
                 out.append('        </tr>')
 

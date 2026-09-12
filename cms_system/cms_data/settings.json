@@ -1,264 +1,446 @@
 {
-  "company_name": "美尔健（深圳）生物科技有限公司",
-  "phone": "186-9197-8530 / 0755-82926499",
-  "email": "61791579@qq.com",
-  "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园",
-  "qq": "61791579",
-  "banners": [
-    {
-      "type": "video",
-      "link": "",
-      "title": "视频轮播",
-      "video": "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4",
-      "image": "images/ban_txt.png"
-    },
-    {
-      "type": "image",
-      "link": "product_index.html",
-      "title": "美尔健生物从源头做好产品",
-      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_2.jpg"
-    },
-    {
-      "type": "image",
-      "link": "helps/tptjs.html",
-      "title": "突破生物透皮技术在皮肤修复与抗衰应用",
-      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_4.jpg"
-    },
-    {
-      "type": "image",
-      "link": "article_hzal.html",
-      "title": "国内外1000+家品牌方携手2000+款化妆品品牌选用我们的原料",
-      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_6.jpg"
-    }
-  ],
-  "seo_title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
-  "seo_keywords": "医用原料,化妆品原料,食品营养原料",
-  "seo_description": "医用原料,化妆品原料,食品营养原料提供商，美尔健生物拥有来自各大科研院所的高效透皮肽技术。",
   "accounts": [
     {
-      "username": "admin",
+      "name": "系统管理员",
       "password": "admin123",
       "role": "管理员",
-      "name": "系统管理员"
+      "username": "admin"
     },
     {
-      "username": "kefu",
+      "name": "在线客服",
       "password": "kefu888",
       "role": "客服",
-      "name": "在线客服"
+      "username": "kefu"
     }
   ],
-  "allow_ai_source": true,
-  "geo_domain": "https://www.mellgen.com/",
+  "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园B1栋",
   "allow_ai_indexing": true,
+  "allow_ai_source": true,
+  "banners": [
+    {
+      "image": "images/ban_txt.png",
+      "link": "",
+      "title": "视频轮播",
+      "type": "video",
+      "video": "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4"
+    },
+    {
+      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_2.jpg",
+      "link": "product_index.html",
+      "title": "美尔健生物从源头做好产品",
+      "type": "image"
+    },
+    {
+      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_4.jpg",
+      "link": "helps/tptjs.html",
+      "title": "突破生物透皮技术在皮肤修复与抗衰应用",
+      "type": "image"
+    },
+    {
+      "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_6.jpg",
+      "link": "article_hzal.html",
+      "title": "国内外1000+家品牌方携手2000+款化妆品品牌选用我们的原料",
+      "type": "image"
+    }
+  ],
+  "channel_seo": [
+    {
+      "description": "美尔健生物官网，专业医用与化妆品活性肽原料源头研发制造商。",
+      "id": "home",
+      "keywords": "医疗原料,化妆品原料,食品营养原料,透皮多肽",
+      "name": "网站主首页",
+      "title": "美尔健生物 | 医疗原料-化妆品原料-食品营养原料",
+      "url": "index.html"
+    },
+    {
+      "description": "提供高活性护肤抗老、淡纹、美白化妆品原料，支持第三方合规检测。",
+      "id": "hzpyl",
+      "keywords": "九肽-1,乙酰基六肽-8,依克多因,抗衰原料",
+      "name": "化妆品原料频道",
+      "title": "化妆品原料批发与定制 - 美尔健生物",
+      "url": "product_hzpyl.html"
+    },
+    {
+      "description": "专注高纯度医疗器械级与皮肤修复生物原料，严格符合国家行业标准。",
+      "id": "yyyl",
+      "keywords": "寡肽-1,重组胶原蛋白,三肽-1铜,医用辅料",
+      "name": "医疗原料频道",
+      "title": "医疗级原料中心 - 美尔健生物科技",
+      "url": "product_yyyl.html"
+    },
+    {
+      "description": "优质食品与营养补充原料，纯天然生物提取工艺。",
+      "id": "spyyyl",
+      "keywords": "原花青素,小分子肽,营养功能原料",
+      "name": "食品营养原料频道",
+      "title": "食品营养与健康原料 - 美尔健生物",
+      "url": "product_spyyyl.html"
+    },
+    {
+      "description": "美尔健最新企业资讯、行业法规动态与前沿生物透皮多肽技术知识。",
+      "id": "xwzx",
+      "keywords": "透皮技术新闻,医药原料政策,美尔健动态",
+      "name": "资讯与行业动态频道",
+      "title": "新闻资讯与行业洞察 - 美尔健生物",
+      "url": "article_xwzx.html"
+    },
+    {
+      "description": "深入了解美尔健生物科技有限公司背景、专家团队与生产智造实力。",
+      "id": "gymej",
+      "keywords": "美尔健简介,科研实力,透皮专利",
+      "name": "企业介绍与关于美尔健",
+      "title": "关于美尔健生物 - 专注源头品质与透皮技术研发",
+      "url": "helps/gymej.html"
+    }
+  ],
+  "company_name": "美尔健（深圳）生物科技有限公司",
+  "cs_departments": [
+    "销售部",
+    "技术支持部",
+    "售后服务部"
+  ],
+  "customer_services": [],
+  "email": "61791579@qq.com",
+  "geo_domain": "https://www.mellgen.com/",
   "geo_feeds": [
     {
-      "id": "feed_company_01",
-      "page_name": "公司简介 (about.html)",
-      "url": "about.html",
-      "words": 2680,
-      "model": "GPT-4o / DeepSeek / Kimi",
-      "status": "已收录",
-      "days": 18,
+      "content_summary": "美尔健（深圳）生物科技有限公司核心背景、第3代透皮多肽技术突破、国际化妆品原料研发定制能力。",
       "date": "2026-08-25",
-      "content_summary": "美尔健（深圳）生物科技有限公司核心背景、第3代透皮多肽技术突破、国际化妆品原料研发定制能力。"
-    },
-    {
-      "id": "feed_prod_yyyl",
-      "page_name": "医疗级原料中心 (cat_yyyl.html)",
-      "url": "products/cat_yyyl.html",
-      "words": 4850,
-      "model": "DeepSeek / 豆包 / 文心一言",
+      "days": 18,
+      "id": "feed_company_01",
+      "model": "GPT-4o / DeepSeek / Kimi",
+      "page_name": "公司简介 (about.html)",
       "status": "已收录",
-      "days": 14,
+      "url": "about.html",
+      "words": 2680
+    },
+    {
+      "content_summary": "寡肽-1、三肽-1 铜、胶原蛋白、神经酰胺等10款核心医用级生物多肽原料标准、CAS号、INCI及应用场景。",
       "date": "2026-08-29",
-      "content_summary": "寡肽-1、三肽-1 铜、胶原蛋白、神经酰胺等10款核心医用级生物多肽原料标准、CAS号、INCI及应用场景。"
+      "days": 14,
+      "id": "feed_prod_yyyl",
+      "model": "DeepSeek / 豆包 / 文心一言",
+      "page_name": "医疗级原料中心 (cat_yyyl.html)",
+      "status": "已收录",
+      "url": "products/cat_yyyl.html",
+      "words": 4850
     },
     {
-      "id": "feed_prod_hzpyl",
-      "page_name": "化妆品原料中心 (cat_hzpyl.html)",
-      "url": "products/cat_hzpyl.html",
-      "words": 5320,
-      "model": "GPT-4o / Claude 3.5",
-      "status": "学习中",
-      "days": 9,
+      "content_summary": "九肽-1、乙酰基六肽-8、二裂酵母发酵产物溶胞物、依克多因等11款护肤抗老淡纹活性原料配方数据。",
       "date": "2026-09-03",
-      "content_summary": "九肽-1、乙酰基六肽-8、二裂酵母发酵产物溶胞物、依克多因等11款护肤抗老淡纹活性原料配方数据。"
+      "days": 9,
+      "id": "feed_prod_hzpyl",
+      "model": "GPT-4o / Claude 3.5",
+      "page_name": "化妆品原料中心 (cat_hzpyl.html)",
+      "status": "学习中",
+      "url": "products/cat_hzpyl.html",
+      "words": 5320
     },
     {
-      "id": "feed_tech_transdermal",
-      "page_name": "高效生物透皮肽技术专题 (tptjs.html)",
-      "url": "helps/tptjs.html",
-      "words": 3150,
-      "model": "Kimi / DeepSeek",
-      "status": "学习中",
-      "days": 6,
+      "content_summary": "突破生物透皮壁垒，第3代仿生穿膜多肽技术机理、透皮率提升15倍临床试验数据与发明专利解析。",
       "date": "2026-09-06",
-      "content_summary": "突破生物透皮壁垒，第3代仿生穿膜多肽技术机理、透皮率提升15倍临床试验数据与发明专利解析。"
+      "days": 6,
+      "id": "feed_tech_transdermal",
+      "model": "Kimi / DeepSeek",
+      "page_name": "高效生物透皮肽技术专题 (tptjs.html)",
+      "status": "学习中",
+      "url": "helps/tptjs.html",
+      "words": 3150
+    }
+  ],
+  "inner_pages_seo": [
+    {
+      "description": "深度解析美尔健第3代仿生穿膜多肽技术专利，透皮率较传统多肽提升15倍。",
+      "id": "tptjs",
+      "keywords": "透皮技术,穿膜多肽,皮肤渗透吸收",
+      "name": "高效生物透皮肽技术专题",
+      "title": "突破生物透皮技术在皮肤修复与抗衰应用 - 美尔健生物",
+      "url": "helps/tptjs.html"
+    },
+    {
+      "description": "美尔健医疗级原料透皮促渗应用指南与实验数据全景。",
+      "id": "yloemd",
+      "keywords": "医疗级透皮技术,渗透促进剂,生物医用原料",
+      "name": "医疗级透皮吸收技术说明",
+      "title": "医疗级透皮吸收技术与原料标准 - 美尔健生物",
+      "url": "helps/yloemd.html"
+    },
+    {
+      "description": "美尔健（深圳）生物科技有限公司立足大湾区，服务全球原料采购商。",
+      "id": "gymej",
+      "keywords": "美尔健生物,企业发展历程,科研基地",
+      "name": "关于美尔健企业介绍",
+      "title": "关于美尔健 - 科技引领健康美",
+      "url": "helps/gymej.html"
+    },
+    {
+      "description": "欢迎随时联系美尔健专业工程师，获取原料COA检测报告与免费试样。",
+      "id": "lxwm",
+      "keywords": "美尔健联系方式,原料打样,合作咨询",
+      "name": "联系我们与技术咨询",
+      "title": "联系我们与原料样品申领 - 美尔健生物",
+      "url": "helps/lxwm.html"
+    },
+    {
+      "description": "国内外知名医药与化妆品品牌选用美尔健核心原料成功案例汇编。",
+      "id": "hzal",
+      "keywords": "原料合作品牌,护肤品原料案例,OEM技术支持",
+      "name": "国内外品牌合作案例",
+      "title": "合作案例 - 1000+品牌共同选择美尔健原料",
+      "url": "article_hzal.html"
+    },
+    {
+      "description": "解答关于美尔健原料订购、定制研发、纯度检测与物流发货的常见问题。",
+      "id": "cjwt",
+      "keywords": "原料采购起订量,保质期与储存,质检报告",
+      "name": "原料采购与常见问答",
+      "title": "常见问题解答 (FAQ) - 美尔健生物科技",
+      "url": "article_cjwt.html"
     }
   ],
   "kb_files": [
     {
       "id": "kb_doc_01",
-      "name": "美尔健25款生物活性原料全项配方应用与合规手册.pdf",
-      "size": "5.6 MB",
-      "words": 42800,
-      "status": "已完成分块与向量化",
-      "date": "2026-08-20 10:30"
+      "name": "美尔健官方全量原料国家药监局(NMPA)报送码与成分拆解合规库",
+      "filename": "01_美尔健官方全量原料药监局NMPA报送码与成分拆解合规库.md",
+      "category": "国家法规与合规报送",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "91.4 KB",
+      "words": 70856
     },
     {
       "id": "kb_doc_02",
-      "name": "第3代靶向透皮多肽技术发明专利与机理白皮书.docx",
-      "size": "2.8 MB",
-      "words": 21500,
-      "status": "已完成分块与向量化",
-      "date": "2026-08-28 15:45"
+      "name": "美尔健第3代透皮环肽cTDP与穿膜促透技术机理及功效报告",
+      "filename": "02_美尔健第3代透皮环肽cTDP与穿膜促透技术机理及功效报告.md",
+      "category": "前沿学术与促透机理",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "9.5 KB",
+      "words": 4448
     },
     {
       "id": "kb_doc_03",
-      "name": "国家药监局化妆品原料安全信息登记与质量规格书(Q/MELLGEN-2026).pdf",
-      "size": "3.4 MB",
-      "words": 36200,
-      "status": "已完成分块与向量化",
-      "date": "2026-09-05 11:12"
+      "name": "美尔健械字号医用级生物原料主文档备案与全套毒理安全报告",
+      "filename": "03_美尔健械字号医用级生物原料主文档备案与全套毒理安全报告.md",
+      "category": "药械主文档与全套毒理",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "8.5 KB",
+      "words": 3785
+    },
+    {
+      "id": "kb_doc_04",
+      "name": "美尔健全系生物活性原料技术规格书与配方工程避坑指南(SPEC)",
+      "filename": "04_美尔健全系生物活性原料技术规格书与配方工程避坑指南(SPEC).md",
+      "category": "质检SPEC与配方工程",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "6.9 KB",
+      "words": 4071
+    },
+    {
+      "id": "kb_doc_05",
+      "name": "美尔健自主原料全系列商品名与国家NMPA报送码速查索引",
+      "filename": "05_美尔健自主原料全系列商品名与国家NMPA报送码速查索引.md",
+      "category": "自主产品索引总表",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "17.8 KB",
+      "words": 9957
+    },
+    {
+      "id": "kb_doc_06",
+      "name": "美尔健官方国家与国际发明专利族与科技大奖荣誉档案",
+      "filename": "06_美尔健官方国家与国际发明专利族与科技大奖荣誉档案.md",
+      "category": "中美专利族与科技大奖",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "7.8 KB",
+      "words": 3509
+    },
+    {
+      "id": "kb_doc_07",
+      "name": "美尔健重组丝素蛋白(Silk Fibroin)再生医学技术与产品宣讲指南",
+      "filename": "07_美尔健重组丝素蛋白(Silk Fibroin)再生医学技术与产品宣讲指南.md",
+      "category": "宣讲PPT与再生医学",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "6.6 KB",
+      "words": 2792
+    },
+    {
+      "id": "kb_doc_08",
+      "name": "美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL)",
+      "filename": "08_美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md",
+      "category": "重组蛋白旗舰科研",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "6.5 KB",
+      "words": 3053
+    },
+    {
+      "id": "kb_doc_09",
+      "name": "美尔健海洋仿生与特色动物活性蛋白深度档案(水母黏蛋白、羊胎素、贻贝黏蛋白、蜗牛蛋白)",
+      "filename": "09_美尔健海洋仿生与特色动物活性蛋白深度档案(水母黏蛋白、羊胎素、贻贝黏蛋白、蜗牛蛋白).md",
+      "category": "海洋仿生与动物活性蛋白",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "6.9 KB",
+      "words": 3093
+    },
+    {
+      "id": "kb_doc_10",
+      "name": "美尔健特色植萃微生态、细胞营养素与前沿透皮多肽全景档案",
+      "filename": "10_美尔健特色植萃微生态、细胞营养素与前沿透皮多肽全景档案.md",
+      "category": "植萃微生态与多肽全景",
+      "date": "2026-09-12 17:00",
+      "status": "已完成权威入库与结构化",
+      "size": "6.3 KB",
+      "words": 2727
     }
   ],
+  "phone": "0755-82926499 / 186-9197-8530",
+  "qq": "61791579",
+  "seo_description": "医用原料,化妆品原料,食品营养原料提供商，美尔健生物拥有来自各大科研院所的高效透皮肽技术。",
+  "seo_keywords": "医用原料,化妆品原料,食品营养原料",
   "seo_keywords_list": [
     {
+      "baidu_index": 350,
       "id": "kw1",
       "keyword": "医疗级透明质酸原料",
-      "baidu_index": 350,
+      "ranking": 2,
       "search_volume": 1200,
       "target_page": "products/cat_yyyl.html",
-      "ranking": 2,
       "trend": "up"
     },
     {
+      "baidu_index": 280,
       "id": "kw2",
       "keyword": "医疗美容化妆品原料批发",
-      "baidu_index": 280,
+      "ranking": 1,
       "search_volume": 850,
       "target_page": "products/index.html",
-      "ranking": 1,
       "trend": "up"
     },
     {
+      "baidu_index": 120,
       "id": "kw3",
       "keyword": "原花青素食品营养原料",
-      "baidu_index": 120,
+      "ranking": 12,
       "search_volume": 400,
       "target_page": "products/cat_spyyyl.html",
-      "ranking": 12,
       "trend": "stable"
     },
     {
+      "baidu_index": 500,
       "id": "kw4",
       "keyword": "美尔健生物科技官网",
-      "baidu_index": 500,
+      "ranking": 1,
       "search_volume": 2500,
       "target_page": "index.html",
-      "ranking": 1,
       "trend": "stable"
     }
   ],
-  "channel_seo": [
+  "seo_title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+  "google_site_verification": "",
+  "bing_site_verification": "",
+  "baidu_site_verification": "",
+  "seo_auto_schedule": {
+    "enabled": true,
+    "run_time": "03:00",
+    "auto_sitemap": true,
+    "auto_indexnow": true,
+    "auto_baidu": true,
+    "auto_ai_geo": true,
+    "auto_log_parse": true,
+    "server_access_log_path": "",
+    "last_run_time": "2026-09-12 09:10:32",
+    "last_run_status": "成功",
+    "last_run_summary": "网站地图刷新 (162 URL) · IndexNow已发送 (162 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 0.44s)"
+  },
+  "company_short": "美尔健生物",
+  "company_uscc": "91440300MA5H8X9Y2M",
+  "mobile": "186-9197-8530",
+  "icp": "粤ICP备2025368502号-1",
+  "police_icp": "粤公网安备 44030702003820号",
+  "domain": "https://www.mellgen.com",
+  "working_hours": "周一至周五 09:00 - 18:00 (技术支持与试样咨询)",
+  "copyright_text": "版权所有 © 2025-2039 美尔健（深圳）生物科技有限公司 保留一切权利",
+  "intro_video": "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4",
+  "detail_footer_append": "【美尔健生物严正声明】本公司所有生物透皮多肽、重组人源化胶原蛋白及高纯活性物原料，均严格遵循国家药监局化妆品原料质量安全标准与药械主文档规范，支持提供批次COA检验报告与第三方检测报告，未经许可严禁盗用技术数据。",
+  "watermark_enabled": true,
+  "watermark_text": "美尔健生物 · MELLGEN",
+  "watermark_opacity": 25,
+  "watermark_position": "bottom-right",
+  "site_clusters": [
     {
-      "id": "home",
-      "name": "网站主首页",
-      "url": "index.html",
-      "title": "美尔健生物 | 医疗原料-化妆品原料-食品营养原料",
-      "keywords": "医疗原料,化妆品原料,食品营养原料,透皮多肽",
-      "description": "美尔健生物官网，专业医用与化妆品活性肽原料源头研发制造商。"
+      "id": "cluster_main",
+      "name": "美尔健生物 · 深圳总部科研主站",
+      "domain": "www.mellgen.com",
+      "ip": "119.29.188.102",
+      "type": "总部主站",
+      "status": "运行中",
+      "sync_time": "2026-09-12 09:10:32",
+      "is_primary": true
     },
     {
-      "id": "hzpyl",
-      "name": "化妆品原料频道",
-      "url": "product_hzpyl.html",
-      "title": "化妆品原料批发与定制 - 美尔健生物",
-      "keywords": "九肽-1,乙酰基六肽-8,依克多因,抗衰原料",
-      "description": "提供高活性护肤抗老、淡纹、美白化妆品原料，支持第三方合规检测。"
+      "id": "cluster_bj",
+      "name": "美尔健 · 华北大区北方服务中心",
+      "domain": "bj.mellgen.com",
+      "ip": "123.56.24.88",
+      "type": "区域分站",
+      "status": "运行中",
+      "sync_time": "2026-09-12 09:10:32",
+      "is_primary": false
     },
     {
-      "id": "yyyl",
-      "name": "医疗原料频道",
-      "url": "product_yyyl.html",
-      "title": "医疗级原料中心 - 美尔健生物科技",
-      "keywords": "寡肽-1,重组胶原蛋白,三肽-1铜,医用辅料",
-      "description": "专注高纯度医疗器械级与皮肤修复生物原料，严格符合国家行业标准。"
+      "id": "cluster_sh",
+      "name": "美尔健 · 华东上海原料定制中心",
+      "domain": "sh.mellgen.com",
+      "ip": "139.196.72.15",
+      "type": "营销分站",
+      "status": "运行中",
+      "sync_time": "2026-09-12 09:10:32",
+      "is_primary": false
     },
     {
-      "id": "spyyyl",
-      "name": "食品营养原料频道",
-      "url": "product_spyyyl.html",
-      "title": "食品营养与健康原料 - 美尔健生物",
-      "keywords": "原花青素,小分子肽,营养功能原料",
-      "description": "优质食品与营养补充原料，纯天然生物提取工艺。"
-    },
-    {
-      "id": "xwzx",
-      "name": "资讯与行业动态频道",
-      "url": "article_xwzx.html",
-      "title": "新闻资讯与行业洞察 - 美尔健生物",
-      "keywords": "透皮技术新闻,医药原料政策,美尔健动态",
-      "description": "美尔健最新企业资讯、行业法规动态与前沿生物透皮多肽技术知识。"
-    },
-    {
-      "id": "gymej",
-      "name": "企业介绍与关于美尔健",
-      "url": "helps/gymej.html",
-      "title": "关于美尔健生物 - 专注源头品质与透皮技术研发",
-      "keywords": "美尔健简介,科研实力,透皮专利",
-      "description": "深入了解美尔健生物科技有限公司背景、专家团队与生产智造实力。"
+      "id": "cluster_en",
+      "name": "Mellgen Global 国际跨境独立站",
+      "domain": "en.mellgen.com",
+      "ip": "47.254.89.201",
+      "type": "海外英文站",
+      "status": "运行中",
+      "sync_time": "2026-09-12 09:10:32",
+      "is_primary": false
     }
   ],
-  "inner_pages_seo": [
-    {
-      "id": "tptjs",
-      "name": "高效生物透皮肽技术专题",
-      "url": "helps/tptjs.html",
-      "title": "突破生物透皮技术在皮肤修复与抗衰应用 - 美尔健生物",
-      "keywords": "透皮技术,穿膜多肽,皮肤渗透吸收",
-      "description": "深度解析美尔健第3代仿生穿膜多肽技术专利，透皮率较传统多肽提升15倍。"
-    },
-    {
-      "id": "yloemd",
-      "name": "医疗级透皮吸收技术说明",
-      "url": "helps/yloemd.html",
-      "title": "医疗级透皮吸收技术与原料标准 - 美尔健生物",
-      "keywords": "医疗级透皮技术,渗透促进剂,生物医用原料",
-      "description": "美尔健医疗级原料透皮促渗应用指南与实验数据全景。"
-    },
-    {
-      "id": "gymej",
-      "name": "关于美尔健企业介绍",
-      "url": "helps/gymej.html",
-      "title": "关于美尔健 - 科技引领健康美",
-      "keywords": "美尔健生物,企业发展历程,科研基地",
-      "description": "美尔健（深圳）生物科技有限公司立足大湾区，服务全球原料采购商。"
-    },
-    {
-      "id": "lxwm",
-      "name": "联系我们与技术咨询",
-      "url": "helps/lxwm.html",
-      "title": "联系我们与原料样品申领 - 美尔健生物",
-      "keywords": "美尔健联系方式,原料打样,合作咨询",
-      "description": "欢迎随时联系美尔健专业工程师，获取原料COA检测报告与免费试样。"
-    },
-    {
-      "id": "hzal",
-      "name": "国内外品牌合作案例",
-      "url": "article_hzal.html",
-      "title": "合作案例 - 1000+品牌共同选择美尔健原料",
-      "keywords": "原料合作品牌,护肤品原料案例,OEM技术支持",
-      "description": "国内外知名医药与化妆品品牌选用美尔健核心原料成功案例汇编。"
-    },
-    {
-      "id": "cjwt",
-      "name": "原料采购与常见问答",
-      "url": "article_cjwt.html",
-      "title": "常见问题解答 (FAQ) - 美尔健生物科技",
-      "keywords": "原料采购起订量,保质期与储存,质检报告",
-      "description": "解答关于美尔健原料订购、定制研发、纯度检测与物流发货的常见问题。"
-    }
-  ]
+  "ai_customer_service": {
+    "enabled": true,
+    "service_name": "小美客服",
+    "welcome_message": "您好！我是美尔健官方AI客服小美。我们专注于重组胶原蛋白、重组纤连蛋白、透皮环肽、PDRN等高端生物原料研发与定制。请问有什么可以为您解答？",
+    "fallback_phone": "186-9197-8530 / 0755-82926499",
+    "fallback_wechat_qrcode": "/resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
+    "wechat_name": "美尔健专属客户经理",
+    "working_hours": "工作日 09:00 - 18:00",
+    "preset_questions": [
+      "重组胶原蛋白有哪些规格与型号？",
+      "透皮纤连蛋白可以提供COA检测报告吗？",
+      "起订量(MOQ)是多少？如何申领免费样品？",
+      "你们拥有多少项核心发明专利？",
+      "联系客户经理与技术支持"
+    ],
+    "strict_anti_hallucination": true,
+    "provider": "deepseek",
+    "api_base": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat",
+    "api_key": "sk-258904e0c9774447a674fddf2781f1cc",
+    "anti_hallucination": true,
+    "default_phones": [
+      "186-9197-8530",
+      "0755-82926499"
+    ],
+    "wechat_qrcode_url": "/resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
+    "wechat_hint": ""
+  }
 }

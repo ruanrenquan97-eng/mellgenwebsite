@@ -10,8 +10,18 @@ import re
 import datetime
 from mcp.server.fastmcp import FastMCP
 
-# Ensure paths
-CMS_DIR = r"d:\Administrator\webapp\美尔健官网\cms_system"
+import os
+import sys
+import json
+import re
+import uuid
+import datetime
+import contextvars
+from urllib.parse import parse_qs
+
+# Ensure dynamic paths for production and local environments
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+CMS_DIR = CURRENT_DIR
 WORKSPACE_DIR = os.path.dirname(CMS_DIR)
 DATA_DIR = os.path.join(CMS_DIR, "cms_data")
 if CMS_DIR not in sys.path:
@@ -20,6 +30,7 @@ if CMS_DIR not in sys.path:
 import generator
 
 # Initialize FastMCP Server
+from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 
 mcp = FastMCP("Mellgen-CMS-MCP-Server")
@@ -30,18 +41,129 @@ mcp.settings.transport_security = TransportSecuritySettings(
     allowed_origins=["*"]
 )
 
+# ContextVar to track currently authenticated website account for the request/session
+current_mcp_user = contextvars.ContextVar("current_mcp_user", default=None)
+
 # Helper functions for data access
 def load_json(filename):
     path = os.path.join(DATA_DIR, filename)
     if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
     return []
 
 def save_json(filename, data):
     path = os.path.join(DATA_DIR, filename)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def get_or_init_account_tokens():
+    """确保所有网站账户（在 settings.json 中定义）均具备专属的 WorkBuddy MCP Token"""
+    settings = load_json("settings.json")
+    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
+    
+    wb_conf = load_json("connector_workbuddy.json")
+    if not isinstance(wb_conf, dict):
+        wb_conf = {}
+        
+    account_tokens = wb_conf.get("account_tokens", {})
+    updated = False
+    
+    for acc in accounts:
+        uname = acc.get("username")
+        if not uname:
+            continue
+        if uname not in account_tokens or not account_tokens[uname].get("token"):
+            token_prefix = "mb_tok_" + re.sub(r'[^a-zA-Z0-9]', '', uname)[:10] + "_"
+            account_tokens[uname] = {
+                "token": token_prefix + uuid.uuid4().hex[:16],
+                "username": uname,
+                "name": acc.get("name", uname),
+                "role": acc.get("role", "普通操作员"),
+                "created_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "last_used_at": None,
+                "enabled": True
+            }
+            updated = True
+        else:
+            # 同步更新姓名和角色
+            account_tokens[uname]["name"] = acc.get("name", uname)
+            account_tokens[uname]["role"] = acc.get("role", "普通操作员")
+            
+    if updated or "account_tokens" not in wb_conf:
+        wb_conf["account_tokens"] = account_tokens
+        save_json("connector_workbuddy.json", wb_conf)
+        
+    return account_tokens
+
+def verify_token_and_get_user(token: str) -> dict | None:
+    """核验传入的 Token 是否属于网站后台有效且启用的账户"""
+    if not token:
+        return None
+    token = token.strip()
+    if token.startswith("Bearer "):
+        token = token[7:].strip()
+        
+    account_tokens = get_or_init_account_tokens()
+    
+    for uname, info in account_tokens.items():
+        if info.get("token") == token:
+            if not info.get("enabled", True):
+                return None  # 账户已被停用
+            # 更新活跃时间
+            info["last_used_at"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            wb_conf = load_json("connector_workbuddy.json")
+            if isinstance(wb_conf, dict):
+                wb_conf["account_tokens"] = account_tokens
+                save_json("connector_workbuddy.json", wb_conf)
+                
+            return {
+                "username": uname,
+                "name": info.get("name", uname),
+                "role": info.get("role", "普通操作员"),
+                "token": token
+            }
+            
+    # 兼容 connector_workbuddy.json 中的主 api_key (默认授予 admin 身份)
+    wb_conf = load_json("connector_workbuddy.json")
+    if isinstance(wb_conf, dict) and wb_conf.get("api_key") and wb_conf.get("api_key") == token:
+        return {
+            "username": "admin",
+            "name": "系统管理员 (主API Key)",
+            "role": "管理员",
+            "token": token
+        }
+        
+    return None
+
+def record_audit_log(action: str, details: str, success: bool = True, user: dict = None):
+    """记录 WorkBuddy 智能体调用操作审计日志"""
+    try:
+        user_info = user or current_mcp_user.get()
+        log_file = "mcp_audit_logs.json"
+        logs = load_json(log_file)
+        if not isinstance(logs, list):
+            logs = []
+        entry = {
+            "id": str(uuid.uuid4())[:8],
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "username": user_info.get("username", "anonymous") if user_info else "anonymous",
+            "name": user_info.get("name", "未识别用户") if user_info else "未识别用户",
+            "role": user_info.get("role", "未知") if user_info else "未知",
+            "action": action,
+            "details": details,
+            "success": success
+        }
+        logs.insert(0, entry)
+        if len(logs) > 200:
+            logs = logs[:200]
+        save_json(log_file, logs)
+    except Exception as e:
+        print(f"[MCP Audit Log Error] {e}")
 
 # Compliance checker rulebase
 ILLEGAL_TERMS = [
@@ -71,8 +193,37 @@ ILLEGAL_TERMS = [
 # ----------------- MCP TOOLS -----------------
 
 @mcp.tool()
+def verify_mellgen_account() -> str:
+    """
+    【账户身份核验】核验当前连接到美尔健官网后台的 WorkBuddy 账户与授权身份。
+    返回当前登录操作人员的用户名、姓名、权限角色以及官网连接状态。
+    """
+    user = current_mcp_user.get()
+    if user:
+        record_audit_log("verify_mellgen_account", f"账户身份核验通过: {user.get('username')}", True, user)
+        return json.dumps({
+            "authenticated": True,
+            "website": "https://www.mellgen.com",
+            "account": {
+                "username": user.get("username"),
+                "name": user.get("name"),
+                "role": user.get("role")
+            },
+            "status": "已授权连接，具备产品详情页制作、法规合规审查与一键发布权限！"
+        }, ensure_ascii=False, indent=2)
+    else:
+        return json.dumps({
+            "authenticated": False,
+            "website": "https://www.mellgen.com",
+            "message": "当前为本地默认调试环境或尚未绑定专属 Token。"
+        }, ensure_ascii=False, indent=2)
+
+
+@mcp.tool()
 def list_all_products() -> str:
     """获取美尔健官网当前所有产品的列表，包含产品ID、名称、分类、INCI及功效简介。"""
+    user = current_mcp_user.get()
+    record_audit_log("list_all_products", "查询全量官网产品列表", True, user)
     products = load_json("products.json")
     summary_list = []
     for p in products:
@@ -94,6 +245,8 @@ def get_product_detail(product_id: str) -> str:
     获取指定产品的完整详情，包括生物机理介绍、推荐应用场景及产品优势。
     :param product_id: 产品唯一标识ID（如 tpxldb, lzdt, 0xjydb 等）
     """
+    user = current_mcp_user.get()
+    record_audit_log("get_product_detail", f"查看产品详情: {product_id}", True, user)
     products = load_json("products.json")
     for p in products:
         if p.get("id") == product_id:
@@ -114,6 +267,8 @@ def audit_product_compliance(text: str) -> str:
             findings.append({"term": term, "reason": reason})
     
     passed = len(findings) == 0
+    user = current_mcp_user.get()
+    record_audit_log("audit_product_compliance", f"文案合规审查: {'全部合规' if passed else f'发现违规词{len(findings)}个'}", passed, user)
     return json.dumps({
         "passed": passed,
         "violation_count": len(findings),
@@ -163,6 +318,9 @@ def create_product_detail(
     :param advantage_3_desc: 优势3详细说明
     """
     # 1. Compliance pre-check
+    user = current_mcp_user.get()
+    operator_name = f"{user.get('name')} ({user.get('username')})" if user else "管理员"
+
     full_text = f"{title} {summary} {intro} {app_scenarios} {advantage_1_title} {advantage_1_desc} {advantage_2_title} {advantage_2_desc} {advantage_3_title} {advantage_3_desc}"
     violations = []
     for term, reason in ILLEGAL_TERMS:
@@ -170,6 +328,7 @@ def create_product_detail(
             violations.append(f"{term} ({reason})")
     
     if violations:
+        record_audit_log("create_product_detail", f"制作产品【{title}】被合规拦截", False, user)
         return json.dumps({
             "success": False,
             "error": "合规拦截：文案中包含违反《化妆品监督管理条例》或《广告法》的禁用词",
@@ -424,7 +583,8 @@ def create_product_detail(
         "views": 180,
         "recommend": True,
         "top": False,
-        "show": True
+        "show": True,
+        "created_by": operator_name
     }
     
     if existing:
@@ -455,26 +615,32 @@ def create_product_detail(
     except Exception as e:
         print(f"Warning building site: {e}")
         
+    record_audit_log("create_product_detail", f"发布产品详情页【{title}】({product_id})", True, user)
     return json.dumps({
         "success": True,
-        "message": f"🎉 产品【{title}】详情页制作并发布成功！",
+        "message": f"🎉 产品【{title}】详情页制作并发布成功！操作账户：{operator_name}",
         "product_id": product_id,
         "preview_url": f"https://www.mellgen.com/products/{product_id}.html",
-        "created_at": now_str
+        "created_at": now_str,
+        "operator": operator_name
     }, ensure_ascii=False, indent=2)
 
 
 @mcp.tool()
 def publish_website() -> str:
     """一键触发全站重新编译与静态发布上线，同步所有产品与资讯页面。"""
+    user = current_mcp_user.get()
     try:
         generator.build_all()
+        record_audit_log("publish_website", "全站重新静态编译与发布上线成功", True, user)
         return json.dumps({
             "success": True,
             "message": "美尔健官网全站静态文件已重新编译并发布成功！",
-            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "operator": user.get("name") if user else "管理员"
         }, ensure_ascii=False)
     except Exception as e:
+        record_audit_log("publish_website", f"全站发布失败: {e}", False, user)
         return json.dumps({"success": False, "error": str(e)}, ensure_ascii=False)
 
 # ----------------- MCP RESOURCES -----------------
@@ -502,15 +668,120 @@ def resource_compliance_rules() -> str:
 5. 技术机理应基于生物学和原料特性客观描述，突出专利生物透皮技术（cTDP）与合成生物学技术优势。
 """
 
+# ----------------- ASGI AUTHENTICATION & MULTI-MOUNT APP -----------------
+
+from starlette.applications import Starlette
+from starlette.routing import Mount, Route
+from starlette.responses import Response
+
+class MellgenMCPAuthMiddleware:
+    """
+    针对 WorkBuddy 客户端的多账户身份核验 ASGI 中间件
+    部署于 https://www.mellgen.com
+    核验规则：
+    1. Query 参数：?token=... 或 ?api_key=...
+    2. Header：Authorization: Bearer <token>
+    3. Header：X-API-Key 或 X-Mellgen-Token
+    必须属于网站后台启用的合法账户，否则返回 HTTP 401
+    """
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope.get("type") == "http":
+            method = scope.get("method", "GET")
+            # 放行 OPTIONS 预检请求以支持 CORS
+            if method == "OPTIONS":
+                response = Response(status_code=204, headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Authorization, Content-Type, X-API-Key, X-Mellgen-Token",
+                })
+                await response(scope, receive, send)
+                return
+
+            path = scope.get("path", "")
+            # 对 MCP 核心路径做身份核验
+            if path in ("/sse", "/mcp/sse", "/messages", "/mcp/messages") or "/messages" in path or "/sse" in path:
+                query_string = scope.get("query_string", b"").decode("utf-8", errors="ignore")
+                qs = parse_qs(query_string)
+                token = qs.get("token", [None])[0] or qs.get("api_key", [None])[0]
+
+                headers = dict(scope.get("headers", []))
+                auth_h = headers.get(b"authorization", b"").decode("utf-8", errors="ignore").strip()
+                if not token and auth_h.startswith("Bearer "):
+                    token = auth_h[7:].strip()
+                if not token:
+                    token = headers.get(b"x-api-key", b"").decode("utf-8", errors="ignore").strip()
+                if not token:
+                    token = headers.get(b"x-mellgen-token", b"").decode("utf-8", errors="ignore").strip()
+
+                user = verify_token_and_get_user(token)
+                if not user:
+                    err_body = {
+                        "error": "Unauthorized",
+                        "code": 401,
+                        "message": "美尔健官网 MCP 连接器：网站账户核验失败！",
+                        "hint": "请在 WorkBuddy 中配置已授权的网站账户专属 Token（详见 https://www.mellgen.com/admin 后台【WorkBuddy 连接器】）。",
+                        "help_url": "https://www.mellgen.com/admin"
+                    }
+                    response = Response(
+                        content=json.dumps(err_body, ensure_ascii=False, indent=2),
+                        status_code=401,
+                        media_type="application/json; charset=utf-8",
+                        headers={"Access-Control-Allow-Origin": "*"}
+                    )
+                    await response(scope, receive, send)
+                    return
+
+                # 核验通过，设置当前请求上下文
+                token_ctx = current_mcp_user.set(user)
+                try:
+                    await self.app(scope, receive, send)
+                finally:
+                    current_mcp_user.reset(token_ctx)
+                return
+
+        await self.app(scope, receive, send)
+
+
+def create_combined_mcp_app() -> Starlette:
+    """
+    创建兼顾本地调试与生产环境 https://www.mellgen.com/mcp/sse 的 ASGI 复合应用
+    同时支持 /sse 和 /mcp/sse 路径
+    """
+    base_app = mcp.sse_app(mount_path="/mcp")
+    
+    # 挂载到主路由
+    main_app = Starlette(
+        routes=[
+            Mount("/mcp", app=base_app),
+            Mount("/", app=base_app)
+        ]
+    )
+    
+    # 包装安全认证中间件
+    return MellgenMCPAuthMiddleware(main_app)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "sse":
-        port = int(sys.argv[2]) if len(sys.argv) > 2 else 8002
-        mcp.settings.port = port
-        mcp.settings.host = "0.0.0.0"
-        # Disable DNS rebinding protection so WorkBuddy can connect across LAN via 192.168.x.x
-        if hasattr(mcp.settings, 'transport_security') and mcp.settings.transport_security:
-            mcp.settings.transport_security.enable_dns_rebinding_protection = False
-        print(f"Starting Mellgen CMS MCP Server on SSE port {port} (LAN enabled)...")
-        mcp.run(transport="sse")
-    else:
+    import uvicorn
+    
+    port = 8002
+    if len(sys.argv) > 1 and sys.argv[1] == "stdio":
         mcp.run(transport="stdio")
+    else:
+        if len(sys.argv) > 1 and sys.argv[1] == "sse":
+            port = int(sys.argv[2]) if len(sys.argv) > 2 else 8002
+            
+        print(f"[*] Starting Mellgen CMS FastMCP SSE Server on port {port}...")
+        print(f"[*] Production Endpoint: https://www.mellgen.com/mcp/sse")
+        print(f"[*] Local Endpoint:      http://127.0.0.1:{port}/mcp/sse")
+        
+        # 初始化并同步所有账户专属 Token
+        tokens = get_or_init_account_tokens()
+        print(f"[*] Loaded {len(tokens)} authorized website accounts for WorkBuddy.")
+        
+        app = create_combined_mcp_app()
+        uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
+

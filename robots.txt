@@ -2,25 +2,75 @@ User-agent: *
 Allow: /
 Disallow: /cms_system/
 
-# AI Search Engines & Scrapers for GEO
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
+# ==========================================================
+# 中国主流 AI 大模型抓取规则 (Domestic LLM Crawlers)
+# ==========================================================
+# DeepSeek (深度求索)
 User-agent: DeepSeekBot
 Allow: /
 
+# 字节跳动 豆包 / 抖音 AI 搜索
+User-agent: Bytespider
+Allow: /
+
+# 阿里巴巴 通义千问 / 夸克 AI 搜索 / 阿里云
+User-agent: AlibabaBot
+Allow: /
+User-agent: AliyunBot
+Allow: /
+User-agent: QuarkSpider
+Allow: /
+
+# 腾讯元宝 / 微信搜一搜 / 腾讯混元
+User-agent: TencentSpider
+Allow: /
+User-agent: HunyuanBot
+Allow: /
+
+# 月之暗面 Kimi
+User-agent: KimiBot
+Allow: /
+User-agent: MoonshotBot
+Allow: /
+
+# MiniMax 名之梦 / 海螺 AI
+User-agent: MiniMaxBot
+Allow: /
+
+# ==========================================================
+# 国外主流前沿 AI 大模型抓取规则 (Global LLM Crawlers)
+# ==========================================================
+# Google Gemini / Google AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI GPT / SearchGPT / ChatGPT
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+
+# xAI Grok
+User-agent: GrokBot
+Allow: /
+User-agent: xAI-Bot
+Allow: /
+
+# Perplexity AI 对话式搜索
+User-agent: PerplexityBot
+Allow: /
+
+# ==========================================================
+# 全球主流通用搜索引擎 (Traditional Search Engines)
+# ==========================================================
 User-agent: Baiduspider
 Allow: /
 
@@ -30,6 +80,15 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogouspider
+Allow: /
+
+# ==========================================================
+# 站点地图与 GEO AI 专属知识源 (Sitemaps & LLM-Text)
+# ==========================================================
 Sitemap: https://www.mellgen.com/sitemap.xml
-# AI Data Source for GEO Engine (https://llmstxt.org/)
 LLM-Text: https://www.mellgen.com/llms.txt
+IndexNow-Key: mellgen2026indexnow8f93e17b

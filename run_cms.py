@@ -76,12 +76,27 @@ except Exception as e:
     preview_process.kill()
     sys.exit(1)
 
+# Start 3: FastMCP SSE Server for WorkBuddy (port 8002)
+print("[*] Launching FastMCP Server for WorkBuddy on port 8002...")
+mcp_script = os.path.join(WORKSPACE_DIR, "cms_system", "mcp_server.py")
+try:
+    mcp_process = subprocess.Popen(
+        [sys.executable, mcp_script, "sse", "8002"],
+        cwd=os.path.join(WORKSPACE_DIR, "cms_system"),
+        env=env
+    )
+except Exception as e:
+    print(f"[-] Failed to launch FastMCP server: {e}")
+    mcp_process = None
+
 # Wait a second for servers to boot up, then open browser
 time.sleep(2)
 print("\n[OK] Servers started successfully!")
 print("  - 本地前台预览: http://localhost:8000")
 print("  - 本地后台管理: http://localhost:8001")
-print("  - 管理员账号密码: admin / admin888")
+print("  - WorkBuddy MCP服务: http://localhost:8002/mcp/sse")
+print("  - 生产环境 MCP地址: https://www.mellgen.com/mcp/sse")
+print("  - 初始管理员账号: admin / admin123")
 
 lan_ips = get_lan_ips()
 if lan_ips:
@@ -89,7 +104,8 @@ if lan_ips:
     for ip in lan_ips:
         print(f"  - 网站前台: http://{ip}:8000")
         print(f"  - CMS后台:  http://{ip}:8001")
-print("\n[提示] 如果局域网内其他设备打不开，请确认 Windows 防火墙已允许 Python 入站通信（或已开放 8000 / 8001 端口）。")
+        print(f"  - WorkBuddy: http://{ip}:8002/mcp/sse")
+print("\n[提示] 部署在 https://www.mellgen.com 生产环境时，Nginx 会自动将 /mcp/ 反向代理至 8002 端口。")
 print("\n[*] Opening CMS Login page in your default browser...")
 
 try:
@@ -97,7 +113,7 @@ try:
 except Exception:
     pass
 
-print("\n[!] Press Ctrl+C in this terminal to shut down both servers.")
+print("\n[!] Press Ctrl+C in this terminal to shut down all servers.")
 
 # Keep running and wait for termination
 try:
@@ -117,8 +133,11 @@ finally:
     try:
         preview_process.terminate()
         cms_process.terminate()
+        if mcp_process:
+            mcp_process.terminate()
         print("[OK] Stopped preview server (port 8000).")
         print("[OK] Stopped CMS server (port 8001).")
+        print("[OK] Stopped FastMCP server (port 8002).")
     except Exception:
         pass
     print("[*] Goodbye!")

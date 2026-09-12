@@ -384,8 +384,11 @@
                 }
                 for (let x in dt) {
                     if (dt[x]) dt[x] = dt[x].replace(/<[^>]+>|&[^>]+;/g, "")
+                // 环境自适应：本地预览端口 8000 时走 8001；在生产环境 (https://www.mellgen.com) 或直接访问时走同源 /api/submit_message
+                var apiUrl = "/api/submit_message";
+                if (window.location.port === "8000" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+                    apiUrl = window.location.protocol + "//" + window.location.hostname + ":8001/api/submit_message";
                 }
-                var apiUrl = window.location.protocol + "//" + window.location.hostname + ":8001/api/submit_message";
                 $.ajax({
                     'url': apiUrl,
 

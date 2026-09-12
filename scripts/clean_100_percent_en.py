@@ -3,7 +3,7 @@ import glob
 import re
 import json
 
-WORKSPACE = r"d:\Administrator\webapp\美尔健官网"
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EN_DIR = os.path.join(WORKSPACE, "en")
 
 # 1. Load existing dictionary

@@ -1,14 +1,11 @@
 [
   {
+    "children": [],
     "id": "node_1",
     "name": "首页",
-    "url": "index.html",
-    "children": []
+    "url": "index.html"
   },
   {
-    "id": "node_2",
-    "name": "化妆品原料",
-    "url": "product_hzpyl.html",
     "children": [
       {
         "id": "node_2_1",
@@ -35,12 +32,12 @@
         "name": "婴儿菌发酵源活性物",
         "url": "product_yejfjy.html"
       }
-    ]
+    ],
+    "id": "node_2",
+    "name": "化妆品原料",
+    "url": "product_hzpyl.html"
   },
   {
-    "id": "node_3",
-    "name": "原料产品中心",
-    "url": "product_index.html",
     "children": [
       {
         "id": "node_3_1",
@@ -57,24 +54,24 @@
         "name": "食品营养原料",
         "url": "product_spyyyl.html"
       }
-    ]
+    ],
+    "id": "node_3",
+    "name": "原料产品中心",
+    "url": "product_index.html"
   },
   {
+    "children": [],
     "id": "node_4",
     "name": "原料OEM定制",
-    "url": "helps/yloemd.html",
-    "children": []
+    "url": "helps/yloemd.html"
   },
   {
+    "children": [],
     "id": "node_5",
     "name": "透皮肽技术",
-    "url": "helps/tptjs.html",
-    "children": []
+    "url": "helps/tptjs.html"
   },
   {
-    "id": "node_6",
-    "name": "合作案例",
-    "url": "article_hzal.html",
     "children": [
       {
         "id": "node_6_1",
@@ -111,12 +108,12 @@
         "name": "女性护理产品",
         "url": "article_nxhlcp.html"
       }
-    ]
+    ],
+    "id": "node_6",
+    "name": "合作案例",
+    "url": "article_hzal.html"
   },
   {
-    "id": "node_7",
-    "name": "新闻资讯",
-    "url": "article_xwzx.html",
     "children": [
       {
         "id": "node_7_1",
@@ -133,12 +130,12 @@
         "name": "常见问答",
         "url": "article_cjwt.html"
       }
-    ]
+    ],
+    "id": "node_7",
+    "name": "新闻资讯",
+    "url": "article_xwzx.html"
   },
   {
-    "id": "node_8",
-    "name": "关于美尔健",
-    "url": "helps/gymej.html",
     "children": [
       {
         "id": "node_8_1",
@@ -180,6 +177,9 @@
         "name": "发明专利",
         "url": "help_fmzl.html"
       }
-    ]
+    ],
+    "id": "node_8",
+    "name": "关于美尔健",
+    "url": "helps/gymej.html"
   }
 ]

@@ -1,76 +1,76 @@
 {
   "top_products": [
     {
-      "id": "mellpr8670",
-      "title": "MELLPRO 5Dcollagen 5D 胶原",
-      "category": "透皮型重组蛋白/多肽",
-      "url": "products/mellpr8670.html",
-      "pv": 440,
-      "uv": 193,
-      "avg_duration_sec": 208,
-      "avg_duration_str": "3分28秒",
-      "bounce_rate": "18.5%",
-      "hot_pct": 98
-    },
-    {
-      "id": "pdrnht",
-      "title": "PDRN环肽棒原料",
-      "category": "化妆品原料",
-      "url": "products/pdrnht.html",
-      "pv": 385,
-      "uv": 168,
-      "avg_duration_sec": 195,
-      "avg_duration_str": "3分15秒",
-      "bounce_rate": "21.2%",
-      "hot_pct": 88
-    },
-    {
-      "id": "tpxldb",
-      "title": "透皮纤连蛋白 (Fibronectin)",
-      "category": "透皮型重组蛋白/多肽",
-      "url": "products/tpxldb.html",
-      "pv": 312,
-      "uv": 145,
-      "avg_duration_sec": 178,
-      "avg_duration_str": "2分58秒",
-      "bounce_rate": "23.0%",
-      "hot_pct": 76
-    },
-    {
       "id": "tptyts",
       "title": "胎盘肽羊胎素",
       "category": "化妆品原料",
       "url": "products/tptyts.html",
-      "pv": 264,
-      "uv": 118,
-      "avg_duration_sec": 162,
-      "avg_duration_str": "2分42秒",
-      "bounce_rate": "25.4%",
-      "hot_pct": 64
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒",
+      "bounce_rate": "0%",
+      "hot_pct": 0
     },
     {
-      "id": "megpep6245",
-      "title": "MEGPEP EXOs 酵母外泌肽",
+      "id": "pdrnht",
+      "title": "PDRN环肽棒",
+      "category": "化妆品原料",
+      "url": "products/pdrnht.html",
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒",
+      "bounce_rate": "0%",
+      "hot_pct": 0
+    },
+    {
+      "id": "mellpr8670",
+      "title": "MELLPRO 5Dcollagen 5D 胶原",
       "category": "透皮型重组蛋白/多肽",
-      "url": "products/megpep6245.html",
-      "pv": 228,
-      "uv": 98,
-      "avg_duration_sec": 185,
-      "avg_duration_str": "3分05秒",
-      "bounce_rate": "19.8%",
-      "hot_pct": 55
+      "url": "products/mellpr8670.html",
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒",
+      "bounce_rate": "0%",
+      "hot_pct": 0
+    },
+    {
+      "id": "tpxldb",
+      "title": "透皮纤连蛋白",
+      "category": "透皮型重组蛋白/多肽",
+      "url": "products/tpxldb.html",
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒",
+      "bounce_rate": "0%",
+      "hot_pct": 0
     },
     {
       "id": "qdjy",
-      "title": "缺端胶原 (Atelocollagen)",
+      "title": "缺端胶原",
       "category": "重组蛋白",
       "url": "products/qdjy.html",
-      "pv": 195,
-      "uv": 86,
-      "avg_duration_sec": 150,
-      "avg_duration_str": "2分30秒",
-      "bounce_rate": "27.1%",
-      "hot_pct": 48
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒",
+      "bounce_rate": "0%",
+      "hot_pct": 0
+    },
+    {
+      "id": "zbssb",
+      "title": "长白山三宝",
+      "category": "植物源活性物",
+      "url": "products/zbssb.html",
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒",
+      "bounce_rate": "0%",
+      "hot_pct": 0
     }
   ],
   "top_pages": [
@@ -78,169 +78,69 @@
       "title": "美尔健官网首页",
       "url": "index.html",
       "type": "首页",
-      "pv": 820,
-      "uv": 430,
-      "avg_duration_sec": 112,
-      "avg_duration_str": "1分52秒"
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒"
     },
     {
       "title": "产品中心 - 核心原料专区",
       "url": "product_index.html",
       "type": "频道页",
-      "pv": 540,
-      "uv": 295,
-      "avg_duration_sec": 165,
-      "avg_duration_str": "2分45秒"
-    },
-    {
-      "title": "MELLPRO 5Dcollagen 5D 胶原详情",
-      "url": "products/mellpr8670.html",
-      "type": "产品详情",
-      "pv": 438,
-      "uv": 192,
-      "avg_duration_sec": 214,
-      "avg_duration_str": "3分34秒"
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒"
     },
     {
       "title": "合作案例 - 1000+品牌选用原料",
       "url": "article_hzal.html",
       "type": "案例页",
-      "pv": 310,
-      "uv": 160,
-      "avg_duration_sec": 148,
-      "avg_duration_str": "2分28秒"
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒"
     },
     {
       "title": "突破生物透皮技术在修复与抗衰应用",
       "url": "helps/tptjs.html",
       "type": "技术专栏",
-      "pv": 245,
-      "uv": 130,
-      "avg_duration_sec": 235,
-      "avg_duration_str": "3分55秒"
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒"
     },
     {
       "title": "联系美尔健 - 索样与业务咨询",
       "url": "contact.html",
       "type": "联系我们",
-      "pv": 185,
-      "uv": 120,
-      "avg_duration_sec": 95,
-      "avg_duration_str": "1分35秒"
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒"
+    },
+    {
+      "title": "MELLPRO 5Dcollagen 5D 胶原详情",
+      "url": "products/mellpr8670.html",
+      "type": "产品详情",
+      "pv": 0,
+      "uv": 0,
+      "avg_duration_sec": 0,
+      "avg_duration_str": "0秒"
     }
   ],
   "realtime_stream": [
     {
-      "time": "05:11:57",
+      "id": "v-local-1",
+      "time": "08:12:00",
       "ip": "127.0.0.1",
-      "page": "/products/mellpr8670.html",
-      "dwell": "165秒",
-      "source": "搜索引擎 (百度/Google)",
-      "action": "浏览产品详情"
-    },
-    {
-      "time": "05:11:26",
-      "ip": "127.0.0.1",
-      "page": "/products/mellpr8670.html",
-      "dwell": "165秒",
-      "source": "搜索引擎 (百度/Google)",
-      "action": "浏览产品详情"
-    },
-    {
-      "id": "v-5431",
-      "time": "刚刚",
-      "ip": "135.43.**.**",
-      "region": "广东广州 (白云区美妆生物产业基地)",
-      "title": "MELLPRO 5Dcollagen 5D 胶原",
-      "url": "products/mellpr8670.html",
-      "type": "产品详情",
-      "duration_str": "2分8秒",
-      "referrer": "直接访问: 采购部客户收藏夹",
-      "device": "PC端 (Chrome 122)"
-    },
-    {
-      "id": "v-1789160222",
-      "time": "04:57:02",
-      "ip": "127.0.**.**",
-      "region": "广东深圳 (访客实时来访)",
-      "title": "MELLPRO 5Dcollagen 5D 胶原",
-      "url": "products/mellpr8670.html",
-      "type": "产品详情",
-      "duration_str": "正在浏览中...",
-      "referrer": "百度搜索: 5D胶原蛋白",
-      "device": "Web终端"
-    },
-    {
-      "id": "v-101",
-      "time": "刚刚",
-      "ip": "113.108.**.**",
-      "region": "广东广州 (白云区美妆产业园)",
-      "title": "MELLPRO 5Dcollagen 5D 胶原",
-      "url": "products/mellpr8670.html",
-      "type": "产品详情",
-      "duration_str": "3分12秒",
-      "referrer": "百度搜索: 5D胶原蛋白原料供应",
-      "device": "PC端 (Chrome)"
-    },
-    {
-      "id": "v-102",
-      "time": "1分钟前",
-      "ip": "218.75.**.**",
-      "region": "浙江杭州 (化妆品品牌研发中心)",
-      "title": "PDRN环肽棒原料规格及应用指南",
-      "url": "products/pdrnht.html",
-      "type": "产品详情",
-      "duration_str": "2分45秒",
-      "referrer": "直接访问 (客户收藏夹)",
-      "device": "移动端 (iOS Safari)"
-    },
-    {
-      "id": "v-103",
-      "time": "3分钟前",
-      "ip": "222.92.**.**",
-      "region": "江苏苏州 (生物医药科技园)",
-      "title": "透皮纤连蛋白 (Fibronectin)",
-      "url": "products/tpxldb.html",
-      "type": "产品详情",
-      "duration_str": "4分18秒",
-      "referrer": "360搜索: 透皮纤连蛋白生产厂家",
-      "device": "PC端 (Edge)"
-    },
-    {
-      "id": "v-104",
-      "time": "5分钟前",
-      "ip": "180.168.**.**",
-      "region": "上海浦东新区 (张江高科生物医药)",
-      "title": "突破生物透皮技术在修复与抗衰应用",
-      "url": "helps/tptjs.html",
-      "type": "技术专栏",
-      "duration_str": "3分50秒",
-      "referrer": "谷歌搜索 (Google)",
-      "device": "PC端 (Chrome)"
-    },
-    {
-      "id": "v-105",
-      "time": "8分钟前",
-      "ip": "119.137.**.**",
-      "region": "广东深圳 (南山区科技园)",
-      "title": "美尔健官网首页 - 首页导览",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "美尔健官网首页",
       "url": "index.html",
       "type": "官网首页",
-      "duration_str": "1分20秒",
-      "referrer": "直接输入网址 (mellgen.com)",
-      "device": "PC端 (Chrome)"
-    },
-    {
-      "id": "v-106",
-      "time": "11分钟前",
-      "ip": "124.160.**.**",
-      "region": "山东济南 (生物医用材料产业带)",
-      "title": "胎盘肽羊胎素大宗批发",
-      "url": "products/tptyts.html",
-      "type": "产品详情",
-      "duration_str": "2分15秒",
-      "referrer": "搜狗搜索: 羊胎素原料直销",
-      "device": "移动端 (Android)"
+      "duration_str": "正在浏览中...",
+      "referrer": "本地直接访问",
+      "device": "PC端 (当前设备)"
     }
   ]
 }

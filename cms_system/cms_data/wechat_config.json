@@ -1,0 +1,11 @@
+{
+  "appid": "wx965ce27dd0c22531",
+  "appsecret": "ec91fd8f3814dcae19f6e31a3b07d74b",
+  "account_name": "美尔健生物",
+  "auto_sync_daily": true,
+  "default_category": "新闻资讯",
+  "download_images": true,
+  "last_sync_time": "2026-09-12 09:21:59",
+  "last_sync_status": "同步完成 (新增 0 篇, 跳过 1 篇)",
+  "total_synced": 1
+}

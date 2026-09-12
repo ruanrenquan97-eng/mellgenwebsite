@@ -312,48 +312,34 @@ $(function () {
         });
     }
 
-    // 4. 构建移动端底部快捷触达工具条 (Bottom Bar) 与微信二维码弹窗
+    // 4. 构建移动端底部快捷触达工具条 (Bottom Bar) - AI客服直达
     if (!$("#mobileBottomBar").length) {
+        var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
         var bottomBarHtml = '';
         bottomBarHtml += '<div class="mobile-bottom-bar" id="mobileBottomBar">';
-        bottomBarHtml += '  <a href="tel:0755-82926499" class="mobile-bottom-bar-item">';
-        bottomBarHtml += '    <span class="mobile-bottom-bar-icon">📞</span>';
-        bottomBarHtml += '    <span>电话咨询</span>';
+        bottomBarHtml += '  <a href="javascript:void(0);" class="mobile-bottom-bar-item highlight" id="mobileAiBtn">';
+        bottomBarHtml += '    <span class="mobile-bottom-bar-icon">🤖</span>';
+        bottomBarHtml += '    <span>' + (isEn ? "AI Support" : "AI客服") + '</span>';
         bottomBarHtml += '  </a>';
-        bottomBarHtml += '  <a href="javascript:void(0);" class="mobile-bottom-bar-item" id="mobileWxBtn">';
-        bottomBarHtml += '    <span class="mobile-bottom-bar-icon">💬</span>';
-        bottomBarHtml += '    <span>微信客服</span>';
-        bottomBarHtml += '  </a>';
-        bottomBarHtml += '  <a href="' + basePrefix + 'helps/lxwm.html" class="mobile-bottom-bar-item highlight">';
+        bottomBarHtml += '  <a href="' + basePrefix + 'helps/lxwm.html" class="mobile-bottom-bar-item">';
         bottomBarHtml += '    <span class="mobile-bottom-bar-icon">📋</span>';
-        bottomBarHtml += '    <span>联系我们</span>';
+        bottomBarHtml += '    <span>' + (isEn ? "Contact Us" : "联系我们") + '</span>';
         bottomBarHtml += '  </a>';
         bottomBarHtml += '  <a href="javascript:void(0);" class="mobile-bottom-bar-item" id="mobileBackTopBtn">';
         bottomBarHtml += '    <span class="mobile-bottom-bar-icon">🔝</span>';
-        bottomBarHtml += '    <span>回到顶部</span>';
+        bottomBarHtml += '    <span>' + (isEn ? "Top" : "回到顶部") + '</span>';
         bottomBarHtml += '  </a>';
-        bottomBarHtml += '</div>';
-
-        // 微信弹窗
-        bottomBarHtml += '<div class="mobile-wx-modal" id="mobileWxModal">';
-        bottomBarHtml += '  <div class="mobile-wx-modal-box">';
-        bottomBarHtml += '    <div class="mobile-wx-modal-close" id="mobileWxModalClose">✕</div>';
-        bottomBarHtml += '    <h4>微信客服咨询</h4>';
-        bottomBarHtml += '    <img src="' + basePrefix + 'resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg" alt="微信客服">';
-        bottomBarHtml += '    <p>长按识别二维码或添加客服微信<br>为您提供一对一原料咨询与技术支持</p>';
-        bottomBarHtml += '  </div>';
         bottomBarHtml += '</div>';
 
         $("body").append(bottomBarHtml);
 
-        // 底部工具条事件
-        $(document).on("click", "#mobileWxBtn", function () {
-            $("#mobileWxModal").addClass("active");
-        });
-
-        $(document).on("click", "#mobileWxModalClose, #mobileWxModal", function (e) {
-            if (e.target.id === 'mobileWxModal' || e.target.id === 'mobileWxModalClose') {
-                $("#mobileWxModal").removeClass("active");
+        // 底部工具条事件 - 唤起AI智能客服
+        $(document).on("click", "#mobileAiBtn", function () {
+            if (window.MellgenAIChat) {
+                window.MellgenAIChat.open();
+            } else {
+                var t = document.getElementById("mg-ai-trigger");
+                if (t) t.click();
             }
         });
 
@@ -460,7 +446,11 @@ $(function () {
         }
 
         var referrer = document.referrer || "直接访问";
-        var apiUrl = protocol + "//" + hostname + ":8001/api/analytics/track_pageview";
+        // 环境自适应：本地预览端口 8000 时走 8001；在生产环境 (https://www.mellgen.com) 或直接访问后台时走同源 /api/...
+        var apiUrl = "/api/analytics/track_pageview";
+        if (window.location.port === "8000" && (hostname === "localhost" || hostname === "127.0.0.1")) {
+            apiUrl = protocol + "//" + hostname + ":8001/api/analytics/track_pageview";
+        }
 
         var startTime = Date.now();
 
@@ -503,6 +493,73 @@ $(function () {
                 sendPing(false);
             }
         });
+    } catch(e) {}
+})();
+
+// 彻底清理旧版右侧客服侧栏 (#client-2112 等)，仅保留右下角AI在线客服“小美”
+(function() {
+    try {
+        function purgeLegacySidebar() {
+            var sels = ["#client-2112", ".xin-2112-client-1", ".my-kefu", ".client-2112-cont", ".client-2112-cont-weixin"];
+            sels.forEach(function(s) {
+                var items = document.querySelectorAll(s);
+                items.forEach(function(el) {
+                    if (el && el.parentNode) el.parentNode.removeChild(el);
+                });
+            });
+        }
+        purgeLegacySidebar();
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", purgeLegacySidebar);
+        }
+        setTimeout(purgeLegacySidebar, 200);
+        setTimeout(purgeLegacySidebar, 1000);
+    } catch(e) {}
+})();
+
+// 全局加载美尔健 AI 智能客服挂件（小美客服）
+(function() {
+    try {
+        function injectAIChatWidget() {
+            if (document.getElementById("mg-ai-chat-script")) return;
+            var script = document.createElement("script");
+            script.id = "mg-ai-chat-script";
+
+            // 动态根据 public.js 所在路径精准定位 js/ai_chat_widget.js
+            var prefix = "";
+            var scripts = document.getElementsByTagName("script");
+            for (var i = 0; i < scripts.length; i++) {
+                var src = scripts[i].getAttribute("src") || "";
+                if (src.indexOf("public.js") !== -1) {
+                    var idx = src.indexOf("public.js");
+                    prefix = src.substring(0, idx);
+                    break;
+                }
+            }
+            if (!prefix) {
+                var clean = (window.location.pathname || "").replace(/^\/+/, "");
+                var parts = clean.split("/").filter(function(p){ return p.length > 0; });
+                if (parts.length > 1) {
+                    var depth = parts.length - 1;
+                    for (var d = 0; d < depth; d++) prefix += "../";
+                    prefix += "js/";
+                } else {
+                    prefix = "./js/";
+                }
+            }
+            script.src = prefix + "ai_chat_widget.js?v=20260912_v8";
+            script.async = true;
+            if (document.body) {
+                document.body.appendChild(script);
+            } else {
+                document.head.appendChild(script);
+            }
+        }
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", injectAIChatWidget);
+        } else {
+            injectAIChatWidget();
+        }
     } catch(e) {}
 })();
 

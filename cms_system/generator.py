@@ -38,6 +38,100 @@ def load_db():
             
     return products, articles, settings, friendlinks, nav_links
 
+DOMAIN_BASE = "https://www.mellgen.com"
+
+def generate_canonical_and_hreflang_tags(rel_path):
+    rel_norm = rel_path.replace("\\", "/").strip("/")
+    is_en = rel_norm.startswith("en/")
+    if is_en:
+        core_rel = rel_norm[3:].strip("/")
+    else:
+        core_rel = rel_norm
+        
+    if core_rel in ["index.html", ""]:
+        zh_url = f"{DOMAIN_BASE}/"
+        en_url = f"{DOMAIN_BASE}/en/"
+    else:
+        zh_url = f"{DOMAIN_BASE}/{core_rel}"
+        en_url = f"{DOMAIN_BASE}/en/{core_rel}"
+        
+    canonical_url = en_url if is_en else zh_url
+    x_default_url = zh_url
+    
+    tags = [
+        f'<link rel="canonical" href="{canonical_url}">',
+        f'<link rel="alternate" hreflang="zh-CN" href="{zh_url}">',
+        f'<link rel="alternate" hreflang="en" href="{en_url}">',
+        f'<link rel="alternate" hreflang="x-default" href="{x_default_url}">'
+    ]
+    return "\n  ".join(tags)
+
+def generate_open_graph_tags(title, description, image_url, page_rel, og_type="website"):
+    clean_desc = (description or "").replace('"', '&quot;').replace('\n', ' ')[:200]
+    clean_title = (title or "").replace('"', '&quot;')
+    
+    if not image_url or not isinstance(image_url, str):
+        full_image = f"{DOMAIN_BASE}/images/ban_txt.png"
+    elif image_url.startswith("http"):
+        full_image = image_url
+    else:
+        full_image = f"{DOMAIN_BASE}/{image_url.lstrip('./').lstrip('/')}"
+        
+    if page_rel in ["index.html", ""]:
+        full_url = f"{DOMAIN_BASE}/"
+    elif page_rel.startswith("http"):
+        full_url = page_rel
+    else:
+        full_url = f"{DOMAIN_BASE}/{page_rel.lstrip('./').lstrip('/')}"
+        
+    tags = [
+        f'<meta property="og:type" content="{og_type}">',
+        f'<meta property="og:title" content="{clean_title}">',
+        f'<meta property="og:description" content="{clean_desc}">',
+        f'<meta property="og:url" content="{full_url}">',
+        f'<meta property="og:site_name" content="美尔健生物 | Mellgen Bio">',
+        f'<meta property="og:image" content="{full_image}">',
+        f'<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{clean_title}">',
+        f'<meta name="twitter:description" content="{clean_desc}">',
+        f'<meta name="twitter:image" content="{full_image}">'
+    ]
+    return "\n  ".join(tags)
+
+def generate_verification_meta(settings):
+    tags = []
+    g_code = (settings.get("google_site_verification") or "").strip()
+    if g_code:
+        m = re.search(r'content=["\']([^"\']+)["\']', g_code)
+        val = m.group(1) if m else g_code
+        tags.append(f'<meta name="google-site-verification" content="{val}">')
+        
+    b_code = (settings.get("bing_site_verification") or "").strip()
+    if b_code:
+        m = re.search(r'content=["\']([^"\']+)["\']', b_code)
+        val = m.group(1) if m else b_code
+        tags.append(f'<meta name="msvalidate.01" content="{val}">')
+        
+    bd_code = (settings.get("baidu_site_verification") or "").strip()
+    if bd_code:
+        m = re.search(r'content=["\']([^"\']+)["\']', bd_code)
+        val = m.group(1) if m else bd_code
+        tags.append(f'<meta name="baidu-site-verification" content="{val}">')
+        
+    return "\n  ".join(tags) if tags else ""
+
+def inject_meta_block_into_head(html, block_content, block_id="seo-meta-block"):
+    """
+    Safely injects or replaces a designated SEO block in the HTML head
+    """
+    wrapped = f"<!-- [{block_id}] -->\n  {block_content}\n  <!-- [/{block_id}] -->"
+    pattern = rf'<!-- \[{block_id}\] -->[\s\S]*?<!-- \[/{block_id}\] -->'
+    if re.search(pattern, html):
+        return re.sub(pattern, wrapped, html)
+    elif '</head>' in html:
+        return html.replace('</head>', f'  {wrapped}\n</head>')
+    return html
+
 # Helper: safe replacement using string slicing to avoid regex group reference errors
 def replace_group(pattern, replacement, html, group_index=2, flags=re.DOTALL):
     match = re.search(pattern, html, flags)
@@ -175,9 +269,9 @@ def render_product_b2b_sections(product):
         for label1, val1, label2, val2 in rd_items:
             if val1 or val2:
                 out.append('        <tr style="border-bottom: 1px solid #f1f5f9;">')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569;">{label1}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569; white-space: nowrap;">{label1}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 35%; color: #1e293b;">{val1 or "—"}</td>')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569;">{label2}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569; white-space: nowrap;">{label2}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 35%; color: #1e293b;">{val2 or "—"}</td>')
                 out.append('        </tr>')
                 
@@ -216,9 +310,9 @@ def render_product_b2b_sections(product):
             if val1 or val2:
                 val1_display = f'<span style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: monospace; border: 1px solid #a7f3d0;">✓ {val1}</span>' if label1 == "药监局原料报送码" and val1 else (val1 or "—")
                 out.append('        <tr style="border-bottom: 1px solid #f1f5f9;">')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569;">{label1}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569; white-space: nowrap;">{label1}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 35%; color: #1e293b;">{val1_display}</td>')
-                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569;">{label2}</td>')
+                out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569; white-space: nowrap;">{label2}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 35%; color: #1e293b;">{val2 or "—"}</td>')
                 out.append('        </tr>')
                 
@@ -310,13 +404,87 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
             html = re.sub(r'(<meta[^>]+name=["\']description["\'][^>]+content=["\'])(.*?)(["\'])', lambda m: f'{m.group(1)}{seo_desc}{m.group(3)}', html, flags=re.I)
         else:
             html = re.sub(r'(<title>[^<]+</title>)', lambda m: f'{m.group(1)}\n  <meta name="description" content="{seo_desc}">', html, flags=re.I)
-    
+
     cat = product['category']
     cat_filename = "product_hzpyl.html"
     if cat in ["医用原料", "重组蛋白", "动物源活性物", "活性抗菌材料"]:
         cat_filename = "product_yyyl.html"
     elif cat in ["食品营养原料", "桃胶多糖", "水母胶原", "灵芝黄酮", "灵芝多糖", "人参多肽", "复合营养素", "婴儿源益生菌"]:
         cat_filename = "product_spyyyl.html"
+
+    # 1. Canonical & Multi-language (Hreflang)
+    can_href_tags = generate_canonical_and_hreflang_tags(product.get("link", ""))
+    html = inject_meta_block_into_head(html, can_href_tags, block_id="seo-canonical-hreflang")
+
+    # 2. Open Graph & Twitter Cards for social/AI bot crawling
+    og_tags = generate_open_graph_tags(
+        title=seo_title,
+        description=seo_desc or product.get("desc", ""),
+        image_url=product.get("image", ""),
+        page_rel=product.get("link", ""),
+        og_type="product"
+    )
+    html = inject_meta_block_into_head(html, og_tags, block_id="seo-opengraph")
+
+    # 3. Schema.org JSON-LD structured data with Product + BreadcrumbList for Google rich snippets
+    domain_url = "https://www.mellgen.com"
+    prod_full_url = f"{domain_url}/{product.get('link', '').lstrip('/')}"
+    prod_img_url = f"{domain_url}/{product.get('image', '').lstrip('/')}" if product.get('image') else f"{domain_url}/images/ban_txt.png"
+    
+    ld_json_data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                "name": product["title"],
+                "description": seo_desc or product.get("desc", ""),
+                "category": product.get("category", "化妆品原料"),
+                "url": prod_full_url,
+                "image": prod_img_url,
+                "brand": {
+                    "@type": "Brand",
+                    "name": settings.get("company_name", "美尔健生物")
+                },
+                "manufacturer": {
+                    "@type": "Organization",
+                    "name": "美尔健（深圳）生物科技有限公司",
+                    "url": domain_url
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "availability": "https://schema.org/InStock",
+                    "priceCurrency": "CNY",
+                    "price": "0",
+                    "url": prod_full_url
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "首页",
+                        "item": f"{domain_url}/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": product.get("category", "产品中心"),
+                        "item": f"{domain_url}/{cat_filename}"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": product["title"],
+                        "item": prod_full_url
+                    }
+                ]
+            }
+        ]
+    }
+    ld_script = f'<script type="application/ld+json">\n{json.dumps(ld_json_data, ensure_ascii=False, indent=2)}\n</script>'
+    html = inject_meta_block_into_head(html, ld_script, block_id="schema-jsonld")
         
     crumbs_pattern = r'(<b>您当前的位置：</b>\s*<a href="\.\./index\.html"[^>]*>\s*首页\s*</a>\s*<span> &gt; </span>\s*<i[^>]*>\s*<a href="\.\./product_index\.html"[^>]*>\s*产品频道\s*</a>\s*<span> &gt; </span>\s*</i>\s*<i[^>]*>\s*<a href="\.\./)([^"]+)("[^>]*>)([^<]+)(</a>)'
     match = re.search(crumbs_pattern, html)
@@ -410,7 +578,8 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
 def generate_article_detail_page(article, base_template_html, settings, nav_links):
     html = base_template_html
     
-    html = re.sub(r'<title>[^<]+</title>', f"<title>{article['title']}-新闻资讯-{settings.get('company_name', '美尔健生物')}</title>", html)
+    art_title = f"{article['title']}-新闻资讯-{settings.get('company_name', '美尔健生物')}"
+    html = re.sub(r'<title>[^<]+</title>', f"<title>{art_title}</title>", html)
     
     cat_filename = "article_xwzx.html"
     cat = article['category']
@@ -436,7 +605,82 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     
     html = replace_group(r'(<span class="p102-info-date">)(.*?)(</span>)', article["date"], html, flags=0)
     
-    html = replace_group(r'(<div class="p102-info-content-desc">)(.*?)(</div>\s*<div class="p102-info-key">)', f"\n     {article['content']}\n    ", html)
+    content_pattern = r'(<div class="p102-info-content endit-content">)(.*?)(</div>\s*<div class="clear"></div>)'
+    if re.search(content_pattern, html, re.DOTALL):
+        html = replace_group(content_pattern, f"\n     {article['content']}\n    ", html)
+    else:
+        alt_pattern = r'(<div class="p102-info-content[^"]*">)(.*?)(</div>\s*<div class="clear"></div>)'
+        if re.search(alt_pattern, html, re.DOTALL):
+            html = replace_group(alt_pattern, f"\n     {article['content']}\n    ", html)
+
+    # 1. Canonical & Multi-language (Hreflang)
+    can_href_tags = generate_canonical_and_hreflang_tags(article.get("link", ""))
+    html = inject_meta_block_into_head(html, can_href_tags, block_id="seo-canonical-hreflang")
+
+    # 2. Open Graph & Twitter Cards for social/AI bot crawling
+    art_desc = article.get("desc") or re.sub(r'<[^>]+>', '', article.get("content", ""))[:150]
+    og_tags = generate_open_graph_tags(
+        title=art_title,
+        description=art_desc,
+        image_url=article.get("image", ""),
+        page_rel=article.get("link", ""),
+        og_type="article"
+    )
+    html = inject_meta_block_into_head(html, og_tags, block_id="seo-opengraph")
+
+    # 3. Schema.org Article + BreadcrumbList JSON-LD
+    domain_url = "https://www.mellgen.com"
+    art_full_url = f"{domain_url}/{article.get('link', '').lstrip('/')}"
+    art_img_url = f"{domain_url}/{article.get('image', '').lstrip('/')}" if article.get('image') else f"{domain_url}/images/ban_txt.png"
+    
+    ld_json_data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Article",
+                "headline": article["title"],
+                "description": art_desc,
+                "url": art_full_url,
+                "image": art_img_url,
+                "datePublished": article.get("date", ""),
+                "author": {
+                    "@type": "Organization",
+                    "name": settings.get("company_name", "美尔健生物")
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "美尔健（深圳）生物科技有限公司",
+                    "url": domain_url
+                },
+                "mainEntityOfPage": art_full_url
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "首页",
+                        "item": f"{domain_url}/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": article.get("category", "新闻资讯"),
+                        "item": f"{domain_url}/{cat_filename}"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": article["title"],
+                        "item": art_full_url
+                    }
+                ]
+            }
+        ]
+    }
+    ld_script = f'<script type="application/ld+json">\n{json.dumps(ld_json_data, ensure_ascii=False, indent=2)}\n</script>'
+    html = inject_meta_block_into_head(html, ld_script, block_id="schema-jsonld")
     
     html = update_global_contact_info(html, settings)
     
@@ -480,10 +724,19 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
     
     html = replace_group(r'(<div class="hyt-product-list-6">)(.*?)(<div class="clear"></div>\s*</div>)', list_html, html)
         
+    # Inject SEO tags into product listing page
+    rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
+    can_href_tags = generate_canonical_and_hreflang_tags(rel_path)
+    html = inject_meta_block_into_head(html, can_href_tags, block_id="seo-canonical-hreflang")
+    
+    cat_title = f"{category}-美尔健生物"
+    cat_desc = f"美尔健（深圳）生物科技有限公司官方{category}专区，提供高纯度研发及生产级原料供应与备案支持。"
+    og_tags = generate_open_graph_tags(cat_title, cat_desc, "images/ban_txt.png", rel_path, og_type="website")
+    html = inject_meta_block_into_head(html, og_tags, block_id="seo-opengraph")
+
     html = update_global_contact_info(html, settings)
     
     # Update navigation menu
-    rel_path = os.path.relpath(file_path, WORKSPACE_DIR)
     html = update_navigation(html, nav_links, rel_path)
     
     with open(file_path, "w", encoding="utf-8") as f:
@@ -497,20 +750,48 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
         html = f.read()
         
     subcats = get_article_subcategories(category)
-    cat_articles = [a for a in articles if a['category'] in subcats]
+    cat_articles = [a for a in articles if a.get('category') in subcats and a.get('show', True)]
+    cat_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
     
-    list_html = "\n"
-    for a in cat_articles:
-        detail_link = "./" + a["link"]
-        image_path = "./" + a["image"]
-        list_html += f"""   <dl> 
+    if '<div class="hyt-product-list-5">' in html:
+        # Case listing pages (article_hzal.html and its 7 industry subpages)
+        list_html = "\n"
+        display_arts = cat_articles[:12]
+        for i, a in enumerate(display_arts):
+            detail_link = "./" + a["link"].replace("\\", "/")
+            image_path = "./" + a["image"].replace("\\", "/")
+            desc = (a.get("desc") or "")[:120].strip()
+            list_html += f"""   <dl> 
+    <dt> 
+     <a href="{detail_link}" target="_blank" title="{a['title']}"><img alt="{a['title']}" src="{image_path}"></a> 
+    </dt> 
+    <dd> 
+     <h4><a href="{detail_link}" target="_blank" title="{a['title']}">{a['title']}</a></h4> 
+     <p>{desc}...</p> 
+     <a class="details" href="{detail_link}" target="_blank" title="{a['title']}"></a> 
+    </dd> 
+   </dl> 
+"""
+            if (i + 1) % 3 == 0 and (i + 1) < len(display_arts):
+                list_html += '   <div class="clear"></div> \n'
+        list_html += "  "
+        pattern = r'(<div class="hyt-product-list-5">)(.*?)(</div>\s*<div class="clear"></div>\s*</div>)'
+        html = replace_group(pattern, list_html, html)
+    else:
+        # News / Knowledge listing pages (article_xwzx.html, article_cjwt.html, etc.)
+        list_html = "\n"
+        for a in cat_articles:
+            detail_link = "./" + a["link"].replace("\\", "/")
+            image_path = "./" + a["image"].replace("\\", "/")
+            desc = (a.get("desc") or "")[:100].strip()
+            list_html += f"""   <dl> 
     <dt> 
      <a href="{detail_link}" target="_blank" title="{a['title']}"><img alt="{a['title']}" src="{image_path}" title="{a['title']}"></a> 
     </dt> 
     <dd> 
      <h4><a href="{detail_link}" target="_blank" title="{a['title']}">{a['title']}</a></h4> 
      <div class="p102-info-list-desc">
-       {a['desc'][:100]}... 
+       {desc}... 
      </div> 
      <div class="p102-info-list-more"> 
       <a href="{detail_link}" target="_blank" title="{a['title']}">详情 &gt;&gt;</a> 
@@ -518,18 +799,52 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
     </dd> 
    </dl> 
 """
-    list_html += "   "
-    
-    pattern = r'(<div class="p102-info-list">)(.*?)(</div>\s*<div class="p102-pagination-)'
-    if not re.search(pattern, html, re.DOTALL):
-        pattern = r'(<div class="p102-info-list">)(.*?)(</div>\s*<div class="clear"></div>\s*</div>\s*<div class="g_ft)'
+        list_html += "   "
         
-    html = replace_group(pattern, list_html, html)
+        pattern = r'(<div class="p102-info-list">)(.*?)(</div>\s*<div class="p102-pagination-)'
+        if not re.search(pattern, html, re.DOTALL):
+            pattern = r'(<div class="p102-info-list">)(.*?)(</div>\s*<div class="clear"></div>\s*</div>\s*<div class="g_ft)'
+            
+        html = replace_group(pattern, list_html, html)
+
+    # Inject SEO tags into article listing page
+    rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
+    can_href_tags = generate_canonical_and_hreflang_tags(rel_path)
+    html = inject_meta_block_into_head(html, can_href_tags, block_id="seo-canonical-hreflang")
+    
+    cat_title = f"{category}-美尔健生物资讯中心"
+    cat_desc = f"美尔健官方{category}专区，分享前沿生物技术知识、行业动态与问答。"
+    og_tags = generate_open_graph_tags(cat_title, cat_desc, "images/ban_txt.png", rel_path, og_type="website")
+    html = inject_meta_block_into_head(html, og_tags, block_id="seo-opengraph")
+
+    # If FAQ page (cjwt), inject FAQPage schema
+    if "cjwt" in file_path or category == "常见问答":
+        faq_entities = []
+        for a in cat_articles[:20]:
+            ans_text = a.get("desc") or re.sub(r'<[^>]+>', '', a.get("content", ""))[:250]
+            faq_entities.append({
+                "@type": "Question",
+                "name": a["title"],
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": ans_text.strip()
+                }
+            })
+        if faq_entities:
+            faq_ld = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faq_entities
+            }
+            html = inject_meta_block_into_head(
+                html,
+                f'<script type="application/ld+json">\n{json.dumps(faq_ld, ensure_ascii=False, indent=2)}\n</script>',
+                block_id="schema-faqpage"
+            )
         
     html = update_global_contact_info(html, settings)
     
     # Update navigation menu
-    rel_path = os.path.relpath(file_path, WORKSPACE_DIR)
     html = update_navigation(html, nav_links, rel_path)
     
     with open(file_path, "w", encoding="utf-8") as f:
@@ -638,7 +953,7 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
 
 def update_all_footers_headers_and_nav(settings, nav_links):
     for root, dirs, files in os.walk(WORKSPACE_DIR):
-        dirs[:] = [d for d in dirs if d not in ['.git', 'en', 'cms_system', '.gemini', 'node_modules', '__pycache__']]
+        dirs[:] = [d for d in dirs if d not in ['.git', 'en', 'cms_system', '.gemini', 'node_modules', '__pycache__'] and not d.startswith('backup')]
         for file in files:
             if file.endswith('.html'):
                 file_path = os.path.join(root, file)
@@ -657,10 +972,13 @@ def update_all_footers_headers_and_nav(settings, nav_links):
                 except Exception as e:
                     print(f"[-] Error updating header/footer in {file}: {e}")
 
-def apply_page_seo(file_path, seo_title=None, seo_keywords=None, seo_description=None):
+def apply_page_seo(file_path, seo_title=None, seo_keywords=None, seo_description=None, settings=None):
     if not os.path.exists(file_path):
         return
     try:
+        if settings is None:
+            _, _, settings, _, _ = load_db()
+
         with open(file_path, "r", encoding="utf-8") as f:
             html = f.read()
         if seo_title:
@@ -675,6 +993,33 @@ def apply_page_seo(file_path, seo_title=None, seo_keywords=None, seo_description
                 html = re.sub(r'(<meta[^>]+name=["\']description["\'][^>]+content=["\'])(.*?)(["\'])', lambda m: f'{m.group(1)}{seo_description}{m.group(3)}', html, flags=re.I)
             else:
                 html = re.sub(r'(<title>[^<]*</title>)', lambda m: f'{m.group(1)}\n  <meta name="description" content="{seo_description}">', html, flags=re.I)
+
+        rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
+
+        # 1. Canonical & Hreflang
+        can_href_tags = generate_canonical_and_hreflang_tags(rel_path)
+        html = inject_meta_block_into_head(html, can_href_tags, block_id="seo-canonical-hreflang")
+
+        # 2. Open Graph & Twitter Cards
+        curr_title = seo_title
+        if not curr_title:
+            tm = re.search(r'<title>([^<]+)</title>', html, re.I)
+            curr_title = tm.group(1) if tm else settings.get("company_name", "美尔健生物")
+            
+        curr_desc = seo_description
+        if not curr_desc:
+            dm = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']', html, re.I)
+            curr_desc = dm.group(1) if dm else settings.get("seo_description", "")
+            
+        og_tags = generate_open_graph_tags(curr_title, curr_desc, "images/ban_txt.png", rel_path, og_type="website")
+        html = inject_meta_block_into_head(html, og_tags, block_id="seo-opengraph")
+
+        # 3. Webmaster verification for root homepage
+        if rel_path in ["index.html", "en/index.html", "mellgen_home.html"]:
+            v_meta = generate_verification_meta(settings)
+            if v_meta:
+                html = inject_meta_block_into_head(html, v_meta, block_id="seo-webmaster-verification")
+
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(html)
     except Exception as e:
@@ -711,15 +1056,17 @@ def publish_site():
     # Apply channel & innerpage SEO
     for ch in settings.get("channel_seo", []):
         ch_file = os.path.join(WORKSPACE_DIR, ch.get("url", ""))
-        apply_page_seo(ch_file, ch.get("title"), ch.get("keywords"), ch.get("description"))
+        apply_page_seo(ch_file, ch.get("title"), ch.get("keywords"), ch.get("description"), settings)
 
     for ip in settings.get("inner_pages_seo", []):
         ip_file = os.path.join(WORKSPACE_DIR, ip.get("url", ""))
-        apply_page_seo(ip_file, ip.get("title"), ip.get("keywords"), ip.get("description"))
+        apply_page_seo(ip_file, ip.get("title"), ip.get("keywords"), ip.get("description"), settings)
 
     # Apply default home SEO to index.html if not specified in channel_seo
     if settings.get("seo_title"):
-        apply_page_seo(os.path.join(WORKSPACE_DIR, "index.html"), settings.get("seo_title"), settings.get("seo_keywords"), settings.get("seo_description"))
+        apply_page_seo(os.path.join(WORKSPACE_DIR, "index.html"), settings.get("seo_title"), settings.get("seo_keywords"), settings.get("seo_description"), settings)
+    else:
+        apply_page_seo(os.path.join(WORKSPACE_DIR, "index.html"), settings=settings)
     
     # 1. Update listing pages
     update_product_listing_page(os.path.join(WORKSPACE_DIR, "product_hzpyl.html"), "化妆品原料", products, settings, nav_links)
@@ -731,6 +1078,15 @@ def publish_site():
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_cjwt.html"), "常见问答", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_qydt.html"), "企业新闻", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_cpbk.html"), "技术知识", articles, settings, nav_links)
+    
+    # 合作案例 7大细分行业页面动态静态化
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_ymxy.html"), "医美行业", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_yyxy.html"), "医药行业", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_hzp.html"), "化妆品", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_hfpgc.html"), "护肤品工厂", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_gnlsp.html"), "功能类食品", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_xhyp.html"), "洗护用品", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_nxhlcp.html"), "女性护理产品", articles, settings, nav_links)
     
     # 2. Re-generate all product details
     template_product_path = os.path.join(WORKSPACE_DIR, "products", "tphtct.html")
@@ -793,7 +1149,29 @@ def publish_site():
         clean_100_percent_en.main()
     except Exception as e:
         print(f"[-] Notice on English site sync: {e}")
-    
+        
+    # 8. Universal Canonical, Hreflang & Verification sweep on ALL generated HTML files
+    print("[*] Performing universal Canonical, Hreflang & Verification sweep...")
+    for root, dirs, files in os.walk(WORKSPACE_DIR):
+        dirs[:] = [d for d in dirs if d not in ['.git', 'cms_system', '.gemini', 'node_modules', '__pycache__'] and not d.startswith('backup')]
+        for file in files:
+            if file.endswith('.html'):
+                fpath = os.path.join(root, file)
+                try:
+                    with open(fpath, "r", encoding="utf-8") as f:
+                        f_html = f.read()
+                    r_path = os.path.relpath(fpath, WORKSPACE_DIR).replace("\\", "/")
+                    new_f_html = inject_meta_block_into_head(f_html, generate_canonical_and_hreflang_tags(r_path), block_id="seo-canonical-hreflang")
+                    if r_path in ["index.html", "en/index.html", "mellgen_home.html"]:
+                        v_tags = generate_verification_meta(settings)
+                        if v_tags:
+                            new_f_html = inject_meta_block_into_head(new_f_html, v_tags, block_id="seo-webmaster-verification")
+                    if new_f_html != f_html:
+                        with open(fpath, "w", encoding="utf-8") as f:
+                            f.write(new_f_html)
+                except Exception as e:
+                    print(f"[-] Notice on sweep for {file}: {e}")
+
     print("[OK] Site publishing complete!")
 
 if __name__ == "__main__":

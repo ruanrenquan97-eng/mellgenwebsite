@@ -367,6 +367,20 @@ html[lang="en"] .add .addlst {
 }
 
 html[lang="en"] .ftd {
-  font-size: 0.75rem;
-  line-height: 1.5rem;
+  font-size: 0.8rem !important;
+  line-height: 1.6rem !important;
 }
+
+/* 英文版页脚产品与案例列表自适应折行 */
+html[lang="en"] .g_ft .ftmid .ftnav dl:nth-child(2) dd a,
+html[lang="en"] .g_ft .ftmid .ftnav dl:nth-child(3) dd a {
+  white-space: normal !important;
+  word-break: break-word !important;
+  line-height: 1.35rem !important;
+  margin-bottom: 6px !important;
+}
+
+html[lang="en"] .g_link h2 {
+  font-size: 13px !important;
+}
+

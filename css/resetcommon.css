@@ -2,6 +2,7 @@
 @charset "utf-8";
 @import url("./lang_switch.css");
 @import url("./en_layout.css");
+@import url("./text_layout.css");
 
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
 dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
@@ -89,3 +90,57 @@ em{ font-style: normal;}
     background-position: center bottom;
     background-size: 1920px 100%;
 }
+
+/* 保证全站所有页面页脚导航永久可见 */
+.g_ft .ftmid .ftnav dl,
+.g_ft .ftmid .ftnav dl.teaser,
+.g_ft .ftnav dl,
+.g_ft .ftnav dl.teaser,
+.m_ft .ftnav dl,
+.m_ft .ftnav dl.teaser {
+    opacity: 1 !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+    transition: none !important;
+}
+
+.g_ft .ftmid {
+    height: auto !important;
+    min-height: 12rem !important;
+    overflow: visible !important;
+}
+
+.g_ft .m_ft:before {
+    display: none !important;
+}
+
+.g_ft canvas,
+canvas[width="1920"] {
+    pointer-events: none !important;
+    z-index: 2 !important;
+    opacity: 0.25 !important;
+}
+
+/* 彻底移除右侧原生旧客服悬浮条，全面由右下角AI在线客服“小美”替代 */
+.xin-2112-client-1,
+#client-2112,
+.my-kefu,
+.client-2112-cont,
+.client-2112-cont-weixin,
+[id^="client-2112"],
+[class*="xin-2112"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+}
+
+

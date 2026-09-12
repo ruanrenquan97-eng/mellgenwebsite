@@ -219,6 +219,7 @@ def main():
     print(f"Total {len(translations)} translation rules loaded.")
 
     files = glob.glob(os.path.join(EN_DIR, "**/*.html"), recursive=True)
+    files = [f for f in files if "backup" not in f]
     print(f"Applying deep translations across {len(files)} English files...")
     updated_count = 0
     for f in files:

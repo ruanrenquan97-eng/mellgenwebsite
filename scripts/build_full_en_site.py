@@ -453,7 +453,7 @@ def main():
 
     all_htmls = []
     for root, dirs, files in os.walk(WORKSPACE):
-        dirs[:] = [d for d in dirs if d not in ['.git', 'en', 'cms_system', '.gemini', 'node_modules', '__pycache__']]
+        dirs[:] = [d for d in dirs if d not in ['.git', 'en', 'cms_system', '.gemini', 'node_modules', '__pycache__'] and not d.startswith('backup')]
         for f in files:
             if f.endswith('.html') and f != 'backend_shell.html':
                 rel_path = os.path.relpath(os.path.join(root, f), WORKSPACE)

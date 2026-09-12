@@ -104,6 +104,23 @@
     background-color: #fff;
     margin: 0 !important;
     padding: 0 !important;
+    scrollbar-width: none !important; /* Firefox 隐藏滚动条 */
+    -ms-overflow-style: none !important; /* IE 10+ / Edge 隐藏滚动条 */
+  }
+
+  /* 彻底隐藏移动端全站滚动条 (无论浏览器内核或容器，绝不显示滚动滑块) */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+    background: transparent !important;
+  }
+
+  * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
 
   body {
@@ -3697,6 +3714,474 @@
   }
 
 
+
+  /* ------------------------------------------------------------------------
+     16.10 原料定制OEM页面深度重构 (.dzfw, .scjd, .gmh, .ys, .zx)
+     ------------------------------------------------------------------------ */
+  /* 通用标题重构 */
+  .p102-about-content .tit {
+    height: auto !important;
+    padding: 24px 10px 14px !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+  .p102-about-content .tit h2 {
+    font-size: 19px !important;
+    line-height: 1.35 !important;
+    padding: 0 !important;
+    margin: 0 0 6px 0 !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    white-space: normal !important;
+  }
+  .p102-about-content .tit em {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    color: #64748b !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    display: block !important;
+  }
+
+  /* 1. 定制服务满足需求 (.dzfw & .dz_con) */
+  .dzfw {
+    height: auto !important;
+    min-height: 0 !important;
+    background: #f8fafc !important;
+    background-image: none !important;
+    padding: 10px 12px 20px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .dzfw .content1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .dz_con {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    margin-top: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .dz_con li {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+    padding: 12px !important;
+    background: #f8fafc !important;
+    border: 1px solid #edf2f7 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .dz_con li:nth-child(3n) {
+    float: none !important;
+    margin-right: 0 !important;
+  }
+  .dz_con li h3 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 0 6px 0 !important;
+    padding: 0 0 0 8px !important;
+    border-left: 3px solid #499c7c !important;
+    line-height: 1.3 !important;
+  }
+  .dz_con li p {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    color: #64748b !important;
+    margin: 0 0 10px 0 !important;
+    height: auto !important;
+  }
+  .dz_con li img {
+    width: 100% !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    display: block !important;
+  }
+
+  /* 2. 生产基地实力展板 (.scjd) */
+  .scjd {
+    padding: 10px 12px 20px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+  }
+  .scjd .content1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .scjd .top {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .scjd .top .left {
+    width: 100% !important;
+    float: none !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+  .scjd .top .left li {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    list-style: none !important;
+    background: #f8fafc !important;
+    border-radius: 10px !important;
+    padding: 8px !important;
+    border: 1px solid #edf2f7 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    line-height: 32px !important;
+  }
+  .scjd .top .left li img {
+    width: 100% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    display: block !important;
+  }
+  .scjd .top .right {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+  .scjd .top .right ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+  }
+  .scjd .top .right ul li {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    padding: 6px !important;
+    border: 1px solid #edf2f7 !important;
+    text-align: center !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    line-height: 26px !important;
+    box-sizing: border-box !important;
+  }
+  .scjd .top .right ul li:nth-child(2n) {
+    float: none !important;
+    margin-right: 0 !important;
+  }
+  .scjd .top .right ul li img {
+    width: 100% !important;
+    height: 95px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+    display: block !important;
+  }
+  .scjd .bottom {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+  }
+  .scjd .bottom dl {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    padding: 6px !important;
+    border: 1px solid #edf2f7 !important;
+    text-align: center !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    line-height: 26px !important;
+    box-sizing: border-box !important;
+  }
+  .scjd .bottom dl:nth-child(3n) {
+    float: none !important;
+    margin-right: 0 !important;
+  }
+  .scjd .bottom dl img {
+    width: 100% !important;
+    height: 75px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+    display: block !important;
+  }
+
+  /* 3. 规模化制造中心 (.gmh) */
+  .gmh {
+    height: auto !important;
+    min-height: 0 !important;
+    background: #f8fafc !important;
+    padding: 14px 12px 20px !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+  .gmh .content1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .gmh dl {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 14px !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  .gmh dl dt {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+  .gmh dl dt img {
+    width: 100% !important;
+    max-width: 400px !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    margin: 0 auto !important;
+    display: block !important;
+    border-radius: 10px !important;
+  }
+  .gmh dl dd {
+    width: 100% !important;
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .gmh dl dd ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+  }
+  .gmh dl dd ul li {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 12px 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+    box-sizing: border-box !important;
+  }
+  .gmh dl dd ul li b {
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    background: #499c7c !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    margin-top: 2px !important;
+    text-align: center !important;
+    float: none !important;
+  }
+  .gmh dl dd ul li .gmh_zw {
+    width: auto !important;
+    flex: 1 !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+  .gmh dl dd ul li .gmh_zw h3 {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 0 4px 0 !important;
+    line-height: 1.4 !important;
+  }
+  .gmh dl dd ul li .gmh_zw p {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    color: #64748b !important;
+    margin: 0 !important;
+  }
+
+  /* 4. 定制流程 6 步网格卡片 (.ys) */
+  .ys {
+    padding: 10px 12px 20px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+  }
+  .ys .ys_t {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .ys ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+  }
+  .ys li {
+    width: 100% !important;
+    float: none !important;
+    height: auto !important;
+    min-height: 160px !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    padding: 12px 8px !important;
+    background: #f8fafc !important;
+    border: 1px solid #eef2f6 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .ys li:nth-child(3n) {
+    float: none !important;
+    margin-right: 0 !important;
+  }
+  .ys li i {
+    width: 44px !important;
+    height: 44px !important;
+    margin: 2px auto 8px !important;
+    background: #ffffff !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    overflow: hidden !important;
+  }
+  .ys li i img {
+    width: 26px !important;
+    height: 26px !important;
+    object-fit: contain !important;
+    position: static !important;
+  }
+  .ys li span {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 0 6px 0 !important;
+    line-height: 1.3 !important;
+    display: block !important;
+  }
+  .ys li em {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    color: #64748b !important;
+    font-style: normal !important;
+    text-align: left !important;
+    display: block !important;
+  }
+
+  /* 5. 立即咨询触达横幅 (.zx) */
+  .zx {
+    margin: 16px 12px 24px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  .zx .content1 {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .zx_img {
+    width: 100% !important;
+    float: none !important;
+    height: 160px !important;
+    overflow: hidden !important;
+  }
+  .zx_img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .zx_con {
+    width: 100% !important;
+    float: none !important;
+    height: auto !important;
+    padding: 16px 14px 20px !important;
+    box-sizing: border-box !important;
+    background: #f8fafc !important;
+    text-align: center !important;
+  }
+  .zx em {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+  }
+  .zx span {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    color: #64748b !important;
+    margin: 0 0 16px 0 !important;
+    display: block !important;
+    text-align: justify !important;
+  }
+  .zx a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 150px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    background: #499c7c !important;
+    border-radius: 20px !important;
+    color: #ffffff !important;
+    margin: 0 auto !important;
+    box-shadow: 0 2px 6px rgba(73, 156, 124, 0.3) !important;
+    text-decoration: none !important;
+  }
 
   /* ------------------------------------------------------------------------
      17. 移动端悬浮快捷沟通条与右侧浮动大框彻底重构

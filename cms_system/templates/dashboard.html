@@ -6386,6 +6386,30 @@ Disallow: /cms_system/
       // 加载 iframe 页面
       const iframe = document.getElementById("mobile-preview-iframe");
       if (iframe) {
+        if (!iframe._hasScrollbarHandler) {
+          iframe._hasScrollbarHandler = true;
+          iframe.addEventListener("load", function() {
+            try {
+              const doc = iframe.contentDocument;
+              if (doc && !doc.getElementById("injected-hide-scrollbar")) {
+                const s = doc.createElement("style");
+                s.id = "injected-hide-scrollbar";
+                s.textContent = `
+                  html, body, * {
+                    scrollbar-width: none !important;
+                    -ms-overflow-style: none !important;
+                  }
+                  ::-webkit-scrollbar {
+                    display: none !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                  }
+                `;
+                (doc.head || doc.documentElement).appendChild(s);
+              }
+            } catch(e) {}
+          });
+        }
         iframe.src = getFrontUrl(cleanPath);
       }
 

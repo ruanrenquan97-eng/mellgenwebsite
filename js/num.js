@@ -8,9 +8,9 @@
     };
     function rollNumDaq(obj, options){
         this.obj = obj;
-        this.options = $.extend(defaults, options);
+        this.options = $.extend({}, defaults, options);
         this.init = function(){
-             this.initHtml(obj,defaults);
+             this.initHtml(obj, this.options);
         }
     }
     rollNumDaq.prototype = {
@@ -29,7 +29,7 @@
         scroNum: function(options){
             var number = options.deVal;
             var $num_item = this.obj.find('.tt');
-            var h = $('.dataBoc').height();
+            var h = this.obj.find('.dataBoc').height() || $('.dataBoc').height() || 22;
             $num_item.css('transition','all 2s ease-in-out');
             var numberStr = number.toString();
             if(numberStr.length <= $num_item.length - 1){
@@ -42,8 +42,12 @@
 
             var numberArr = numberStr.split('');
             $num_item.each(function(i, item) {
+                var targetTop = -parseInt(numberArr[i])*h - h*10 + 'px';
                 setTimeout(function(){
-                    $num_item.eq(i).css('top',-parseInt(numberArr[i])*h - h*10 + 'px');
+                    $num_item.eq(i).css('top', targetTop);
+                    if ($num_item.eq(i)[0]) {
+                        $num_item.eq(i)[0].style.setProperty('top', targetTop, 'important');
+                    }
                 },i*100)
             });
         }

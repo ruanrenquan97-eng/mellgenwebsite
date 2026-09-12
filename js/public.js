@@ -312,18 +312,27 @@ $(function () {
         });
     }
 
-    // 4. 构建移动端底部快捷触达工具条 (Bottom Bar) - AI客服直达
+    // 4. 构建移动端底部快捷触达工具条 (Bottom Bar) - 整合首页、全站导航、AI客服与回到顶部
     if (!$("#mobileBottomBar").length) {
         var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
+        var currentPath = window.location.pathname || "";
+        var isHome = currentPath.endsWith("index.html") || currentPath === "/" || currentPath.endsWith("/");
+
+        var homeUrl = isEn ? (currentPath.indexOf("/en/") !== -1 ? (basePrefix === "../" ? "./index.html" : (basePrefix === "../../" ? "../index.html" : "./index.html")) : basePrefix + "en/index.html") : basePrefix + "index.html";
+
         var bottomBarHtml = '';
         bottomBarHtml += '<div class="mobile-bottom-bar" id="mobileBottomBar">';
+        bottomBarHtml += '  <a href="' + homeUrl + '" class="mobile-bottom-bar-item' + (isHome ? ' active' : '') + '" id="mobileHomeBtn">';
+        bottomBarHtml += '    <span class="mobile-bottom-bar-icon">🏠</span>';
+        bottomBarHtml += '    <span>' + (isEn ? "Home" : "首页") + '</span>';
+        bottomBarHtml += '  </a>';
+        bottomBarHtml += '  <a href="javascript:void(0);" class="mobile-bottom-bar-item" id="mobileNavBtn">';
+        bottomBarHtml += '    <span class="mobile-bottom-bar-icon">☰</span>';
+        bottomBarHtml += '    <span>' + (isEn ? "Menu" : "导航") + '</span>';
+        bottomBarHtml += '  </a>';
         bottomBarHtml += '  <a href="javascript:void(0);" class="mobile-bottom-bar-item highlight" id="mobileAiBtn">';
         bottomBarHtml += '    <span class="mobile-bottom-bar-icon">🤖</span>';
         bottomBarHtml += '    <span>' + (isEn ? "AI Support" : "AI客服") + '</span>';
-        bottomBarHtml += '  </a>';
-        bottomBarHtml += '  <a href="' + basePrefix + 'helps/lxwm.html" class="mobile-bottom-bar-item">';
-        bottomBarHtml += '    <span class="mobile-bottom-bar-icon">📋</span>';
-        bottomBarHtml += '    <span>' + (isEn ? "Contact Us" : "联系我们") + '</span>';
         bottomBarHtml += '  </a>';
         bottomBarHtml += '  <a href="javascript:void(0);" class="mobile-bottom-bar-item" id="mobileBackTopBtn">';
         bottomBarHtml += '    <span class="mobile-bottom-bar-icon">🔝</span>';
@@ -340,6 +349,20 @@ $(function () {
             } else {
                 var t = document.getElementById("mg-ai-trigger");
                 if (t) t.click();
+            }
+        });
+
+        // 底部工具条事件 - 快捷打开/关闭全站导航抽屉
+        $(document).on("click", "#mobileNavBtn", function (e) {
+            e.preventDefault();
+            if ($("#mobileDrawer").hasClass("active")) {
+                $("#mobileDrawerOverlay").removeClass("active");
+                $("#mobileDrawer").removeClass("active");
+                $("body").css("overflow", "");
+            } else {
+                $("#mobileDrawerOverlay").addClass("active");
+                $("#mobileDrawer").addClass("active");
+                $("body").css("overflow", "hidden");
             }
         });
 

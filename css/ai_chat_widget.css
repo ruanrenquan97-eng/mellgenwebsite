@@ -682,17 +682,14 @@
 }
 
 /* 移动端适配 */
-@media (max-width: 640px) {
-  #mg-ai-trigger {
-    bottom: 20px;
-    right: 20px;
-    width: 52px;
-    height: 52px;
-  }
-  #mg-ai-bubble-hint {
-    bottom: 80px;
-    right: 15px;
-    max-width: 200px;
+@media (max-width: 768px) {
+  #mg-ai-trigger,
+  #mg-ai-bubble-hint,
+  #mg-back-to-top {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   #mg-ai-chat-window {
     top: 0;

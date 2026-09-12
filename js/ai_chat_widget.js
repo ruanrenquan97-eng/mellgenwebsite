@@ -635,7 +635,7 @@
     } catch(e) {}
 
     var prefix = getAssetPrefix();
-    loadCss(prefix + "css/ai_chat_widget.css?v=20260912v2");
+    loadCss(prefix + "css/ai_chat_widget.css?v=20260912v12");
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", createWidgetDOM);

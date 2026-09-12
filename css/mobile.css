@@ -106,6 +106,10 @@
     padding: 0 !important;
   }
 
+  body {
+    padding-bottom: 60px !important;
+  }
+
   /* 覆盖所有桌面端 1200px、1000px 等写死宽度的容器与内联样式 */
   [style*="1200px"], [style*="width: 1200px"], [style*="width:1200px"],
   [style*="1000px"], [style*="width: 1000px"], [style*="width:1000px"],
@@ -271,99 +275,10 @@
     color: #fff !important;
   }
 
-  /* 顶部快捷弹性横滑一级分类栏 */
+  /* 移动端顶部隐藏横向截断的一级分类栏（已由底部导航栏与抽屉菜单统一承载） */
   .g_nav,
   .g_nav.menu,
   .g_nav.rter {
-    order: 3 !important;
-    float: none !important;
-    width: 100% !important;
-    margin-top: 8px !important;
-    margin-bottom: 2px !important;
-    border-top: 1px solid #f1f5f9 !important;
-    border-bottom: none !important;
-    padding: 6px 0 !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    display: block !important;
-    white-space: nowrap !important;
-    clear: both !important;
-  }
-
-  .g_nav::-webkit-scrollbar,
-  .g_nav.menu::-webkit-scrollbar,
-  .g_nav.rter::-webkit-scrollbar {
-    display: none !important;
-    height: 0 !important;
-  }
-
-  .g_nav ul,
-  .g_nav.menu ul,
-  .g_nav.rter ul {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    float: none !important;
-    margin: 0 !important;
-    padding: 0 4px !important;
-    gap: 6px !important;
-    list-style: none !important;
-  }
-
-  .g_nav li,
-  .g_nav.menu li,
-  .g_nav.rter li {
-    display: inline-block !important;
-    float: none !important;
-    flex: 0 0 auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* 过滤掉深层子分类 (带有 ├ 的项目不放入横滑条，只在抽屉菜单展开展示) */
-  .g_nav li.is-sub-item,
-  .g_nav li.sub-nav-item,
-  .g_nav.menu li.is-sub-item,
-  .g_nav.menu li.sub-nav-item {
-    display: none !important;
-  }
-
-  .g_nav li a,
-  .g_nav.menu li a,
-  .g_nav.rter li a {
-    display: block !important;
-    height: auto !important;
-    line-height: normal !important;
-    padding: 5px 12px !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    color: #4a5568 !important;
-    background: #f7fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
-    float: none !important;
-    margin: 0 !important;
-    text-decoration: none !important;
-    transition: all 0.2s ease !important;
-  }
-
-  .g_nav li.cur a,
-  .g_nav li a:hover,
-  .g_nav li a.active,
-  .g_nav.menu li.cur a,
-  .g_nav.menu li a:hover,
-  .g_nav.menu li a.active,
-  .g_nav.rter li.cur a,
-  .g_nav.rter li a:hover,
-  .g_nav.rter li a.active {
-    color: #fff !important;
-    background: #499c7c !important;
-    border-color: #499c7c !important;
-    font-weight: 600 !important;
-  }
-
-  .g_nav li a::before,
-  .g_nav li a:before,
-  .g_nav.menu li a::before {
     display: none !important;
   }
 
@@ -3455,9 +3370,15 @@
   /* ------------------------------------------------------------------------
      17. 移动端悬浮快捷沟通条与右侧浮动大框彻底重构
      ------------------------------------------------------------------------ */
-  /* 隐藏桌面端阻挡屏幕正文的右侧浮窗 */
-  .xin-2112-client-1 {
+  /* 隐藏桌面端右侧浮窗以及移动端冗余的浮动AI在线气泡/按钮与回到顶部 */
+  .xin-2112-client-1,
+  #mg-ai-trigger,
+  #mg-ai-bubble-hint,
+  #mg-back-to-top {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   /* 移动端底部固定快捷触达工具条 */
@@ -3488,15 +3409,19 @@
     text-decoration: none !important;
     font-size: 11px !important;
     user-select: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
   }
 
-  .mobile-bottom-bar-item:active {
-    color: #499c7c !important;
+  .mobile-bottom-bar-item:active,
+  .mobile-bottom-bar-item.active {
+    color: #059669 !important;
+    font-weight: 600 !important;
   }
 
   .mobile-bottom-bar-item.highlight {
-    color: #499c7c !important;
-    font-weight: 600 !important;
+    color: #059669 !important;
+    font-weight: 700 !important;
   }
 
   .mobile-bottom-bar-icon {

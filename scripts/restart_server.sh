@@ -27,11 +27,21 @@ git checkout -- cms_system/cms_data/seo_metrics.json sitemap.xml 2>/dev/null || 
 git stash
 git pull origin main
 
-echo "[2/4] Checking Python dependencies..."
-if command -v pip3 &>/dev/null; then
-    pip3 install -r requirements.txt || true
-elif command -v pip &>/dev/null; then
-    pip install -r requirements.txt || true
+echo "[2/4] Checking Python environment & dependencies..."
+if command -v python3.11 &>/dev/null; then
+    PYTHON_CMD="python3.11"
+    PIP_CMD="pip3.11"
+elif command -v python3 &>/dev/null; then
+    PYTHON_CMD="python3"
+    PIP_CMD="pip3"
+else
+    PYTHON_CMD="python"
+    PIP_CMD="pip"
+fi
+echo "  -> Using Python runtime: $PYTHON_CMD ($($PYTHON_CMD -V 2>&1))"
+
+if command -v $PIP_CMD &>/dev/null; then
+    $PIP_CMD install -r requirements.txt 2>/dev/null || true
 fi
 
 echo "[3/4] Stopping previous servers..."
@@ -48,12 +58,12 @@ echo "[4/4] Starting Mellgen CMS & WorkBuddy Native MCP Server (Port 8001)..."
 export PYTHONPATH="$WORKSPACE_DIR"
 
 # 启动核心 Flask 服务（包含全站内容管理、AI 客服与原生 WorkBuddy MCP SSE）
-nohup python3 cms_system/server.py > server.log 2>&1 &
+nohup $PYTHON_CMD cms_system/server.py > server.log 2>&1 &
 echo "  -> CMS & WorkBuddy Native MCP Server started on port 8001."
 
 # 尝试启动独立 FastMCP (端口 8002，若环境支持)
-if python3 -c "import mcp" 2>/dev/null; then
-    nohup python3 cms_system/mcp_server.py sse 8002 > mcp_server.log 2>&1 &
+if $PYTHON_CMD -c "import mcp" 2>/dev/null; then
+    nohup $PYTHON_CMD cms_system/mcp_server.py sse 8002 > mcp_server.log 2>&1 &
     echo "  -> Optional FastMCP Standalone Server started on port 8002."
 fi
 

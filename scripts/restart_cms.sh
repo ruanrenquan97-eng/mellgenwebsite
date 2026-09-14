@@ -18,6 +18,11 @@ echo "[*] 项目工作目录: $PROJECT_DIR"
 
 # 1. 查找并结束旧的 Python CMS 进程
 echo "[1/4] 正在排查并终止历史旧进程..."
+if command -v fuser &>/dev/null; then
+    fuser -k 8001/tcp 2>/dev/null || true
+    fuser -k 8002/tcp 2>/dev/null || true
+fi
+
 PIDS=$(lsof -t -i:8001 2>/dev/null)
 if [ -n "$PIDS" ]; then
     echo "  - 发现占用 8001 端口的旧进程 PID: $PIDS，正在终止..."
@@ -33,12 +38,24 @@ if [ -n "$PGREP_PIDS" ]; then
 fi
 echo "  [OK] 旧进程清理完毕。"
 
-# 2. 检查依赖
-echo "[2/4] 检查 Python 运行依赖..."
-python3 -c "import bs4" 2>/dev/null
+# 2. 检查依赖与 Python 版本
+echo "[2/4] 检查 Python 运行环境与依赖..."
+if command -v python3.11 &>/dev/null; then
+    PYTHON_CMD="python3.11"
+    PIP_CMD="pip3.11"
+elif command -v python3 &>/dev/null; then
+    PYTHON_CMD="python3"
+    PIP_CMD="pip3"
+else
+    PYTHON_CMD="python"
+    PIP_CMD="pip"
+fi
+echo "  - 选用 Python 环境: $PYTHON_CMD ($($PYTHON_CMD -V 2>&1))"
+
+$PYTHON_CMD -c "import bs4" 2>/dev/null
 if [ $? -ne 0 ]; then
     echo "  - 正在安装缺少的基础依赖 (beautifulsoup4)..."
-    pip3 install beautifulsoup4 || pip install beautifulsoup4
+    $PIP_CMD install beautifulsoup4 || pip install beautifulsoup4
 else
     echo "  [OK] 依赖环境正常。"
 fi
@@ -46,7 +63,7 @@ fi
 # 3. 启动新版后端服务
 echo "[3/4] 正在启动最新版 CMS 后端守护进程..."
 export PYTHONPATH="$PROJECT_DIR"
-nohup python3 "$PROJECT_DIR/cms_system/server.py" > "$PROJECT_DIR/cms_system/server_daemon.log" 2>&1 &
+nohup $PYTHON_CMD "$PROJECT_DIR/cms_system/server.py" > "$PROJECT_DIR/cms_system/server_daemon.log" 2>&1 &
 NEW_PID=$!
 sleep 2
 

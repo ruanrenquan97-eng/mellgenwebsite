@@ -620,18 +620,18 @@
               </div>
             </div>
 
-            <!-- Products Table -->
-            <div id="insight-products-table-container" class="overflow-x-auto">
+            <!-- Products Table (默认显示5条，超过5条自动滚动) -->
+            <div id="insight-products-table-container" class="overflow-x-auto overflow-y-auto max-h-[320px] rounded border border-slate-100/80 scroll-smooth pr-0.5">
               <table class="w-full text-left border-collapse text-xs">
-                <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
+                <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600 sticky top-0 z-10 shadow-xs backdrop-blur-xs">
                   <tr>
-                    <th class="p-2.5 w-12 text-center">排名</th>
-                    <th class="p-2.5">产品名称 / 访问路径</th>
-                    <th class="p-2.5">所属原料分类</th>
-                    <th class="p-2.5 text-center">浏览量 (PV)</th>
-                    <th class="p-2.5 text-center">访客 (UV)</th>
-                    <th class="p-2.5 text-center text-emerald-700">平均停留时长</th>
-                    <th class="p-2.5 w-24 text-center">关注热度</th>
+                    <th class="p-2.5 w-12 text-center bg-slate-50">排名</th>
+                    <th class="p-2.5 bg-slate-50">产品名称 / 访问路径</th>
+                    <th class="p-2.5 bg-slate-50">所属原料分类</th>
+                    <th class="p-2.5 text-center bg-slate-50">浏览量 (PV)</th>
+                    <th class="p-2.5 text-center bg-slate-50">访客 (UV)</th>
+                    <th class="p-2.5 text-center text-emerald-700 bg-slate-50">平均停留时长</th>
+                    <th class="p-2.5 w-24 text-center bg-slate-50">关注热度</th>
                   </tr>
                 </thead>
                 <tbody id="insight-products-tbody" class="divide-y divide-slate-100 text-slate-700">
@@ -640,17 +640,17 @@
               </table>
             </div>
 
-            <!-- Pages Table (Hidden by default) -->
-            <div id="insight-pages-table-container" class="overflow-x-auto hidden">
+            <!-- Pages Table (Hidden by default, 默认显示5条，超过5条自动滚动) -->
+            <div id="insight-pages-table-container" class="overflow-x-auto overflow-y-auto max-h-[320px] rounded border border-slate-100/80 scroll-smooth pr-0.5 hidden">
               <table class="w-full text-left border-collapse text-xs">
-                <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
+                <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600 sticky top-0 z-10 shadow-xs backdrop-blur-xs">
                   <tr>
-                    <th class="p-2.5 w-12 text-center">排名</th>
-                    <th class="p-2.5">受访页面标题</th>
-                    <th class="p-2.5">页面文件路径</th>
-                    <th class="p-2.5 text-center">浏览量 (PV)</th>
-                    <th class="p-2.5 text-center">访客 (UV)</th>
-                    <th class="p-2.5 text-center text-emerald-700">平均停留时长</th>
+                    <th class="p-2.5 w-12 text-center bg-slate-50">排名</th>
+                    <th class="p-2.5 bg-slate-50">受访页面标题</th>
+                    <th class="p-2.5 bg-slate-50">页面文件路径</th>
+                    <th class="p-2.5 text-center bg-slate-50">浏览量 (PV)</th>
+                    <th class="p-2.5 text-center bg-slate-50">访客 (UV)</th>
+                    <th class="p-2.5 text-center text-emerald-700 bg-slate-50">平均停留时长</th>
                   </tr>
                 </thead>
                 <tbody id="insight-pages-tbody" class="divide-y divide-slate-100 text-slate-700">

@@ -2397,14 +2397,12 @@
 
   .g_news .m_news dl dd span {
     display: flex !important;
-    justify-content: space-between !important;
+    justify-content: flex-end !important;
     align-items: center !important;
   }
 
   .g_news .m_news dl dd span em {
-    font-size: 11px !important;
-    color: #a0aec0 !important;
-    float: none !important;
+    display: none !important;
   }
 
   .g_news .m_news dl dd span i {

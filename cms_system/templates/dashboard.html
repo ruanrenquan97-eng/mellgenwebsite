@@ -711,55 +711,445 @@
           </div>
 
           <!-- MCP Tools Grid -->
-          <div class="space-y-2">
-            <label class="block text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-              <i class="fa-solid fa-wrench text-purple-600 text-[11px]"></i>
-              <span>WorkBuddy 获得的 MCP 专属工具矩阵 (Tools)</span>
-            </label>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <!-- Tool 1: create_product_detail -->
-              <div class="border border-purple-100 bg-purple-50/30 rounded-lg p-3 space-y-1.5 hover:border-purple-200 transition">
+          <!-- MCP Tools Grid: 34 Tools across 10 Modules -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-wrench text-purple-600 text-[11px]"></i>
+                <span>WorkBuddy 专属 Agent 工具矩阵 (已解锁全站 10 大模块 · 34 项原生 Tools)</span>
+              </label>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
+                  <i class="fa-solid fa-layer-group mr-1"></i>10 大功能模块全覆盖
+                </span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <i class="fa-solid fa-bolt mr-1"></i>34 项工具即刻调用
+                </span>
+              </div>
+            </div>
+
+            <!-- Quick Module Pills -->
+            <div class="flex flex-wrap gap-1.5 text-[11px]">
+              <button type="button" onclick="filterWbTools('all')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-purple-600 text-white font-medium shadow-sm transition" data-target="all">全部 (34)</button>
+              <button type="button" onclick="filterWbTools('products')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="products">产品中心 (7)</button>
+              <button type="button" onclick="filterWbTools('articles')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="articles">资讯中心 (7)</button>
+              <button type="button" onclick="filterWbTools('inquiries')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="inquiries">客户线索 (3)</button>
+              <button type="button" onclick="filterWbTools('seo')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="seo">SEO优化 (4)</button>
+              <button type="button" onclick="filterWbTools('geo')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="geo">GEO引擎 (2)</button>
+              <button type="button" onclick="filterWbTools('qa')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="qa">AI客服 (4)</button>
+              <button type="button" onclick="filterWbTools('videos')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="videos">视频中心 (3)</button>
+              <button type="button" onclick="filterWbTools('company')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="company">企业资料 (2)</button>
+              <button type="button" onclick="filterWbTools('system')" class="wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="system">发布/鉴权 (2)</button>
+            </div>
+
+            <!-- Tool Cards Grid -->
+            <div id="wb-tools-container" class="grid grid-cols-1 md:grid-cols-3 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
+              <!-- 模块 1: 账户身份核验 -->
+              <div class="wb-tool-card border border-purple-200 bg-purple-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="system">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-purple-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-shield text-purple-600 text-[11px]"></i>
+                    <span>verify_mellgen_account</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-purple-100 text-purple-700 rounded font-semibold">身份核验</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">核验 WorkBuddy 连接账户授权身份与操作角色，返回登录状态及对应后台权限。</p>
+              </div>
+
+              <!-- 模块 2: 产品中心 (7 tools) -->
+              <div class="wb-tool-card border border-purple-200 bg-purple-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
                 <div class="flex items-center justify-between">
                   <span class="font-bold font-mono text-xs text-purple-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-magic-wand-sparkles text-purple-600 text-[11px]"></i>
                     <span>create_product_detail</span>
                   </span>
-                  <span class="text-[9px] px-1.5 py-0.2 bg-purple-200/70 text-purple-800 rounded font-semibold">核心制作</span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-purple-200/80 text-purple-800 rounded font-semibold">核心制作</span>
                 </div>
-                <p class="text-[11px] text-slate-600 leading-snug">
-                  WorkBuddy 接收您的要求后，自动生成符合化妆品法规的【产品介绍 + 推荐应用 + 3大优势卡片】，自动生成官网静态 HTML 页面并上线！
-                </p>
+                <p class="text-[11px] text-slate-600 leading-snug">自动生成高保真图文版式【产品介绍+应用场景+3大优势卡片】，自动生成官网静态 HTML 页面并上线。</p>
               </div>
 
-              <!-- Tool 2: audit_product_compliance -->
-              <div class="border border-slate-200 bg-slate-50/50 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition">
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-boxes-stacked text-indigo-600 text-[11px]"></i>
+                    <span>list_all_products</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">产品列表</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">获取官网产品全量知识库，支持按分类及关键词搜索产品名、INCI 及性状指标。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-info text-blue-600 text-[11px]"></i>
+                    <span>get_product_detail</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">产品详情</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">按产品 ID 调取生物透皮机理、配方推荐与 3 大优势详情，支持 WorkBuddy 深度推理。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-to-square text-amber-600 text-[11px]"></i>
+                    <span>update_product_detail</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded">产品修改</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">修改已有产品参数、INCI、介绍文案或上下架状态，自动重构静态页面。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-trash-can text-rose-600 text-[11px]"></i>
+                    <span>delete_product</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded">产品删除</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">下架指定产品并清理对应静态 HTML 文件，同时刷新产品中心分类索引。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-folder-tree text-teal-600 text-[11px]"></i>
+                    <span>list_product_categories</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">分类目录</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">查询所有产品分类结构、SEO TDK 配置及关联技术标签速查表。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
                 <div class="flex items-center justify-between">
                   <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
                     <i class="fa-solid fa-shield-halved text-emerald-600 text-[11px]"></i>
                     <span>audit_product_compliance</span>
                   </span>
-                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">法规审查</span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded">法规审查</span>
                 </div>
-                <p class="text-[11px] text-slate-600 leading-snug">
-                  在发布前自动筛查文案是否含有“抗肿瘤、创面愈合、消炎杀菌、赢领”等违禁词，确保 100% 符合化妆品广告法。
-                </p>
+                <p class="text-[11px] text-slate-600 leading-snug">自动筛查文案是否含涉医、消炎杀菌、免疫力及极限词，确保 100% 广告法合规。</p>
               </div>
 
-              <!-- Tool 3: publish_website -->
-              <div class="border border-slate-200 bg-slate-50/50 rounded-lg p-3 space-y-1.5 hover:border-slate-300 transition">
+              <!-- 模块 3: 资讯中心 (7 tools) -->
+              <div class="wb-tool-card border border-blue-200 bg-blue-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-blue-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-newspaper text-blue-600 text-[11px]"></i>
+                    <span>list_articles</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-blue-100 text-blue-800 rounded">资讯检索</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">分页获取企业动态、行业新闻与科研成果，支持按分类与关键字多维筛选。</p>
+              </div>
+
+              <div class="wb-tool-card border border-blue-200 bg-blue-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-blue-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-lines text-blue-600 text-[11px]"></i>
+                    <span>get_article_detail</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-blue-100 text-blue-800 rounded">文章正文</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">获取单篇文章完整正文 HTML、作者、发布日期及摘要元数据。</p>
+              </div>
+
+              <div class="wb-tool-card border border-blue-200 bg-blue-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-blue-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-nib text-blue-600 text-[11px]"></i>
+                    <span>create_article</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-blue-200/70 text-blue-800 rounded font-semibold">发布文章</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">由 WorkBuddy 撰写并发布全新资讯，合规审查后自动生成静态文章页并更新列表。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
                 <div class="flex items-center justify-between">
                   <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-pen text-amber-600 text-[11px]"></i>
+                    <span>update_article</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded">更新文章</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">修改已有文章标题、分类、摘要或正文，并重新生成静态文件。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-circle-xmark text-rose-600 text-[11px]"></i>
+                    <span>delete_article</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded">删除文章</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">删除指定文章并清理对应静态 HTML 页面与资讯列表索引。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-tags text-teal-600 text-[11px]"></i>
+                    <span>list_article_categories</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">资讯分类</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">获取企业动态、行业新闻、科研进展等所有资讯分类列表。</p>
+              </div>
+
+              <div class="wb-tool-card border border-emerald-200 bg-emerald-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="articles">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-emerald-900 flex items-center gap-1.5">
+                    <i class="fa-brands fa-weixin text-emerald-600 text-[11px]"></i>
+                    <span>sync_wechat_articles</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded font-semibold">微信同步</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">一键抓取微信公众号推文链接，自动转为官网高保真图文排版并同步发布。</p>
+              </div>
+
+              <!-- 模块 4: 客户线索 (3 tools) -->
+              <div class="wb-tool-card border border-amber-200 bg-amber-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="inquiries">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-amber-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-clipboard-list text-amber-600 text-[11px]"></i>
+                    <span>list_customer_inquiries</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded">客户留言</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">调取官网访客提交的意向采购留言、联系电话、邮箱及未读数量。</p>
+              </div>
+
+              <div class="wb-tool-card border border-amber-200 bg-amber-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="inquiries">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-amber-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-check-double text-amber-600 text-[11px]"></i>
+                    <span>update_inquiry_status</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded">处理标记</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">将客户意向标记为已读，或由 WorkBuddy 录入处理备注与回复记录。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="inquiries">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-trash text-rose-600 text-[11px]"></i>
+                    <span>delete_customer_inquiry</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded">删除线索</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">清理垃圾广告与无效咨询留言。</p>
+              </div>
+
+              <!-- 模块 5: SEO 优化 (4 tools) -->
+              <div class="wb-tool-card border border-cyan-200 bg-cyan-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="seo">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-cyan-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-magnifying-glass-chart text-cyan-600 text-[11px]"></i>
+                    <span>get_seo_overview</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-cyan-100 text-cyan-800 rounded">SEO大盘</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">获取百度、谷歌、必应及各 AI 爬虫抓取频次与收录健康度数据。</p>
+              </div>
+
+              <div class="wb-tool-card border border-cyan-200 bg-cyan-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="seo">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-cyan-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-paper-plane text-cyan-600 text-[11px]"></i>
+                    <span>push_urls_to_search_engines</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-cyan-200/70 text-cyan-800 rounded font-semibold">主动推送</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">主动向百度、必应 IndexNow 与 AI 爬虫广播全站最新页面，加速秒级收录。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="seo">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-spider text-slate-600 text-[11px]"></i>
+                    <span>get_spider_crawl_logs</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">蜘蛛监控</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">查询真实搜索引擎与大模型蜘蛛（Baiduspider, GPTBot 等）的实时访问日志。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="seo">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-sitemap text-indigo-600 text-[11px]"></i>
+                    <span>trigger_seo_optimize</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-indigo-100 text-indigo-800 rounded">深度优化</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">一键重构标准 sitemap.xml 网站地图并更新 robots.txt 规范。</p>
+              </div>
+
+              <!-- 模块 6: GEO 生成式引擎 (2 tools) -->
+              <div class="wb-tool-card border border-purple-200 bg-purple-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="geo">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-purple-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-brain text-purple-600 text-[11px]"></i>
+                    <span>get_geo_status</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-purple-100 text-purple-800 rounded">GEO状态</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">查看面向 DeepSeek、豆包、Kimi、GPT-4o、Gemini 的 llms.txt 知识库状态与引用统计。</p>
+              </div>
+
+              <div class="wb-tool-card border border-purple-200 bg-purple-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="geo">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-purple-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-600 text-[11px]"></i>
+                    <span>rebuild_llms_knowledge</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-purple-200/80 text-purple-800 rounded font-semibold">重构llms.txt</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">全量重构 /llms.txt 与 /llms-full.txt，喂养全球大模型权威透皮原料知识。</p>
+              </div>
+
+              <!-- 模块 7: AI 客服与向量知识库 (4 tools) -->
+              <div class="wb-tool-card border border-rose-200 bg-rose-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="qa">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-rose-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-headset text-rose-600 text-[11px]"></i>
+                    <span>list_qa_pairs</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded">问答库检索</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">检索官方问答库（包含机理、配方推荐、资质等 1000+ 条权威问答对）。</p>
+              </div>
+
+              <div class="wb-tool-card border border-rose-200 bg-rose-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="qa">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-rose-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-plus-minus text-rose-600 text-[11px]"></i>
+                    <span>add_or_update_qa_pair</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded">录入问答</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">新增或维护 AI 问答条目，通过法规合规审查后直接供在线客服调用。</p>
+              </div>
+
+              <div class="wb-tool-card border border-rose-200 bg-rose-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="qa">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-rose-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-comments text-rose-600 text-[11px]"></i>
+                    <span>test_ai_customer_service</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded font-semibold">客服测试</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">模拟访客提问，实时测试 AI 客服检索精准度、知识引用来源与回答语气。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="qa">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-network-wired text-indigo-600 text-[11px]"></i>
+                    <span>rebuild_vector_database</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-indigo-100 text-indigo-800 rounded">向量索引</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">重构全库语义向量索引，支持复杂同义词与多维度意图匹配。</p>
+              </div>
+
+              <!-- 模块 8: 视频中心 (3 tools) -->
+              <div class="wb-tool-card border border-sky-200 bg-sky-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="videos">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-sky-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-film text-sky-600 text-[11px]"></i>
+                    <span>list_all_videos</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-sky-100 text-sky-800 rounded">视频列表</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">获取官网企业形象宣传片与产品实验机理视频列表。</p>
+              </div>
+
+              <div class="wb-tool-card border border-sky-200 bg-sky-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="videos">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-sky-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-video text-sky-600 text-[11px]"></i>
+                    <span>create_or_update_video</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-sky-100 text-sky-800 rounded">配置视频</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">配置企业宣传或产品讲解视频条目（播放源、封面图与简介）。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="videos">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-trash text-rose-600 text-[11px]"></i>
+                    <span>delete_video</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-rose-100 text-rose-800 rounded">删除视频</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">删除指定视频条目并同步前端播放列表。</p>
+              </div>
+
+              <!-- 模块 9: 企业资料与配置 (2 tools) -->
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="company">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-building text-slate-700 text-[11px]"></i>
+                    <span>get_company_profile</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">企业档案</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">调取美尔健官方企业简介、地址、热线、邮箱与 ICP 备案号。</p>
+              </div>
+
+              <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="company">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-address-card text-indigo-600 text-[11px]"></i>
+                    <span>update_company_profile</span>
+                  </span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-indigo-100 text-indigo-800 rounded">更新配置</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug">更新企业官方热线、邮箱或地址，自动同步全站所有静态页面的页脚！</p>
+              </div>
+
+              <!-- 模块 10: 全站发布与编译 (1 tool) -->
+              <div class="wb-tool-card border border-blue-200 bg-blue-50/40 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="system">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold font-mono text-xs text-blue-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-cloud-arrow-up text-blue-600 text-[11px]"></i>
                     <span>publish_website</span>
                   </span>
-                  <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">一键发布</span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-blue-200/80 text-blue-800 rounded font-semibold">全量发布</span>
                 </div>
-                <p class="text-[11px] text-slate-600 leading-snug">
-                  重新编译并全量发布全站静态 HTML 页面，同步更新产品中心列表及各分类目录索引。
-                </p>
+                <p class="text-[11px] text-slate-600 leading-snug">重新编译并发布全站静态 HTML 页面，同步更新产品、资讯及双语站索引。</p>
               </div>
             </div>
           </div>
+
+          <script>
+            function filterWbTools(category) {
+              const cards = document.querySelectorAll('.wb-tool-card');
+              const btns = document.querySelectorAll('.wb-tool-filter-btn');
+              btns.forEach(b => {
+                if (b.getAttribute('data-target') === category) {
+                  b.className = 'wb-tool-filter-btn px-2.5 py-1 rounded bg-purple-600 text-white font-medium shadow-sm transition';
+                } else {
+                  b.className = 'wb-tool-filter-btn px-2.5 py-1 rounded bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+                }
+              });
+              cards.forEach(c => {
+                if (category === 'all' || c.getAttribute('data-cat') === category) {
+                  c.style.display = 'block';
+                } else {
+                  c.style.display = 'none';
+                }
+              });
+            }
+          </script>
 
           <!-- Configuration Code Snippets for WorkBuddy (Production & Multi-Account Verified) -->
           <div class="space-y-3 pt-2">

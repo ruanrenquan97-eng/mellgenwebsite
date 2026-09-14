@@ -4421,7 +4421,7 @@ def get_network_info():
     })
 
 def cleanup_historical_visitor_logs():
-    """在服务启动时自动清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
+    """在后台异步清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
     try:
         logs = load_json("visitor_logs.json")
         if logs and isinstance(logs, dict):
@@ -4432,7 +4432,13 @@ def cleanup_historical_visitor_logs():
     except Exception as e:
         print(f"[Cleanup] 访客记录自愈警告: {e}")
 
-cleanup_historical_visitor_logs()
+# 在独立后台守护线程中运行，绝不阻塞主服务极速启动与端口监听
+def _async_startup_cleanup():
+    import time
+    time.sleep(1.5)
+    cleanup_historical_visitor_logs()
+
+threading.Thread(target=_async_startup_cleanup, daemon=True).start()
 
 # Start the background daily SEO scheduler daemon
 daily_scheduler.start_scheduler()

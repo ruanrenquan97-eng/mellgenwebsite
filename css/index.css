@@ -431,17 +431,137 @@ to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);opacity:1}
 }
 
 /* ==========================================================================
-   页脚保障 (Footer Teaser Visibility & Canvas Optimizations)
+   页脚导航列完整展示保障 (Footer Multi-Column Full Content Guarantee)
    ========================================================================== */
 
-/* 强制页脚所有导航列可见，杜绝 teaser 动画未触发导致空白 */
+/* 强制页脚容器自适应高度，绝不截断下方内容 */
+.g_ft .ftmid,
+.m_ft .ftmid {
+  height: auto !important;
+  min-height: 12rem !important;
+  overflow: visible !important;
+  display: block !important;
+}
+
+.g_ft .ftmid .ftnav,
+.m_ft .ftmid .ftnav {
+  display: block !important;
+  float: left !important;
+  width: 76% !important;
+  overflow: visible !important;
+}
+
+/* 强制页脚所有导航列 100% 永久可见，彻底杜绝 teaser 动画未触发导致空白 */
+.g_ft .ftmid .ftnav dl,
+.g_ft .ftnav dl,
+.m_ft .ftnav dl,
 .g_ft .ftmid .ftnav dl.teaser,
 .g_ft .ftnav dl.teaser,
 .m_ft .ftnav dl.teaser {
+  display: block !important;
+  float: left !important;
   opacity: 1 !important;
   transform: none !important;
   -webkit-transform: none !important;
   visibility: visible !important;
+  position: relative !important;
+}
+
+/* 第 1 列：快捷链接 */
+.g_ft .ftmid .ftnav dl:nth-child(1),
+.m_ft .ftmid .ftnav dl:nth-child(1) {
+  width: 12.5% !important;
+  margin-right: 7.5% !important;
+}
+
+.g_ft .ftmid .ftnav dl:nth-child(1) dd a,
+.m_ft .ftmid .ftnav dl:nth-child(1) dd a {
+  display: block !important;
+  font-size: 14px !important;
+  line-height: 1.8rem !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 第 2 列：产品中心（完整三列网格展开所有原料产品） */
+.g_ft .ftmid .ftnav dl:nth-child(2),
+.m_ft .ftmid .ftnav dl:nth-child(2) {
+  width: 42.5% !important;
+  margin-right: 6% !important;
+}
+
+.g_ft .ftmid .ftnav dl:nth-child(2) dd,
+.m_ft .ftmid .ftnav dl:nth-child(2) dd {
+  display: block !important;
+  overflow: visible !important;
+}
+
+.g_ft .ftmid .ftnav dl:nth-child(2) dd a,
+.m_ft .ftmid .ftnav dl:nth-child(2) dd a {
+  float: left !important;
+  width: 33.33% !important;
+  display: block !important;
+  font-size: 14px !important;
+  line-height: 1.8rem !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  padding-right: 8px !important;
+  box-sizing: border-box !important;
+}
+
+/* 第 3 列：行业案例（完整两列网格展开所有行业应用） */
+.g_ft .ftmid .ftnav dl:nth-child(3),
+.m_ft .ftmid .ftnav dl:nth-child(3) {
+  width: 24% !important;
+}
+
+.g_ft .ftmid .ftnav dl:nth-child(3) dd,
+.m_ft .ftmid .ftnav dl:nth-child(3) dd {
+  display: block !important;
+  overflow: visible !important;
+}
+
+.g_ft .ftmid .ftnav dl:nth-child(3) dd a,
+.m_ft .ftmid .ftnav dl:nth-child(3) dd a {
+  float: left !important;
+  width: 48% !important;
+  display: block !important;
+  font-size: 14px !important;
+  line-height: 1.8rem !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  padding-right: 6px !important;
+  box-sizing: border-box !important;
+}
+
+/* 列标题样式 */
+.g_ft .ftmid .ftnav dl dt a,
+.m_ft .ftmid .ftnav dl dt a {
+  display: block !important;
+  font-size: .95rem !important;
+  font-weight: 700 !important;
+  line-height: 1.8rem !important;
+  color: #ffffff !important;
+  margin-bottom: .8rem !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 右侧公司信息与地址 */
+.g_ft .ftmid .add,
+.m_ft .ftmid .add {
+  float: left !important;
+  width: 24% !important;
+  display: block !important;
 }
 
 /* 底部背景粒子 Canvas 降噪与防遮挡 */

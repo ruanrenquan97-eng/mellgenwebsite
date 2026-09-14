@@ -147,6 +147,8 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not session.get("logged_in"):
+            if request.path.startswith("/api/"):
+                return jsonify({"success": False, "message": "登录已过期，请刷新页面重新登录"}), 401
             return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
@@ -310,11 +312,33 @@ def edit_product(product_id):
             p["recommend"] = bool(data.get("recommend", p.get("recommend", False)))
             p["top"] = bool(data.get("top", p.get("top", False)))
             p["show"] = bool(data.get("show", p.get("show", True)))
+            p["sort"] = int(data.get("sort", p.get("sort", 50)))
             p["date"] = data.get("date", p.get("date", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
             save_json("products.json", products)
             return jsonify({"success": True, "product": p})
             
     return jsonify({"success": False, "message": "产品未找到"}), 404
+
+@app.route("/api/products/reorder", methods=["POST"])
+@login_required
+def reorder_products():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        order_list = data.get("order", [])
+        if not order_list or not isinstance(order_list, list):
+            return jsonify({"success": False, "message": "无效的排序列表"}), 400
+        
+        products = load_json("products.json") or []
+        prod_map = {p["id"]: p for p in products if isinstance(p, dict) and "id" in p}
+        
+        for idx, pid in enumerate(order_list, 1):
+            if pid in prod_map:
+                prod_map[pid]["sort"] = idx * 10
+                
+        save_json("products.json", products)
+        return jsonify({"success": True, "message": "产品排序保存成功"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"保存排序异常: {str(e)}"}), 500
 
 @app.route("/api/products/<product_id>", methods=["DELETE"])
 @login_required
@@ -419,6 +443,27 @@ def delete_article(article_id):
             pass
             
     return jsonify({"success": True})
+
+@app.route("/api/articles/reorder", methods=["POST"])
+@login_required
+def reorder_articles():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        order_list = data.get("order", [])
+        if not order_list or not isinstance(order_list, list):
+            return jsonify({"success": False, "message": "无效的排序列表"}), 400
+            
+        articles = load_json("articles.json") or []
+        art_map = {a["id"]: a for a in articles if isinstance(a, dict) and "id" in a}
+        
+        for idx, aid in enumerate(order_list, 1):
+            if aid in art_map:
+                art_map[aid]["sort"] = idx * 10
+                
+        save_json("articles.json", articles)
+        return jsonify({"success": True, "message": "文章排序保存成功"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"保存排序异常: {str(e)}"}), 500
 
 # 2.1 WeChat Official Account Sync API
 @app.route("/api/wechat/config", methods=["GET", "POST"])
@@ -1850,6 +1895,25 @@ def batch_delete_categories():
     categories = [c for c in categories if c["id"] not in ids_to_delete]
     save_json("categories.json", categories)
     return jsonify({"success": True})
+
+@app.route("/api/categories/reorder", methods=["POST"])
+@login_required
+def reorder_categories():
+    data = request.json or {}
+    order_list = data.get("order", [])
+    if not order_list:
+        return jsonify({"success": False, "message": "无效的排序列表"}), 400
+        
+    categories = load_json("categories.json") or []
+    cat_map = {c["id"]: c for c in categories}
+    
+    for idx, cid in enumerate(order_list, 1):
+        if cid in cat_map:
+            cat_map[cid]["sort"] = idx
+            
+    categories.sort(key=lambda x: x.get("sort", 999))
+    save_json("categories.json", categories)
+    return jsonify({"success": True, "message": "分类排序保存成功"})
 
 
 

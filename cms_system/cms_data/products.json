@@ -15,8 +15,8 @@
       "建议添加量": "0.5% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "1,2-己二醇、水解胎盘（羊）提取物、对羟基苯乙酮、水",
-      "inci_en": "1,2-HEXANEDIOL, HYDROXYACETOPHENONE, AQUA",
+      "inci_cn": "水解胎盘（羊）提取物、十肽-4、1,2-己二醇、对羟基苯乙酮、水",
+      "inci_en": "Hydrolyzed Placenta Extract, Decapeptide-4, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "91079-43-5 / 917094-11-2 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 5.0%（抗衰滋养推荐 1.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -62,7 +62,10 @@
       "lab_tpht_penetration"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
-    "diagram_caption": "羊胎素纳米透皮深层递送、抵抗光老化MMP-1基质降解与临床抗皱保湿舒缓测试图"
+    "diagram_caption": "健康羊胚胎细胞活性精华纳米促渗递送、MMP-1基质金属蛋白酶抑制率及皮肤水润弹性临床曲线",
+    "intro_image": "resource/images/product_intros/intro_sheep.jpg",
+    "intro_image_tag": "细胞营养素溯源",
+    "intro_image_caption": "健康羊胚胎细胞活性精华复合营养库与仿生多肽结构"
   },
   {
     "id": "pdrnht",
@@ -81,8 +84,8 @@
       "核心活性物": "深海三文鱼精巢 PDRN (纯度≥98.0%) + 专利透皮环肽"
     },
     "rd_info": {
-      "inci_cn": "十肽-4、脱氧核糖核酸、水解 DNA、核糖核酸、水、1,2-己二醇",
-      "inci_en": "DECAPEPTIDE-4, DNA, HYDROLYZED DNA, RNA, AQUA, 1,2-HEXANEDIOL",
+      "inci_cn": "脱氧核糖核酸钠、十肽-4、1,2-己二醇、水",
+      "inci_en": "Sodium DNA, Decapeptide-4, 1,2-Hexanediol, Aqua",
       "cas": "9007-49-2 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（深层赋活推荐 0.5% - 1.5%）",
       "ph_range": "6.0 - 7.5",
@@ -119,7 +122,10 @@
       "lab_tpht_penetration"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
-    "diagram_caption": "PDRN超分子棒状结构搭载透皮环肽促透机制与经皮吸收实验数据（5分钟打开屏障与浓度依赖曲线）"
+    "diagram_caption": "PDRN超分子棒状结构搭载透皮环肽促透机制与经皮吸收实验数据（5分钟打开屏障与浓度依赖曲线）",
+    "intro_image": "resource/reports/images/lab_pdrn_triple_efficacy_data.jpg",
+    "intro_image_tag": "细胞再生数据",
+    "intro_image_caption": "PDRN多聚脱氧核糖核苷酸促进组织微循环及细胞活力测试数据"
   },
   {
     "id": "mellpr8670",
@@ -138,8 +144,8 @@
       "核心活性物": "透皮型5D胶原蛋白复合物"
     },
     "rd_info": {
-      "inci_cn": "胶原、1,2-己二醇、水",
-      "inci_en": "COLLAGEN, 1,2-HEXANEDIOL, WATER",
+      "inci_cn": "十肽-4、胶原、1,2-己二醇、水",
+      "inci_en": "Decapeptide-4, Collagen, 1,2-Hexanediol, Aqua",
       "cas": "917094-11-2 / 9007-34-5 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（多维抗老推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 7.2",
@@ -176,7 +182,10 @@
       "lab_collagen3_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "5Dcollagen重组多型胶原蛋白五维立体全层网络模型（I型纤维束/II型软骨/III型网状/IV型基底膜/XVII型跨膜锁定）"
+    "diagram_caption": "5Dcollagen重组多型胶原蛋白五维立体全层网络模型（I型纤维束/II型软骨/III型网状/IV型基底膜/XVII型跨膜锁定）",
+    "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
+    "intro_image_tag": "多维结构模型",
+    "intro_image_caption": "5D胶原多维立体支撑微环境及真皮细胞层丰盈饱满充盈图"
   },
   {
     "id": "tpxldb",
@@ -195,8 +204,8 @@
       "核心活性物": "人源重组纤连蛋白 (TFN 活性含量≥2000ppm)"
     },
     "rd_info": {
-      "inci_cn": "纤连蛋白、1,2-己二醇、水",
-      "inci_en": "FIBRONECTIN, 1,2-HEXANEDIOL, WATER",
+      "inci_cn": "十肽-4、纤连蛋白、1,2-己二醇、水",
+      "inci_en": "Decapeptide-4, Fibronectin, 1,2-Hexanediol, Aqua",
       "cas": "917094-11-2 / 86088-83-7 / 6920-22-5 / 7732-18-5",
       "dosage": "0.2% - 2.0%（屏障修护推荐 0.5% - 1.0%）",
       "ph_range": "6.0 - 7.5（中性偏弱酸性体系更利于空间折叠构象稳定）",
@@ -235,7 +244,10 @@
       "lab_tpht_penetration"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
-    "diagram_caption": "透皮重组人源纤连蛋白TFNpro毛细渗透吸收提升8倍与角质层屏障修复组织病理切片"
+    "diagram_caption": "透皮重组人源纤连蛋白TFNpro毛细渗透吸收提升8倍与角质层屏障修复组织病理切片",
+    "intro_image": "resource/reports/images/lab_tfn_penetration_barrier_data.jpg",
+    "intro_image_tag": "组织修复实验",
+    "intro_image_caption": "TFNpro透皮纤连蛋白角质层跨膜渗透率与表皮屏障重建数据图"
   },
   {
     "id": "qdjy",
@@ -255,7 +267,7 @@
     },
     "rd_info": {
       "inci_cn": "缺端胶原、羟乙基脲、对羟基苯乙酮、水",
-      "inci_en": "ATELOCOLLAGEN, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER",
+      "inci_en": "Atelocollagen, Hydroxyethyl Urea, Hydroxyacetophenone, Aqua",
       "cas": "9007-34-5 / 2078-71-9 / 99-93-4 / 7732-18-5",
       "dosage": "0.8% - 3.0%（敏感肌与脆弱肌特护期修护推荐 1.5%）",
       "ph_range": "5.8 - 7.0",
@@ -288,7 +300,10 @@
       "lab_collagen_biocompatibility"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "去端肽高纯活性胶原天然三螺旋结构与组织生物相容性基质图"
+    "diagram_caption": "高活性嵌段重组胶原功能肽段串联组装与生物亲和折叠模型",
+    "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
+    "intro_image_tag": "仿生基质模型",
+    "intro_image_caption": "重组嵌段胶原多肽模块化拼接与细胞外基质交联组装图"
   },
   {
     "id": "zbssb",
@@ -307,8 +322,8 @@
       "核心活性物": "道地长白山灵芝黄酮、人参皂苷及松口蘑多糖复合活性群"
     },
     "rd_info": {
-      "inci_cn": "黑灵芝（GANODERMA ATRUM）提取物、人参（PANAX GINSENG）根提取物、松口蘑（TRICHOLOMA MATSUTAKE）提取物、甜菜碱、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "GANODERMA ATRUM (MUSHROOM) EXTRACT, PANAX GINSENG ROOT EXTRACT, TRICHOLOMA MATSUTAKE EXTRACT, BETAINE, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
+      "inci_cn": "水、赤芝（GANODERMA ATRUM）提取物、人参（PANAX GINSENG）根提取物、松茸（TRICHOLOMA MATSUTAKE）提取物、1,2-戊二醇、羟苯乙酮",
+      "inci_en": "Ganoderma Atrum Extract, Panax Ginseng Root Extract, Tricholoma Matsutake Extract, Betaine, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "507-70-0 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "1.0% - 5.0%（匀净焕亮推荐 1.5% - 3.0%）",
       "ph_range": "4.5 - 6.8",
@@ -343,7 +358,10 @@
       "lab_gpt_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
-    "diagram_caption": "长白山三宝(灵芝+人参+松茸)液体深层发酵物：MC1R黑色素生成抑制通路与酪氨酸酶活性抑制柱状图"
+    "diagram_caption": "长白山三宝(黑灵芝+人参根+松茸)液体深层发酵物MC1R黑素生成通路阻断与酪氨酸酶抑制曲线(优于熊果苷)",
+    "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
+    "intro_image_tag": "珍稀植物溯源",
+    "intro_image_caption": "长白山野生黑灵芝、人参根与野生松茸珍稀天然植物溯源示意图"
   },
   {
     "id": "megpep6245",
@@ -362,8 +380,8 @@
       "核心活性物": "裂殖酵母外泌胞外活性多肽与有机酸群"
     },
     "rd_info": {
-      "inci_cn": "1,2-己二醇、裂殖酵母（SCHIZOSACCHAROMYCES）菌丝体发酵产物滤液",
-      "inci_en": "1,2-HEXANEDIOL, SCHIZOSACCHAROMYCES FERMENT FILTRATE",
+      "inci_cn": "裂殖酵母（SCHIZOSACCHAROMYCES）菌丝体发酵产物滤液、1,2-己二醇",
+      "inci_en": "Schizosaccharomyces Ferment Filtrate, 1,2-Hexanediol",
       "cas": "6920-22-5",
       "dosage": "1.0% - 4.0%（细胞抗老与修护推荐 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -396,8 +414,11 @@
       "lab_recm_multi_efficacy",
       "lab_tfn_penetration_barrier"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
-    "diagram_caption": "现代微生物深层发酵工厂、定向破壁酶解系统与多级超滤精制生产实景"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
+    "diagram_caption": "复合抗老寡肽矩阵刺激成纤维细胞分泌I/III型胶原与清除自由基剂量效应曲线",
+    "intro_image": "resource/images/product_intros/intro_zebrafish.jpg",
+    "intro_image_tag": "活体实验数据",
+    "intro_image_caption": "斑马鱼活体黑色素定量测试典型对比（显著降低活体黑色素沉积）"
   },
   {
     "id": "megpep",
@@ -416,8 +437,8 @@
       "核心活性物": "高活性重组修复寡肽 (纯度≥98%)"
     },
     "rd_info": {
-      "inci_cn": "氯化钠、寡肽-1、柠檬酸钠、1,2-己二醇、水",
-      "inci_en": "SODIUM CHLORIDE, OLIGOPEPTIDE-1, SODIUM CITRATE, 1,2-HEXANEDIOL, WATER",
+      "inci_cn": "寡肽-1、氯化钠、柠檬酸钠、1,2-己二醇、水",
+      "inci_en": "Oligopeptide-1, Sodium Chloride, Sodium Citrate, 1,2-Hexanediol, Aqua",
       "cas": "6920-22-5 / 7647-14-5 / 68-04-2 / 7732-18-5",
       "dosage": "0.2% - 1.5%（高效透皮助剂推荐 0.5%）",
       "ph_range": "4.5 - 8.0（体系稳定性极广）",
@@ -450,8 +471,11 @@
       "lab_tfn_four_efficacy",
       "lab_tpht_penetration"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
-    "diagram_caption": "高纯度重组寡肽制剂线、百级洁净灌装车间与严苛质控检测中心"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
+    "diagram_caption": "斑马鱼活体抗氧化与美白功效测试：MEGPEP-TXOD实验组黄色素与黑色素信号显著降低量化图",
+    "intro_image": "resource/images/product_intros/intro_zebrafish.jpg",
+    "intro_image_tag": "活体实验数据",
+    "intro_image_caption": "斑马鱼活体黑色素定量测试典型对比（显著降低活体黑色素沉积）"
   },
   {
     "id": "lzdt",
@@ -470,8 +494,8 @@
       "核心活性物": "高纯度破壁灵芝β-葡聚糖与多糖复合物"
     },
     "rd_info": {
-      "inci_cn": "赤芝（GANODERMA LUCIDUM）提取物、对羟基苯乙酮、水",
-      "inci_en": "GANODERMA LUCIDUM (MUSHROOM) EXTRACT, HYDROXYACETOPHENONE, WATER",
+      "inci_cn": "中国灵芝（GANODERMA SINENSIS）提取物、对羟基苯乙酮、水",
+      "inci_en": "Ganoderma Sinensis Extract, Hydroxyacetophenone, Aqua",
       "cas": "99-93-4 / 7732-18-5",
       "dosage": "1.0% - 5.0%（免疫修护推荐 2.0% - 3.0%）",
       "ph_range": "4.5 - 7.5",
@@ -481,7 +505,7 @@
       "compatibility": "与红没药醇、积雪草提取物、透明质酸钠协同舒缓；不与高浓度强阳离子聚合物混溶"
     },
     "procurement_info": {
-      "nmpa_code": "137249-00075-6372",
+      "nmpa_code": "190358-00075-9589",
       "packaging": "1kg/瓶、5kg/桶、25kg/桶",
       "moq": "1 kg (现货充足)",
       "lead_time": "24小时发出",
@@ -505,7 +529,10 @@
       "lab_gpt_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
-    "diagram_caption": "灵芝多糖活性组分抑制细胞氧化损伤、促进胶原与纤连蛋白表达及舒缓褪红实验数据"
+    "diagram_caption": "长白山椴木黑灵芝活性β-葡聚糖多糖构象与体外巨噬细胞抗炎修护动力学曲线",
+    "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
+    "intro_image_tag": "珍稀真菌溯源",
+    "intro_image_caption": "长白山深山椴木黑灵芝活性多糖提取溯源"
   },
   {
     "id": "mellpr205",
@@ -524,8 +551,8 @@
       "核心活性物": "重组仿生贻贝黏蛋白 (高富含多巴 DOPA 结构)"
     },
     "rd_info": {
-      "inci_cn": "贻贝提取物、对羟基苯乙酮、1,2-己二醇、水",
-      "inci_en": "MUSSEL EXTRACT, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, WATER",
+      "inci_cn": "贻贝提取物、1,2-己二醇、水",
+      "inci_en": "Mussel Extract, 1,2-Hexanediol, Aqua",
       "cas": "6920-22-5 / 7732-18-5",
       "dosage": "0.2% - 2.0%（耐水成膜舒缓推荐 0.3% - 1.0%）",
       "ph_range": "5.0 - 6.5（微酸性环境更有利于维持多巴结构稳定）",
@@ -560,8 +587,11 @@
       "lab_map_transdermal_absorption",
       "lab_map_three_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
-    "diagram_caption": "重组仿生多肽蛋白微环境成膜保护、高稳定性多效修护与耐水抗冲刷特性展示"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
+    "diagram_caption": "重组弹性蛋白原与微纤维蛋白交联构建真皮弹性回弹三维网格机制图",
+    "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
+    "intro_image_tag": "弹性韧性模型",
+    "intro_image_caption": "重组弹性蛋白原与微原纤维交联重建皮肤三维回弹韧性网架"
   },
   {
     "id": "megzym",
@@ -580,8 +610,8 @@
       "核心活性物": "海洋生物提取活性溶菌酶 (比活≥20000 U/mg)"
     },
     "rd_info": {
-      "inci_cn": "甘油、水、溶菌酶、氯化钠",
-      "inci_en": "GLYCERIN, WATER, LYSOZYME, SODIUM CHLORIDE",
+      "inci_cn": "溶菌酶、甘油、氯化钠、水",
+      "inci_en": "Lysozyme, Glycerin, Sodium Chloride, Aqua",
       "cas": "9001-63-2 / 56-81-5 / 7647-14-5 / 7732-18-5",
       "dosage": "0.5% - 2.5%（祛痘控油与微生态平衡推荐 1.0% - 1.5%）",
       "ph_range": "5.5 - 7.5",
@@ -614,7 +644,10 @@
       "lab_yskm_toxicology_safety"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
-    "diagram_caption": "重组生物活性酶高密度工程菌发酵车间与GMP标准分离纯化生产线实景"
+    "diagram_caption": "重组生物活性酶高密度工程菌发酵车间与GMP标准分离纯化生产线实景",
+    "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",
+    "intro_image_tag": "酶催化水解模型",
+    "intro_image_caption": "仿生定向生物酶催化水解与高纯度分离纯化技术示意"
   },
   {
     "id": "mellpr",
@@ -634,7 +667,7 @@
     },
     "rd_info": {
       "inci_cn": "胶原、甘露糖醇",
-      "inci_en": "COLLAGEN, MANNITOL",
+      "inci_en": "Collagen, Mannitol",
       "cas": "9007-34-5 / 69-65-8",
       "dosage": "1.0% - 4.0%（抗皱紧致推荐 2.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -667,8 +700,11 @@
       "lab_collagen_biocompatibility",
       "lab_collagen3_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "重组多型胶原蛋白立体三螺旋网络支撑与肌底弹力构建模型"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
+    "diagram_caption": "仿生弹性蛋白微纤维定向排布与皮肤韧性回弹微结构解析图",
+    "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
+    "intro_image_tag": "弹性韧性模型",
+    "intro_image_caption": "重组弹性蛋白原与微原纤维交联重建皮肤三维回弹韧性网架"
   },
   {
     "id": "tysgdb",
@@ -687,8 +723,8 @@
       "核心活性物": "全矩阵重组细胞外基质 (rECM: 胶原+纤连+弹性蛋白+关键氨基酸)"
     },
     "rd_info": {
-      "inci_cn": "水解弹性蛋白、胶原、纤连蛋白、甘氨酸、脯氨酸、1,2-己二醇、水",
-      "inci_en": "HYDROLYZED ELASTIN, COLLAGEN, FIBRONECTIN, GLYCINE, PROLINE, 1,2-HEXANEDIOL, AQUA",
+      "inci_cn": "水、可溶性胶原、水解纤连蛋白、水解弹性蛋白、甘油、1,2-己二醇",
+      "inci_en": "Hydrolyzed Elastin, Collagen, Fibronectin, Glycine, Proline, 1,2-Hexanediol, Aqua",
       "cas": "9007-34-5 / 86088-83-7 / 56-40-6 / 147-85-3 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 5.0%（水光滋养推荐 1.0% - 3.0%）",
       "ph_range": "5.5 - 7.2",
@@ -725,7 +761,10 @@
       "lab_collagen_biocompatibility"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
-    "diagram_caption": "童颜水光蛋白MELLPRO-rECM细胞外基质全层装配模型（胶原蛋白+纤连蛋白+弹性蛋白+整联素+层粘连蛋白）"
+    "diagram_caption": "童颜水光蛋白MELLPRO-rECM仿生细胞外基质全组分重构模型（胶原+纤连+弹性蛋白+整联素+层粘连蛋白）",
+    "intro_image": "resource/reports/images/lab_recm_multi_efficacy_data.jpg",
+    "intro_image_tag": "多蛋白表达数据",
+    "intro_image_caption": "MELLPRO-rECM细胞外基质多蛋白协同表达与组织微环境修护测试数据"
   },
   {
     "id": "yskmyz",
@@ -745,7 +784,7 @@
     },
     "rd_info": {
       "inci_cn": "桃（PRUNUS PERSICA）树脂提取物、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "PRUNUS PERSICA (PEACH) RESIN EXTRACT, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
+      "inci_en": "Prunus Persica (Peach) Resin Extract, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "9000-70-8 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 3.0%（快速舒缓止痒推荐 1.0% - 2.0%）",
       "ph_range": "4.5 - 7.0",
@@ -782,7 +821,10 @@
       "lab_yskm_risk_screening"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
-    "diagram_caption": "MEGCALM PSF桃胶多糖发酵酶切原理示意图与HPLC对比（分子量更小、吸收更快、激活AQP3水通道）"
+    "diagram_caption": "MEGCALM PSF桃胶多糖酵母定向生物酶切前后HPLC分子量分布对比及水通道蛋白AQP3激活数据",
+    "intro_image": "resource/images/product_intros/intro_peach_gum.jpg",
+    "intro_image_tag": "植物多糖溯源",
+    "intro_image_caption": "天然桃树原生态桃胶琥珀晶体与深层定向酶解多糖"
   },
   {
     "id": "smndb",
@@ -802,7 +844,7 @@
     },
     "rd_info": {
       "inci_cn": "水母提取物、羟乙基脲、对羟基苯乙酮、水",
-      "inci_en": "JELLYFISH EXTRACT, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER",
+      "inci_en": "Jellyfish Extract, Hydroxyethyl Urea, Hydroxyacetophenone, Aqua",
       "cas": "2078-71-9 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 2.0%（抗光老化推荐 0.5% - 1.0%）",
       "ph_range": "5.5 - 7.5",
@@ -837,8 +879,11 @@
       "lab_collagen_biocompatibility",
       "lab_tfn_penetration_barrier"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
-    "diagram_caption": "JELFIPRO水母黏蛋白抗光老化与角质修护实验（清除自由基、皮肤切片抗炎修护、促进细胞增殖）"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "特色极端微生物发酵工程车间与百级层流无菌灌装GMP洁净区",
+    "intro_image": "resource/reports/images/lab_yskm_soothing_repair_data.jpg",
+    "intro_image_tag": "发酵舒缓数据",
+    "intro_image_caption": "嗜麦芽菌发酵代谢物清除自由基及降低致敏因子释放数据"
   },
   {
     "id": "hylfyz",
@@ -857,8 +902,8 @@
       "核心活性物": "深海耐热氧化还原酶复合物"
     },
     "rd_info": {
-      "inci_cn": "氧化还原酶、甘氨酸、精氨酸、聚山梨醇酯-20、1,2-己二醇、水",
-      "inci_en": "OXIDO REDUCTASES, GLYCINE, ARGININE, POLYSORBATE 20, 1,2-HEXANEDIOL, WATER",
+      "inci_cn": "水、纤连蛋白、交替单胞菌发酵产物提取物、甘油、1,2-己二醇",
+      "inci_en": "Oxidoreductases, Glycine, Arginine, Polysorbate-20, 1,2-Hexanediol, Aqua",
       "cas": "9001-73-4 / 56-40-6 / 74-79-3 / 9005-64-5 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 5.0%（焕亮抗氧推荐 1.0% - 2.0%）",
       "ph_range": "5.0 - 7.0",
@@ -893,7 +938,10 @@
       "lab_txod_whitening_antiox"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
-    "diagram_caption": "MEGPEP TXOD斑马鱼抗氧化美白功效试验（清除紫外ROS自由基与头部黑色素信号显著降低）"
+    "diagram_caption": "海洋微生物共生酵母发酵氧化还原酶TXOD在斑马鱼活体模型中的淡斑与抗光老化量化图",
+    "intro_image": "resource/images/product_intros/intro_marine_yeast.jpg",
+    "intro_image_tag": "海洋微生物发酵",
+    "intro_image_caption": "红珊瑚共生海洋酵母菌群培养及其天然活性氧化还原酶系统"
   },
   {
     "id": "zzxldb",
@@ -912,8 +960,8 @@
       "核心活性物": "高活性重组人纤连蛋白"
     },
     "rd_info": {
-      "inci_cn": "纤连蛋白、氯化钠、甘油、1,2-己二醇、柠檬酸钠、水",
-      "inci_en": "FIBRONECTIN, SODIUM CHLORIDE, GLYCERIN, 1,2-HEXANEDIOL, SODIUM CITRATE, WATER",
+      "inci_cn": "水、甘油、氯化钠、1,2-己二醇、纤连蛋白、柠檬酸钠",
+      "inci_en": "Aqua, Glycerin, Sodium Chloride, 1,2-Hexanediol, Fibronectin, Sodium Citrate",
       "cas": "7732-18-5 / 56-81-5 / 7647-14-5 / 6920-22-5 / 86088-83-7 / 68-04-2",
       "dosage": "0.5% - 3.0%（受损表皮修复与抗老紧致推荐 1.5% - 2.0%）",
       "ph_range": "6.0 - 7.5",
@@ -948,7 +996,10 @@
       "lab_tfn_toxicology"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
-    "diagram_caption": "AlphaDrugs人工智能分子设计平台：纤连蛋白与整联素(Integrin)分子对接模拟模型"
+    "diagram_caption": "AlphaDrugs人工智能分子设计平台：纤连蛋白与整联素(Integrin)分子对接模拟模型",
+    "intro_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
+    "intro_image_tag": "分子对接模拟",
+    "intro_image_caption": "AlphaDrugs计算生物学模拟重组纤连蛋白与整合素受体亲和对接"
   },
   {
     "id": "zzjydb",
@@ -967,8 +1018,8 @@
       "核心活性物": "重组人Ⅰ型、Ⅲ型可溶性胶原"
     },
     "rd_info": {
-      "inci_cn": "1,2-己二醇、可溶性胶原、水",
-      "inci_en": "1,2-HEXANEDIOL, SOLUBLE COLLAGEN, WATER",
+      "inci_cn": "可溶性胶原、EDTA 二钠、1,2-己二醇、水",
+      "inci_en": "Soluble Collagen, Disodium EDTA, 1,2-Hexanediol, Aqua",
       "cas": "9007-34-5 / 139-33-3 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（抗皱紧致推荐 0.5% - 1.5%）",
       "ph_range": "5.5 - 7.0",
@@ -1005,7 +1056,10 @@
       "lab_collagen_penetration"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "5Dcollagen多型胶原体系中III型婴儿胶原柔嫩网状纤维结构与高亲和修护机制"
+    "diagram_caption": "重组III型人源化胶原蛋白三螺旋空间构象与细胞外基质整合素结合位点解析图",
+    "intro_image": "resource/reports/images/lab_collagen3_efficacy_data.jpg",
+    "intro_image_tag": "细胞活性数据",
+    "intro_image_caption": "重组人源化胶原对成纤维细胞增殖率及内源性胶原分泌促进实验数据"
   },
   {
     "id": "5djydb",
@@ -1024,8 +1078,8 @@
       "核心活性物": "全型重组人源胶原蛋白超分子复合物"
     },
     "rd_info": {
-      "inci_cn": "胶原、十肽-4、水、1,2-己二醇",
-      "inci_en": "COLLAGEN, DECAPEPTIDE-4, AQUA, 1,2-HEXANEDIOL",
+      "inci_cn": "胶原、十肽-4、1,2-己二醇、水",
+      "inci_en": "Collagen, Decapeptide-4, 1,2-Hexanediol, Aqua",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "1.0% - 5.0%（全脸抗下垂垮塌推荐 2.5% - 4.0%）",
       "ph_range": "5.5 - 7.2",
@@ -1060,7 +1114,10 @@
       "lab_collagen3_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "5D胶原蛋白多维立体支撑与跨层渗透构建模型（I/II/III/IV/XVII型胶原协同网络）"
+    "diagram_caption": "5D胶原蛋白多维立体支撑与跨层渗透构建模型（I/II/III/IV/XVII型胶原协同网络）",
+    "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
+    "intro_image_tag": "多维结构模型",
+    "intro_image_caption": "5D胶原多维立体支撑微环境及真皮细胞层丰盈饱满充盈图"
   },
   {
     "id": "twdvit",
@@ -1079,8 +1136,8 @@
       "核心活性物": "9重复合维生素B族发酵酵母多肽"
     },
     "rd_info": {
-      "inci_cn": "生物素/叶酸/维生素 B12/维生素 B3/泛酸/维生素 B6/维生素 B2/维生素 B1/酵母多肽类、对羟基苯乙酮、1,2-己二醇、肌醇、水",
-      "inci_en": "BIOTIN/FOLIC ACID/CYANOCOBALAMIN/NIACINAMIDE/PANTOTHENIC ACID/PYRIDOXINE/RIBOFLAVIN/THIAMINE/YEAST POLYPEPTIDES, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, INOSITOL, WATER",
+      "inci_cn": "生物素/叶酸/复合维生素B族酵母多肽、对羟基苯乙酮、1,2-己二醇、肌醇、水",
+      "inci_en": "Biotin/Folic Acid/Cyanocobalamin/Niacinamide/Pantothenic Acid/Pyridoxine/Riboflavin/Thiamine/Yeast Polypeptides, Hydroxyacetophenone, 1,2-Hexanediol, Inositol, Water",
       "cas": "6920-22-5 / 99-93-4 / 87-89-8 / 7732-18-5",
       "dosage": "0.1% - 1.0%（细胞级深层滋养推荐 0.2% - 0.5%）",
       "ph_range": "5.5 - 6.8",
@@ -1113,8 +1170,11 @@
     "referenced_lab_data": [
       "lab_gpt_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
-    "diagram_caption": "天然酵母多维营养代谢精粹与透皮促透核心技术国际权威文献与专利成果"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
+    "diagram_caption": "重组贻贝粘蛋白(MAP)多巴结构强效水下成膜粘附与表皮物理屏障封闭修复切片",
+    "intro_image": "resource/reports/images/lab_map_three_efficacy_data.jpg",
+    "intro_image_tag": "耐水成膜数据",
+    "intro_image_caption": "重组贻贝粘蛋白（MAP）耐水性成膜及表皮隔离屏障测试数据"
   },
   {
     "id": "jnhtea",
@@ -1134,7 +1194,7 @@
     },
     "rd_info": {
       "inci_cn": "卤虫（ARTEMIA）提取物、十肽-4、环磷酸腺苷、肌醇、1,2-己二醇、水",
-      "inci_en": "ARTEMIA EXTRACT, DECAPEPTIDE-4, ADENOSINE CYCLIC PHOSPHATE, INOSITOL, 1,2-HEXANEDIOL, AQUA",
+      "inci_en": "Artemia Extract, Decapeptide-4, Adenosine Cyclic Phosphate, Inositol, 1,2-Hexanediol, Aqua",
       "cas": "917094-11-2 / 60-92-4 / 87-89-8 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（紧致焕亮推荐 0.5% - 1.5%）",
       "ph_range": "4.5 - 7.5",
@@ -1169,8 +1229,11 @@
       "lab_tpht_penetration",
       "lab_tpht_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
-    "diagram_caption": "聚能环肽细胞能量赋活与第三代生物透皮吸收协同机制图（钠钾泵结合与双通道渗透）"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
+    "diagram_caption": "九肽-1竞争性结合黑素细胞MC1R受体抑制酪氨酸酶生成通路示意图",
+    "intro_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
+    "intro_image_tag": "黑素抑制机理",
+    "intro_image_caption": "九肽-1竞争性结合黑素细胞MC1R受体抑制酪氨酸酶生成通路"
   },
   {
     "id": "wndbzy",
@@ -1190,7 +1253,7 @@
     },
     "rd_info": {
       "inci_cn": "蜗牛分泌物滤液、1,3-丙二醇、甘油、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "SNAIL SECRETION FILTRATE, PROPANEDIOL, GLYCERIN, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
+      "inci_en": "Snail Secretion Filtrate, Propanediol, Glycerin, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "504-63-2 / 56-81-5 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 5.0%（屏障滋润推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1226,7 +1289,10 @@
       "lab_map_three_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
-    "diagram_caption": "Snailpro仿生蜗牛蛋白重组分子骨架、EGFR受体结合促细胞生长与高粘弹成膜锁水特性"
+    "diagram_caption": "重组仿生蜗牛分泌物粘液蛋白多糖网架与表皮细胞迁移促愈合划痕实验模型",
+    "intro_image": "resource/images/product_intros/intro_snail.jpg",
+    "intro_image_tag": "仿生生物模型",
+    "intro_image_caption": "仿生蜗牛分泌物黏蛋白糖蛋白基底与细胞修护网络"
   },
   {
     "id": "fswnjy",
@@ -1245,8 +1311,8 @@
       "核心活性物": "琥珀酰化仿生蜗牛胶原"
     },
     "rd_info": {
-      "inci_cn": "琥珀酰缺端胶原、1,3-丙二醇、甘油、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "SUCCINOYL ATELOCOLLAGEN, PROPANEDIOL, GLYCERIN, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
+      "inci_cn": "水、重组蜗牛胶原蛋白、甘油、1,2-戊二醇、羟苯乙酮",
+      "inci_en": "Succinoyl Atelocollagen, Propanediol, Glycerin, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "9007-34-5 / 504-63-2 / 56-81-5 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 5.0%（嘭弹丰盈推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1282,7 +1348,10 @@
       "lab_recm_multi_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
-    "diagram_caption": "Snailpro仿生蜗牛胶原耐热耐储测试（48小时活性损失极低）与全肤感多聚体复合结构"
+    "diagram_caption": "Snailpro仿生蜗牛胶原结合EGFR受体激活细胞增殖及48小时高温热稳定性保留曲线(>95%)",
+    "intro_image": "resource/images/product_intros/intro_snail.jpg",
+    "intro_image_tag": "仿生动物模型",
+    "intro_image_caption": "Snailpro仿生蜗牛分泌物粘液与重组仿生胶原分子骨架结构"
   },
   {
     "id": "0xjydb",
@@ -1301,8 +1370,8 @@
       "核心活性物": "去端肽缺端胶原 (零免疫原性纯化胶原)"
     },
     "rd_info": {
-      "inci_cn": "羟乙基脲、原胶原、对羟基苯乙酮、水",
-      "inci_en": "HYDROXYETHYL UREA, PROCOLLAGEN, HYDROXYACETOPHENONE, WATER",
+      "inci_cn": "水、水解水母提取物（水母源0型胶原）、甘油、羟乙基脲、1,2-己二醇",
+      "inci_en": "Atelocollagen, Hydroxyethyl Urea, Hydroxyacetophenone, Aqua",
       "cas": "9007-34-5 / 2078-71-9 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 2.0%（修护锁水推荐 0.5% - 1.0%）",
       "ph_range": "5.5 - 7.2",
@@ -1338,7 +1407,10 @@
       "lab_collagen3_efficacy"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
-    "diagram_caption": "JELFIPRO海洋0型胶原病理切片修护、ACE抑制率与促进细胞增殖实验图谱"
+    "diagram_caption": "JELFIPRO水母黏蛋白核心三螺旋抗光老化、细胞增殖活性(OD490nm)与血管紧张素转化酶(ACE)抑制曲线",
+    "intro_image": "resource/images/product_intros/intro_jellyfish.jpg",
+    "intro_image_tag": "海洋生物溯源",
+    "intro_image_caption": "深海天然水母（Aurelia aurita）来源原生态0型胶原蛋白模型"
   },
   {
     "id": "tphtct",
@@ -1357,8 +1429,8 @@
       "核心活性物": "闭环促透十肽 (cTDP 纯度≥98.5%)"
     },
     "rd_info": {
-      "inci_cn": "1,2-己二醇、十肽-4、水",
-      "inci_en": "1,2-HEXANEDIOL, DECAPEPTIDE-4, AQUA",
+      "inci_cn": "十肽-4、三磷酸腺苷、1,2-己二醇、水",
+      "inci_en": "Decapeptide-4, Adenosine Triphosphate, 1,2-Hexanediol, Aqua",
       "cas": "917094-11-2 / 987-65-5 / 6920-22-5 / 7732-18-5",
       "dosage": "0.2% - 2.0%（高效促透推荐 0.5% - 1.0%）",
       "ph_range": "4.5 - 8.0（耐受性极广，宽 pH 体系极其稳定）",
@@ -1395,7 +1467,10 @@
       "lab_tpht_safety"
     ],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
-    "diagram_caption": "第三代生物透皮技术机理：cTDP靶向结合钠钾泵(Na+/K+-ATPase)，5分钟可逆开启毛囊与细胞间隙双通道，吸收效率提升10倍"
+    "diagram_caption": "第三代生物透皮技术机理：cTDP靶向结合钠钾泵(Na+/K+-ATPase)，5分钟可逆开启毛囊与细胞间隙双通道，吸收效率提升10倍",
+    "intro_image": "resource/reports/images/lab_tpht_penetration_data.jpg",
+    "intro_image_tag": "促渗实验数据",
+    "intro_image_caption": "Franz扩散池透皮吸收曲线：cTDP 促透环肽快速跨越角质屏障动力学数据"
   },
   {
     "id": "tp1jydb",
@@ -1414,7 +1489,7 @@
     },
     "rd_info": {
       "inci_cn": "胶原、十肽-4、1,2-己二醇、水",
-      "inci_en": "COLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA",
+      "inci_en": "Collagen, Decapeptide-4, 1,2-Hexanediol, Aqua",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（深层紧致抗衰推荐 0.5% - 1.5%）",
       "ph_range": "5.5 - 7.5",
@@ -1454,8 +1529,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "5Dcollagen多型胶原体系中I型胶原纤维束真皮支撑骨架与抗皱充盈机理模型"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
+    "diagram_caption": "透皮I型重组胶原蛋白经由第三代生物递送通道进入真皮层锚定支撑实验模型",
+    "intro_image": "resource/images/product_intros/intro_deep_transdermal_delivery.jpg",
+    "intro_image_tag": "跨膜递送机制",
+    "intro_image_caption": "透皮I型胶原深层渗透至肌底真皮层加固胶原纤维网架"
   },
   {
     "id": "tptxdb",
@@ -1473,8 +1551,8 @@
       "建议添加量": "0.3% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "水解弹性蛋白、1,2-己二醇、水",
-      "inci_en": "HYDROLYZED ELASTIN, 1,2-HEXANEDIOL, WATER",
+      "inci_cn": "弹性蛋白、水解弹性蛋白、1,2-己二醇、水",
+      "inci_en": "Elastin, Hydrolyzed Elastin, 1,2-Hexanediol, Water",
       "cas": "9007-58-3 / 100085-10-7 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（弹力紧致推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 7.2",
@@ -1514,8 +1592,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
-    "diagram_caption": "MELLPRO-rECM细胞外基质体系中弹性蛋白(Elastin)与胶原纤维交联回弹架构模型"
+    "diagram_image": "resource/images/brochure_extracted/page_8_img_24.jpeg",
+    "diagram_caption": "重组弹性蛋白Telastin与弹力纤维网交联交织维持皮肤紧致回弹性示意图"
   },
   {
     "id": "gtlafdp",
@@ -1534,7 +1612,7 @@
     },
     "rd_info": {
       "inci_cn": "寡肽-2、甘露糖醇、氯化钠",
-      "inci_en": "OLIGOPEPTIDE-2, MANNITOL, SODIUM CHLORIDE",
+      "inci_en": "Oligopeptide-2, Mannitol, Sodium Chloride",
       "cas": "100085-39-0 / 69-65-8 / 7647-14-5",
       "dosage": "0.1% - 1.0%（高效舒缓抗老推荐 0.2% - 0.5%）",
       "ph_range": "5.5 - 7.2",
@@ -1574,8 +1652,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
-    "diagram_caption": "美尔健绿色合成生物制造平台：生物透皮孵化中心、微生物细胞工厂与GMP冷冻干燥制剂生产线"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
+    "diagram_caption": "重组芋螺毒素肽模拟肌肉神经乙酰胆碱受体靶向阻断分子构象与动态模拟图",
+    "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",
+    "intro_image_tag": "靶向包裹模型",
+    "intro_image_caption": "重组芋螺毒素多肽微球包裹靶向神经肌肉接头抚平表情纹机制"
   },
   {
     "id": "lrdt",
@@ -1593,8 +1674,8 @@
       "建议添加量": "0.5% - 4.5%"
     },
     "rd_info": {
-      "inci_cn": "十肽-4、鹿茸提取物、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "DECAPEPTIDE-4, VELVET EXTRACT, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, AQUA",
+      "inci_cn": "鹿茸提取物、十肽-4、1,2-己二醇、对羟基苯乙酮、水",
+      "inci_en": "Velvet Extract, Decapeptide-4, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "917094-11-2 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 4.5%（高奢滋养紧致推荐 1.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1634,8 +1715,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
-    "diagram_caption": "小分子活性多肽与生物透皮融合技术国际高水平SCI期刊文献与发明专利背书"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
+    "diagram_caption": "类蛇毒三肽(Waglerin-1仿生肽)特异性结合突触后烟碱型乙酰胆碱受体(mnAChR)分子模型",
+    "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",
+    "intro_image_tag": "仿生肽靶向机理",
+    "intro_image_caption": "类蛇毒三肽（Waglerin-1仿生肽）阻断乙酰胆碱受体舒缓肌束示意"
   },
   {
     "id": "tpjy",
@@ -1653,8 +1737,8 @@
       "建议添加量": "0.5% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "原胶原、十肽-4、对羟基苯乙酮、1,2-己二醇、水",
-      "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, AQUA",
+      "inci_cn": "原胶原、十肽-4、1,2-己二醇、对羟基苯乙酮、水",
+      "inci_en": "Procollagen, Decapeptide-4, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 5.0%（滋润修护推荐 1.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1694,8 +1778,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
-    "diagram_caption": "胎盘天然活性多型胶原深层渗透补充、真皮基质充盈与长效锁水舒缓实验数据"
+    "diagram_image": "resource/images/brochure_extracted/page_10_img_6.jpeg",
+    "diagram_caption": "胎盘多型天然活性胶原(I/III/V型)深层充盈与网状修护机制图"
   },
   {
     "id": "aminofree",
@@ -1713,8 +1797,8 @@
       "建议添加量": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "酪氨酸、丙氨酸、天冬氨酸、谷氨酸、半胱氨酸、蛋氨酸、脯氨酸、甘氨酸、胱氨酸、丝氨酸、组氨酸、苯丙氨酸、亮氨酸、谷氨酰胺、缬氨酸、苏氨酸、异亮氨酸、赖氨酸盐酸盐、精氨酸、1,2-己二醇、水",
-      "inci_en": "TYROSINE, ALANINE, ASPARTIC ACID, GLUTAMIC ACID, CYSTEINE, METHIONINE, PROLINE, GLYCINE, CYSTINE, SERINE, HISTIDINE, PHENYLALANINE, LEUCINE, GLUTAMINE, VALINE, THREONINE, ISOLEUCINE, LYSINE HCL, ARGININE, 1,2-HEXANEDIOL, AQUA",
+      "inci_cn": "丙氨酸、精氨酸、天冬氨酸、谷氨酸、甘氨酸、组氨酸、异亮氨酸、亮氨酸、赖氨酸盐酸盐、蛋氨酸、苯丙氨酸、脯氨酸、丝氨酸、苏氨酸、色氨酸、酪氨酸、缬氨酸、1,2-己二醇、水",
+      "inci_en": "Alanine, Arginine, Aspartic Acid, Glutamic Acid, Glycine, Histidine, Isoleucine, Leucine, Lysine HCl, Methionine, Phenylalanine, Proline, Serine, Threonine, Tryptophan, Tyrosine, Valine, 1,2-Hexanediol, Aqua",
       "cas": "56-40-6 等复合氨基酸 / 6920-22-5 / 7732-18-5",
       "dosage": "1.0% - 5.0%（深层细胞滋养推荐 2.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1754,8 +1838,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
-    "diagram_caption": "美尔健全谱氨基酸与生物透皮递送技术国际高水平SCI学术期刊论文发表成果（含Nature Biotechnology等）"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "高活性婴儿源益生菌厌氧高密度深层发酵罐与高纯度低温破壁提取产线实景",
+    "intro_image": "resource/images/product_intros/intro_marine_yeast.jpg",
+    "intro_image_tag": "微生态发酵溯源",
+    "intro_image_caption": "益生菌菌株发酵液微生态菌群平衡与抑菌屏障构建示意"
   },
   {
     "id": "colamino",
@@ -1773,8 +1860,8 @@
       "建议添加量": "2.0% - 10.0%"
     },
     "rd_info": {
-      "inci_cn": "对羟基苯乙酮、胶原氨基酸类、水、1,2-己二醇",
-      "inci_en": "HYDROXYACETOPHENONE, COLLAGEN AMINO ACIDS, WATER, 1,2-HEXANEDIOL",
+      "inci_cn": "胶原氨基酸类、1,2-己二醇、对羟基苯乙酮、水",
+      "inci_en": "Collagen Amino Acids, 1,2-Hexanediol, Hydroxyacetophenone, Water",
       "cas": "9007-34-5 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "2.0% - 10.0%（胶原增效促生推荐 3.0% - 5.0%）",
       "ph_range": "5.5 - 7.2",
@@ -1814,8 +1901,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
-    "diagram_caption": "美尔健胶原特征三联氨基酸合成与生物递送技术学术论文与国家基础研究获奖成果"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "重组微分子胶原多肽与角质层桥粒结合促渗及内源性胶原合成激发机制",
+    "intro_image": "resource/images/product_intros/intro_deep_transdermal_delivery.jpg",
+    "intro_image_tag": "寡肽渗透模型",
+    "intro_image_caption": "超低分子量胶原低聚肽快速穿透角质间隙促进自体胶原合成"
   },
   {
     "id": "tpxviijy",
@@ -1834,7 +1924,7 @@
     },
     "rd_info": {
       "inci_cn": "原胶原、十肽-4、1,2-己二醇、水",
-      "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA",
+      "inci_en": "Procollagen, Decapeptide-4, 1,2-Hexanediol, Aqua",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 3.0%（基底膜锚定与头皮滋养推荐 1.0% - 2.0%）",
       "ph_range": "5.5 - 7.2",
@@ -1875,7 +1965,10 @@
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "5Dcollagen多型胶原体系中XVII型跨膜胶原锚定表皮-真皮交界处(DEJ)结构图"
+    "diagram_caption": "重组XVII型胶原蛋白表皮-真皮交界处(DEJ)半桥粒跨膜锚定结构与毛囊干细胞稳固图解",
+    "intro_image": "resource/images/product_intros/intro_deep_transdermal_delivery.jpg",
+    "intro_image_tag": "基底层锚定机制",
+    "intro_image_caption": "XVII型跨膜胶原蛋白自表皮深入基底膜带（DEJ）稳固锚定示意图"
   },
   {
     "id": "supercleaner",
@@ -1893,8 +1986,8 @@
       "建议添加量": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "无患子（SAPINDUS MUKOROSSI）果提取物、水、北美金缕梅（HAMAMELIS VIRGINIANA）提取物、油茶（CAMELLIA OLEIFERA）籽提取物、肥皂草（SAPONARIA OFFICINALIS）叶提取物、欧洲七叶树（AESCULUS HIPPOCASTANUM）树皮提取物、蛋白酶、黄原胶、组氨酸、1,3-丙二醇、1,2-己二醇、碳酸钠、十肽-4",
-      "inci_en": "SAPINDUS MUKOROSSI FRUIT EXTRACT, AQUA, HAMAMELIS VIRGINIANA (WITCH HAZEL) EXTRACT, CAMELLIA OLEIFERA SEED EXTRACT, SAPONARIA OFFICINALIS LEAF EXTRACT, AESCULUS HIPPOCASTANUM (HORSE CHESTNUT) BARK EXTRACT, PROTEASE, XANTHAN GUM, HISTIDINE, PROPANEDIOL, 1,2-HEXANEDIOL, SODIUM CARBONATE, DECAPEPTIDE-4",
+      "inci_cn": "水、精氨酸、皂苷、1,3-丙二醇、碳酸钠、组氨酸、十肽-4、1,2-己二醇",
+      "inci_en": "Water, Arginine, Saponins, Propanediol, Sodium Carbonate, Histidine, Decapeptide-4, 1,2-Hexanediol",
       "cas": "7732-18-5 / 74-79-3 / 8047-15-2 / 504-63-2 / 497-19-8 / 71-00-1 / 917094-11-2 / 6920-22-5",
       "dosage": "1.0% - 5.0%（温和深层洁颜推荐 2.0% - 4.0%）",
       "ph_range": "7.5 - 9.0",
@@ -1934,8 +2027,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
-    "diagram_caption": "植物皂苷定向提取与多肽促透洁净原料标准化生物制造产线"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
+    "diagram_caption": "重组多肽工程分子与有害革兰氏阳性/阴性细菌胞壁电荷特异性结合破坏机制模拟",
+    "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",
+    "intro_image_tag": "膜破坏机理",
+    "intro_image_caption": "重组抗菌肽分子靶向破坏致病菌细胞膜渗透性生物机理"
   },
   {
     "id": "zwjy",
@@ -1953,8 +2049,8 @@
       "建议添加量": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "胶原、可溶性胶原、桃（PRUNUS PERSICA）树脂提取物、十肽-4、对羟基苯乙酮、1,2-己二醇、甘油、水",
-      "inci_en": "COLLAGEN, SOLUBLE COLLAGEN, PRUNUS PERSICA (PEACH) RESIN EXTRACT, DECAPEPTIDE-4, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, GLYCERIN, AQUA",
+      "inci_cn": "植物水解蛋白、多糖提取物、1,2-己二醇、水",
+      "inci_en": "Hydrolyzed Vegetable Protein, Polysaccharide Extract, 1,2-Hexanediol, Aqua",
       "cas": "100209-45-8 / 6920-22-5 / 7732-18-5",
       "dosage": "1.0% - 5.0%（纯素抗衰紧致推荐 2.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1994,8 +2090,11 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
-    "diagram_caption": "纯素植物胶原与多糖仿生空间网状结构锁水与表皮屏障保护模型"
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
+    "diagram_caption": "天然植物源类胶原多肽超滤纯化及仿生表皮水合保护膜分子交联结构图",
+    "intro_image": "resource/images/product_intros/intro_peach_gum.jpg",
+    "intro_image_tag": "植物蛋白溯源",
+    "intro_image_caption": "天然绿色植物细胞壁羟脯氨酸富集型植物胶原多肽提取溯源"
   },
   {
     "id": "mgpdrn",
@@ -2013,8 +2112,8 @@
       "建议添加量": "0.5% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "十肽-4、脱氧核糖核酸、水解 DNA、核糖核酸、玫瑰（ROSA RUGOSA）花提取物、1,2-己二醇、水",
-      "inci_en": "DECAPEPTIDE-4, DNA, HYDROLYZED DNA, RNA, ROSA RUGOSA FLOWER EXTRACT, 1,2-HEXANEDIOL, AQUA",
+      "inci_cn": "突厥蔷薇花水、DNA钠、十肽-4、1,2-己二醇、水",
+      "inci_en": "Rosa Damascena Flower Water, Sodium DNA, Decapeptide-4, 1,2-Hexanediol, Aqua",
       "cas": "90106-38-0 / 9007-49-2 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 3.0%（红润赋活紧致推荐 1.0% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -2055,7 +2154,10 @@
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
-    "diagram_caption": "大马士革玫瑰精粹协同DNA钠与透皮环肽深层促渗与细胞营养递送实验图"
+    "diagram_caption": "大马士革玫瑰精粹协同DNA钠与透皮环肽深层促渗与细胞营养递送实验图",
+    "intro_image": "resource/reports/images/lab_pdrn_triple_efficacy_data.jpg",
+    "intro_image_tag": "细胞再生数据",
+    "intro_image_caption": "PDRN多聚脱氧核糖核苷酸促进组织微循环及细胞活力测试数据"
   },
   {
     "id": "4dzyshyz",
@@ -2073,8 +2175,8 @@
       "建议添加量": "0.5% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "紫草（LITHOSPERMUM ERYTHRORHIZON）根提取物、侧柏（THUJA ORIENTALIS）叶提取物、桃（PRUNUS PERSICA）树脂提取物、甘草酸二钾、苯氧乙醇、十肽-4、水",
-      "inci_en": "LITHOSPERMUM ERYTHRORHIZON ROOT EXTRACT, THUJA ORIENTALIS LEAF EXTRACT, PRUNUS PERSICA (PEACH) RESIN EXTRACT, DIPOTASSIUM GLYCYRRHIZATE, PHENOXYETHANOL, DECAPEPTIDE-4, AQUA",
+      "inci_cn": "积雪草提取物、马齿苋提取物、甘草酸二钾、十肽-4、1,2-己二醇、水",
+      "inci_en": "Centella Asiatica Extract, Portulaca Oleracea Extract, Dipotassium Glycyrrhizate, Decapeptide-4, 1,2-Hexanediol, Aqua",
       "cas": "84696-21-9 / 90083-07-1 / 68797-35-3 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 3.0%（敏肌急救舒缓推荐 1.0% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -2115,6 +2217,9 @@
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
-    "diagram_caption": "4D植萃止痒舒缓机制：快速止痒消肿退红、微生态菌群调节与水通道长效锁水"
+    "diagram_caption": "4D特色药用植萃（积雪草+马齿苋+甘草酸二钾）协同阻断致敏因子释放与红斑消退测试曲线",
+    "intro_image": "resource/reports/images/lab_yskm_soothing_repair_data.jpg",
+    "intro_image_tag": "植物舒缓数据",
+    "intro_image_caption": "四重植物提取组分协同舒缓止痒及抑制促炎介质实验数据"
   }
 ]

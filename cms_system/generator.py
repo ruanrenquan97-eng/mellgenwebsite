@@ -23,6 +23,7 @@ def load_db():
     if os.path.exists(products_path):
         with open(products_path, "r", encoding="utf-8") as f:
             products = json.load(f)
+        products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
     if os.path.exists(articles_path):
         with open(articles_path, "r", encoding="utf-8") as f:
             articles = json.load(f)
@@ -142,19 +143,48 @@ def replace_group(pattern, replacement, html, group_index=2, flags=re.DOTALL):
     return html
 
 def get_product_subcategories(category):
-    if category == "化妆品原料":
-        return ["化妆品原料", "透皮型重组蛋白/多肽", "重组仿生蛋白", "植物源活性物", "海洋源活性物", "婴儿菌发酵源活性物"]
-    elif category == "医用原料":
+    if category in ["化妆品原料", "cat_hzpyl"]:
+        return [
+            "化妆品原料", "透皮型重组蛋白/多肽", "重组仿生蛋白", "植物源活性物", 
+            "海洋源活性物", "婴儿菌发酵源活性物", "植物提取物", "仿生生物原料", 
+            "仿生原料", "细胞营养素", "生物发酵原料", "生物酶", "水生原料", 
+            "动物源活性物", "焕亮因子"
+        ]
+    elif category in ["医用原料", "cat_yyyl"]:
         return ["医用原料", "重组蛋白", "动物源活性物", "活性抗菌材料"]
-    elif category == "食品营养原料":
+    elif category in ["食品营养原料", "cat_spyyyl"]:
         return ["食品营养原料", "桃胶多糖", "水母胶原", "灵芝黄酮", "灵芝多糖", "人参多肽", "复合营养素", "婴儿源益生菌"]
+    elif category in ["透皮型重组蛋白/多肽", "cat_tpxzzd"]:
+        return ["透皮型重组蛋白/多肽"]
+    elif category in ["植物源活性物", "植物提取物", "cat_zwyhxw"]:
+        return ["植物源活性物", "植物提取物"]
+    elif category in ["海洋源活性物", "cat_hyyhxw"]:
+        return ["海洋源活性物", "水生原料", "生物发酵原料", "生物酶"]
+    elif category in ["动物源活性物", "仿生生物原料", "仿生原料", "cat_dwyhxw"]:
+        return ["动物源活性物", "仿生生物原料", "仿生原料"]
+    elif category in ["重组蛋白", "cat_zzdb"]:
+        return ["重组蛋白", "医用原料"]
+    elif category in ["重组仿生蛋白", "cat_zzfsdb"]:
+        return ["重组仿生蛋白", "仿生生物原料", "仿生原料"]
+    elif category in ["复合营养素", "细胞营养素", "cat_fhyys"]:
+        return ["复合营养素", "细胞营养素"]
+    elif category in ["灵芝多糖", "cat_lzdt"]:
+        return ["灵芝多糖", "食品营养原料"]
+    elif category in ["全部", "all", "原料产品中心", "产品中心", "产品频道"]:
+        return None
     return [category]
 
 def get_article_subcategories(category):
     if category == "合作案例":
-        return ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品", "实验室数据研究"]
-    elif category == "实验室数据研究":
-        return ["实验室数据研究"]
+        return ["合作案例", "三方权威报告", "实验室研究数据", "客户合作", "应用场景", "实验室数据研究"]
+    elif category in ["三方权威报告", "实验室数据研究"]:
+        return ["三方权威报告", "实验室数据研究"]
+    elif category == "实验室研究数据":
+        return ["实验室研究数据"]
+    elif category == "客户合作":
+        return ["客户合作"]
+    elif category in ["应用场景", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]:
+        return ["应用场景", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]
     elif category == "新闻资讯":
         return ["新闻资讯", "企业新闻", "技术知识", "常见问答"]
     elif category == "企业新闻":
@@ -429,14 +459,14 @@ def render_product_b2b_sections(product):
                 
         matched_reports = [lab_articles_map[rid] for rid in referenced_lab_ids if rid in lab_articles_map]
         if matched_reports:
-            out.append('  <!-- 实验室数据研究与第三方权威检测报告 -->')
+            out.append('  <!-- 三方权威报告 -->')
             out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
             out.append('    <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;">')
             out.append('      <div style="display: flex; align-items: center; gap: 10px;">')
             out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">🔬</span>')
-            out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">实验室数据研究与权威第三方检测报告 (Laboratory Research & Testing Reports)</span>')
+            out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">三方权威报告 (Third-Party Authoritative Reports)</span>')
             out.append('      </div>')
-            out.append('      <span style="color: #bfdbfe; font-size: 12px;">国家认可 CMA / CNAS 实验室实测数据 · 经皮渗透 · 生物相容 · 功效循证</span>')
+            out.append('      <span style="color: #bfdbfe; font-size: 12px;">国家认可 CMA / CNAS 实验室实测报告 · 官方公章 · 经皮渗透 · 生物相容 · 功效循证</span>')
             out.append('    </div>')
             out.append('    <div style="padding: 24px; display: flex; flex-direction: column; gap: 18px;">')
             
@@ -478,7 +508,7 @@ def render_product_b2b_sections(product):
                     out.append('            </div>')
                 out.append('          </div>')
                 out.append('          <div style="display: flex; align-items: center; gap: 10px; justify-content: flex-end; margin-top: 6px;">')
-                out.append(f'            <a href="{rep_link}" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; background: #1e3a8a; color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; padding: 5px 14px; border-radius: 4px;">🔬 查看图文实验报告 &gt;&gt;</a>')
+                out.append(f'            <a href="{rep_link}" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; background: #1e3a8a; color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; padding: 5px 14px; border-radius: 4px;">🔬 查看三方权威报告 &gt;&gt;</a>')
                 out.append('          </div>')
                 out.append('        </div>')
                 out.append('      </div>')
@@ -794,8 +824,14 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     cat_filename = "article_xwzx.html"
     cat = article.get('category', '')
     subcat = article.get('sub_category', '')
-    if subcat == "实验室数据研究" or cat == "实验室数据研究":
+    if subcat in ["三方权威报告", "实验室数据研究"] or cat in ["三方权威报告", "实验室数据研究"]:
         cat_filename = "article_syssj.html"
+    elif subcat == "实验室研究数据":
+        cat_filename = "article_sysyanjiu.html"
+    elif subcat == "客户合作":
+        cat_filename = "article_khhz.html"
+    elif subcat == "应用场景":
+        cat_filename = "article_yycj.html"
     elif cat in ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]:
         cat_filename = "article_hzal.html"
     elif cat in ["常见问答"]:
@@ -831,6 +867,7 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     rel_depth = article.get("link", "").count("/")
     root_prefix = "../" * rel_depth if rel_depth > 0 else "./"
     art_content = re.sub(r'src=["\'](?:\.\./)*resource/images/', f'src="{root_prefix}resource/images/', art_content)
+    art_content = re.sub(r'src=["\'](?:\.\./)*resource/reports/images/', f'src="{root_prefix}resource/reports/images/', art_content)
     art_content = re.sub(r'src=["\'](?:\.\./)*images/', f'src="{root_prefix}images/', art_content)
     
     if re.search(content_pattern, html, re.DOTALL):
@@ -927,7 +964,12 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
         html = f.read()
         
     subcats = get_product_subcategories(category)
-    cat_products = [p for p in products if p['category'] in subcats]
+    if subcats is None:
+        cat_products = list(products)
+    else:
+        cat_products = [p for p in products if p.get('category') in subcats]
+        
+    cat_products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
     
     list_html = "\n"
     for i, p in enumerate(cat_products):
@@ -954,6 +996,9 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
     list_html += "    "
     
     html = replace_group(r'(<div class="hyt-product-list-6">)(.*?)(<div class="clear"></div>\s*</div>)', list_html, html)
+    
+    # Clean pagination block so that it does not link to outdated static pages
+    html = replace_group(r'(<div class="p102-pagination-1-main">)(.*?)(</div>)', '<a class="page_curr">1</a>', html)
         
     # Inject SEO tags into product listing page
     rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
@@ -1038,6 +1083,39 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
             
         html = replace_group(pattern, list_html, html)
 
+
+    # Update case subcategory navigation tabs (4 subcategories)
+    if any(k in file_path for k in ["hzal", "syssj", "sysyanjiu", "khhz", "yycj", "ymxy", "yyxy", "hzp", "hfpgc", "gnlsp", "xhyp", "nxhlcp"]) or category in ["合作案例", "三方权威报告", "实验室研究数据", "客户合作", "应用场景", "实验室数据研究"]:
+        nav_pattern = r'(<div class="p101a-fdh-02-nav"[^>]*>\s*<ul[^>]*>)([\s\S]*?)(</ul>\s*</div>)'
+        
+        cur_syssj = ' class="cur"' if category in ["三方权威报告", "实验室数据研究"] or "syssj" in file_path else ""
+        cur_sysyanjiu = ' class="cur"' if category == "实验室研究数据" or "sysyanjiu" in file_path else ""
+        cur_khhz = ' class="cur"' if category == "客户合作" or "khhz" in file_path else ""
+        cur_yycj = ' class="cur"' if category == "应用场景" or "yycj" in file_path else ""
+        
+        case_tabs_html = f'''
+     <li{cur_syssj}><a href="./article_syssj.html" title="三方权威报告">三方权威报告</a></li> 
+     <li{cur_sysyanjiu}><a href="./article_sysyanjiu.html" title="实验室研究数据">实验室研究数据</a></li> 
+     <li{cur_khhz}><a href="./article_khhz.html" title="客户合作">客户合作</a></li> 
+     <li{cur_yycj}><a href="./article_yycj.html" title="应用场景">应用场景</a></li> 
+    '''
+        html = re.sub(nav_pattern, r'\1' + case_tabs_html + r'\3', html)
+        
+        # Update crumbs
+        crumb_pattern = r'(<div class="p102-curmbs-1"[^>]*>[\s\S]*?<b>您当前的位置：</b>[\s\S]*?<a href="[^"]*index\.html"[^>]*>\s*首页\s*</a>\s*<span>\s*&gt;\s*</span>\s*)([\s\S]*?)(</div>)'
+        if category == "合作案例":
+            new_crumb = '<i> <a href="./article_hzal.html" title="合作案例"> 合作案例 </a> </i> '
+        else:
+            new_crumb = f'<i> <a href="./article_hzal.html" title="合作案例"> 合作案例 </a> </i> <span> &gt; </span> <i> {category} </i> '
+        html = re.sub(crumb_pattern, r'\1' + new_crumb + r'\3', html)
+
+        # Update H3
+        h3_pattern = r'(<div class="p101a-fdh-02">[\s\S]*?<h3>)([\s\S]*?)(</h3>)'
+        if category == "合作案例":
+            html = re.sub(h3_pattern, r'\1合作案例\3', html)
+        else:
+            html = re.sub(h3_pattern, r'\1' + f'合作案例 · {category}' + r'\3', html)
+
     # Inject SEO tags into article listing page
     rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
     can_href_tags = generate_canonical_and_hreflang_tags(rel_path)
@@ -1112,9 +1190,10 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
     html = replace_group(r'(<div class="swiper-wrapper">)(.*?)(</div>\s*<div class="swiper-pagination">)', banner_html, html)
         
     # 2. Update Product Showcase (g_fa tabs)
-    hzp = [p for p in products if p['category'] in get_product_subcategories("化妆品原料")][:5]
-    yyy = [p for p in products if p['category'] in get_product_subcategories("医用原料")][:3]
-    spy = [p for p in products if p['category'] in get_product_subcategories("食品营养原料")][:7]
+    sorted_prods = sorted(products, key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
+    hzp = [p for p in sorted_prods if p.get('category') in get_product_subcategories("化妆品原料")][:5]
+    yyy = [p for p in sorted_prods if p.get('category') in get_product_subcategories("医用原料")][:3]
+    spy = [p for p in sorted_prods if p.get('category') in get_product_subcategories("食品营养原料")][:7]
     
     hzp_links = "\n         " + "\n          ".join([f'<a href="./{p["link"]}" title="{p["title"]}">{p["title"]} </a>' for p in hzp]) + "\n          "
     yyy_links = "\n         " + "\n          ".join([f'<a href="./{p["link"]}" title="{p["title"]}">{p["title"]} </a>' for p in yyy]) + "\n          "
@@ -1199,6 +1278,35 @@ def update_all_footers_headers_and_nav(settings, nav_links):
                     new_content = update_global_contact_info(content, settings)
                     
                     rel_path = os.path.relpath(file_path, WORKSPACE_DIR)
+                    depth = len(rel_path.replace("\\", "/").split("/")) - 1
+                    prefix = "../" * depth if depth > 0 else "./"
+
+                    # Update footer case links (4 subcategories)
+                    footer_case_pattern = r'(<dl>\s*<dt>\s*<a href="[^"]*article_hzal\.html">[^<]*</a>\s*</dt>\s*<dd class="f_cb">)[\s\S]*?(</dd>\s*</dl>)'
+                    if re.search(footer_case_pattern, new_content):
+                        new_case_footer = f'''
+         <a href="{prefix}article_syssj.html" title="三方权威报告">三方权威报告 </a> 
+         <a href="{prefix}article_sysyanjiu.html" title="实验室研究数据">实验室研究数据 </a> 
+         <a href="{prefix}article_khhz.html" title="客户合作">客户合作 </a> 
+         <a href="{prefix}article_yycj.html" title="应用场景">应用场景 </a> 
+       '''
+                        new_content = re.sub(footer_case_pattern, r'\1' + new_case_footer + r'\2', new_content)
+
+                    # Update case tabs in case pages
+                    if '<div class="p101a-fdh-02">' in new_content and any(k in file for k in ["hzal", "syssj", "sysyanjiu", "khhz", "yycj", "ymxy", "yyxy", "hzp", "hfpgc", "gnlsp", "xhyp", "nxhlcp"]):
+                        tab_pat = r'(<div class="p101a-fdh-02-nav"[^>]*>\s*<ul[^>]*>)([\s\S]*?)(</ul>\s*</div>)'
+                        cur_syssj = ' class="cur"' if "syssj" in file else ""
+                        cur_sysyanjiu = ' class="cur"' if "sysyanjiu" in file else ""
+                        cur_khhz = ' class="cur"' if "khhz" in file else ""
+                        cur_yycj = ' class="cur"' if "yycj" in file else ""
+                        new_tabs = f'''
+     <li{cur_syssj}><a href="{prefix}article_syssj.html" title="三方权威报告">三方权威报告</a></li> 
+     <li{cur_sysyanjiu}><a href="{prefix}article_sysyanjiu.html" title="实验室研究数据">实验室研究数据</a></li> 
+     <li{cur_khhz}><a href="{prefix}article_khhz.html" title="客户合作">客户合作</a></li> 
+     <li{cur_yycj}><a href="{prefix}article_yycj.html" title="应用场景">应用场景</a></li> 
+    '''
+                        new_content = re.sub(tab_pat, r'\1' + new_tabs + r'\3', new_content)
+
                     new_content = update_navigation(new_content, nav_links, rel_path)
                     
                     if new_content != content:
@@ -1304,9 +1412,43 @@ def publish_site():
         apply_page_seo(os.path.join(WORKSPACE_DIR, "index.html"), settings=settings)
     
     # 1. Update listing pages
-    update_product_listing_page(os.path.join(WORKSPACE_DIR, "product_hzpyl.html"), "化妆品原料", products, settings, nav_links)
-    update_product_listing_page(os.path.join(WORKSPACE_DIR, "product_yyyl.html"), "医用原料", products, settings, nav_links)
-    update_product_listing_page(os.path.join(WORKSPACE_DIR, "product_spyyyl.html"), "食品营养原料", products, settings, nav_links)
+    product_listing_configs = [
+        ("product_index.html", "原料产品中心"),
+        ("product_hzpyl.html", "化妆品原料"),
+        ("product_yyyl.html", "医用原料"),
+        ("product_spyyyl.html", "食品营养原料"),
+        ("product_tpxzzd.html", "透皮型重组蛋白/多肽"),
+        ("product_zwyhxw.html", "植物源活性物"),
+        ("product_zzfsdb.html", "重组仿生蛋白"),
+        ("product_hyyhxw.html", "海洋源活性物"),
+        ("product_dwyhxw.html", "动物源活性物"),
+        ("product_zzdb.html", "重组蛋白"),
+        ("product_fhyys.html", "复合营养素"),
+        ("product_lzdt.html", "灵芝多糖"),
+    ]
+    for page_rel, cat_name in product_listing_configs:
+        page_path = os.path.join(WORKSPACE_DIR, page_rel)
+        if os.path.exists(page_path):
+            update_product_listing_page(page_path, cat_name, products, settings, nav_links)
+
+    # Clean legacy pagination files so they redirect to canonical listing pages
+    pagination_redirects = [
+        ("product_index_0002.html", "./product_index.html"),
+        ("product_index_0003.html", "./product_index.html"),
+        ("product_hzpyl_0002.html", "./product_hzpyl.html"),
+        ("product_hzpyl_0003.html", "./product_hzpyl.html"),
+        ("product_tpxzzd_0002.html", "./product_tpxzzd.html"),
+        ("en/product_index_0002.html", "./product_index.html"),
+        ("en/product_index_0003.html", "./product_index.html"),
+        ("en/product_hzpyl_0002.html", "./product_hzpyl.html"),
+        ("en/product_hzpyl_0003.html", "./product_hzpyl.html"),
+        ("en/product_tpxzzd_0002.html", "./product_tpxzzd.html"),
+    ]
+    for rel_f, target_url in pagination_redirects:
+        p_path = os.path.join(WORKSPACE_DIR, rel_f)
+        if os.path.exists(p_path):
+            with open(p_path, "w", encoding="utf-8") as pf:
+                pf.write(f'<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={target_url}"><link rel="canonical" href="{target_url}"><script>location.replace("{target_url}");</script></head><body></body></html>')
     
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_xwzx.html"), "新闻资讯", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_hzal.html"), "合作案例", articles, settings, nav_links)
@@ -1314,15 +1456,25 @@ def publish_site():
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_qydt.html"), "企业新闻", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_cpbk.html"), "技术知识", articles, settings, nav_links)
     
-    # 合作案例 7大细分行业页面动态静态化
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_ymxy.html"), "医美行业", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_yyxy.html"), "医药行业", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_hzp.html"), "化妆品", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_hfpgc.html"), "护肤品工厂", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_gnlsp.html"), "功能类食品", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_xhyp.html"), "洗护用品", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_nxhlcp.html"), "女性护理产品", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_syssj.html"), "实验室数据研究", articles, settings, nav_links)
+    # 合作案例 4大板块动态静态化
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_syssj.html"), "三方权威报告", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_sysyanjiu.html"), "实验室研究数据", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_khhz.html"), "客户合作", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_yycj.html"), "应用场景", articles, settings, nav_links)
+    
+    # 历史细分行业页面更新保持兼容
+    for legacy_page, leg_cat in [
+        ("article_ymxy.html", "客户合作"),
+        ("article_yyxy.html", "客户合作"),
+        ("article_hzp.html", "应用场景"),
+        ("article_hfpgc.html", "客户合作"),
+        ("article_gnlsp.html", "应用场景"),
+        ("article_xhyp.html", "应用场景"),
+        ("article_nxhlcp.html", "应用场景")
+    ]:
+        lp_path = os.path.join(WORKSPACE_DIR, legacy_page)
+        if os.path.exists(lp_path):
+            update_article_listing_page(lp_path, leg_cat, articles, settings, nav_links)
     
     # 2. Re-generate all product details
     template_product_path = os.path.join(WORKSPACE_DIR, "products", "tphtct.html")

@@ -228,22 +228,29 @@
 
      $(function () {
         var ysSwiper = new Swiper('.anlst', {
-            autoplay: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false
+            },
             paginationClickable: true,
-            slidesPerView: 2,
-            spaceBetween: 2 + "%",
+            slidesPerView: 4,
+            spaceBetween: 20,
             breakpoints: {
-                320: {
-                    slidesPerView: 1.2,
-                    spaceBetween: 8
+                1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
                 },
-                480: {
-                    slidesPerView: 2,
-                    spaceBetween: 10
+                992: {
+                    slidesPerView: 3,
+                    spaceBetween: 16
                 },
                 768: {
                     slidesPerView: 2,
-                    spaceBetween: '2%'
+                    spaceBetween: 12
+                },
+                480: {
+                    slidesPerView: 1.3,
+                    spaceBetween: 10
                 }
             },
             loop: true,

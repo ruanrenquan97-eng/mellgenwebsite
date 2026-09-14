@@ -75,43 +75,23 @@
     "children": [
       {
         "id": "node_6_1",
-        "name": "医美行业",
-        "url": "article_ymxy.html"
+        "name": "三方权威报告",
+        "url": "article_syssj.html"
       },
       {
         "id": "node_6_2",
-        "name": "医药行业",
-        "url": "article_yyxy.html"
+        "name": "实验室研究数据",
+        "url": "article_sysyanjiu.html"
       },
       {
         "id": "node_6_3",
-        "name": "化妆品",
-        "url": "article_hzp.html"
+        "name": "客户合作",
+        "url": "article_khhz.html"
       },
       {
         "id": "node_6_4",
-        "name": "护肤品工厂",
-        "url": "article_hfpgc.html"
-      },
-      {
-        "id": "node_6_5",
-        "name": "功能类食品",
-        "url": "article_gnlsp.html"
-      },
-      {
-        "id": "node_6_6",
-        "name": "洗护用品",
-        "url": "article_xhyp.html"
-      },
-      {
-        "id": "node_6_7",
-        "name": "女性护理产品",
-        "url": "article_nxhlcp.html"
-      },
-      {
-        "id": "node_6_8",
-        "name": "实验室数据研究",
-        "url": "article_syssj.html"
+        "name": "应用场景",
+        "url": "article_yycj.html"
       }
     ],
     "id": "node_6",

@@ -13,6 +13,9 @@
   <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
   <!-- QRCode.js for Mobile QR Code Preview -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- SortableJS for smooth drag and drop table sorting -->
+  <script src="/js/sortable.min.js"></script>
+  <script>window.Sortable || document.write('<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"><\/script>')</script>
   <script>
     tailwind.config = {
       theme: {
@@ -43,6 +46,26 @@
     ::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 4px;
+    }
+
+    /* SortableJS Drag & Drop Styling */
+    .sortable-fallback {
+      opacity: 0.95 !important;
+      background-color: #ffffff !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+      display: table !important;
+      table-layout: fixed !important;
+      cursor: grabbing !important;
+      z-index: 99999 !important;
+      pointer-events: none !important;
+    }
+    .sortable-chosen {
+      background-color: #f0fdf4 !important;
+    }
+    .sortable-ghost {
+      opacity: 0.4 !important;
+      background-color: #d1fae5 !important;
+      border: 2px dashed #10b981 !important;
     }
 
     /* ==========================================================
@@ -2151,27 +2174,33 @@
           </div>
           <!-- Pagination -->
           <div class="flex items-center gap-2 text-slate-500 font-medium">
-            <span id="products-pagination-info">1/3</span>
+            <span id="products-pagination-info">1/2</span>
             <button type="button" onclick="changeProductsPage(-1)" class="w-5 h-5 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition text-slate-400 hover:text-slate-700"><i class="fa-solid fa-chevron-left text-[9px]"></i></button>
             <button type="button" onclick="changeProductsPage(1)" class="w-5 h-5 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition text-slate-400 hover:text-slate-700"><i class="fa-solid fa-chevron-right text-[9px]"></i></button>
+            <select id="products-page-size-select" onchange="changeProductsPageSize(this.value)" class="text-xs border border-slate-200 rounded px-1.5 py-0.5 outline-none text-slate-600 bg-white cursor-pointer hover:border-slate-300">
+              <option value="10">10条/页</option>
+              <option value="20" selected>20条/页</option>
+              <option value="50">50条/页</option>
+              <option value="100">100条/页</option>
+            </select>
             <span id="products-total-badge" class="bg-[#eef9f5] text-primary text-[10px] font-bold px-2 py-0.5 rounded border border-primary/25"># 共 25 条</span>
           </div>
         </div>
 
-        <div class="bg-white rounded border border-slate-200 overflow-hidden">
+        <div class="bg-white rounded border border-slate-200 overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
               <tr>
                 <th class="p-3 w-10"></th>
-                <th class="p-3 w-12 text-center whitespace-nowrap">序号</th>
+                <th class="p-3 w-16 text-center whitespace-nowrap" title="按住序号处拖拽手柄可快速上下拖动排序">序号 / 拖动</th>
                 <th class="p-3 whitespace-nowrap">标题名称</th>
                 <th class="p-3 min-w-[110px] whitespace-nowrap">所属分类</th>
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">SEO状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">推荐</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">置顶</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">显示</th>
-                <th class="p-3 min-w-[65px] text-center whitespace-nowrap">排序</th>
-                <th class="p-3 min-w-[340px] whitespace-nowrap">发布时间</th>
+                <th class="p-3 min-w-[65px] text-center whitespace-nowrap" title="手动输入排序数值，越小越靠前">排序</th>
+                <th class="p-3 min-w-[460px] whitespace-nowrap">操作 / 发布时间</th>
               </tr>
             </thead>
             <tbody id="products-table-body" class="divide-y divide-slate-100"></tbody>
@@ -2658,7 +2687,7 @@
             <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600 select-none">
               <tr>
                 <th class="p-3 w-10"><input type="checkbox" disabled class="opacity-0"></th>
-                <th class="p-3 w-12 text-center whitespace-nowrap">序号</th>
+                <th class="p-3 w-16 text-center whitespace-nowrap" title="按住序号处拖拽手柄可快速上下拖动排序">排序 / 序号</th>
                 <th class="p-3 whitespace-nowrap">分类名称</th>
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">SEO状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">推荐</th>
@@ -2725,6 +2754,14 @@
               <div class="flex items-center gap-4">
                 <label class="w-24 text-right font-semibold text-slate-600"><span class="text-rose-500">*</span> 上级分类</label>
                 <select id="cat-parent-select" class="w-60 px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary transition bg-white"></select>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <label class="w-24 text-right font-semibold text-slate-600">排序权重</label>
+                <div class="flex items-center gap-3">
+                  <input type="number" id="cat-sort-input" placeholder="默认999" class="w-28 px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary transition text-xs">
+                  <span class="text-slate-400 text-[11px]">数字越小越靠前，可在分类列表直接按住手柄上下拖拽排序</span>
+                </div>
               </div>
 
               <div class="flex items-center gap-4">
@@ -3030,27 +3067,33 @@
           </div>
           <!-- Pagination -->
           <div class="flex items-center gap-2 text-slate-500 font-medium">
-            <span id="articles-pagination-info">1/13</span>
+            <span id="articles-pagination-info">1/7</span>
             <button type="button" onclick="changeArticlesPage(-1)" class="w-5 h-5 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition text-slate-400 hover:text-slate-700"><i class="fa-solid fa-chevron-left text-[9px]"></i></button>
             <button type="button" onclick="changeArticlesPage(1)" class="w-5 h-5 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition text-slate-400 hover:text-slate-700"><i class="fa-solid fa-chevron-right text-[9px]"></i></button>
+            <select id="articles-page-size-select" onchange="changeArticlesPageSize(this.value)" class="text-xs border border-slate-200 rounded px-1.5 py-0.5 outline-none text-slate-600 bg-white cursor-pointer hover:border-slate-300">
+              <option value="10">10条/页</option>
+              <option value="20" selected>20条/页</option>
+              <option value="50">50条/页</option>
+              <option value="100">100条/页</option>
+            </select>
             <span id="articles-total-badge" class="bg-[#eef9f5] text-primary text-[10px] font-bold px-2 py-0.5 rounded border border-primary/25"># 共 125 条</span>
           </div>
         </div>
 
-        <div class="bg-white rounded border border-slate-200 overflow-hidden">
+        <div class="bg-white rounded border border-slate-200 overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
               <tr>
                 <th class="p-3 w-10"></th>
-                <th class="p-3 w-12 text-center whitespace-nowrap">序号</th>
+                <th class="p-3 w-16 text-center whitespace-nowrap" title="按住序号处拖拽手柄可快速上下拖动排序">序号 / 拖动</th>
                 <th class="p-3 whitespace-nowrap">标题名称</th>
                 <th class="p-3 min-w-[110px] whitespace-nowrap">所属分类</th>
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">SEO状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">推荐</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">置顶</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">显示</th>
-                <th class="p-3 min-w-[65px] text-center whitespace-nowrap">排序</th>
-                <th class="p-3 min-w-[320px] whitespace-nowrap">发布时间</th>
+                <th class="p-3 min-w-[65px] text-center whitespace-nowrap" title="手动输入排序数值，越小越靠前">排序</th>
+                <th class="p-3 min-w-[440px] whitespace-nowrap">操作 / 发布时间</th>
               </tr>
             </thead>
             <tbody id="articles-table-body" class="divide-y divide-slate-100"></tbody>
@@ -6626,28 +6669,28 @@ Disallow: /cms_system/
               <span>上一步：采购与合规供应</span>
             </button>
             <button type="button" onclick="switchProdModalTab('labdata')" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded text-xs font-semibold flex items-center gap-1 shadow-xs transition">
-              <span>下一步：引用实验室数据</span>
+              <span>下一步：引用三方权威报告</span>
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </button>
           </div>
 
         </div>
 
-        <!-- 5. 实验室数据引用面板 -->
+        <!-- 5. 三方权威报告引用面板 -->
         <div id="pm-panel-labdata" class="space-y-4 hidden">
           <div class="bg-indigo-50/80 border border-indigo-200 p-3 rounded-lg text-xs flex items-start gap-2.5">
             <i class="fa-solid fa-microscope text-indigo-600 text-base mt-0.5"></i>
             <div class="flex-1 text-slate-700 leading-relaxed">
               <span class="font-bold text-indigo-900 block mb-0.5">关联引用第三方权威实验室检测报告与学术科研数据</span>
-              勾选本原料在前台展示关联的实验室检验报告（来源于【合作案例 - 实验室数据研究】库）。
-              勾选后将在前台产品详情页【🔬 实验室数据研究与权威第三方检测报告】专属模块展示，具备 CMA/CNAS 资质背书、关键实验结论与 PDF 报告查看能力。
+              勾选本原料在前台展示关联的三方权威检验报告（来源于【合作案例 - 三方权威报告】库）。
+              勾选后将在前台产品详情页【🔬 三方权威报告】专属模块展示，具备 CMA/CNAS 资质背书、关键实验结论与权威影印件查阅能力。
             </div>
           </div>
 
           <div class="flex items-center justify-between gap-3 pt-1">
             <div class="relative flex-1">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-              <input type="text" id="prod-labdata-search" oninput="filterProdLabReports()" placeholder="搜索实验室数据报告（按标题、测试项目、检测机构如SGS/绿翊等）..." class="w-full pl-8 pr-3 py-1.5 border border-slate-200 rounded text-xs outline-none focus:border-indigo-500 bg-white">
+              <input type="text" id="prod-labdata-search" oninput="filterProdLabReports()" placeholder="搜索三方权威报告（按标题、测试项目、检测机构如一苇堂/检迅/斯坦德等）..." class="w-full pl-8 pr-3 py-1.5 border border-slate-200 rounded text-xs outline-none focus:border-indigo-500 bg-white">
             </div>
             <div class="flex items-center gap-2 shrink-0">
               <button type="button" onclick="selectAllLabReports(true)" class="px-2.5 py-1 text-xs border border-indigo-200 text-indigo-600 hover:bg-indigo-50 rounded transition font-medium">全选筛选结果</button>
@@ -6686,7 +6729,7 @@ Disallow: /cms_system/
           <div class="pt-2 border-t border-slate-100 flex items-center justify-start">
             <button type="button" onclick="switchProdModalTab('labdata')" class="px-4 py-1.5 border border-slate-200 rounded text-slate-600 hover:bg-slate-50 text-xs flex items-center gap-1">
               <i class="fa-solid fa-arrow-left text-[10px]"></i>
-              <span>上一步：引用实验室数据</span>
+              <span>上一步：引用三方权威报告</span>
             </button>
           </div>
         </div>
@@ -8156,10 +8199,13 @@ Disallow: /cms_system/
     let entryQuill = null;
 
     let productsPage = 1;
-    const productsPageSize = 10;
+    let productsPageSize = parseInt(localStorage.getItem('productsPageSize')) || 20;
     let articlesPage = 1;
-    const articlesPageSize = 10;
+    let articlesPageSize = parseInt(localStorage.getItem('articlesPageSize')) || 20;
     let quillCategory = null;
+    let sortableProductsInstance = null;
+    let sortableArticlesInstance = null;
+    let sortableCategoriesInstance = null;
 
     function showToast(msg, type = "info") {
       const toast = document.getElementById("toast");
@@ -9540,19 +9586,28 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       
       const prodPagInfo = document.getElementById("products-pagination-info");
       const prodTotalBadge = document.getElementById("products-total-badge");
+      const prodPageSizeSel = document.getElementById("products-page-size-select");
       if (prodPagInfo) prodPagInfo.innerText = `${productsPage}/${totalPages}`;
       if (prodTotalBadge) prodTotalBadge.innerText = `# 共 ${totalItems} 条`;
+      if (prodPageSizeSel) prodPageSizeSel.value = String(productsPageSize);
       
       const pageData = filtered.slice((productsPage - 1) * productsPageSize, productsPage * productsPageSize);
       
       pageData.forEach((p, index) => {
         const serialNum = (productsPage - 1) * productsPageSize + index + 1;
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50/50 transition group/row border-b border-slate-100";
+        tr.className = "hover:bg-slate-50/50 group/row border-b border-slate-100 transition-colors duration-150";
+        tr.dataset.id = p.id;
+
         tr.innerHTML = `
           <td class="p-3 w-10"><input type="checkbox" class="check-product-item" value="${p.id}"></td>
-          <td class="p-3 w-12 text-slate-400">${serialNum}</td>
-                    <td class="p-3">
+          <td class="p-3 w-16 text-slate-400 select-none whitespace-nowrap">
+            <div class="drag-handle flex items-center gap-1.5 cursor-grab active:cursor-grabbing text-slate-300 group-hover/row:text-primary transition select-none" title="按住拖动排序">
+              <i class="fa-solid fa-grip-vertical text-xs pointer-events-none"></i>
+              <span class="text-xs font-mono text-slate-400 group-hover/row:text-slate-600 serial-badge pointer-events-none">${serialNum}</span>
+            </div>
+          </td>
+          <td class="p-3">
             <div class="flex items-center gap-2.5">
               <img src="/${p.image}" class="w-8 h-8 object-cover rounded-full border bg-slate-50 shrink-0">
               <div class="space-y-1">
@@ -9580,53 +9635,151 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
               <i class="fa-solid fa-circle text-[8px]"></i>
             </button>
           </td>
-          <td class="p-3"><input type="text" value="${p.sort || 50}" onblur="updateProductSort('${p.id}', this.value)" class="w-10 px-1 py-0.5 border text-center rounded outline-none focus:border-primary text-[10px] bg-white text-slate-700"></td>
-          <td class="p-3 text-slate-500 text-xs relative group/date min-w-[340px] select-none whitespace-nowrap">
+          <td class="p-3 text-center relative z-20"><input type="text" value="${p.sort || 50}" onblur="updateProductSort('${p.id}', this.value)" onkeydown="if(event.key==='Enter')this.blur()" class="sort-input w-11 px-1 py-0.5 border text-center rounded outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 text-xs bg-white text-slate-700 shadow-sm transition" title="手动输入排序数值（回车保存）"></td>
+          <td class="p-3 text-slate-500 text-xs relative group/date min-w-[460px] select-none whitespace-nowrap">
             <!-- Normal Date state -->
             <div class="group-hover/row:invisible transition-all duration-100 whitespace-nowrap">${p.date || '2025-04-16'}</div>
             <!-- Action buttons overlay on hover -->
-            <div class="hidden group-hover/row:flex items-center gap-2 absolute right-2 top-1.5 bg-white/95 backdrop-blur-sm px-2 py-1 transition-all duration-100 whitespace-nowrap flex-nowrap shrink-0 shadow-md border border-slate-200/80 rounded-md z-10">
-              <button onclick="editProduct('${p.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="弹窗快速修改">
+            <div class="hidden group-hover/row:flex items-center gap-1.5 absolute right-2 top-1.5 bg-white/95 backdrop-blur-sm px-1.5 py-1 transition-all duration-100 whitespace-nowrap flex-nowrap shrink-0 shadow-md border border-slate-200/80 rounded-md z-10">
+              <button onclick="editProduct('${p.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="弹窗快速修改">
                 <i class="fa-solid fa-pen-to-square text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">快捷修改</span>
+                <span class="text-[10px] font-medium mt-0.5">快捷修改</span>
               </button>
-              <button onclick="openProductEntryForEdit('${p.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="全页深度编辑">
+              <button onclick="openProductEntryForEdit('${p.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="全页深度编辑">
                 <i class="fa-solid fa-file-pen text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">全页编辑</span>
+                <span class="text-[10px] font-medium mt-0.5">全页编辑</span>
               </button>
-              <a href="${getFrontUrl(p.link)}" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览电脑版">
+              <a href="${getFrontUrl(p.link)}" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览电脑版">
                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">预览</span>
+                <span class="text-[10px] font-medium mt-0.5">预览</span>
               </a>
-              <button type="button" onclick="openMobilePreview('${p.link}', '${encodeURIComponent(p.title || '')}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition cursor-pointer" title="手机端自适应预览">
+              <button type="button" onclick="openMobilePreview('${p.link}', '${encodeURIComponent(p.title || '')}')" class="flex flex-col items-center px-1 py-0.5 rounded text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition cursor-pointer" title="手机端自适应预览">
                 <i class="fa-solid fa-mobile-screen-button text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">手机端</span>
+                <span class="text-[10px] font-medium mt-0.5">手机端</span>
               </button>
-              <button onclick="deleteProduct('${p.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-rose-500 hover:bg-rose-50 transition" title="删除">
+              <button onclick="deleteProduct('${p.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-rose-500 hover:bg-rose-50 transition" title="删除">
                 <i class="fa-solid fa-circle-xmark text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">删除</span>
+                <span class="text-[10px] font-medium mt-0.5">删除</span>
               </button>
-              <button onclick="copyProduct('${p.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="复制">
+              <button onclick="copyProduct('${p.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="复制">
                 <i class="fa-solid fa-copy text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">复制</span>
+                <span class="text-[10px] font-medium mt-0.5">复制</span>
               </button>
-              <button onclick="copyProductLink('${p.link}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="拷贝链接">
+              <button onclick="copyProductLink('${p.link}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="拷贝链接">
                 <i class="fa-solid fa-link text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">拷贝链接</span>
+                <span class="text-[10px] font-medium mt-0.5">拷贝链接</span>
               </button>
-              <button onclick="checkForbiddenWords('${p.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="违禁词">
+              <button onclick="checkForbiddenWords('${p.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="违禁词">
                 <i class="fa-solid fa-magnifying-glass-chart text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">违禁词</span>
+                <span class="text-[10px] font-medium mt-0.5">违禁词</span>
               </button>
             </div>
           </td>
         `;
         tbody.appendChild(tr);
       });
+
+      // Initialize smooth SortableJS
+      if (window.Sortable) {
+        if (sortableProductsInstance) {
+          try { sortableProductsInstance.destroy(); } catch (_) {}
+        }
+        sortableProductsInstance = new Sortable(tbody, {
+          handle: '.drag-handle',
+          forceFallback: true,
+          fallbackClass: 'sortable-fallback',
+          fallbackOnBody: true,
+          fallbackTolerance: 3,
+          animation: 0,
+          ghostClass: 'sortable-ghost',
+          chosenClass: 'sortable-chosen',
+          onEnd: function(evt) {
+            if (evt.oldIndex === evt.newIndex) return;
+            handleProductReorderFromDom();
+          }
+        });
+      }
+    }
+
+    async function handleProductReorderFromDom() {
+      const tbody = document.getElementById("products-table-body");
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll("tr[data-id]"));
+      const pageIds = rows.map(r => r.dataset.id).filter(Boolean);
+      if (!pageIds.length) return;
+
+      // Update serial numbers in UI immediately
+      rows.forEach((r, idx) => {
+        const sEl = r.querySelector(".serial-badge");
+        if (sEl) sEl.innerText = (productsPage - 1) * productsPageSize + idx + 1;
+      });
+
+      // Update full order list
+      const currentList = [...(cache.products || [])].sort((a, b) => {
+        const sa = a.sort !== undefined ? parseInt(a.sort) : 50;
+        const sb = b.sort !== undefined ? parseInt(b.sort) : 50;
+        if (sa !== sb) return sa - sb;
+        return new Date(b.date || 0) - new Date(a.date || 0);
+      });
+
+      const startIdx = (productsPage - 1) * productsPageSize;
+      const pageMap = new Map(pageIds.map(id => [id, currentList.find(p => p.id === id)]));
+      const newPageItems = pageIds.map(id => pageMap.get(id)).filter(Boolean);
+      currentList.splice(startIdx, newPageItems.length, ...newPageItems);
+
+      currentList.forEach((p, idx) => {
+        p.sort = (idx + 1) * 10;
+      });
+      cache.products = currentList;
+
+      // Update sort input value on current page
+      rows.forEach(r => {
+        const p = currentList.find(item => item.id === r.dataset.id);
+        if (p) {
+          const inp = r.querySelector(".sort-input");
+          if (inp) inp.value = p.sort;
+        }
+      });
+
+      try {
+        const res = await fetch("/api/products/reorder", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order: currentList.map(p => p.id) })
+        });
+        if (!res.ok) {
+          let errMsg = `保存失败 (${res.status})`;
+          try {
+            const errData = await res.json();
+            if (errData && errData.message) errMsg = errData.message;
+          } catch (_) {}
+          showToast(errMsg, "error");
+          loadAllData();
+          return;
+        }
+        const data = await res.json();
+        if (data && data.success) {
+          showToast("产品排序已更新！", "success");
+        } else {
+          showToast((data && data.message) || "排序保存失败", "error");
+          loadAllData();
+        }
+      } catch (err) {
+        console.error("handleProductReorderFromDom error:", err);
+        showToast("网络请求异常，请检查服务或刷新重试", "error");
+        loadAllData();
+      }
     }
 
     function changeProductsPage(dir) {
       productsPage += dir;
+      renderProductsTable();
+    }
+
+    function changeProductsPageSize(newSize) {
+      productsPageSize = parseInt(newSize) || 20;
+      localStorage.setItem('productsPageSize', productsPageSize);
+      productsPage = 1;
       renderProductsTable();
     }
 
@@ -9812,8 +9965,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       if (!container) return;
       
       const labArticles = (cache.articles || []).filter(a => 
-        a.sub_category === "实验室数据研究" || 
-        (a.category === "合作案例" && a.sub_category === "实验室数据研究") ||
+        a.sub_category === "三方权威报告" || a.sub_category === "实验室数据研究" || 
+        (a.category === "合作案例" && (a.sub_category === "三方权威报告" || a.sub_category === "实验室数据研究")) ||
         (a.id && a.id.startsWith("lab_"))
       );
 
@@ -9832,7 +9985,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         container.innerHTML = `
           <div class="text-center py-8 text-slate-400 text-xs">
             <i class="fa-solid fa-folder-open text-2xl mb-2 block text-slate-300"></i>
-            暂无匹配的实验室数据报告，可在“文章管理 - 合作案例 - 实验室数据研究”中添加。
+            暂无匹配的三方权威报告，可在“文章管理 - 合作案例 - 三方权威报告”中添加。
           </div>
         `;
         return;
@@ -9886,8 +10039,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const input = document.getElementById("prod-labdata-search");
       const kw = (input ? input.value : "").trim().toLowerCase();
       const labArticles = (cache.articles || []).filter(a => 
-        a.sub_category === "实验室数据研究" || 
-        (a.category === "合作案例" && a.sub_category === "实验室数据研究") ||
+        a.sub_category === "三方权威报告" || a.sub_category === "实验室数据研究" || 
+        (a.category === "合作案例" && (a.sub_category === "三方权威报告" || a.sub_category === "实验室数据研究")) ||
         (a.id && a.id.startsWith("lab_"))
       );
       const filtered = labArticles.filter(a => {
@@ -10691,18 +10844,27 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       
       const artPagInfo = document.getElementById("articles-pagination-info");
       const artTotalBadge = document.getElementById("articles-total-badge");
+      const artPageSizeSel = document.getElementById("articles-page-size-select");
       if (artPagInfo) artPagInfo.innerText = `${articlesPage}/${totalPages}`;
       if (artTotalBadge) artTotalBadge.innerText = `# 共 ${totalItems} 条`;
+      if (artPageSizeSel) artPageSizeSel.value = String(articlesPageSize);
       
       const pageData = filtered.slice((articlesPage - 1) * articlesPageSize, articlesPage * articlesPageSize);
       
       pageData.forEach((a, index) => {
         const serialNum = (articlesPage - 1) * articlesPageSize + index + 1;
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50/50 transition group/row border-b border-slate-100";
+        tr.className = "hover:bg-slate-50/50 group/row border-b border-slate-100 transition-colors duration-150";
+        tr.dataset.id = a.id;
+
         tr.innerHTML = `
           <td class="p-3 w-10"><input type="checkbox" class="check-article-item" value="${a.id}"></td>
-          <td class="p-3 w-12 text-slate-400">${serialNum}</td>
+          <td class="p-3 w-16 text-slate-400 select-none whitespace-nowrap">
+            <div class="drag-handle flex items-center gap-1.5 cursor-grab active:cursor-grabbing text-slate-300 group-hover/row:text-primary transition select-none" title="按住拖动排序">
+              <i class="fa-solid fa-grip-vertical text-xs pointer-events-none"></i>
+              <span class="text-xs font-mono text-slate-400 group-hover/row:text-slate-600 serial-badge pointer-events-none">${serialNum}</span>
+            </div>
+          </td>
           <td class="p-3 flex items-center gap-2">
             <img src="/${a.image || 'images/ban_txt.png'}" class="w-8 h-8 object-cover rounded-full border bg-slate-50 shrink-0">
             <span class="font-bold text-slate-800 hover:text-primary cursor-pointer" onclick="editArticle('${a.id}')">${a.title}</span>
@@ -10719,49 +10881,147 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
               <i class="fa-solid fa-circle text-[8px]"></i>
             </button>
           </td>
-          <td class="p-3"><input type="text" value="${a.sort || 50}" onblur="updateArticleSort('${a.id}', this.value)" class="w-10 px-1 py-0.5 border text-center rounded outline-none focus:border-primary text-[10px] bg-white text-slate-700"></td>
-          <td class="p-3 text-slate-500 text-xs relative group/date min-w-[320px] select-none whitespace-nowrap">
+          <td class="p-3 text-center relative z-20"><input type="text" value="${a.sort || 50}" onblur="updateArticleSort('${a.id}', this.value)" onkeydown="if(event.key==='Enter')this.blur()" class="sort-input w-11 px-1 py-0.5 border text-center rounded outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 text-xs bg-white text-slate-700 shadow-sm transition" title="手动输入排序数值（回车保存）"></td>
+          <td class="p-3 text-slate-500 text-xs relative group/date min-w-[440px] select-none whitespace-nowrap">
             <!-- Normal Date state -->
             <div class="group-hover/row:invisible transition-all duration-100 whitespace-nowrap">${a.date || ''}</div>
             <!-- Action buttons overlay on hover -->
-            <div class="hidden group-hover/row:flex items-center gap-2 absolute right-2 top-1.5 bg-white/95 backdrop-blur-sm px-2 py-1 transition-all duration-100 whitespace-nowrap flex-nowrap shrink-0 shadow-md border border-slate-200/80 rounded-md z-10">
-              <button onclick="editArticle('${a.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="修改">
+            <div class="hidden group-hover/row:flex items-center gap-1.5 absolute right-2 top-1.5 bg-white/95 backdrop-blur-sm px-1.5 py-1 transition-all duration-100 whitespace-nowrap flex-nowrap shrink-0 shadow-md border border-slate-200/80 rounded-md z-10">
+              <button onclick="editArticle('${a.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="修改">
                 <i class="fa-solid fa-pen-to-square text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">修改</span>
+                <span class="text-[10px] font-medium mt-0.5">修改</span>
               </button>
-              <a href="${getFrontUrl(a.link)}" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览电脑版">
+              <a href="${getFrontUrl(a.link)}" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="预览电脑版">
                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">预览</span>
+                <span class="text-[10px] font-medium mt-0.5">预览</span>
               </a>
-              <button type="button" onclick="openMobilePreview('${a.link}', '${encodeURIComponent(a.title || '')}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition cursor-pointer" title="手机端自适应预览">
+              <button type="button" onclick="openMobilePreview('${a.link}', '${encodeURIComponent(a.title || '')}')" class="flex flex-col items-center px-1 py-0.5 rounded text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition cursor-pointer" title="手机端自适应预览">
                 <i class="fa-solid fa-mobile-screen-button text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">手机端</span>
+                <span class="text-[10px] font-medium mt-0.5">手机端</span>
               </button>
-              <button onclick="deleteArticle('${a.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-rose-500 hover:bg-rose-50 transition" title="删除">
+              <button onclick="deleteArticle('${a.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-rose-500 hover:bg-rose-50 transition" title="删除">
                 <i class="fa-solid fa-circle-xmark text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">删除</span>
+                <span class="text-[10px] font-medium mt-0.5">删除</span>
               </button>
-              <button onclick="copyArticle('${a.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="复制">
+              <button onclick="copyArticle('${a.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="复制">
                 <i class="fa-solid fa-copy text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">复制</span>
+                <span class="text-[10px] font-medium mt-0.5">复制</span>
               </button>
-              <button onclick="copyArticleLink('${a.link}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="拷贝链接">
+              <button onclick="copyArticleLink('${a.link}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="拷贝链接">
                 <i class="fa-solid fa-link text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">拷贝链接</span>
+                <span class="text-[10px] font-medium mt-0.5">拷贝链接</span>
               </button>
-              <button onclick="checkForbiddenWords('${a.id}')" class="flex flex-col items-center px-1.5 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="违禁词">
+              <button onclick="checkForbiddenWords('${a.id}')" class="flex flex-col items-center px-1 py-0.5 rounded text-slate-500 hover:text-primary hover:bg-slate-50 transition" title="违禁词">
                 <i class="fa-solid fa-magnifying-glass-chart text-xs"></i>
-                <span class="text-[11px] font-medium mt-0.5">违禁词</span>
+                <span class="text-[10px] font-medium mt-0.5">违禁词</span>
               </button>
             </div>
           </td>
         `;
         tbody.appendChild(tr);
       });
+
+      // Initialize smooth SortableJS
+      if (window.Sortable) {
+        if (sortableArticlesInstance) {
+          try { sortableArticlesInstance.destroy(); } catch (_) {}
+        }
+        sortableArticlesInstance = new Sortable(tbody, {
+          handle: '.drag-handle',
+          forceFallback: true,
+          fallbackClass: 'sortable-fallback',
+          fallbackOnBody: true,
+          fallbackTolerance: 3,
+          animation: 0,
+          ghostClass: 'sortable-ghost',
+          chosenClass: 'sortable-chosen',
+          onEnd: function(evt) {
+            if (evt.oldIndex === evt.newIndex) return;
+            handleArticleReorderFromDom();
+          }
+        });
+      }
+    }
+
+    async function handleArticleReorderFromDom() {
+      const tbody = document.getElementById("articles-table-body");
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll("tr[data-id]"));
+      const pageIds = rows.map(r => r.dataset.id).filter(Boolean);
+      if (!pageIds.length) return;
+
+      // Update serial numbers in UI immediately
+      rows.forEach((r, idx) => {
+        const sEl = r.querySelector(".serial-badge");
+        if (sEl) sEl.innerText = (articlesPage - 1) * articlesPageSize + idx + 1;
+      });
+
+      // Update full order list
+      const currentList = [...(cache.articles || [])].sort((a, b) => {
+        const sa = a.sort !== undefined ? parseInt(a.sort) : 50;
+        const sb = b.sort !== undefined ? parseInt(b.sort) : 50;
+        if (sa !== sb) return sa - sb;
+        return new Date(b.date || 0) - new Date(a.date || 0);
+      });
+
+      const startIdx = (articlesPage - 1) * articlesPageSize;
+      const pageMap = new Map(pageIds.map(id => [id, currentList.find(a => a.id === id)]));
+      const newPageItems = pageIds.map(id => pageMap.get(id)).filter(Boolean);
+      currentList.splice(startIdx, newPageItems.length, ...newPageItems);
+
+      currentList.forEach((a, idx) => {
+        a.sort = (idx + 1) * 10;
+      });
+      cache.articles = currentList;
+
+      // Update sort input value on current page
+      rows.forEach(r => {
+        const a = currentList.find(item => item.id === r.dataset.id);
+        if (a) {
+          const inp = r.querySelector(".sort-input");
+          if (inp) inp.value = a.sort;
+        }
+      });
+
+      try {
+        const res = await fetch("/api/articles/reorder", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order: currentList.map(a => a.id) })
+        });
+        if (!res.ok) {
+          let errMsg = `保存失败 (${res.status})`;
+          try {
+            const errData = await res.json();
+            if (errData && errData.message) errMsg = errData.message;
+          } catch (_) {}
+          showToast(errMsg, "error");
+          loadAllData();
+          return;
+        }
+        const data = await res.json();
+        if (data && data.success) {
+          showToast("文章排序已更新！", "success");
+        } else {
+          showToast((data && data.message) || "排序保存失败", "error");
+          loadAllData();
+        }
+      } catch (err) {
+        console.error("handleArticleReorderFromDom error:", err);
+        showToast("网络请求异常，请检查服务或刷新重试", "error");
+        loadAllData();
+      }
     }
 
     function changeArticlesPage(dir) {
       articlesPage += dir;
+      renderArticlesTable();
+    }
+
+    function changeArticlesPageSize(newSize) {
+      articlesPageSize = parseInt(newSize) || 20;
+      localStorage.setItem('articlesPageSize', articlesPageSize);
+      articlesPage = 1;
       renderArticlesTable();
     }
 
@@ -12052,6 +12312,73 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
     // ==========================================================
     let categoriesPage = 1;
     const categoriesPageSize = 10;
+    let draggedCategoryId = null;
+
+    async function handleCategoryReorderFromDom() {
+      const tbody = document.getElementById("products-categories-body");
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll("tr[data-id]"));
+      const pageIds = rows.map(r => r.dataset.id).filter(Boolean);
+      if (!pageIds.length) return;
+
+      rows.forEach((r, idx) => {
+        const sEl = r.querySelector(".serial-badge");
+        if (sEl) sEl.innerText = idx + 1;
+      });
+
+      const currentList = [...(cache.categories || [])].sort((a, b) => {
+        const sa = a.sort !== undefined ? parseInt(a.sort) : 999;
+        const sb = b.sort !== undefined ? parseInt(b.sort) : 999;
+        if (sa !== sb) return sa - sb;
+        return (a.id || '').localeCompare(b.id || '');
+      });
+
+      const pageMap = new Map(pageIds.map(id => [id, currentList.find(c => c.id === id)]));
+      const newPageItems = pageIds.map(id => pageMap.get(id)).filter(Boolean);
+      currentList.splice(0, newPageItems.length, ...newPageItems);
+
+      currentList.forEach((c, idx) => {
+        c.sort = idx + 1;
+      });
+      cache.categories = currentList;
+
+      rows.forEach(r => {
+        const c = currentList.find(item => item.id === r.dataset.id);
+        if (c) {
+          const inp = r.querySelector(".sort-input");
+          if (inp) inp.value = c.sort;
+        }
+      });
+
+      try {
+        const res = await fetch("/api/categories/reorder", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order: currentList.map(c => c.id) })
+        });
+        if (!res.ok) {
+          let errMsg = `保存失败 (${res.status})`;
+          try {
+            const errData = await res.json();
+            if (errData && errData.message) errMsg = errData.message;
+          } catch (_) {}
+          showToast(errMsg, "error");
+          loadAllData();
+          return;
+        }
+        const data = await res.json();
+        if (data && data.success) {
+          showToast("分类排序已更新！", "success");
+        } else {
+          showToast((data && data.message) || "排序保存失败", "error");
+          loadAllData();
+        }
+      } catch (err) {
+        console.error("handleCategoryReorderFromDom error:", err);
+        showToast("操作失败", "error");
+        loadAllData();
+      }
+    }
 
     function renderProductsCategories() {
       const tbody = document.getElementById("products-categories-body");
@@ -12065,6 +12392,14 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         (c.name || "").toLowerCase().includes(q)
       );
 
+      // Sort categories by sort ascending
+      filtered.sort((a, b) => {
+        const sa = a.sort !== undefined ? parseInt(a.sort) : 999;
+        const sb = b.sort !== undefined ? parseInt(b.sort) : 999;
+        if (sa !== sb) return sa - sb;
+        return (a.id || '').localeCompare(b.id || '');
+      });
+
       // Total count badge
       const totalItems = filtered.length;
       const badge = document.getElementById("categories-total-count");
@@ -12075,10 +12410,17 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         const prodCount = (cache.products || []).filter(p => p.category === c.name).length;
         
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50/50 transition group/row border-b border-slate-100 text-xs";
+        tr.className = "hover:bg-slate-50/50 group/row border-b border-slate-100 text-xs transition-colors duration-150";
+        tr.dataset.id = c.id;
+
         tr.innerHTML = `
           <td class="p-3 w-10"><input type="checkbox" class="check-category-item" value="${c.id}"></td>
-          <td class="p-3 w-12 text-center text-slate-400">${serialNum}</td>
+          <td class="p-3 w-16 text-slate-400 select-none whitespace-nowrap text-center">
+            <div class="drag-handle flex items-center justify-center gap-1.5 cursor-grab active:cursor-grabbing text-slate-300 group-hover/row:text-primary transition select-none" title="按住拖动排序">
+              <i class="fa-solid fa-grip-vertical text-xs pointer-events-none"></i>
+              <span class="text-xs font-mono text-slate-400 group-hover/row:text-slate-600 serial-badge pointer-events-none">${serialNum}</span>
+            </div>
+          </td>
           <td class="p-3 flex items-center gap-2">
             <img src="/${c.thumbnail || 'resource/images/ban_txt.png'}" class="w-8 h-8 object-cover rounded border bg-slate-50 shrink-0">
             <span class="font-bold text-slate-800 hover:text-primary cursor-pointer" onclick="editCategory('${c.id}')">${c.name}</span>
@@ -12092,7 +12434,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
               <i class="fa-solid fa-circle text-[8px]"></i>
             </button>
           </td>
-          <td class="p-3 text-center"><input type="text" value="${c.sort || 999}" onblur="updateCategorySort('${c.id}', this.value)" class="w-10 px-1 py-0.5 border text-center rounded outline-none focus:border-primary text-[10px] bg-white text-slate-700"></td>
+          <td class="p-3 text-center"><input type="text" value="${c.sort || 999}" onblur="updateCategorySort('${c.id}', this.value)" class="sort-input w-10 px-1 py-0.5 border text-center rounded outline-none focus:border-primary text-[10px] bg-white text-slate-700"></td>
           <td class="p-3 text-center font-bold text-slate-600">${prodCount}</td>
           <td class="p-3 text-slate-500 text-xs relative group/date w-40 select-none text-center">
             <div class="group-hover/row:invisible transition-all duration-100">${(c.date || '').split(' ')[0]}</div>
@@ -12110,6 +12452,26 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         `;
         tbody.appendChild(tr);
       });
+
+      if (window.Sortable) {
+        if (sortableCategoriesInstance) {
+          try { sortableCategoriesInstance.destroy(); } catch (_) {}
+        }
+        sortableCategoriesInstance = new Sortable(tbody, {
+          handle: '.drag-handle',
+          forceFallback: true,
+          fallbackClass: 'sortable-fallback',
+          fallbackOnBody: true,
+          fallbackTolerance: 3,
+          animation: 0,
+          ghostClass: 'sortable-ghost',
+          chosenClass: 'sortable-chosen',
+          onEnd: function(evt) {
+            if (evt.oldIndex === evt.newIndex) return;
+            handleCategoryReorderFromDom();
+          }
+        });
+      }
     }
 
     function filterCategoriesList() {
@@ -12219,6 +12581,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       activeCategory = null;
       document.getElementById("cat-entry-breadcrumb").innerText = "新建分类";
       document.getElementById("cat-name-input").value = "";
+      const sortInput = document.getElementById("cat-sort-input");
+      if (sortInput) sortInput.value = (cache.categories || []).length + 1;
       document.getElementById("cat-tag-input").value = "产品资讯";
       document.getElementById("cat-thumbnail-path").value = "";
       document.getElementById("cat-thumb-preview").src = "";
@@ -12250,6 +12614,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
 
       document.getElementById("cat-entry-breadcrumb").innerText = `编辑分类：${cat.name}`;
       document.getElementById("cat-name-input").value = cat.name || "";
+      const sortInput = document.getElementById("cat-sort-input");
+      if (sortInput) sortInput.value = cat.sort !== undefined ? cat.sort : 999;
       document.getElementById("cat-tag-input").value = cat.associated_tag || "产品资讯";
       
       const thumbnail = cat.thumbnail || "";
@@ -12343,17 +12709,20 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         page_url: pageUrl
       };
 
+      const sortInputVal = parseInt(document.getElementById("cat-sort-input")?.value);
+      const catSort = !isNaN(sortInputVal) ? sortInputVal : (activeCategory && activeCategory.sort !== undefined ? activeCategory.sort : (cache.categories.length + 1));
+
       if (activeCategory) {
         payload.id = activeCategory.id;
         payload.date = activeCategory.date;
-        payload.sort = activeCategory.sort;
+        payload.sort = catSort;
         payload.show = activeCategory.show;
         payload.recommend = activeCategory.recommend;
         payload.top = activeCategory.top;
       } else {
         payload.id = "cat_" + Math.random().toString(36).substr(2, 9);
         payload.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        payload.sort = cache.categories.length + 1;
+        payload.sort = catSort;
         payload.show = true;
         payload.recommend = false;
         payload.top = false;

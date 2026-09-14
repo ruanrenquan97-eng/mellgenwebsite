@@ -16,6 +16,7 @@ NAV_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "nav.json")
 def load_data():
     with open(PRODUCTS_EN_PATH, "r", encoding="utf-8") as f:
         products = json.load(f)
+    products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
     settings = {}
     if os.path.exists(SETTINGS_PATH):
         with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
@@ -306,8 +307,26 @@ def generate_en_product_detail(product):
 
     # 5. Render B2B Dossier
     b2b_html_en = render_b2b_dossier_en(product)
+    intro_p = product.get("content", f"<p>{product.get('desc')}</p>")
 
-    full_content_en = f"{product['content']}\n{b2b_html_en}" if product.get("content") else b2b_html_en
+    # Add intro illustration image card (animal/plant source, mechanism, or data chart)
+    intro_img = product.get("intro_image")
+    intro_tag = product.get("intro_image_tag", "Scientific Illustration")
+    intro_cap = product.get("intro_image_caption", "")
+    intro_img_html = ""
+    if intro_img:
+        intro_img_html = f'''
+      <div class="product-intro-image-card" style="margin: 28px auto 25px auto; text-align: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 22px; box-shadow: 0 2px 12px rgba(0,0,0,0.03); max-width: 820px; box-sizing: border-box;">
+        <div style="overflow: hidden; border-radius: 6px; display: inline-block; max-width: 100%; box-shadow: 0 1px 4px rgba(0,0,0,0.06); background: #ffffff;">
+          <img src="../../{intro_img}" alt="{intro_cap}" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: 0 auto;">
+        </div>
+        <p style="margin: 14px 0 0 0; font-size: 13.5px; color: #475569; font-weight: 600; line-height: 1.6; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
+          <span style="background: #e0f2fe; color: #0369a1; padding: 2px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; border: 1px solid #bae6fd;">{intro_tag}</span>
+          <span>{intro_cap}</span>
+        </p>
+      </div>'''
+
+    full_content_en = f"{intro_p}\n{intro_img_html}\n{b2b_html_en}"
 
     # Replace content container
     content_pattern = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)((?:\s*</div>){3,5}\s*<div class="k12-cx-xgcp-4pl-fx1-1-01)'
@@ -464,13 +483,28 @@ def update_en_product_listing_pages(products):
         if cat == "All Products":
             cat_products = products
         elif cat == "Cosmetic Raw Materials":
-            cat_products = [p for p in products if p.get("category") in ["Cosmetic Raw Materials", "Transdermal Recombinant Protein/Peptides", "Recombinant Biomimetic Protein", "Plant-Derived Actives", "Marine-Derived Actives", "Infant Probiotic Fermentation Actives"]]
+            cat_products = [p for p in products if p.get("category") in [
+                "Cosmetic Raw Materials", "Transdermal Recombinant Protein/Peptides", "Recombinant Biomimetic Protein", 
+                "Plant-Derived Actives", "Marine-Derived Actives", "Infant Probiotic Fermentation Actives",
+                "化妆品原料", "透皮型重组蛋白/多肽", "重组仿生蛋白", "植物源活性物", 
+                "海洋源活性物", "婴儿菌发酵源活性物", "植物提取物", "仿生生物原料", 
+                "仿生原料", "细胞营养素", "生物发酵原料", "生物酶", "水生原料", 
+                "动物源活性物", "焕亮因子"
+            ]]
         elif cat == "Medical Raw Materials":
-            cat_products = [p for p in products if p.get("category") in ["Medical Raw Materials", "Recombinant Protein", "Animal-Derived Actives", "Active Antibacterial Materials"]]
+            cat_products = [p for p in products if p.get("category") in [
+                "Medical Raw Materials", "Recombinant Protein", "Animal-Derived Actives", "Active Antibacterial Materials",
+                "医用原料", "重组蛋白", "活性抗菌材料"
+            ]]
         elif cat == "Food Nutrition Ingredients":
-            cat_products = [p for p in products if p.get("category") in ["Food Nutrition Ingredients", "Complex Nutrients", "Infant-Derived Probiotics"]]
+            cat_products = [p for p in products if p.get("category") in [
+                "Food Nutrition Ingredients", "Complex Nutrients", "Infant-Derived Probiotics",
+                "食品营养原料", "桃胶多糖", "水母胶原", "灵芝黄酮", "灵芝多糖", "人参多肽", "复合营养素", "婴儿源益生菌"
+            ]]
         else:
             cat_products = products
+
+        cat_products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
 
         list_html = "\n"
         for i, p in enumerate(cat_products):
@@ -491,6 +525,7 @@ def update_en_product_listing_pages(products):
         list_html += "    "
 
         html = re.sub(r'(<div class="hyt-product-list-6">)(.*?)(<div class="clear"></div>\s*</div>)', r'\1' + list_html.replace('\\', '\\\\') + r'\3', html, flags=re.DOTALL)
+        html = re.sub(r'(<div class="p102-pagination-1-main">)(.*?)(</div>)', r'\1<a class="page_curr">1</a>\3', html, flags=re.DOTALL)
 
         # Popular searches in header
         pop_html = '''<p> <b>Popular Searches: </b> 
@@ -508,6 +543,19 @@ def update_en_product_listing_pages(products):
 def main():
     print("Generating pure English product pages & updating listing pages...")
     products, settings, nav_links = load_data()
+    
+    # Clean orphaned English product pages
+    active_pids = set(p['id'] for p in products)
+    en_prod_dir = os.path.join(WORKSPACE, "en", "products")
+    if os.path.exists(en_prod_dir):
+        for f in os.listdir(en_prod_dir):
+            if f.endswith('.html') and f[:-5] not in active_pids:
+                try:
+                    os.remove(os.path.join(en_prod_dir, f))
+                    print(f"[*] Cleaned orphaned English product page: {f}")
+                except Exception:
+                    pass
+
     for p in products:
         generate_en_product_detail(p)
     update_en_product_listing_pages(products)

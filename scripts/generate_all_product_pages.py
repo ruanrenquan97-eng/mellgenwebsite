@@ -389,7 +389,25 @@ def generate_zh_product_detail(product):
     # 5. Render B2B Dossier
     b2b_html_zh = render_b2b_dossier_zh(product)
     intro_p = product.get("content", f"<p>{product.get('desc')}</p>")
-    full_content_zh = f"{intro_p}\n{b2b_html_zh}"
+
+    # Add intro illustration image card (animal/plant source, mechanism, or data chart)
+    intro_img = product.get("intro_image")
+    intro_tag = product.get("intro_image_tag", "技术图谱")
+    intro_cap = product.get("intro_image_caption", "")
+    intro_img_html = ""
+    if intro_img:
+        intro_img_html = f'''
+      <div class="product-intro-image-card" style="margin: 28px auto 25px auto; text-align: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 22px; box-shadow: 0 2px 12px rgba(0,0,0,0.03); max-width: 820px; box-sizing: border-box;">
+        <div style="overflow: hidden; border-radius: 6px; display: inline-block; max-width: 100%; box-shadow: 0 1px 4px rgba(0,0,0,0.06); background: #ffffff;">
+          <img src="../{intro_img}" alt="{intro_cap}" style="max-width: 100%; max-height: 400px; object-fit: contain; display: block; margin: 0 auto;">
+        </div>
+        <p style="margin: 14px 0 0 0; font-size: 13.5px; color: #475569; font-weight: 600; line-height: 1.6; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
+          <span style="background: #e0f2fe; color: #0369a1; padding: 2px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; border: 1px solid #bae6fd;">{intro_tag}</span>
+          <span>{intro_cap}</span>
+        </p>
+      </div>'''
+
+    full_content_zh = f"{intro_p}\n{intro_img_html}\n{b2b_html_zh}"
 
     # Replace content container
     content_pattern = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)((?:\s*</div>){3,5}\s*<div class="k12-cx-xgcp-4pl-fx1-1-01)'

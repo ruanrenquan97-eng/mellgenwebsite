@@ -23,6 +23,8 @@ fi
 echo "[*] Working Directory: $WORKSPACE_DIR"
 
 echo "[1/4] Pulling latest code from GitHub..."
+git checkout -- cms_system/cms_data/seo_metrics.json sitemap.xml 2>/dev/null || true
+git stash
 git pull origin main
 
 echo "[2/4] Checking Python dependencies..."

@@ -163,8 +163,9 @@ def update_global_contact_info(html_content, settings):
     html_content = html_content.replace("186-9197-8530&nbsp;&nbsp;&nbsp;0755-82926499", settings.get("phone", "").replace(" / ", "&nbsp;&nbsp;&nbsp;"))
     html_content = html_content.replace("0755-82926499", settings.get("phone", "").split(" / ")[-1])
     
-    html_content = html_content.replace("广东省深圳市大鹏新区葵涌街道生命科学产业园", settings.get("address", ""))
-    html_content = html_content.replace("地址：广东省深圳市大鹏新区葵涌街道生命科学产业园", "地址：" + settings.get("address", ""))
+    address_val = settings.get("address", "")
+    if address_val:
+        html_content = re.sub(r'广东省深圳市大鹏新区葵涌街道生命科学产业园(?:B1栋)*', address_val, html_content)
     
     html_content = html_content.replace("61791579@qq.com", settings.get("email", ""))
     html_content = html_content.replace("邮箱：61791579@qq.com", "邮箱：" + settings.get("email", ""))

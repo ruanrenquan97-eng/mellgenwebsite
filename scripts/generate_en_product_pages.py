@@ -259,10 +259,18 @@ def generate_en_product_detail(product):
     # 5. Render B2B Dossier
     b2b_html_en = render_b2b_dossier_en(product)
 
+    full_content_en = f"{product['content']}\n{b2b_html_en}" if product.get("content") else b2b_html_en
+
     # Replace content container
-    content_pattern = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)(</div>\s*</div>\s*</div>)'
-    if re.search(content_pattern, html):
-        html = re.sub(content_pattern, r'\1\n     ' + b2b_html_en.replace('\\', '\\\\') + r'\n    \3', html, count=1)
+    content_pattern = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)((?:\s*</div>){3,5}\s*<div class="k12-cx-xgcp-4pl-fx1-1-01)'
+    match = re.search(content_pattern, html)
+    if match:
+        html = html[:match.start(2)] + f"\n     {full_content_en}\n    " + html[match.end(2):]
+    else:
+        content_pattern_fallback = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)((?:\s*</div>){3,5})'
+        match_fb = re.search(content_pattern_fallback, html)
+        if match_fb:
+            html = html[:match_fb.start(2)] + f"\n     {full_content_en}\n    " + html[match_fb.end(2):]
 
     # Clean related products translations
     rel_replacements = [

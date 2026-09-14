@@ -616,24 +616,28 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
         else:
             html = re.sub(r'(</div>\s*</div>\s*<div class="p102-proShow-1-right">)', f'\n{sample_bar_html}\n   ' + r'\1', html, count=1)
     
+    # Clean duplicate/stray sample links around image
+    html = re.sub(r'(</ul>)\s*<a href="[^"]*lxwm\.html"[^>]*>\s*申请寄样\s*&gt;\s*</a>', r'\1', html)
+    html = re.sub(r'(</div>)\s*<a href="[^"]*lxwm\.html"[^>]*>\s*申请寄样\s*&gt;\s*</a>\s*(</div>)', r'\1\2', html)
+
     # Render B2B sections (R&D, Procurement, Marketing, Disclaimer)
     b2b_html = render_product_b2b_sections(product)
     
-    # Clean any and all previous B2B sections first
+    # Clean any and all previous B2B sections first (wherever they may be located)
     b2b_clean_pattern = r'<!-- ==================== B2B PROFESSIONAL DOSSIER & DISCLAIMER ==================== -->[\s\S]*?<!-- ==================== END B2B PROFESSIONAL DOSSIER ==================== -->'
     html = re.sub(b2b_clean_pattern, '', html)
+    html = re.sub(r'<div class="mellgen-b2b-section"[\s\S]*?<!-- ==================== END B2B PROFESSIONAL DOSSIER ==================== -->', '', html)
 
     full_content = f"{product['content']}\n{b2b_html}" if product.get("content") else b2b_html
-    content_pattern1 = r'(<div class="p102-pro-content-desc endit-content">)(.*?)(</div>\s*</div>\s*</div>\s*<div class="k12-cx-xgcp-4pl-fx1-1-01)'
-    content_pattern2 = r'(<div class="p102-pro-content-desc endit-content">)(.*?)(</div>\s*<!--)'
-    if re.search(content_pattern1, html, re.DOTALL):
-        html = replace_group(content_pattern1, f"\n     {full_content}\n    ", html)
-    elif re.search(content_pattern2, html, re.DOTALL):
-        html = replace_group(content_pattern2, f"\n     {full_content}\n    ", html)
+    content_pattern = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)((?:\s*</div>){3,5}\s*<div class="k12-cx-xgcp-4pl-fx1-1-01)'
+    match = re.search(content_pattern, html)
+    if match:
+        html = html[:match.start(2)] + f"\n     {full_content}\n    " + html[match.end(2):]
     else:
-        end_pattern = r'(</div>\s*</div>\s*</div>\s*<div class="k12-cx-xgcp-4pl-fx1-1-01)'
-        if re.search(end_pattern, html):
-            html = re.sub(end_pattern, lambda m: f"\n{full_content}\n    " + m.group(1), html, count=1)
+        content_pattern_fallback = r'(<div class="p102-pro-content-desc endit-content">)([\s\S]*?)((?:\s*</div>){3,5}\s*<!--)'
+        match_fb = re.search(content_pattern_fallback, html)
+        if match_fb:
+            html = html[:match_fb.start(2)] + f"\n     {full_content}\n    " + html[match_fb.end(2):]
 
     html = update_global_contact_info(html, settings)
     

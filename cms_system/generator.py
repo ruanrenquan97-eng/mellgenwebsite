@@ -625,6 +625,72 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
         if match_fb:
             html = html[:match_fb.start(2)] + f"\n     {full_content}\n    " + html[match_fb.end(2):]
 
+    # 5. Clean up & Normalize Bottom Recommendations (ensure exactly one clean block, no duplicated blocks or empty news-info blocks)
+    standard_rec_block = '''<div class="k12-cx-xgcp-4pl-fx1-1-01 blk blk-main" style="width:1200px;margin:30px auto;"> 
+ <h4 class="p102-pro-content-title">推荐产品</h4> 
+ <div class="k12-cx-xgcp-4pl-fx1-1-01-list"> 
+   <dl> 
+    <dt> 
+     <a href="../products/tphtct.html" target="_blank" title="透皮环肽cTDP"> <img alt="透皮环肽cTDP" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg" title="透皮环肽cTDP"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/tphtct.html" target="_blank" title="透皮环肽cTDP"> 透皮环肽cTDP </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       打开皮肤吸收通道的肌肤之钥，生物透皮技术核心载体，助力10000+Da.分子透皮吸收，功效护肤的高效促渗方案。
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/tphtct.html" target="_blank" title="透皮环肽cTDP"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+   <dl> 
+    <dt> 
+     <a href="../products/jnhtea.html" target="_blank" title="聚能环肽EAC"> <img alt="聚能环肽EAC" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_36.jpg" title="聚能环肽EAC"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/jnhtea.html" target="_blank" title="聚能环肽EAC"> 聚能环肽EAC </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       细胞能量充电宝，皮肤营养聚能环。赋能线粒体呼吸链，加速细胞微循环与胶原蛋白自主合成。
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/jnhtea.html" target="_blank" title="聚能环肽EAC"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+   <dl> 
+    <dt> 
+     <a href="../products/5djydb.html" target="_blank" title="5D胶原蛋白"> <img alt="5D胶原蛋白" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_32.jpg" title="5D胶原蛋白"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/5djydb.html" target="_blank" title="5D胶原蛋白"> 5D胶原蛋白 </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       融合第三代生物透皮技术，为皮肤直补胶原蛋白，抵抗胶原蛋白流失，恢复肌肤饱满弹润。
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/5djydb.html" target="_blank" title="5D胶原蛋白"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+   <dl class="p14-product-clear"> 
+    <dt> 
+     <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> <img alt="重组胶原蛋白溶液" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_30.jpg" title="重组胶原蛋白溶液"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> 重组胶原蛋白溶液 </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       MELLPRO-RHC透皮重组人Ⅰ型、Ⅲ型胶原蛋白溶液，修复基底膜带，抚平肌底干纹松弛。
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+ </div> 
+ <div class="clear"></div> 
+</div>'''
+    rec_pattern = r'((?:</div>\s*){3})\s*(?:<div class=["\']k12-cx-xgcp-4pl-fx1-1-01[\s\S]*?)(?=\s*<div class=["\']g_ft f_fw["\'])'
+    html = re.sub(rec_pattern, r'\1\n  ' + standard_rec_block.replace('\\', '\\\\') + '\n\n  ', html)
+
     html = update_global_contact_info(html, settings)
     
     # Update navigation menu

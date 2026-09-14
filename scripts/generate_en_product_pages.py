@@ -314,6 +314,72 @@ def generate_en_product_detail(product):
     for k, v in rel_replacements:
         html = html.replace(k, v)
 
+    # Normalize bottom recommendation section: exactly one clean English recommendation block
+    standard_rec_block_en = '''<div class="k12-cx-xgcp-4pl-fx1-1-01 blk blk-main" style="width:1200px;margin:30px auto;"> 
+ <h4 class="p102-pro-content-title">Recommended Products</h4> 
+ <div class="k12-cx-xgcp-4pl-fx1-1-01-list"> 
+   <dl> 
+    <dt> 
+     <a href="../products/tphtct.html" target="_blank" title="Transdermal Peptide cTDP"> <img alt="Transdermal Peptide cTDP" src="../../resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg" title="Transdermal Peptide cTDP"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/tphtct.html" target="_blank" title="Transdermal Peptide cTDP"> Transdermal Peptide cTDP </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       The master key to opening skin absorption channels. Core carrier of biological transdermal technology, enhancing skin absorption of 10000+ Da. macromolecules.
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/tphtct.html" target="_blank" title="Transdermal Peptide cTDP"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+   <dl> 
+    <dt> 
+     <a href="../products/jnhtea.html" target="_blank" title="Polycyclic Peptide EAC"> <img alt="Polycyclic Peptide EAC" src="../../resource/images/9b89259b4fb24ad2bcc390737279f8ff_36.jpg" title="Polycyclic Peptide EAC"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/jnhtea.html" target="_blank" title="Polycyclic Peptide EAC"> Polycyclic Peptide EAC </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       Cellular energy power bank and nutrient ring. Energizes mitochondrial respiration, accelerates cutaneous microcirculation and endogenous collagen synthesis.
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/jnhtea.html" target="_blank" title="Polycyclic Peptide EAC"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+   <dl> 
+    <dt> 
+     <a href="../products/5djydb.html" target="_blank" title="5D Collagen"> <img alt="5D Collagen" src="../../resource/images/9b89259b4fb24ad2bcc390737279f8ff_32.jpg" title="5D Collagen"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/5djydb.html" target="_blank" title="5D Collagen"> 5D Collagen </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       Integrates 3rd-generation biological transdermal technology to replenish collagen directly into deep skin layers, resisting collagen depletion and restoring elasticity.
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/5djydb.html" target="_blank" title="5D Collagen"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+   <dl class="p14-product-clear"> 
+    <dt> 
+     <a href="../products/zzjydb.html" target="_blank" title="Recombinant Collagen Solution"> <img alt="Recombinant Collagen Solution" src="../../resource/images/9b89259b4fb24ad2bcc390737279f8ff_30.jpg" title="Recombinant Collagen Solution"> </a> 
+    </dt> 
+    <dd> 
+     <h4><a href="../products/zzjydb.html" target="_blank" title="Recombinant Collagen Solution"> Recombinant Collagen Solution </a></h4> 
+     <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
+       MELLPRO-RHC transdermal recombinant human Type I &amp; Type III collagen solution, repairing the basement membrane zone and smoothing dry lines and sagging.
+     </div> 
+     <div class="p15-product-2-date"> 
+      <a href="../products/zzjydb.html" target="_blank" title="Recombinant Collagen Solution"></a> 
+     </div> 
+    </dd> 
+   </dl> 
+ </div> 
+ <div class="clear"></div> 
+</div>'''
+    rec_pattern = r'((?:</div>\s*){3})\s*(?:<div class=["\']k12-cx-xgcp-4pl-fx1-1-01[\s\S]*?)(?=\s*<div class=["\']g_ft f_fw["\'])'
+    html = re.sub(rec_pattern, r'\1\n  ' + standard_rec_block_en.replace('\\', '\\\\') + '\n\n  ', html)
+
     # 6. Fix asset paths for en/products/ (depth = 1)
     html = re.sub(r'src=["\']\.\./images/', 'src="../../images/', html)
     html = re.sub(r'href=["\']\.\./css/', 'href="../../css/', html)

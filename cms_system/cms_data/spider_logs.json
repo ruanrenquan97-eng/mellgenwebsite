@@ -1,5 +1,37 @@
 [
   {
+    "id": "feed_auto_1789347621",
+    "time": "2026-09-14 03:00:21",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 34.53s)。"
+  },
+  {
+    "id": "feed_auto_1789347622",
+    "time": "2026-09-14 03:00:22",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 30.18s)。"
+  },
+  {
+    "id": "feed_auto_1789261236",
+    "time": "2026-09-13 03:00:36",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 29.03s)。"
+  },
+  {
+    "id": "feed_auto_1789261229",
+    "time": "2026-09-13 03:00:29",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 35.74s)。"
+  },
+  {
     "id": "feed_auto_1789197032",
     "time": "2026-09-12 09:10:32",
     "engine": "每日SEO自动化调度器",

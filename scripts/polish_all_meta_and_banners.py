@@ -25,7 +25,7 @@ META_REPLACEMENTS = [
     ("医用可降解材料等众多行业领域", "medical biodegradable materials and diverse industries"),
 
     # article_xwzx.html meta description
-    ("公司占地面积4600平米, 拥有Biological Transdermal Technology孵化平台, 可开展分子生物学、细胞生物学、发酵与纯化工程、制剂开发及人体功效验证等研发工作.",
+    (", 拥有Biological Transdermal Technology孵化平台, 可开展分子生物学、细胞生物学、发酵与纯化工程、制剂开发及人体功效验证等研发工作.",
      "Covering 4,600m², Mellgen features an advanced transdermal incubation platform for molecular biology, cell biology, fermentation & purification, formulation development, and human efficacy validation."),
     ("公司占地4600平米，拥有Biological Transdermal Technology孵化平台，可开展分子生物学、细胞生物学、发酵与纯化工程、制剂开发及人体功效验证等研发工作。",
      "Covering 4,600m², Mellgen features an advanced transdermal incubation platform for molecular biology, cell biology, fermentation & purification, formulation development, and human efficacy validation."),

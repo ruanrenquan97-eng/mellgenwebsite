@@ -14,8 +14,8 @@ EN_DIR = os.path.join(WORKSPACE, "en")
 # Comprehensive translation dictionary: ordered by key length descending
 DICT_ITEMS = [
     # Full Sentences / Paragraphs
-    ("拥有生物透皮技术孵化平台，开展分子生物学、细胞生物学、发酵与纯化工程、制剂开发及人体功效验证等研发工作。1000平制药级GMP细胞工厂，装载7台发酵罐， 总装量达5吨；2000平制剂生产平台，含冻干粉剂生产线，乳化生产线。公司具备从上游分子设计、工艺开发和功效验证到下游原料生产以及终端产品生产贯通的上下游产业链。",
-     "Equipped with a biological transdermal incubation platform for molecular biology, cell biology, fermentation & purification, formulation development, and human efficacy validation. A 1,000m² pharma-grade GMP cell factory with 7 fermenters totaling 5 tons capacity; a 2,000m² formulation platform with freeze-dried powder and emulsification production lines. The company commands an end-to-end industrial chain from molecular design and process validation to raw material and finished product manufacturing."),
+    ("拥有生物透皮技术孵化平台，开展分子生物学、细胞生物学、发酵与纯化工程、制剂开发及人体功效验证等研发工作。1000平GMP细胞工厂，装载7台发酵罐， 总装量达5吨；2000平制剂生产平台，含冻干粉剂生产线，乳化生产线。公司具备从上游分子设计、工艺开发和功效验证到下游原料生产以及终端产品生产贯通的上下游产业链。",
+     "Equipped with a biological transdermal incubation platform for molecular biology, cell biology, fermentation & purification, formulation development, and human efficacy validation. A 1,000m² GMP cell factory with 7 fermenters totaling 5 tons capacity; a 2,000m² formulation platform with freeze-dried powder and emulsification production lines. The company commands an end-to-end industrial chain from molecular design and process validation to raw material and finished product manufacturing."),
 
     ("配备医用万级生产洁净车间，价值上千万元的研发设备，同时引入注射剂医用纯水系统，严苛环境与精尖设施，确保产品无菌、纯净，配备近10吨级发酵罐，每年产出各类原料超百吨。 拥有工业化冻干产线，冻干粉剂年产量超10000 万支。全自动化配料灌装产线更是高效率运转， 年产各类水乳膏霜超100万支。",
      "Equipped with Class 10,000 medical cleanrooms and tens of millions worth of R&D instruments, introducing injection-grade purified water systems to ensure aseptic purity. Features ~10-ton fermenters producing over 100 tons of raw materials annually, industrialized freeze-drying lines with annual capacity exceeding 100M vials, and automated filling lines producing over 1M units of lotions and creams annually."),

@@ -71,6 +71,18 @@
       "avg_duration_str": "0秒",
       "bounce_rate": "0%",
       "hot_pct": 0
+    },
+    {
+      "id": "detail_1",
+      "title": "NMN核心原料",
+      "category": "核心原料",
+      "url": "products/detail_1.html",
+      "pv": 1,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒",
+      "bounce_rate": "0%",
+      "hot_pct": 50
     }
   ],
   "top_pages": [
@@ -131,6 +143,18 @@
   ],
   "realtime_stream": [
     {
+      "id": "v-1789371130",
+      "time": "09:32:10",
+      "ip": "113.116.12.88",
+      "region": "广东省深圳市 电信",
+      "title": "NMN核心原料",
+      "url": "products/detail_1.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "百度搜索",
+      "device": "PC端"
+    },
+    {
       "id": "v-local-1",
       "time": "08:12:00",
       "ip": "127.0.0.1",
@@ -138,7 +162,7 @@
       "title": "美尔健官网首页",
       "url": "index.html",
       "type": "官网首页",
-      "duration_str": "正在浏览中...",
+      "duration_str": "25秒",
       "referrer": "本地直接访问",
       "device": "PC端 (当前设备)"
     }

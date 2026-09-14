@@ -355,9 +355,9 @@
     "auto_ai_geo": true,
     "auto_log_parse": true,
     "server_access_log_path": "",
-    "last_run_time": "2026-09-12 09:10:32",
+    "last_run_time": "2026-09-14 03:00:21",
     "last_run_status": "成功",
-    "last_run_summary": "网站地图刷新 (162 URL) · IndexNow已发送 (162 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 0.44s)"
+    "last_run_summary": "公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 34.53s)"
   },
   "company_short": "美尔健生物",
   "company_uscc": "91440300MA5H8X9Y2M",
@@ -442,5 +442,13 @@
     ],
     "wechat_qrcode_url": "/resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
     "wechat_hint": ""
+  },
+  "contact": {
+    "phone": "186-9197-8530",
+    "tel": "0755-82926499",
+    "email": "61791579@qq.com",
+    "qq": "61791579",
+    "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园B1栋",
+    "company_name": "美尔健（深圳）生物科技有限公司"
   }
 }

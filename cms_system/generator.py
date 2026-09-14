@@ -1211,6 +1211,10 @@ def publish_site():
 
     print("[OK] Site publishing complete!")
 
+# Alias build_all to publish_site for backward compatibility
+build_all = publish_site
+
 if __name__ == "__main__":
     publish_site()
+
 

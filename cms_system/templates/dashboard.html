@@ -172,6 +172,33 @@
         </div>
       </div>
 
+      <!-- Item: 关于我们 / 企业管理 (包含全部10大板块) -->
+      <div class="border-b border-[#eef2f5]">
+        <button onclick="toggleFolder('companyinfo')" class="w-full flex items-center justify-between px-4 py-2.5 text-[#555] font-medium hover:bg-[#f4f5f9] hover:text-[#333] transition">
+          <span class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center shrink-0"><i class="fa-solid fa-landmark text-xs text-primary"></i></div>
+            <span class="flex items-center gap-1.5">
+              <span>关于我们管理</span>
+              <span class="text-[9px] bg-teal-100 text-teal-800 px-1 py-0.2 rounded font-normal">10板块</span>
+            </span>
+          </span>
+          <i id="arrow-companyinfo" class="fa-solid fa-chevron-right text-[8px] text-slate-400"></i>
+        </button>
+        <div id="sub-companyinfo" class="hidden bg-[#fafbfc] pl-12 pr-4 py-1 space-y-1 text-slate-500 border-t border-slate-50">
+          <button onclick="openCompanyInfoTab('about_company')" id="nav-company-about_company" class="w-full text-left py-1 hover:text-primary transition block">关于美尔健</button>
+          <button onclick="openCompanyInfoTab('founder')" id="nav-company-founder" class="w-full text-left py-1 hover:text-primary transition block">创始人介绍</button>
+          <button onclick="openCompanyInfoTab('photos')" id="nav-company-photos" class="w-full text-left py-1 hover:text-primary transition block">企业相册</button>
+          <button onclick="openCompanyInfoTab('production_bases')" id="nav-company-production_bases" class="w-full text-left py-1 hover:text-primary transition block">生产基地</button>
+          <button onclick="openCompanyInfoTab('videos')" id="nav-company-videos" class="w-full text-left py-1 hover:text-primary transition block">视频中心</button>
+          <button onclick="openCompanyInfoTab('honors')" id="nav-company-honors" class="w-full text-left py-1 hover:text-primary transition block">荣誉证书</button>
+          <button onclick="openCompanyInfoTab('qualifications')" id="nav-company-qualifications" class="w-full text-left py-1 hover:text-primary transition block">公司资质</button>
+          <button onclick="openCompanyInfoTab('patents')" id="nav-company-patents" class="w-full text-left py-1 hover:text-primary transition block">专利认证</button>
+          <button onclick="openCompanyInfoTab('contact')" id="nav-company-contact" class="w-full text-left py-1 hover:text-primary transition block">联系我们</button>
+          <button onclick="openCompanyInfoTab('messages')" id="nav-company-messages" class="w-full text-left py-1 hover:text-primary transition block">在线留言</button>
+        </div>
+      </div>
+
+
       <!-- Item 4: 搜索引擎优化 -->
       <div class="border-b border-[#eef2f5]">
         <button onclick="toggleFolder('seo')" class="w-full flex items-center justify-between px-4 py-2.5 text-[#555] font-medium hover:bg-[#f4f5f9] hover:text-[#333] transition">
@@ -326,15 +353,88 @@
       <section id="tab-overview" class="space-y-5 block">
 
         <div class="grid grid-cols-3 gap-5">
-          <!--体检卡片-->
-          <div class="bg-white p-4 rounded border border-slate-200 flex flex-col justify-between space-y-3">
-            <div>
-              <h3 class="font-bold text-slate-800">网站安全体检</h3>
-              <p class="text-slate-400 scale-95 origin-left mt-0.5">上次体检已过7天。请执行体检确保链接无挂马与死链。</p>
+          <!--流量趋势卡片 (显示最近一个月的流量曲线)-->
+          <div class="bg-white p-4 rounded border border-slate-200 flex flex-col justify-between shadow-sm relative overflow-hidden">
+            <!-- Header -->
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold shadow-xs">
+                  <i class="fa-solid fa-chart-line"></i>
+                </span>
+                <div>
+                  <h3 class="font-bold text-slate-800 text-xs">流量趋势</h3>
+                  <span class="text-[9px] text-slate-400">近30天走势</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 text-[10px] font-semibold text-slate-500">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>PV</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span>UV</span>
+              </div>
             </div>
-            <button onclick="showToast('正在为您执行本地文件死链与敏感词体检，检查通过！', 'success')" class="w-full bg-primary text-white py-2 rounded font-bold hover:bg-primary-dark transition text-[10px]">
-              马上体检
-            </button>
+
+            <!-- Stats Highlight Bar -->
+            <div class="grid grid-cols-3 gap-1 py-1.5 text-center bg-slate-50/70 rounded my-1 border border-slate-100/80">
+              <div>
+                <span class="text-[9px] text-slate-400 block">30天总PV</span>
+                <span id="trend-pv-sum" class="text-xs font-black text-slate-800">0</span>
+              </div>
+              <div>
+                <span class="text-[9px] text-slate-400 block">30天总UV</span>
+                <span id="trend-uv-sum" class="text-xs font-black text-blue-600">0</span>
+              </div>
+              <div>
+                <span class="text-[9px] text-slate-400 block">单日峰值</span>
+                <span id="trend-peak-pv" class="text-xs font-black text-emerald-600">0</span>
+              </div>
+            </div>
+
+            <!-- Interactive SVG Traffic Curve Container -->
+            <div class="relative w-full h-24 my-0.5 select-none" id="traffic-curve-wrapper">
+              <svg id="traffic-curve-svg" viewBox="0 0 320 80" preserveAspectRatio="none" class="w-full h-full overflow-visible">
+                <defs>
+                  <linearGradient id="pv-curve-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#10b981" stop-opacity="0.30" />
+                    <stop offset="100%" stop-color="#10b981" stop-opacity="0.01" />
+                  </linearGradient>
+                  <linearGradient id="uv-curve-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.15" />
+                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <!-- Grid lines -->
+                <line x1="0" y1="18" x2="320" y2="18" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+                <line x1="0" y1="46" x2="320" y2="46" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+                <line x1="0" y1="74" x2="320" y2="74" stroke="#e2e8f0" stroke-width="1" />
+                
+                <!-- Area and Curve Paths -->
+                <path id="traffic-pv-area" fill="url(#pv-curve-grad)" d="" />
+                <path id="traffic-pv-line" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="" />
+                <path id="traffic-uv-line" fill="none" stroke="#3b82f6" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="3,2" d="" />
+                
+                <!-- Interactive Cursor / Hover Points -->
+                <line id="traffic-hover-line" x1="0" y1="0" x2="0" y2="74" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,2" class="hidden" />
+                <circle id="traffic-hover-pv-dot" cx="0" cy="0" r="3.5" fill="#10b981" stroke="#ffffff" stroke-width="2" class="hidden shadow" />
+                <circle id="traffic-hover-uv-dot" cx="0" cy="0" r="3" fill="#3b82f6" stroke="#ffffff" stroke-width="1.5" class="hidden shadow" />
+              </svg>
+
+              <!-- Floating Tooltip -->
+              <div id="traffic-curve-tooltip" class="absolute hidden pointer-events-none z-20 bg-slate-900/90 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded shadow-lg transition-opacity whitespace-nowrap">
+                <div id="tt-date" class="font-bold text-slate-200 text-[9px] border-b border-slate-700/80 pb-0.5 mb-0.5">--</div>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-emerald-400 font-semibold">PV: <span id="tt-pv">0</span></span>
+                  <span class="text-blue-300 font-semibold">UV: <span id="tt-uv">0</span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- X-axis 30-Day Date Labels -->
+            <div class="flex items-center justify-between text-[8px] text-slate-400 font-mono px-0.5 pt-1 border-t border-slate-100/80" id="traffic-curve-xaxis">
+              <span>--</span>
+              <span>--</span>
+              <span>--</span>
+              <span>--</span>
+              <span class="text-emerald-600 font-bold">今日</span>
+            </div>
           </div>
 
           <!--流量与搜索引擎分析栏 (今日流量 / 搜索引擎收录 / 权重评级)-->
@@ -787,7 +887,392 @@
         
       </section>
 
+      <!-- ================== VIEW: COMPANY INFO (关于我们 / 企业信息与资质全功能中心) ================== -->
+      <section id="tab-company-info" class="space-y-4 hidden pb-16">
+        <!-- Top Title & Sync Banner -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-50 text-primary flex items-center justify-center font-bold text-lg shadow-2xs">
+              <i class="fa-solid fa-landmark"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-slate-800 text-sm">企业信息与资质管理中心</h3>
+                <span class="text-[10px] bg-teal-100 text-teal-800 font-semibold px-2 py-0.5 rounded-full">中英双语即时同步</span>
+              </div>
+              <p class="text-slate-400 text-[11px] mt-0.5">全站关于我们 10 大核心板块可视化维护：资质证书、相册基地、图文与留言一站式更新，随时增删改。</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="syncAllCompanyInfo()" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold flex items-center gap-2 transition shadow-xs">
+              <i class="fa-solid fa-rotate"></i>
+              <span>一键全量同步双语前台</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 10个导航标签胶囊按钮 (双行排列，1:1 复刻用户截图界面) -->
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs space-y-2.5">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[11px] font-bold text-slate-500 flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-primary"></i> 快捷切换维护板块：</span>
+            <span id="current-active-tab-desc" class="text-[10px] text-slate-400 font-mono">当前板块: 公司资质 (help_gszz.html)</span>
+          </div>
+          <!-- 第一行: 关于美尔健, 创始人介绍, 企业相册, 生产基地, 视频中心 -->
+          <div class="grid grid-cols-5 gap-2.5">
+            <button type="button" onclick="switchCompanySubTab('about_company')" id="btn-comp-tab-about_company" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">关于美尔健</button>
+            <button type="button" onclick="switchCompanySubTab('founder')" id="btn-comp-tab-founder" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">创始人介绍</button>
+            <button type="button" onclick="switchCompanySubTab('photos')" id="btn-comp-tab-photos" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">企业相册</button>
+            <button type="button" onclick="switchCompanySubTab('production_bases')" id="btn-comp-tab-production_bases" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">生产基地</button>
+            <button type="button" onclick="switchCompanySubTab('videos')" id="btn-comp-tab-videos" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">视频中心</button>
+          </div>
+          <!-- 第二行: 荣誉证书, 公司资质, 专利认证, 联系我们, 在线留言 -->
+          <div class="grid grid-cols-5 gap-2.5">
+            <button type="button" onclick="switchCompanySubTab('honors')" id="btn-comp-tab-honors" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">荣誉证书</button>
+            <button type="button" onclick="switchCompanySubTab('qualifications')" id="btn-comp-tab-qualifications" class="comp-tab-pill py-2 text-center rounded-full border border-[#499c7c] bg-[#499c7c] text-white text-xs font-bold transition shadow-sm cursor-pointer">公司资质</button>
+            <button type="button" onclick="switchCompanySubTab('patents')" id="btn-comp-tab-patents" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">专利认证</button>
+            <button type="button" onclick="switchCompanySubTab('contact')" id="btn-comp-tab-contact" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">联系我们</button>
+            <button type="button" onclick="switchCompanySubTab('messages')" id="btn-comp-tab-messages" class="comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer">在线留言</button>
+          </div>
+        </div>
+
+        <!-- 子面板 1: 卡片式网格管理 (公司资质、荣誉证书、专利认证、企业相册、生产基地) -->
+        <div id="comp-panel-grid" class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <h4 id="comp-grid-title" class="font-bold text-slate-800 text-sm">公司资质列表</h4>
+              <span id="comp-grid-count" class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-semibold">6 项</span>
+              <a id="comp-grid-preview-link" href="./help_gszz.html" target="_blank" class="text-xs text-primary hover:underline flex items-center gap-1 ml-2 font-medium">
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览前台
+              </a>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <div class="relative">
+                <input type="text" id="comp-grid-search" oninput="filterCompanyGridCards(this.value)" placeholder="搜索名称..." class="pl-7 pr-3 py-1.5 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary w-48 bg-slate-50 focus:bg-white text-slate-700">
+                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              </div>
+              <button type="button" onclick="openAddCompanyItemModal()" class="px-3.5 py-1.5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-xs">
+                <i class="fa-solid fa-plus"></i>
+                <span id="btn-add-comp-item-text">添加资质证书</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 卡片网格展示容器 -->
+          <div id="comp-grid-cards" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-1">
+            <!-- 动态填充 -->
+          </div>
+          
+          <!-- 空状态提示 -->
+          <div id="comp-grid-empty" class="hidden py-16 text-center text-slate-400 space-y-2">
+            <i class="fa-solid fa-certificate text-3xl text-slate-300"></i>
+            <p class="text-xs">暂无内容，点击右上角“添加”即可上传新项</p>
+          </div>
+        </div>
+
+        <!-- 子面板 2: 关于美尔健 (图文编辑) -->
+        <div id="comp-panel-about_company" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-800 text-sm">“关于美尔健”图文内容维护</h4>
+              <p class="text-[11px] text-slate-400">修改保存后将即时更新前台 helps/gymej.html 及英文双语页面。</p>
+            </div>
+            <a href="./helps/gymej.html" target="_blank" class="text-xs text-primary hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览前台页面
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">主标题 (H3)：</label>
+              <input type="text" id="comp-about-title" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">愿景 / 副标题：</label>
+              <input type="text" id="comp-about-subtitle" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">企业形象宣传横幅图 (Banner)：</label>
+            <div class="flex items-center gap-3">
+              <input type="text" id="comp-about-banner" class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary font-mono text-slate-600">
+              <label class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold cursor-pointer transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                <span>上传新图</span>
+                <input type="file" accept="image/*" class="hidden" onchange="uploadAboutBanner(this)">
+              </label>
+            </div>
+            <div class="mt-2 w-48 h-24 rounded border border-slate-200 overflow-hidden bg-slate-50 flex items-center justify-center">
+              <img id="comp-about-banner-preview" src="" class="w-full h-full object-cover">
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <label class="block text-xs font-bold text-slate-700">企业介绍主体内容 (三段核心介绍)：</label>
+            <div>
+              <span class="text-[11px] text-slate-500 font-semibold mb-1 block">第 1 段：企业战略定位与地理布局</span>
+              <textarea id="comp-about-p1" rows="3" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary"></textarea>
+            </div>
+            <div>
+              <span class="text-[11px] text-slate-500 font-semibold mb-1 block">第 2 段：核心技术与学术依托机构</span>
+              <textarea id="comp-about-p2" rows="3" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary"></textarea>
+            </div>
+            <div>
+              <span class="text-[11px] text-slate-500 font-semibold mb-1 block">第 3 段：产业化应用与功效方向</span>
+              <textarea id="comp-about-p3" rows="3" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary"></textarea>
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-3 border-t border-slate-100">
+            <button type="button" onclick="saveAboutCompanyForm()" class="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold transition shadow-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>保存修改并同步前台</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 子面板 3: 创始人介绍 (创始人与专家团队维护) -->
+        <div id="comp-panel-founder" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-800 text-sm">“创始人介绍”信息维护</h4>
+              <p class="text-[11px] text-slate-400">管理创始人学术头衔、科研成就与科研荣誉奖项。</p>
+            </div>
+            <a href="./helps/csrjs.html" target="_blank" class="text-xs text-primary hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览前台页面
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">创始人姓名 / 称谓：</label>
+              <input type="text" id="comp-founder-name" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">学术头衔 / 团队资质：</label>
+              <input type="text" id="comp-founder-title" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">形象照片：</label>
+            <div class="flex items-center gap-3">
+              <input type="text" id="comp-founder-photo" class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary font-mono text-slate-600">
+              <label class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold cursor-pointer transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                <span>上传照片</span>
+                <input type="file" accept="image/*" class="hidden" onchange="uploadFounderPhoto(this)">
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">学术履历与科研背景简介：</label>
+            <textarea id="comp-founder-intro" rows="4" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">核心荣誉与奖励 (每行一条)：</label>
+            <textarea id="comp-founder-honors" rows="4" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary font-sans" placeholder="科技部创新创业领军人才&#10;中国科学家论坛科技创新典范"></textarea>
+          </div>
+
+          <div class="flex justify-end pt-3 border-t border-slate-100">
+            <button type="button" onclick="saveFounderForm()" class="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold transition shadow-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>保存修改并同步前台</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 子面板 4: 联系我们 (一站式配置) -->
+        <div id="comp-panel-contact" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-800 text-sm">“联系我们”与全网联系方式</h4>
+              <p class="text-[11px] text-slate-400">修改后将一站式同步更新前台 helps/lxwm.html 页面及全站全局配置。</p>
+            </div>
+            <a href="./helps/lxwm.html" target="_blank" class="text-xs text-primary hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览前台页面
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">公司全称：</label>
+              <input type="text" id="comp-contact-company_name" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">全国热线 / 手机号：</label>
+              <input type="text" id="comp-contact-phone" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">固定电话：</label>
+              <input type="text" id="comp-contact-tel" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">电子邮箱：</label>
+              <input type="text" id="comp-contact-email" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">商务 QQ：</label>
+              <input type="text" id="comp-contact-qq" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">工作时间：</label>
+              <input type="text" id="comp-contact-work_hours" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">公司详细中文地址：</label>
+            <input type="text" id="comp-contact-address" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">公司详细英文地址 (Address EN)：</label>
+            <input type="text" id="comp-contact-address_en" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+          </div>
+
+          <div class="flex justify-end pt-3 border-t border-slate-100">
+            <button type="button" onclick="saveContactForm()" class="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold transition shadow-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>保存修改并同步前台</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 子面板 5: 在线留言 (访客咨询管理) -->
+        <div id="comp-panel-messages" class="hidden bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-800 text-sm">访客在线留言与咨询反馈</h4>
+              <p class="text-[11px] text-slate-400">接收并管理通过前台 Tools/leaveword.html 提交的询盘与合作咨询。</p>
+            </div>
+            <a href="./Tools/leaveword.html" target="_blank" class="text-xs text-primary hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 查看前台留言板
+            </a>
+          </div>
+
+          <!-- 留言表格 -->
+          <div class="overflow-x-auto border border-slate-200 rounded-lg">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-600">
+                <tr>
+                  <th class="p-3">提交时间</th>
+                  <th class="p-3">访客姓名</th>
+                  <th class="p-3">联系方式</th>
+                  <th class="p-3">留言咨询内容</th>
+                  <th class="p-3 text-center">状态</th>
+                  <th class="p-3 text-right">操作</th>
+                </tr>
+              </thead>
+              <tbody id="comp-messages-tbody" class="divide-y divide-slate-100 text-slate-700">
+                <!-- 动态填充 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 子面板 6: 视频中心 (联动视频发布中心) -->
+        <div id="comp-panel-videos" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h4 class="font-bold text-slate-800 text-sm">视频中心</h4>
+              <p class="text-[11px] text-slate-400">官网视频与抖音视频统一由【视频发布中心】管理发布并同步到前台。</p>
+            </div>
+            <a href="./help_spzx.html" target="_blank" class="text-xs text-primary hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> 预览前台视频中心
+            </a>
+          </div>
+          
+          <div class="p-6 bg-rose-50/50 rounded-xl border border-rose-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-clapperboard"></i>
+              </div>
+              <div>
+                <h5 class="font-bold text-slate-800 text-sm">视频发布中心已就绪</h5>
+                <p class="text-xs text-slate-500 mt-0.5">支持批量管理宣传视频、上传本地 MP4 或输入流媒体地址，一键同步至 help_spzx.html。</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="switchTab('video-center')" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold transition shadow-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-play"></i>
+                <span>前往视频发布中心</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================== MODAL: 公司资质/证书/相册添加与编辑弹窗 ================== -->
+      <div id="modal-company-item" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-md p-5 space-y-4 m-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h4 id="modal-company-item-title" class="font-bold text-slate-800 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-pen-to-square text-primary"></i>
+              <span>编辑项目</span>
+            </h4>
+            <button type="button" onclick="closeCompanyItemModal()" class="text-slate-400 hover:text-slate-600">
+              <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+          </div>
+
+          <input type="hidden" id="comp-modal-item-id">
+          <input type="hidden" id="comp-modal-section">
+
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">所属板块：</label>
+              <span id="comp-modal-section-badge" class="inline-block px-2.5 py-1 bg-teal-50 text-teal-800 rounded font-semibold text-xs">公司资质</span>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">中文名称 (必填)：</label>
+              <input type="text" id="comp-modal-title" placeholder="请输入证书或相册标题..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">英文名称 (选填，自动同步至英文站)：</label>
+              <div class="flex items-center gap-2">
+                <input type="text" id="comp-modal-title-en" placeholder="English Title..." class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
+                <button type="button" onclick="autoTranslateCompTitle()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg shrink-0">自动填充</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">图片路径 / 上传图片：</label>
+              <div class="flex items-center gap-2">
+                <input type="text" id="comp-modal-img" placeholder="./resource/images/..." class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary font-mono text-slate-600" oninput="updateCompModalImgPreview()">
+                <label class="px-3 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-semibold cursor-pointer transition shrink-0 flex items-center gap-1">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                  <span>上传</span>
+                  <input type="file" accept="image/*" class="hidden" onchange="uploadCompItemImage(this)">
+                </label>
+              </div>
+              <!-- 图片预览框 -->
+              <div class="mt-2 w-full h-32 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center overflow-hidden">
+                <img id="comp-modal-img-preview" src="" alt="预览" class="max-h-full max-w-full object-contain">
+                <span id="comp-modal-img-empty" class="text-slate-400 text-xs">暂无图片预览</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">详情页链接 (选填)：</label>
+              <input type="text" id="comp-modal-url" placeholder="./helps/xxx.html 或 javascript:;" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary font-mono text-slate-600">
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeCompanyItemModal()" class="px-4 py-2 border border-slate-200 rounded-lg hover:bg-slate-50 text-xs font-semibold text-slate-600">取消</button>
+            <button type="button" onclick="saveCompanyItemModal()" class="px-5 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold transition shadow-xs">保存并同步</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ================== VIEW: PRODUCTS LIST ================== -->
+
       <section id="tab-products" class="space-y-3 hidden">
         <!-- Breadcrumb & Search Bar -->
         <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
@@ -6237,7 +6722,7 @@ Disallow: /cms_system/
     };
 
     const SYSTEM_MODULES = [
-      { code: "overview", name: "首页概览", desc: "体检、流量与收录监控", icon: "fa-chart-pie", defaultChecked: true },
+      { code: "overview", name: "首页概览", desc: "流量走势、访问量与收录监控", icon: "fa-chart-pie", defaultChecked: true },
       { code: "products", name: "产品中心", desc: "产品发布、列表与规格", icon: "fa-boxes-stacked", defaultChecked: true },
       { code: "articles", name: "资讯频道", desc: "企业动态与文章管理", icon: "fa-newspaper", defaultChecked: true },
       { code: "seo", name: "搜索引擎优化", desc: "Sitemap/Robots/关键词", icon: "fa-magnifying-glass-chart", defaultChecked: true },
@@ -6835,6 +7320,7 @@ Disallow: /cms_system/
 
       const titles = {
         overview: "首页概览",
+        'company-info': "关于我们管理",
         'pages-edit': "页面修改",
         products: "产品频道 > 产品列表",
         'product-entry': "产品频道 > 产品录入",
@@ -6989,6 +7475,8 @@ Disallow: /cms_system/
         initVideoPublishForm();
       } else if (tabId === "video-settings") {
         initVideoSettingsTab();
+      } else if (tabId === "company-info") {
+        initCompanyInfoTab();
       }
     }
 
@@ -7110,6 +7598,139 @@ Disallow: /cms_system/
       }
     }
 
+    function renderTrafficCurve(history) {
+      if (!Array.isArray(history) || history.length === 0) return;
+
+      const totalPv = history.reduce((sum, item) => sum + (Number(item.pv) || 0), 0);
+      const totalUv = history.reduce((sum, item) => sum + (Number(item.uv) || 0), 0);
+      const peakPv = history.reduce((max, item) => Math.max(max, Number(item.pv) || 0), 0);
+
+      const pvSumEl = document.getElementById("trend-pv-sum");
+      const uvSumEl = document.getElementById("trend-uv-sum");
+      const peakPvEl = document.getElementById("trend-peak-pv");
+      if (pvSumEl) pvSumEl.innerText = totalPv.toLocaleString();
+      if (uvSumEl) uvSumEl.innerText = totalUv.toLocaleString();
+      if (peakPvEl) peakPvEl.innerText = peakPv.toLocaleString();
+
+      // Render X-axis ticks (5 labels across 30 days)
+      const xaxisEl = document.getElementById("traffic-curve-xaxis");
+      if (xaxisEl && history.length >= 5) {
+        const indices = [0, Math.floor(history.length * 0.25), Math.floor(history.length * 0.5), Math.floor(history.length * 0.75), history.length - 1];
+        xaxisEl.innerHTML = indices.map((idx, i) => {
+          const item = history[idx];
+          const isToday = i === indices.length - 1;
+          return `<span class="${isToday ? 'text-emerald-600 font-bold' : ''}">${isToday ? '今日' : item.date}</span>`;
+        }).join("");
+      }
+
+      // Draw SVG curve
+      const svgWidth = 320;
+      const svgHeight = 80;
+      const padLeft = 4;
+      const padRight = 4;
+      const padTop = 10;
+      const padBottom = 8;
+      const chartW = svgWidth - padLeft - padRight;
+      const chartH = svgHeight - padTop - padBottom;
+      const maxVal = Math.max(peakPv, 5);
+
+      const pvPoints = history.map((item, i) => {
+        const x = padLeft + (i / (history.length - 1)) * chartW;
+        const y = padTop + (1 - (Number(item.pv) || 0) / maxVal) * chartH;
+        return { x, y, item };
+      });
+
+      const uvPoints = history.map((item, i) => {
+        const x = padLeft + (i / (history.length - 1)) * chartW;
+        const y = padTop + (1 - (Number(item.uv) || 0) / maxVal) * chartH;
+        return { x, y, item };
+      });
+
+      function getBezierPath(points) {
+        if (!points.length) return "";
+        let d = `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
+        for (let i = 0; i < points.length - 1; i++) {
+          const p0 = points[i];
+          const p1 = points[i + 1];
+          const cx1 = (p0.x + (p1.x - p0.x) / 2).toFixed(1);
+          const cy1 = p0.y.toFixed(1);
+          const cx2 = (p0.x + (p1.x - p0.x) / 2).toFixed(1);
+          const cy2 = p1.y.toFixed(1);
+          d += ` C ${cx1},${cy1} ${cx2},${cy2} ${p1.x.toFixed(1)},${p1.y.toFixed(1)}`;
+        }
+        return d;
+      }
+
+      const pvLinePath = getBezierPath(pvPoints);
+      const uvLinePath = getBezierPath(uvPoints);
+      const pvAreaPath = pvPoints.length ? `${pvLinePath} L ${pvPoints[pvPoints.length - 1].x.toFixed(1)},${(padTop + chartH).toFixed(1)} L ${pvPoints[0].x.toFixed(1)},${(padTop + chartH).toFixed(1)} Z` : "";
+
+      const pvLineEl = document.getElementById("traffic-pv-line");
+      const uvLineEl = document.getElementById("traffic-uv-line");
+      const pvAreaEl = document.getElementById("traffic-pv-area");
+      if (pvLineEl) pvLineEl.setAttribute("d", pvLinePath);
+      if (uvLineEl) uvLineEl.setAttribute("d", uvLinePath);
+      if (pvAreaEl) pvAreaEl.setAttribute("d", pvAreaPath);
+
+      // Bind mouse interaction for hover tooltip & dots
+      const wrapper = document.getElementById("traffic-curve-wrapper");
+      const hoverLine = document.getElementById("traffic-hover-line");
+      const hoverPvDot = document.getElementById("traffic-hover-pv-dot");
+      const hoverUvDot = document.getElementById("traffic-hover-uv-dot");
+      const tooltip = document.getElementById("traffic-curve-tooltip");
+      const ttDate = document.getElementById("tt-date");
+      const ttPv = document.getElementById("tt-pv");
+      const ttUv = document.getElementById("tt-uv");
+
+      if (wrapper && !wrapper._hasListener) {
+        wrapper._hasListener = true;
+        wrapper.addEventListener("mousemove", (e) => {
+          if (!history.length) return;
+          const rect = wrapper.getBoundingClientRect();
+          const mouseX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+          const ratio = mouseX / rect.width;
+          const idx = Math.max(0, Math.min(history.length - 1, Math.round(ratio * (history.length - 1))));
+          const ptPv = pvPoints[idx];
+          const ptUv = uvPoints[idx];
+          if (!ptPv || !ptUv) return;
+
+          if (hoverLine) {
+            hoverLine.setAttribute("x1", ptPv.x.toFixed(1));
+            hoverLine.setAttribute("x2", ptPv.x.toFixed(1));
+            hoverLine.classList.remove("hidden");
+          }
+          if (hoverPvDot) {
+            hoverPvDot.setAttribute("cx", ptPv.x.toFixed(1));
+            hoverPvDot.setAttribute("cy", ptPv.y.toFixed(1));
+            hoverPvDot.classList.remove("hidden");
+          }
+          if (hoverUvDot) {
+            hoverUvDot.setAttribute("cx", ptUv.x.toFixed(1));
+            hoverUvDot.setAttribute("cy", ptUv.y.toFixed(1));
+            hoverUvDot.classList.remove("hidden");
+          }
+          if (tooltip) {
+            if (ttDate) ttDate.innerText = ptPv.item.full_date || ptPv.item.date;
+            if (ttPv) ttPv.innerText = ptPv.item.pv || 0;
+            if (ttUv) ttUv.innerText = ptUv.item.uv || 0;
+            
+            let tipLeft = mouseX + 10;
+            if (tipLeft + 110 > rect.width) tipLeft = mouseX - 115;
+            tooltip.style.left = `${Math.max(5, tipLeft)}px`;
+            tooltip.style.top = `2px`;
+            tooltip.classList.remove("hidden");
+          }
+        });
+
+        wrapper.addEventListener("mouseleave", () => {
+          if (hoverLine) hoverLine.classList.add("hidden");
+          if (hoverPvDot) hoverPvDot.classList.add("hidden");
+          if (hoverUvDot) hoverUvDot.classList.add("hidden");
+          if (tooltip) tooltip.classList.add("hidden");
+        });
+      }
+    }
+
     function renderSeoMetrics() {
       if (!cache.seoMetrics) return;
       const { traffic, indexing, authority } = cache.seoMetrics;
@@ -7136,6 +7757,19 @@ Disallow: /cms_system/
         if (durEl) durEl.innerText = traffic.avg_duration || '2分46秒';
         if (bncEl) bncEl.innerText = traffic.bounce_rate || '24.6%';
         if (peakEl) peakEl.innerText = traffic.peak_hour || '14:00 - 16:00';
+
+        const srcEl = document.getElementById('stat-traffic-source-desc');
+        if (srcEl) {
+          if ((traffic.uv || 0) > 0) {
+            srcEl.innerText = '真实公网访客接入中';
+          } else {
+            srcEl.innerText = '等待真实访客';
+          }
+        }
+
+        if (traffic.history_30d) {
+          renderTrafficCurve(traffic.history_30d);
+        }
       }
 
       // 2. Indexing Tab Data
@@ -7592,10 +8226,10 @@ Disallow: /cms_system/
         streamContainer.innerHTML = realtime_stream.slice(0, 8).map(st => `
           <div class="p-2.5 rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition space-y-1 text-xs">
             <div class="flex items-center justify-between text-[10px]">
-              <span class="font-bold text-slate-700 flex items-center gap-1">
-                <i class="fa-solid fa-location-dot text-rose-500"></i> ${st.region || '客户来访'}
+              <span class="font-bold text-slate-700 flex items-center gap-1 truncate max-w-[220px]" title="${st.region || '客户来访'}">
+                <i class="fa-solid fa-location-dot text-rose-500 shrink-0"></i> <span>${st.region || '客户来访'}</span>
               </span>
-              <span class="text-slate-400">${st.time}</span>
+              <span class="text-slate-400 font-mono text-[9px] shrink-0">${st.time}</span>
             </div>
             <div class="flex items-center justify-between">
               <div class="font-semibold text-slate-800 truncate text-[11px] max-w-[200px]" title="${st.title}">
@@ -7606,8 +8240,8 @@ Disallow: /cms_system/
               </span>
             </div>
             <div class="text-[10px] text-slate-400 flex items-center justify-between pt-0.5">
-              <span class="truncate max-w-[180px]" title="${st.referrer}"><i class="fa-solid fa-arrow-turn-up text-[8px] mr-1"></i>${st.referrer}</span>
-              <span class="text-[9px] text-slate-400 font-mono">${st.ip}</span>
+              <span class="truncate max-w-[170px]" title="${st.referrer}"><i class="fa-solid fa-arrow-turn-up text-[8px] mr-1"></i>${st.referrer}</span>
+              <span class="text-[10px] text-slate-500 font-mono font-medium shrink-0" title="访客公网真实IP">${st.ip}</span>
             </div>
           </div>
         `).join('');
@@ -15640,6 +16274,635 @@ window.onload = () => {
         }
       } catch (e) {
         showToast("保存失败: " + e.message, "error");
+      }
+    }
+
+    /* =========================================================================
+       企业信息与资质管理中心 (Company Info & Qualifications Management) JS 逻辑
+       ========================================================================= */
+    let currentCompanySubTab = 'qualifications';
+    let companyInfoData = null;
+
+    const compTabMeta = {
+      about_company: { name: "关于美尔健", page: "helps/gymej.html", type: "form" },
+      founder: { name: "创始人介绍", page: "helps/csrjs.html", type: "form" },
+      photos: { name: "企业相册", page: "help_qyxc.html", type: "grid", addBtn: "添加相册照片" },
+      production_bases: { name: "生产基地", page: "help_scjd.html", type: "grid", addBtn: "添加基地设施" },
+      videos: { name: "视频中心", page: "help_spzx.html", type: "videos" },
+      honors: { name: "荣誉证书", page: "help_ryzs.html", type: "grid", addBtn: "添加荣誉证书" },
+      qualifications: { name: "公司资质", page: "help_gszz.html", type: "grid", addBtn: "添加资质证书" },
+      patents: { name: "专利认证", page: "help_fmzl.html", type: "grid", addBtn: "添加专利证书" },
+      contact: { name: "联系我们", page: "helps/lxwm.html", type: "form" },
+      messages: { name: "在线留言", page: "Tools/leaveword.html", type: "messages" }
+    };
+
+    function openCompanyInfoTab(subTab) {
+      currentCompanySubTab = subTab || 'qualifications';
+      switchTab('company-info');
+      switchCompanySubTab(currentCompanySubTab);
+    }
+
+    async function initCompanyInfoTab() {
+      await loadCompanyInfoData();
+      switchCompanySubTab(currentCompanySubTab);
+    }
+
+    async function loadCompanyInfoData(forceReload = false) {
+      try {
+        if (!companyInfoData || forceReload) {
+          const res = await fetch("/api/company-info");
+          const json = await res.json();
+          if (json.success && json.data) {
+            companyInfoData = json.data;
+          }
+        }
+      } catch (e) {
+        console.error("加载企业信息数据失败", e);
+        showToast("加载数据失败: " + e.message, "error");
+      }
+    }
+
+    function switchCompanySubTab(subTab) {
+      currentCompanySubTab = subTab;
+      
+      // 更新顶部胶囊按钮高亮状态 (选中为墨绿 #499c7c，其余为白色)
+      document.querySelectorAll('.comp-tab-pill').forEach(btn => {
+        btn.className = 'comp-tab-pill py-2 text-center rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:border-primary hover:text-primary transition shadow-2xs cursor-pointer';
+      });
+      const activeBtn = document.getElementById(`btn-comp-tab-${subTab}`);
+      if (activeBtn) {
+        activeBtn.className = 'comp-tab-pill py-2 text-center rounded-full border border-[#499c7c] bg-[#499c7c] text-white text-xs font-bold transition shadow-sm cursor-pointer';
+      }
+
+      // 更新描述
+      const meta = compTabMeta[subTab] || { name: subTab, page: "" };
+      const descEl = document.getElementById("current-active-tab-desc");
+      if (descEl) descEl.innerText = `当前板块: ${meta.name} (${meta.page})`;
+
+      // 隐藏全部子面板
+      const panels = ["grid", "about_company", "founder", "contact", "messages", "videos"];
+      panels.forEach(p => {
+        const el = document.getElementById(`comp-panel-${p}`);
+        if (el) el.classList.add("hidden");
+      });
+
+      if (!companyInfoData) return;
+
+      // 渲染对应面板
+      if (meta.type === "grid") {
+        const gridPanel = document.getElementById("comp-panel-grid");
+        if (gridPanel) gridPanel.classList.remove("hidden");
+        
+        // 更新标题与前台预览链接
+        document.getElementById("comp-grid-title").innerText = `${meta.name}列表`;
+        document.getElementById("btn-add-comp-item-text").innerText = meta.addBtn || "添加新项";
+        const previewLink = document.getElementById("comp-grid-preview-link");
+        if (previewLink) {
+          previewLink.href = `./${meta.page}`;
+        }
+        
+        renderCompanyGridCards();
+      } else if (subTab === "about_company") {
+        const panel = document.getElementById("comp-panel-about_company");
+        if (panel) panel.classList.remove("hidden");
+        populateAboutCompanyForm();
+      } else if (subTab === "founder") {
+        const panel = document.getElementById("comp-panel-founder");
+        if (panel) panel.classList.remove("hidden");
+        populateFounderForm();
+      } else if (subTab === "contact") {
+        const panel = document.getElementById("comp-panel-contact");
+        if (panel) panel.classList.remove("hidden");
+        populateContactForm();
+      } else if (subTab === "messages") {
+        const panel = document.getElementById("comp-panel-messages");
+        if (panel) panel.classList.remove("hidden");
+        renderCompanyMessages();
+      } else if (subTab === "videos") {
+        const panel = document.getElementById("comp-panel-videos");
+        if (panel) panel.classList.remove("hidden");
+      }
+    }
+
+    function renderCompanyGridCards(filterText = "") {
+      const container = document.getElementById("comp-grid-cards");
+      const emptyEl = document.getElementById("comp-grid-empty");
+      const countEl = document.getElementById("comp-grid-count");
+      if (!container || !companyInfoData) return;
+
+      let items = companyInfoData[currentCompanySubTab] || [];
+      if (countEl) countEl.innerText = `${items.length} 项`;
+
+      if (filterText) {
+        const q = filterText.toLowerCase();
+        items = items.filter(it => (it.title && it.title.toLowerCase().includes(q)) || (it.title_en && it.title_en.toLowerCase().includes(q)));
+      }
+
+      if (items.length === 0) {
+        container.innerHTML = "";
+        if (emptyEl) emptyEl.classList.remove("hidden");
+        return;
+      }
+      if (emptyEl) emptyEl.classList.add("hidden");
+
+      let html = "";
+      items.forEach(item => {
+        const title = item.title || "未命名";
+        const titleEn = item.title_en || "";
+        const img = item.img || "./images/flogo.png";
+        const bigImg = item.big_img || img;
+        const url = item.url || "javascript:;";
+        const id = item.id;
+
+        html += `
+          <div class="bg-slate-50 hover:bg-white rounded-xl border border-slate-200 hover:border-primary/60 hover:shadow-md transition duration-200 flex flex-col justify-between overflow-hidden group">
+            <div class="p-3">
+              <!-- 图片展示框 -->
+              <div class="w-full h-44 bg-white rounded-lg border border-slate-200/80 p-2 flex items-center justify-center overflow-hidden relative cursor-pointer" onclick="window.open('${bigImg}', '_blank')">
+                <img src="${img}" alt="${title}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300">
+                <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs gap-1 font-semibold">
+                  <i class="fa-solid fa-magnifying-glass-plus"></i> 查看大图
+                </div>
+              </div>
+
+              <!-- 标题与英文名 -->
+              <div class="mt-2.5 space-y-0.5">
+                <h5 class="font-bold text-slate-800 text-xs line-clamp-2 leading-snug" title="${title}">${title}</h5>
+                ${titleEn ? `<p class="text-[10px] text-slate-400 font-mono italic line-clamp-1" title="${titleEn}">${titleEn}</p>` : ''}
+              </div>
+            </div>
+
+            <!-- 操作底栏 -->
+            <div class="px-3 py-2 bg-white border-t border-slate-100 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5">
+                ${url && url !== 'javascript:;' ? `<a href="${url}" target="_blank" class="text-[10px] text-slate-400 hover:text-primary flex items-center gap-0.5"><i class="fa-solid fa-link text-[9px]"></i> 前台</a>` : ''}
+              </div>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="openEditCompanyItemModal('${id}')" class="px-2.5 py-1 text-primary hover:bg-teal-50 rounded font-medium transition flex items-center gap-1">
+                  <i class="fa-solid fa-pen-to-square text-[10px]"></i> 编辑
+                </button>
+                <button type="button" onclick="deleteCompanyItem('${id}')" class="px-2.5 py-1 text-red-500 hover:bg-red-50 hover:text-red-700 rounded font-medium transition flex items-center gap-1">
+                  <i class="fa-solid fa-trash text-[10px]"></i> 删除
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function filterCompanyGridCards(val) {
+      renderCompanyGridCards(val.trim());
+    }
+
+    function openAddCompanyItemModal() {
+      const meta = compTabMeta[currentCompanySubTab] || { name: "项目" };
+      document.getElementById("modal-company-item-title").innerHTML = `<i class="fa-solid fa-plus text-primary"></i> <span>添加${meta.name}</span>`;
+      document.getElementById("comp-modal-item-id").value = "";
+      document.getElementById("comp-modal-section").value = currentCompanySubTab;
+      document.getElementById("comp-modal-section-badge").innerText = meta.name;
+      document.getElementById("comp-modal-title").value = "";
+      document.getElementById("comp-modal-title-en").value = "";
+      document.getElementById("comp-modal-img").value = "";
+      document.getElementById("comp-modal-url").value = "";
+      updateCompModalImgPreview();
+      document.getElementById("modal-company-item").classList.remove("hidden");
+    }
+
+    function openEditCompanyItemModal(itemId) {
+      if (!companyInfoData) return;
+      const items = companyInfoData[currentCompanySubTab] || [];
+      const item = items.find(it => it.id === itemId);
+      if (!item) return;
+
+      const meta = compTabMeta[currentCompanySubTab] || { name: "项目" };
+      document.getElementById("modal-company-item-title").innerHTML = `<i class="fa-solid fa-pen-to-square text-primary"></i> <span>编辑${meta.name}</span>`;
+      document.getElementById("comp-modal-item-id").value = item.id;
+      document.getElementById("comp-modal-section").value = currentCompanySubTab;
+      document.getElementById("comp-modal-section-badge").innerText = meta.name;
+      document.getElementById("comp-modal-title").value = item.title || "";
+      document.getElementById("comp-modal-title-en").value = item.title_en || "";
+      document.getElementById("comp-modal-img").value = item.img || "";
+      document.getElementById("comp-modal-url").value = item.url || "";
+      updateCompModalImgPreview();
+      document.getElementById("modal-company-item").classList.remove("hidden");
+    }
+
+    function closeCompanyItemModal() {
+      document.getElementById("modal-company-item").classList.add("hidden");
+    }
+
+    function updateCompModalImgPreview() {
+      const url = document.getElementById("comp-modal-img").value.trim();
+      const imgEl = document.getElementById("comp-modal-img-preview");
+      const emptyEl = document.getElementById("comp-modal-img-empty");
+      if (url) {
+        imgEl.src = url;
+        imgEl.classList.remove("hidden");
+        emptyEl.classList.add("hidden");
+      } else {
+        imgEl.src = "";
+        imgEl.classList.add("hidden");
+        emptyEl.classList.remove("hidden");
+      }
+    }
+
+    function autoTranslateCompTitle() {
+      const zh = document.getElementById("comp-modal-title").value.trim();
+      if (!zh) {
+        showToast("请先填写中文名称", "warning");
+        return;
+      }
+      // 常见字典或简易转换
+      const dict = {
+        "管理体系认证注册证书": "Management System Registration Certificate",
+        "高新技术企业证书": "High-Tech Enterprise Certificate",
+        "创新型企业": "Innovative Enterprise",
+        "科技创新典范": "Model of Scientific and Technological Innovation",
+        "外观设计专利": "Design Patent",
+        "实用新型专利": "Utility Model Patent",
+        "发明专利": "Invention Patent",
+        "生产基地": "Production Base",
+        "公司大门": "Company Gate",
+        "公司前台": "Company Front Desk",
+        "工作环境": "Working Environment",
+        "公司外景": "Company Exterior"
+      };
+      for (const k in dict) {
+        if (zh.includes(k)) {
+          document.getElementById("comp-modal-title-en").value = dict[k];
+          return;
+        }
+      }
+      document.getElementById("comp-modal-title-en").value = zh;
+    }
+
+    async function uploadCompItemImage(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      showToast("正在上传图片...", "info");
+      try {
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          body: formData
+        });
+        const result = await res.json();
+        if (result.success && result.url) {
+          document.getElementById("comp-modal-img").value = result.url;
+          updateCompModalImgPreview();
+          showToast("图片上传成功！", "success");
+        } else {
+          showToast(result.message || "上传失败", "error");
+        }
+      } catch (e) {
+        showToast("上传异常: " + e.message, "error");
+      }
+    }
+
+    async function saveCompanyItemModal() {
+      const id = document.getElementById("comp-modal-item-id").value.trim();
+      const section = document.getElementById("comp-modal-section").value.trim();
+      const title = document.getElementById("comp-modal-title").value.trim();
+      const titleEn = document.getElementById("comp-modal-title-en").value.trim();
+      const img = document.getElementById("comp-modal-img").value.trim();
+      const url = document.getElementById("comp-modal-url").value.trim();
+
+      if (!title) {
+        showToast("请填写中文名称", "warning");
+        return;
+      }
+      if (!img) {
+        showToast("请填写或上传图片路径", "warning");
+        return;
+      }
+
+      const itemPayload = {
+        id: id || undefined,
+        title: title,
+        title_en: titleEn,
+        img: img,
+        big_img: img,
+        url: url
+      };
+
+      try {
+        const res = await fetch("/api/company-info/item", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section: section, item: itemPayload })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast(result.message || "保存成功并已同步前台！", "success");
+          closeCompanyItemModal();
+          await loadCompanyInfoData(true);
+          renderCompanyGridCards();
+        } else {
+          showToast(result.message || "保存失败", "error");
+        }
+      } catch (e) {
+        showToast("保存异常: " + e.message, "error");
+      }
+    }
+
+    async function deleteCompanyItem(itemId) {
+      const meta = compTabMeta[currentCompanySubTab] || { name: "该项" };
+      if (!confirm(`确定要删除此${meta.name}吗？\n删除后将立即从数据和前台 HTML 页面中移除。`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/company-info/item", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section: currentCompanySubTab, id: itemId })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast("已成功删除并同步至前台页面！", "success");
+          await loadCompanyInfoData(true);
+          renderCompanyGridCards();
+        } else {
+          showToast(result.message || "删除失败", "error");
+        }
+      } catch (e) {
+        showToast("请求异常: " + e.message, "error");
+      }
+    }
+
+    // 关于美尔健表单
+    function populateAboutCompanyForm() {
+      if (!companyInfoData || !companyInfoData.about_company) return;
+      const ab = companyInfoData.about_company;
+      document.getElementById("comp-about-title").value = ab.title || "";
+      document.getElementById("comp-about-subtitle").value = ab.subtitle || "";
+      document.getElementById("comp-about-banner").value = ab.banner_img || "";
+      const bannerImg = document.getElementById("comp-about-banner-preview");
+      if (bannerImg) bannerImg.src = ab.banner_img || "./images/flogo.png";
+
+      const paras = ab.paragraphs || [];
+      document.getElementById("comp-about-p1").value = paras[0] || "";
+      document.getElementById("comp-about-p2").value = paras[1] || "";
+      document.getElementById("comp-about-p3").value = paras[2] || "";
+    }
+
+    async function uploadAboutBanner(input) {
+      if (!input.files || !input.files[0]) return;
+      const formData = new FormData();
+      formData.append("file", input.files[0]);
+      try {
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const result = await res.json();
+        if (result.success && result.url) {
+          document.getElementById("comp-about-banner").value = result.url;
+          document.getElementById("comp-about-banner-preview").src = result.url;
+          showToast("横幅图片上传成功", "success");
+        }
+      } catch (e) {
+        showToast("上传失败: " + e.message, "error");
+      }
+    }
+
+    async function saveAboutCompanyForm() {
+      const title = document.getElementById("comp-about-title").value.trim();
+      const subtitle = document.getElementById("comp-about-subtitle").value.trim();
+      const banner = document.getElementById("comp-about-banner").value.trim();
+      const p1 = document.getElementById("comp-about-p1").value.trim();
+      const p2 = document.getElementById("comp-about-p2").value.trim();
+      const p3 = document.getElementById("comp-about-p3").value.trim();
+
+      const payload = {
+        title: title,
+        subtitle: subtitle,
+        banner_img: banner,
+        paragraphs: [p1, p2, p3].filter(p => p)
+      };
+
+      try {
+        const res = await fetch("/api/company-info/text-section", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section: "about_company", data: payload })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast("关于美尔健图文已更新并同步前台！", "success");
+          await loadCompanyInfoData(true);
+        } else {
+          showToast(result.message || "更新失败", "error");
+        }
+      } catch (e) {
+        showToast("保存失败: " + e.message, "error");
+      }
+    }
+
+    // 创始人介绍表单
+    function populateFounderForm() {
+      if (!companyInfoData || !companyInfoData.founder) return;
+      const f = companyInfoData.founder;
+      document.getElementById("comp-founder-name").value = f.name || "";
+      document.getElementById("comp-founder-title").value = f.title || "";
+      document.getElementById("comp-founder-photo").value = f.photo || "";
+      document.getElementById("comp-founder-intro").value = f.intro || "";
+      document.getElementById("comp-founder-honors").value = (f.honors || []).join("\n");
+    }
+
+    async function uploadFounderPhoto(input) {
+      if (!input.files || !input.files[0]) return;
+      const formData = new FormData();
+      formData.append("file", input.files[0]);
+      try {
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const result = await res.json();
+        if (result.success && result.url) {
+          document.getElementById("comp-founder-photo").value = result.url;
+          showToast("照片上传成功", "success");
+        }
+      } catch (e) {
+        showToast("上传失败: " + e.message, "error");
+      }
+    }
+
+    async function saveFounderForm() {
+      const name = document.getElementById("comp-founder-name").value.trim();
+      const title = document.getElementById("comp-founder-title").value.trim();
+      const photo = document.getElementById("comp-founder-photo").value.trim();
+      const intro = document.getElementById("comp-founder-intro").value.trim();
+      const honors = document.getElementById("comp-founder-honors").value.split("\n").map(s => s.trim()).filter(s => s);
+
+      const payload = {
+        name: name,
+        title: title,
+        photo: photo,
+        intro: intro,
+        honors: honors
+      };
+
+      try {
+        const res = await fetch("/api/company-info/text-section", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section: "founder", data: payload })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast("创始人介绍已保存更新！", "success");
+          await loadCompanyInfoData(true);
+        } else {
+          showToast(result.message || "更新失败", "error");
+        }
+      } catch (e) {
+        showToast("保存失败: " + e.message, "error");
+      }
+    }
+
+    // 联系我们表单
+    function populateContactForm() {
+      if (!companyInfoData || !companyInfoData.contact) return;
+      const c = companyInfoData.contact;
+      document.getElementById("comp-contact-company_name").value = c.company_name || "";
+      document.getElementById("comp-contact-phone").value = c.phone || "";
+      document.getElementById("comp-contact-tel").value = c.tel || "";
+      document.getElementById("comp-contact-email").value = c.email || "";
+      document.getElementById("comp-contact-qq").value = c.qq || "";
+      document.getElementById("comp-contact-work_hours").value = c.work_hours || "";
+      document.getElementById("comp-contact-address").value = c.address || "";
+      document.getElementById("comp-contact-address_en").value = c.address_en || "";
+    }
+
+    async function saveContactForm() {
+      const payload = {
+        company_name: document.getElementById("comp-contact-company_name").value.trim(),
+        phone: document.getElementById("comp-contact-phone").value.trim(),
+        tel: document.getElementById("comp-contact-tel").value.trim(),
+        email: document.getElementById("comp-contact-email").value.trim(),
+        qq: document.getElementById("comp-contact-qq").value.trim(),
+        work_hours: document.getElementById("comp-contact-work_hours").value.trim(),
+        address: document.getElementById("comp-contact-address").value.trim(),
+        address_en: document.getElementById("comp-contact-address_en").value.trim()
+      };
+
+      try {
+        const res = await fetch("/api/company-info/text-section", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section: "contact", data: payload })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast("联系我们与全局配置已同步更新！", "success");
+          await loadCompanyInfoData(true);
+        } else {
+          showToast(result.message || "更新失败", "error");
+        }
+      } catch (e) {
+        showToast("保存失败: " + e.message, "error");
+      }
+    }
+
+    // 在线留言管理
+    function renderCompanyMessages() {
+      const tbody = document.getElementById("comp-messages-tbody");
+      if (!tbody || !companyInfoData) return;
+      const msgs = companyInfoData.messages || [];
+
+      if (msgs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-400">暂无访客留言咨询记录</td></tr>';
+        return;
+      }
+
+      let html = "";
+      msgs.forEach(m => {
+        const isProcessed = m.status === "processed";
+        html += `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3 text-slate-500 whitespace-nowrap font-mono text-[11px]">${m.created_at || "近期"}</td>
+            <td class="p-3 font-bold text-slate-800 whitespace-nowrap">${m.name || "访客"}</td>
+            <td class="p-3 whitespace-nowrap">
+              <div class="space-y-0.5">
+                ${m.phone ? `<div class="font-mono text-slate-700 font-semibold"><i class="fa-solid fa-phone text-slate-400 text-[10px]"></i> ${m.phone}</div>` : ''}
+                ${m.email ? `<div class="font-mono text-slate-500 text-[11px]"><i class="fa-solid fa-envelope text-slate-400 text-[10px]"></i> ${m.email}</div>` : ''}
+              </div>
+            </td>
+            <td class="p-3 text-slate-700">
+              <p class="line-clamp-2 max-w-md">${m.content || "暂无留言详情"}</p>
+            </td>
+            <td class="p-3 text-center whitespace-nowrap">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isProcessed ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                ${isProcessed ? '已处理' : '待跟进'}
+              </span>
+            </td>
+            <td class="p-3 text-right whitespace-nowrap">
+              <div class="inline-flex items-center gap-1.5">
+                <button type="button" onclick="toggleCompanyMessageStatus('${m.id}', '${isProcessed ? 'pending' : 'processed'}')" class="px-2 py-1 ${isProcessed ? 'text-slate-500 hover:bg-slate-100' : 'text-primary hover:bg-teal-50'} rounded font-medium text-xs transition">
+                  ${isProcessed ? '标为待跟进' : '标记已处理'}
+                </button>
+                <button type="button" onclick="deleteCompanyMessage('${m.id}')" class="px-2 py-1 text-red-500 hover:bg-red-50 rounded font-medium text-xs transition">
+                  删除
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    async function toggleCompanyMessageStatus(msgId, newStatus) {
+      try {
+        const res = await fetch("/api/company-info/messages/status", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: msgId, status: newStatus })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast("留言状态已更新", "success");
+          await loadCompanyInfoData(true);
+          renderCompanyMessages();
+        }
+      } catch (e) {
+        showToast("操作失败: " + e.message, "error");
+      }
+    }
+
+    async function deleteCompanyMessage(msgId) {
+      if (!confirm("确定要删除这条留言记录吗？")) return;
+      try {
+        const res = await fetch("/api/company-info/messages", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: msgId })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showToast("留言已删除", "success");
+          await loadCompanyInfoData(true);
+          renderCompanyMessages();
+        }
+      } catch (e) {
+        showToast("操作失败: " + e.message, "error");
+      }
+    }
+
+    // 全量同步
+    async function syncAllCompanyInfo() {
+      showToast("正在全量同步关于我们 10 大板块到前台双语网站...", "info");
+      try {
+        const res = await fetch("/api/company-info/sync", { method: "POST" });
+        const result = await res.json();
+        if (result.success) {
+          showToast(result.message || "全量企业信息已同步至双语前台！", "success");
+        } else {
+          showToast(result.message || "同步失败", "error");
+        }
+      } catch (e) {
+        showToast("同步异常: " + e.message, "error");
       }
     }
 

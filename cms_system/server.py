@@ -22,6 +22,7 @@ import wechat_crawler
 import ai_customer_service
 import video_manager
 import vector_db
+import company_info_manager as cim
 
 app = Flask(__name__)
 app.secret_key = "mellgen_cms_secret_key_12938"
@@ -1634,6 +1635,89 @@ def handle_navigation():
     nav_data = load_json("nav.json")
     return jsonify(nav_data)
 
+# =========================================================================
+# Company Info & Qualifications Management APIs (企业信息与资质管理中心)
+# =========================================================================
+@app.route("/api/company-info", methods=["GET"])
+@login_required
+def api_get_company_info():
+    section = request.args.get("section")
+    data = cim.load_company_info()
+    if section:
+        return jsonify({"success": True, "section": section, "data": data.get(section, [])})
+    return jsonify({"success": True, "data": data})
+
+@app.route("/api/company-info/item", methods=["POST"])
+@login_required
+def api_save_company_item():
+    req_data = request.json or {}
+    section = req_data.get("section")
+    item = req_data.get("item", {})
+    if not section or not item:
+        return jsonify({"success": False, "message": "缺少必要参数"}), 400
+    if item.get("id"):
+        res = cim.update_item(section, item["id"], item)
+    else:
+        res = cim.add_item(section, item)
+    return jsonify(res)
+
+@app.route("/api/company-info/item", methods=["DELETE"])
+@login_required
+def api_delete_company_item():
+    req_data = request.json or {}
+    section = req_data.get("section") or request.args.get("section")
+    item_id = req_data.get("id") or request.args.get("id")
+    if not section or not item_id:
+        return jsonify({"success": False, "message": "缺少 section 或 id 参数"}), 400
+    res = cim.delete_item(section, item_id)
+    return jsonify(res)
+
+@app.route("/api/company-info/text-section", methods=["POST"])
+@login_required
+def api_update_text_section():
+    req_data = request.json or {}
+    section = req_data.get("section")
+    content = req_data.get("data", {})
+    if not section:
+        return jsonify({"success": False, "message": "缺少 section 参数"}), 400
+    res = cim.update_text_section(section, content)
+    return jsonify(res)
+
+@app.route("/api/company-info/sync", methods=["POST"])
+@login_required
+def api_sync_company_info():
+    res = cim.sync_all()
+    return jsonify(res)
+
+@app.route("/api/company-info/messages", methods=["GET"])
+@login_required
+def api_get_company_messages():
+    data = cim.load_company_info()
+    return jsonify({"success": True, "messages": data.get("messages", [])})
+
+@app.route("/api/company-info/messages/status", methods=["POST"])
+@login_required
+def api_update_company_message_status():
+    req_data = request.json or {}
+    msg_id = req_data.get("id")
+    status = req_data.get("status", "processed")
+    reply = req_data.get("reply")
+    if not msg_id:
+        return jsonify({"success": False, "message": "缺少 id"}), 400
+    res = cim.update_message_status(msg_id, status, reply)
+    return jsonify(res)
+
+@app.route("/api/company-info/messages", methods=["DELETE"])
+@login_required
+def api_delete_company_message():
+    req_data = request.json or {}
+    msg_id = req_data.get("id") or request.args.get("id")
+    if not msg_id:
+        return jsonify({"success": False, "message": "缺少 id"}), 400
+    res = cim.delete_message(msg_id)
+    return jsonify(res)
+
+
 # 12. Product Categories REST API (GET, POST, PUT, DELETE)
 @app.route("/api/categories", methods=["GET"])
 @login_required
@@ -2115,7 +2199,7 @@ def api_mcp_messages_endpoint():
 # ==========================================================
 
 AVAILABLE_PERMISSIONS = [
-    {"code": "overview", "name": "首页概览", "desc": "体检、流量与搜索引擎收录监控", "icon": "fa-chart-pie"},
+    {"code": "overview", "name": "首页概览", "desc": "流量走势、访问量与搜索引擎收录监控", "icon": "fa-chart-pie"},
     {"code": "products", "name": "产品中心", "desc": "产品列表、发布、分类与规格管理", "icon": "fa-boxes-stacked"},
     {"code": "articles", "name": "资讯频道", "desc": "文章资讯、发布与分类管理", "icon": "fa-newspaper"},
     {"code": "orders", "name": "意向订单", "desc": "客户线索与意向订单处理", "icon": "fa-clipboard-list"},
@@ -2483,6 +2567,9 @@ def test_workbuddy_webhook():
 # ==============================================================================
 
 def get_client_ip():
+    cf_ip = request.headers.get("CF-Connecting-IP")
+    if cf_ip and cf_ip.strip():
+        return cf_ip.strip()
     xff = request.headers.get("X-Forwarded-For")
     if xff:
         ip = xff.split(",")[0].strip()
@@ -2493,14 +2580,103 @@ def get_client_ip():
         return x_real.strip()
     return request.remote_addr or "127.0.0.1"
 
+_ip_geo_cache = {}
+
 def get_ip_region(ip):
     if not ip or ip in ("127.0.0.1", "::1", "localhost"):
         return "本地开发测试 (127.0.0.1)"
-    if ip.startswith("192.168.") or ip.startswith("10.") or ip.startswith("172."):
+    if ip.startswith("192.168.") or ip.startswith("10."):
         return f"局域网/内网测试 ({ip})"
-    parts = ip.split(".")
-    masked = f"{parts[0]}.{parts[1]}.**.**" if len(parts) == 4 else ip
-    return f"公网真实访客 ({masked})"
+    if ip.startswith("172."):
+        try:
+            sec = int(ip.split(".")[1])
+            if 16 <= sec <= 31:
+                return f"局域网/内网测试 ({ip})"
+        except Exception:
+            pass
+    if ip in _ip_geo_cache:
+        return _ip_geo_cache[ip]
+
+    # 1. 优先调用全国网络IP归属库查询具体省市与运营商
+    try:
+        url = f"https://whois.pconline.com.cn/ipJson.jsp?ip={ip}&json=true"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=1.5) as res:
+            raw = res.read().decode("gbk", errors="ignore")
+            data = json.loads(raw.strip())
+            addr = data.get("addr", "").strip()
+            if addr:
+                _ip_geo_cache[ip] = addr
+                return addr
+    except Exception:
+        pass
+
+    # 2. 备用全球IP接口 (支持海外与全球IP精确定位)
+    try:
+        url = f"http://ip-api.com/json/{ip}?lang=zh-CN"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=1.5) as res:
+            data = json.loads(res.read().decode("utf-8", errors="ignore"))
+            if data.get("status") == "success":
+                parts = [data.get("country"), data.get("regionName"), data.get("city")]
+                location = " ".join([p for p in parts if p])
+                isp = data.get("isp", "").strip()
+                addr = f"{location} ({isp})" if isp else location
+                if addr.strip():
+                    _ip_geo_cache[ip] = addr.strip()
+                    return addr.strip()
+    except Exception:
+        pass
+
+    fallback = f"公网真实访客 ({ip})"
+    _ip_geo_cache[ip] = fallback
+    return fallback
+
+def get_history_30d(traffic):
+    if not isinstance(traffic, dict):
+        traffic = {}
+    today = datetime.date.today()
+    existing = {}
+    for h in (traffic.get("history_30d") or []) + (traffic.get("history_7d") or []):
+        f_date = h.get("full_date")
+        s_date = h.get("date")
+        if f_date:
+            existing[f_date] = h
+        elif s_date:
+            existing[s_date] = h
+
+    result = []
+    for i in range(29, -1, -1):
+        day = today - datetime.timedelta(days=i)
+        full_str = day.strftime("%Y-%m-%d")
+        short_str = day.strftime("%m-%d")
+        if i == 0:
+            result.append({
+                "date": short_str,
+                "full_date": full_str,
+                "pv": traffic.get("pv", 0),
+                "uv": traffic.get("uv", 0),
+                "ip": traffic.get("ip", 0)
+            })
+        else:
+            found = existing.get(full_str) or existing.get(short_str)
+            if found:
+                result.append({
+                    "date": short_str,
+                    "full_date": full_str,
+                    "pv": found.get("pv", 0),
+                    "uv": found.get("uv", 0),
+                    "ip": found.get("ip", 0)
+                })
+            else:
+                result.append({
+                    "date": short_str,
+                    "full_date": full_str,
+                    "pv": 0,
+                    "uv": 0,
+                    "ip": 0
+                })
+    return result
 
 def ensure_traffic_today(traffic):
     if not isinstance(traffic, dict):
@@ -2510,22 +2686,33 @@ def ensure_traffic_today(traffic):
     last_date = traffic.get("current_date")
     
     if last_date != today_full:
-        history = traffic.get("history_7d", [])
+        history = traffic.get("history_30d", [])
         if last_date:
-            history.append({
-                "date": last_date[5:] if len(last_date) >= 10 else today_short,
-                "pv": traffic.get("pv", 0),
-                "uv": traffic.get("uv", 0),
-                "ip": traffic.get("ip", 0)
-            })
-            if len(history) > 7:
-                history = history[-7:]
-            traffic["history_7d"] = history
+            already = False
+            for h in history:
+                if h.get("full_date") == last_date or (not h.get("full_date") and h.get("date") == last_date[5:]):
+                    already = True
+                    break
+            if not already:
+                history.append({
+                    "date": last_date[5:] if len(last_date) >= 10 else today_short,
+                    "full_date": last_date,
+                    "pv": traffic.get("pv", 0),
+                    "uv": traffic.get("uv", 0),
+                    "ip": traffic.get("ip", 0)
+                })
+            if len(history) > 30:
+                history = history[-30:]
+            traffic["history_30d"] = history
+            traffic["history_7d"] = history[-7:]
         traffic["current_date"] = today_full
         traffic["pv"] = 0
         traffic["uv"] = 0
         traffic["ip"] = 0
         traffic["today_ips"] = []
+    
+    traffic["history_30d"] = get_history_30d(traffic)
+    traffic["history_7d"] = traffic["history_30d"][-7:]
     return traffic
 
 def get_default_seo_metrics():
@@ -2786,8 +2973,6 @@ def track_pageview():
 
     client_ip = get_client_ip()
     region_desc = get_ip_region(client_ip)
-    ip_parts = client_ip.split(".")
-    masked_ip = f"{ip_parts[0]}.{ip_parts[1]}.**.**" if len(ip_parts) == 4 else client_ip
 
     duration_str = f"{duration // 60}分{duration % 60}秒" if duration >= 60 else f"{duration}秒"
     if duration == 0:
@@ -2866,7 +3051,7 @@ def track_pageview():
         new_entry = {
             "id": f"v-{int(datetime.datetime.now().timestamp())}",
             "time": datetime.datetime.now().strftime("%H:%M:%S"),
-            "ip": masked_ip,
+            "ip": client_ip,
             "region": region_desc,
             "title": page_title[:40],
             "url": page_url,
@@ -2927,7 +3112,8 @@ def reset_analytics_data():
         ],
         "devices": { "pc": 0, "mobile": 0 },
         "today_ips": [],
-        "history_7d": []
+        "history_7d": [],
+        "history_30d": []
     }
     save_json("seo_metrics.json", metrics)
     save_json("spider_logs.json", [])

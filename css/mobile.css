@@ -82,6 +82,145 @@
     height: 2.5rem !important;
     line-height: 2.5rem !important;
   }
+
+  /* ==========================================================================
+     全站统一页脚导航保障 (Unified Footer Multi-Column Full Content Guarantee)
+     覆盖首页及所有子页面（PC 桌面端）
+     ========================================================================== */
+  .g_ft .ftmid,
+  .m_ft .ftmid {
+    height: auto !important;
+    min-height: 12rem !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .g_ft .ftmid .ftnav,
+  .m_ft .ftmid .ftnav {
+    display: block !important;
+    float: left !important;
+    width: 76% !important;
+    overflow: visible !important;
+  }
+
+  .g_ft .ftmid .ftnav dl,
+  .g_ft .ftnav dl,
+  .m_ft .ftnav dl,
+  .g_ft .ftmid .ftnav dl.teaser,
+  .g_ft .ftnav dl.teaser,
+  .m_ft .ftnav dl.teaser {
+    display: block !important;
+    float: left !important;
+    opacity: 1 !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    visibility: visible !important;
+    position: relative !important;
+  }
+
+  /* 第 1 列：快捷链接 */
+  .g_ft .ftmid .ftnav dl:nth-child(1),
+  .m_ft .ftmid .ftnav dl:nth-child(1) {
+    width: 12.5% !important;
+    margin-right: 7.5% !important;
+  }
+
+  .g_ft .ftmid .ftnav dl:nth-child(1) dd a,
+  .m_ft .ftmid .ftnav dl:nth-child(1) dd a {
+    display: block !important;
+    font-size: 14px !important;
+    line-height: 1.8rem !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* 第 2 列：产品中心（完整三列网格展开所有原料产品） */
+  .g_ft .ftmid .ftnav dl:nth-child(2),
+  .m_ft .ftmid .ftnav dl:nth-child(2) {
+    width: 42.5% !important;
+    margin-right: 6% !important;
+  }
+
+  .g_ft .ftmid .ftnav dl:nth-child(2) dd,
+  .m_ft .ftmid .ftnav dl:nth-child(2) dd {
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .g_ft .ftmid .ftnav dl:nth-child(2) dd a,
+  .m_ft .ftmid .ftnav dl:nth-child(2) dd a {
+    float: left !important;
+    width: 33.33% !important;
+    display: block !important;
+    font-size: 14px !important;
+    line-height: 1.8rem !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding-right: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 第 3 列：行业案例（完整两列网格展开所有行业应用） */
+  .g_ft .ftmid .ftnav dl:nth-child(3),
+  .m_ft .ftmid .ftnav dl:nth-child(3) {
+    width: 24% !important;
+  }
+
+  .g_ft .ftmid .ftnav dl:nth-child(3) dd,
+  .m_ft .ftmid .ftnav dl:nth-child(3) dd {
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .g_ft .ftmid .ftnav dl:nth-child(3) dd a,
+  .m_ft .ftmid .ftnav dl:nth-child(3) dd a {
+    float: left !important;
+    width: 48% !important;
+    display: block !important;
+    font-size: 14px !important;
+    line-height: 1.8rem !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding-right: 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 列标题样式 */
+  .g_ft .ftmid .ftnav dl dt a,
+  .m_ft .ftmid .ftnav dl dt a {
+    display: block !important;
+    font-size: .95rem !important;
+    font-weight: 700 !important;
+    line-height: 1.8rem !important;
+    color: #ffffff !important;
+    margin-bottom: .8rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* 右侧公司信息与地址 */
+  .g_ft .ftmid .add,
+  .m_ft .ftmid .add {
+    float: left !important;
+    width: 24% !important;
+    display: block !important;
+  }
+
+  /* 底部背景粒子 Canvas 降噪与防遮挡 */
+  .g_ft canvas {
+    pointer-events: none !important;
+    opacity: 0.25 !important;
+    z-index: 2 !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -5986,7 +6125,15 @@
    全站文本排版精细化：在有充足空间时严禁无谓折行 (Site-wide No-Wrap Rules)
    ========================================================================== */
 
-/* 1. 面包屑导航各节点不折断 */
+/* 1. 面包屑导航各节点不折断且垂直基准线精准对齐 */
+.p102-curmbs-1 {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  height: auto !important;
+  min-height: 40px !important;
+  line-height: 40px !important;
+}
 .p102-curmbs-1 b,
 .p102-curmbs-1 a,
 .p102-curmbs-1 span,
@@ -5994,8 +6141,22 @@
   white-space: nowrap !important;
   word-break: keep-all !important;
   text-wrap: nowrap !important;
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
   float: none !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+}
+.p102-curmbs-1 span {
+  font-family: inherit !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+  padding: 0 6px !important;
+  color: #94a3b8 !important;
+}
+.p102-curmbs-1 i {
+  gap: 0 !important;
 }
 
 /* 2. 产品分类与侧边分类栏 */

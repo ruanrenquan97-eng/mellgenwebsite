@@ -6,7 +6,7 @@
     "image": "resource/images/05e32ce2ab694b4796cf6ff032fe7d47_10.jpg",
     "desc": "Mellgen high-purity bio-enzymatic hydrolyzed sheep placenta peptide extract, rich in active oligopeptides and essential amino acids, deeply revitalizes skin elasticity and improves dullness and roughness.",
     "link": "products/tptyts.html",
-    "content": "",
+    "content": "<p>Utilizes biomimetic gradient enzymatic cleavage to preserve bioactive sheep placenta oligopeptides and micronutrients. Highly bioavailable to activate fibroblast collagen synthesis, improving elasticity, dullness, and facial firmness.</p>",
     "specs": {
       "INCI Name": "Aqua, Hydrolyzed Placenta Extract, Oligopeptide-1, Glycerin, Pentylene Glycol",
       "Core Actives": "Placental Small-Molecule Oligopeptides (<1000Da >85%)",
@@ -61,7 +61,7 @@
     "image": "resource/images/b8a942ac10c0484bbb9d2eb5ab7ed6ce_8.jpg",
     "desc": "Integrating lab-grade salmon PDRN with Mellgen patented transdermal cyclic peptide technology, empowering multi-dimensional skin barrier repair and matrix replenishment while soothing dryness and facial redness.",
     "link": "products/pdrnht.html",
-    "content": "",
+    "content": "<p>Combines deep-sea salmon PDRN with patented cyclic transdermal peptides, delivering dual-action rejuvenation. Rapidly soothes sensitivity and redness while stimulating ECM collagen remodeling to visibly diminish fine lines.</p>",
     "specs": {
       "INCI Name": "Aqua, Sodium DNA, Acetyl Tetrapeptide-5, Butylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Salmon PDRN (Purity >98%) + Transdermal Cyclic Carrier Peptides",
@@ -105,7 +105,7 @@
     "image": "resource/images/b8a942ac10c0484bbb9d2eb5ab7ed6ce_13.jpg",
     "desc": "Comprehensive 5-dimensional recombinant matrix encompassing Type I, III, IV, VII, and XVII collagen peptide chains, providing multi-layer structural support and anti-aging firming.",
     "link": "products/mellpr8670.html",
-    "content": "",
+    "content": "<p>Engineered with a 5-dimensional recombinant collagen matrix covering Types I, III, IV, VII, and XVII. Reinforces the stratum corneum, basement membrane (DEJ), and deep dermal fibers for multi-tier firming and anti-wrinkle efficacy.</p>",
     "specs": {
       "INCI Name": "Aqua, Soluble Collagen, Recombinant Collagen, Glycerin, 1,2-Hexanediol",
       "Core Actives": "5D Recombinant Collagen Peptide Complex (Purity >95%)",
@@ -149,7 +149,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_28.jpg",
     "desc": "Human-origin recombinant fibronectin powered by patented cell-penetrating peptides, anchoring to compromised skin barriers to deliver rapid repair and extracellular matrix replenishing.",
     "link": "products/tpxldb.html",
-    "content": "",
+    "content": "<p>Overcomes high-molecular transdermal barriers by pairing human-origin recombinant fibronectin with cell-penetrating peptides. Features RGD motifs that anchor damaged sites to accelerate re-epithelialization and emergency barrier repair.</p>",
     "specs": {
       "INCI Name": "Aqua, Recombinant Fibronectin, Butylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Humanized Recombinant Fibronectin (RGD sequence >98%)",
@@ -193,7 +193,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_46.jpg",
     "desc": "Ultra-pure atelocollagen with immunogenic telopeptides removed, preserving the intact native triple-helix conformation with superior biocompatibility and cellular adherence.",
     "link": "products/qdjy.html",
-    "content": "",
+    "content": "<p>Enzymatically cleaves non-helical telopeptides to eliminate immunogenic risks while locking the triple-helix bioactivity. Exhibits superior biocompatibility and cell adhesion to accelerate tissue repair and reinforce delicate skin.</p>",
     "specs": {
       "INCI Name": "Aqua, Atelocollagen, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Medical-Grade Atelocollagen (>99% Triple Helix)",
@@ -237,7 +237,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_14.jpg",
     "desc": "Sourced from authentic Changbai Mountain Ginseng, Deer Antler, and Schisandra, rich in active ginsenosides, bioactive peptides, and lignans, delivering powerful antioxidant defense and deep nourishment.",
     "link": "products/zbssb.html",
-    "content": "",
+    "content": "<p>Combines Changbai Mountain ginseng, deer antler, and schisandra via low-temperature extraction to isolate ginsenosides and native peptides. Revitalizes cellular metabolism and delivers potent antioxidant defense against photoaging.</p>",
     "specs": {
       "INCI Name": "Aqua, Panax Ginseng Root Extract, Cervus Elaphus Extract, Schisandra Chinensis Fruit Extract, Butylene Glycol",
       "Core Actives": "Total Ginsenosides >15%, Active Deer Antler Peptides, Schisandrin",
@@ -281,7 +281,7 @@
     "image": "resource/images/a4cd153a8dfd4acd9b7f35deb722ec9f_2.jpg",
     "desc": "Biomimetic yeast-derived exosome peptide vesicles with natural phospholipid bilayers encapsulating signal peptides, achieving gentle transdermal delivery to revitalize skin firmness.",
     "link": "products/megpep6245.html",
-    "content": "",
+    "content": "<p>Biomimetic phospholipid bilayer nanovesicles encapsulate high-potency endogenous growth peptides and signaling cues. Achieves gentle transdermal delivery to stimulate collagen genesis, restoring facial plumping and elasticity.</p>",
     "specs": {
       "INCI Name": "Aqua, Yeast Ferment Extract, Palmitoyl Tripeptide-5, Lecithin, 1,2-Hexanediol",
       "Core Actives": "Yeast Exosome Vesicles (>10^9 particles/mL), Palmitoyl Tripeptide-5",
@@ -325,7 +325,7 @@
     "image": "resource/images/a4cd153a8dfd4acd9b7f35deb722ec9f_4.jpg",
     "desc": "Next-generation 13-amino-acid cell-penetrating peptide developed by Mellgen, reversibly optimizing stratum corneum lipid organization to dramatically enhance active ingredient absorption.",
     "link": "products/megpep.html",
-    "content": "",
+    "content": "<p>Next-generation 13-amino-acid cyclic transdermal peptide reversibly modulates stratum corneum intercellular lipid fluidity. Establishes safe micro-pathways to multiply the absorption of large active proteins without barrier damage.</p>",
     "specs": {
       "INCI Name": "Aqua, Oligopeptide-13, Pentylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Transdermal Carrier Peptide MEGPEP-13 (Purity >98%)",
@@ -369,7 +369,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_16.jpg",
     "desc": "High-purity beta-glucan extracted from Changbai Mountain Ganoderma lucidum fruiting bodies, offering exceptional skin protection and soothing properties against environmental and UV stressors.",
     "link": "products/lzdt.html",
-    "content": "",
+    "content": "<p>Extracts triple-helical beta-glucan from Changbai Mountain Ganoderma lucidum, ensuring stable immunomodulatory conformation. Forms a breathable hydrating shield that suppresses pro-inflammatory cytokines and relieves UV and heat stress.</p>",
     "specs": {
       "INCI Name": "Aqua, Ganoderma Lucidum Extract, Butylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Ganoderma Beta-Glucans >65%, Ganoderic Triterpenes",
@@ -413,7 +413,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_18.jpg",
     "desc": "Recombinant humanized mussel adhesive protein rich in DOPA residues, exhibiting outstanding surface adherence and network membrane shielding to soothe redness and dryness.",
     "link": "products/mellpr205.html",
-    "content": "",
+    "content": "<p>High-purity recombinant mussel adhesive protein rich in DOPA groups self-assembles into a biomimetic barrier film on moist skin. Rapidly shields external stressors, calms facial redness, and accelerates epidermal micro-wound healing.</p>",
     "specs": {
       "INCI Name": "Aqua, Recombinant Mussel Adhesive Protein, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Recombinant Mussel Adhesive Protein (Purity >98%)",
@@ -457,7 +457,7 @@
     "image": "resource/images/a4cd153a8dfd4acd9b7f35deb722ec9f_6.jpg",
     "desc": "Psychrophilic marine lysozyme sourced from deep-sea cold-adapted microbes, providing high catalytic activity to balance skin microflora and clarify oily blemish-prone skin.",
     "link": "products/megzym.html",
-    "content": "",
+    "content": "<p>Cold-adapted marine lysozyme sourced from deep-sea extremophiles with robust catalytic activity at room temperature. Selectively hydrolyzes acne-causing bacterial cell walls, balancing microbiome flora and reducing clogged pores and sebum.</p>",
     "specs": {
       "INCI Name": "Aqua, Lysozyme, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Marine Psychrophilic Lysozyme (Specific Activity >40,000 U/mg)",
@@ -501,7 +501,7 @@
     "image": "resource/images/a4cd153a8dfd4acd9b7f35deb722ec9f_8.jpg",
     "desc": "Recombinant biomimetic collagen focusing on extracellular matrix 3D network reconstruction, compounding Type I and Type III active peptides to create a firming elastic scaffold.",
     "link": "products/mellpr.html",
-    "content": "",
+    "content": "<p>Reconstructs dermal ECM through an optimized biomimetic ratio of recombinant Types I and III collagen. Self-assembles into a 3D structural fibrillar scaffold in the dermis, restoring tensile firmness and smoothing deep dry expression lines.</p>",
     "specs": {
       "INCI Name": "Aqua, Soluble Collagen, Recombinant Collagen, 1,2-Hexanediol",
       "Core Actives": "3D Recombinant Type I & III Collagen Complex (>95%)",
@@ -545,7 +545,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_20.jpg",
     "desc": "Biomimetic active protein combining self-assembling peptide moisture dynamics with recombinant human collagen, infusing epidermal plumpness and long-lasting luminous glow.",
     "link": "products/tysgdb.html",
-    "content": "",
+    "content": "<p>Merges supramolecular self-assembling peptides with recombinant collagen to deliver intense, long-lasting hydration. Penetrates dry keratin to stimulate endogenous hyaluronic acid and collagen synthesis, awakening radiant glass-skin texture.</p>",
     "specs": {
       "INCI Name": "Aqua, Recombinant Collagen, Poly-L-Lactic Acid, Hyaluronic Acid, 1,2-Hexanediol",
       "Core Actives": "Nano-PLLA Bio-Stimulatory Dispersion + Recombinant Collagen",
@@ -589,7 +589,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_22.jpg",
     "desc": "Highly branched acidic polysaccharide extracted from natural peach gum, rich in L-arabinose and D-galactose, forming a breathable hydration film to reinforce barrier defense and soothe redness.",
     "link": "products/yskmyz.html",
-    "content": "",
+    "content": "<p>High-branched acidic heteropolysaccharide extracted from peach gum, rich in galacturonic acid units. Forms an immediate breathable moisture-locking film, reducing TEWL and instantly soothing dryness, tightness, and compromised barriers.</p>",
     "specs": {
       "INCI Name": "Aqua, Prunus Persica (Peach) Resin Extract, Bifida Ferment Lysate, Butylene Glycol",
       "Core Actives": "Peach Gum Heteropolysaccharides >70%, Probiotic Bio-Lysate",
@@ -633,7 +633,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_24.jpg",
     "desc": "High-molecular glycoprotein (Q-mucin) derived from deep-sea jellyfish, exhibiting remarkable long-term water-holding capacity and environmental stress protection.",
     "link": "products/smndb.html",
-    "content": "",
+    "content": "<p>Ultra-high-molecular glycoprotein (Q-mucin) derived from deep-sea jellyfish boasts exceptional moisture-binding capacity. Creates a resilient invisible shield on the skin surface, blocking environmental particulate adhesion and oxidative stress.</p>",
     "specs": {
       "INCI Name": "Aqua, Jellyfish Extract, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Deep-Sea Jellyfish Q-Mucin (Glycoprotein >90%)",
@@ -677,7 +677,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_26.jpg",
     "desc": "Derived from marine pseudoalteromonas and microalgae fermentation filtrates, rich in exopolysaccharides and peptides, working multi-pathway to improve dullness and illuminate skin clarity.",
     "link": "products/hylfyz.html",
-    "content": "",
+    "content": "<p>Co-fermented lysate of deep-sea Pseudoalteromonas and marine microalgae, enriched in extracellular polysaccharides and antioxidant peptides. Modulates melanin transport and tyrosinase pathways, revitalizing dullness for clear, luminous skin.</p>",
     "specs": {
       "INCI Name": "Aqua, Pseudoalteromonas Ferment Extract, Microalgae Extract, Butylene Glycol",
       "Core Actives": "Marine Bio-Peptides + Marine Oligosaccharides",
@@ -721,7 +721,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_28.jpg",
     "desc": "Human-origin recombinant fibronectin containing precise RGD cell-adhesion motifs, facilitating keratinocyte migration and barrier matrix restoration during special skin recovery.",
     "link": "products/zzxldb.html",
-    "content": "",
+    "content": "<p>High-purity recombinant human-like fibronectin retaining dense RGD cell-adhesion motifs. Directs keratinocyte migration and adhesion to accelerate self-repair of damaged barriers and reinforce the basement membrane in compromised skin.</p>",
     "specs": {
       "INCI Name": "Aqua, Recombinant Fibronectin, Butylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Full-Length Recombinant Human Fibronectin (Purity >96%)",
@@ -765,7 +765,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_30.jpg",
     "desc": "High-purity recombinant humanized Type III collagen solution with amino acid sequence identical to human collagen, promoting cellular adherence and skin elasticity without animal-derived risks.",
     "link": "products/zzjydb.html",
-    "content": "",
+    "content": "<p>100% human-homologous sequence Type III recombinant collagen solution with zero animal-origin pathogens. Recreates youthful dermal resilience, promoting fibroblast proliferation to refine pore texture and restore plump skin elasticity.</p>",
     "specs": {
       "INCI Name": "Aqua, Soluble Collagen, 1,2-Hexanediol, Pentylene Glycol",
       "Core Actives": "Humanized Recombinant Type III Collagen (Purity >98%)",
@@ -809,7 +809,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_32.jpg",
     "desc": "Integrates bioactive sequences from collagen Types I, III, IV, VII, and XVII, covering epidermal to basement membrane layers to build an all-around anti-wrinkle defense network.",
     "link": "products/5djydb.html",
-    "content": "",
+    "content": "<p>Integrates key functional sequences of Types I, III, IV, VII, and XVII recombinant collagens into an anti-aging network. Systematically targets the epidermal barrier, DEJ, and dermal matrix to counteract structural sagging and soften wrinkles.</p>",
     "specs": {
       "INCI Name": "Aqua, Soluble Collagen, Recombinant Collagen, Glycerin, Butylene Glycol",
       "Core Actives": "5-Type Recombinant Collagen Matrix (Types I, III, IV, VII, XVII)",
@@ -853,7 +853,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_34.jpg",
     "desc": "Advanced complex uniting carnosine, acetyl hexapeptide, palmitoyl tripeptide, and vitamin B/C/E precursors to provide anti-glycation and antioxidant defense for fatigued skin.",
     "link": "products/twdvit.html",
-    "content": "",
+    "content": "<p>A synergized matrix of anti-aging peptides and bioactive vitamins B, C, and E precursors. Delivers triple defense against glycation, oxidation, and photo-damage, scavenging free radicals to eliminate skin fatigue and restore vibrant tone.</p>",
     "specs": {
       "INCI Name": "Aqua, Palmitoyl Pentapeptide-4, Niacinamide, Panthenol, Ascorbyl Glucoside, Tocopherol",
       "Core Actives": "Multi-Peptide Matrix + Multi-Vitamin Vital Complex",
@@ -897,7 +897,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_36.jpg",
     "desc": "Rigid closed-loop cyclic peptide offering extraordinary resistance against proteolytic enzymes, specifically targeting elastic fiber networks to reconstruct facial firmness and elasticity.",
     "link": "products/jnhtea.html",
-    "content": "",
+    "content": "<p>Topologically locked cyclic peptide architecture offers exceptional resistance to cutaneous enzymatic hydrolysis. Target-activates fibrillin and elastin synthesis, tightening dermal elastic fibers to lift sagging facial contours.</p>",
     "specs": {
       "INCI Name": "Aqua, Cyclotetrapeptide-24 Aminocyclohexane Carboxylate, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Topologically Locked Cyclic Peptide EAC (Purity >98%)",
@@ -941,7 +941,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_38.jpg",
     "desc": "Genetically engineered humanized biomimetic snail mucin protein, purified to remove natural impurities, rich in chondroitin, allantoin, and collagen peptides to soothe and smooth rough skin.",
     "link": "products/wndbzy.html",
-    "content": "",
+    "content": "<p>Biomimetic synthesized recombinant snail mucin protein purifies out allergens found in raw secretions. Rich in chondroitin, allantoin, and reparative peptides, it calms micro-inflammation, refines roughness, and restores smooth skin texture.</p>",
     "specs": {
       "INCI Name": "Aqua, Snail Secretion Filtrate, Recombinant Glycoprotein, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Recombinant Snail Mucin Glycoprotein (Purity >95%)",
@@ -985,7 +985,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_42.jpg",
     "desc": "Biomimetic complex collagen fusing snail mucin repair strength with recombinant human collagen plumping performance, facilitating epidermal texture refinement and matrix elasticity.",
     "link": "products/fswnjy.html",
-    "content": "",
+    "content": "<p>Combines the soothing barrier-protective benefits of snail mucin with the deep redensifying power of recombinant collagen. Forms a moisture shield on the surface while replenishing the dermal matrix to erase fine dry lines and smooth texture.</p>",
     "specs": {
       "INCI Name": "Aqua, Recombinant Collagen, Snail Secretion Filtrate, Butylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Biomimetic Snail Glycoprotein + Recombinant Collagen Complex",
@@ -1029,7 +1029,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_46.jpg",
     "desc": "Specialized recombinant collagen targeting the dermal-epidermal junction (DEJ), fortifying interfacial anchorage microstructures to combat facial sagging and structural relaxation.",
     "link": "products/0xjydb.html",
-    "content": "",
+    "content": "<p>Engineered recombinant collagen specifically targeting the dermal-epidermal junction (DEJ) and anchoring micro-fibrils. Stabilizes the wavy interlock between dermis and epidermis, resisting gravity-induced sagging and visibly lifting facial contours.</p>",
     "specs": {
       "INCI Name": "Aqua, Recombinant Collagen, Glycerin, 1,2-Hexanediol",
       "Core Actives": "Origin Type Recombinant Collagen (Type 0 / DEJ Homology >98%)",
@@ -1073,7 +1073,7 @@
     "image": "resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg",
     "desc": "Award-winning proprietary closed-loop cyclic peptide carrier featuring exceptional enzymatic stability, transporting macromolecular active ingredients across the skin barrier.",
     "link": "products/tphtct.html",
-    "content": "",
+    "content": "<p>Award-winning proprietary cyclic peptide carrier that reversibly modulates membrane lipid fluidity. Safely drives high-molecular proteins and peptides through the stratum corneum, dramatically multiplying bioavailability without irritation.</p>",
     "specs": {
       "INCI Name": "Aqua, Cyclopeptide-1, Pentylene Glycol, 1,2-Hexanediol",
       "Core Actives": "Patented Transdermal Cyclic Peptide cTDP (Purity >99%)",

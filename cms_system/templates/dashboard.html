@@ -671,8 +671,8 @@
                 <button type="button" onclick="resetVisitorAnalyticsData()" class="px-2 py-0.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 rounded text-[10px] font-medium transition cursor-pointer" title="清空本地测试留存数据，上线归零重新统计">
                   <i class="fa-solid fa-rotate-right text-[9px] mr-0.5"></i> 清空测试数据
                 </button>
-                <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold flex items-center gap-1">
-                  <i class="fa-solid fa-signal text-[9px]"></i> 真实采集
+                <span class="traffic-poll-badge px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold flex items-center gap-1.5" title="系统已启用每10秒自动刷新">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 10秒实时刷新
                 </span>
               </div>
             </div>
@@ -3632,10 +3632,15 @@
 
           <!-- Realtime Visitor Stream -->
           <div class="p-4 border rounded bg-white space-y-2">
-            <h4 class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-              <span>实时访客足迹流水 (最新访客来路、点击产品及停留时间跟踪)</span>
-            </h4>
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span>实时访客足迹流水 (最新访客来路、点击产品及停留时间跟踪)</span>
+              </h4>
+              <span class="traffic-poll-badge px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold flex items-center gap-1.5" title="系统已启用每10秒自动刷新">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 10秒实时刷新
+              </span>
+            </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left text-[11px] border-collapse">
                 <thead class="bg-slate-50 text-slate-500 font-semibold border-b">
@@ -7939,9 +7944,63 @@ Disallow: /cms_system/
         await loadVisitorInsights();
         loadSeoRanking();
         loadSeoStatistics();
+        startTrafficAutoRefresh();
       } catch (err) {
         console.error("Error in loadAllData:", err);
       }
+    }
+
+    // ==========================================================
+    // --- 实时流量与访客数据 10 秒自动轮询系统 ---
+    // ==========================================================
+    let trafficAutoRefreshTimer = null;
+    let isTrafficRefreshing = false;
+
+    async function refreshTrafficAndVisitorData(silent = true) {
+      if (isTrafficRefreshing) return;
+      if (document.hidden) return; // 后台标签页挂起时不空耗网络
+
+      isTrafficRefreshing = true;
+      try {
+        // 并行拉取全网流量指标、产品热度/访客轨迹以及概览统计
+        await Promise.allSettled([
+          loadSeoMetrics(),
+          loadVisitorInsights(),
+          loadSeoStatistics()
+        ]);
+        updateTrafficRefreshBadges();
+      } catch (e) {
+        console.error("[Traffic Poller] 自动刷新流量数据异常:", e);
+      } finally {
+        isTrafficRefreshing = false;
+      }
+    }
+
+    function updateTrafficRefreshBadges() {
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      const badges = document.querySelectorAll('.traffic-poll-badge');
+      badges.forEach(b => {
+        b.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 10秒实时刷新 (${timeStr})`;
+      });
+    }
+
+    function startTrafficAutoRefresh() {
+      if (trafficAutoRefreshTimer) {
+        clearInterval(trafficAutoRefreshTimer);
+      }
+      // 严格设定每 10 秒（10000ms）自动静默刷新一次
+      trafficAutoRefreshTimer = setInterval(() => {
+        refreshTrafficAndVisitorData(true);
+      }, 10000);
+
+      // 用户切回当前浏览器窗口时立刻主动刷新
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          refreshTrafficAndVisitorData(true);
+        }
+      });
+      updateTrafficRefreshBadges();
     }
 
     // ==========================================================

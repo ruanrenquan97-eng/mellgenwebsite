@@ -2684,7 +2684,23 @@ def is_garbled_region(text):
             return True
     return False
 
-def get_ip_region(ip):
+_ip_geo_cache = {}
+_subnet_geo_cache = {}
+
+def get_ip_subnet(ip):
+    """提取 IPv4 的 C 段 (/24) 网段标识，运营商通常按 /24 网段划拨机房与地级市广播"""
+    parts = (ip or "").strip().split(".")
+    if len(parts) == 4 and all(p.isdigit() for p in parts):
+        return ".".join(parts[:3])
+    return None
+
+def has_city_precision(loc_str):
+    """判断地址是否精确到了市、区、县或特区行政级别"""
+    if not loc_str or not isinstance(loc_str, str):
+        return False
+    return any(c in loc_str for c in ["市", "区", "县", "州", "盟", "特别行政区"])
+
+def get_ip_region(ip, force_refresh=False):
     ip = (ip or "").strip()
     if not ip or ip in ("127.0.0.1", "::1", "localhost"):
         return "本地开发测试 (127.0.0.1)"
@@ -2697,38 +2713,97 @@ def get_ip_region(ip):
                 return f"局域网/内网测试 ({ip})"
         except Exception:
             pass
-    if ip in _ip_geo_cache and not is_garbled_region(_ip_geo_cache[ip]):
-        return _ip_geo_cache[ip]
 
-    # 1. 优先调用 ip-api.com (精准结构化提供：省 + 市区 + 运营商)
+    subnet = get_ip_subnet(ip)
+
+    # 1. 优先检查单机缓存
+    if not force_refresh and ip in _ip_geo_cache:
+        cached = _ip_geo_cache[ip]
+        if not is_garbled_region(cached):
+            # 如果单机缓存缺乏市区精度，但网段缓存已有更高精度，优先升级为网段高精度
+            if not has_city_precision(cached) and subnet and subnet in _subnet_geo_cache and has_city_precision(_subnet_geo_cache[subnet]):
+                return _subnet_geo_cache[subnet]
+            return cached
+
+    # 2. 检查 C 段（/24）子网一致性高精度缓存
+    # 同一 /24 子网物理上必定属于同一机房或同一地级市节点，彻底解决同网段主机城市漂移问题
+    if not force_refresh and subnet and subnet in _subnet_geo_cache:
+        sub_cached = _subnet_geo_cache[subnet]
+        if not is_garbled_region(sub_cached) and has_city_precision(sub_cached):
+            _ip_geo_cache[ip] = sub_cached
+            return sub_cached
+
+    # 3. 渠道一：国内专业高精度定位库（ip9.com.cn，毫秒级响应，直出精准省+市+区+运营商，绝不误判总部）
     try:
-        url = f"http://ip-api.com/json/{ip}?lang=zh-CN"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=3.0) as res:
+        url = f"https://ip9.com.cn/get?ip={ip}"
+        req = urllib.request.Request(
+            url, 
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"}
+        )
+        with urllib.request.urlopen(req, timeout=2.5) as res:
             data = json.loads(res.read().decode("utf-8", errors="ignore"))
-            if data.get("status") == "success":
-                province = data.get("regionName", "").strip()
-                city = data.get("city", "").strip()
-                isp = data.get("isp", "").strip()
-                country = data.get("country", "").strip()
-                if country in ["中国", "China", "CN"] or any(p in province for p in PROVINCES_LIST):
-                    formatted = format_chinese_location(province, city, isp)
+            if data.get("ret") == 200 and data.get("data"):
+                d = data["data"]
+                prov = (d.get("prov") or "").strip()
+                city = (d.get("city") or "").strip()
+                isp = (d.get("isp") or "").strip()
+                country = (d.get("country") or "").strip()
+                if country in ["中国", "China", "cn"] or any(p in prov for p in PROVINCES_LIST):
+                    formatted = format_chinese_location(prov, city, isp)
                     if formatted and not is_garbled_region(formatted):
                         _ip_geo_cache[ip] = formatted
+                        if subnet and has_city_precision(formatted):
+                            _subnet_geo_cache[subnet] = formatted
                         return formatted
-                else:
-                    parts = [country, province, city]
+                elif country:
+                    parts = [country, prov, city]
                     loc_str = " ".join([p for p in parts if p]) + (f" ({isp})" if isp else "")
                     _ip_geo_cache[ip] = loc_str
+                    if subnet:
+                        _subnet_geo_cache[subnet] = loc_str
                     return loc_str
     except Exception:
         pass
 
-    # 2. 备用全球多语言接口 (ipwho.is：省 + 市区 + 运营商)
+    # 4. 渠道二：国内权威纯真 IP 库 (cip.cc)
+    try:
+        url = f"http://www.cip.cc/{ip}"
+        req = urllib.request.Request(url, headers={"User-Agent": "curl/7.79.1"})
+        with urllib.request.urlopen(req, timeout=2.5) as res:
+            raw = res.read().decode("utf-8", errors="ignore")
+            fields = {}
+            for line in raw.splitlines():
+                if ":" in line:
+                    k, v = line.split(":", 1)
+                    fields[k.strip()] = v.strip()
+            raw_addr = fields.get("数据三") or fields.get("数据二") or fields.get("地址") or ""
+            raw_isp = fields.get("运营商") or ""
+            if raw_addr:
+                cleaned = raw_addr.replace("中国", "").replace("|", " ").strip()
+                cleaned = re.sub(r"\s+", " ", cleaned)
+                prov_match = None
+                for p in PROVINCES_LIST:
+                    if p in cleaned:
+                        prov_match = p
+                        break
+                if prov_match:
+                    city_part = cleaned.replace(prov_match, "").replace("省", "").replace("自治区", "").replace("特别行政区", "").strip()
+                    city_tokens = city_part.split()
+                    city_name = city_tokens[0] if city_tokens else ""
+                    formatted = format_chinese_location(prov_match, city_name, raw_isp)
+                    if formatted and not is_garbled_region(formatted):
+                        _ip_geo_cache[ip] = formatted
+                        if subnet and has_city_precision(formatted):
+                            _subnet_geo_cache[subnet] = formatted
+                        return formatted
+    except Exception:
+        pass
+
+    # 5. 渠道三：全球多语言高精度接口 (ipwho.is：省 + 市区 + 运营商)
     try:
         url = f"https://ipwho.is/{ip}?lang=zh-CN"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=3.0) as res:
+        with urllib.request.urlopen(req, timeout=2.5) as res:
             data = json.loads(res.read().decode("utf-8", errors="ignore"))
             if data.get("success"):
                 province = data.get("region", "").strip()
@@ -2739,20 +2814,56 @@ def get_ip_region(ip):
                     formatted = format_chinese_location(province, city, isp)
                     if formatted and not is_garbled_region(formatted):
                         _ip_geo_cache[ip] = formatted
+                        if subnet and has_city_precision(formatted):
+                            _subnet_geo_cache[subnet] = formatted
                         return formatted
                 else:
                     parts = [country, province, city]
                     loc_str = " ".join([p for p in parts if p]) + (f" ({isp})" if isp else "")
                     _ip_geo_cache[ip] = loc_str
+                    if subnet:
+                        _subnet_geo_cache[subnet] = loc_str
                     return loc_str
     except Exception:
         pass
 
-    # 3. 备用渠道：百度官方 IP 接口
+    # 6. 渠道四：全球备用接口 (ip-api.com，适合海外访客，国内带防误判保护)
+    try:
+        url = f"http://ip-api.com/json/{ip}?lang=zh-CN"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=2.5) as res:
+            data = json.loads(res.read().decode("utf-8", errors="ignore"))
+            if data.get("status") == "success":
+                province = data.get("regionName", "").strip()
+                city = data.get("city", "").strip()
+                isp = data.get("isp", "").strip()
+                country = data.get("country", "").strip()
+                if country in ["中国", "China", "CN"] or any(p in province for p in PROVINCES_LIST):
+                    # 若国外库把国内其他省份IP误报为北京总部，而我们已知更高精度子网，则跳过
+                    if "西城区" in city and subnet and subnet in _subnet_geo_cache and "北京市" not in _subnet_geo_cache[subnet]:
+                        pass
+                    else:
+                        formatted = format_chinese_location(province, city, isp)
+                        if formatted and not is_garbled_region(formatted):
+                            _ip_geo_cache[ip] = formatted
+                            if subnet and has_city_precision(formatted):
+                                _subnet_geo_cache[subnet] = formatted
+                            return formatted
+                else:
+                    parts = [country, province, city]
+                    loc_str = " ".join([p for p in parts if p]) + (f" ({isp})" if isp else "")
+                    _ip_geo_cache[ip] = loc_str
+                    if subnet:
+                        _subnet_geo_cache[subnet] = loc_str
+                    return loc_str
+    except Exception:
+        pass
+
+    # 7. 渠道五：百度官方 IP 接口兜底
     try:
         url = f"https://opendata.baidu.com/api.php?query={ip}&resource_id=6006&oe=utf8"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
-        with urllib.request.urlopen(req, timeout=3.0) as res:
+        with urllib.request.urlopen(req, timeout=2.5) as res:
             raw_text = res.read().decode("utf-8", errors="ignore")
             data = json.loads(raw_text)
             if data.get("status") == "0" and data.get("data"):
@@ -2764,6 +2875,10 @@ def get_ip_region(ip):
                     return loc
     except Exception:
         pass
+
+    # 若子网缓存存在，直接继承
+    if subnet and subnet in _subnet_geo_cache:
+        return _subnet_geo_cache[subnet]
 
     fallback = "中国 (公网客户)"
     _ip_geo_cache[ip] = fallback
@@ -2794,25 +2909,35 @@ def api_geo_lang():
         return jsonify(_geo_lang_cache[client_ip])
 
     country_code = "CN"
-    # 1. 优先调用 ip-api.com
+    # 1. 优先调用国内高可用超快接口 ip9.com.cn
     try:
-        url = f"http://ip-api.com/json/{client_ip}?fields=status,countryCode"
+        url = f"https://ip9.com.cn/get?ip={client_ip}"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as res:
+        with urllib.request.urlopen(req, timeout=2.0) as res:
             d = json.loads(res.read().decode("utf-8", errors="ignore"))
-            if d.get("status") == "success" and d.get("countryCode"):
-                country_code = d.get("countryCode").upper()
+            cc = (d.get("data", {}).get("country_code") or "").upper()
+            if cc:
+                country_code = cc
     except Exception:
-        # 2. 备用 ipwho.is
+        # 2. 备用调用 ip-api.com
         try:
-            url = f"https://ipwho.is/{client_ip}"
+            url = f"http://ip-api.com/json/{client_ip}?fields=status,countryCode"
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
             with urllib.request.urlopen(req, timeout=2.5) as res:
                 d = json.loads(res.read().decode("utf-8", errors="ignore"))
-                if d.get("country_code"):
-                    country_code = d.get("country_code").upper()
+                if d.get("status") == "success" and d.get("countryCode"):
+                    country_code = d.get("countryCode").upper()
         except Exception:
-            pass
+            # 3. 备用调用 ipwho.is
+            try:
+                url = f"https://ipwho.is/{client_ip}"
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=2.5) as res:
+                    d = json.loads(res.read().decode("utf-8", errors="ignore"))
+                    if d.get("country_code"):
+                        country_code = d.get("country_code").upper()
+            except Exception:
+                pass
 
     is_cn = country_code in CHINESE_REGION_CODES
     res_data = {
@@ -3130,20 +3255,59 @@ def record_visit():
 
 # ---------------- Page & Product Visitor Analytics ----------------
 
-def normalize_visitor_stream(stream):
+def normalize_visitor_stream(stream, force_full=False):
     if not isinstance(stream, list):
         return False
     changed = False
+    subnet_canonical = {}
+
     for v in stream:
         ip = (v.get("ip") or "").strip()
-        reg = v.get("region", "")
-        if ip and is_garbled_region(reg):
+        reg = (v.get("region") or "").strip()
+        subnet = get_ip_subnet(ip)
+        
+        # 判断该访客记录是否属于需要升级的高精度场景：
+        # 1. 历史乱码或空值
+        # 2. 缺少市级行政区（如仅显示“山西省 联通”）
+        # 3. 国外接口误报运营商总部西城区（如联通 116.179.37.* 属于山西，但被国外库报为北京西城区）
+        # 4. 旧版残留的占位描述（如“公网”、“未知”等）
+        # 5. force_full 全量刷新模式
+        needs_upgrade = force_full
+        if not reg or is_garbled_region(reg):
+            needs_upgrade = True
+        elif not has_city_precision(reg) and not any(k in reg for k in ["本地", "内网"]):
+            needs_upgrade = True
+        elif "西城区" in reg and ip and not ip.startswith(("127.", "192.168.", "10.")):
+            needs_upgrade = True
+        elif any(w in reg for w in ["公网", "未知", "客户来访", "国内网络"]):
+            needs_upgrade = True
+        elif "晋中" in reg and "116.179.37." in ip:
+            needs_upgrade = True
+
+        if ip and needs_upgrade:
             if ip in _ip_geo_cache:
                 del _ip_geo_cache[ip]
-            new_reg = get_ip_region(ip)
-            if new_reg and new_reg != reg:
-                v["region"] = new_reg
+            new_reg = get_ip_region(ip, force_refresh=True)
+            if new_reg and not is_garbled_region(new_reg):
+                if new_reg != reg:
+                    v["region"] = new_reg
+                    changed = True
+                if subnet and has_city_precision(new_reg):
+                    subnet_canonical[subnet] = new_reg
+        elif subnet and has_city_precision(reg):
+            if subnet not in subnet_canonical:
+                subnet_canonical[subnet] = reg
+
+    # 二次巡检：确保同一 /24 网段内的所有记录 100% 保持完全相同的城市，彻底消除同网段跳变
+    for v in stream:
+        ip = (v.get("ip") or "").strip()
+        subnet = get_ip_subnet(ip)
+        if subnet and subnet in subnet_canonical:
+            canon = subnet_canonical[subnet]
+            if v.get("region") != canon:
+                v["region"] = canon
                 changed = True
+
     return changed
 
 @app.route("/api/analytics/visitor_insights", methods=["GET"])
@@ -4476,16 +4640,21 @@ def get_network_info():
     })
 
 def cleanup_historical_visitor_logs():
-    """在服务启动时自动清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
-    try:
-        logs = load_json("visitor_logs.json")
-        if logs and isinstance(logs, dict):
-            stream = logs.get("realtime_stream", [])
-            if normalize_visitor_stream(stream):
-                save_json("visitor_logs.json", logs)
-                print("[Cleanup] 已成功将历史访客记录清洗升级至市区高精度级别！")
-    except Exception as e:
-        print(f"[Cleanup] 访客记录自愈警告: {e}")
+    """在服务启动时在后台线程自动清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
+    def _run_bg_cleanup():
+        try:
+            import time
+            time.sleep(1.0)
+            logs = load_json("visitor_logs.json")
+            if logs and isinstance(logs, dict):
+                stream = logs.get("realtime_stream", [])
+                if normalize_visitor_stream(stream, force_full=True):
+                    save_json("visitor_logs.json", logs)
+                    print("[Cleanup] 已成功将历史访客记录清洗升级至市区高精度级别！")
+        except Exception as e:
+            print(f"[Cleanup] 访客记录自愈警告: {e}")
+
+    threading.Thread(target=_run_bg_cleanup, daemon=True).start()
 
 cleanup_historical_visitor_logs()
 

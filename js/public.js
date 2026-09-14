@@ -856,5 +856,120 @@ $(function () {
     setTimeout(initVideoPosters, 300);
 })();
 
+// ==============================================================================
+// 10. 全球访客地域智能语言路由 (GeoIP Auto Language Switcher)
+// 规则：
+// 1. 中国大陆 (CN)、中国香港 (HK)、中国澳门 (MO)、中国台湾 (TW) 及本地/内网访客默认显示中文版本；
+// 2. 其余所有非中国地区的海外 IP 访问中文页面时，自动引导平滑重定向至对应的 /en/ 英文版本；
+// 3. 用户在页面顶部主动点击 CN/EN 或携带 ?lang=zh 参数时，优先尊重用户选择，避免死循环。
+// ==============================================================================
+(function() {
+    try {
+        var pathname = window.location.pathname || "";
+        // 排除后台管理与鉴权路径
+        if (pathname.indexOf("/dashboard") !== -1 || pathname.indexOf("/login") !== -1 || pathname.indexOf("/admin") !== -1) {
+            return;
+        }
 
+        // 1. 监听全站导航中英文语言切换按钮点击事件，记录用户主动选择
+        document.addEventListener("click", function(e) {
+            var target = e.target && e.target.closest("a");
+            if (!target) return;
+            var href = target.getAttribute("href") || "";
+            var title = target.getAttribute("title") || "";
+            var text = (target.textContent || "").trim();
 
+            if (title.indexOf("Chinese") !== -1 || text === "CN" || (href.indexOf("index.html") !== -1 && href.indexOf("/en/") === -1 && pathname.indexOf("/en/") !== -1)) {
+                localStorage.setItem("mellgen_lang_pref", "zh");
+            } else if (title.indexOf("English") !== -1 || text === "EN" || href.indexOf("/en/") !== -1) {
+                localStorage.setItem("mellgen_lang_pref", "en");
+            }
+        });
+
+        // 2. 支持 URL 显式参数强行指定语言（如 ?lang=zh）
+        var search = window.location.search || "";
+        if (search.indexOf("lang=zh") !== -1) {
+            localStorage.setItem("mellgen_lang_pref", "zh");
+            return;
+        } else if (search.indexOf("lang=en") !== -1) {
+            localStorage.setItem("mellgen_lang_pref", "en");
+        }
+
+        var isEnPage = pathname.indexOf("/en/") !== -1;
+        var userPref = localStorage.getItem("mellgen_lang_pref");
+
+        // 若用户主动选择过中文，哪怕身处海外也尊重选择，不再跳转
+        if (userPref === "zh") {
+            return;
+        }
+
+        // 当前已在英文页面，无需执行重定向
+        if (isEnPage) {
+            return;
+        }
+
+        // 3. 检查会话缓存，避免站内多次翻页重复发起网络探测
+        var cachedLang = sessionStorage.getItem("mellgen_detected_lang");
+        if (cachedLang) {
+            if (cachedLang === "en") {
+                redirectToEnPage();
+            }
+            return;
+        }
+
+        // 4. 重定向至对应英文版本页面
+        function redirectToEnPage() {
+            var currentPath = window.location.pathname.replace(/^\/+/, "");
+            var targetEnUrl = "/en/index.html";
+            if (!currentPath || currentPath === "index.html" || currentPath === "mellgen_home.html") {
+                targetEnUrl = "/en/index.html";
+            } else {
+                targetEnUrl = "/en/" + currentPath;
+            }
+            if (window.location.search) targetEnUrl += window.location.search;
+            if (window.location.hash) targetEnUrl += window.location.hash;
+            window.location.replace(targetEnUrl);
+        }
+
+        function handleGeoResult(isChineseRegion) {
+            if (isChineseRegion) {
+                sessionStorage.setItem("mellgen_detected_lang", "zh");
+            } else {
+                sessionStorage.setItem("mellgen_detected_lang", "en");
+                redirectToEnPage();
+            }
+        }
+
+        // 5. 优先调用自有后端 /api/geo/lang 检测客户端真实公网 IP
+        var apiUrl = "/api/geo/lang";
+        if (window.location.port === "8000" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+            apiUrl = window.location.protocol + "//" + window.location.hostname + ":8001/api/geo/lang";
+        }
+
+        if (window.fetch) {
+            fetch(apiUrl)
+                .then(function(res) {
+                    if (!res.ok) throw new Error("HTTP " + res.status);
+                    return res.json();
+                })
+                .then(function(data) {
+                    var isCn = data && (data.is_chinese_region === true || data.preferred_lang === "zh");
+                    handleGeoResult(isCn);
+                })
+                .catch(function() {
+                    // 若自有接口未响应，降级调用公网高可用快速 GeoIP 接口
+                    fetch("https://ipwho.is/")
+                        .then(function(res) { return res.json(); })
+                        .then(function(geo) {
+                            var code = (geo.country_code || "").toUpperCase();
+                            var isCn = ["CN", "HK", "MO", "TW"].indexOf(code) !== -1;
+                            handleGeoResult(isCn);
+                        })
+                        .catch(function() {
+                            // 若所有探测均不可达，默认保持中文
+                            sessionStorage.setItem("mellgen_detected_lang", "zh");
+                        });
+                });
+        }
+    } catch(e) {}
+})();

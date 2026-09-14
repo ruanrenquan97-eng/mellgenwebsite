@@ -2769,6 +2769,61 @@ def get_ip_region(ip):
     _ip_geo_cache[ip] = fallback
     return fallback
 
+# =========================================================================
+# GeoIP Internationalization Language Router (大中华区/海外语言分流检测接口)
+# 针对中国大陆、香港、澳门、台湾IP默认中文版；其余海外IP自动引导英文版
+# =========================================================================
+_geo_lang_cache = {}
+CHINESE_REGION_CODES = {"CN", "HK", "MO", "TW"}
+
+@app.route("/api/geo/lang", methods=["GET"], strict_slashes=False)
+@app.route("/geo/lang", methods=["GET"], strict_slashes=False)
+def api_geo_lang():
+    client_ip = get_client_ip()
+
+    # 本地或内网访问：默认中文
+    if not client_ip or client_ip in ("127.0.0.1", "::1", "localhost") or client_ip.startswith(("192.168.", "10.", "172.")):
+        return jsonify({
+            "ip": client_ip or "127.0.0.1",
+            "country_code": "CN",
+            "is_chinese_region": True,
+            "preferred_lang": "zh"
+        })
+
+    if client_ip in _geo_lang_cache:
+        return jsonify(_geo_lang_cache[client_ip])
+
+    country_code = "CN"
+    # 1. 优先调用 ip-api.com
+    try:
+        url = f"http://ip-api.com/json/{client_ip}?fields=status,countryCode"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=2.5) as res:
+            d = json.loads(res.read().decode("utf-8", errors="ignore"))
+            if d.get("status") == "success" and d.get("countryCode"):
+                country_code = d.get("countryCode").upper()
+    except Exception:
+        # 2. 备用 ipwho.is
+        try:
+            url = f"https://ipwho.is/{client_ip}"
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=2.5) as res:
+                d = json.loads(res.read().decode("utf-8", errors="ignore"))
+                if d.get("country_code"):
+                    country_code = d.get("country_code").upper()
+        except Exception:
+            pass
+
+    is_cn = country_code in CHINESE_REGION_CODES
+    res_data = {
+        "ip": client_ip,
+        "country_code": country_code,
+        "is_chinese_region": is_cn,
+        "preferred_lang": "zh" if is_cn else "en"
+    }
+    _geo_lang_cache[client_ip] = res_data
+    return jsonify(res_data)
+
 def get_history_30d(traffic):
     if not isinstance(traffic, dict):
         traffic = {}
@@ -4421,7 +4476,7 @@ def get_network_info():
     })
 
 def cleanup_historical_visitor_logs():
-    """在后台异步清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
+    """在服务启动时自动清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
     try:
         logs = load_json("visitor_logs.json")
         if logs and isinstance(logs, dict):
@@ -4432,13 +4487,7 @@ def cleanup_historical_visitor_logs():
     except Exception as e:
         print(f"[Cleanup] 访客记录自愈警告: {e}")
 
-# 在独立后台守护线程中运行，绝不阻塞主服务极速启动与端口监听
-def _async_startup_cleanup():
-    import time
-    time.sleep(1.5)
-    cleanup_historical_visitor_logs()
-
-threading.Thread(target=_async_startup_cleanup, daemon=True).start()
+cleanup_historical_visitor_logs()
 
 # Start the background daily SEO scheduler daemon
 daily_scheduler.start_scheduler()

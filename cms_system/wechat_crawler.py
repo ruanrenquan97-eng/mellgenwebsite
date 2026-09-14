@@ -96,6 +96,118 @@ def save_wechat_config(config_data):
         return False
 
 # ==============================================================================
+# Mojibake Repair & Text Sanitization Engine
+# ==============================================================================
+def fix_utf8_bytes(raw):
+    """
+    Reconstructs valid UTF-8 byte sequences from raw bytes that may have stray
+    or malformed bytes (such as isolated 0xA0 non-breaking spaces).
+    """
+    out = bytearray()
+    i = 0
+    n = len(raw)
+    while i < n:
+        b1 = raw[i]
+        # 1-byte ASCII
+        if b1 < 0x80:
+            out.append(b1)
+            i += 1
+        # 2-byte UTF-8
+        elif 0xC2 <= b1 <= 0xDF:
+            if i + 1 < n and 0x80 <= raw[i+1] <= 0xBF:
+                out.extend(raw[i:i+2])
+                i += 2
+            else:
+                out.append(b1)
+                i += 1
+        # 3-byte UTF-8
+        elif 0xE0 <= b1 <= 0xEF:
+            if i + 2 < n and 0x80 <= raw[i+1] <= 0xBF and 0x80 <= raw[i+2] <= 0xBF:
+                out.extend(raw[i:i+3])
+                i += 3
+            else:
+                out.append(b1)
+                i += 1
+        # 4-byte UTF-8
+        elif 0xF0 <= b1 <= 0xF4:
+            if i + 3 < n and 0x80 <= raw[i+1] <= 0xBF and 0x80 <= raw[i+2] <= 0xBF and 0x80 <= raw[i+3] <= 0xBF:
+                out.extend(raw[i:i+4])
+                i += 4
+            else:
+                out.append(b1)
+                i += 1
+        elif b1 == 0xA0:
+            # Standalone non-breaking space
+            out.extend(b' ')
+            i += 1
+        else:
+            out.append(b1)
+            i += 1
+    return bytes(out)
+
+def fix_mojibake_text(s):
+    """
+    Recovers clean UTF-8 text from string that was decoded incorrectly as ISO-8859-1.
+    """
+    if not isinstance(s, str) or not s:
+        return s
+    if not re.search(r'[åæèéçï][\x80-\xff]', s):
+        return s
+    try:
+        raw_b = s.encode('iso-8859-1')
+        fixed_b = fix_utf8_bytes(raw_b)
+        return fixed_b.decode('utf-8', errors='ignore')
+    except Exception:
+        return s
+
+def fix_mojibake_html(content_str):
+    """
+    Recovers clean UTF-8 HTML from content that was decoded incorrectly as ISO-8859-1,
+    preserving non-mojibake appended footers.
+    """
+    if not isinstance(content_str, str) or not content_str:
+        return content_str
+    if not re.search(r'[åæèéçï][\x80-\xff]', content_str):
+        return content_str
+    
+    split_marker = '<div class="article-footer-note"'
+    if split_marker in content_str:
+        body, footer = content_str.split(split_marker, 1)
+        footer = split_marker + footer
+    else:
+        body = content_str
+        footer = ""
+
+    try:
+        raw_b = body.encode('iso-8859-1')
+        fixed_b = fix_utf8_bytes(raw_b)
+        decoded_body = fixed_b.decode('utf-8', errors='ignore')
+        return decoded_body + footer
+    except Exception:
+        return content_str
+
+def extract_clean_digest(content_html, fallback=""):
+    """
+    Extracts a clean, SEO-friendly digest from article body, skipping WeChat banner prompt texts.
+    """
+    if not content_html:
+        return fallback
+    try:
+        soup = BeautifulSoup(content_html, "html.parser")
+        # Remove footer note
+        for fn in soup.select(".article-footer-note"):
+            fn.decompose()
+        text = soup.get_text(separator=" ", strip=True)
+        # Strip common wechat header slogans
+        text = re.sub(r'^(点击蓝字\s*关注我们|关注我们|长按识别二维码|戳上方蓝字.*?关注我)\s*', '', text)
+        text = re.sub(r'\s+', ' ', text).strip()
+        if len(text) > 20:
+            return text[:140] + ("..." if len(text) > 140 else "")
+    except Exception:
+        pass
+    return fallback
+
+# ==============================================================================
 # Anti-Leech Image Downloader
 # ==============================================================================
 def download_wechat_image(img_url, timeout=12):
@@ -173,6 +285,7 @@ def process_wechat_html_content(raw_html, download_images=True):
     if not raw_html:
         return ""
 
+    raw_html = fix_mojibake_html(raw_html)
     soup = BeautifulSoup(raw_html, "html.parser")
 
     # Remove script, style, iframe, audio/video ads
@@ -266,6 +379,7 @@ def scrape_wechat_article_by_url(url, download_images=True):
         if not title and soup.title:
             title = soup.title.get_text(strip=True)
             
+        title = fix_mojibake_text(title)
         if not title:
             return None
 
@@ -278,6 +392,7 @@ def scrape_wechat_article_by_url(url, download_images=True):
             author_node = soup.find(id="js_author_name") or soup.find(class_="profile_nickname")
             if author_node:
                 author = author_node.get_text(strip=True)
+        author = fix_mojibake_text(author)
 
         # 3. Publish Date
         pub_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -305,16 +420,16 @@ def scrape_wechat_article_by_url(url, download_images=True):
             elif raw_cover_url:
                 cover_image = raw_cover_url
 
-        # 5. Description / Digest
+        # 5. Sanitize Content
+        content = process_wechat_html_content(html_text, download_images=download_images)
+
+        # 6. Description / Digest
         desc = ""
         og_desc = soup.find("meta", property="og:description")
         if og_desc and og_desc.get("content"):
-            desc = og_desc["content"].strip()
-        if not desc:
-            desc = f"美尔健（深圳）生物科技有限公司微信公众号发布文章：{title}"
-
-        # 6. Sanitize Content
-        content = process_wechat_html_content(html_text, download_images=download_images)
+            desc = fix_mojibake_text(og_desc["content"].strip())
+        if not desc or "点击蓝字" in desc or len(desc) < 15:
+            desc = extract_clean_digest(content, fallback=f"美尔健（深圳）生物科技有限公司微信公众号发布文章：{title}")
 
         # Generate unique ID
         title_hash = hashlib.md5(title.encode("utf-8")).hexdigest()[:8]
@@ -358,6 +473,7 @@ class WeChatOfficialSync:
         url = f"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={self.appid}&secret={self.appsecret}"
         try:
             resp = requests.get(url, timeout=10)
+            resp.encoding = "utf-8"
             data = resp.json()
             if "access_token" in data:
                 self.access_token = data["access_token"]
@@ -393,17 +509,17 @@ class WeChatOfficialSync:
         # Helper: parse news item into standard dict
         # ---------------------------------------------------------
         def parse_news_dict(news, pub_date, source_url=""):
-            title = news.get("title", "").strip()
+            title = fix_mojibake_text(news.get("title", "").strip())
             if not title:
                 return None
             if title in seen_titles:
                 return None
             seen_titles.add(title)
 
-            author = news.get("author", "美尔健生物").strip() or "美尔健生物"
-            digest = news.get("digest", "").strip() or f"美尔健（深圳）生物科技有限公司：{title}"
+            author = fix_mojibake_text(news.get("author", "美尔健生物").strip() or "美尔健生物")
+            raw_digest = fix_mojibake_text(news.get("digest", "").strip())
             thumb_url = news.get("thumb_url") or news.get("cover_url") or ""
-            raw_content = news.get("content", "")
+            raw_content = fix_mojibake_html(news.get("content", ""))
             article_source_url = news.get("url") or news.get("content_url") or source_url
 
             cover_image = "resource/images/ban_txt.png"
@@ -414,6 +530,13 @@ class WeChatOfficialSync:
                     cover_image = thumb_url
 
             clean_content = process_wechat_html_content(raw_content, download_images=download_images)
+            
+            # Clean and informative digest
+            if not raw_digest or "点击蓝字" in raw_digest or len(raw_digest) < 15:
+                digest = extract_clean_digest(clean_content, fallback=f"美尔健（深圳）生物科技有限公司：{title}")
+            else:
+                digest = raw_digest
+
             title_hash = hashlib.md5(title.encode("utf-8")).hexdigest()[:8]
             article_id = f"wx_{title_hash}"
 
@@ -447,6 +570,7 @@ class WeChatOfficialSync:
                     json={"type": "news", "offset": mat_offset, "count": mat_count},
                     timeout=20
                 )
+                resp.encoding = "utf-8"
                 data = resp.json()
             except Exception as e:
                 update_sync_state(log=f"[-] 素材库请求异常: {e}")
@@ -491,6 +615,7 @@ class WeChatOfficialSync:
                     json={"offset": draft_offset, "count": draft_count, "no_content": 0},
                     timeout=20
                 )
+                resp.encoding = "utf-8"
                 data = resp.json()
             except Exception as e:
                 update_sync_state(log=f"[-] 草稿库请求异常: {e}")
@@ -535,6 +660,7 @@ class WeChatOfficialSync:
                     json={"offset": fp_offset, "count": fp_count, "no_content": 0},
                     timeout=20
                 )
+                resp.encoding = "utf-8"
                 data = resp.json()
             except Exception:
                 break
@@ -574,6 +700,7 @@ class WeChatOfficialSync:
                 f"https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token={token}",
                 timeout=15
             )
+            m_resp.encoding = "utf-8"
             m_data = m_resp.json()
             buttons = m_data.get("selfmenu_info", {}).get("button", [])
             

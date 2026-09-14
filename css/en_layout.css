@@ -1,369 +1,1156 @@
-/* =========================================================
-   Mellgen Biotechnology - English Version Layout Refinements
-   Targeted styling for html[lang="en"] pages
-   ========================================================= */
+/* ==========================================================================
+   Mellgen Biotechnology - English Version Master Layout & Styling
+   Precision styling for html[lang="en"] across all desktop & responsive pages.
+   Guarantees:
+     1. Zero border/container overflow
+     2. Clean flex-based alignment for headers, grids, cards, tables
+     3. Crisp international typography & readability
+     4. Responsive adaptability from mobile to ultra-wide displays
+   ========================================================================== */
 
-/* --- 1. Global English Typography --- */
+/* --- 1. Global English Typography & Containment --- */
+html[lang="en"] {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+
+html[lang="en"] *,
+html[lang="en"] *::before,
+html[lang="en"] *::after {
+  box-sizing: inherit;
+}
+
 html[lang="en"] body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  max-width: 100vw;
+  color: #334155;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
-/* --- 2. Top Header & Navigation --- */
+/* Global width safety limits on layout containers */
+html[lang="en"] .blk-main,
+html[lang="en"] .g_top,
+html[lang="en"] .g_top .m_top,
+html[lang="en"] .g_ft,
+html[lang="en"] .m_ft,
+html[lang="en"] .p102-search-1,
+html[lang="en"] .plc,
+html[lang="en"] .p102-fdh-1,
+html[lang="en"] .p102-fdh-3,
+html[lang="en"] .p102-proShow-1,
+html[lang="en"] .p102-pro-content,
+html[lang="en"] .p102-info-blk,
+html[lang="en"] .mellgen-b2b-section {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+html[lang="en"] img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- 2. Top Header, Logo, Slogan & Navigation --- */
 html[lang="en"] .g_top {
-  height: 5.8rem;
+  height: auto !important;
+  min-height: 5.6rem !important;
+  overflow: visible !important;
+  background: #ffffff !important;
+  position: relative !important;
+}
+
+html[lang="en"] .g_top .m_top {
+  position: relative !important;
+  height: 5.6rem !important;
 }
 
 html[lang="en"] .g_top .tlogo {
-  width: 9%;
-  height: 5.8rem;
-  padding: 0 0.5% 0 2%;
+  width: 9% !important;
+  min-width: 110px !important;
+  height: 5.6rem !important;
+  padding: 0 0.5% 0 1.5% !important;
+  float: left !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+html[lang="en"] .g_top .tlogo img {
+  max-height: 4.6rem !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
 }
 
 html[lang="en"] .g_top h2 {
-  width: 25%;
-  padding-top: 1.1rem;
+  width: auto !important;
+  max-width: 28% !important;
+  float: left !important;
+  padding-top: 1.15rem !important;
+  padding-left: 0.5rem !important;
 }
 
 html[lang="en"] .g_top h2 em {
-  font-size: 0.78rem;
-  line-height: 1.25rem;
-  height: 1.25rem;
-  white-space: nowrap;
-  letter-spacing: 0;
+  font-size: 0.78rem !important;
+  line-height: 1.25rem !important;
+  height: 1.25rem !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  color: #475569 !important;
+  display: block !important;
+  font-weight: normal !important;
 }
 
 html[lang="en"] .g_top h2 b {
-  font-size: 0.82rem;
-  line-height: 1.3rem;
-  height: 1.3rem;
-  white-space: nowrap;
-  letter-spacing: 0;
+  font-size: 0.82rem !important;
+  line-height: 1.3rem !important;
+  height: 1.3rem !important;
+  white-space: nowrap !important;
+  letter-spacing: 0 !important;
+  color: #1e293b !important;
+  display: block !important;
+  font-weight: 700 !important;
 }
 
 html[lang="en"] .g_top .tel {
-  right: 7.5% !important;
-  width: auto;
-  padding: 0 0.8rem;
-  background: #e9eef4;
+  right: 2% !important;
+  top: 1.15rem !important;
+  width: auto !important;
+  max-width: 24% !important;
+  padding: 0 0.8rem !important;
+  height: 1.8rem !important;
+  line-height: 1.8rem !important;
+  border-radius: 1rem !important;
+  background: #f1f5f9 !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
 }
 
 html[lang="en"] .g_top .tel b {
-  font-size: 0.75rem;
-  white-space: nowrap;
+  font-size: 0.76rem !important;
+  white-space: nowrap !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
 }
 
 html[lang="en"] .g_nav {
-  width: 58%;
-  margin-top: 3.1rem;
-  height: 2.5rem;
-  overflow: hidden;
+  float: right !important;
+  width: auto !important;
+  max-width: 62% !important;
+  margin-top: 3.1rem !important;
+  height: 2.5rem !important;
+  overflow: visible !important;
 }
 
 html[lang="en"] .g_nav ul {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+html[lang="en"] .g_nav li {
+  float: none !important;
+  flex: 0 0 auto !important;
 }
 
 html[lang="en"] .g_nav li a {
-  font-size: 0.82rem;
-  line-height: 2.5rem;
-  height: 2.5rem;
-  padding: 0 0.55rem;
-  margin: 0 0.15rem;
-  white-space: nowrap;
-  float: none;
-  display: inline-block;
+  font-size: 0.84rem !important;
+  line-height: 2.5rem !important;
+  height: 2.5rem !important;
+  padding: 0 0.55rem !important;
+  margin: 0 0.1rem !important;
+  white-space: nowrap !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+  display: inline-block !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+html[lang="en"] .g_nav li a:hover,
+html[lang="en"] .g_nav .cur a {
+  color: #174778 !important;
+  border-bottom-color: #7fb435 !important;
+  font-weight: 700 !important;
+}
+
+html[lang="en"] .g_nav li.is-sub-item {
+  display: none !important;
 }
 
 /* --- 3. Slogan & Tech Section (.g_yzsp, .g_js) --- */
 html[lang="en"] .g_yzsp .yzleft h2 em {
-  font-size: 2.1rem;
-  line-height: 2.8rem;
+  font-size: 2.1rem !important;
+  line-height: 2.8rem !important;
 }
 
 html[lang="en"] .g_yzsp .yzleft h2 b {
-  font-size: 2.1rem;
-  line-height: 2.8rem;
+  font-size: 2.1rem !important;
+  line-height: 2.8rem !important;
 }
 
 html[lang="en"] .g_yzsp .yzleft h2 span {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
+  font-size: 1.6rem !important;
+  line-height: 2.4rem !important;
 }
 
 html[lang="en"] .g_yzsp .yzleft .yzw p {
-  font-size: 0.82rem;
-  line-height: 1.55rem;
+  font-size: 0.82rem !important;
+  line-height: 1.55rem !important;
 }
 
 html[lang="en"] .g_js h2 b {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_js h2 em {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_js .jsjs p {
-  padding: 0 10%;
-  font-size: 0.82rem;
-  line-height: 1.35rem;
+  padding: 0 10% !important;
+  font-size: 0.82rem !important;
+  line-height: 1.35rem !important;
 }
 
 /* --- 4. 6 R&D Core Strengths (.sup_nav) --- */
 html[lang="en"] .sup_nav dl dt h4 {
-  font-size: 0.86rem;
-  line-height: 1.25rem;
-  margin-left: 0.8rem;
-  margin-right: 0.8rem;
-  word-break: normal;
-  text-align: left;
+  font-size: 0.84rem !important;
+  line-height: 1.25rem !important;
+  margin-left: 0.6rem !important;
+  margin-right: 0.6rem !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  text-wrap: wrap !important;
+  text-align: left !important;
 }
 
 html[lang="en"] .sup_nav dl dd h4 {
-  font-size: 0.95rem;
-  line-height: 1.3rem;
-  margin-left: 1.2rem;
-  margin-right: 0.8rem;
-  margin-bottom: 2.5rem;
+  font-size: 0.92rem !important;
+  line-height: 1.3rem !important;
+  margin-left: 1rem !important;
+  margin-right: 0.8rem !important;
+  margin-bottom: 2rem !important;
 }
 
 html[lang="en"] .sup_nav dl dd p {
-  font-size: 0.75rem;
-  line-height: 1.15rem;
-  margin-left: 1.2rem;
-  margin-right: 0.8rem;
-  margin-bottom: 1.2rem;
-  -webkit-line-clamp: 6;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-size: 0.74rem !important;
+  line-height: 1.15rem !important;
+  margin-left: 1rem !important;
+  margin-right: 0.8rem !important;
+  margin-bottom: 1.2rem !important;
+  -webkit-line-clamp: 6 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
 
 /* --- 5. Raw Materials & Solutions (.g_fa) --- */
 html[lang="en"] .g_fa .faleft h2 b {
-  font-size: 2.1rem;
-  line-height: 2.8rem;
+  font-size: 2.1rem !important;
+  line-height: 2.8rem !important;
 }
 
 html[lang="en"] .g_fa .faleft h2 em {
-  font-size: 0.95rem;
-  line-height: 1.8rem;
+  font-size: 0.95rem !important;
+  line-height: 1.8rem !important;
 }
 
 html[lang="en"] .g_fa .fafl dl dd {
-  padding: 0.6rem 1rem 0 0.9rem;
+  padding: 0.6rem 1rem 0 0.9rem !important;
 }
 
 html[lang="en"] .g_fa .fafl dl dd h4 a {
-  font-size: 0.95rem;
-  line-height: 1.6rem;
-  margin-bottom: 0.2rem;
+  font-size: 0.95rem !important;
+  line-height: 1.6rem !important;
+  margin-bottom: 0.2rem !important;
 }
 
 html[lang="en"] .g_fa .fafl dl dd p {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem 0.5rem;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.2rem 0.5rem !important;
 }
 
 html[lang="en"] .g_fa .fafl dl dd p a {
-  font-size: 0.72rem;
-  line-height: 1.35rem;
-  padding-right: 0;
-  float: none;
-  display: inline-block;
-  white-space: nowrap;
+  font-size: 0.72rem !important;
+  line-height: 1.35rem !important;
+  padding-right: 0 !important;
+  float: none !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
 }
 
 html[lang="en"] .g_fa .dzoem dd h4 a {
-  font-size: 0.95rem;
-  line-height: 1.6rem;
+  font-size: 0.95rem !important;
+  line-height: 1.6rem !important;
 }
 
 html[lang="en"] .g_fa .dzoem dd p a {
-  width: 48%;
-  font-size: 0.72rem;
-  line-height: 1.3rem;
-  padding-left: 1.2rem;
-  margin-bottom: 0.3rem;
+  width: 48% !important;
+  font-size: 0.72rem !important;
+  line-height: 1.3rem !important;
+  padding-left: 1.2rem !important;
+  margin-bottom: 0.3rem !important;
 }
 
 /* --- 6. Large-Scale Manufacturing Center (.g_zzzx) --- */
 html[lang="en"] .g_zzzx h2 b {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_zzzx h2 em {
-  font-size: 0.95rem;
-  line-height: 1.8rem;
+  font-size: 0.95rem !important;
+  line-height: 1.8rem !important;
 }
 
 html[lang="en"] .g_zzzx .m_zzzx .js-swiper-tab dl dd p {
-  top: 15rem;
-  left: 8.3%;
-  width: 44%;
-  font-size: 13px;
-  line-height: 1.4rem;
+  top: 15rem !important;
+  left: 8.3% !important;
+  width: 44% !important;
+  font-size: 13px !important;
+  line-height: 1.4rem !important;
 }
 
 html[lang="en"] .g_zzzx .m_zzzx .tabsfa a {
-  font-size: 1.05rem;
-  line-height: 1.35rem;
-  padding-top: 7.2rem;
+  font-size: 1.05rem !important;
+  line-height: 1.35rem !important;
+  padding-top: 7.2rem !important;
 }
 
 /* --- 7. Scientific Achievements (.g_kycg) --- */
 html[lang="en"] .g_kycg .m_kycg h2 b {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_kycg .m_kycg h2 em {
-  font-size: 0.95rem;
-  line-height: 1.8rem;
+  font-size: 0.95rem !important;
+  line-height: 1.8rem !important;
 }
 
 html[lang="en"] .g_kycg .m_kycg .kyleft p {
-  font-size: 13px;
-  line-height: 1.4rem;
-  width: 58%;
+  font-size: 13px !important;
+  line-height: 1.4rem !important;
+  width: 58% !important;
 }
 
 html[lang="en"] .number .numb .nmh {
-  font-size: 0.75rem;
-  line-height: 1.15rem;
-  height: 2.4rem;
-  display: flex;
-  align-items: center;
-  word-break: normal;
+  font-size: 0.75rem !important;
+  line-height: 1.15rem !important;
+  height: 2.4rem !important;
+  display: flex !important;
+  align-items: center !important;
+  word-break: normal !important;
 }
 
 /* --- 8. Video Showcase (.video) --- */
 html[lang="en"] .video h2 b {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .video .video-list .video-txt h4 {
-  font-size: 15px;
-  line-height: 24px;
-  height: 24px;
+  font-size: 15px !important;
+  line-height: 24px !important;
+  height: 24px !important;
 }
 
 html[lang="en"] .video .video-list .video-txt .desc {
-  font-size: 13px;
-  line-height: 20px;
+  font-size: 13px !important;
+  line-height: 20px !important;
 }
 
 /* --- 9. Case Studies Filter Bar (.g_anlst) --- */
 html[lang="en"] .g_an .m_antit h2 b {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_an .m_antit h2 em {
-  font-size: 0.95rem;
-  line-height: 1.8rem;
+  font-size: 0.95rem !important;
+  line-height: 1.8rem !important;
 }
 
 html[lang="en"] .g_anlst .antit {
-  height: auto;
-  min-height: 2.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.4rem 1.2rem;
-  margin-bottom: 2rem;
+  height: auto !important;
+  min-height: 2.5rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.4rem 1.2rem !important;
+  margin-bottom: 2rem !important;
 }
 
 html[lang="en"] .g_anlst .antit a {
-  float: none;
-  font-size: 0.95rem;
-  line-height: 2rem;
-  padding: 0.1rem 1.1rem;
-  background: #ffffff;
-  border: 1px solid #d5e0ea;
-  border-radius: 20px;
-  transition: all 0.25s ease;
+  float: none !important;
+  font-size: 0.92rem !important;
+  line-height: 2rem !important;
+  padding: 0.1rem 1.1rem !important;
+  background: #ffffff !important;
+  border: 1px solid #d5e0ea !important;
+  border-radius: 20px !important;
+  transition: all 0.25s ease !important;
 }
 
 html[lang="en"] .g_anlst .antit a:hover {
-  background: #7fb435;
+  background: #7fb435 !important;
   color: #ffffff !important;
-  border-color: #7fb435;
+  border-color: #7fb435 !important;
 }
 
 html[lang="en"] .g_anlst .anlst li em {
-  font-size: 0.82rem;
-  line-height: 3.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 1rem;
+  font-size: 0.82rem !important;
+  line-height: 3.5rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  padding: 0 1rem !important;
 }
 
-/* --- 10. News & Insights (.g_news) --- */
+/* --- 10. News & Insights on Homepage (.g_news) --- */
 html[lang="en"] .g_news h2 b {
-  font-size: 2.1rem;
-  line-height: 3rem;
+  font-size: 2.1rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_news h2 em {
-  font-size: 0.95rem;
-  line-height: 1.8rem;
+  font-size: 0.95rem !important;
+  line-height: 1.8rem !important;
 }
 
 html[lang="en"] .g_news .m_news .newtit {
-  margin-left: 42%;
-  width: 58%;
-  height: 8rem;
+  margin-left: 40% !important;
+  width: 60% !important;
+  height: 8rem !important;
 }
 
 html[lang="en"] .g_news .m_news .newtit .tabsnew a {
-  margin-right: 4%;
-  padding-left: 3rem;
+  margin-right: 4% !important;
+  padding-left: 3rem !important;
 }
 
 html[lang="en"] .g_news .m_news .newtit .tabsnew em {
-  font-size: 0.92rem;
-  line-height: 3rem;
+  font-size: 0.92rem !important;
+  line-height: 3rem !important;
 }
 
 html[lang="en"] .g_news .m_news dl dt h4 {
-  font-size: 0.82rem;
-  line-height: 1.25rem;
-  height: 45px;
+  font-size: 0.82rem !important;
+  line-height: 1.25rem !important;
+  height: 48px !important;
+  overflow: hidden !important;
 }
 
 html[lang="en"] .g_news .m_news dl dd p {
-  font-size: 0.74rem;
-  line-height: 1.2rem;
-  height: 55px;
+  font-size: 0.74rem !important;
+  line-height: 1.2rem !important;
+  height: 55px !important;
+  overflow: hidden !important;
 }
 
-/* --- 11. Footer Layout (.g_ft) --- */
+/* --- 11. Breadcrumbs, Subpage Nav & Search Bar --- */
+html[lang="en"] .plc {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto !important;
+  padding: 12px 0 !important;
+}
+
+html[lang="en"] .p102-curmbs-1 {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  font-size: 13.5px !important;
+  color: #64748b !important;
+  line-height: 28px !important;
+}
+
+html[lang="en"] .p102-curmbs-1 b {
+  color: #334155 !important;
+  margin-right: 6px !important;
+  white-space: nowrap !important;
+}
+
+html[lang="en"] .p102-curmbs-1 a {
+  color: #64748b !important;
+  white-space: normal !important;
+}
+
+html[lang="en"] .p102-curmbs-1 a:hover {
+  color: #174778 !important;
+}
+
+html[lang="en"] .p102-curmbs-1 span {
+  margin: 0 6px !important;
+  color: #cbd5e1 !important;
+}
+
+html[lang="en"] .p102-curmbs-1 i.p12-curblock a,
+html[lang="en"] .p102-curmbs-1 i:last-child a {
+  color: #174778 !important;
+  font-weight: 600 !important;
+}
+
+html[lang="en"] .p102-search-1 {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 12px 0 !important;
+}
+
+html[lang="en"] .p102-search-1 .blk-main {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+html[lang="en"] .p102-search-1 p {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px 10px !important;
+  font-size: 13px !important;
+  color: #64748b !important;
+}
+
+html[lang="en"] .p102-search-1 p b {
+  color: #334155 !important;
+  white-space: nowrap !important;
+}
+
+html[lang="en"] .p102-search-1 p a {
+  color: #475569 !important;
+  background: #ffffff !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+  border: 1px solid #e2e8f0 !important;
+  font-size: 12.5px !important;
+  white-space: nowrap !important;
+}
+
+html[lang="en"] .p102-search-1 p a:hover {
+  color: #174778 !important;
+  border-color: #174778 !important;
+}
+
+html[lang="en"] .p102-fdh-1 {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 20px auto !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 16px 24px !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one {
+  display: flex !important;
+  align-items: flex-start !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px dashed #e2e8f0 !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one:last-child {
+  border-bottom: none !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one h3 {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  flex: 0 0 210px !important;
+  line-height: 28px !important;
+  margin: 0 !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one dl {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px 12px !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one dd {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one dd > a {
+  display: inline-block !important;
+  font-size: 13px !important;
+  line-height: 24px !important;
+  padding: 2px 10px !important;
+  border-radius: 4px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+  white-space: normal !important;
+  max-width: 380px !important;
+  overflow-wrap: break-word !important;
+  transition: all 0.2s ease !important;
+}
+
+html[lang="en"] .p102-fdh-1-nav-one dd > a:hover,
+html[lang="en"] .p102-fdh-1-nav-one dd.cur > a {
+  background: #174778 !important;
+  color: #ffffff !important;
+  border-color: #174778 !important;
+}
+
+html[lang="en"] .p101a-fdh-02 {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 20px auto !important;
+}
+
+html[lang="en"] .p101a-fdh-02-nav ul {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  padding: 10px 0 !important;
+  list-style: none !important;
+}
+
+html[lang="en"] .p101a-fdh-02-nav li a {
+  display: inline-block !important;
+  padding: 6px 20px !important;
+  border-radius: 20px !important;
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+html[lang="en"] .p101a-fdh-02-nav li.cur a,
+html[lang="en"] .p101a-fdh-02-nav li a:hover {
+  background: #174778 !important;
+  color: #ffffff !important;
+}
+
+/* --- 12. Product List Grid (.hyt-product-list-6) --- */
+html[lang="en"] .hyt-product-list {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 40px auto !important;
+}
+
+html[lang="en"] .hyt-product-list-6 {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  gap: 30px 2.5% !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dl {
+  float: none !important;
+  width: 31.6% !important;
+  margin: 0 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: all 0.25s ease !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dl:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-4px) !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dt {
+  width: 100% !important;
+  height: 240px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dt a,
+html[lang="en"] .hyt-product-list-6 dt img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dt em {
+  position: absolute !important;
+  left: 14px !important;
+  top: 14px !important;
+  font-size: 11.5px !important;
+  height: 24px !important;
+  line-height: 22px !important;
+  padding: 0 8px !important;
+  max-width: 85% !important;
+  border-radius: 4px !important;
+  background: rgba(255,255,255,0.92) !important;
+  color: #174778 !important;
+  border: 1px solid #174778 !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dd {
+  padding: 20px 22px 24px !important;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dd h4 {
+  height: auto !important;
+  min-height: 48px !important;
+  margin-bottom: 10px !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dd h4 a {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  line-height: 24px !important;
+  height: 48px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dd p {
+  font-size: 13.5px !important;
+  line-height: 20px !important;
+  height: 40px !important;
+  color: #64748b !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin: 0 !important;
+}
+
+html[lang="en"] .hyt-product-list-6 dd p a {
+  color: #174778 !important;
+  font-weight: 600 !important;
+  margin-left: 6px !important;
+}
+
+/* --- 13. Product Detail Page (.p102-proShow-1) & B2B Tables --- */
+html[lang="en"] .p102-proShow-1 {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 30px auto !important;
+}
+
+html[lang="en"] .p102-proShow-1-con {
+  display: flex !important;
+  gap: 35px !important;
+}
+
+html[lang="en"] .p102-proShow-1-left {
+  flex: 0 0 450px !important;
+  max-width: 450px !important;
+}
+
+html[lang="en"] .p102-proShow-1-right {
+  flex: 1 1 auto !important;
+  padding: 0 !important;
+}
+
+html[lang="en"] .p102-proShow-1-title {
+  font-size: 24px !important;
+  line-height: 32px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  word-break: break-word !important;
+  margin-bottom: 12px !important;
+}
+
+html[lang="en"] .p102-proShow-1-desc p {
+  font-size: 13.5px !important;
+  line-height: 1.65 !important;
+  color: #334155 !important;
+  margin-bottom: 8px !important;
+}
+
+html[lang="en"] .p102-proShow-1-desc strong,
+html[lang="en"] .p102-proShow-1-desc b {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  white-space: normal !important;
+}
+
+html[lang="en"] .p102-proShow-1-tel a {
+  display: inline-block !important;
+  padding: 10px 24px !important;
+  border-radius: 6px !important;
+  background: #174778 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+html[lang="en"] .p102-proShow-1-tel a:hover {
+  background: #0f3057 !important;
+}
+
+html[lang="en"] .mellgen-b2b-section {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 35px auto 25px auto !important;
+  overflow-x: auto !important;
+}
+
+html[lang="en"] .mellgen-b2b-section table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 13.5px !important;
+}
+
+html[lang="en"] .mellgen-b2b-section table th,
+html[lang="en"] .mellgen-b2b-section table td[style*="background: #f8fafc"],
+html[lang="en"] .mellgen-b2b-section table td[style*="background:#f8fafc"],
+html[lang="en"] .mellgen-b2b-section table td[style*="font-weight: 600"],
+html[lang="en"] .mellgen-b2b-section table td[style*="font-weight:600"] {
+  white-space: normal !important;
+  word-break: break-word !important;
+  text-wrap: wrap !important;
+  line-height: 1.35 !important;
+}
+
+/* --- 14. News / Article List (.p102-info-list) --- */
+html[lang="en"] .p102-info-list {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 30px auto !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+}
+
+html[lang="en"] .p102-info-list dl {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  gap: 24px !important;
+  position: relative !important;
+  padding: 22px 24px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  height: auto !important;
+  min-height: 180px !important;
+  box-sizing: border-box !important;
+  transition: background-color 0.2s ease !important;
+}
+
+html[lang="en"] .p102-info-list dl:hover {
+  background-color: #f8fafc !important;
+}
+
+html[lang="en"] .p102-info-list dl:last-child {
+  border-bottom: none !important;
+}
+
+html[lang="en"] .p102-info-list dt {
+  flex: 0 0 260px !important;
+  width: 260px !important;
+  height: 160px !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background: #f1f5f9 !important;
+}
+
+html[lang="en"] .p102-info-list dt a,
+html[lang="en"] .p102-info-list dt img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+html[lang="en"] .p102-info-list dd {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  padding: 0 !important;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+html[lang="en"] .p102-info-list dd h4 {
+  height: auto !important;
+  line-height: normal !important;
+  margin: 0 0 8px 0 !important;
+}
+
+html[lang="en"] .p102-info-list dd h4 a {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  line-height: 26px !important;
+  height: auto !important;
+  max-height: 52px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+html[lang="en"] .p102-info-list .p102-info-list-desc {
+  font-size: 13.5px !important;
+  line-height: 22px !important;
+  color: #64748b !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin: 0 0 12px 0 !important;
+  text-align: left !important;
+}
+
+html[lang="en"] .p102-info-list-more {
+  padding: 0 !important;
+  margin-top: auto !important;
+}
+
+html[lang="en"] .p102-info-list-more a {
+  display: inline-block !important;
+  width: auto !important;
+  padding: 6px 16px !important;
+  height: auto !important;
+  line-height: normal !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #174778 !important;
+  border: 1px solid #174778 !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+}
+
+html[lang="en"] .p102-info-list-more a:hover {
+  background: #174778 !important;
+  color: #ffffff !important;
+}
+
+/* --- 15. Article Detail Pages (.p102-info-blk) --- */
+html[lang="en"] .p102-info-blk {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 40px auto !important;
+  float: none !important;
+}
+
+html[lang="en"] .p102-info-blk-title {
+  font-size: 24px !important;
+  line-height: 34px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  word-break: break-word !important;
+  margin-bottom: 12px !important;
+  text-align: left !important;
+}
+
+html[lang="en"] .article-body-wrapper {
+  font-size: 15px !important;
+  line-height: 1.85 !important;
+  color: #334155 !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  text-align: left !important;
+}
+
+html[lang="en"] .article-body-wrapper p {
+  text-indent: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+html[lang="en"] .article-body-wrapper img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 6px !important;
+  display: block !important;
+  margin: 18px auto !important;
+}
+
+html[lang="en"] .article-body-wrapper section {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+html[lang="en"] .p102-info-latest li h4 a {
+  max-width: calc(100% - 95px) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 14.5px !important;
+}
+
+html[lang="en"] .p102-info-latest li h4 em {
+  width: 85px !important;
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+}
+
+/* --- 16. Certifications & Honors Gallery (.mc2-about-list) --- */
+html[lang="en"] .mc2-about-1,
+html[lang="en"] .p102-ry-1 {
+  width: 1200px !important;
+  max-width: 95% !important;
+  margin: 0 auto 30px auto !important;
+}
+
+html[lang="en"] .mc2-about-list ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 24px 2.5% !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+html[lang="en"] .mc2-about-list li {
+  float: none !important;
+  width: 23% !important;
+  margin: 0 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  transition: all 0.2s ease !important;
+}
+
+html[lang="en"] .mc2-about-list li:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+  transform: translateY(-3px) !important;
+}
+
+html[lang="en"] .mc2-about-list li img {
+  width: 100% !important;
+  height: 190px !important;
+  object-fit: contain !important;
+  background: #f8fafc !important;
+  padding: 12px !important;
+  display: block !important;
+}
+
+html[lang="en"] .mc2-about-list li h4 {
+  font-size: 13.5px !important;
+  line-height: 18px !important;
+  height: 36px !important;
+  padding: 8px 10px !important;
+  text-align: center !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+/* --- 17. Pagination Controls --- */
+html[lang="en"] .p102-pagination-blk,
+html[lang="en"] .mc-page-1,
+html[lang="en"] .page {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 25px 0 45px 0 !important;
+  clear: both !important;
+}
+
+html[lang="en"] .p102-pagination-blk a,
+html[lang="en"] .p102-pagination-blk span,
+html[lang="en"] .mc-page-1 a,
+html[lang="en"] .mc-page-1 span,
+html[lang="en"] .page a,
+html[lang="en"] .page span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 0 12px !important;
+  border-radius: 4px !important;
+  font-size: 13.5px !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+  background: #ffffff !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+html[lang="en"] .p102-pagination-blk a:hover,
+html[lang="en"] .mc-page-1 a:hover,
+html[lang="en"] .page a:hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+}
+
+html[lang="en"] .p102-pagination-blk .page_curr,
+html[lang="en"] .mc-page-1 .page_curr,
+html[lang="en"] .page .cur {
+  background: #174778 !important;
+  color: #ffffff !important;
+  border-color: #174778 !important;
+  font-weight: 600 !important;
+}
+
+/* --- 18. Footer Layout (.g_ft) --- */
 html[lang="en"] .ftnav dl dt a {
-  font-size: 1rem;
+  font-size: 1rem !important;
 }
 
 html[lang="en"] .ftnav dl dd a {
-  font-size: 0.76rem;
-  line-height: 1.6rem;
+  font-size: 0.76rem !important;
+  line-height: 1.6rem !important;
 }
 
 html[lang="en"] .add h3 {
-  font-size: 1rem;
+  font-size: 1rem !important;
 }
 
 html[lang="en"] .add .addlst {
-  font-size: 0.78rem;
-  line-height: 1.4rem;
+  font-size: 0.78rem !important;
+  line-height: 1.4rem !important;
 }
 
 html[lang="en"] .ftd {
@@ -371,7 +1158,6 @@ html[lang="en"] .ftd {
   line-height: 1.6rem !important;
 }
 
-/* 英文版页脚产品与案例列表自适应折行 */
 html[lang="en"] .g_ft .ftmid .ftnav dl:nth-child(2) dd a,
 html[lang="en"] .g_ft .ftmid .ftnav dl:nth-child(3) dd a {
   white-space: normal !important;
@@ -384,3 +1170,47 @@ html[lang="en"] .g_link h2 {
   font-size: 13px !important;
 }
 
+/* --- 19. Responsive Media Queries --- */
+@media screen and (max-width: 1200px) {
+  html[lang="en"] .hyt-product-list-6 dl {
+    width: 48% !important;
+  }
+  html[lang="en"] .mc2-about-list li {
+    width: 31% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html[lang="en"] .hyt-product-list-6 dl {
+    width: 100% !important;
+  }
+  html[lang="en"] .mc2-about-list li {
+    width: 48% !important;
+  }
+  html[lang="en"] .p102-info-list dl {
+    flex-direction: column !important;
+  }
+  html[lang="en"] .p102-info-list dt {
+    width: 100% !important;
+    height: 200px !important;
+  }
+  html[lang="en"] .p102-proShow-1-con {
+    flex-direction: column !important;
+  }
+  html[lang="en"] .p102-proShow-1-left {
+    max-width: 100% !important;
+  }
+  html[lang="en"] .p102-fdh-1-nav-one {
+    flex-direction: column !important;
+  }
+  html[lang="en"] .p102-fdh-1-nav-one h3 {
+    flex: none !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html[lang="en"] .mc2-about-list li {
+    width: 100% !important;
+  }
+}

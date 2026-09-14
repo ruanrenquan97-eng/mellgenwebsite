@@ -143,7 +143,7 @@ def render_b2b_dossier_en(p):
         if mkt.get("claims"):
             claims_tags = [f'<span style="background: #f1f5f9; color: #1e293b; padding: 4px 12px; border-radius: 100px; font-size: 12.5px; font-weight: 600; border: 1px solid #cbd5e1;">🏷️ {c.strip()}</span>' for c in mkt.get("claims").split(',') if c.strip()]
             out.append('      <div>')
-            out.append('        <h5 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1e293b;">✨ Key Efficacy Claim Keywords:</h5>')
+            out.append('        <h5 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1e293b;">✨ Key Selling Point Keywords:</h5>')
             out.append(f'        <div style="display: flex; flex-wrap: wrap; gap: 8px;">{"".join(claims_tags)}</div>')
             out.append('      </div>')
 

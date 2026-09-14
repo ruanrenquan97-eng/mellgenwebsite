@@ -281,6 +281,7 @@ def add_product():
         
     products.append(new_product)
     save_json("products.json", products)
+    threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True, "product": new_product})
 
 @app.route("/api/products/<product_id>", methods=["PUT"])
@@ -315,6 +316,7 @@ def edit_product(product_id):
             p["sort"] = int(data.get("sort", p.get("sort", 50)))
             p["date"] = data.get("date", p.get("date", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
             save_json("products.json", products)
+            threading.Thread(target=generator.publish_site, daemon=True).start()
             return jsonify({"success": True, "product": p})
             
     return jsonify({"success": False, "message": "产品未找到"}), 404
@@ -335,8 +337,24 @@ def reorder_products():
             if pid in prod_map:
                 prod_map[pid]["sort"] = idx * 10
                 
+        # Sort products by sort ascending before saving
+        products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
         save_json("products.json", products)
-        return jsonify({"success": True, "message": "产品排序保存成功"})
+        
+        # Also sync sort order to products_en.json
+        try:
+            products_en = load_json("products_en.json") or []
+            sort_lookup = {p["id"]: p.get("sort", 999) for p in products}
+            for pen in products_en:
+                if pen.get("id") in sort_lookup:
+                    pen["sort"] = sort_lookup[pen["id"]]
+            products_en.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
+            save_json("products_en.json", products_en)
+        except Exception as e_en:
+            print(f"[WARN] Error syncing sort to products_en.json: {e_en}")
+            
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "message": "产品排序保存成功，前台页面已自动触发更新"})
     except Exception as e:
         return jsonify({"success": False, "message": f"保存排序异常: {str(e)}"}), 500
 
@@ -352,14 +370,30 @@ def delete_product(product_id):
         
     save_json("products.json", products)
     
+    # Also remove from products_en.json
+    try:
+        products_en = load_json("products_en.json") or []
+        products_en = [p for p in products_en if p.get("id") != product_id]
+        save_json("products_en.json", products_en)
+    except Exception as e_en:
+        print(f"[WARN] Error removing from products_en.json: {e_en}")
+    
     detail_path = os.path.join(WORKSPACE_DIR, "products", f"{product_id}.html")
     if os.path.exists(detail_path):
         try:
             os.remove(detail_path)
         except Exception:
             pass
+
+    detail_en_path = os.path.join(WORKSPACE_DIR, "en", "products", f"{product_id}.html")
+    if os.path.exists(detail_en_path):
+        try:
+            os.remove(detail_en_path)
+        except Exception:
+            pass
             
-    return jsonify({"success": True})
+    threading.Thread(target=generator.publish_site, daemon=True).start()
+    return jsonify({"success": True, "message": "产品已删除，前台页面已自动触发更新"})
 
 # 2. Articles API
 @app.route("/api/articles", methods=["GET"])
@@ -398,6 +432,7 @@ def add_article():
         
     articles.append(new_article)
     save_json("articles.json", articles)
+    threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True, "article": new_article})
 
 @app.route("/api/articles/<article_id>", methods=["PUT"])
@@ -419,6 +454,7 @@ def edit_article(article_id):
             a["show"] = bool(data.get("show", a.get("show", True)))
             a["sort"] = int(data.get("sort", a.get("sort", 50)))
             save_json("articles.json", articles)
+            threading.Thread(target=generator.publish_site, daemon=True).start()
             return jsonify({"success": True, "article": a})
             
     return jsonify({"success": False, "message": "文章未找到"}), 404
@@ -442,6 +478,7 @@ def delete_article(article_id):
         except Exception:
             pass
             
+    threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True})
 
 @app.route("/api/articles/reorder", methods=["POST"])
@@ -460,8 +497,10 @@ def reorder_articles():
             if aid in art_map:
                 art_map[aid]["sort"] = idx * 10
                 
+        articles.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
         save_json("articles.json", articles)
-        return jsonify({"success": True, "message": "文章排序保存成功"})
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "message": "文章排序保存成功，前台页面已自动触发更新"})
     except Exception as e:
         return jsonify({"success": False, "message": f"保存排序异常: {str(e)}"}), 500
 

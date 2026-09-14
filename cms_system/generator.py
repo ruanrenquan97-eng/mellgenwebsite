@@ -788,7 +788,7 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
    </dl> 
    <dl class="p14-product-clear"> 
     <dt> 
-     <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> <img alt="重组胶原蛋白溶液" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_30.jpg" title="重组胶原蛋白溶液"> </a> 
+     <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> <img alt="重组胶原蛋白溶液" src="../resource/images/bottle_zzjydb.jpg" title="重组胶原蛋白溶液"> </a> 
     </dt> 
     <dd> 
      <h4><a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> 重组胶原蛋白溶液 </a></h4> 

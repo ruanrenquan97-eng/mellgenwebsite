@@ -380,22 +380,31 @@ def render_product_b2b_sections(product):
             out.append('      </div>')
             
         if mkt.get("claims"):
-            claims_tags = [f'<span style="background: #f1f5f9; color: #1e293b; padding: 4px 12px; border-radius: 100px; font-size: 12.5px; font-weight: 600; border: 1px solid #cbd5e1;">🏷️ {c.strip()}</span>' for c in mkt.get("claims").replace('，', ',').replace('、', ',').split(',') if c.strip()]
+            raw_claims = mkt.get("claims")
+            if isinstance(raw_claims, list):
+                claims_list = [str(c).strip() for c in raw_claims if str(c).strip()]
+            else:
+                claims_list = [c.strip() for c in str(raw_claims).replace('，', ',').replace('、', ',').split(',') if c.strip()]
+            claims_tags = [f'<span style="background: #f1f5f9; color: #1e293b; padding: 4px 12px; border-radius: 100px; font-size: 12.5px; font-weight: 600; border: 1px solid #cbd5e1;">🏷️ {c}</span>' for c in claims_list]
             out.append('      <div>')
             out.append('        <h5 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1e293b;">✨ 核心功效宣称关键词：</h5>')
             out.append(f'        <div style="display: flex; flex-wrap: wrap; gap: 8px;">{"".join(claims_tags)}</div>')
             out.append('      </div>')
             
         if mkt.get("applications"):
+            raw_app = mkt.get("applications")
+            app_str = "、".join(raw_app) if isinstance(raw_app, list) else str(raw_app)
             out.append('      <div>')
             out.append('        <h5 style="margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: #1e293b;">🧴 推荐适用产品品类与剂型：</h5>')
-            out.append(f'        <p style="margin: 0; font-size: 13.5px; color: #334155;">{mkt.get("applications")}</p>')
+            out.append(f'        <p style="margin: 0; font-size: 13.5px; color: #334155;">{app_str}</p>')
             out.append('      </div>')
             
         if mkt.get("patents"):
+            raw_pat = mkt.get("patents")
+            pat_str = "<br>".join(raw_pat) if isinstance(raw_pat, list) else str(raw_pat)
             out.append('      <div>')
             out.append('        <h5 style="margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: #1e293b;">📜 专利技术背书与科研合作：</h5>')
-            out.append(f'        <p style="margin: 0; font-size: 13.5px; color: #334155;">{mkt.get("patents")}</p>')
+            out.append(f'        <p style="margin: 0; font-size: 13.5px; color: #334155;">{pat_str}</p>')
             out.append('      </div>')
             
         out.append('    </div>')

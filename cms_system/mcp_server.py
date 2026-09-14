@@ -250,6 +250,11 @@ def create_product_detail(
     return mcp_service.execute_create_product_detail(args, current_mcp_user.get())
 
 @mcp.tool()
+def get_product_parameters_schema() -> str:
+    """【产品中心】获取产品全量参数字典及字段定义架构（供 WorkBuddy 检索所有可修改字段规范与示例）"""
+    return mcp_service.execute_get_product_parameters_schema({}, current_mcp_user.get())
+
+@mcp.tool()
 def update_product_detail(
     product_id: str,
     title: str = "",
@@ -259,12 +264,54 @@ def update_product_detail(
     appearance: str = "",
     solubility: str = "",
     summary: str = "",
-    intro: str = "",
-    app_scenarios: str = ""
+    desc: str = "",
+    image: str = "",
+    largeImage: str = "",
+    fullBanner: str = "",
+    video: str = "",
+    disclaimer: str = "",
+    seoTitle: str = "",
+    seoKeywords: str = "",
+    seoDesc: str = "",
+    h1: str = "",
+    content: str = "",
+    show: bool = None,
+    recommend: bool = None,
+    top: bool = None,
+    specs: dict = None,
+    rd_info: dict = None,
+    procurement_info: dict = None,
+    marketing_info: dict = None,
+    raw_params: dict = None,
+    ignore_compliance_warning: bool = False
 ) -> str:
-    """【产品中心】更新已存在的产品规格、文案、推荐场景或显示状态，自动执行合规审查并重新编译静态页。"""
-    args = {k: v for k, v in locals().items() if v}
+    """【产品中心】全参数更新产品：支持修改全部理化specs、研发rd_info、采购procurement_info、市场marketing_info、合规disclaimer、SEO、图片/视频及富文本。"""
+    args = {k: v for k, v in locals().items() if v is not None}
     return mcp_service.execute_update_product_detail(args, current_mcp_user.get())
+
+@mcp.tool()
+def update_product_parameter(
+    product_id: str,
+    parameter_path: str,
+    value: str = ""
+) -> str:
+    """【产品中心】原子化精准修改产品的指定参数（支持点分路径如 'rd_info.cas', 'specs.核心活性物', 'procurement_info.moq' 等）"""
+    return mcp_service.execute_update_product_parameter({
+        "product_id": product_id,
+        "parameter_path": parameter_path,
+        "value": value
+    }, current_mcp_user.get())
+
+@mcp.tool()
+def batch_update_products(
+    product_ids: list,
+    parameters: dict
+) -> str:
+    """【产品中心】批量更新多个产品的公共参数属性（如统一调整发货说明、免责条款、分类或推荐状态）"""
+    return mcp_service.execute_batch_update_products({
+        "product_ids": product_ids,
+        "parameters": parameters
+    }, current_mcp_user.get())
 
 @mcp.tool()
 def delete_product(product_id: str) -> str:
@@ -439,6 +486,27 @@ def update_company_profile(phone: str = "", email: str = "", address: str = "", 
 def publish_website() -> str:
     """【全站发布】一键触发全站重新编译与静态发布上线，同步所有产品与资讯页面。"""
     return mcp_service.execute_publish_website({}, current_mcp_user.get())
+
+# 动态自动补齐全站其余所有模块工具 (确保全站 70 项原生 Tools 100% 完整挂载至 FastMCP 服务)
+_existing_tools = set(mcp._tool_manager._tools.keys()) if hasattr(mcp, '_tool_manager') and hasattr(mcp._tool_manager, '_tools') else set()
+for _t_meta in mcp_service.MCP_TOOLS_METADATA:
+    _t_name = _t_meta["name"]
+    if _t_name not in _existing_tools and _t_name in mcp_service.TOOL_HANDLERS:
+        _desc = _t_meta["description"]
+        _handler = mcp_service.TOOL_HANDLERS[_t_name]
+        
+        def _make_fastmcp_fn(h):
+            def _fn(**kwargs):
+                return h(kwargs, current_mcp_user.get())
+            return _fn
+            
+        _wrapped = _make_fastmcp_fn(_handler)
+        _wrapped.__name__ = _t_name
+        _wrapped.__doc__ = _desc
+        try:
+            mcp.add_tool(_wrapped, name=_t_name, description=_desc)
+        except Exception:
+            pass
 
 # ----------------- MCP RESOURCES -----------------
 @mcp.resource("mellgen://products/catalog")

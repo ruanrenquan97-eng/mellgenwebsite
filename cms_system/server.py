@@ -3590,36 +3590,68 @@ def verify_workbuddy_api_key():
         return {"username": "admin", "name": "系统管理员", "role": "管理员"}
     return None
 
-@app.route("/api/connector/v1/products", methods=["GET", "POST"])
-def connector_api_products():
+@app.route("/api/connector/v1/products", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+@app.route("/api/connector/v1/products/<product_id>", methods=["GET", "PUT", "PATCH", "DELETE"])
+def connector_api_products(product_id=None):
     user = verify_workbuddy_api_key()
     if not user:
         return jsonify({"success": False, "message": "WorkBuddy 鉴权失败，请提供合法的 Token 或 API Key"}), 401
     
+    if request.method in ("PUT", "PATCH"):
+        data = request.json or {}
+        pid = product_id or data.get("product_id") or request.args.get("product_id") or request.args.get("id")
+        data["product_id"] = pid
+        res_str = mcp_service.execute_update_product_detail(data, user)
+        return jsonify(json.loads(res_str))
+        
+    if request.method == "DELETE":
+        pid = product_id or request.args.get("product_id") or request.args.get("id") or (request.json or {}).get("product_id")
+        res_str = mcp_service.execute_delete_product({"product_id": pid}, user)
+        return jsonify(json.loads(res_str))
+        
     if request.method == "POST":
         data = request.json or {}
         res_str = mcp_service.execute_create_product_detail(data, user)
         return jsonify(json.loads(res_str))
         
+    # GET method
+    pid = product_id or request.args.get("product_id") or request.args.get("id")
+    if pid:
+        res_str = mcp_service.execute_get_product_detail({"product_id": pid}, user)
+        return jsonify(json.loads(res_str))
+        
+    if request.args.get("schema"):
+        res_str = mcp_service.execute_get_product_parameters_schema({}, user)
+        return jsonify(json.loads(res_str))
+        
     products = load_json("products.json") or []
-    cleaned = []
-    for p in products:
-        cleaned.append({
-            "id": p.get("id"),
-            "name": p.get("title"),
-            "category": p.get("category_name", p.get("category")),
-            "inci": p.get("inci", ""),
-            "appearance": p.get("appearance", ""),
-            "solubility": p.get("solubility", ""),
-            "description": p.get("desc", ""),
-            "summary": p.get("summary", ""),
-            "url": f"https://www.mellgen.com/products/{p.get('id')}.html"
+    if request.args.get("detail") == "summary":
+        cleaned = []
+        for p in products:
+            cleaned.append({
+                "id": p.get("id"),
+                "name": p.get("title"),
+                "category": p.get("category_name", p.get("category")),
+                "inci": p.get("inci", ""),
+                "appearance": p.get("appearance", ""),
+                "solubility": p.get("solubility", ""),
+                "description": p.get("desc", ""),
+                "summary": p.get("summary", ""),
+                "url": f"https://www.mellgen.com/products/{p.get('id')}.html"
+            })
+        return jsonify({
+            "success": True,
+            "total": len(cleaned),
+            "data": cleaned,
+            "source": "美尔健官方产品知识库",
+            "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         })
+        
     return jsonify({
         "success": True,
-        "total": len(cleaned),
-        "data": cleaned,
-        "source": "美尔健官方产品知识库",
+        "total": len(products),
+        "data": products,
+        "source": "美尔健官方全量产品知识库（全参数）",
         "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
@@ -3761,6 +3793,87 @@ def connector_api_publish():
         return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
         
     res_str = mcp_service.execute_publish_website({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/banners", methods=["GET", "POST", "DELETE"])
+def connector_api_banners():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+    if request.method == "POST":
+        res_str = mcp_service.execute_create_or_update_banner(request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    if request.method == "DELETE":
+        res_str = mcp_service.execute_delete_banner(request.args or request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    res_str = mcp_service.execute_list_banners({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/navigation", methods=["GET", "PUT", "POST"])
+def connector_api_navigation():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+    if request.method in ("PUT", "POST"):
+        res_str = mcp_service.execute_update_navigation_menu(request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    res_str = mcp_service.execute_get_navigation_menu({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/pages", methods=["GET", "POST"])
+def connector_api_pages():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+    page_path = request.args.get("page_path") or request.args.get("path")
+    if request.method == "POST":
+        res_str = mcp_service.execute_update_page_content(request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    if page_path:
+        res_str = mcp_service.execute_get_page_content({"page_path": page_path}, user)
+        return jsonify(json.loads(res_str))
+    res_str = mcp_service.execute_list_pages({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/friendlinks", methods=["GET", "POST", "DELETE"])
+def connector_api_friendlinks():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+    if request.method == "POST":
+        res_str = mcp_service.execute_create_or_update_friendlink(request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    if request.method == "DELETE":
+        lid = request.args.get("id") or (request.json or {}).get("id")
+        res_str = mcp_service.execute_delete_friendlink({"id": lid}, user)
+        return jsonify(json.loads(res_str))
+    res_str = mcp_service.execute_list_friendlinks({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/categories", methods=["GET", "POST", "PUT", "DELETE"])
+def connector_api_categories():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+    if request.method == "POST":
+        res_str = mcp_service.execute_create_product_category(request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    if request.method in ("PUT", "PATCH"):
+        res_str = mcp_service.execute_update_product_category(request.json or {}, user)
+        return jsonify(json.loads(res_str))
+    if request.method == "DELETE":
+        cid = request.args.get("id") or (request.json or {}).get("id")
+        res_str = mcp_service.execute_delete_product_category({"id": cid}, user)
+        return jsonify(json.loads(res_str))
+    res_str = mcp_service.execute_list_product_categories({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/upload", methods=["POST"])
+def connector_api_upload():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+    res_str = mcp_service.execute_upload_file_asset(request.json or {}, user)
     return jsonify(json.loads(res_str))
 
 # ==========================================================

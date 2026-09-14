@@ -577,28 +577,17 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
     elif re.search(r'(<div class="p102-proShow-1-para-text">)(.*?)(</div>)', html, re.DOTALL):
         html = replace_group(r'(<div class="p102-proShow-1-para-text">)(.*?)(</div>)', top_specs_content, html)
     
-    # Update Image
-    img_pattern = r'(<div class="p102-proShow-1-pic">.*?<img alt=")(.*?)(" src=")(.*?)(")'
-    match = re.search(img_pattern, html, re.DOTALL)
-    if match:
-        html = (
-            html[:match.start(2)] + product["title"] +
-            html[match.end(2):match.start(4)] + f"../{product['image']}" +
-            html[match.end(4):]
-        )
-    
-    # Inject Sample Corner Badge and Sample Notice Bar under Product Image
-    # 1. Clean previous sample elements if any
-    html = re.sub(r'\s*<div class="product-sample-corner-tag"[^>]*>[\s\S]*?</div>', '', html)
-    html = re.sub(r'\s*<div class="product-detail-sample-bar"[^>]*>[\s\S]*?</div>', '', html)
-    
-    # 2. Add Corner Tag
-    sample_corner_html = '<div class="product-sample-corner-tag" style="position: absolute; left: 14px; top: 14px; z-index: 6; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: #ffffff; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.2); pointer-events: none;"><span style="width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; display: inline-block;"></span>寄样图 (Sample Packaging)</div>'
-    if '<div class="product-sample-corner-tag"' not in html:
-        html = re.sub(r'(<div class="p102-proShow-1-left"[^>]*>)', r'\1\n    ' + sample_corner_html, html, count=1)
-
-    # 3. Add Sample Notice Bar directly under product image
-    sample_bar_html = '''    <div class="product-detail-sample-bar" style="margin: 10px 14px 12px 14px; padding: 9px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box;">
+    # Update/Reconstruct Left Column (Image, Corner Tag, Sample Bar, Size) cleanly and deterministically
+    clean_left_block = f'''<div class="p102-proShow-1-left">
+    <div class="product-sample-corner-tag" style="position: absolute; left: 14px; top: 14px; z-index: 6; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: #ffffff; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.2); pointer-events: none;"><span style="width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; display: inline-block;"></span>寄样图 (Sample Packaging)</div> 
+    <div class="p102-proShow-1-prev"></div> 
+    <div class="p102-proShow-1-next"></div> 
+    <div class="p102-proShow-1-pic"> 
+     <ul class="clearafter"> 
+       <li><img alt="{product['title']}" src="../{product['image']}" title="{product['title']}"></li> 
+     </ul> 
+    </div> 
+    <div class="product-detail-sample-bar" style="margin: 10px 14px 12px 14px; padding: 9px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box;">
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <span style="display: inline-flex; align-items: center; gap: 4px; background: #0284c7; color: #ffffff; font-size: 12px; font-weight: 600; padding: 2px 7px; border-radius: 3px;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -609,16 +598,13 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
       <a href="../helps/lxwm.html" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; color: #0284c7; font-size: 12px; font-weight: 600; text-decoration: none; white-space: nowrap;">
         申请寄样 &gt;
       </a>
-    </div>'''
-    if '<div class="product-detail-sample-bar"' not in html:
-        if '<div class="p102-proShow-1-size">' in html:
-            html = re.sub(r'(</div>\s*<div class="p102-proShow-1-size">)', f'\n{sample_bar_html}\n    ' + r'\1', html, count=1)
-        else:
-            html = re.sub(r'(</div>\s*</div>\s*<div class="p102-proShow-1-right">)', f'\n{sample_bar_html}\n   ' + r'\1', html, count=1)
-    
-    # Clean duplicate/stray sample links around image
-    html = re.sub(r'(</ul>)\s*<a href="[^"]*lxwm\.html"[^>]*>\s*申请寄样\s*&gt;\s*</a>', r'\1', html)
-    html = re.sub(r'(</div>)\s*<a href="[^"]*lxwm\.html"[^>]*>\s*申请寄样\s*&gt;\s*</a>\s*(</div>)', r'\1\2', html)
+    </div>
+    <div class="p102-proShow-1-size"></div> 
+   </div>\n   '''
+
+    left_pattern = r'<div class="p102-proShow-1-left"[^>]*>[\s\S]*?(?=\s*<div class="p102-proShow-1-right">)'
+    if re.search(left_pattern, html):
+        html = re.sub(left_pattern, clean_left_block, html)
 
     # Render B2B sections (R&D, Procurement, Marketing, Disclaimer)
     b2b_html = render_product_b2b_sections(product)

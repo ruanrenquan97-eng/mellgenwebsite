@@ -56,33 +56,14 @@
     ]
   };
 
-  // 彻底移除旧版右侧悬浮侧栏 (#client-2112, .xin-2112-client-1, .my-kefu 等)，仅保留右下角AI在线
+  // 保留原版右侧悬浮挂件与AI客服共存
   function removeOldSidebar() {
-    var selectors = [
-      "#client-2112",
-      ".xin-2112-client-1",
-      ".my-kefu",
-      ".client-2112-cont",
-      ".client-2112-cont-weixin",
-      "[id^='client-2112']",
-      "[class*='xin-2112']"
-    ];
-    selectors.forEach(function(sel) {
-      try {
-        var elements = document.querySelectorAll(sel);
-        elements.forEach(function(el) {
-          if (el && el.parentNode) {
-            el.parentNode.removeChild(el);
-          }
-        });
-      } catch(e) {}
-    });
+    // 允许原版 client-2112 与 AI 客服挂件共存，不主动移除
   }
 
   // 2. 插入 DOM 元素
   function createWidgetDOM() {
-    // 移除旧侧栏
-    removeOldSidebar();
+    // 保持原侧栏存在
 
     // 触发按钮（胶囊型醒目展示“AI客服”与“AI在线”角标）
     var trigger = document.createElement("div");

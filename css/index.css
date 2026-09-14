@@ -274,13 +274,13 @@
 
 
 
-.g_link{height:auto;min-height:2rem;line-height:2rem;margin:10px auto 0 auto;z-index:25;position:relative;width:100%;float:none;clear:both;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding:8px 0;}
-.g_link .content{height:auto;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;}
-.g_link h2{float:none;width:auto;height:auto;line-height:2rem;font-size:14px;font-weight:400;color:#fff;margin:0 10px 0 0;}
-.link_c{line-height:2rem;overflow:hidden;float:none;width:auto;font-size:14px;display:flex;align-items:center;flex-wrap:wrap;gap:15px;}
-.link_c li{display:flex;align-items:center;gap:15px;list-style:none;}
-.link_c a{white-space:nowrap;padding:0 5px;float:none;height:auto;line-height:2rem;color:#fff;display:inline-block;}
-.link_c a:hover{color:#7fb435;}
+.g_link{height:2rem;line-height:2rem; margin-top:-2rem;z-index:25;position:relative;width:35%;float:right;}
+.g_link .content{height:3rem}
+.g_link h2{float:left;width:100px;height:2rem;line-height:2rem;font-size:14px;font-weight:400}
+.g_link h2{color:#fff}
+.link_c{line-height:2rem;overflow:hidden;float:left;width:48%;font-size:14px}
+.link_c a{white-space:nowrap;padding:0 1%;float:left;height:2rem;line-height:2rem;color:#fff;display:block}
+.link_c a:hover{color:#fff}
 .link_c .lasta a{background:0 0}
 
 @keyframes warn{0%{opacity:0;-webkit-transform:scale(.5);transform:scale(.5)}
@@ -431,154 +431,20 @@ to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);opacity:1}
 }
 
 /* ==========================================================================
-   美尔健全站页脚终极修复 (Footer Display & Visibility Fix)
+   页脚保障 (Footer Teaser Visibility & Canvas Optimizations)
    ========================================================================== */
 
-/* 1. 强制页脚所有导航列永久可见，杜绝 teaser 动画未触发导致全黑无显示 */
-.g_ft .ftmid .ftnav,
-.g_ft .ftmid .ftnav dl,
+/* 强制页脚所有导航列可见，杜绝 teaser 动画未触发导致空白 */
 .g_ft .ftmid .ftnav dl.teaser,
-.g_ft .ftnav dl,
 .g_ft .ftnav dl.teaser,
-.m_ft .ftnav dl,
 .m_ft .ftnav dl.teaser {
   opacity: 1 !important;
   transform: none !important;
   -webkit-transform: none !important;
   visibility: visible !important;
-  display: block !important;
-  transition: none !important;
 }
 
-/* 2. 确保 ftmid 自适应高度，内容不被截断 */
-.g_ft .ftmid {
-  height: auto !important;
-  min-height: 12rem !important;
-  overflow: visible !important;
-  padding-bottom: 20px !important;
-}
-
-/* 3. 彻底移除伪元素绝对定位白线对高度的限制 */
-.g_ft .m_ft:before {
-  display: none !important;
-}
-
-/* 4. 页脚底部版权信息栏 (.ftd) 居中对齐、内边距与边框 */
-.g_ft .ftd {
-  height: auto !important;
-  min-height: 38px !important;
-  line-height: 24px !important;
-  padding: 14px 15px 20px 15px !important;
-  font-size: 13px !important;
-  color: rgba(255, 255, 255, 0.75) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
-  position: relative !important;
-  z-index: 30 !important;
-  text-align: center !important;
-  clear: both !important;
-  box-sizing: border-box !important;
-  float: none !important;
-  width: 100% !important;
-}
-
-.g_ft .ftd a {
-  color: rgba(255, 255, 255, 0.8) !important;
-  display: inline !important;
-  text-decoration: none !important;
-}
-
-.g_ft .ftd a:hover {
-  color: #ffffff !important;
-  text-decoration: underline !important;
-}
-
-/* 5. 友情链接栏 (.g_link) 彻底消除负 margin-top 重叠，独占一行且优雅对齐 */
-.g_link[style*="none"],
-.g_link.hidden {
-  display: none !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  line-height: 0 !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-.g_link {
-  background: transparent !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-  margin: 15px auto 0 auto !important;
-  float: none !important;
-  width: 100% !important;
-  max-width: 1200px !important;
-  height: auto !important;
-  min-height: 36px !important;
-  line-height: 24px !important;
-  padding: 10px 15px !important;
-  position: relative !important;
-  z-index: 30 !important;
-  clear: both !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  gap: 12px !important;
-}
-
-.g_link h2 {
-  float: none !important;
-  width: auto !important;
-  height: auto !important;
-  line-height: 24px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: rgba(255, 255, 255, 0.75) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.g_link .link_c {
-  float: none !important;
-  width: auto !important;
-  line-height: 24px !important;
-  font-size: 13px !important;
-  display: flex !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-  gap: 16px !important;
-}
-
-.g_link .link_c li {
-  display: flex !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-  gap: 16px !important;
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.g_link .link_c a {
-  float: none !important;
-  height: auto !important;
-  line-height: 24px !important;
-  padding: 0 4px !important;
-  font-size: 13px !important;
-  color: rgba(255, 255, 255, 0.75) !important;
-  display: inline-block !important;
-  text-decoration: none !important;
-  transition: color .2s !important;
-}
-
-.g_link .link_c a:hover {
-  color: #ffffff !important;
-  text-decoration: underline !important;
-}
-
-/* 6. 底部背景粒子 Canvas 降噪与防遮挡 */
+/* 底部背景粒子 Canvas 降噪与防遮挡 */
 .g_ft canvas,
 canvas[width="1920"] {
   pointer-events: none !important;

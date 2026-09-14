@@ -3308,6 +3308,13 @@ def normalize_visitor_stream(stream, force_full=False):
                 v["region"] = canon
                 changed = True
 
+        # 统一规范化设备字段为【电脑端】或【手机端】
+        raw_dev = v.get("device", "")
+        clean_dev = "手机端" if any(k in raw_dev for k in ["手机", "移动", "Mobile", "Phone", "Android", "iPhone"]) else "电脑端"
+        if v.get("device") != clean_dev:
+            v["device"] = clean_dev
+            changed = True
+
     return changed
 
 @app.route("/api/analytics/visitor_insights", methods=["GET"])
@@ -3353,6 +3360,15 @@ def track_pageview():
     if duration == 0:
         duration_str = "刚刚进入"
 
+    # 智能解析用户设备端：电脑端 vs 手机端（优先采用前端探针上报，无则通过精确 User-Agent 判定）
+    raw_device = (data.get("device") or request.args.get("device") or "").strip()
+    ua = request.headers.get("User-Agent", "")
+    if not raw_device:
+        is_mobile = any(k in ua.lower() for k in ["mobile", "android", "iphone", "ipad", "ipod", "harmonyos", "micromessenger", "windows phone", "mobi"])
+        client_device = "手机端" if is_mobile else "电脑端"
+    else:
+        client_device = "手机端" if any(k in raw_device for k in ["手机", "移动", "Mobile", "Phone", "Android", "iPhone"]) else "电脑端"
+
     # 1. Update overall traffic
     metrics = load_json("seo_metrics.json") or get_default_seo_metrics()
     traffic = metrics.get("traffic", {})
@@ -3366,6 +3382,14 @@ def track_pageview():
             traffic["today_ips"] = today_ips
         traffic["uv"] = len(today_ips)
         traffic["ip"] = len(today_ips)
+
+        if "devices" not in traffic or not isinstance(traffic["devices"], dict):
+            traffic["devices"] = {"pc": 0, "mobile": 0}
+        if client_device == "手机端":
+            traffic["devices"]["mobile"] = traffic["devices"].get("mobile", 0) + 1
+        else:
+            traffic["devices"]["pc"] = traffic["devices"].get("pc", 0) + 1
+
         metrics["traffic"] = traffic
         save_json("seo_metrics.json", metrics)
 
@@ -3433,7 +3457,7 @@ def track_pageview():
             "type": page_type,
             "duration_str": "正在浏览中...",
             "referrer": referrer[:40] if referrer else "直接访问",
-            "device": "移动端" if ("Mobile" in request.headers.get("User-Agent", "")) else "PC端"
+            "device": client_device
         }
         stream.insert(0, new_entry)
         if len(stream) > 30:

@@ -8677,16 +8677,25 @@ Disallow: /cms_system/
       // 3. Render Real-time Stream
       const streamContainer = document.getElementById('realtime-stream-container');
       if (streamContainer && realtime_stream) {
-        streamContainer.innerHTML = realtime_stream.slice(0, 8).map(st => `
-          <div class="p-2.5 rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition space-y-1 text-xs">
+        streamContainer.innerHTML = realtime_stream.slice(0, 8).map(st => {
+          const isMob = (st.device || '').includes('手机') || (st.device || '').includes('移动');
+          const devBadge = isMob
+            ? `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200 shrink-0" title="访问设备：手机移动端"><i class="fa-solid fa-mobile-screen text-[9px] text-amber-500"></i> 手机端</span>`
+            : `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shrink-0" title="访问设备：电脑PC端"><i class="fa-solid fa-desktop text-[9px] text-indigo-500"></i> 电脑端</span>`;
+
+          return `
+          <div class="p-2.5 rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition space-y-1.5 text-xs">
             <div class="flex items-center justify-between text-[10px]">
-              <span class="font-bold text-slate-800 flex items-center gap-1 truncate max-w-[220px]" title="${st.region || '客户来访'}">
+              <span class="font-bold text-slate-800 flex items-center gap-1 truncate max-w-[170px]" title="${st.region || '客户来访'}">
                 <i class="fa-solid fa-location-dot text-rose-500 shrink-0 text-xs"></i> <span>${st.region || '客户来访'}</span>
               </span>
-              <span class="text-slate-400 font-mono text-[9px] shrink-0">${st.time}</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                ${devBadge}
+                <span class="text-slate-400 font-mono text-[9px]">${st.time}</span>
+              </div>
             </div>
             <div class="flex items-center justify-between">
-              <div class="font-semibold text-slate-800 truncate text-[11px] max-w-[200px]" title="${st.title}">
+              <div class="font-semibold text-slate-800 truncate text-[11px] max-w-[190px]" title="${st.title}">
                 ${st.title}
               </div>
               <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-100 px-1.5 py-0.2 rounded shrink-0">
@@ -8694,11 +8703,12 @@ Disallow: /cms_system/
               </span>
             </div>
             <div class="text-[10px] text-slate-400 flex items-center justify-between pt-0.5">
-              <span class="truncate max-w-[150px]" title="${st.referrer}"><i class="fa-solid fa-arrow-turn-up text-[8px] mr-1"></i>${st.referrer}</span>
+              <span class="truncate max-w-[140px]" title="${st.referrer}"><i class="fa-solid fa-arrow-turn-up text-[8px] mr-1"></i>${st.referrer}</span>
               <span class="font-mono text-[10px] font-semibold text-blue-700 bg-blue-50 px-1.5 py-0.2 rounded border border-blue-100 shrink-0 select-all" title="访客公网真实IP">${st.ip}</span>
             </div>
           </div>
-        `).join('');
+          `;
+        }).join('');
       }
     }
 
@@ -13229,7 +13239,13 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         // 6. Realtime stream
         const streamTbody = document.getElementById("v-realtime-stream-tbody");
         if (streamTbody && data.recent_visitors) {
-          streamTbody.innerHTML = data.recent_visitors.map(v => `
+          streamTbody.innerHTML = data.recent_visitors.map(v => {
+            const isMob = (v.device || '').includes('手机') || (v.device || '').includes('移动');
+            const devBadge = isMob
+              ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200"><i class="fa-solid fa-mobile-screen text-amber-500 text-[10px]"></i> 手机端</span>`
+              : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200"><i class="fa-solid fa-desktop text-indigo-500 text-[10px]"></i> 电脑端</span>`;
+
+            return `
             <tr class="hover:bg-slate-50 transition">
               <td class="p-2 text-slate-400 font-mono">${v.time}</td>
               <td class="p-2">
@@ -13244,9 +13260,10 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
               <td class="p-2 text-primary font-medium">${v.title}</td>
               <td class="p-2 text-center text-emerald-600 font-bold font-mono">${v.duration_str}</td>
               <td class="p-2 text-slate-500">${v.referrer}</td>
-              <td class="p-2 text-slate-400">${v.device}</td>
+              <td class="p-2">${devBadge}</td>
             </tr>
-          `).join("");
+            `;
+          }).join("");
         }
       } catch(e) {
         console.error("loadSeoStatistics error:", e);

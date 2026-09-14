@@ -535,6 +535,12 @@ $(function () {
 
         var startTime = Date.now();
 
+        // 识别访客设备端：手机端 vs 电脑端
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent || "") ||
+                       (window.innerWidth && window.innerWidth <= 768) ||
+                       (navigator.maxTouchPoints && navigator.maxTouchPoints > 1 && window.innerWidth < 1024);
+        var clientDevice = isMobile ? "手机端" : "电脑端";
+
         function sendPing(isInitial) {
             var elapsed = Math.floor((Date.now() - startTime) / 1000);
             var payload = JSON.stringify({
@@ -543,6 +549,7 @@ $(function () {
                 type: pageType,
                 duration: elapsed,
                 referrer: referrer,
+                device: clientDevice,
                 initial: !!isInitial
             });
 

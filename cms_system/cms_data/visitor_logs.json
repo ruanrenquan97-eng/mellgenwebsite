@@ -89,7 +89,7 @@
       "title": "化妆品原料批发与定制 - 美尔健生物",
       "category": "核心原料",
       "url": "product_hzpyl.html",
-      "pv": 25,
+      "pv": 26,
       "uv": 1,
       "avg_duration_sec": 15,
       "avg_duration_str": "15秒",
@@ -101,7 +101,7 @@
       "title": "透皮胶原蛋白-重组仿生蛋白-人参多肽-美尔健生物",
       "category": "核心原料",
       "url": "product_index.html",
-      "pv": 11,
+      "pv": 12,
       "uv": 1,
       "avg_duration_sec": 15,
       "avg_duration_str": "15秒",
@@ -113,7 +113,7 @@
       "title": "透皮环肽cTDP - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
       "category": "核心原料",
       "url": "products/tphtct.html",
-      "pv": 4,
+      "pv": 5,
       "uv": 1,
       "avg_duration_sec": 15,
       "avg_duration_str": "15秒",
@@ -246,7 +246,7 @@
       "title": "美尔健官网首页",
       "url": "index.html",
       "type": "首页",
-      "pv": 11,
+      "pv": 12,
       "uv": 0,
       "avg_duration_sec": 0,
       "avg_duration_str": "0秒"
@@ -541,6 +541,54 @@
     }
   ],
   "realtime_stream": [
+    {
+      "id": "v-1789427431",
+      "time": "01:10:31",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "透皮环肽cTDP - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限",
+      "url": "products/tphtct.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_index.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789427428",
+      "time": "01:10:28",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "透皮胶原蛋白-重组仿生蛋白-人参多肽-美尔健生物",
+      "url": "product_index.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_hzpyl.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789427427",
+      "time": "01:10:27",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "化妆品原料批发与定制 - 美尔健生物",
+      "url": "product_hzpyl.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789427425",
+      "time": "01:10:25",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+      "url": "index.html",
+      "type": "官网首页",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8001/",
+      "device": "电脑端"
+    },
     {
       "id": "v-1789426876",
       "time": "01:01:16",
@@ -851,54 +899,6 @@
       "type": "产品详情",
       "duration_str": "正在浏览中...",
       "referrer": "http://localhost:8000/helps/yloemd.html",
-      "device": "电脑端"
-    },
-    {
-      "id": "v-1789424754",
-      "time": "00:25:54",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "化妆品原料批发与定制 - 美尔健生物",
-      "url": "product_hzpyl.html",
-      "type": "产品详情",
-      "duration_str": "正在浏览中...",
-      "referrer": "http://localhost:8000/helps/yloemd.html",
-      "device": "电脑端"
-    },
-    {
-      "id": "v-1789424753",
-      "time": "00:25:53",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "医疗级透皮吸收技术与原料标准 - 美尔健生物",
-      "url": "helps/yloemd.html",
-      "type": "页面浏览",
-      "duration_str": "正在浏览中...",
-      "referrer": "http://localhost:8000/product_hzpyl.html",
-      "device": "电脑端"
-    },
-    {
-      "id": "v-1789424752",
-      "time": "00:25:52",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "化妆品原料批发与定制 - 美尔健生物",
-      "url": "product_hzpyl.html",
-      "type": "产品详情",
-      "duration_str": "正在浏览中...",
-      "referrer": "http://localhost:8000/product_index.html",
-      "device": "电脑端"
-    },
-    {
-      "id": "v-1789424751",
-      "time": "00:25:51",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "透皮胶原蛋白-重组仿生蛋白-人参多肽-美尔健生物",
-      "url": "product_index.html",
-      "type": "产品详情",
-      "duration_str": "正在浏览中...",
-      "referrer": "http://localhost:8000/product_hzpyl.html",
       "device": "电脑端"
     }
   ]

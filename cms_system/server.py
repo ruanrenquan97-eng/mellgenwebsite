@@ -2597,6 +2597,62 @@ def get_client_ip():
 
 _ip_geo_cache = {}
 
+PROVINCES_LIST = [
+    "北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+    "上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南",
+    "湖北", "湖南", "广东", "广西", "海南", "重庆", "四川", "贵州",
+    "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾",
+    "香港", "澳门"
+]
+
+def format_chinese_location(province, city, isp):
+    province = (province or "").strip()
+    city = (city or "").strip()
+    isp = (isp or "").strip()
+
+    clean_isp = ""
+    u_isp = isp.upper()
+    if any(k in u_isp for k in ["TELECOM", "CHINANET", "电信"]):
+        clean_isp = "电信"
+    elif any(k in u_isp for k in ["UNICOM", "CHINA169", "联通", "CNC"]):
+        clean_isp = "联通"
+    elif any(k in u_isp for k in ["MOBILE", "CMNET", "移动"]):
+        clean_isp = "移动"
+    elif any(k in u_isp for k in ["TENCENT", "腾讯"]):
+        clean_isp = "腾讯云"
+    elif any(k in u_isp for k in ["ALIBABA", "ALIYUN", "阿里"]):
+        clean_isp = "阿里云"
+    elif any(k in u_isp for k in ["HUAWEI", "华为"]):
+        clean_isp = "华为云"
+    elif isp:
+        clean_isp = isp[:10]
+
+    if province and not province.endswith(("省", "市", "区", "特别行政区")):
+        if province in ["北京", "上海", "天津", "重庆"]:
+            province += "市"
+        elif province in ["内蒙古", "西藏", "新疆", "广西", "宁夏"]:
+            province += "自治区"
+        elif province in ["香港", "澳门"]:
+            province += "特别行政区"
+        else:
+            province += "省"
+
+    if city and not city.endswith(("市", "区", "县", "州", "盟")) and province not in ["北京市", "上海市", "天津市", "重庆市"]:
+        city += "市"
+
+    if province and city and city not in province:
+        addr = f"{province}{city}"
+    elif city:
+        addr = city
+    elif province:
+        addr = province
+    else:
+        addr = "中国"
+
+    if clean_isp:
+        addr = f"{addr} {clean_isp}"
+    return addr
+
 def is_garbled_region(text):
     if not text or not isinstance(text, str):
         return True
@@ -2606,18 +2662,27 @@ def is_garbled_region(text):
     # 占位字与旧fallback
     if any(kw in text for kw in ["公网", "国内网络", "未知", "IP地址查询", "客户来访"]):
         return True
-    has_chinese = False
+    # 必须包含我国至少一个省份或海外标识，否则视作乱码（如“缇底泳”、“錯炲 +”）
+    has_prov = any(p in text for p in PROVINCES_LIST)
+    has_foreign = any(f in text for f in ["美国", "日本", "德国", "新加坡", "英国", "法国", "韩国", "加拿大", "澳大利亚", "中国"])
+    if not has_prov and not has_foreign:
+        return True
+
+    # 如果有省份，但缺少市区（非直辖市需具备“市/区/县/州/盟”）
+    is_municipality = any(m in text for m in ["北京", "上海", "天津", "重庆", "香港", "澳门"])
+    if has_prov and not is_municipality:
+        has_city = any(c in text for c in ["市", "区", "县", "州", "盟"])
+        if not has_city:
+            return True
+
+    # 乱码错解字符特征判定
     for ch in text:
         code = ord(ch)
-        # 私有区字符
-        if 0xE000 <= code <= 0xF8FF:
+        if 0xE000 <= code <= 0xF8FF: # 私有区乱码
             return True
-        # 错解UTF-8作为GB18030的高频乱码特征码点
-        if code in (39582, 22840, 31522, 37930, 32321, 37734, 20914, 31478, 37922):
+        if code in (32519, 24213, 27891, 37679, 28850, 26937, 24829, 29831, 31295, 23049, 26916):
             return True
-        if 0x4E00 <= code <= 0x9FA5:
-            has_chinese = True
-    return not has_chinese
+    return False
 
 def get_ip_region(ip):
     ip = (ip or "").strip()
@@ -2635,17 +2700,60 @@ def get_ip_region(ip):
     if ip in _ip_geo_cache and not is_garbled_region(_ip_geo_cache[ip]):
         return _ip_geo_cache[ip]
 
-    # 1. 优先调用百度官方 IP 归属地开放接口 (严格使用 UTF-8 解码，确保编码绝不走偏)
+    # 1. 优先调用 ip-api.com (精准结构化提供：省 + 市区 + 运营商)
+    try:
+        url = f"http://ip-api.com/json/{ip}?lang=zh-CN"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=3.0) as res:
+            data = json.loads(res.read().decode("utf-8", errors="ignore"))
+            if data.get("status") == "success":
+                province = data.get("regionName", "").strip()
+                city = data.get("city", "").strip()
+                isp = data.get("isp", "").strip()
+                country = data.get("country", "").strip()
+                if country in ["中国", "China", "CN"] or any(p in province for p in PROVINCES_LIST):
+                    formatted = format_chinese_location(province, city, isp)
+                    if formatted and not is_garbled_region(formatted):
+                        _ip_geo_cache[ip] = formatted
+                        return formatted
+                else:
+                    parts = [country, province, city]
+                    loc_str = " ".join([p for p in parts if p]) + (f" ({isp})" if isp else "")
+                    _ip_geo_cache[ip] = loc_str
+                    return loc_str
+    except Exception:
+        pass
+
+    # 2. 备用全球多语言接口 (ipwho.is：省 + 市区 + 运营商)
+    try:
+        url = f"https://ipwho.is/{ip}?lang=zh-CN"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=3.0) as res:
+            data = json.loads(res.read().decode("utf-8", errors="ignore"))
+            if data.get("success"):
+                province = data.get("region", "").strip()
+                city = data.get("city", "").strip()
+                isp = (data.get("connection") or {}).get("isp", "").strip()
+                country = data.get("country", "").strip()
+                if country in ["中国", "China", "CN"] or any(p in province for p in PROVINCES_LIST):
+                    formatted = format_chinese_location(province, city, isp)
+                    if formatted and not is_garbled_region(formatted):
+                        _ip_geo_cache[ip] = formatted
+                        return formatted
+                else:
+                    parts = [country, province, city]
+                    loc_str = " ".join([p for p in parts if p]) + (f" ({isp})" if isp else "")
+                    _ip_geo_cache[ip] = loc_str
+                    return loc_str
+    except Exception:
+        pass
+
+    # 3. 备用渠道：百度官方 IP 接口
     try:
         url = f"https://opendata.baidu.com/api.php?query={ip}&resource_id=6006&oe=utf8"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
-        with urllib.request.urlopen(req, timeout=2.5) as res:
-            raw_bytes = res.read()
-            # 必须使用 utf-8 解码！
-            try:
-                raw_text = raw_bytes.decode("utf-8")
-            except UnicodeDecodeError:
-                raw_text = raw_bytes.decode("gb18030", errors="ignore")
+        with urllib.request.urlopen(req, timeout=3.0) as res:
+            raw_text = res.read().decode("utf-8", errors="ignore")
             data = json.loads(raw_text)
             if data.get("status") == "0" and data.get("data"):
                 loc = data["data"][0].get("location", "").strip()
@@ -2654,60 +2762,6 @@ def get_ip_region(ip):
                 if loc and not is_garbled_region(loc):
                     _ip_geo_cache[ip] = loc
                     return loc
-    except Exception:
-        pass
-
-    # 2. 备用全球多语言 IP 接口 (ipwho.is，标准 UTF-8 REST API)
-    try:
-        url = f"https://ipwho.is/{ip}?lang=zh-CN"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as res:
-            data = json.loads(res.read().decode("utf-8", errors="ignore"))
-            if data.get("success"):
-                parts = []
-                country = data.get("country", "")
-                region = data.get("region", "")
-                city = data.get("city", "")
-                isp = (data.get("connection") or {}).get("isp", "")
-                if country and country != "中国":
-                    parts.append(country)
-                if region:
-                    parts.append(region)
-                if city and city != region:
-                    parts.append(city)
-                loc_str = " ".join(parts)
-                if isp:
-                    loc_str = f"{loc_str} ({isp})" if loc_str else isp
-                if loc_str.strip() and not is_garbled_region(loc_str):
-                    _ip_geo_cache[ip] = loc_str.strip()
-                    return loc_str.strip()
-    except Exception:
-        pass
-
-    # 3. 备用全球 IP 接口 (ip-api.com)
-    try:
-        url = f"http://ip-api.com/json/{ip}?lang=zh-CN"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=2.5) as res:
-            data = json.loads(res.read().decode("utf-8", errors="ignore"))
-            if data.get("status") == "success":
-                parts = []
-                country = data.get("country", "")
-                region = data.get("regionName", "")
-                city = data.get("city", "")
-                isp = data.get("isp", "").strip()
-                if country and country != "中国":
-                    parts.append(country)
-                if region:
-                    parts.append(region)
-                if city and city != region:
-                    parts.append(city)
-                loc_str = " ".join(parts)
-                if isp:
-                    loc_str = f"{loc_str} ({isp})" if loc_str else isp
-                if loc_str.strip() and not is_garbled_region(loc_str):
-                    _ip_geo_cache[ip] = loc_str.strip()
-                    return loc_str.strip()
     except Exception:
         pass
 
@@ -4365,6 +4419,20 @@ def get_network_info():
         "lan_ips": ips,
         "hostname": socket.gethostname()
     })
+
+def cleanup_historical_visitor_logs():
+    """在服务启动时自动清洗 visitor_logs.json 中历史存在的乱码或缺少市区的记录"""
+    try:
+        logs = load_json("visitor_logs.json")
+        if logs and isinstance(logs, dict):
+            stream = logs.get("realtime_stream", [])
+            if normalize_visitor_stream(stream):
+                save_json("visitor_logs.json", logs)
+                print("[Cleanup] 已成功将历史访客记录清洗升级至市区高精度级别！")
+    except Exception as e:
+        print(f"[Cleanup] 访客记录自愈警告: {e}")
+
+cleanup_historical_visitor_logs()
 
 # Start the background daily SEO scheduler daemon
 daily_scheduler.start_scheduler()

@@ -709,6 +709,29 @@ class WeChatOfficialSync:
                     if "sub_button" in b and "list" in b["sub_button"]:
                         extract_menu_news(b["sub_button"]["list"])
                     
+                    # If button has media_id value for news, fetch directly via official get_material API!
+                    btn_val = b.get("value")
+                    btn_type = b.get("type")
+                    if btn_val and (btn_type == "news" or btn_type == "article_id"):
+                        try:
+                            g_resp = requests.post(
+                                f"https://api.weixin.qq.com/cgi-bin/material/get_material?access_token={token}",
+                                json={"media_id": btn_val},
+                                timeout=15
+                            )
+                            g_resp.encoding = "utf-8"
+                            g_data = g_resp.json()
+                            if "news_item" in g_data:
+                                pub_date = datetime.datetime.now().strftime("%Y-%m-%d")
+                                for m_item in g_data["news_item"]:
+                                    parsed = parse_news_dict(m_item, pub_date)
+                                    if parsed:
+                                        all_articles.append(parsed)
+                                        update_sync_state(log=f"  + 自定义菜单永久素材获取: 《{parsed['title']}》")
+                                continue
+                        except Exception as e:
+                            update_sync_state(log=f"[-] 自定义菜单素材请求异常: {e}")
+
                     # If button has news_info
                     news_info = b.get("news_info", {}).get("list", [])
                     for n in news_info:
@@ -762,25 +785,48 @@ def integrate_articles_into_cms(crawled_articles, trigger_name="manual"):
     existing_ids = {a.get("id") for a in existing_articles}
 
     added_count = 0
+    updated_count = 0
     skipped_count = 0
 
     for article in crawled_articles:
         t = article.get("title", "").strip()
         aid = article.get("id")
-        if t in existing_titles or aid in existing_ids:
-            skipped_count += 1
-            continue
+        
+        # Check if article already exists
+        is_existing = False
+        for ex in existing_articles:
+            if (t and ex.get("title", "").strip() == t) or (aid and ex.get("id") == aid):
+                is_existing = True
+                new_content = article.get("content", "").strip()
+                ex_content = ex.get("content", "").strip()
+                # If existing content was empty or short, and new content is rich, update it!
+                if len(ex_content) < 200 and len(new_content) >= 200:
+                    ex["content"] = article["content"]
+                    if article.get("image") and (not ex.get("image") or ex.get("image") == "resource/images/ban_txt.png"):
+                        ex["image"] = article["image"]
+                    if article.get("desc") and (not ex.get("desc") or len(ex.get("desc")) < 20):
+                        ex["desc"] = article["desc"]
+                    if article.get("date") and not ex.get("date"):
+                        ex["date"] = article["date"]
+                    updated_count += 1
+                else:
+                    skipped_count += 1
+                break
 
-        existing_articles.insert(0, article)
-        existing_titles.add(t)
-        existing_ids.add(aid)
-        added_count += 1
+        if not is_existing:
+            existing_articles.append(article)
+            existing_titles.add(t)
+            existing_ids.add(aid)
+            added_count += 1
 
-    if added_count > 0:
+    # Keep all articles sorted by date descending so latest articles always appear first
+    existing_articles.sort(key=lambda x: x.get('date', '') or '', reverse=True)
+
+    if added_count > 0 or updated_count > 0:
         try:
             with open(articles_file, "w", encoding="utf-8") as f:
                 json.dump(existing_articles, f, ensure_ascii=False, indent=2)
-            update_sync_state(log=f"成功将 {added_count} 篇新文章入库 articles.json，正在重新编译静态页面...")
+            update_sync_state(log=f"成功将 {added_count} 篇新文章入库，更新 {updated_count} 篇已有文章，正在重新编译静态页面...")
             
             # Trigger generator
             try:
@@ -796,12 +842,12 @@ def integrate_articles_into_cms(crawled_articles, trigger_name="manual"):
             update_sync_state(log=f"[-] 保存 articles.json 失败: {e}")
             return False, added_count, skipped_count
     else:
-        update_sync_state(log="全部文章均为最新，未发现新增内容。")
+        update_sync_state(log="全部文章均为最新，未发现新增或需更新的内容。")
 
     # Update config stats
     cfg = load_wechat_config()
     cfg["last_sync_time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cfg["last_sync_status"] = f"同步完成 (新增 {added_count} 篇, 跳过 {skipped_count} 篇)"
+    cfg["last_sync_status"] = f"同步完成 (新增 {added_count} 篇, 更新 {updated_count} 篇, 跳过 {skipped_count} 篇)"
     cfg["total_synced"] = cfg.get("total_synced", 0) + added_count
     save_wechat_config(cfg)
 

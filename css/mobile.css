@@ -9425,5 +9425,57 @@ canvas[width="1920"] {
   }
 }
 
+/* ========================================================
+   产品中心 & 详情页 寄样图标签及说明条样式
+   ======================================================== */
+.product-item-sample-caption {
+  background: #f8fafc;
+  text-align: center;
+  font-size: 12px;
+  color: #475569;
+  padding: 5px 0;
+  border-top: 1px solid #e2e8f0;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.product-item-sample-caption .sample-tag {
+  background: #e0f2fe;
+  color: #0284c7;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid #bae6fd;
+}
+
+.product-detail-sample-bar {
+  margin: 10px 14px 12px 14px;
+  padding: 9px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #0284c7;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .product-detail-sample-bar {
+    margin: 8px 4px !important;
+    padding: 8px 10px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  .product-detail-sample-bar a {
+    align-self: flex-end !important;
+  }
+}
+
 
 

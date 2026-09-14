@@ -155,6 +155,8 @@ def get_article_subcategories(category):
         return ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]
     elif category == "新闻资讯":
         return ["新闻资讯", "企业新闻", "技术知识", "常见问答"]
+    elif category == "企业新闻":
+        return ["企业新闻", "新闻资讯"]
     return [category]
 
 
@@ -585,6 +587,35 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
             html[match.end(4):]
         )
     
+    # Inject Sample Corner Badge and Sample Notice Bar under Product Image
+    # 1. Clean previous sample elements if any
+    html = re.sub(r'\s*<div class="product-sample-corner-tag"[^>]*>[\s\S]*?</div>', '', html)
+    html = re.sub(r'\s*<div class="product-detail-sample-bar"[^>]*>[\s\S]*?</div>', '', html)
+    
+    # 2. Add Corner Tag
+    sample_corner_html = '<div class="product-sample-corner-tag" style="position: absolute; left: 14px; top: 14px; z-index: 6; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: #ffffff; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.2); pointer-events: none;"><span style="width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; display: inline-block;"></span>寄样图 (Sample Packaging)</div>'
+    if '<div class="product-sample-corner-tag"' not in html:
+        html = re.sub(r'(<div class="p102-proShow-1-left"[^>]*>)', r'\1\n    ' + sample_corner_html, html, count=1)
+
+    # 3. Add Sample Notice Bar directly under product image
+    sample_bar_html = '''    <div class="product-detail-sample-bar" style="margin: 10px 14px 12px 14px; padding: 9px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box;">
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <span style="display: inline-flex; align-items: center; gap: 4px; background: #0284c7; color: #ffffff; font-size: 12px; font-weight: 600; padding: 2px 7px; border-radius: 3px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          寄样图
+        </span>
+        <span style="color: #475569; font-size: 12.5px;">实物规格：30g/50g 研发打样测试装（支持顺丰寄样）</span>
+      </div>
+      <a href="../helps/lxwm.html" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; color: #0284c7; font-size: 12px; font-weight: 600; text-decoration: none; white-space: nowrap;">
+        申请寄样 &gt;
+      </a>
+    </div>'''
+    if '<div class="product-detail-sample-bar"' not in html:
+        if '<div class="p102-proShow-1-size">' in html:
+            html = re.sub(r'(</div>\s*<div class="p102-proShow-1-size">)', f'\n{sample_bar_html}\n    ' + r'\1', html, count=1)
+        else:
+            html = re.sub(r'(</div>\s*</div>\s*<div class="p102-proShow-1-right">)', f'\n{sample_bar_html}\n   ' + r'\1', html, count=1)
+    
     # Render B2B sections (R&D, Procurement, Marketing, Disclaimer)
     b2b_html = render_product_b2b_sections(product)
     
@@ -763,6 +794,10 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
         list_html += f"""    <dl> 
      <dt> 
       <a href="{detail_link}" target="_blank" title="{p['title']}"><img alt="{p['title']}" src="{image_path}"></a> 
+      <div class="product-item-sample-caption" style="background: #f8fafc; text-align: center; font-size: 12px; color: #475569; padding: 5px 0; border-top: 1px solid #e2e8f0; line-height: 1.5; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span style="background: #e0f2fe; color: #0284c7; font-weight: 600; font-size: 11px; padding: 1px 6px; border-radius: 3px; border: 1px solid #bae6fd;">寄样图</span>
+        <span>实物打样装规格</span>
+      </div>
      </dt> 
      <dd> 
       <h4><a href="{detail_link}" target="_blank" title="{p['title']}">{p['title']}</a></h4> {p_desc}
@@ -945,8 +980,12 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
     html = replace_group(r'(医用原料</a></h4>\s*<p>)(.*?)(</p>)', yyy_links, html)
     html = replace_group(r'(食品营养原料</a></h4>\s*<p>)(.*?)(</p>)', spy_links, html)
     
+    # Filter active articles and sort by date descending so latest articles appear first
+    active_articles = [a for a in articles if a.get("show", True)]
+    sorted_active_articles = sorted(active_articles, key=lambda a: a.get("date", "") or "", reverse=True)
+    
     # 3. Update case studies
-    cases = [a for a in articles if a['category'] in get_article_subcategories("合作案例")][:10]
+    cases = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("合作案例")][:10]
     case_list_html = "\n"
     for c in cases:
         case_list_html += f'      <li class="swiper-slide"><a href="./{c["link"]}" target="_blank" title="{c["title"]}"><i><img alt="{c["title"]}" src="./{c["image"]}" title="{c["title"]}"><span><img alt="" src="./images/anspico.png"></span></i><em>{c["title"]}</em></a></li> \n'
@@ -954,10 +993,10 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
     
     html = replace_group(r'(<ul class="f_cb swiper-wrapper">)(.*?)(</ul>\s*</div>\s*</div>\s*\n\s*</div>\s*<!-- 新闻资讯 -->)', case_list_html, html)
     
-    # 4. Update News tabs
-    qydt_news = [a for a in articles if a['category'] in get_article_subcategories("企业新闻")][:4]
-    cpbk_news = [a for a in articles if a['category'] in get_article_subcategories("技术知识")][:4]
-    cjwt_news = [a for a in articles if a['category'] in get_article_subcategories("常见问答")][:4]
+    # 4. Update News tabs (sorted by latest date, without date display on homepage)
+    qydt_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("企业新闻")][:4]
+    cpbk_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("技术知识")][:4]
+    cjwt_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("常见问答")][:4]
     
     def make_news_tab_html(news_list):
         tab_html = "\n"
@@ -970,7 +1009,7 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
           </dt> 
           <dd> 
            <p>{n['desc'][:80]}...</p> 
-           <span><em>{n['date']}</em><i><img src="./images/newmore.png"></i></span> 
+           <span><i><img src="./images/newmore.png"></i></span> 
           </dd> </a> 
         </dl> 
 """

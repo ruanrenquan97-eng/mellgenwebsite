@@ -2597,6 +2597,28 @@ def get_client_ip():
 
 _ip_geo_cache = {}
 
+def is_garbled_region(text):
+    if not text or not isinstance(text, str):
+        return True
+    text = text.strip()
+    if not text:
+        return True
+    # 占位字与旧fallback
+    if any(kw in text for kw in ["公网", "国内网络", "未知", "IP地址查询", "客户来访"]):
+        return True
+    has_chinese = False
+    for ch in text:
+        code = ord(ch)
+        # 私有区字符
+        if 0xE000 <= code <= 0xF8FF:
+            return True
+        # 错解UTF-8作为GB18030的高频乱码特征码点
+        if code in (39582, 22840, 31522, 37930, 32321, 37734, 20914, 31478, 37922):
+            return True
+        if 0x4E00 <= code <= 0x9FA5:
+            has_chinese = True
+    return not has_chinese
+
 def get_ip_region(ip):
     ip = (ip or "").strip()
     if not ip or ip in ("127.0.0.1", "::1", "localhost"):
@@ -2610,31 +2632,32 @@ def get_ip_region(ip):
                 return f"局域网/内网测试 ({ip})"
         except Exception:
             pass
-    if ip in _ip_geo_cache and not _ip_geo_cache[ip].startswith("公网"):
+    if ip in _ip_geo_cache and not is_garbled_region(_ip_geo_cache[ip]):
         return _ip_geo_cache[ip]
 
-    # 1. 优先调用百度官方 IP 归属地开放接口 (全国最稳、速度极快、包含省/市/运营商)
+    # 1. 优先调用百度官方 IP 归属地开放接口 (严格使用 UTF-8 解码，确保编码绝不走偏)
     try:
         url = f"https://opendata.baidu.com/api.php?query={ip}&resource_id=6006&oe=utf8"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
         with urllib.request.urlopen(req, timeout=2.5) as res:
             raw_bytes = res.read()
+            # 必须使用 utf-8 解码！
             try:
+                raw_text = raw_bytes.decode("utf-8")
+            except UnicodeDecodeError:
                 raw_text = raw_bytes.decode("gb18030", errors="ignore")
-            except Exception:
-                raw_text = raw_bytes.decode("utf-8", errors="ignore")
             data = json.loads(raw_text)
             if data.get("status") == "0" and data.get("data"):
                 loc = data["data"][0].get("location", "").strip()
                 loc = re.sub(r"[\uE000-\uF8FF]", "", loc).strip()
                 loc = re.sub(r"\s+", " ", loc)
-                if loc and loc != "IP地址查询":
+                if loc and not is_garbled_region(loc):
                     _ip_geo_cache[ip] = loc
                     return loc
     except Exception:
         pass
 
-    # 2. 备用全球多语言 IP 接口 (ipwho.is，支持中文省、市、运营商)
+    # 2. 备用全球多语言 IP 接口 (ipwho.is，标准 UTF-8 REST API)
     try:
         url = f"https://ipwho.is/{ip}?lang=zh-CN"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -2655,7 +2678,7 @@ def get_ip_region(ip):
                 loc_str = " ".join(parts)
                 if isp:
                     loc_str = f"{loc_str} ({isp})" if loc_str else isp
-                if loc_str.strip():
+                if loc_str.strip() and not is_garbled_region(loc_str):
                     _ip_geo_cache[ip] = loc_str.strip()
                     return loc_str.strip()
     except Exception:
@@ -2682,13 +2705,13 @@ def get_ip_region(ip):
                 loc_str = " ".join(parts)
                 if isp:
                     loc_str = f"{loc_str} ({isp})" if loc_str else isp
-                if loc_str.strip():
+                if loc_str.strip() and not is_garbled_region(loc_str):
                     _ip_geo_cache[ip] = loc_str.strip()
                     return loc_str.strip()
     except Exception:
         pass
 
-    fallback = f"国内网络客户 ({ip})"
+    fallback = "中国 (公网客户)"
     _ip_geo_cache[ip] = fallback
     return fallback
 
@@ -3005,9 +3028,11 @@ def normalize_visitor_stream(stream):
     for v in stream:
         ip = (v.get("ip") or "").strip()
         reg = v.get("region", "")
-        if ip and (not reg or "公网" in reg or "国内网络" in reg or reg.startswith(ip)):
+        if ip and is_garbled_region(reg):
+            if ip in _ip_geo_cache:
+                del _ip_geo_cache[ip]
             new_reg = get_ip_region(ip)
-            if new_reg and not new_reg.startswith("国内网络") and new_reg != reg:
+            if new_reg and new_reg != reg:
                 v["region"] = new_reg
                 changed = True
     return changed

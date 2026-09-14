@@ -15,8 +15,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "水解胎盘（羊）提取物、十肽-4、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Hydrolyzed Placenta Extract, Decapeptide-4, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
+      "inci_cn": "1,2-己二醇、水解胎盘（羊）提取物、对羟基苯乙酮、水",
+      "inci_en": "1,2-HEXANEDIOL, HYDROXYACETOPHENONE, AQUA",
       "cas": "91079-43-5 / 917094-11-2 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 5.0%（抗衰滋养推荐 1.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -60,8 +60,8 @@
       "lab_placenta_safety_test",
       "lab_tpht_penetration"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_6.jpeg",
-    "diagram_caption": "Sheep placenta bioactive nutrient complex nano-transdermal delivery and skin metabolism revitalization."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
+    "diagram_caption": "Sheep placenta nano-transdermal delivery, anti-photoaging MMP-1 regulation, and clinical hydration & soothing data."
   },
   {
     "id": "pdrnht",
@@ -79,8 +79,8 @@
       "Recommended Dosage": "1.0% - 6.0%"
     },
     "rd_info": {
-      "inci_cn": "脱氧核糖核酸钠、十肽-4、1,2-己二醇、水",
-      "inci_en": "Sodium DNA, Decapeptide-4, 1,2-Hexanediol, Aqua",
+      "inci_cn": "十肽-4、脱氧核糖核酸、水解 DNA、核糖核酸、水、1,2-己二醇",
+      "inci_en": "DECAPEPTIDE-4, DNA, HYDROLYZED DNA, RNA, AQUA, 1,2-HEXANEDIOL",
       "cas": "9007-49-2 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（深层赋活推荐 0.5% - 1.5%）",
       "ph_range": "6.0 - 7.5",
@@ -113,8 +113,8 @@
       "lab_pdrn_safety_assessment",
       "lab_tpht_penetration"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-    "diagram_caption": "Supramolecular rod assembly of PDRN bound with transdermal cyclic peptides for deep cutaneous delivery."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
+    "diagram_caption": "Supramolecular rod assembly of PDRN bound with transdermal cyclic peptides: cutaneous delivery and absorption data."
   },
   {
     "id": "mellpr8670",
@@ -132,8 +132,8 @@
       "Recommended Dosage": "2.0% - 8.0%"
     },
     "rd_info": {
-      "inci_cn": "十肽-4、胶原、1,2-己二醇、水",
-      "inci_en": "Decapeptide-4, Collagen, 1,2-Hexanediol, Aqua",
+      "inci_cn": "胶原、1,2-己二醇、水",
+      "inci_en": "COLLAGEN, 1,2-HEXANEDIOL, WATER",
       "cas": "917094-11-2 / 9007-34-5 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（多维抗老推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 6.8",
@@ -166,8 +166,8 @@
       "lab_collagen_biocompatibility",
       "lab_collagen3_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "5Dcollagen 5-dimensional structural model (Multi-type I/II/III/IV/XVII collagen network scaffolding)."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "5Dcollagen recombinant multi-type collagen 5D architectural model (Type I bundle / Type II cartilage / Type III mesh / Type IV basement membrane / Type XVII anchor)."
   },
   {
     "id": "tpxldb",
@@ -185,8 +185,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "十肽-4、纤连蛋白、1,2-己二醇、水",
-      "inci_en": "Decapeptide-4, Fibronectin, 1,2-Hexanediol, Aqua",
+      "inci_cn": "纤连蛋白、1,2-己二醇、水",
+      "inci_en": "FIBRONECTIN, 1,2-HEXANEDIOL, WATER",
       "cas": "917094-11-2 / 86088-83-7 / 6920-22-5 / 7732-18-5",
       "dosage": "0.2% - 2.0%（屏障修护推荐 0.5% - 1.0%）",
       "ph_range": "6.0 - 7.2",
@@ -221,8 +221,8 @@
       "lab_tfn_phototox_mutagen",
       "lab_tpht_penetration"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_8.jpeg",
-    "diagram_caption": "Transdermal fibronectin TFNpro RGD active domain facilitating cell adhesion and stratum corneum barrier reinforcement."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
+    "diagram_caption": "TFNpro transdermal fibronectin: 8-fold enhanced absorption and stratum corneum barrier repair histological evidence."
   },
   {
     "id": "qdjy",
@@ -241,7 +241,7 @@
     },
     "rd_info": {
       "inci_cn": "缺端胶原、羟乙基脲、对羟基苯乙酮、水",
-      "inci_en": "Atelocollagen, Hydroxyethyl Urea, Hydroxyacetophenone, Aqua",
+      "inci_en": "ATELOCOLLAGEN, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER",
       "cas": "9007-34-5 / 2078-71-9 / 99-93-4 / 7732-18-5",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 4.0%)",
       "ph_range": "5.8 - 7.0",
@@ -270,8 +270,8 @@
     "referenced_lab_data": [
       "lab_collagen_biocompatibility"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "Atelocollagen de-antigenic molecular structure and biocompatible extracellular matrix support."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "Atelocollagen native triple-helix structure and biocompatible extracellular matrix model."
   },
   {
     "id": "zbssb",
@@ -290,7 +290,7 @@
     },
     "rd_info": {
       "inci_cn": "黑灵芝（GANODERMA ATRUM）提取物、人参（PANAX GINSENG）根提取物、松口蘑（TRICHOLOMA MATSUTAKE）提取物、甜菜碱、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Aqua, Ganoderma Atrum Extract, Panax Ginseng Root Extract, Tricholoma Matsutake Extract, Pentylene Glycol, Hydroxyacetophenone",
+      "inci_en": "GANODERMA ATRUM (MUSHROOM) EXTRACT, PANAX GINSENG ROOT EXTRACT, TRICHOLOMA MATSUTAKE EXTRACT, BETAINE, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
       "cas": "507-70-0 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "1.0% - 5.0%（匀净焕亮推荐 1.5% - 3.0%）",
       "ph_range": "5.0 - 6.5",
@@ -321,8 +321,8 @@
     "referenced_lab_data": [
       "lab_gpt_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_11_img_2.jpeg",
-    "diagram_caption": "MEGCALM GPT deep fermentation extract of Changbai Mountain Ganoderma, Ginseng, and Matsutake."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
+    "diagram_caption": "MEGCALM GPT deep liquid fermentation extract: MC1R melanogenesis pathway & tyrosinase inhibition assays."
   },
   {
     "id": "megpep6245",
@@ -340,8 +340,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "裂殖酵母（SCHIZOSACCHAROMYCES）菌丝体发酵产物滤液、1,2-己二醇",
-      "inci_en": "Schizosaccharomyces Ferment Filtrate, 1,2-Hexanediol",
+      "inci_cn": "1,2-己二醇、裂殖酵母（SCHIZOSACCHAROMYCES）菌丝体发酵产物滤液",
+      "inci_en": "1,2-HEXANEDIOL, SCHIZOSACCHAROMYCES FERMENT FILTRATE",
       "cas": "6920-22-5",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 3.0%)",
       "ph_range": "5.5 - 7.0",
@@ -371,8 +371,8 @@
       "lab_recm_multi_efficacy",
       "lab_tfn_penetration_barrier"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-    "diagram_caption": "MEGPEP SFF yeast ferment filtrate micro-peptides replenishing moisture and smoothing skin texture."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "Modern microbial deep-fermentation plant, enzymatic lysis system, and ultrafiltration lines."
   },
   {
     "id": "megpep",
@@ -390,8 +390,8 @@
       "Recommended Dosage": "0.5% - 2.0%"
     },
     "rd_info": {
-      "inci_cn": "寡肽-1、氯化钠、柠檬酸钠、1,2-己二醇、水",
-      "inci_en": "Oligopeptide-1, Sodium Chloride, Sodium Citrate, 1,2-Hexanediol, Aqua",
+      "inci_cn": "氯化钠、寡肽-1、柠檬酸钠、1,2-己二醇、水",
+      "inci_en": "SODIUM CHLORIDE, OLIGOPEPTIDE-1, SODIUM CITRATE, 1,2-HEXANEDIOL, WATER",
       "cas": "6920-22-5 / 7647-14-5 / 68-04-2 / 7732-18-5",
       "dosage": "0.5% - 2.0% (Recommended 1.0%)",
       "ph_range": "5.0 - 7.5",
@@ -421,8 +421,8 @@
       "lab_tfn_four_efficacy",
       "lab_tpht_penetration"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-    "diagram_caption": "MEGPEP RF50G- oligopeptide solution reinforcing epidermal barrier stability and soothing sensitive skin."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "High-purity recombinant oligopeptide formulation line, clean-room filling, and strict QC testing center."
   },
   {
     "id": "lzdt",
@@ -440,8 +440,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "中国灵芝（GANODERMA SINENSIS）提取物、对羟基苯乙酮、水",
-      "inci_en": "Ganoderma Sinensis Extract, Hydroxyacetophenone, Aqua",
+      "inci_cn": "赤芝（GANODERMA LUCIDUM）提取物、对羟基苯乙酮、水",
+      "inci_en": "GANODERMA LUCIDUM (MUSHROOM) EXTRACT, HYDROXYACETOPHENONE, WATER",
       "cas": "99-93-4 / 7732-18-5",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 3.0%)",
       "ph_range": "5.0 - 7.0",
@@ -451,7 +451,7 @@
       "compatibility": "Broad compatibility with hydrophilic thickeners, humectants, and botanical complexes"
     },
     "procurement_info": {
-      "nmpa_code": "190358-00075-9589",
+      "nmpa_code": "137249-00075-6372",
       "packaging": "1kg/fluorinated bottle, 5kg/drum, 25kg/drum",
       "moq": "1 kg (Ready Stock)",
       "lead_time": "Dispatched within 24-48 hours",
@@ -471,8 +471,8 @@
       "lab_lingbai_rose_screening",
       "lab_gpt_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_11_img_2.jpeg",
-    "diagram_caption": "Ganoderma lucidum polysaccharide branched structure enhancing skin defense and moisture retention."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
+    "diagram_caption": "Ganoderma lucidum polysaccharide mitigating oxidative damage, boosting collagen/fibronectin, and soothing skin."
   },
   {
     "id": "mellpr205",
@@ -490,8 +490,8 @@
       "Recommended Dosage": "0.5% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "贻贝提取物、1,2-己二醇、水",
-      "inci_en": "Mussel Extract, 1,2-Hexanediol, Aqua",
+      "inci_cn": "贻贝提取物、对羟基苯乙酮、1,2-己二醇、水",
+      "inci_en": "MUSSEL EXTRACT, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, WATER",
       "cas": "6920-22-5 / 7732-18-5",
       "dosage": "0.2% - 2.0%（耐水成膜舒缓推荐 0.3% - 1.0%）",
       "ph_range": "5.0 - 6.5",
@@ -523,8 +523,8 @@
       "lab_map_transdermal_absorption",
       "lab_map_three_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_9_img_5.jpeg",
-    "diagram_caption": "Recombinant mussel adhesive protein DOPA-functionalized water-resistant soothing protective barrier."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
+    "diagram_caption": "Recombinant biomimetic adhesive protein protective barrier film, high stability, and soothing properties."
   },
   {
     "id": "megzym",
@@ -542,8 +542,8 @@
       "Recommended Dosage": "0.5% - 2.0%"
     },
     "rd_info": {
-      "inci_cn": "溶菌酶、甘油、氯化钠、水",
-      "inci_en": "Lysozyme, Glycerin, Sodium Chloride, Aqua",
+      "inci_cn": "甘油、水、溶菌酶、氯化钠",
+      "inci_en": "GLYCERIN, WATER, LYSOZYME, SODIUM CHLORIDE",
       "cas": "9001-63-2 / 56-81-5 / 7647-14-5 / 7732-18-5",
       "dosage": "0.5% - 2.0% (Recommended 1.0%)",
       "ph_range": "5.5 - 7.5",
@@ -572,8 +572,8 @@
     "referenced_lab_data": [
       "lab_yskm_toxicology_safety"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-    "diagram_caption": "Biosynthetic lysozyme selectively hydrolyzing bacterial peptidoglycans to maintain skin microbiome equilibrium."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "Recombinant bio-enzyme high-density fermentation and GMP standard purification facility."
   },
   {
     "id": "mellpr",
@@ -592,7 +592,7 @@
     },
     "rd_info": {
       "inci_cn": "胶原、甘露糖醇",
-      "inci_en": "Collagen, Mannitol",
+      "inci_en": "COLLAGEN, MANNITOL",
       "cas": "9007-34-5 / 69-65-8",
       "dosage": "1.5% - 6.0% (Recommended 2.5% - 4.0%)",
       "ph_range": "5.5 - 7.0",
@@ -622,8 +622,8 @@
       "lab_collagen_biocompatibility",
       "lab_collagen3_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "Recombinant 3D collagen high-affinity triple helix network and elasticity lifting mechanism."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "Recombinant collagen triple-helix matrix structural scaffolding and dermal elasticity model."
   },
   {
     "id": "tysgdb",
@@ -642,7 +642,7 @@
     },
     "rd_info": {
       "inci_cn": "水解弹性蛋白、胶原、纤连蛋白、甘氨酸、脯氨酸、1,2-己二醇、水",
-      "inci_en": "Aqua, Soluble Collagen, Hydrolyzed Fibronectin, Hydrolyzed Elastin, Glycerin, 1,2-Hexanediol",
+      "inci_en": "HYDROLYZED ELASTIN, COLLAGEN, FIBRONECTIN, GLYCINE, PROLINE, 1,2-HEXANEDIOL, AQUA",
       "cas": "9007-34-5 / 86088-83-7 / 56-40-6 / 147-85-3 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 5.0%（水光滋养推荐 1.0% - 3.0%）",
       "ph_range": "5.5 - 7.0",
@@ -675,8 +675,8 @@
       "lab_tfn_penetration_barrier",
       "lab_collagen_biocompatibility"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_8_img_24.jpeg",
-    "diagram_caption": "MELLPRO rECM biomimetic extracellular matrix architecture (Collagen + Fibronectin + Elastin + Amino Acids)."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
+    "diagram_caption": "MELLPRO-rECM extracellular matrix assembly architecture (Collagen + Fibronectin + Elastin + Integrin + Laminin)."
   },
   {
     "id": "yskmyz",
@@ -695,7 +695,7 @@
     },
     "rd_info": {
       "inci_cn": "桃（PRUNUS PERSICA）树脂提取物、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Prunus Persica (Peach) Resin Extract, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
+      "inci_en": "PRUNUS PERSICA (PEACH) RESIN EXTRACT, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
       "cas": "9000-70-8 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 3.0%（快速舒缓止痒推荐 1.0% - 2.0%）",
       "ph_range": "5.0 - 6.8",
@@ -728,8 +728,8 @@
       "lab_yskm_toxicology_safety",
       "lab_yskm_risk_screening"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_5.jpeg",
-    "diagram_caption": "Probiotic anti-allergy factor peach gum oligosaccharides balancing microbiome and activating AQP3 water channels."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
+    "diagram_caption": "MEGCALM PSF peach gum fermentation cleavage mechanism & HPLC profile (smaller molecular weight, faster absorption, AQP3 activation)."
   },
   {
     "id": "smndb",
@@ -748,7 +748,7 @@
     },
     "rd_info": {
       "inci_cn": "水母提取物、羟乙基脲、对羟基苯乙酮、水",
-      "inci_en": "Jellyfish Extract, Hydroxyethyl Urea, Hydroxyacetophenone, Aqua",
+      "inci_en": "JELLYFISH EXTRACT, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER",
       "cas": "2078-71-9 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 2.0%（抗光老化推荐 0.5% - 1.0%）",
       "ph_range": "5.5 - 7.0",
@@ -780,8 +780,8 @@
       "lab_collagen_biocompatibility",
       "lab_tfn_penetration_barrier"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_9_img_1.jpg",
-    "diagram_caption": "JELFIPRO jellyfish mucin native triple-helix polymer network and anti-photoaging protection mechanism."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
+    "diagram_caption": "JELFIPRO jellyfish mucin anti-photoaging & barrier repair: ROS scavenging, histology, and cell proliferation."
   },
   {
     "id": "hylfyz",
@@ -800,7 +800,7 @@
     },
     "rd_info": {
       "inci_cn": "氧化还原酶、甘氨酸、精氨酸、聚山梨醇酯-20、1,2-己二醇、水",
-      "inci_en": "Aqua, Fibronectin, Alteromonas Ferment Extract, Glycerin, 1,2-Hexanediol",
+      "inci_en": "OXIDO REDUCTASES, GLYCINE, ARGININE, POLYSORBATE 20, 1,2-HEXANEDIOL, WATER",
       "cas": "9001-73-4 / 56-40-6 / 74-79-3 / 9005-64-5 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 5.0%（焕亮抗氧推荐 1.0% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -831,8 +831,8 @@
     "referenced_lab_data": [
       "lab_txod_whitening_antiox"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_8_img_3.jpg",
-    "diagram_caption": "MEGPEP TXOD marine yeast dual-active domains and zebrafish in vivo antioxidant & melanin reduction data."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
+    "diagram_caption": "MEGPEP TXOD zebrafish in vivo antioxidant & whitening data (UV ROS scavenging & melanin reduction)."
   },
   {
     "id": "zzxldb",
@@ -850,8 +850,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "水、甘油、氯化钠、1,2-己二醇、纤连蛋白、柠檬酸钠",
-      "inci_en": "Aqua, Glycerin, Sodium Chloride, 1,2-Hexanediol, Fibronectin, Sodium Citrate",
+      "inci_cn": "纤连蛋白、氯化钠、甘油、1,2-己二醇、柠檬酸钠、水",
+      "inci_en": "FIBRONECTIN, SODIUM CHLORIDE, GLYCERIN, 1,2-HEXANEDIOL, SODIUM CITRATE, WATER",
       "cas": "7732-18-5 / 56-81-5 / 7647-14-5 / 6920-22-5 / 86088-83-7 / 68-04-2",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 3.0%)",
       "ph_range": "6.0 - 7.2",
@@ -882,8 +882,8 @@
       "lab_tfn_four_efficacy",
       "lab_tfn_toxicology"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_8.jpeg",
-    "diagram_caption": "High-purity recombinant fibronectin promoting epidermal barrier integrity and skin resilience."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
+    "diagram_caption": "AlphaDrugs AI platform: Fibronectin & Integrin molecular docking simulation model."
   },
   {
     "id": "zzjydb",
@@ -901,8 +901,8 @@
       "Recommended Dosage": "2.0% - 8.0%"
     },
     "rd_info": {
-      "inci_cn": "可溶性胶原、EDTA 二钠、1,2-己二醇、水",
-      "inci_en": "Soluble Collagen, Disodium EDTA, 1,2-Hexanediol, Aqua",
+      "inci_cn": "1,2-己二醇、可溶性胶原、水",
+      "inci_en": "1,2-HEXANEDIOL, SOLUBLE COLLAGEN, WATER",
       "cas": "9007-34-5 / 139-33-3 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（抗皱紧致推荐 0.5% - 1.5%）",
       "ph_range": "5.5 - 6.8",
@@ -935,8 +935,8 @@
       "lab_collagen3_efficacy",
       "lab_collagen_penetration"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "Recombinant Type III infant-like collagen replenishing the extracellular matrix and smoothing fine lines."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "Type III baby-collagen mesh network structure and extracellular matrix replenishment in 5D collagen architecture."
   },
   {
     "id": "5djydb",
@@ -954,8 +954,8 @@
       "Recommended Dosage": "2.0% - 8.0%"
     },
     "rd_info": {
-      "inci_cn": "胶原、十肽-4、1,2-己二醇、水",
-      "inci_en": "Collagen, Decapeptide-4, 1,2-Hexanediol, Aqua",
+      "inci_cn": "胶原、十肽-4、水、1,2-己二醇",
+      "inci_en": "COLLAGEN, DECAPEPTIDE-4, AQUA, 1,2-HEXANEDIOL",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "2.0% - 8.0% (Recommended 3.0% - 5.0%)",
       "ph_range": "5.5 - 6.8",
@@ -986,8 +986,8 @@
       "lab_collagen_biocompatibility",
       "lab_collagen3_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "5D Collagen microsphere sustained-release delivery and multi-layer structural reinforcement."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "5D Collagen multi-dimensional structural reinforcement and multi-layer scaffolding model."
   },
   {
     "id": "twdvit",
@@ -1005,8 +1005,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "生物素/叶酸/复合维生素B族酵母多肽、对羟基苯乙酮、1,2-己二醇、肌醇、水",
-      "inci_en": "Biotin/Folic Acid/Cyanocobalamin/Niacinamide/Pantothenic Acid/Pyridoxine/Riboflavin/Thiamine/Yeast Polypeptides, Hydroxyacetophenone, 1,2-Hexanediol, Inositol, Water",
+      "inci_cn": "生物素/叶酸/维生素 B12/维生素 B3/泛酸/维生素 B6/维生素 B2/维生素 B1/酵母多肽类、对羟基苯乙酮、1,2-己二醇、肌醇、水",
+      "inci_en": "BIOTIN/FOLIC ACID/CYANOCOBALAMIN/NIACINAMIDE/PANTOTHENIC ACID/PYRIDOXINE/RIBOFLAVIN/THIAMINE/YEAST POLYPEPTIDES, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, INOSITOL, WATER",
       "cas": "6920-22-5 / 99-93-4 / 87-89-8 / 7732-18-5",
       "dosage": "0.1% - 1.0%（细胞级深层滋养推荐 0.2% - 0.5%）",
       "ph_range": "5.5 - 6.5",
@@ -1036,8 +1036,8 @@
     "referenced_lab_data": [
       "lab_gpt_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-    "diagram_caption": "Vitaluxe natural yeast fermentation metabolites providing multi-vitamin, amino acid, and organic acid cellular nutrition."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+    "diagram_caption": "Natural yeast fermentation multi-nutrient metabolites & transdermal technology authoritative scientific publications."
   },
   {
     "id": "jnhtea",
@@ -1056,7 +1056,7 @@
     },
     "rd_info": {
       "inci_cn": "卤虫（ARTEMIA）提取物、十肽-4、环磷酸腺苷、肌醇、1,2-己二醇、水",
-      "inci_en": "Artemia Extract, Decapeptide-4, Adenosine Cyclic Phosphate, Inositol, 1,2-Hexanediol, Aqua",
+      "inci_en": "ARTEMIA EXTRACT, DECAPEPTIDE-4, ADENOSINE CYCLIC PHOSPHATE, INOSITOL, 1,2-HEXANEDIOL, AQUA",
       "cas": "917094-11-2 / 60-92-4 / 87-89-8 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0%（紧致焕亮推荐 0.5% - 1.5%）",
       "ph_range": "5.0 - 7.5",
@@ -1088,8 +1088,8 @@
       "lab_tpht_penetration",
       "lab_tpht_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-    "diagram_caption": "Synergistic mechanism of EAC cyclic peptides with adenosine for high-efficiency penetration and cellular energizing."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
+    "diagram_caption": "Synergistic cellular energizing and 3rd-generation transdermal penetration mechanism of EAC cyclic peptides."
   },
   {
     "id": "wndbzy",
@@ -1108,7 +1108,7 @@
     },
     "rd_info": {
       "inci_cn": "蜗牛分泌物滤液、1,3-丙二醇、甘油、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Snail Secretion Filtrate, Propanediol, Glycerin, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
+      "inci_en": "SNAIL SECRETION FILTRATE, PROPANEDIOL, GLYCERIN, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
       "cas": "504-63-2 / 56-81-5 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 5.0%（屏障滋润推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1140,8 +1140,8 @@
       "lab_recm_multi_efficacy",
       "lab_map_three_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_9_img_5.jpeg",
-    "diagram_caption": "Snailpro biomimetic snail protein receptor-binding capability and viscoelastic hydrating film properties."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
+    "diagram_caption": "Snailpro biomimetic snail protein backbone, EGFR receptor binding, and viscoelastic hydrating film properties."
   },
   {
     "id": "fswnjy",
@@ -1160,7 +1160,7 @@
     },
     "rd_info": {
       "inci_cn": "琥珀酰缺端胶原、1,3-丙二醇、甘油、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Aqua, Recombinant Snail Collagen, Glycerin, Pentylene Glycol, Hydroxyacetophenone",
+      "inci_en": "SUCCINOYL ATELOCOLLAGEN, PROPANEDIOL, GLYCERIN, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER",
       "cas": "9007-34-5 / 504-63-2 / 56-81-5 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 5.0%（嘭弹丰盈推荐 0.5% - 2.0%）",
       "ph_range": "5.5 - 7.0",
@@ -1192,8 +1192,8 @@
       "lab_collagen_biocompatibility",
       "lab_recm_multi_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_9_img_5.jpeg",
-    "diagram_caption": "Snailpro biomimetic snail collagen thermal stability profile and polymeric skin-feel texture matrix."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
+    "diagram_caption": "Snailpro biomimetic snail collagen thermal stability (minimal loss after 48h) and polymeric skin-feel matrix."
   },
   {
     "id": "0xjydb",
@@ -1211,8 +1211,8 @@
       "Recommended Dosage": "1.5% - 6.0%"
     },
     "rd_info": {
-      "inci_cn": "缺端胶原、羟乙基脲、对羟基苯乙酮、水",
-      "inci_en": "Aqua, Hydrolyzed Jellyfish Extract (Type 0 Collagen), Glycerin, Hydroxyethyl Urea, 1,2-Hexanediol",
+      "inci_cn": "羟乙基脲、原胶原、对羟基苯乙酮、水",
+      "inci_en": "HYDROXYETHYL UREA, PROCOLLAGEN, HYDROXYACETOPHENONE, WATER",
       "cas": "9007-34-5 / 2078-71-9 / 99-93-4 / 7732-18-5",
       "dosage": "0.2% - 2.0%（修护锁水推荐 0.5% - 1.0%）",
       "ph_range": "5.5 - 6.8",
@@ -1244,8 +1244,8 @@
       "lab_collagen_biocompatibility",
       "lab_collagen3_efficacy"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_9_img_1.jpg",
-    "diagram_caption": "Type 0 marine jellyfish collagen preventing transepidermal water loss and repairing UV-induced micro-stress."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
+    "diagram_caption": "JELFIPRO Marine Type 0 collagen histological repair, ACE inhibition, and cell proliferation data."
   },
   {
     "id": "tphtct",
@@ -1263,8 +1263,8 @@
       "Recommended Dosage": "0.5% - 2.0%"
     },
     "rd_info": {
-      "inci_cn": "十肽-4、三磷酸腺苷、1,2-己二醇、水",
-      "inci_en": "Decapeptide-4, Adenosine Triphosphate, 1,2-Hexanediol, Aqua",
+      "inci_cn": "1,2-己二醇、十肽-4、水",
+      "inci_en": "1,2-HEXANEDIOL, DECAPEPTIDE-4, AQUA",
       "cas": "917094-11-2 / 987-65-5 / 6920-22-5 / 7732-18-5",
       "dosage": "0.2% - 2.0%（高效促透推荐 0.5% - 1.0%）",
       "ph_range": "5.0 - 7.5",
@@ -1297,8 +1297,8 @@
       "lab_tpht_efficacy",
       "lab_tpht_safety"
     ],
-    "diagram_image": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-    "diagram_caption": "Mechanism diagram of cTDP reversible binding to cellular Na+/K+-ATPase to open cutaneous absorption channels (5-min fast opening, 30-min closure)."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
+    "diagram_caption": "3rd-generation biological transdermal mechanism: cTDP targeting Na+/K+-ATPase to reversibly open follicular and paracellular pathways within 5 minutes, enhancing absorption 10-fold."
   },
   {
     "id": "tp1jydb",
@@ -1317,7 +1317,7 @@
     },
     "rd_info": {
       "inci_cn": "胶原、十肽-4、1,2-己二醇、水",
-      "inci_en": "Collagen, Decapeptide-4, 1,2-Hexanediol, Aqua",
+      "inci_en": "COLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0% (Recommended 0.5% - 1.5% for deep anti-aging)",
       "ph_range": "5.5 - 7.5",
@@ -1357,8 +1357,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "Transdermal Type I humanized collagen directly scaffolding dermal structural integrity and skin bounce."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "Type I collagen fiber bundle structural dermal scaffolding in the multi-type collagen architecture."
   },
   {
     "id": "tptxdb",
@@ -1376,8 +1376,8 @@
       "Recommended Dosage": "0.3% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "弹性蛋白、水解弹性蛋白、1,2-己二醇、水",
-      "inci_en": "Elastin, Hydrolyzed Elastin, 1,2-Hexanediol, Water",
+      "inci_cn": "水解弹性蛋白、1,2-己二醇、水",
+      "inci_en": "HYDROLYZED ELASTIN, 1,2-HEXANEDIOL, WATER",
       "cas": "9007-58-3 / 100085-10-7 / 6920-22-5 / 7732-18-5",
       "dosage": "0.3% - 3.0% (Recommended 0.5% - 2.0% for elasticity lift)",
       "ph_range": "5.5 - 7.2",
@@ -1417,8 +1417,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_8_img_24.jpeg",
-    "diagram_caption": "Recombinant elastin Telastin reinforcing the dermal elastic network to maintain structural firmness."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
+    "diagram_caption": "Elastin and collagen fiber crosslinking elastic recoil network in MELLPRO-rECM matrix."
   },
   {
     "id": "gtlafdp",
@@ -1437,7 +1437,7 @@
     },
     "rd_info": {
       "inci_cn": "寡肽-2、甘露糖醇、氯化钠",
-      "inci_en": "Oligopeptide-2, Mannitol, Sodium Chloride",
+      "inci_en": "OLIGOPEPTIDE-2, MANNITOL, SODIUM CHLORIDE",
       "cas": "100085-39-0 / 69-65-8 / 7647-14-5",
       "dosage": "0.1% - 1.0% (Recommended 0.2% - 0.5% for soothing and repair)",
       "ph_range": "5.5 - 7.2",
@@ -1477,8 +1477,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-    "diagram_caption": "MEGPEP AFDP high-purity lyophilized oligopeptides stimulating dermal collagen and anti-oxidation response."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "Mellgen Green Bio-manufacturing Platform: Transdermal R&D Center, Microbial Cell Factory & GMP Freeze-drying Line."
   },
   {
     "id": "lrdt",
@@ -1496,8 +1496,8 @@
       "Recommended Dosage": "0.5% - 4.5%"
     },
     "rd_info": {
-      "inci_cn": "鹿茸提取物、十肽-4、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Velvet Extract, Decapeptide-4, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
+      "inci_cn": "十肽-4、鹿茸提取物、1,2-己二醇、对羟基苯乙酮、水",
+      "inci_en": "DECAPEPTIDE-4, VELVET EXTRACT, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, AQUA",
       "cas": "917094-11-2 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 4.5% (Recommended 1.0% - 3.0% for luxury anti-aging)",
       "ph_range": "5.5 - 7.0",
@@ -1537,8 +1537,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-    "diagram_caption": "Deer antler bioactive peptides protecting cellular DNA against oxidative stress and sustaining metabolic turnover."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+    "diagram_caption": "Bioactive oligopeptide & transdermal technology international SCI publications and patent endorsements."
   },
   {
     "id": "tpjy",
@@ -1556,8 +1556,8 @@
       "Recommended Dosage": "0.5% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "原胶原、十肽-4、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Procollagen, Decapeptide-4, 1,2-Hexanediol, Hydroxyacetophenone, Aqua",
+      "inci_cn": "原胶原、十肽-4、对羟基苯乙酮、1,2-己二醇、水",
+      "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, AQUA",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "0.5% - 5.0% (Recommended 1.0% - 3.0% for intensive plumping)",
       "ph_range": "5.5 - 7.0",
@@ -1597,8 +1597,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_6.jpeg",
-    "diagram_caption": "Placental multi-type native active procollagen (I/III/V) matrix replenishment and barrier repair."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
+    "diagram_caption": "Placental multi-type native collagen deep penetration, matrix replenishment, and hydration data."
   },
   {
     "id": "aminofree",
@@ -1616,8 +1616,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "丙氨酸、精氨酸、天冬氨酸、谷氨酸、甘氨酸、组氨酸、异亮氨酸、亮氨酸、赖氨酸盐酸盐、蛋氨酸、苯丙氨酸、脯氨酸、丝氨酸、苏氨酸、色氨酸、酪氨酸、缬氨酸、1,2-己二醇、水",
-      "inci_en": "Alanine, Arginine, Aspartic Acid, Glutamic Acid, Glycine, Histidine, Isoleucine, Leucine, Lysine HCl, Methionine, Phenylalanine, Proline, Serine, Threonine, Tryptophan, Tyrosine, Valine, 1,2-Hexanediol, Aqua",
+      "inci_cn": "酪氨酸、丙氨酸、天冬氨酸、谷氨酸、半胱氨酸、蛋氨酸、脯氨酸、甘氨酸、胱氨酸、丝氨酸、组氨酸、苯丙氨酸、亮氨酸、谷氨酰胺、缬氨酸、苏氨酸、异亮氨酸、赖氨酸盐酸盐、精氨酸、1,2-己二醇、水",
+      "inci_en": "TYROSINE, ALANINE, ASPARTIC ACID, GLUTAMIC ACID, CYSTEINE, METHIONINE, PROLINE, GLYCINE, CYSTINE, SERINE, HISTIDINE, PHENYLALANINE, LEUCINE, GLUTAMINE, VALINE, THREONINE, ISOLEUCINE, LYSINE HCL, ARGININE, 1,2-HEXANEDIOL, AQUA",
       "cas": "56-40-6 et al. / 6920-22-5 / 7732-18-5",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 3.0% for deep cellular nutrition)",
       "ph_range": "5.5 - 7.0",
@@ -1657,8 +1657,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-    "diagram_caption": "AminoFree full-spectrum 20 human-homologous free amino acids matching natural moisturizing factor profile."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+    "diagram_caption": "Mellgen full-spectrum amino acid & transdermal delivery research publications in high-impact international journals."
   },
   {
     "id": "colamino",
@@ -1676,8 +1676,8 @@
       "Recommended Dosage": "2.0% - 10.0%"
     },
     "rd_info": {
-      "inci_cn": "胶原氨基酸类、1,2-己二醇、对羟基苯乙酮、水",
-      "inci_en": "Collagen Amino Acids, 1,2-Hexanediol, Hydroxyacetophenone, Water",
+      "inci_cn": "对羟基苯乙酮、胶原氨基酸类、水、1,2-己二醇",
+      "inci_en": "HYDROXYACETOPHENONE, COLLAGEN AMINO ACIDS, WATER, 1,2-HEXANEDIOL",
       "cas": "9007-34-5 / 6920-22-5 / 99-93-4 / 7732-18-5",
       "dosage": "2.0% - 10.0% (Recommended 3.0% - 5.0% for collagen synthesis boost)",
       "ph_range": "5.5 - 7.2",
@@ -1717,8 +1717,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-    "diagram_caption": "ColAmino characteristic collagen triad amino acids (Gly-Pro-Hyp) serving as building block precursors."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+    "diagram_caption": "Mellgen collagen-triad amino acid synthesis & transdermal delivery academic publications and awards."
   },
   {
     "id": "tpxviijy",
@@ -1737,7 +1737,7 @@
     },
     "rd_info": {
       "inci_cn": "原胶原、十肽-4、1,2-己二醇、水",
-      "inci_en": "Procollagen, Decapeptide-4, 1,2-Hexanediol, Aqua",
+      "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA",
       "cas": "9007-34-5 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 3.0% (Recommended 1.0% - 2.0% for DEJ anchoring and scalp care)",
       "ph_range": "5.5 - 7.2",
@@ -1777,8 +1777,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_7_img_15.jpg",
-    "diagram_caption": "Transmembrane Type XVII collagen anchoring the dermal-epidermal junction (DEJ) and hair follicle stem cell niche."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "Type XVII transmembrane collagen anchoring the dermal-epidermal junction (DEJ) in 5D collagen model."
   },
   {
     "id": "supercleaner",
@@ -1796,8 +1796,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "水、精氨酸、皂苷、1,3-丙二醇、碳酸钠、组氨酸、十肽-4、1,2-己二醇",
-      "inci_en": "Water, Arginine, Saponins, Propanediol, Sodium Carbonate, Histidine, Decapeptide-4, 1,2-Hexanediol",
+      "inci_cn": "无患子（SAPINDUS MUKOROSSI）果提取物、水、北美金缕梅（HAMAMELIS VIRGINIANA）提取物、油茶（CAMELLIA OLEIFERA）籽提取物、肥皂草（SAPONARIA OFFICINALIS）叶提取物、欧洲七叶树（AESCULUS HIPPOCASTANUM）树皮提取物、蛋白酶、黄原胶、组氨酸、1,3-丙二醇、1,2-己二醇、碳酸钠、十肽-4",
+      "inci_en": "SAPINDUS MUKOROSSI FRUIT EXTRACT, AQUA, HAMAMELIS VIRGINIANA (WITCH HAZEL) EXTRACT, CAMELLIA OLEIFERA SEED EXTRACT, SAPONARIA OFFICINALIS LEAF EXTRACT, AESCULUS HIPPOCASTANUM (HORSE CHESTNUT) BARK EXTRACT, PROTEASE, XANTHAN GUM, HISTIDINE, PROPANEDIOL, 1,2-HEXANEDIOL, SODIUM CARBONATE, DECAPEPTIDE-4",
       "cas": "7732-18-5 / 74-79-3 / 8047-15-2 / 504-63-2 / 497-19-8 / 71-00-1 / 917094-11-2 / 6920-22-5",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 4.0% for gentle deep pore cleansing)",
       "ph_range": "7.5 - 9.0",
@@ -1837,8 +1837,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-    "diagram_caption": "Super cleaner botanical saponin micelle matrix gently solubilizing sebum plugs and purifying pore microenvironments."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+    "diagram_caption": "Botanical saponin extraction and peptide-assisted gentle cleansing raw material production facility."
   },
   {
     "id": "zwjy",
@@ -1856,8 +1856,8 @@
       "Recommended Dosage": "1.0% - 5.0%"
     },
     "rd_info": {
-      "inci_cn": "植物水解蛋白、多糖提取物、1,2-己二醇、水",
-      "inci_en": "Hydrolyzed Vegetable Protein, Polysaccharide Extract, 1,2-Hexanediol, Aqua",
+      "inci_cn": "胶原、可溶性胶原、桃（PRUNUS PERSICA）树脂提取物、十肽-4、对羟基苯乙酮、1,2-己二醇、甘油、水",
+      "inci_en": "COLLAGEN, SOLUBLE COLLAGEN, PRUNUS PERSICA (PEACH) RESIN EXTRACT, DECAPEPTIDE-4, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, GLYCERIN, AQUA",
       "cas": "100209-45-8 / 6920-22-5 / 7732-18-5",
       "dosage": "1.0% - 5.0% (Recommended 2.0% - 3.0% for vegan firming)",
       "ph_range": "5.5 - 7.0",
@@ -1897,8 +1897,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_5.jpeg",
-    "diagram_caption": "Vegan plant collagen polysaccharide mesh structure forming a breathable protective hydration veil."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+    "diagram_caption": "Vegan botanical collagen and polysaccharide biomimetic network protective veil model."
   },
   {
     "id": "mgpdrn",
@@ -1916,8 +1916,8 @@
       "Recommended Dosage": "0.5% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "突厥蔷薇花水、DNA钠、十肽-4、1,2-己二醇、水",
-      "inci_en": "Rosa Damascena Flower Water, Sodium DNA, Decapeptide-4, 1,2-Hexanediol, Aqua",
+      "inci_cn": "十肽-4、脱氧核糖核酸、水解 DNA、核糖核酸、玫瑰（ROSA RUGOSA）花提取物、1,2-己二醇、水",
+      "inci_en": "DECAPEPTIDE-4, DNA, HYDROLYZED DNA, RNA, ROSA RUGOSA FLOWER EXTRACT, 1,2-HEXANEDIOL, AQUA",
       "cas": "90106-38-0 / 9007-49-2 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 3.0% (Recommended 1.0% - 2.0% for rosy glow and firming)",
       "ph_range": "5.5 - 7.0",
@@ -1957,8 +1957,8 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-    "diagram_caption": "Mechanism of Rose Distillate, Sodium DNA, and cTDP delivering microcirculation revitalization and deep moisture."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
+    "diagram_caption": "Rose distillate, Sodium DNA, and cTDP cutaneous delivery and cellular nourishment experimental data."
   },
   {
     "id": "4dzyshyz",
@@ -1976,8 +1976,8 @@
       "Recommended Dosage": "0.5% - 3.0%"
     },
     "rd_info": {
-      "inci_cn": "积雪草提取物、马齿苋提取物、甘草酸二钾、十肽-4、1,2-己二醇、水",
-      "inci_en": "Centella Asiatica Extract, Portulaca Oleracea Extract, Dipotassium Glycyrrhizate, Decapeptide-4, 1,2-Hexanediol, Aqua",
+      "inci_cn": "紫草（LITHOSPERMUM ERYTHRORHIZON）根提取物、侧柏（THUJA ORIENTALIS）叶提取物、桃（PRUNUS PERSICA）树脂提取物、甘草酸二钾、苯氧乙醇、十肽-4、水",
+      "inci_en": "LITHOSPERMUM ERYTHRORHIZON ROOT EXTRACT, THUJA ORIENTALIS LEAF EXTRACT, PRUNUS PERSICA (PEACH) RESIN EXTRACT, DIPOTASSIUM GLYCYRRHIZATE, PHENOXYETHANOL, DECAPEPTIDE-4, AQUA",
       "cas": "84696-21-9 / 90083-07-1 / 68797-35-3 / 917094-11-2 / 6920-22-5 / 7732-18-5",
       "dosage": "0.5% - 3.0% (Recommended 1.0% - 2.0% for emergency sensitive relief)",
       "ph_range": "5.5 - 7.0",
@@ -2017,7 +2017,7 @@
     "show": true,
     "date": "2026-09-14 22:50:00",
     "referenced_lab_data": [],
-    "diagram_image": "resource/images/brochure_extracted/page_10_img_5.jpeg",
-    "diagram_caption": "4D botanical targeted multi-pathway soothing system intercepting redness, heat, itchiness, and dryness."
+    "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
+    "diagram_caption": "4D botanical anti-itch & soothing mechanism: rapid redness relief, microbiome balance, and AQP3 water locking."
   }
 ]

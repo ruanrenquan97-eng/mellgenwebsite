@@ -17,215 +17,215 @@ with open(ZH_JSON_PATH, "r", encoding="utf-8") as f:
 with open(EN_JSON_PATH, "r", encoding="utf-8") as f:
     en_products = json.load(f)
 
-# Diagram image assignments based on series and product characteristics
+# # Authentic diagram assignments from official 2026 brochure
 diagram_map = {
     # 1. 透皮环肽类
     "tphtct": {
-        "img": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-        "caption_zh": "透皮环肽cTDP与皮肤细胞钠钾泵可逆结合开启吸收通道机理示意图（5分钟快速促透，30分钟自然关闭）",
-        "caption_en": "Mechanism diagram of cTDP reversible binding to cellular Na+/K+-ATPase to open cutaneous absorption channels (5-min fast opening, 30-min closure)."
+        "img": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
+        "caption_zh": "第三代生物透皮技术机理：cTDP靶向结合钠钾泵(Na+/K+-ATPase)，5分钟可逆开启毛囊与细胞间隙双通道，吸收效率提升10倍",
+        "caption_en": "3rd-generation biological transdermal mechanism: cTDP targeting Na+/K+-ATPase to reversibly open follicular and paracellular pathways within 5 minutes, enhancing absorption 10-fold."
     },
     "pdrnht": {
-        "img": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-        "caption_zh": "PDRN超分子棒状结构搭载透皮环肽深层促渗与细胞营养递送示意图",
-        "caption_en": "Supramolecular rod assembly of PDRN bound with transdermal cyclic peptides for deep cutaneous delivery."
+        "img": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
+        "caption_zh": "PDRN超分子棒状结构搭载透皮环肽促透机制与经皮吸收实验数据（5分钟打开屏障与浓度依赖曲线）",
+        "caption_en": "Supramolecular rod assembly of PDRN bound with transdermal cyclic peptides: cutaneous delivery and absorption data."
     },
     "jnhtea": {
-        "img": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-        "caption_zh": "聚能环肽多维供能与透皮促渗协同机制（能量腺苷协同环肽增强吸收与微环境赋活）",
-        "caption_en": "Synergistic mechanism of EAC cyclic peptides with adenosine for high-efficiency penetration and cellular energizing."
+        "img": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
+        "caption_zh": "聚能环肽细胞能量赋活与第三代生物透皮吸收协同机制图（钠钾泵结合与双通道渗透）",
+        "caption_en": "Synergistic cellular energizing and 3rd-generation transdermal penetration mechanism of EAC cyclic peptides."
     },
     "mgpdrn": {
-        "img": "resource/images/brochure_extracted/page_6_img_1.jpeg",
-        "caption_zh": "玫瑰蒸馏原液协同DNA钠与透皮环肽微循环赋活与深层润泽示意图",
-        "caption_en": "Mechanism of Rose Distillate, Sodium DNA, and cTDP delivering microcirculation revitalization and deep moisture."
+        "img": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
+        "caption_zh": "大马士革玫瑰精粹协同DNA钠与透皮环肽深层促渗与细胞营养递送实验图",
+        "caption_en": "Rose distillate, Sodium DNA, and cTDP cutaneous delivery and cellular nourishment experimental data."
     },
 
-    # 2. 人源重组胶原蛋白类
-    "mellpr8670": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "5Dcollagen五维立体胶原全层网络构建模型（I/II/III/IV/XVII型胶原协同支撑）",
-        "caption_en": "5Dcollagen 5-dimensional structural model (Multi-type I/II/III/IV/XVII collagen network scaffolding)."
-    },
-    "tp1jydb": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "透皮I型重组人源胶原蛋白直补真皮层支架结构与弹性回弹示意图",
-        "caption_en": "Transdermal Type I humanized collagen directly scaffolding dermal structural integrity and skin bounce."
-    },
-    "zzjydb": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "重组III型人源婴儿胶原蛋白高亲和修护与肌底充盈机制示意图",
-        "caption_en": "Recombinant Type III infant-like collagen replenishing the extracellular matrix and smoothing fine lines."
-    },
-    "5djydb": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "5D胶原微球缓释渗透与基底膜多维立体修护机制图",
-        "caption_en": "5D Collagen microsphere sustained-release delivery and multi-layer structural reinforcement."
-    },
-    "mellpr": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "重组3D胶原蛋白高活性三螺旋结构网络与弹力提升机制图",
-        "caption_en": "Recombinant 3D collagen high-affinity triple helix network and elasticity lifting mechanism."
-    },
-    "qdjy": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "缺端胶原蛋白去抗原性纯化结构与高生物相容性基质示意图",
-        "caption_en": "Atelocollagen de-antigenic molecular structure and biocompatible extracellular matrix support."
-    },
-    "tpxviijy": {
-        "img": "resource/images/brochure_extracted/page_7_img_15.jpg",
-        "caption_zh": "透皮XVII型跨膜胶原锚定表皮-真皮交界处(DEJ)与毛囊微环境结构示意图",
-        "caption_en": "Transmembrane Type XVII collagen anchoring the dermal-epidermal junction (DEJ) and hair follicle stem cell niche."
-    },
-
-    # 3. 纤连蛋白类
+    # 2. 纤连蛋白类
     "tpxldb": {
-        "img": "resource/images/brochure_extracted/page_7_img_8.jpeg",
-        "caption_zh": "透皮重组人源纤连蛋白TFNpro的RGD活性结构域与角质层屏障紧密修护示意图",
-        "caption_en": "Transdermal fibronectin TFNpro RGD active domain facilitating cell adhesion and stratum corneum barrier reinforcement."
+        "img": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
+        "caption_zh": "透皮重组人源纤连蛋白TFNpro毛细渗透吸收提升8倍与角质层屏障修复组织病理切片",
+        "caption_en": "TFNpro transdermal fibronectin: 8-fold enhanced absorption and stratum corneum barrier repair histological evidence."
     },
     "zzxldb": {
-        "img": "resource/images/brochure_extracted/page_7_img_8.jpeg",
-        "caption_zh": "重组纤连蛋白高纯度溶液对角质屏障损伤修护与微环境调控示意图",
-        "caption_en": "High-purity recombinant fibronectin promoting epidermal barrier integrity and skin resilience."
+        "img": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
+        "caption_zh": "AlphaDrugs人工智能分子设计平台：纤连蛋白与整联素(Integrin)分子对接模拟模型",
+        "caption_en": "AlphaDrugs AI platform: Fibronectin & Integrin molecular docking simulation model."
     },
 
-    # 4. 童颜水光蛋白
-    "tysgdb": {
-        "img": "resource/images/brochure_extracted/page_8_img_24.jpeg",
-        "caption_zh": "童颜水光蛋白MELLPRO rECM模拟人体皮肤细胞外基质多维复合矩阵装配模型",
-        "caption_en": "MELLPRO rECM biomimetic extracellular matrix architecture (Collagen + Fibronectin + Elastin + Amino Acids)."
+    # 3. 胶原蛋白全谱
+    "mellpr8670": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "5Dcollagen重组多型胶原蛋白五维立体全层网络模型（I型纤维束/II型软骨/III型网状/IV型基底膜/XVII型跨膜锁定）",
+        "caption_en": "5Dcollagen recombinant multi-type collagen 5D architectural model (Type I bundle / Type II cartilage / Type III mesh / Type IV basement membrane / Type XVII anchor)."
     },
+    "5djydb": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "5D胶原蛋白多维立体支撑与跨层渗透构建模型（I/II/III/IV/XVII型胶原协同网络）",
+        "caption_en": "5D Collagen multi-dimensional structural reinforcement and multi-layer scaffolding model."
+    },
+    "mellpr": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "重组多型胶原蛋白立体三螺旋网络支撑与肌底弹力构建模型",
+        "caption_en": "Recombinant collagen triple-helix matrix structural scaffolding and dermal elasticity model."
+    },
+    "tp1jydb": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "5Dcollagen多型胶原体系中I型胶原纤维束真皮支撑骨架与抗皱充盈机理模型",
+        "caption_en": "Type I collagen fiber bundle structural dermal scaffolding in the multi-type collagen architecture."
+    },
+    "zzjydb": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "5Dcollagen多型胶原体系中III型婴儿胶原柔嫩网状纤维结构与高亲和修护机制",
+        "caption_en": "Type III baby-collagen mesh network structure and extracellular matrix replenishment in 5D collagen architecture."
+    },
+    "tpxviijy": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "5Dcollagen多型胶原体系中XVII型跨膜胶原锚定表皮-真皮交界处(DEJ)结构图",
+        "caption_en": "Type XVII transmembrane collagen anchoring the dermal-epidermal junction (DEJ) in 5D collagen model."
+    },
+    "qdjy": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "去端肽高纯活性胶原天然三螺旋结构与组织生物相容性基质图",
+        "caption_en": "Atelocollagen native triple-helix structure and biocompatible extracellular matrix model."
+    },
+    "zwjy": {
+        "img": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
+        "caption_zh": "纯素植物胶原与多糖仿生空间网状结构锁水与表皮屏障保护模型",
+        "caption_en": "Vegan botanical collagen and polysaccharide biomimetic network protective veil model."
+    },
+
+    # 4. 弹性蛋白与水光蛋白
     "tptxdb": {
-        "img": "resource/images/brochure_extracted/page_8_img_24.jpeg",
-        "caption_zh": "重组弹性蛋白Telastin与弹力纤维网交联交织维持皮肤紧致回弹性示意图",
-        "caption_en": "Recombinant elastin Telastin reinforcing the dermal elastic network to maintain structural firmness."
+        "img": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
+        "caption_zh": "MELLPRO-rECM细胞外基质体系中弹性蛋白(Elastin)与胶原纤维交联回弹架构模型",
+        "caption_en": "Elastin and collagen fiber crosslinking elastic recoil network in MELLPRO-rECM matrix."
+    },
+    "tysgdb": {
+        "img": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
+        "caption_zh": "童颜水光蛋白MELLPRO-rECM细胞外基质全层装配模型（胶原蛋白+纤连蛋白+弹性蛋白+整联素+层粘连蛋白）",
+        "caption_en": "MELLPRO-rECM extracellular matrix assembly architecture (Collagen + Fibronectin + Elastin + Integrin + Laminin)."
     },
 
     # 5. 海洋亮肤因子 TXOD
     "hylfyz": {
-        "img": "resource/images/brochure_extracted/page_8_img_3.jpg",
-        "caption_zh": "MEGPEP TXOD海洋红珊瑚共生酵母双活性结构域及斑马鱼抗氧化美白实验效果图",
-        "caption_en": "MEGPEP TXOD marine yeast dual-active domains and zebrafish in vivo antioxidant & melanin reduction data."
+        "img": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
+        "caption_zh": "MEGPEP TXOD斑马鱼抗氧化美白功效试验（清除紫外ROS自由基与头部黑色素信号显著降低）",
+        "caption_en": "MEGPEP TXOD zebrafish in vivo antioxidant & whitening data (UV ROS scavenging & melanin reduction)."
     },
 
     # 6. 水母蛋白类
     "smndb": {
-        "img": "resource/images/brochure_extracted/page_9_img_1.jpg",
-        "caption_zh": "JELFIPRO海洋水母黏蛋白天然三螺旋高分子网络与紫外光防护修护图解",
-        "caption_en": "JELFIPRO jellyfish mucin native triple-helix polymer network and anti-photoaging protection mechanism."
+        "img": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
+        "caption_zh": "JELFIPRO水母黏蛋白抗光老化与角质修护实验（清除自由基、皮肤切片抗炎修护、促进细胞增殖）",
+        "caption_en": "JELFIPRO jellyfish mucin anti-photoaging & barrier repair: ROS scavenging, histology, and cell proliferation."
     },
     "0xjydb": {
-        "img": "resource/images/brochure_extracted/page_9_img_1.jpg",
-        "caption_zh": "水母0型活性胶原蛋白减少水分流失与修护紫外微损伤示意图",
-        "caption_en": "Type 0 marine jellyfish collagen preventing transepidermal water loss and repairing UV-induced micro-stress."
+        "img": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
+        "caption_zh": "JELFIPRO海洋0型胶原病理切片修护、ACE抑制率与促进细胞增殖实验图谱",
+        "caption_en": "JELFIPRO Marine Type 0 collagen histological repair, ACE inhibition, and cell proliferation data."
     },
 
     # 7. 蜗牛仿生蛋白类
     "wndbzy": {
-        "img": "resource/images/brochure_extracted/page_9_img_5.jpeg",
-        "caption_zh": "Snailpro仿生蜗牛蛋白结合细胞因子受体与高粘弹成膜锁水特性示意图",
-        "caption_en": "Snailpro biomimetic snail protein receptor-binding capability and viscoelastic hydrating film properties."
+        "img": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
+        "caption_zh": "Snailpro仿生蜗牛蛋白重组分子骨架、EGFR受体结合促细胞生长与高粘弹成膜锁水特性",
+        "caption_en": "Snailpro biomimetic snail protein backbone, EGFR receptor binding, and viscoelastic hydrating film properties."
     },
     "fswnjy": {
-        "img": "resource/images/brochure_extracted/page_9_img_5.jpeg",
-        "caption_zh": "Snailpro仿生蜗牛胶原耐热稳定性试验与多聚体肤感网络展示图",
-        "caption_en": "Snailpro biomimetic snail collagen thermal stability profile and polymeric skin-feel texture matrix."
+        "img": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
+        "caption_zh": "Snailpro仿生蜗牛胶原耐热耐储测试（48小时活性损失极低）与全肤感多聚体复合结构",
+        "caption_en": "Snailpro biomimetic snail collagen thermal stability (minimal loss after 48h) and polymeric skin-feel matrix."
     },
     "mellpr205": {
-        "img": "resource/images/brochure_extracted/page_9_img_5.jpeg",
-        "caption_zh": "重组贻贝黏蛋白DOPA基团耐水抗冲刷连续保护屏障网展示图",
-        "caption_en": "Recombinant mussel adhesive protein DOPA-functionalized water-resistant soothing protective barrier."
+        "img": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
+        "caption_zh": "重组仿生多肽蛋白微环境成膜保护、高稳定性多效修护与耐水抗冲刷特性展示",
+        "caption_en": "Recombinant biomimetic adhesive protein protective barrier film, high stability, and soothing properties."
     },
 
     # 8. 羊胎素与胎盘胶原
     "tptyts": {
-        "img": "resource/images/brochure_extracted/page_10_img_6.jpeg",
-        "caption_zh": "羊胎素纳米透皮渗透多维复合营养库赋活肌底新陈代谢图解",
-        "caption_en": "Sheep placenta bioactive nutrient complex nano-transdermal delivery and skin metabolism revitalization."
+        "img": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
+        "caption_zh": "羊胎素纳米透皮深层递送、抵抗光老化MMP-1基质降解与临床抗皱保湿舒缓测试图",
+        "caption_en": "Sheep placenta nano-transdermal delivery, anti-photoaging MMP-1 regulation, and clinical hydration & soothing data."
     },
     "tpjy": {
-        "img": "resource/images/brochure_extracted/page_10_img_6.jpeg",
-        "caption_zh": "胎盘多型天然活性胶原(I/III/V型)深层充盈与网状修护机制图",
-        "caption_en": "Placental multi-type native active procollagen (I/III/V) matrix replenishment and barrier repair."
+        "img": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
+        "caption_zh": "胎盘天然活性多型胶原深层渗透补充、真皮基质充盈与长效锁水舒缓实验数据",
+        "caption_en": "Placental multi-type native collagen deep penetration, matrix replenishment, and hydration data."
     },
 
     # 9. 特色植物与益生抗敏
     "yskmyz": {
-        "img": "resource/images/brochure_extracted/page_10_img_5.jpeg",
-        "caption_zh": "益生抗敏因子桃胶多糖调节皮肤微生态稳态与激活AQP3水通道蛋白长效锁水机制图",
-        "caption_en": "Probiotic anti-allergy factor peach gum oligosaccharides balancing microbiome and activating AQP3 water channels."
+        "img": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
+        "caption_zh": "MEGCALM PSF桃胶多糖发酵酶切原理示意图与HPLC对比（分子量更小、吸收更快、激活AQP3水通道）",
+        "caption_en": "MEGCALM PSF peach gum fermentation cleavage mechanism & HPLC profile (smaller molecular weight, faster absorption, AQP3 activation)."
     },
     "4dzyshyz": {
-        "img": "resource/images/brochure_extracted/page_10_img_5.jpeg",
-        "caption_zh": "4D特色植萃针对红、热、痒、燥多靶点快速舒缓与屏障强韧图解",
-        "caption_en": "4D botanical targeted multi-pathway soothing system intercepting redness, heat, itchiness, and dryness."
-    },
-    "zwjy": {
-        "img": "resource/images/brochure_extracted/page_10_img_5.jpeg",
-        "caption_zh": "纯素植物类胶原高分子多糖矩阵网状透气锁水膜形成图解",
-        "caption_en": "Vegan plant collagen polysaccharide mesh structure forming a breathable protective hydration veil."
+        "img": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
+        "caption_zh": "4D植萃止痒舒缓机制：快速止痒消肿退红、微生态菌群调节与水通道长效锁水",
+        "caption_en": "4D botanical anti-itch & soothing mechanism: rapid redness relief, microbiome balance, and AQP3 water locking."
     },
 
     # 10. 长白山与灵芝
     "zbssb": {
-        "img": "resource/images/brochure_extracted/page_11_img_2.jpeg",
-        "caption_zh": "长白山三宝（黑灵芝+人参根+野生松茸）液体深层发酵产物提亮抗氧机理图",
-        "caption_en": "MEGCALM GPT deep fermentation extract of Changbai Mountain Ganoderma, Ginseng, and Matsutake."
+        "img": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
+        "caption_zh": "长白山三宝(灵芝+人参+松茸)液体深层发酵物：MC1R黑色素生成抑制通路与酪氨酸酶活性抑制柱状图",
+        "caption_en": "MEGCALM GPT deep liquid fermentation extract: MC1R melanogenesis pathway & tyrosinase inhibition assays."
     },
     "lzdt": {
-        "img": "resource/images/brochure_extracted/page_11_img_2.jpeg",
-        "caption_zh": "灵芝多糖高活性多支链结构提升皮肤微环境抵御力与锁水舒缓机制图",
-        "caption_en": "Ganoderma lucidum polysaccharide branched structure enhancing skin defense and moisture retention."
+        "img": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
+        "caption_zh": "灵芝多糖活性组分抑制细胞氧化损伤、促进胶原与纤连蛋白表达及舒缓褪红实验数据",
+        "caption_en": "Ganoderma lucidum polysaccharide mitigating oxidative damage, boosting collagen/fibronectin, and soothing skin."
     },
 
-    # 11. 细胞营养素与氨基酸
-    "twdvit": {
-        "img": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-        "caption_zh": "Vitaluxe天然酵母代谢精粹多重维他命、氨基酸与有机酸细胞级深层滋养图解",
-        "caption_en": "Vitaluxe natural yeast fermentation metabolites providing multi-vitamin, amino acid, and organic acid cellular nutrition."
-    },
+    # 11. 细胞营养素与氨基酸（权威科研成果与高水平SCI文献背书）
     "aminofree": {
-        "img": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-        "caption_zh": "AminoFree全谱20种人体同源游离氨基酸精准匹配天然保湿因子(NMF)图解",
-        "caption_en": "AminoFree full-spectrum 20 human-homologous free amino acids matching natural moisturizing factor profile."
+        "img": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+        "caption_zh": "美尔健全谱氨基酸与生物透皮递送技术国际高水平SCI学术期刊论文发表成果（含Nature Biotechnology等）",
+        "caption_en": "Mellgen full-spectrum amino acid & transdermal delivery research publications in high-impact international journals."
     },
     "colamino": {
-        "img": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-        "caption_zh": "ColAmino富集胶原三螺旋特征氨基酸(Gly-Pro-Hyp)作为前体促进胶原生成机制图",
-        "caption_en": "ColAmino characteristic collagen triad amino acids (Gly-Pro-Hyp) serving as building block precursors."
+        "img": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+        "caption_zh": "美尔健胶原特征三联氨基酸合成与生物递送技术学术论文与国家基础研究获奖成果",
+        "caption_en": "Mellgen collagen-triad amino acid synthesis & transdermal delivery academic publications and awards."
+    },
+    "twdvit": {
+        "img": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+        "caption_zh": "天然酵母多维营养代谢精粹与透皮促透核心技术国际权威文献与专利成果",
+        "caption_en": "Natural yeast fermentation multi-nutrient metabolites & transdermal technology authoritative scientific publications."
     },
     "lrdt": {
-        "img": "resource/images/brochure_extracted/page_10_img_13.jpeg",
-        "caption_zh": "鹿茸小分子多肽群保护DNA抗氧化损伤与维持正常代谢更新机理图",
-        "caption_en": "Deer antler bioactive peptides protecting cellular DNA against oxidative stress and sustaining metabolic turnover."
+        "img": "resource/images/brochure_diagrams/diagram_p3_publications.jpg",
+        "caption_zh": "小分子活性多肽与生物透皮融合技术国际高水平SCI期刊文献与发明专利背书",
+        "caption_en": "Bioactive oligopeptide & transdermal technology international SCI publications and patent endorsements."
     },
 
-    # 12. 定制与清洁类
-    "supercleaner": {
-        "img": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-        "caption_zh": "Super cleaner天然植物皂苷胶束与促透多肽温和软化溶解毛孔角栓油脂示意图",
-        "caption_en": "Super cleaner botanical saponin micelle matrix gently solubilizing sebum plugs and purifying pore microenvironments."
+    # 12. 定制与清洁类（现代GMP生物制造平台）
+    "gtlafdp": {
+        "img": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+        "caption_zh": "美尔健绿色合成生物制造平台：生物透皮孵化中心、微生物细胞工厂与GMP冷冻干燥制剂生产线",
+        "caption_en": "Mellgen Green Bio-manufacturing Platform: Transdermal R&D Center, Microbial Cell Factory & GMP Freeze-drying Line."
     },
     "megzym": {
-        "img": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-        "caption_zh": "生物合成溶菌酶靶向水解有害菌细胞壁与维护皮肤微生态平衡示意图",
-        "caption_en": "Biosynthetic lysozyme selectively hydrolyzing bacterial peptidoglycans to maintain skin microbiome equilibrium."
-    },
-    "gtlafdp": {
-        "img": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-        "caption_zh": "寡肽类MEGPEP AFDP高纯度冻干工艺与细胞微环境修护活性示意图",
-        "caption_en": "MEGPEP AFDP high-purity lyophilized oligopeptides stimulating dermal collagen and anti-oxidation response."
+        "img": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+        "caption_zh": "重组生物活性酶高密度工程菌发酵车间与GMP标准分离纯化生产线实景",
+        "caption_en": "Recombinant bio-enzyme high-density fermentation and GMP standard purification facility."
     },
     "megpep6245": {
-        "img": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-        "caption_zh": "MEGPEP SFF酵母发酵滤液小分子活性肽群深层滋润与角质平滑示意图",
-        "caption_en": "MEGPEP SFF yeast ferment filtrate micro-peptides replenishing moisture and smoothing skin texture."
+        "img": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+        "caption_zh": "现代微生物深层发酵工厂、定向破壁酶解系统与多级超滤精制生产实景",
+        "caption_en": "Modern microbial deep-fermentation plant, enzymatic lysis system, and ultrafiltration lines."
     },
     "megpep": {
-        "img": "resource/images/brochure_extracted/page_4_img_15.jpeg",
-        "caption_zh": "MEGPEP RF50G-寡肽原液修护微损伤与强韧表皮屏障稳态示意图",
-        "caption_en": "MEGPEP RF50G- oligopeptide solution reinforcing epidermal barrier stability and soothing sensitive skin."
+        "img": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+        "caption_zh": "高纯度重组寡肽制剂线、百级洁净灌装车间与严苛质控检测中心",
+        "caption_en": "High-purity recombinant oligopeptide formulation line, clean-room filling, and strict QC testing center."
+    },
+    "supercleaner": {
+        "img": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
+        "caption_zh": "植物皂苷定向提取与多肽促透洁净原料标准化生物制造产线",
+        "caption_en": "Botanical saponin extraction and peptide-assisted gentle cleansing raw material production facility."
     }
 }
 

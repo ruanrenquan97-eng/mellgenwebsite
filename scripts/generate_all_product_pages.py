@@ -53,7 +53,30 @@ def render_b2b_dossier_zh(p):
         out.append('    <p style="font-size: 14px; color: #64748b; margin: 0;">针对研发工程师、采购供应链及产品策划的专属深度技术与准入资料</p>')
         out.append('  </div>')
 
-    # 1. 研发配方工程师专区
+    # 1. 生物科技机理与实验佐证（源自2026官方画册）
+    diagram_img = p.get("diagram_image")
+    diagram_cap = p.get("diagram_caption", "")
+    if diagram_img:
+        out.append('  <!-- 1. 生物科技机理与实验佐证 -->')
+        out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
+        out.append('    <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;">')
+        out.append('      <div style="display: flex; align-items: center; gap: 10px;">')
+        out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">📊</span>')
+        out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">生物科技机理与实验佐证 (Biotechnology Mechanism &amp; Evidence)</span>')
+        out.append('      </div>')
+        out.append('      <span style="color: #dbeafe; font-size: 12px;">官方权威画册图谱 · 结构解析 · 促透与功效机理</span>')
+        out.append('    </div>')
+        out.append('    <div style="padding: 24px; text-align: center; background: #f8fafc;">')
+        out.append('      <div style="display: inline-block; max-width: 100%; background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">')
+        out.append(f'        <img src="../{diagram_img}" alt="{diagram_cap}" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: 6px; display: block; margin: 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">')
+        out.append(f'        <p style="margin: 14px 0 4px 0; font-size: 13.5px; color: #334155; font-weight: 600; line-height: 1.6; text-align: center;">')
+        out.append(f'          <span style="display: inline-block; background: #eff6ff; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 8px; border: 1px solid #bfdbfe;">机理与实验图谱</span>{diagram_cap}')
+        out.append('        </p>')
+        out.append('      </div>')
+        out.append('    </div>')
+        out.append('  </div>')
+
+    # 2. 研发配方工程师专区
     if has_rd:
         out.append('  <!-- 研发配方工程师专区 -->')
         out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
@@ -93,7 +116,7 @@ def render_b2b_dossier_zh(p):
         out.append('    </div>')
         out.append('  </div>')
 
-    # 2. 采购与供应链专区
+    # 3. 采购与供应链专区
     if has_proc:
         out.append('  <!-- 采购与供应链专区 -->')
         out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
@@ -129,7 +152,7 @@ def render_b2b_dossier_zh(p):
         out.append('    </div>')
         out.append('  </div>')
 
-    # 3. 产品策划专区
+    # 4. 产品策划专区
     if has_mkt:
         out.append('  <!-- 产品策划专区 -->')
         out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
@@ -167,29 +190,6 @@ def render_b2b_dossier_zh(p):
             out.append(f'        <p style="margin: 0; font-size: 13.5px; color: #334155;">{mkt.get("patents")}</p>')
             out.append('      </div>')
 
-        out.append('    </div>')
-        out.append('  </div>')
-
-    # 4. 科学机理与分子模型图谱（源自2026官方画册）
-    diagram_img = p.get("diagram_image")
-    diagram_cap = p.get("diagram_caption", "")
-    if diagram_img:
-        out.append('  <!-- 科学机理与实验佐证图谱 -->')
-        out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
-        out.append('    <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;">')
-        out.append('      <div style="display: flex; align-items: center; gap: 10px;">')
-        out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">📊</span>')
-        out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">生物科技机理与实验佐证 (Biotechnology Mechanism &amp; Evidence)</span>')
-        out.append('      </div>')
-        out.append('      <span style="color: #dbeafe; font-size: 12px;">官方权威画册图谱 · 结构解析 · 促透与功效机理</span>')
-        out.append('    </div>')
-        out.append('    <div style="padding: 24px; text-align: center; background: #f8fafc;">')
-        out.append('      <div style="display: inline-block; max-width: 100%; background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">')
-        out.append(f'        <img src="../{diagram_img}" alt="{diagram_cap}" style="max-width: 100%; max-height: 460px; object-fit: contain; border-radius: 6px; display: block; margin: 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">')
-        out.append(f'        <p style="margin: 14px 0 4px 0; font-size: 13.5px; color: #334155; font-weight: 600; line-height: 1.6; text-align: center;">')
-        out.append(f'          <span style="display: inline-block; background: #eff6ff; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 8px; border: 1px solid #bfdbfe;">图示说明</span>{diagram_cap}')
-        out.append('        </p>')
-        out.append('      </div>')
         out.append('    </div>')
         out.append('  </div>')
 

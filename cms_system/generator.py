@@ -643,12 +643,20 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     html = replace_group(r'(<span class="p102-info-date">)(.*?)(</span>)', article["date"], html, flags=0)
     
     content_pattern = r'(<div class="p102-info-content endit-content">)(.*?)(</div>\s*<div class="clear"></div>)'
+    
+    # Normalize relative image paths based on target page depth
+    art_content = article.get("content", "")
+    rel_depth = article.get("link", "").count("/")
+    root_prefix = "../" * rel_depth if rel_depth > 0 else "./"
+    art_content = re.sub(r'src=["\'](?:\.\./)*resource/images/', f'src="{root_prefix}resource/images/', art_content)
+    art_content = re.sub(r'src=["\'](?:\.\./)*images/', f'src="{root_prefix}images/', art_content)
+    
     if re.search(content_pattern, html, re.DOTALL):
-        html = replace_group(content_pattern, f"\n     {article['content']}\n    ", html)
+        html = replace_group(content_pattern, f"\n     {art_content}\n    ", html)
     else:
         alt_pattern = r'(<div class="p102-info-content[^"]*">)(.*?)(</div>\s*<div class="clear"></div>)'
         if re.search(alt_pattern, html, re.DOTALL):
-            html = replace_group(alt_pattern, f"\n     {article['content']}\n    ", html)
+            html = replace_group(alt_pattern, f"\n     {art_content}\n    ", html)
 
     # 1. Canonical & Multi-language (Hreflang)
     can_href_tags = generate_canonical_and_hreflang_tags(article.get("link", ""))

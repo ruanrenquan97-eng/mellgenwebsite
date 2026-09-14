@@ -152,7 +152,9 @@ def get_product_subcategories(category):
 
 def get_article_subcategories(category):
     if category == "合作案例":
-        return ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]
+        return ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品", "实验室数据研究"]
+    elif category == "实验室数据研究":
+        return ["实验室数据研究"]
     elif category == "新闻资讯":
         return ["新闻资讯", "企业新闻", "技术知识", "常见问答"]
     elif category == "企业新闻":
@@ -167,7 +169,8 @@ def update_global_contact_info(html_content, settings):
     
     address_val = settings.get("address", "")
     if address_val:
-        html_content = re.sub(r'广东省深圳市大鹏新区葵涌街道生命科学产业园(?:B1栋)*', address_val, html_content)
+        html_content = re.sub(r'广东省深圳市大鹏新区葵涌街道生命科学产业园[A-Za-z0-9栋 楼/、]*', address_val, html_content)
+        html_content = re.sub(r'深圳市大鹏新区葵涌街道(?:金业大道140号)?生命科学产业园[A-Za-z0-9栋 楼/、]*', address_val, html_content)
     
     html_content = html_content.replace("61791579@qq.com", settings.get("email", ""))
     html_content = html_content.replace("邮箱：61791579@qq.com", "邮箱：" + settings.get("email", ""))
@@ -410,7 +413,80 @@ def render_product_b2b_sections(product):
         out.append('    </div>')
         out.append('  </div>')
 
-    # 4. 法规合规与免责声明
+    # 4. 实验室数据研究与权威第三方检测报告
+    referenced_lab_ids = product.get("referenced_lab_data") or []
+    if referenced_lab_ids and isinstance(referenced_lab_ids, list):
+        lab_articles_map = {}
+        art_path = os.path.join(DATA_DIR, "articles.json")
+        if os.path.exists(art_path):
+            try:
+                with open(art_path, "r", encoding="utf-8") as af:
+                    all_arts = json.load(af)
+                    for a in all_arts:
+                        lab_articles_map[a["id"]] = a
+            except Exception:
+                pass
+                
+        matched_reports = [lab_articles_map[rid] for rid in referenced_lab_ids if rid in lab_articles_map]
+        if matched_reports:
+            out.append('  <!-- 实验室数据研究与第三方权威检测报告 -->')
+            out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
+            out.append('    <div style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;">')
+            out.append('      <div style="display: flex; align-items: center; gap: 10px;">')
+            out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">🔬</span>')
+            out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">实验室数据研究与权威第三方检测报告 (Laboratory Research & Testing Reports)</span>')
+            out.append('      </div>')
+            out.append('      <span style="color: #bfdbfe; font-size: 12px;">国家认可 CMA / CNAS 实验室实测数据 · 经皮渗透 · 生物相容 · 功效循证</span>')
+            out.append('    </div>')
+            out.append('    <div style="padding: 24px; display: flex; flex-direction: column; gap: 18px;">')
+            
+            for rep in matched_reports:
+                inst = rep.get("institution", "权威第三方检测机构")
+                ttype = rep.get("test_type", "专业检测")
+                conc = rep.get("conclusion", "")
+                rep_link = "../" + rep["link"].replace("\\", "/")
+                pdf_link = "../" + rep.get("report_file", "").replace("\\", "/") if rep.get("report_file") else ""
+                
+                img_rel = rep.get("image") or ""
+                if img_rel and not img_rel.startswith("http"):
+                    img_src = "../" + img_rel.replace("\\", "/").lstrip("/")
+                else:
+                    img_src = img_rel or "../resource/reports/images/lab_tpht_penetration_thumb.jpg"
+
+                out.append('      <div style="border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 20px; background: #ffffff; box-shadow: 0 3px 12px rgba(0,0,0,0.03); display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">')
+                out.append('        <!-- 报告封面缩略图 -->')
+                out.append('        <div style="width: 130px; flex-shrink: 0; position: relative; border-radius: 6px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #f8fafc;">')
+                out.append(f'          <a href="{rep_link}" target="_blank" title="点击查阅图文报告详情">')
+                out.append(f'            <img src="{img_src}" alt="{rep["title"]}" style="width: 100%; height: 170px; object-fit: contain; background: #f8fafc; display: block; padding: 4px;">')
+                out.append('            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.8); color: #ffffff; font-size: 10.5px; text-align: center; padding: 3px 0; font-weight: 700;">CMA 检验章</div>')
+                out.append('          </a>')
+                out.append('        </div>')
+                out.append('        <!-- 报告核心结论与链接 -->')
+                out.append('        <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; justify-content: space-between; min-height: 170px;">')
+                out.append('          <div>')
+                out.append('            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">')
+                out.append('              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">')
+                out.append('                <span style="background: #1e3a8a; color: #ffffff; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px;">CMA / CNAS 权威资质</span>')
+                out.append(f'                <span style="background: #e0f2fe; color: #0369a1; font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 4px;">{ttype}</span>')
+                out.append(f'                <span style="color: #64748b; font-size: 12px;">受托机构：{inst}</span>')
+                out.append('              </div>')
+                out.append('            </div>')
+                out.append(f'            <h5 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #0f172a;"><a href="{rep_link}" target="_blank" style="color: #1e3a8a; text-decoration: none;">{rep["title"]}</a></h5>')
+                if conc:
+                    out.append('            <div style="background: #eff6ff; border: 1px solid #dbeafe; border-radius: 6px; padding: 9px 12px; margin-bottom: 10px;">')
+                    out.append(f'              <div style="font-size: 12.5px; color: #1e40af; line-height: 1.6;"><strong>📊 核心检测结论：</strong>{conc}</div>')
+                    out.append('            </div>')
+                out.append('          </div>')
+                out.append('          <div style="display: flex; align-items: center; gap: 10px; justify-content: flex-end; margin-top: 6px;">')
+                out.append(f'            <a href="{rep_link}" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; background: #1e3a8a; color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; padding: 5px 14px; border-radius: 4px;">🔬 查看图文实验报告 &gt;&gt;</a>')
+                out.append('          </div>')
+                out.append('        </div>')
+                out.append('      </div>')
+                
+            out.append('    </div>')
+            out.append('  </div>')
+
+    # 5. 法规合规与免责声明
     out.append('  <!-- 法规合规与免责声明 -->')
     out.append('  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #174778; border-radius: 6px; padding: 20px 24px; margin-top: 25px;">')
     out.append('    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">')
@@ -716,8 +792,11 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     html = re.sub(r'<title>[^<]+</title>', f"<title>{art_title}</title>", html)
     
     cat_filename = "article_xwzx.html"
-    cat = article['category']
-    if cat in ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]:
+    cat = article.get('category', '')
+    subcat = article.get('sub_category', '')
+    if subcat == "实验室数据研究" or cat == "实验室数据研究":
+        cat_filename = "article_syssj.html"
+    elif cat in ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]:
         cat_filename = "article_hzal.html"
     elif cat in ["常见问答"]:
         cat_filename = "article_cjwt.html"
@@ -902,13 +981,13 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
         html = f.read()
         
     subcats = get_article_subcategories(category)
-    cat_articles = [a for a in articles if a.get('category') in subcats and a.get('show', True)]
+    cat_articles = [a for a in articles if (a.get('category') in subcats or a.get('sub_category') in subcats or a.get('cat_name') in subcats) and a.get('show', True)]
     cat_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
     
     if '<div class="hyt-product-list-5">' in html:
-        # Case listing pages (article_hzal.html and its 7 industry subpages)
+        # Case listing pages (article_hzal.html and its 8 industry subpages)
         list_html = "\n"
-        display_arts = cat_articles[:12]
+        display_arts = cat_articles[:30]
         for i, a in enumerate(display_arts):
             detail_link = "./" + a["link"].replace("\\", "/")
             image_path = "./" + a["image"].replace("\\", "/")
@@ -1243,6 +1322,7 @@ def publish_site():
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_gnlsp.html"), "功能类食品", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_xhyp.html"), "洗护用品", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_nxhlcp.html"), "女性护理产品", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_syssj.html"), "实验室数据研究", articles, settings, nav_links)
     
     # 2. Re-generate all product details
     template_product_path = os.path.join(WORKSPACE_DIR, "products", "tphtct.html")

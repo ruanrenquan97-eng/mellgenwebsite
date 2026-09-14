@@ -531,10 +531,13 @@ em{font-style:normal;}
     }
     
     .p102-info-related-list {
-        padding: 29px 0;
+        padding: 26px 0;
         background: #fff;
         border: 1px solid #f0f0f0;
         position: relative;
+        display: flex;
+        align-items: stretch;
+        box-sizing: border-box;
     }
     
     .p102-info-related-list:after {
@@ -543,65 +546,89 @@ em{font-style:normal;}
         width: 1px;
         background: #dedede;
         left: 50%;
-        top: 29px;
-        bottom: 29px;
+        top: 24px;
+        bottom: 24px;
         z-index: 1;
+    }
+
+    .p102-info-related-list .clear {
+        display: none !important;
     }
     
     .p102-info-related-list dl {
-        float: left;
-        width: 541px;
-        padding: 0 29px;
+        flex: 0 0 50%;
+        width: 50%;
+        max-width: 50%;
+        float: none;
+        padding: 0 28px;
         position: relative;
+        box-sizing: border-box;
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        margin: 0;
     }
     
     .p102-info-related-list dt {
-        width: 220px;
+        flex: 0 0 200px;
+        width: 200px;
+        max-width: 200px;
+        margin: 0;
     }
     
     .p102-info-related-list dt a,
     .p102-info-related-list dt img {
         width: 100%;
+        height: 125px;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
         display: block;
+        border-radius: 4px;
     }
     
     .p102-info-related-list dd {
-        position: absolute;
-        padding-top: 5px;
-        left: 280px;
-        right: 29px;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
+        flex: 1 1 auto;
+        min-width: 0;
+        position: static;
+        padding: 2px 0 0 0;
+        margin: 0;
     }
     
     .p102-info-related-list dd h4 {
-        height: 34px;
-        line-height: 34px;
-        font-weight: normal;
-        margin-bottom: 6px;
+        height: 32px;
+        line-height: 32px;
+        font-weight: 600;
+        margin: 0 0 6px 0;
     }
     
     .p102-info-related-list dd h4 a {
-        display: inline-block;
+        display: block;
         width: 100%;
-        height: 34px;
-        font-size: 20px;
-        color: #333333;
+        height: 32px;
+        line-height: 32px;
+        font-size: 17px;
+        color: #222222;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        transition: color 0.2s ease;
     }
     
     .p102-info-related-list dd p {
         font-size: 14px;
-        line-height: 26px;
+        line-height: 24px;
         color: #666666;
         text-align: justify;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     
     .p102-info-related-list dd p a {
-        color: #333333;
+        color: #174778;
+        font-weight: 500;
     }
     
     .p102-info-related-list dl:hover dd h4 a {
@@ -668,26 +695,60 @@ em{font-style:normal;}
         
     .p102-info-latest {
         padding: 30px 0 80px;
+        box-sizing: border-box;
+        clear: both;
     }
     
     .p102-info-latest ul {
-        padding: 29px 39px;
+        padding: 26px 36px;
         border: 1px solid #f0f0f0;
         position: relative;
         background: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        box-sizing: border-box;
+    }
+
+    .p102-info-latest ul:after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        left: 50%;
+        top: 22px;
+        bottom: 22px;
+        background: #dedede;
+        z-index: 1;
     }
     
     .p102-info-latest li {
-        float: left;
-        width: 530px;
+        flex: 0 0 calc(50% - 24px);
+        width: calc(50% - 24px);
+        max-width: calc(50% - 24px);
+        float: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
     
+    .p102-info-latest li.last {
+        margin-left: 0;
+    }
+    
+    .p102-info-latest li.last:before {
+        display: none;
+    }
+
     .p102-info-latest li h4 {
-        height: 36px;
-        padding-left: 25px;
+        height: 38px;
+        line-height: 38px;
+        padding-left: 18px;
         position: relative;
-        line-height: 36px;
         font-weight: normal;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
     }
     
     .p102-info-latest li h4:before {
@@ -697,20 +758,27 @@ em{font-style:normal;}
         height: 4px;
         border-radius: 100%;
         border: 2px solid #174778;
+        background: #fff;
         left: 0;
         top: 50%;
-        margin-top: -4px;
+        transform: translateY(-50%);
+        margin-top: 0;
+        box-sizing: content-box;
     }
     
     .p102-info-latest li h4 a {
         display: inline-block;
-        max-width: 400px;
-        height: 36px;
-        font-size: 16px;
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: calc(100% - 95px);
+        height: 38px;
+        line-height: 38px;
+        font-size: 15px;
         color: #333333;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        transition: color 0.2s ease;
     }
     
     .p102-info-latest li h4:hover a {
@@ -719,35 +787,20 @@ em{font-style:normal;}
     
     .p102-info-latest li h4:hover:before {
         border-color: #174778;
-    }
-    
-    .p102-info-latest li h4:hover:after {
         background: #174778;
     }
     
     .p102-info-latest li h4 em {
-        float: right;
-        width: 90px;
-        height: 36px;
-        font-family: Arial;
+        flex: 0 0 85px;
+        width: 85px;
+        height: 38px;
+        line-height: 38px;
+        font-family: Arial, sans-serif;
         color: #808080;
         text-align: right;
         font-style: normal;
-    }
-    
-    .p102-info-latest li.last {
-        margin-left: 60px;
-    }
-    
-    .p102-info-latest li.last:before {
-        content: '';
-        position: absolute;
-        width: 1px;
-        left: 50%;
-        top: 22px;
-        bottom: 22px;
-        background: #dedede;
-        z-index: 1;
+        font-size: 13px;
+        white-space: nowrap;
     }
 
 

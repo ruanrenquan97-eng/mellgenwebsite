@@ -5964,6 +5964,294 @@
     box-sizing: border-box !important;
   }
 
+  /* 桌面端文章详情页底部相关推荐与最新资讯 (.p102-info-related, .p102-info-latest) 标准双列网格布局，严防折行错位 */
+  .p102-info-related,
+  .p102-info-latest {
+    width: 1200px !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    float: none !important;
+    clear: both !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .p102-info-related {
+    padding-top: 30px !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .p102-info-latest {
+    padding-top: 30px !important;
+    padding-bottom: 80px !important;
+    margin-top: 0 !important;
+  }
+
+  .p102-info-11-title,
+  .p102-info-12-title {
+    height: 48px !important;
+    line-height: 48px !important;
+    font-size: 26px !important;
+    font-weight: normal !important;
+    color: #174778 !important;
+    padding-bottom: 10px !important;
+    padding-left: 0 !important;
+    border-left: none !important;
+    margin-bottom: 0 !important;
+    position: relative !important;
+  }
+
+  .p102-info-11-title:after,
+  .p102-info-12-title:after {
+    content: '' !important;
+    position: absolute !important;
+    width: 30px !important;
+    height: 2px !important;
+    background: #174778 !important;
+    left: 0 !important;
+    bottom: -1px !important;
+    z-index: 1 !important;
+  }
+
+  .p102-info-related-list {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    position: relative !important;
+    background: #ffffff !important;
+    border: 1px solid #f0f0f0 !important;
+    padding: 26px 0 !important;
+    box-sizing: border-box !important;
+    gap: 0 !important;
+  }
+
+  .p102-info-related-list:after {
+    content: '' !important;
+    position: absolute !important;
+    width: 1px !important;
+    background: #e8e8e8 !important;
+    left: 50% !important;
+    top: 24px !important;
+    bottom: 24px !important;
+    z-index: 1 !important;
+  }
+
+  .p102-info-related-list .clear {
+    display: none !important;
+  }
+
+  .p102-info-related-list dl {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    float: none !important;
+    padding: 0 28px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .p102-info-related-list dt {
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    max-width: 200px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .p102-info-related-list dt a,
+  .p102-info-related-list dt img {
+    width: 100% !important;
+    height: 125px !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 4px !important;
+  }
+
+  .p102-info-related-list dd {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    position: static !important;
+    padding: 2px 0 0 0 !important;
+    margin: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: block !important;
+  }
+
+  .p102-info-related-list dd h4 {
+    height: 32px !important;
+    line-height: 32px !important;
+    font-weight: 600 !important;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .p102-info-related-list dd h4 a {
+    display: block !important;
+    width: 100% !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .p102-info-related-list dd p {
+    font-size: 14px !important;
+    line-height: 24px !important;
+    color: #666666 !important;
+    text-align: justify !important;
+    margin: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .p102-info-related-list dd p a {
+    color: #174778 !important;
+    font-weight: 500 !important;
+  }
+
+  .p102-info-related-list dl:hover dd h4 a {
+    color: #174778 !important;
+  }
+
+  /* 最新资讯 */
+  .p102-info-latest ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    padding: 24px 36px !important;
+    border: 1px solid #f0f0f0 !important;
+    position: relative !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    list-style: none !important;
+    margin: 0 !important;
+  }
+
+  .p102-info-latest ul:after {
+    content: '' !important;
+    position: absolute !important;
+    width: 1px !important;
+    left: 50% !important;
+    top: 20px !important;
+    bottom: 20px !important;
+    background: #e8e8e8 !important;
+    z-index: 1 !important;
+  }
+
+  .p102-info-latest li {
+    flex: 0 0 calc(50% - 24px) !important;
+    width: calc(50% - 24px) !important;
+    max-width: calc(50% - 24px) !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .p102-info-latest li.last {
+    margin-left: 0 !important;
+  }
+
+  .p102-info-latest li.last:before {
+    display: none !important;
+  }
+
+  .p102-info-latest li h4 {
+    height: 38px !important;
+    line-height: 38px !important;
+    padding-left: 18px !important;
+    position: relative !important;
+    font-weight: normal !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin: 0 !important;
+    border-bottom: none !important;
+  }
+
+  .p102-info-latest li h4:before {
+    content: "" !important;
+    position: absolute !important;
+    width: 4px !important;
+    height: 4px !important;
+    border-radius: 100% !important;
+    border: 2px solid #174778 !important;
+    background: #ffffff !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-top: 0 !important;
+    box-sizing: content-box !important;
+  }
+
+  .p102-info-latest li h4 a {
+    display: inline-block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 95px) !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    font-size: 15px !important;
+    color: #333333 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .p102-info-latest li h4:hover a {
+    color: #174778 !important;
+  }
+
+  .p102-info-latest li h4:hover:before {
+    border-color: #174778 !important;
+    background: #174778 !important;
+  }
+
+  .p102-info-latest li h4 em {
+    flex: 0 0 85px !important;
+    width: 85px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    font-family: Arial, sans-serif !important;
+    color: #808080 !important;
+    text-align: right !important;
+    font-style: normal !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+  }
+
   .p102-fdh-3 {
     display: block !important;
     height: auto !important;

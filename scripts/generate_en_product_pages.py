@@ -162,7 +162,30 @@ def render_b2b_dossier_en(p):
         out.append('    </div>')
         out.append('  </div>')
 
-    # 4. Regulatory Compliance & Disclaimer
+    # 4. Authoritative Brochure Scientific Mechanism Diagram
+    diagram_img = p.get("diagram_image")
+    diagram_cap = p.get("diagram_caption", "")
+    if diagram_img:
+        out.append('  <!-- Biotechnology Mechanism & Evidence -->')
+        out.append('  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden;">')
+        out.append('    <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;">')
+        out.append('      <div style="display: flex; align-items: center; gap: 10px;">')
+        out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">📊</span>')
+        out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">Biotechnology Mechanism &amp; Scientific Evidence</span>')
+        out.append('      </div>')
+        out.append('      <span style="color: #dbeafe; font-size: 12px;">Authoritative Brochure Technical Diagram · Molecular Model · Transdermal &amp; Efficacy Mechanism</span>')
+        out.append('    </div>')
+        out.append('    <div style="padding: 24px; text-align: center; background: #f8fafc;">')
+        out.append('      <div style="display: inline-block; max-width: 100%; background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">')
+        out.append(f'        <img src="../../{diagram_img}" alt="{diagram_cap}" style="max-width: 100%; max-height: 460px; object-fit: contain; border-radius: 6px; display: block; margin: 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">')
+        out.append(f'        <p style="margin: 14px 0 4px 0; font-size: 13.5px; color: #334155; font-weight: 600; line-height: 1.6; text-align: center;">')
+        out.append(f'          <span style="display: inline-block; background: #eff6ff; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-right: 8px; border: 1px solid #bfdbfe;">Mechanism Diagram</span>{diagram_cap}')
+        out.append('        </p>')
+        out.append('      </div>')
+        out.append('    </div>')
+        out.append('  </div>')
+
+    # 5. Regulatory Compliance & Disclaimer
     out.append('  <!-- Regulatory Compliance & Disclaimer -->')
     out.append('  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #174778; border-radius: 6px; padding: 20px 24px; margin-top: 25px;">')
     out.append('    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">')

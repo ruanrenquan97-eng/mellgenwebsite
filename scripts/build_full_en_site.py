@@ -298,9 +298,13 @@ DICT_ITEMS = [
     ("保留一切权利", "All Rights Reserved"),
     ("备案号：", "ICP License: "),
     ("邮箱：", "Email: "),
-    ("地址：广东省深圳市大鹏新区葵涌街道生命科学产业园", "Address: Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
+    ("地址：广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼", "Address: 3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
+    ("广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼", "3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
+    ("地址：广东省深圳市大鹏新区葵涌街道生命科学产业园B1栋", "Address: 3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
+    ("广东省深圳市大鹏新区葵涌街道生命科学产业园B1栋", "3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
+    ("地址：广东省深圳市大鹏新区葵涌街道生命科学产业园", "Address: 3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
+    ("广东省深圳市大鹏新区葵涌街道生命科学产业园", "3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
     ("地址：", "Address: "),
-    ("广东省深圳市大鹏新区葵涌街道生命科学产业园", "Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China"),
 ]
 
 # Load external en_dictionary.json if available

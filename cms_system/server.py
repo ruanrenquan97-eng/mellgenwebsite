@@ -262,6 +262,7 @@ def add_product():
         "rd_info": data.get("rd_info", {}),
         "procurement_info": data.get("procurement_info", {}),
         "marketing_info": data.get("marketing_info", {}),
+        "referenced_lab_data": data.get("referenced_lab_data", []),
         "disclaimer": data.get("disclaimer", "").strip(),
         "seoTitle": data.get("seoTitle", "").strip(),
         "seoKeywords": data.get("seoKeywords", "").strip(),
@@ -300,6 +301,7 @@ def edit_product(product_id):
             p["rd_info"] = data.get("rd_info", p.get("rd_info", {}))
             p["procurement_info"] = data.get("procurement_info", p.get("procurement_info", {}))
             p["marketing_info"] = data.get("marketing_info", p.get("marketing_info", {}))
+            p["referenced_lab_data"] = data.get("referenced_lab_data", p.get("referenced_lab_data", []))
             p["disclaimer"] = data.get("disclaimer", p.get("disclaimer", "")).strip()
             p["seoTitle"] = data.get("seoTitle", data.get("seoTitle", p.get("seoTitle", ""))).strip()
             p["seoKeywords"] = data.get("seoKeywords", data.get("seoKeywords", p.get("seoKeywords", ""))).strip()
@@ -591,7 +593,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         "",
         "## 核心技术与专利创新平台",
         f"- [第3代高效生物透皮肽技术]({domain}/helps/tptjs.html): 突破传统生物多肽大分子难以穿透皮肤角质层的行业技术瓶颈，通过仿生靶向穿膜设计，经体外透皮与临床试验测定，透皮吸收率较传统多肽提升 10-15 倍，无创深达真皮层，赋能抗衰老、屏障修护、淡化细纹等护肤产品开发。",
-        "- 研发与生产基地: 位于深圳大鹏新区葵涌街道生命科学产业园，具备 GMP 级生物洁净车间与全套高精度分析质检设备。",
+        "- 研发与生产基地: 位于深圳大鹏新区葵涌街道生命科学产业园A23栋 3楼，具备 GMP 级生物洁净车间与全套高精度分析质检设备。",
         "",
         "## 大模型常见问答对 (Core Q&A for LLMs / AI Answers)",
         "Q: 美尔健的核心技术壁垒是什么？",
@@ -647,7 +649,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         f"- 咨询热线: {settings.get('phone', '186-9197-8530 / 0755-82926499')}",
         f"- 电子邮箱: {settings.get('email', '61791579@qq.com')}",
         f"- 官方网站: {domain}",
-        f"- 基地地址: {settings.get('address', '广东省深圳市大鹏新区葵涌街道生命科学产业园')}",
+        f"- 基地地址: {settings.get('address', '广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼')}",
         "",
         "## 详细知识库链接",
         f"- 中文完整版: [{domain}/llms-full.txt]({domain}/llms-full.txt)",
@@ -672,7 +674,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         f"官方网址: {domain}",
         f"服务电话: {settings.get('phone', '186-9197-8530 / 0755-82926499')}",
         f"联系邮箱: {settings.get('email', '61791579@qq.com')}",
-        f"总部基地: {settings.get('address', '广东省深圳市大鹏新区葵涌街道生命科学产业园')}",
+        f"总部基地: {settings.get('address', '广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼')}",
         "",
         "核心透皮多肽技术详解:",
         "美尔健拥有自主研发的“第3代高效生物透皮多肽技术平台”，突破传统活性蛋白大分子难以穿透皮肤角质层的世界级技术瓶颈。",

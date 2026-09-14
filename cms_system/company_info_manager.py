@@ -102,8 +102,8 @@ def bootstrap_company_info():
             "tel": "0755-82926499",
             "email": "61791579@qq.com",
             "qq": "61791579",
-            "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园B1栋",
-            "address_en": "Building B1, Life Science Industrial Park, Kuichong Street, Dapeng New District, Shenzhen, Guangdong, China",
+            "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
+            "address_en": "3rd Floor, Building A23, Life Science Industrial Park, Kuichong Street, Dapeng New District, Shenzhen, Guangdong, China",
             "work_hours": "周一至周五 09:00 - 18:00"
         },
         "messages": []
@@ -364,6 +364,25 @@ def sync_contact(data=None):
         except Exception as e:
             print(f"[company_info_manager] 同步 helps/lxwm.html 失败: {e}")
 
+    en_path = os.path.join(WORKSPACE_DIR, "en", "helps", "lxwm.html")
+    if os.path.exists(en_path):
+        try:
+            with open(en_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            if contact.get("phone"):
+                content = re.sub(r'<h3>\s*Phone\s*</h3>\s*<span>[^<]+</span>',
+                                 f'<h3>Phone</h3>\n <span>{contact["phone"]}</span>', content)
+            if contact.get("email"):
+                content = re.sub(r'<h3>\s*Email\s*</h3>\s*<span>[^<]+</span>',
+                                 f'<h3>Email</h3>\n <span>{contact["email"]}</span>', content)
+            addr_en = contact.get("address_en") or "3rd Floor, Building A23, Life Science Industrial Park, Kuichong Street, Dapeng New District, Shenzhen, Guangdong, China"
+            content = re.sub(r'<h3>\s*Company Address\s*</h3>\s*<span>[^<]+</span>',
+                             f'<h3>Company Address</h3>\n <span>{addr_en}</span>', content)
+            with open(en_path, "w", encoding="utf-8") as f:
+                f.write(content)
+        except Exception as e:
+            print(f"[company_info_manager] 同步 en/helps/lxwm.html 失败: {e}")
+
     # 同时更新 settings.json 保持全局联系方式同步
     settings_file = os.path.join(CMS_DATA_DIR, "settings.json")
     if os.path.exists(settings_file):
@@ -375,6 +394,8 @@ def sync_contact(data=None):
             for k in ["phone", "tel", "email", "qq", "address", "company_name"]:
                 if contact.get(k):
                     s["contact"][k] = contact[k]
+            if contact.get("address"):
+                s["address"] = contact["address"]
             with open(settings_file, "w", encoding="utf-8") as f:
                 json.dump(s, f, ensure_ascii=False, indent=2)
         except Exception as e:

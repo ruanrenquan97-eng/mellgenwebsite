@@ -5,7 +5,7 @@
       "title": "胎盘肽羊胎素",
       "category": "化妆品原料",
       "url": "products/tptyts.html",
-      "pv": 0,
+      "pv": 5,
       "uv": 0,
       "avg_duration_sec": 0,
       "avg_duration_str": "0秒",
@@ -83,6 +83,18 @@
       "avg_duration_str": "15秒",
       "bounce_rate": "0%",
       "hot_pct": 50
+    },
+    {
+      "id": "product_hzpyl",
+      "title": "化妆品原料批发与定制 - 美尔健生物",
+      "category": "核心原料",
+      "url": "product_hzpyl.html",
+      "pv": 1,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒",
+      "bounce_rate": "0%",
+      "hot_pct": 50
     }
   ],
   "top_pages": [
@@ -90,7 +102,7 @@
       "title": "美尔健官网首页",
       "url": "index.html",
       "type": "首页",
-      "pv": 0,
+      "pv": 1,
       "uv": 0,
       "avg_duration_sec": 0,
       "avg_duration_str": "0秒"
@@ -108,7 +120,7 @@
       "title": "合作案例 - 1000+品牌选用原料",
       "url": "article_hzal.html",
       "type": "案例页",
-      "pv": 0,
+      "pv": 1,
       "uv": 0,
       "avg_duration_sec": 0,
       "avg_duration_str": "0秒"
@@ -139,9 +151,456 @@
       "uv": 0,
       "avg_duration_sec": 0,
       "avg_duration_str": "0秒"
+    },
+    {
+      "title": "【高能赋活】羊胎盘小分子寡肽提取物保湿锁水、舒缓修护与紧致抗衰功效检测-新闻资讯-美尔健（深圳）生物科技有限公司",
+      "url": "articles/lab_placenta_efficacy.html",
+      "type": "资讯文章",
+      "pv": 2,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "企业新闻-美尔健生物",
+      "url": "article_qydt.html",
+      "type": "资讯文章",
+      "pv": 2,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "实验室数据研究-合作案例-美尔健（深圳）生物科技有限公司",
+      "url": "article_syssj.html",
+      "type": "资讯文章",
+      "pv": 3,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "护肤品工厂-美尔健生物",
+      "url": "article_hfpgc.html",
+      "type": "资讯文章",
+      "pv": 3,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "化妆品-美尔健生物",
+      "url": "article_hzp.html",
+      "type": "资讯文章",
+      "pv": 3,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "医药行业-美尔健生物",
+      "url": "article_yyxy.html",
+      "type": "资讯文章",
+      "pv": 2,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "女性护理产品-美尔健生物",
+      "url": "article_nxhlcp.html",
+      "type": "资讯文章",
+      "pv": 1,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "洗护用品-美尔健生物",
+      "url": "article_xhyp.html",
+      "type": "资讯文章",
+      "pv": 1,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "功能类食品-美尔健生物",
+      "url": "article_gnlsp.html",
+      "type": "资讯文章",
+      "pv": 1,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "医美行业-美尔健生物",
+      "url": "article_ymxy.html",
+      "type": "资讯文章",
+      "pv": 1,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
+    },
+    {
+      "title": "【医疗级生物相容性】重组胶原蛋白生物相容性 5 项完整测试报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+      "url": "articles/lab_collagen_biocompatibility.html",
+      "type": "资讯文章",
+      "pv": 2,
+      "uv": 1,
+      "avg_duration_sec": 15,
+      "avg_duration_str": "15秒"
     }
   ],
   "realtime_stream": [
+    {
+      "id": "v-1789419656",
+      "time": "23:00:56",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "【医疗级生物相容性】重组胶原蛋白生物相容性 5 项完整测试报告-新闻资讯-美尔健",
+      "url": "articles/lab_collagen_biocompatibility.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_syssj.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419621",
+      "time": "23:00:21",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "【医疗级生物相容性】重组胶原蛋白生物相容性 5 项完整测试报告-新闻资讯-美尔健",
+      "url": "articles/lab_collagen_biocompatibility.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_syssj.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419614",
+      "time": "23:00:14",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "实验室数据研究-合作案例-美尔健（深圳）生物科技有限公司",
+      "url": "article_syssj.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_ymxy.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419614",
+      "time": "23:00:14",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "医美行业-美尔健生物",
+      "url": "article_ymxy.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_yyxy.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419607",
+      "time": "23:00:07",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "医药行业-美尔健生物",
+      "url": "article_yyxy.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hzp.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419607",
+      "time": "23:00:07",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "化妆品-美尔健生物",
+      "url": "article_hzp.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hfpgc.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419606",
+      "time": "23:00:06",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "护肤品工厂-美尔健生物",
+      "url": "article_hfpgc.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_gnlsp.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419605",
+      "time": "23:00:05",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "功能类食品-美尔健生物",
+      "url": "article_gnlsp.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_xhyp.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419603",
+      "time": "23:00:03",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "洗护用品-美尔健生物",
+      "url": "article_xhyp.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_nxhlcp.htm",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419602",
+      "time": "23:00:02",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "女性护理产品-美尔健生物",
+      "url": "article_nxhlcp.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_syssj.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419600",
+      "time": "23:00:00",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "实验室数据研究-合作案例-美尔健（深圳）生物科技有限公司",
+      "url": "article_syssj.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hfpgc.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419598",
+      "time": "22:59:58",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "护肤品工厂-美尔健生物",
+      "url": "article_hfpgc.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hzp.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419597",
+      "time": "22:59:57",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "化妆品-美尔健生物",
+      "url": "article_hzp.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_yyxy.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419597",
+      "time": "22:59:57",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "医药行业-美尔健生物",
+      "url": "article_yyxy.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hzp.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419596",
+      "time": "22:59:56",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "化妆品-美尔健生物",
+      "url": "article_hzp.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hfpgc.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419594",
+      "time": "22:59:54",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "护肤品工厂-美尔健生物",
+      "url": "article_hfpgc.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_syssj.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419587",
+      "time": "22:59:47",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "实验室数据研究-合作案例-美尔健（深圳）生物科技有限公司",
+      "url": "article_syssj.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_hzal.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419585",
+      "time": "22:59:45",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "合作案例 - 1000+品牌共同选择美尔健原料",
+      "url": "article_hzal.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_qydt.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419576",
+      "time": "22:59:36",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "企业新闻-美尔健生物",
+      "url": "article_qydt.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/article_qydt.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419574",
+      "time": "22:59:34",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "企业新闻-美尔健生物",
+      "url": "article_qydt.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/articles/lab_place",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419529",
+      "time": "22:58:49",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "【高能赋活】羊胎盘小分子寡肽提取物保湿锁水、舒缓修护与紧致抗衰功效检测-新闻资讯",
+      "url": "articles/lab_placenta_efficacy.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/products/tptyts.ht",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419514",
+      "time": "22:58:34",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "胎盘肽羊胎素 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+      "url": "products/tptyts.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_hzpyl.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419457",
+      "time": "22:57:37",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "胎盘肽羊胎素 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+      "url": "products/tptyts.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_hzpyl.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419431",
+      "time": "22:57:11",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "胎盘肽羊胎素 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+      "url": "products/tptyts.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_hzpyl.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419313",
+      "time": "22:55:13",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "【高能赋活】羊胎盘小分子寡肽提取物保湿锁水、舒缓修护与紧致抗衰功效检测-新闻资讯",
+      "url": "articles/lab_placenta_efficacy.html",
+      "type": "资讯文章",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/products/tptyts.ht",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789419284",
+      "time": "22:54:44",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "胎盘肽羊胎素 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+      "url": "products/tptyts.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_hzpyl.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789417678",
+      "time": "22:27:58",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "胎盘肽羊胎素 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+      "url": "products/tptyts.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/product_hzpyl.html",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789417677",
+      "time": "22:27:57",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "化妆品原料批发与定制 - 美尔健生物",
+      "url": "product_hzpyl.html",
+      "type": "产品详情",
+      "duration_str": "正在浏览中...",
+      "referrer": "http://localhost:8000/",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789417674",
+      "time": "22:27:54",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+      "url": "index.html",
+      "type": "官网首页",
+      "duration_str": "正在浏览中...",
+      "referrer": "直接访问",
+      "device": "电脑端"
+    },
     {
       "id": "v-1789371130",
       "time": "09:32:10",
@@ -152,19 +611,7 @@
       "type": "产品详情",
       "duration_str": "正在浏览中...",
       "referrer": "百度搜索",
-      "device": "PC端"
-    },
-    {
-      "id": "v-local-1",
-      "time": "08:12:00",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "美尔健官网首页",
-      "url": "index.html",
-      "type": "官网首页",
-      "duration_str": "25秒",
-      "referrer": "本地直接访问",
-      "device": "PC端 (当前设备)"
+      "device": "电脑端"
     }
   ]
 }

@@ -178,7 +178,10 @@ em{font-style:normal;}
 	
 
     .p102-info-blk {
-        width: 888px;
+        width: 1200px;
+        max-width: 100%;
+        margin: 0 auto;
+        float: none;
         border: 1px solid #f0f0f0;
         background: #fff;
     }

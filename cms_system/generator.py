@@ -639,9 +639,15 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
             html[match.end(4):]
         )
     
+    last_crumb_pattern = r'(<i[^>]*>\s*<a href="\.\./articles/[^"]*"[^>]*>)(.*?)(</a>\s*</i>\s*</div>)'
+    if re.search(last_crumb_pattern, html):
+        html = re.sub(last_crumb_pattern, rf'<i class=""> <a href="../{article["link"]}" title="{article["title"]}"> {article["title"]} </a> </i>\n </div>', html)
+
     html = replace_group(r'(<h1[^>]*>)(.*?)(</h1>)', article["title"], html)
+    html = re.sub(r'<h1[^>]*title="[^"]*"', f'<h1 title="{article["title"]}"', html)
     
     html = replace_group(r'(<span class="p102-info-date">)(.*?)(</span>)', article["date"], html, flags=0)
+    html = re.sub(r'发布日期：\d{4}-\d{2}-\d{2}', f'发布日期：{article.get("date", "")}', html)
     
     content_pattern = r'(<div class="p102-info-content endit-content">)(.*?)(</div>\s*<div class="clear"></div>)'
     

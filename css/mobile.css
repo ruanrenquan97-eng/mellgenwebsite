@@ -5919,13 +5919,53 @@
   height: auto !important;
   min-height: 0 !important;
   overflow: visible !important;
-  width: 100% !important;
-  max-width: 100% !important;
   box-sizing: border-box !important;
 }
 
-/* 桌面端内页二级导航 (.p102-fdh-3)：保持单行自适应展开 */
+/* 桌面端内页二级导航 (.p102-fdh-3) 与文章详情页居中排版 (1200px 标准栅格) */
 @media screen and (min-width: 769px) {
+  /* 桌面端内页与文章主容器全局 1200px 居中对齐，与全站PC端标准排版保持一致 */
+  .blk-main,
+  .blk-main.clearafter {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    clear: both !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+
+  .plc {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    clear: both !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 文章详情页容器桌面端居中展开至 1200px (原模板无侧边栏) */
+  .p102-info-blk,
+  .p102-info-blk.fl,
+  .p102-info-blk.fr {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 40px !important;
+    box-sizing: border-box !important;
+  }
+
+  .p102-info-blk-con {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
   .p102-fdh-3 {
     display: block !important;
     height: auto !important;

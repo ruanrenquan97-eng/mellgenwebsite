@@ -667,9 +667,14 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 <h3 class="font-bold text-slate-800 text-sm">全网访客实时动态轨迹</h3>
               </div>
-              <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold flex items-center gap-1">
-                <i class="fa-solid fa-signal text-[9px]"></i> 真实采集
-              </span>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="resetVisitorAnalyticsData()" class="px-2 py-0.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 rounded text-[10px] font-medium transition cursor-pointer" title="清空本地测试留存数据，上线归零重新统计">
+                  <i class="fa-solid fa-rotate-right text-[9px] mr-0.5"></i> 清空测试数据
+                </button>
+                <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-[10px] font-bold flex items-center gap-1">
+                  <i class="fa-solid fa-signal text-[9px]"></i> 真实采集
+                </span>
+              </div>
             </div>
 
             <p class="text-[11px] text-slate-400">实时捕捉访问客户地区、搜索来路与当前停留秒数：</p>
@@ -8651,6 +8656,25 @@ Disallow: /cms_system/
         }
       } catch (err) {
         showToast("请求异常", "error");
+      }
+    }
+
+    async function resetVisitorAnalyticsData() {
+      if (!confirm("确定要清空测试数据并将访客流量初始化归零吗？\n此操作将清除历史测试留存的访客流与IP记录，开始统计线上真实来访客户。")) {
+        return;
+      }
+      try {
+        const res = await fetch("/api/analytics/reset_data", { method: "POST" });
+        const json = await res.json();
+        if (json.success) {
+          showToast("已成功重置！当前访客数据已全部初始化归零", "success");
+          await loadVisitorInsights();
+          await loadSeoMetrics();
+        } else {
+          showToast(json.message || "重置失败", "error");
+        }
+      } catch (err) {
+        showToast("请求重置异常: " + err.message, "error");
       }
     }
 
@@ -16701,14 +16725,27 @@ window.onload = () => {
       try {
         if (!companyInfoData || forceReload) {
           const res = await fetch("/api/company-info");
+          if (!res.ok) {
+            let msg = `HTTP ${res.status}`;
+            try {
+              const j = await res.json();
+              if (j && j.message) msg = j.message;
+            } catch (_) {
+              if (res.status === 404) msg = "接口 404 (服务器未同步最新 server.py 或未重启服务)";
+              else if (res.status === 502) msg = "后端服务未启动 (502 Bad Gateway)";
+            }
+            throw new Error(msg);
+          }
           const json = await res.json();
           if (json.success && json.data) {
             companyInfoData = json.data;
+          } else {
+            throw new Error(json.message || "企业信息返回数据为空");
           }
         }
       } catch (e) {
         console.error("加载企业信息数据失败", e);
-        showToast("加载数据失败: " + e.message, "error");
+        showToast("加载关于我们数据失败: " + e.message, "error");
       }
     }
 

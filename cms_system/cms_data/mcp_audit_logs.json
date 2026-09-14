@@ -1,5 +1,95 @@
 [
   {
+    "id": "b32ab109",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_qa_pairs",
+    "details": "查询AI客服问答库 (关键词: 无)",
+    "success": true
+  },
+  {
+    "id": "90952dec",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_geo_status",
+    "details": "查看GEO大模型喂养库运行状态",
+    "success": true
+  },
+  {
+    "id": "adfaedcd",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_seo_overview",
+    "details": "获取SEO概览与蜘蛛监控数据",
+    "success": true
+  },
+  {
+    "id": "a3ab2807",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_company_profile",
+    "details": "查询企业基本资料与联系方式",
+    "success": true
+  },
+  {
+    "id": "aa328fea",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_company_profile",
+    "details": "查询企业基本资料与联系方式",
+    "success": true
+  },
+  {
+    "id": "920a9150",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_geo_status",
+    "details": "查看GEO大模型喂养库运行状态",
+    "success": true
+  },
+  {
+    "id": "8317e910",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_seo_overview",
+    "details": "获取SEO概览与蜘蛛监控数据",
+    "success": true
+  },
+  {
+    "id": "cbd51011",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_articles",
+    "details": "查询资讯列表 (分类: 全部, 关键词: 无)",
+    "success": true
+  },
+  {
+    "id": "4ed9d1de",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "verify_mellgen_account",
+    "details": "账户身份核验通过: admin",
+    "success": true
+  },
+  {
     "id": "453a7223",
     "timestamp": "2026-09-12 13:33:48",
     "username": "admin",

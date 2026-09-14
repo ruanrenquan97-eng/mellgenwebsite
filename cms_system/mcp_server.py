@@ -199,91 +199,24 @@ ILLEGAL_TERMS = [
 ]
 
 # ----------------- MCP TOOLS -----------------
+import mcp_service
 
+# 模块 1: 身份核验
 @mcp.tool()
 def verify_mellgen_account() -> str:
-    """
-    【账户身份核验】核验当前连接到美尔健官网后台的 WorkBuddy 账户与授权身份。
-    返回当前登录操作人员的用户名、姓名、权限角色以及官网连接状态。
-    """
-    user = current_mcp_user.get()
-    if user:
-        record_audit_log("verify_mellgen_account", f"账户身份核验通过: {user.get('username')}", True, user)
-        return json.dumps({
-            "authenticated": True,
-            "website": "https://www.mellgen.com",
-            "account": {
-                "username": user.get("username"),
-                "name": user.get("name"),
-                "role": user.get("role")
-            },
-            "status": "已授权连接，具备产品详情页制作、法规合规审查与一键发布权限！"
-        }, ensure_ascii=False, indent=2)
-    else:
-        return json.dumps({
-            "authenticated": False,
-            "website": "https://www.mellgen.com",
-            "message": "当前为本地默认调试环境或尚未绑定专属 Token。"
-        }, ensure_ascii=False, indent=2)
+    """【账户身份核验】核验当前连接到美尔健官网后台的 WorkBuddy 账户与授权身份。返回操作人员姓名、角色权限及官网授权状态。"""
+    return mcp_service.execute_verify_mellgen_account({}, current_mcp_user.get())
 
-
+# 模块 2: 产品中心
 @mcp.tool()
-def list_all_products() -> str:
-    """获取美尔健官网当前所有产品的列表，包含产品ID、名称、分类、INCI及功效简介。"""
-    user = current_mcp_user.get()
-    record_audit_log("list_all_products", "查询全量官网产品列表", True, user)
-    products = load_json("products.json")
-    summary_list = []
-    for p in products:
-        summary_list.append({
-            "id": p.get("id"),
-            "title": p.get("title"),
-            "category": p.get("category_name", p.get("category")),
-            "inci": p.get("inci", ""),
-            "appearance": p.get("appearance", ""),
-            "solubility": p.get("solubility", ""),
-            "url": f"https://www.mellgen.com/products/{p.get('id')}.html"
-        })
-    return json.dumps({"total": len(summary_list), "products": summary_list}, ensure_ascii=False, indent=2)
-
+def list_all_products(category: str = "", keyword: str = "") -> str:
+    """【产品中心】获取美尔健官网当前产品列表，支持分类筛选与关键字搜索。返回ID、名称、分类、INCI及功效简介。"""
+    return mcp_service.execute_list_all_products({"category": category, "keyword": keyword}, current_mcp_user.get())
 
 @mcp.tool()
 def get_product_detail(product_id: str) -> str:
-    """
-    获取指定产品的完整详情，包括生物机理介绍、推荐应用场景及产品优势。
-    :param product_id: 产品唯一标识ID（如 tpxldb, lzdt, 0xjydb 等）
-    """
-    user = current_mcp_user.get()
-    record_audit_log("get_product_detail", f"查看产品详情: {product_id}", True, user)
-    products = load_json("products.json")
-    for p in products:
-        if p.get("id") == product_id:
-            return json.dumps(p, ensure_ascii=False, indent=2)
-    return json.dumps({"error": f"未找到ID为 '{product_id}' 的产品"}, ensure_ascii=False)
-
-
-@mcp.tool()
-def audit_product_compliance(text: str) -> str:
-    """
-    审核产品文案是否符合中国《广告法》、《化妆品监督管理条例》及《化妆品标签管理办法》。
-    自动筛查涉医、疾病、消炎、杀菌、免疫力及绝对化极限词汇。
-    :param text: 待审核的产品介绍、功效文案或宣传语
-    """
-    findings = []
-    for term, reason in ILLEGAL_TERMS:
-        if term in text:
-            findings.append({"term": term, "reason": reason})
-    
-    passed = len(findings) == 0
-    user = current_mcp_user.get()
-    record_audit_log("audit_product_compliance", f"文案合规审查: {'全部合规' if passed else f'发现违规词{len(findings)}个'}", passed, user)
-    return json.dumps({
-        "passed": passed,
-        "violation_count": len(findings),
-        "violations": findings,
-        "suggestion": "文案完全合规，准予发布。" if passed else "检测到违规风险用语，请根据法规修改后再行发布。"
-    }, ensure_ascii=False, indent=2)
-
+    """【产品中心】获取指定产品的完整详情，包括生物机理介绍、推荐应用场景及产品优势。"""
+    return mcp_service.execute_get_product_detail({"product_id": product_id}, current_mcp_user.get())
 
 @mcp.tool()
 def create_product_detail(
@@ -304,377 +237,245 @@ def create_product_detail(
     advantage_3_title: str,
     advantage_3_desc: str
 ) -> str:
-    """
-    由 WorkBuddy 直接在美尔健官网后台【制作并发布】全新产品详情页！
-    自动生成高保真图文版式（产品介绍+应用场景+3大核心优势卡片），并生成静态HTML。
-    
-    :param product_id: 产品英文标识（如 recombinant_collagen_pro, pdrn_stick 等，仅字母数字下划线）
-    :param title: 产品中文主标题（如：重组人源化Ⅲ型胶原蛋白）
-    :param category: 主分类（化妆品原料、医用原料、食品营养原料）
-    :param category_name: 二级分类（如：重组仿生蛋白、透皮型重组蛋白/多肽、植物源活性物、海洋源活性物等）
-    :param inci: INCI标准成分名称（如：可溶性胶原、甘油、水）
-    :param appearance: 外观性状（如：无色透明液体、白色疏松冻干粉块）
-    :param solubility: 溶解性（如：易溶于水、水溶）
-    :param summary: 简明功效亮点（50字以内概括）
-    :param intro: 详尽生物机理阐释与产品介绍（150-250字，需严格符合化妆品法规）
-    :param app_scenarios: 推荐应用场景（如：抗皱紧致精华液、屏障修护乳霜、美容护理冻干安瓶等）
-    :param advantage_1_title: 优势1标题（如：高纯度生物表达）
-    :param advantage_1_desc: 优势1详细说明
-    :param advantage_2_title: 优势2标题（如：生物透皮靶向吸收）
-    :param advantage_2_desc: 优势2详细说明
-    :param advantage_3_title: 优势3标题（如：优良生物相容性）
-    :param advantage_3_desc: 优势3详细说明
-    """
-    # 1. Compliance pre-check
-    user = current_mcp_user.get()
-    operator_name = f"{user.get('name')} ({user.get('username')})" if user else "管理员"
-
-    full_text = f"{title} {summary} {intro} {app_scenarios} {advantage_1_title} {advantage_1_desc} {advantage_2_title} {advantage_2_desc} {advantage_3_title} {advantage_3_desc}"
-    violations = []
-    for term, reason in ILLEGAL_TERMS:
-        if term in full_text:
-            violations.append(f"{term} ({reason})")
-    
-    if violations:
-        record_audit_log("create_product_detail", f"制作产品【{title}】被合规拦截", False, user)
-        return json.dumps({
-            "success": False,
-            "error": "合规拦截：文案中包含违反《化妆品监督管理条例》或《广告法》的禁用词",
-            "violations": violations
-        }, ensure_ascii=False, indent=2)
-
-    # 2. Prepare HTML detail snippet
-    detail_html = f"""<div class="cpxq-01-text cpxq-01-cur">
-      <div class="yz">
-    <div class="content1">
-        <dl>
-            <dt>
-				<img align="center" alt="{title}-产品介绍" src="../resource/images/b7c9e5f7ce6a4da7bdf4054f227bcd35_10.jpg" title="{title}-产品介绍"> 
-			</dt>
-            <dd>
-                <h3>
-					{title}<i>产品介绍</i>
-				</h3>
-                <p>
-                    {intro}
-                </p>
-                <div class="yy">
-                    <b>推荐应用：</b>{app_scenarios}
-                </div>
-            </dd>
-        </dl>
-    </div>
-    <div class="clear">
-    </div>
-    <style>
-        .yz dt {{
-            width: 43%;
-            float: right;
-            height: 343px;
-            overflow: hidden;
-            box-sizing: border-box;
-            background: #fafbfe;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }}
-        .yz dt img {{
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }}
-        .yz dd {{
-            width: 57%;
-            float: left;
-            padding-right: 3%;
-            box-sizing: border-box;
-            padding-top: 10px;
-        }}
-        .yz dd h3 {{
-            font-size: 34px;
-            line-height: 46px;
-            color: #222222;
-            font-weight: normal;
-            padding-top: 10px;
-            position: relative;
-            padding-bottom: 30px;
-        }}
-        .yz dd h3:after {{
-            position: absolute;
-            content: "";
-            background: #174778;
-            width: 80px;
-            height: 3px;
-            top: 90px;
-            left: 0;
-        }}
-        .yz dd h3 i {{
-            color: #174778;
-            font-style: normal;
-            margin-left: 10px;
-            font-size: 26px;
-        }}
-        .yz dd p {{
-            font-size: 16px;
-            line-height: 32px;
-            color: #666666;
-            text-align: justify;
-        }}
-        .yz dd .yy {{
-            font-weight: normal;
-            font-size: 16px;
-            margin-top: 25px;
-            line-height: 28px;
-            color: #555;
-        }}
-        .yz dd .yy b {{
-            color: #174778;
-            font-size: 18px;
-        }}
-    </style>
-</div>
-<div class="adv">
-    <div class="adv_con content1">
-        <div class="tit">
-            <h2>
-				产品优势<em>Product advantage</em> 
-			</h2>
-        </div>
-        <div class="adv_img">
-            <img align="center" alt="{title}-产品优势" src="../resource/images/b7c9e5f7ce6a4da7bdf4054f227bcd35_8.jpg" title="{title}-产品优势">
-        </div>
-        <div class="adv_nr">
-            <dl>
-                <dt>
-					<img align="center" alt="{advantage_1_title}" src="../resource/images/b7c9e5f7ce6a4da7bdf4054f227bcd35_16.png" title="{advantage_1_title}"> 
-				</dt>
-                <dd>
-                    <h3>{advantage_1_title}</h3>
-                    <p>{advantage_1_desc}</p>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-					<img align="center" alt="{advantage_2_title}" src="../resource/images/b7c9e5f7ce6a4da7bdf4054f227bcd35_20.png" title="{advantage_2_title}"> 
-				</dt>
-                <dd>
-                    <h3>{advantage_2_title}</h3>
-                    <p>{advantage_2_desc}</p>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-					<img align="center" alt="{advantage_3_title}" src="../resource/images/b7c9e5f7ce6a4da7bdf4054f227bcd35_18.png" title="{advantage_3_title}"> 
-				</dt>
-                <dd>
-                    <h3>{advantage_3_title}</h3>
-                    <p>{advantage_3_desc}</p>
-                </dd>
-            </dl>
-        </div>
-    </div>
-    <div class="clear">
-    </div>
-    <style>
-        .adv {{
-            padding: 50px 0;
-            background: #f4f6fa;
-            margin-top: 30px;
-        }}
-        .adv .adv_img {{
-            width: 48%;
-            float: left;
-            height: 420px;
-            overflow: hidden;
-            border-radius: 6px;
-        }}
-        .adv .adv_img img {{
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }}
-        .adv .adv_nr {{
-            width: 52%;
-            background: #fff;
-            float: right;
-            padding: 40px;
-            box-sizing: border-box;
-            min-height: 420px;
-            border-radius: 6px;
-        }}
-        .adv .adv_nr dl {{
-            min-height: 100px;
-            clear: both;
-            margin-bottom: 20px;
-        }}
-        .adv .adv_nr dl:last-child {{
-            margin-bottom: 0;
-        }}
-        .adv .adv_nr dl dt {{
-            width: 60px;
-            float: left;
-            margin-right: 20px;
-        }}
-        .adv .adv_nr dl dt img {{
-            width: 48px;
-            height: 48px;
-            vertical-align: middle;
-        }}
-        .adv .adv_nr dl dd {{
-            width: calc(100% - 80px);
-            float: left;
-        }}
-        .adv .adv_nr dl dd h3 {{
-            color: #174778;
-            font-size: 20px;
-            line-height: 32px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }}
-        .adv .adv_nr dl dd p {{
-            font-size: 14px;
-            line-height: 24px;
-            color: #666;
-            margin: 0;
-        }}
-        .tit {{
-            height: 110px;
-            clear: both;
-            text-align: center;
-        }}
-        .tit h2 {{
-            color: #222;
-            font-size: 34px;
-            padding-top: 20px;
-            line-height: 40px;
-            font-weight: normal;
-        }}
-        .tit em {{
-            display: block;
-            font-size: 16px;
-            line-height: 36px;
-            color: #888;
-            font-style: normal;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }}
-        .content1 {{
-            width: 1200px;
-            margin: 0 auto;
-        }}
-        .clear {{
-            clear: both;
-        }}
-    </style>
-</div>
-</div>"""
-
-    # 3. Create or update in database
-    products = load_json("products.json")
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    existing = next((p for p in products if p.get("id") == product_id), None)
-    new_product_entry = {
-        "id": product_id,
-        "title": title,
-        "category": category,
-        "category_name": category_name,
-        "inci": inci,
-        "appearance": appearance,
-        "solubility": solubility,
-        "desc": summary,
-        "summary": summary,
-        "content": detail_html,
-        "date": now_str,
-        "views": 180,
-        "recommend": True,
-        "top": False,
-        "show": True,
-        "created_by": operator_name
+    """【产品中心】由 WorkBuddy 直接制作并发布全新产品详情页！自动生成高保真图文版式（产品介绍+应用场景+3大优势卡片），内置严格广告法合规审查，一键生成静态HTML并上线。"""
+    args = {
+        "product_id": product_id, "title": title, "category": category,
+        "category_name": category_name, "inci": inci, "appearance": appearance,
+        "solubility": solubility, "summary": summary, "intro": intro,
+        "app_scenarios": app_scenarios, "advantage_1_title": advantage_1_title,
+        "advantage_1_desc": advantage_1_desc, "advantage_2_title": advantage_2_title,
+        "advantage_2_desc": advantage_2_desc, "advantage_3_title": advantage_3_title,
+        "advantage_3_desc": advantage_3_desc
     }
-    
-    if existing:
-        products = [p if p.get("id") != product_id else new_product_entry for p in products]
-    else:
-        products.insert(0, new_product_entry)
-        
-    save_json("products.json", products)
-    
-    # 4. Generate HTML static file
-    prod_html_path = os.path.join(WORKSPACE_DIR, "products", f"{product_id}.html")
-    template_src = os.path.join(WORKSPACE_DIR, "products", "tpxldb.html")
-    if os.path.exists(template_src):
-        with open(template_src, "r", encoding="utf-8") as f:
-            html_t = f.read()
-        
-        # Replace title, breadcrumbs, and detail
-        html_t = re.sub(r'<title>.*?</title>', f'<title>{title} - 深圳美尔健生物科技官方网站</title>', html_t)
-        html_t = re.sub(r'<h1[^>]*class="p102-proShow-1-title"[^>]*>.*?</h1>', f'<h1 title="{title}" class="p102-proShow-1-title">{title}</h1>', html_t)
-        html_t = re.sub(r'(<div class="p102-pro-content-desc endit-content">)[\s\S]*?(</div>\s*</div>\s*</div>\s*</div>)', f'\\1\n     {detail_html}\n    \\2', html_t)
-        
-        with open(prod_html_path, "w", encoding="utf-8") as f:
-            f.write(html_t)
-            
-    # Trigger full catalog rebuild
-    try:
-        generator.build_all()
-    except Exception as e:
-        print(f"Warning building site: {e}")
-        
-    record_audit_log("create_product_detail", f"发布产品详情页【{title}】({product_id})", True, user)
-    return json.dumps({
-        "success": True,
-        "message": f"🎉 产品【{title}】详情页制作并发布成功！操作账户：{operator_name}",
-        "product_id": product_id,
-        "preview_url": f"https://www.mellgen.com/products/{product_id}.html",
-        "created_at": now_str,
-        "operator": operator_name
-    }, ensure_ascii=False, indent=2)
-
+    return mcp_service.execute_create_product_detail(args, current_mcp_user.get())
 
 @mcp.tool()
+def update_product_detail(
+    product_id: str,
+    title: str = "",
+    category: str = "",
+    category_name: str = "",
+    inci: str = "",
+    appearance: str = "",
+    solubility: str = "",
+    summary: str = "",
+    intro: str = "",
+    app_scenarios: str = ""
+) -> str:
+    """【产品中心】更新已存在的产品规格、文案、推荐场景或显示状态，自动执行合规审查并重新编译静态页。"""
+    args = {k: v for k, v in locals().items() if v}
+    return mcp_service.execute_update_product_detail(args, current_mcp_user.get())
+
+@mcp.tool()
+def delete_product(product_id: str) -> str:
+    """【产品中心】下架并彻底删除指定产品及其静态 HTML 页面，自动同步刷新产品中心列表索引。"""
+    return mcp_service.execute_delete_product({"product_id": product_id}, current_mcp_user.get())
+
+@mcp.tool()
+def list_product_categories() -> str:
+    """【产品中心】查询官网所有产品分类目录树（包含分类ID、中文名、SEO TDK及关联标签）。"""
+    return mcp_service.execute_list_product_categories({}, current_mcp_user.get())
+
+@mcp.tool()
+def audit_product_compliance(text: str) -> str:
+    """【法规审查】审核文案是否符合中国《广告法》、《化妆品监督管理条例》及《化妆品标签管理办法》，自动筛查涉医、消炎杀菌、免疫力及极限词汇。"""
+    return mcp_service.execute_audit_product_compliance({"text": text}, current_mcp_user.get())
+
+# 模块 3: 资讯中心
+@mcp.tool()
+def list_articles(category: str = "", keyword: str = "", page: int = 1, limit: int = 20) -> str:
+    """【资讯中心】分页查询企业动态、行业新闻与科研进展文章列表，支持按分类与关键词检索。"""
+    return mcp_service.execute_list_articles({"category": category, "keyword": keyword, "page": page, "limit": limit}, current_mcp_user.get())
+
+@mcp.tool()
+def get_article_detail(article_id: str) -> str:
+    """【资讯中心】获取指定文章的完整详情与 HTML 正文内容。"""
+    return mcp_service.execute_get_article_detail({"article_id": article_id}, current_mcp_user.get())
+
+@mcp.tool()
+def create_article(
+    title: str,
+    content: str,
+    category: str = "新闻资讯",
+    desc: str = "",
+    image: str = "resource/images/ban_txt.png",
+    author: str = "美尔健生物",
+    date: str = ""
+) -> str:
+    """【资讯中心】撰写并发布全新资讯文章！内置合规筛查，自动生成静态 HTML 文章页面并同步资讯列表。"""
+    return mcp_service.execute_create_article({
+        "title": title, "content": content, "category": category,
+        "desc": desc, "image": image, "author": author, "date": date
+    }, current_mcp_user.get())
+
+@mcp.tool()
+def update_article(
+    article_id: str,
+    title: str = "",
+    category: str = "",
+    content: str = "",
+    desc: str = "",
+    image: str = "",
+    author: str = ""
+) -> str:
+    """【资讯中心】修改已有文章的标题、分类、摘要或正文，并重新生成静态文件。"""
+    args = {k: v for k, v in locals().items() if v}
+    return mcp_service.execute_update_article(args, current_mcp_user.get())
+
+@mcp.tool()
+def delete_article(article_id: str) -> str:
+    """【资讯中心】删除指定文章并清理对应静态 HTML 页面。"""
+    return mcp_service.execute_delete_article({"article_id": article_id}, current_mcp_user.get())
+
+@mcp.tool()
+def list_article_categories() -> str:
+    """【资讯中心】获取当前资讯频道的所有分类列表。"""
+    return mcp_service.execute_list_article_categories({}, current_mcp_user.get())
+
+@mcp.tool()
+def sync_wechat_articles(article_url: str = "", category: str = "企业动态") -> str:
+    """【资讯中心】一键同步抓取微信公众号推文！支持输入单个推文链接或触发官方公众号全量同步，自动清洗样式下载本地高清图片。"""
+    return mcp_service.execute_sync_wechat_articles({"article_url": article_url, "category": category}, current_mcp_user.get())
+
+# 模块 4: 客户线索
+@mcp.tool()
+def list_customer_inquiries(status: str = "all", keyword: str = "", limit: int = 50) -> str:
+    """【意向订单与客户线索】查询官网访客留言与意向采购需求（包含姓名、联系电话、邮箱、留言内容及提交时间），支持筛选未读/已读。"""
+    return mcp_service.execute_list_customer_inquiries({"status": status, "keyword": keyword, "limit": limit}, current_mcp_user.get())
+
+@mcp.tool()
+def update_inquiry_status(inquiry_id: str, read: bool = True, admin_reply: str = "", remark: str = "") -> str:
+    """【客户线索】标记留言为已读，或由 WorkBuddy 录入处理备注与回复内容。"""
+    return mcp_service.execute_update_inquiry_status({"inquiry_id": inquiry_id, "read": read, "admin_reply": admin_reply, "remark": remark}, current_mcp_user.get())
+
+@mcp.tool()
+def delete_customer_inquiry(inquiry_id: str) -> str:
+    """【客户线索】删除垃圾或无效的留言记录。"""
+    return mcp_service.execute_delete_customer_inquiry({"inquiry_id": inquiry_id}, current_mcp_user.get())
+
+# 模块 5: SEO 与蜘蛛
+@mcp.tool()
+def get_seo_overview() -> str:
+    """【SEO 优化】获取搜索引擎收录与每日访问概况，包括百度, 谷歌, 必应及各 AI 爬虫的抓取频次与收录健康度。"""
+    return mcp_service.execute_get_seo_overview({}, current_mcp_user.get())
+
+@mcp.tool()
+def push_urls_to_search_engines(engine: str = "all") -> str:
+    """【SEO 优化】主动向百度、必应 (IndexNow)、谷歌及 AI 爬虫广播全站最新页面 URL，加速收录与快照更新。"""
+    return mcp_service.execute_push_urls_to_search_engines({"engine": engine}, current_mcp_user.get())
+
+@mcp.tool()
+def get_spider_crawl_logs(engine: str = "", limit: int = 50) -> str:
+    """【SEO 优化】查询真实搜索引擎与大模型蜘蛛（Baiduspider, Googlebot, GPTBot, ClaudeBot 等）的实时访问日志。"""
+    return mcp_service.execute_get_spider_crawl_logs({"engine": engine, "limit": limit}, current_mcp_user.get())
+
+@mcp.tool()
+def trigger_seo_optimize() -> str:
+    """【SEO 优化】一键重新编译标准 sitemap.xml 网站地图，刷新 robots.txt 合规条目并计算 SEO 优化评分。"""
+    return mcp_service.execute_trigger_seo_optimize({}, current_mcp_user.get())
+
+# 模块 6: GEO 引擎
+@mcp.tool()
+def get_geo_status() -> str:
+    """【GEO 生成式引擎】查看面向 AI 搜索（DeepSeek, 豆包, Kimi, Gemini, GPT-4o 等）的 llms.txt、llms-full.txt 知识库状态与大模型引用频次。"""
+    return mcp_service.execute_get_geo_status({}, current_mcp_user.get())
+
+@mcp.tool()
+def rebuild_llms_knowledge(domain: str = "https://www.mellgen.com") -> str:
+    """【GEO 生成式引擎】重新提取全量多肽原料知识，一键重构生成标准的 /llms.txt 与 /llms-full.txt 供全球大模型索引抓取。"""
+    return mcp_service.execute_rebuild_llms_knowledge({"domain": domain}, current_mcp_user.get())
+
+# 模块 7: AI 客服与向量库
+@mcp.tool()
+def list_qa_pairs(keyword: str = "", category: str = "", limit: int = 50) -> str:
+    """【AI 客服知识库】检索官方问答库（包含产品机理、配方推荐、合规资质等 1000+ 条权威问答对）。"""
+    return mcp_service.execute_list_qa_pairs({"keyword": keyword, "category": category, "limit": limit}, current_mcp_user.get())
+
+@mcp.tool()
+def add_or_update_qa_pair(question: str, answer: str, category: str = "产品问答", qa_id: str = "") -> str:
+    """【AI 客服知识库】新增或修改问答库条目，包含问题、权威解答及关键词标签，通过法规审查后自动生效。"""
+    return mcp_service.execute_add_or_update_qa_pair({"question": question, "answer": answer, "category": category, "qa_id": qa_id}, current_mcp_user.get())
+
+@mcp.tool()
+def test_ai_customer_service(question: str) -> str:
+    """【AI 客服】模拟访客向美尔健官方 AI 客服发起提问，测试问答检索匹配精准度与回答效果。"""
+    return mcp_service.execute_test_ai_customer_service({"question": question}, current_mcp_user.get())
+
+@mcp.tool()
+def rebuild_vector_database() -> str:
+    """【AI 客服】重新计算全库问答对的语义向量索引，使客服能理解更复杂的同义词与多维度意图。"""
+    return mcp_service.execute_rebuild_vector_database({}, current_mcp_user.get())
+
+# 模块 8: 视频中心
+@mcp.tool()
+def list_all_videos() -> str:
+    """【视频中心】获取官网企业形象宣传片与产品实验机理视频列表。"""
+    return mcp_service.execute_list_all_videos({}, current_mcp_user.get())
+
+@mcp.tool()
+def create_or_update_video(title: str, video_url: str, category: str = "企业宣传", cover: str = "./resource/images/ban_txt.png", desc: str = "", video_id: str = "") -> str:
+    """【视频中心】上传/配置企业宣传或产品讲解视频条目（包含标题、播放源地址、封面图与简介）。"""
+    return mcp_service.execute_create_or_update_video({"title": title, "video_url": video_url, "category": category, "cover": cover, "desc": desc, "video_id": video_id}, current_mcp_user.get())
+
+@mcp.tool()
+def delete_video(video_id: str) -> str:
+    """【视频中心】删除指定的视频条目。"""
+    return mcp_service.execute_delete_video({"video_id": video_id}, current_mcp_user.get())
+
+# 模块 9: 企业资料与配置
+@mcp.tool()
+def get_company_profile() -> str:
+    """【企业资料与配置】查询美尔健官方企业简介、地址、业务热线、服务邮箱、ICP备案号与联系方式。"""
+    return mcp_service.execute_get_company_profile({}, current_mcp_user.get())
+
+@mcp.tool()
+def update_company_profile(phone: str = "", email: str = "", address: str = "", company_name: str = "", icp: str = "") -> str:
+    """【企业资料与配置】更新企业官方联系电话、服务邮箱、办公地址或ICP备案号，自动同步全站所有页面页脚！"""
+    args = {k: v for k, v in locals().items() if v}
+    return mcp_service.execute_update_company_profile(args, current_mcp_user.get())
+
+# 模块 10: 全站发布
+@mcp.tool()
 def publish_website() -> str:
-    """一键触发全站重新编译与静态发布上线，同步所有产品与资讯页面。"""
-    user = current_mcp_user.get()
-    try:
-        generator.build_all()
-        record_audit_log("publish_website", "全站重新静态编译与发布上线成功", True, user)
-        return json.dumps({
-            "success": True,
-            "message": "美尔健官网全站静态文件已重新编译并发布成功！",
-            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "operator": user.get("name") if user else "管理员"
-        }, ensure_ascii=False)
-    except Exception as e:
-        record_audit_log("publish_website", f"全站发布失败: {e}", False, user)
-        return json.dumps({"success": False, "error": str(e)}, ensure_ascii=False)
+    """【全站发布】一键触发全站重新编译与静态发布上线，同步所有产品与资讯页面。"""
+    return mcp_service.execute_publish_website({}, current_mcp_user.get())
 
 # ----------------- MCP RESOURCES -----------------
-
 @mcp.resource("mellgen://products/catalog")
 def resource_products_catalog() -> str:
     """美尔健官方全量原料知识库（JSON 数据源）"""
-    products = load_json("products.json")
-    return json.dumps(products, ensure_ascii=False, indent=2)
+    res = mcp_service.read_resource_content("mellgen://products/catalog")
+    return res["text"] if res else "{}"
 
 @mcp.resource("mellgen://compliance/rules")
 def resource_compliance_rules() -> str:
     """中国化妆品广告宣传与标签管理合规准则"""
-    return """
-【美尔健生物产品宣传合规准则】
-1. 严禁明示或暗示疾病治疗、医疗作用（如抗肿瘤、治疗创面、创面愈合、抗炎消炎、抑菌杀菌、提高机体免疫力等）；
-2. 严禁使用《广告法》第九条绝对化极限词（如国家级、第一、顶级、赢领、首选、彻底根除等）；
-3. 严禁使用“药妆”、“医学护肤品”等违规模糊概念；
-4. 功效宣称应当科学中立，推荐使用法定化妆品分类目录术语：
-   - 舒缓、减轻泛红、缓解干燥不适；
-   - 紧致、抗皱、丰盈弹润；
-   - 屏障修护、强韧脆弱角质；
-   - 补水保湿、深层滋润；
-   - 提亮肤色、净透匀净；
-5. 技术机理应基于生物学和原料特性客观描述，突出专利生物透皮技术（cTDP）与合成生物学技术优势。
-"""
+    res = mcp_service.read_resource_content("mellgen://compliance/rules")
+    return res["text"] if res else ""
+
+@mcp.resource("mellgen://articles/list")
+def resource_articles_list() -> str:
+    """美尔健官方全量资讯与动态列表（JSON 数据源）"""
+    res = mcp_service.read_resource_content("mellgen://articles/list")
+    return res["text"] if res else "[]"
+
+@mcp.resource("mellgen://company/profile")
+def resource_company_profile() -> str:
+    """美尔健官方企业概况与联系方式配置"""
+    res = mcp_service.read_resource_content("mellgen://company/profile")
+    return res["text"] if res else "{}"
+
+@mcp.resource("mellgen://inquiries/leads")
+def resource_inquiries_leads() -> str:
+    """美尔健意向采购咨询与客户留言记录（JSON 数据源）"""
+    res = mcp_service.read_resource_content("mellgen://inquiries/leads")
+    return res["text"] if res else "[]"
+
+@mcp.resource("mellgen://seo/metrics")
+def resource_seo_metrics() -> str:
+    """美尔健官网 SEO 收录指标与蜘蛛访问统计"""
+    res = mcp_service.read_resource_content("mellgen://seo/metrics")
+    return res["text"] if res else "{}"
 
 # ----------------- ASGI AUTHENTICATION & MULTI-MOUNT APP -----------------
 

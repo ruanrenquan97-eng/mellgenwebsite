@@ -546,14 +546,27 @@ $(function () {
                 initial: !!isInitial
             });
 
-            if (navigator.sendBeacon) {
-                var blob = new Blob([payload], { type: "application/json" });
-                navigator.sendBeacon(apiUrl, blob);
+            if (!isInitial && navigator.sendBeacon) {
+                try {
+                    var blob = new Blob([payload], { type: "application/json" });
+                    navigator.sendBeacon(apiUrl, blob);
+                    return;
+                } catch(e) {}
+            }
+            if (window.fetch) {
+                fetch(apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: payload,
+                    keepalive: true
+                }).catch(function() {});
             } else {
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", apiUrl, true);
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(payload);
+                try {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", apiUrl, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(payload);
+                } catch(e) {}
             }
         }
 

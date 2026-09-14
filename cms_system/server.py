@@ -22,7 +22,11 @@ import wechat_crawler
 import ai_customer_service
 import video_manager
 import vector_db
-import company_info_manager as cim
+try:
+    import company_info_manager as cim
+except Exception as _cim_err:
+    print(f"[WARN] 无法加载 company_info_manager 模块: {_cim_err}")
+    cim = None
 
 app = Flask(__name__)
 app.secret_key = "mellgen_cms_secret_key_12938"
@@ -1641,6 +1645,8 @@ def handle_navigation():
 @app.route("/api/company-info", methods=["GET"])
 @login_required
 def api_get_company_info():
+    if not cim:
+        return jsonify({"success": False, "message": "服务器缺少 company_info_manager 模块，请检查代码同步与依赖安装"}), 500
     section = request.args.get("section")
     data = cim.load_company_info()
     if section:
@@ -2949,8 +2955,9 @@ def get_visitor_insights():
 @app.route("/api/analytics/track_pageview", methods=["POST", "GET"])
 def track_pageview():
     data = {}
-    if request.is_json and request.json:
-        data = request.json
+    json_data = request.get_json(silent=True)
+    if json_data and isinstance(json_data, dict):
+        data = json_data
     elif request.form:
         data = request.form.to_dict()
     elif request.data:
@@ -3125,17 +3132,29 @@ def reset_analytics_data():
 
 # ---------------- OpenAPI for WorkBuddy AI Agents ----------------
 def verify_workbuddy_api_key():
+    token = mcp_service.extract_token_from_request(request)
+    user = mcp_service.verify_token_and_get_user(token)
+    if user:
+        return user
     config = load_json("connector_workbuddy.json") or {}
     expected_key = config.get("api_key", "").strip()
     provided_key = request.headers.get("X-API-Key", "") or request.args.get("api_key", "")
-    return expected_key and (provided_key == expected_key)
+    if expected_key and (provided_key == expected_key):
+        return {"username": "admin", "name": "系统管理员", "role": "管理员"}
+    return None
 
-@app.route("/api/connector/v1/products", methods=["GET"])
+@app.route("/api/connector/v1/products", methods=["GET", "POST"])
 def connector_api_products():
-    if not verify_workbuddy_api_key():
-        return jsonify({"success": False, "message": "API Key 鉴权失败，请在请求头提供 X-API-Key 或 URL 参数携带 api_key"}), 401
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败，请提供合法的 Token 或 API Key"}), 401
     
-    products = load_json("products.json")
+    if request.method == "POST":
+        data = request.json or {}
+        res_str = mcp_service.execute_create_product_detail(data, user)
+        return jsonify(json.loads(res_str))
+        
+    products = load_json("products.json") or []
     cleaned = []
     for p in products:
         cleaned.append({
@@ -3157,12 +3176,18 @@ def connector_api_products():
         "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
-@app.route("/api/connector/v1/articles", methods=["GET"])
+@app.route("/api/connector/v1/articles", methods=["GET", "POST"])
 def connector_api_articles():
-    if not verify_workbuddy_api_key():
-        return jsonify({"success": False, "message": "API Key 鉴权失败"}), 401
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
     
-    articles = load_json("articles.json")
+    if request.method == "POST":
+        data = request.json or {}
+        res_str = mcp_service.execute_create_article(data, user)
+        return jsonify(json.loads(res_str))
+        
+    articles = load_json("articles.json") or []
     cleaned = []
     for a in articles:
         cleaned.append({
@@ -3170,7 +3195,8 @@ def connector_api_articles():
             "title": a.get("title"),
             "date": a.get("date"),
             "author": a.get("author"),
-            "summary": a.get("summary", ""),
+            "category": a.get("category"),
+            "summary": a.get("summary", a.get("desc", "")),
             "url": f"https://www.mellgen.com/articles/{a.get('id')}.html"
         })
     return jsonify({
@@ -3181,17 +3207,114 @@ def connector_api_articles():
         "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
-@app.route("/api/connector/v1/inquiries", methods=["GET"])
+@app.route("/api/connector/v1/inquiries", methods=["GET", "POST"])
 def connector_api_inquiries():
-    if not verify_workbuddy_api_key():
-        return jsonify({"success": False, "message": "API Key 鉴权失败"}), 401
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    if request.method == "POST":
+        data = request.json or {}
+        res_str = mcp_service.execute_update_inquiry_status(data, user)
+        return jsonify(json.loads(res_str))
     
-    messages = load_json("messages.json")
+    messages = load_json("messages.json") or []
     return jsonify({
         "success": True,
         "total": len(messages),
         "data": messages
     })
+
+@app.route("/api/connector/v1/company", methods=["GET", "POST"])
+def connector_api_company():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    if request.method == "POST":
+        data = request.json or {}
+        res_str = mcp_service.execute_update_company_profile(data, user)
+        return jsonify(json.loads(res_str))
+        
+    res_str = mcp_service.execute_get_company_profile({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/seo", methods=["GET", "POST"])
+def connector_api_seo():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    if request.method == "POST":
+        data = request.json or {}
+        action = data.get("action", "optimize")
+        if action == "push":
+            res_str = mcp_service.execute_push_urls_to_search_engines(data, user)
+        else:
+            res_str = mcp_service.execute_trigger_seo_optimize(data, user)
+        return jsonify(json.loads(res_str))
+        
+    res_str = mcp_service.execute_get_seo_overview({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/geo", methods=["GET", "POST"])
+def connector_api_geo():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    if request.method == "POST":
+        data = request.json or {}
+        res_str = mcp_service.execute_rebuild_llms_knowledge(data, user)
+        return jsonify(json.loads(res_str))
+        
+    res_str = mcp_service.execute_get_geo_status({}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/qa", methods=["GET", "POST"])
+def connector_api_qa():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    if request.method == "POST":
+        data = request.json or {}
+        action = data.get("action", "save")
+        if action == "test":
+            res_str = mcp_service.execute_test_ai_customer_service(data, user)
+        elif action == "rebuild_vector":
+            res_str = mcp_service.execute_rebuild_vector_database(data, user)
+        else:
+            res_str = mcp_service.execute_add_or_update_qa_pair(data, user)
+        return jsonify(json.loads(res_str))
+        
+    keyword = request.args.get("keyword", "")
+    category = request.args.get("category", "")
+    res_str = mcp_service.execute_list_qa_pairs({"keyword": keyword, "category": category}, user)
+    return jsonify(json.loads(res_str))
+
+@app.route("/api/connector/v1/videos", methods=["GET", "POST"])
+def connector_api_videos():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    if request.method == "POST":
+        data = request.json or {}
+        res_str = mcp_service.execute_create_or_update_video(data, user)
+        return jsonify(json.loads(res_str))
+        
+    videos = load_json("videos.json") or []
+    return jsonify({"success": True, "total": len(videos), "data": videos})
+
+@app.route("/api/connector/v1/publish", methods=["POST"])
+def connector_api_publish():
+    user = verify_workbuddy_api_key()
+    if not user:
+        return jsonify({"success": False, "message": "WorkBuddy 鉴权失败"}), 401
+        
+    res_str = mcp_service.execute_publish_website({}, user)
+    return jsonify(json.loads(res_str))
 
 # ==========================================================
 # Comprehensive Search Engine Optimization (SEO) Suite APIs

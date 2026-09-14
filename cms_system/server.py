@@ -1641,8 +1641,10 @@ def handle_navigation():
 
 # =========================================================================
 # Company Info & Qualifications Management APIs (企业信息与资质管理中心)
+# 同时支持 /api/company-info 与 /company-info，全面适配各类反向代理配置
 # =========================================================================
-@app.route("/api/company-info", methods=["GET"])
+@app.route("/api/company-info", methods=["GET"], strict_slashes=False)
+@app.route("/company-info", methods=["GET"], strict_slashes=False)
 @login_required
 def api_get_company_info():
     if not cim:
@@ -1653,7 +1655,8 @@ def api_get_company_info():
         return jsonify({"success": True, "section": section, "data": data.get(section, [])})
     return jsonify({"success": True, "data": data})
 
-@app.route("/api/company-info/item", methods=["POST"])
+@app.route("/api/company-info/item", methods=["POST"], strict_slashes=False)
+@app.route("/company-info/item", methods=["POST"], strict_slashes=False)
 @login_required
 def api_save_company_item():
     req_data = request.json or {}
@@ -1667,7 +1670,8 @@ def api_save_company_item():
         res = cim.add_item(section, item)
     return jsonify(res)
 
-@app.route("/api/company-info/item", methods=["DELETE"])
+@app.route("/api/company-info/item", methods=["DELETE"], strict_slashes=False)
+@app.route("/company-info/item", methods=["DELETE"], strict_slashes=False)
 @login_required
 def api_delete_company_item():
     req_data = request.json or {}
@@ -1678,7 +1682,8 @@ def api_delete_company_item():
     res = cim.delete_item(section, item_id)
     return jsonify(res)
 
-@app.route("/api/company-info/text-section", methods=["POST"])
+@app.route("/api/company-info/text-section", methods=["POST"], strict_slashes=False)
+@app.route("/company-info/text-section", methods=["POST"], strict_slashes=False)
 @login_required
 def api_update_text_section():
     req_data = request.json or {}
@@ -1689,19 +1694,22 @@ def api_update_text_section():
     res = cim.update_text_section(section, content)
     return jsonify(res)
 
-@app.route("/api/company-info/sync", methods=["POST"])
+@app.route("/api/company-info/sync", methods=["POST"], strict_slashes=False)
+@app.route("/company-info/sync", methods=["POST"], strict_slashes=False)
 @login_required
 def api_sync_company_info():
     res = cim.sync_all()
     return jsonify(res)
 
-@app.route("/api/company-info/messages", methods=["GET"])
+@app.route("/api/company-info/messages", methods=["GET"], strict_slashes=False)
+@app.route("/company-info/messages", methods=["GET"], strict_slashes=False)
 @login_required
 def api_get_company_messages():
     data = cim.load_company_info()
     return jsonify({"success": True, "messages": data.get("messages", [])})
 
-@app.route("/api/company-info/messages/status", methods=["POST"])
+@app.route("/api/company-info/messages/status", methods=["POST"], strict_slashes=False)
+@app.route("/company-info/messages/status", methods=["POST"], strict_slashes=False)
 @login_required
 def api_update_company_message_status():
     req_data = request.json or {}
@@ -1713,7 +1721,8 @@ def api_update_company_message_status():
     res = cim.update_message_status(msg_id, status, reply)
     return jsonify(res)
 
-@app.route("/api/company-info/messages", methods=["DELETE"])
+@app.route("/api/company-info/messages", methods=["DELETE"], strict_slashes=False)
+@app.route("/company-info/messages", methods=["DELETE"], strict_slashes=False)
 @login_required
 def api_delete_company_message():
     req_data = request.json or {}
@@ -2589,6 +2598,7 @@ def get_client_ip():
 _ip_geo_cache = {}
 
 def get_ip_region(ip):
+    ip = (ip or "").strip()
     if not ip or ip in ("127.0.0.1", "::1", "localhost"):
         return "本地开发测试 (127.0.0.1)"
     if ip.startswith("192.168.") or ip.startswith("10."):
@@ -2600,41 +2610,85 @@ def get_ip_region(ip):
                 return f"局域网/内网测试 ({ip})"
         except Exception:
             pass
-    if ip in _ip_geo_cache:
+    if ip in _ip_geo_cache and not _ip_geo_cache[ip].startswith("公网"):
         return _ip_geo_cache[ip]
 
-    # 1. 优先调用全国网络IP归属库查询具体省市与运营商
+    # 1. 优先调用百度官方 IP 归属地开放接口 (全国最稳、速度极快、包含省/市/运营商)
     try:
-        url = f"https://whois.pconline.com.cn/ipJson.jsp?ip={ip}&json=true"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=1.5) as res:
-            raw = res.read().decode("gbk", errors="ignore")
-            data = json.loads(raw.strip())
-            addr = data.get("addr", "").strip()
-            if addr:
-                _ip_geo_cache[ip] = addr
-                return addr
+        url = f"https://opendata.baidu.com/api.php?query={ip}&resource_id=6006&oe=utf8"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+        with urllib.request.urlopen(req, timeout=2.5) as res:
+            raw_bytes = res.read()
+            try:
+                raw_text = raw_bytes.decode("gb18030", errors="ignore")
+            except Exception:
+                raw_text = raw_bytes.decode("utf-8", errors="ignore")
+            data = json.loads(raw_text)
+            if data.get("status") == "0" and data.get("data"):
+                loc = data["data"][0].get("location", "").strip()
+                loc = re.sub(r"[\uE000-\uF8FF]", "", loc).strip()
+                loc = re.sub(r"\s+", " ", loc)
+                if loc and loc != "IP地址查询":
+                    _ip_geo_cache[ip] = loc
+                    return loc
     except Exception:
         pass
 
-    # 2. 备用全球IP接口 (支持海外与全球IP精确定位)
+    # 2. 备用全球多语言 IP 接口 (ipwho.is，支持中文省、市、运营商)
+    try:
+        url = f"https://ipwho.is/{ip}?lang=zh-CN"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=2.5) as res:
+            data = json.loads(res.read().decode("utf-8", errors="ignore"))
+            if data.get("success"):
+                parts = []
+                country = data.get("country", "")
+                region = data.get("region", "")
+                city = data.get("city", "")
+                isp = (data.get("connection") or {}).get("isp", "")
+                if country and country != "中国":
+                    parts.append(country)
+                if region:
+                    parts.append(region)
+                if city and city != region:
+                    parts.append(city)
+                loc_str = " ".join(parts)
+                if isp:
+                    loc_str = f"{loc_str} ({isp})" if loc_str else isp
+                if loc_str.strip():
+                    _ip_geo_cache[ip] = loc_str.strip()
+                    return loc_str.strip()
+    except Exception:
+        pass
+
+    # 3. 备用全球 IP 接口 (ip-api.com)
     try:
         url = f"http://ip-api.com/json/{ip}?lang=zh-CN"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=1.5) as res:
+        with urllib.request.urlopen(req, timeout=2.5) as res:
             data = json.loads(res.read().decode("utf-8", errors="ignore"))
             if data.get("status") == "success":
-                parts = [data.get("country"), data.get("regionName"), data.get("city")]
-                location = " ".join([p for p in parts if p])
+                parts = []
+                country = data.get("country", "")
+                region = data.get("regionName", "")
+                city = data.get("city", "")
                 isp = data.get("isp", "").strip()
-                addr = f"{location} ({isp})" if isp else location
-                if addr.strip():
-                    _ip_geo_cache[ip] = addr.strip()
-                    return addr.strip()
+                if country and country != "中国":
+                    parts.append(country)
+                if region:
+                    parts.append(region)
+                if city and city != region:
+                    parts.append(city)
+                loc_str = " ".join(parts)
+                if isp:
+                    loc_str = f"{loc_str} ({isp})" if loc_str else isp
+                if loc_str.strip():
+                    _ip_geo_cache[ip] = loc_str.strip()
+                    return loc_str.strip()
     except Exception:
         pass
 
-    fallback = f"公网真实访客 ({ip})"
+    fallback = f"国内网络客户 ({ip})"
     _ip_geo_cache[ip] = fallback
     return fallback
 
@@ -2944,12 +2998,28 @@ def record_visit():
 
 # ---------------- Page & Product Visitor Analytics ----------------
 
+def normalize_visitor_stream(stream):
+    if not isinstance(stream, list):
+        return False
+    changed = False
+    for v in stream:
+        ip = (v.get("ip") or "").strip()
+        reg = v.get("region", "")
+        if ip and (not reg or "公网" in reg or "国内网络" in reg or reg.startswith(ip)):
+            new_reg = get_ip_region(ip)
+            if new_reg and not new_reg.startswith("国内网络") and new_reg != reg:
+                v["region"] = new_reg
+                changed = True
+    return changed
+
 @app.route("/api/analytics/visitor_insights", methods=["GET"])
 @login_required
 def get_visitor_insights():
     logs = load_json("visitor_logs.json")
     if not logs or not isinstance(logs, dict):
         logs = { "top_products": [], "top_pages": [], "realtime_stream": [] }
+    if normalize_visitor_stream(logs.get("realtime_stream", [])):
+        save_json("visitor_logs.json", logs)
     return jsonify({"success": True, "data": logs})
 
 @app.route("/api/analytics/track_pageview", methods=["POST", "GET"])
@@ -3747,6 +3817,10 @@ def api_seo_statistics():
             "google_count": uv_val
         })
 
+    recent_stream = visitor_logs.get("realtime_stream", [])
+    if normalize_visitor_stream(recent_stream):
+        save_json("visitor_logs.json", visitor_logs)
+
     return jsonify({
         "success": True,
         "spider": spider_stats,
@@ -3754,7 +3828,7 @@ def api_seo_statistics():
         "traffic": traffic,
         "top_products": visitor_logs.get("top_products", [])[:6],
         "top_pages": visitor_logs.get("top_pages", [])[:6],
-        "recent_visitors": visitor_logs.get("realtime_stream", [])[:10]
+        "recent_visitors": recent_stream[:10]
     })
 
 @app.route("/api/seo/diagnostics", methods=["GET", "POST"])

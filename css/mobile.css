@@ -8937,6 +8937,293 @@ canvas[width="1920"] {
   html[lang="en"] .zxlb-3n-ts-02-list dd::after {
     content: '▶ Play' !important;
   }
+
+  /* ==========================================================================
+     移动端专属精简页脚 (Mobile Compact Footer)
+     彻底解决手机端底部过高占满整屏的问题，打造精致紧凑的企业移动端页脚
+     ========================================================================== */
+  /* 1. 容器与背景重构：去除错位的桌面端背景大图及绝对定位标线 */
+  .g_ft, .m_ft {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin: 0 !important;
+  }
+
+  .g_ft .m_ft {
+    background: #0b223c !important;
+    background-image: none !important;
+    padding: 18px 12px 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .g_ft .m_ft:before,
+  .g_ft .m_ft:after {
+    display: none !important;
+  }
+
+  .g_ft .dban {
+    display: none !important;
+  }
+
+  .g_ft .m_ft .content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  /* 2. 品牌 Logo 与电话：精致紧凑居中 */
+  .g_ft .m_ft .ftlogo {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 0 8px 0 !important;
+    margin: 0 0 8px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    float: none !important;
+    width: 100% !important;
+  }
+
+  .g_ft .m_ft .ftlogo .flogo {
+    float: none !important;
+    width: auto !important;
+    max-width: 120px !important;
+    padding: 0 !important;
+    margin: 0 auto 6px auto !important;
+    display: block !important;
+  }
+
+  .g_ft .m_ft .ftlogo .flogo img {
+    width: auto !important;
+    max-width: 100% !important;
+    max-height: 28px !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  .g_ft .m_ft .ftlogo .flogor {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .g_ft .m_ft .ftlogo .flogor .codelst {
+    display: none !important;
+  }
+
+  .g_ft .m_ft .ftlogo .flogor .ftel {
+    float: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #38bdf8 !important;
+    background: rgba(56, 189, 248, 0.08) !important;
+    border: 1px solid rgba(56, 189, 248, 0.22) !important;
+    padding: 3px 12px !important;
+    border-radius: 16px !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+  }
+
+  /* 3. 中间导航区：移动端双行扁平化胶囊导航 (第1行4个，第2行3个) */
+  .g_ft .ftmid {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    float: none !important;
+    width: 100% !important;
+  }
+
+  .g_ft .ftmid .ftnav {
+    float: none !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto 10px auto !important;
+    padding: 0 !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 扁平化容器：两行整齐排列，彻底杜绝跨浏览器容器断层 */
+  .m-ftnav-flat {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 7px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .m-ftnav-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  .m-ftnav-row1 a {
+    flex: 1 1 0 !important;
+    max-width: 85px !important;
+  }
+
+  .m-ftnav-row2 a {
+    flex: 1 1 0 !important;
+    max-width: 105px !important;
+  }
+
+  .m-ftnav-flat a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 28px !important;
+    min-height: 0 !important;
+    line-height: 1 !important;
+    font-size: clamp(10.5px, 2.8vw, 11.5px) !important;
+    letter-spacing: -0.2px !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 14px !important;
+    padding: 0 4px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    transition: all .2s ease !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    text-decoration: none !important;
+  }
+
+  .m-ftnav-flat a:active,
+  .m-ftnav-flat a:hover {
+    color: #ffffff !important;
+    background: rgba(56, 189, 248, 0.25) !important;
+    border-color: rgba(56, 189, 248, 0.5) !important;
+  }
+
+  /* 移动端彻底屏蔽所有原始嵌套的 dl 结构，杜绝文字在上方重复出现 */
+  .g_ft .ftmid .ftnav dl,
+  .g_ft .ftmid .ftnav dl.teaser,
+  .g_ft .ftmid .ftnav dl:nth-child(1),
+  .g_ft .ftmid .ftnav dl:nth-child(2),
+  .g_ft .ftmid .ftnav dl:nth-child(3),
+  .g_ft .ftmid .ftnav dl dt,
+  .g_ft .ftmid .ftnav dl dd,
+  .g_ft .ftmid .ftnav dl a {
+    display: none !important;
+  }
+
+  /* 4. 公司信息与地址：紧凑精简 */
+  .g_ft .ftmid .add {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  .g_ft .ftmid .add h3 {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    line-height: 1.35 !important;
+    margin: 0 0 4px 0 !important;
+    text-align: center !important;
+  }
+
+  .g_ft .ftmid .add .addlst {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+    margin: 0 0 10px 0 !important;
+    padding: 0 6px !important;
+    text-align: center !important;
+  }
+
+  /* 5. 官方二维码：紧凑横排 (宽高度 54px) */
+  .g_ft .ftmid .add .addcode {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    float: none !important;
+    width: 100% !important;
+    list-style: none !important;
+  }
+
+  .g_ft .ftmid .add .addcode li {
+    float: none !important;
+    width: 54px !important;
+    height: 54px !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 7px !important;
+    background: #ffffff !important;
+    padding: 2px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+  }
+
+  .g_ft .ftmid .add .addcode li img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 5px !important;
+    display: block !important;
+  }
+
+  /* 6. 版权与备案信息栏：紧凑居中 */
+  .g_ft .ftd {
+    min-height: 0 !important;
+    height: auto !important;
+    line-height: 1.5 !important;
+    font-size: 10.5px !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 8px 6px 8px 6px !important;
+    margin: 8px 0 0 0 !important;
+    text-align: center !important;
+    clear: both !important;
+    float: none !important;
+    width: 100% !important;
+    word-break: break-word !important;
+  }
+
+  .g_ft .ftd a {
+    color: rgba(255, 255, 255, 0.6) !important;
+    margin: 0 3px !important;
+    display: inline-block !important;
+    font-size: 10.5px !important;
+    text-decoration: none !important;
+  }
+
+  .g_link {
+    display: none !important;
+  }
 }
 
 

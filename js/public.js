@@ -729,11 +729,27 @@ $(function () {
     setTimeout(injectBar, 300);
 })();
 
-// 移动端页脚导航扁平化重构，确保排成整齐的两行（第一行4个，第二行3个），彻底杜绝跨浏览器容器断层
+// 移动端页脚导航扁平化重构，确保移动端排成整齐的两行（第一行4个，第二行3个），桌面端保持完整原始列表
 (function () {
     function flattenMobileFooterNav() {
         var ftnav = document.querySelector(".g_ft .ftmid .ftnav");
-        if (!ftnav || ftnav.getAttribute("data-flattened") === "true") return;
+        if (!ftnav) return;
+
+        // 仅在移动端屏幕 (<= 768px) 下执行！在桌面端必须完整保留 3 列导航，绝对不可隐藏 dl！
+        if (window.innerWidth > 768) {
+            var oldFlat = ftnav.querySelector(".m-ftnav-flat");
+            if (oldFlat) {
+                oldFlat.parentNode.removeChild(oldFlat);
+            }
+            var origDls = ftnav.querySelectorAll("dl");
+            for (var k = 0; k < origDls.length; k++) {
+                origDls[k].style.removeProperty("display");
+            }
+            ftnav.removeAttribute("data-flattened");
+            return;
+        }
+
+        if (ftnav.getAttribute("data-flattened") === "true") return;
 
         var links = [];
         // 1. 快捷链接列表 (解决方案、透皮肽技术、联系我们、关于我们、视频中心)
@@ -782,7 +798,7 @@ $(function () {
                 flat.appendChild(row2);
             }
 
-            // 彻底隐藏原始的所有 dl 节点，防止文字在上方重复出现
+            // 移动端隐藏原始的所有 dl 节点，防止文字在上方重复出现
             var dls = ftnav.querySelectorAll("dl");
             for (var k = 0; k < dls.length; k++) {
                 dls[k].style.setProperty("display", "none", "important");
@@ -799,6 +815,7 @@ $(function () {
         flattenMobileFooterNav();
     }
     setTimeout(flattenMobileFooterNav, 200);
+    window.addEventListener("resize", flattenMobileFooterNav);
 })();
 
 // 视频中心海报自动注入与播放优化（解决移动端黑屏与封面丢失）

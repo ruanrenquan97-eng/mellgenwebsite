@@ -100,8 +100,11 @@
     var hint = document.createElement("div");
     hint.id = "mg-ai-bubble-hint";
     hint.innerHTML = 
-      '<div style="font-weight:600; color:#059669; margin-bottom:2px;">' + (isEn ? "Mellgen AI Support" : "AI客服 · 小美") + '</div>' +
-      '<div>' + (isEn ? "Hello! Ask me about raw material specs, COA, or turnkey formulas." : "您好！我是AI客服小美，欢迎咨询原料规格、质检COA及技术方案~") + '</div>' +
+      '<div style="font-weight:600; color:#059669; font-size:13px; display:flex; align-items:center; gap:5px; margin-bottom:1px;">' +
+        '<span style="display:inline-block; width:6px; height:6px; background:#10b981; border-radius:50%; flex-shrink:0;"></span>' +
+        '<span>' + (isEn ? "Mellgen AI Support" : "AI客服 · 小美") + '</span>' +
+      '</div>' +
+      '<div style="font-size:12.5px; color:#374151; line-height:1.45;">' + (isEn ? "Hello! Ask me about raw material specs, COA, or turnkey formulas." : "您好！我是AI客服小美，欢迎咨询原料规格、质检COA及技术方案~") + '</div>' +
       '<span class="mg-hint-close" title="关闭提示">&times;</span>';
 
     // 回到顶部浮动按钮

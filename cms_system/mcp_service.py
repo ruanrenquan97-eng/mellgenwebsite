@@ -46,9 +46,13 @@ def save_json(filename: str, data: Any):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 def get_or_init_account_tokens() -> Dict[str, Any]:
-    """确保所有后台账户（在 settings.json 中定义）均具备专属的 WorkBuddy MCP Token"""
-    settings = load_json("settings.json")
-    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
+    """确保所有后台账户（在持久化数据库及 settings.json 中定义）均具备专属的 WorkBuddy MCP Token"""
+    try:
+        import analytics_storage
+        accounts = analytics_storage.get_all_accounts()
+    except Exception:
+        settings = load_json("settings.json")
+        accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
     
     wb_conf = load_json("connector_workbuddy.json")
     if not isinstance(wb_conf, dict):

@@ -47,7 +47,7 @@ var _hmt = _hmt || [];
  <a href="../index.html" class="active" title="English">EN</a>
 </div>
  <div class="tel rter"> 
- <b>186-9197-8530 / 186-9197-8530</b> 
+ <b>186-9197-8530 / 0755-82926499</b> 
  </div> 
  <div class="g_nav menu rter"> 
  <ul>
@@ -210,14 +210,74 @@ var _hmt = _hmt || [];
  <p class="timeinterval" style="display:none;">30</p> 
  <p class="isvalidate" style="display:none;">true</p> 
  </div> 
- <div class="form-tel-box">
- <p class="form-tel-tip">such as Sample Request， full ：</p>
- <a href="tel:18691978530" class="form-tel-link">📞 186-9197-8530 ( one )</a>
- </div>
+  <div class="form-tel-box">
+  <p class="form-tel-tip">For urgent inquiries or sample requests, feel free to contact our hotline directly:</p>
+  <a href="tel:18691978530" class="form-tel-link">📞 +86-186-9197-8530 (Click to call)</a>
+  </div>
+  <script>
+    (function() {
+      function renderCaptcha() {
+        var chars = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+        var code = "";
+        for (var i = 0; i < 4; i++) {
+          code += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        var canvas = document.createElement("canvas");
+        canvas.width = 90;
+        canvas.height = 36;
+        var ctx = canvas.getContext("2d");
+        
+        var grad = ctx.createLinearGradient(0, 0, 90, 36);
+        grad.addColorStop(0, "#f8fafc");
+        grad.addColorStop(1, "#e2e8f0");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 90, 36);
+        
+        for (var i = 0; i < 3; i++) {
+          ctx.strokeStyle = "rgba(" + Math.floor(Math.random()*120) + "," + Math.floor(Math.random()*120) + "," + Math.floor(Math.random()*120) + ",0.25)";
+          ctx.beginPath();
+          ctx.moveTo(Math.random() * 90, Math.random() * 36);
+          ctx.lineTo(Math.random() * 90, Math.random() * 36);
+          ctx.stroke();
+        }
+        
+        var colors = ["#047857", "#1d4ed8", "#b91c1c", "#7c3aed", "#c2410c", "#0f766e"];
+        for (var i = 0; i < 4; i++) {
+          ctx.font = "bold 20px 'Segoe UI', Arial, sans-serif";
+          ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+          ctx.save();
+          var x = 12 + i * 18;
+          var y = 25;
+          var angle = (Math.random() - 0.5) * 0.35;
+          ctx.translate(x, y);
+          ctx.rotate(angle);
+          ctx.fillText(code[i], 0, 0);
+          ctx.restore();
+        }
+        
+        var img = document.getElementById("getcode_gg");
+        if (img) {
+          img.src = canvas.toDataURL("image/png");
+          img.dataset.code = code;
+          img.style.cursor = "pointer";
+          img.style.display = "inline-block";
+          img.title = "Click to refresh verification code";
+        }
+      }
+      window.renderCaptcha = renderCaptcha;
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderCaptcha);
+      } else {
+        renderCaptcha();
+      }
+      var btn = document.getElementById("getcode_gg");
+      if (btn) btn.onclick = renderCaptcha;
+    })();
+  </script>
+  </div> 
+  <div class="clear"></div> 
+  </div> 
  </div> 
- <div class="clear"></div> 
- </div> 
-</div> 
  
  
  </div> 
@@ -243,7 +303,7 @@ var _hmt = _hmt || [];
  <li><i><img alt="" src="../../images/qq.png"></i><em><img alt="RED QR Code" src="../../resource/images/98118d91c8d74d289a05f86fc2519ad7_8.jpg" title="RED QR Code"></em></li> 
  </ul> 
  <div class="ftel">
- 186-9197-8530&nbsp;&nbsp;&nbsp;186-9197-8530 
+ 186-9197-8530&nbsp;&nbsp;&nbsp;0755-82926499 
  </div> 
  </div> 
  </div> 
@@ -325,7 +385,7 @@ var _hmt = _hmt || [];
  <h3>Mellgen (Shenzhen) Biotechnology Co., Ltd.</h3> 
  <div class="addlst">
  Email: 61791579@qq.com 
- <br> Address: Guangdong ProvinceGuangdong ProvinceGuangdong ProvinceGuangdong ProvinceGuangdong ProvinceGuangdong ProvinceGuangdong ProvinceGuangdong Province3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China</div> 
+ <br> Address: 3rd Floor, Building A23, Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China</div> 
  <ul class="addcode f_cb"> 
  <li><img alt="WeChat Customer Service" src="../../resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg" title="WeChat Customer Service"></li> 
  <li><img alt="WeChat Official Account" src="../../resource/images/98118d91c8d74d289a05f86fc2519ad7_4.jpg" title="WeChat Official Account"></li> 

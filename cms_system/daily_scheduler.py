@@ -334,6 +334,14 @@ def execute_daily_seo_pipeline(trigger_source="scheduler"):
     cfg["last_run_summary"] = final_summary
     save_schedule_config(cfg)
 
+    # Automatically snapshot and sync analytics vault
+    try:
+        import analytics_storage
+        analytics_storage.sync_active_data_to_vault()
+        analytics_storage.create_periodic_snapshot()
+    except Exception as _vault_err:
+        print(f"[-] Analytics vault auto snapshot error: {_vault_err}")
+
     print(f"[OK] Daily SEO Pipeline completed successfully in {duration}s: {final_summary}")
     return log_entry
 

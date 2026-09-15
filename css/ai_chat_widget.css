@@ -149,22 +149,22 @@
 /* 首次欢迎气泡浮动提示 */
 #mg-ai-bubble-hint {
   position: fixed;
-  bottom: 100px;
-  right: 30px;
+  bottom: 92px;
+  right: 28px;
   background: #ffffff;
   color: #1f2937;
-  padding: 12px 16px;
+  padding: 12px 28px 12px 14px;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
   font-size: 13px;
-  line-height: 1.45;
-  max-width: 230px;
+  line-height: 1.5;
+  max-width: 250px;
   z-index: 99997;
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   animation: fadeInHint 0.5s ease;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 4px;
   cursor: pointer;
 }
 
@@ -181,14 +181,23 @@
 }
 
 #mg-ai-bubble-hint .mg-hint-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  line-height: 16px;
+  text-align: center;
   color: #9ca3af;
   font-size: 16px;
-  line-height: 1;
   cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
 }
 
 #mg-ai-bubble-hint .mg-hint-close:hover {
-  color: #4b5563;
+  background: #f3f4f6;
+  color: #374151;
 }
 
 @keyframes fadeInHint {

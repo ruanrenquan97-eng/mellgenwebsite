@@ -22,6 +22,7 @@ import wechat_crawler
 import ai_customer_service
 import video_manager
 import vector_db
+import analytics_storage
 try:
     import company_info_manager as cim
 except Exception as _cim_err:
@@ -125,21 +126,43 @@ def serve_bing_verify():
     xml = f'<?xml version="1.0"?><users><user>{b_code}</user></users>'
     return xml, 200, {"Content-Type": "text/xml; charset=utf-8"}
 
-# Helper: load/save JSON data
+# Helper: load/save JSON data with atomic writes and persistent storage vault
 def load_json(filename, default=None):
     path = os.path.join(DATA_DIR, filename)
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return default if default is not None else []
+    data = analytics_storage.safe_load_json(path, None)
+    if data is None:
+        if filename == "seo_metrics.json":
+            try:
+                data = analytics_storage.heal_and_get_seo_metrics(get_default_seo_metrics())
+                analytics_storage.atomic_save_json(path, data)
+            except Exception:
+                data = default if default is not None else {}
+        elif filename == "visitor_logs.json":
+            try:
+                data = analytics_storage.heal_and_get_visitor_logs({"top_products": [], "top_pages": [], "realtime_stream": []})
+                analytics_storage.atomic_save_json(path, data)
+            except Exception:
+                data = default if default is not None else {}
+        elif filename == "settings.json":
+            data = default if default is not None else {}
+            data = analytics_storage.heal_and_sync_settings_accounts(data)
+        else:
+            data = default if default is not None else []
+    else:
+        if filename == "settings.json":
+            data = analytics_storage.heal_and_sync_settings_accounts(data)
+    return data
 
 def save_json(filename, data):
     path = os.path.join(DATA_DIR, filename)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    if filename == "settings.json":
+        data = analytics_storage.heal_and_sync_settings_accounts(data)
+    analytics_storage.atomic_save_json(path, data)
+    if filename in ["seo_metrics.json", "visitor_logs.json"]:
+        try:
+            analytics_storage.sync_active_data_to_vault()
+        except Exception as _e:
+            print(f"[AnalyticsVault] 持久化同步异常: {_e}")
 
 # Authentication decorator
 def login_required(f):
@@ -166,16 +189,8 @@ def login():
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "").strip()
         
-        settings_path = os.path.join(DATA_DIR, "settings.json")
-        try:
-            with open(settings_path, 'r', encoding='utf-8') as f:
-                settings = json.load(f)
-            accounts = settings.get("accounts", [])
-        except Exception:
-            accounts = [
-                {"username": "admin", "password": "admin123", "role": "管理员", "name": "系统管理员"},
-                {"username": "kefu", "password": "kefu888", "role": "客服", "name": "在线客服"}
-            ]
+        # 从持久化保险箱获取所有账号，确保新增账号永不因代码更新而丢失
+        accounts = analytics_storage.get_all_accounts()
         
         matched = None
         for acc in accounts:
@@ -2094,8 +2109,7 @@ def save_workbuddy_config():
 def get_workbuddy_accounts():
     """获取所有网站账户及其对应的 WorkBuddy MCP Token 与连接配置"""
     tokens = get_or_init_account_tokens()
-    settings = load_json("settings.json")
-    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
+    accounts = analytics_storage.get_all_accounts()
     
     account_list = []
     for acc in accounts:
@@ -2338,10 +2352,7 @@ def get_accounts():
     if not is_admin_user():
         return jsonify({"success": False, "message": "无权限访问账号管理"}), 403
 
-    settings = load_json("settings.json")
-    if not isinstance(settings, dict):
-        settings = {}
-    accounts = settings.get("accounts", [])
+    accounts = analytics_storage.get_all_accounts()
     
     wb_conf = load_json("connector_workbuddy.json")
     wb_tokens = wb_conf.get("account_tokens", {}) if isinstance(wb_conf, dict) else {}
@@ -2412,11 +2423,7 @@ def create_account():
     if not name:
         name = username
 
-    settings = load_json("settings.json")
-    if not isinstance(settings, dict):
-        settings = {}
-    accounts = settings.get("accounts", [])
-    
+    accounts = analytics_storage.get_all_accounts()
     if any(a.get("username") == username for a in accounts):
         return jsonify({"success": False, "message": f"用户名【{username}】已存在，请换一个"}), 400
 
@@ -2432,16 +2439,14 @@ def create_account():
         "remark": remark,
         "created_at": now_str
     }
-    accounts.append(new_acc)
-    settings["accounts"] = accounts
-    save_json("settings.json", settings)
+    analytics_storage.save_account_to_vault(new_acc)
 
     try:
         get_or_init_account_tokens()
     except Exception as e:
         print(f"[Account WorkBuddy Sync Error] {e}")
 
-    return jsonify({"success": True, "message": f"账号【{username}】添加成功！", "account": new_acc})
+    return jsonify({"success": True, "message": f"账号【{username}】添加成功！已持久化备份至保险箱", "account": new_acc})
 
 @app.route("/api/accounts/<username>", methods=["PUT"])
 @login_required
@@ -2458,15 +2463,8 @@ def update_account(username):
     remark = data.get("remark", "").strip()
     password = data.get("password", "").strip()
     
-    settings = load_json("settings.json")
-    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
-    
-    target = None
-    for acc in accounts:
-        if acc.get("username") == username:
-            target = acc
-            break
-            
+    accounts = analytics_storage.get_all_accounts()
+    target = next((a for a in accounts if a.get("username") == username), None)
     if not target:
         return jsonify({"success": False, "message": f"未找到账号【{username}】"}), 404
 
@@ -2494,7 +2492,7 @@ def update_account(username):
             return jsonify({"success": False, "message": "密码长度至少4位"}), 400
         target["password"] = password
 
-    save_json("settings.json", settings)
+    analytics_storage.save_account_to_vault(target)
     
     try:
         tokens = get_or_init_account_tokens()
@@ -2523,21 +2521,14 @@ def toggle_account_status(username):
     if username == session.get("username"):
         return jsonify({"success": False, "message": "禁止停用当前正在登录的本人账号！"}), 400
 
-    settings = load_json("settings.json")
-    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
-    
-    target = None
-    for acc in accounts:
-        if acc.get("username") == username:
-            target = acc
-            break
-            
+    accounts = analytics_storage.get_all_accounts()
+    target = next((a for a in accounts if a.get("username") == username), None)
     if not target:
         return jsonify({"success": False, "message": f"未找到账号【{username}】"}), 404
 
     curr_disabled = target.get("disabled", False)
     target["disabled"] = not curr_disabled
-    save_json("settings.json", settings)
+    analytics_storage.save_account_to_vault(target)
 
     try:
         wb_conf = load_json("connector_workbuddy.json")
@@ -2562,20 +2553,13 @@ def reset_account_password(username):
     if not new_pwd or len(new_pwd) < 4:
         return jsonify({"success": False, "message": "新密码至少需4位字符"}), 400
 
-    settings = load_json("settings.json")
-    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
-    
-    target = None
-    for acc in accounts:
-        if acc.get("username") == username:
-            target = acc
-            break
-            
+    accounts = analytics_storage.get_all_accounts()
+    target = next((a for a in accounts if a.get("username") == username), None)
     if not target:
         return jsonify({"success": False, "message": f"未找到账号【{username}】"}), 404
 
     target["password"] = new_pwd
-    save_json("settings.json", settings)
+    analytics_storage.save_account_to_vault(target)
     return jsonify({"success": True, "message": f"账号【{username}】密码修改成功！"})
 
 @app.route("/api/accounts/<username>", methods=["DELETE"])
@@ -2590,15 +2574,12 @@ def delete_account(username):
     if username == session.get("username"):
         return jsonify({"success": False, "message": "禁止删除当前正在登录的本人账号！"}), 400
 
-    settings = load_json("settings.json")
-    accounts = settings.get("accounts", []) if isinstance(settings, dict) else []
-    
-    new_accounts = [a for a in accounts if a.get("username") != username]
-    if len(new_accounts) == len(accounts):
+    accounts = analytics_storage.get_all_accounts()
+    target = next((a for a in accounts if a.get("username") == username), None)
+    if not target:
         return jsonify({"success": False, "message": f"未找到账号【{username}】"}), 404
 
-    settings["accounts"] = new_accounts
-    save_json("settings.json", settings)
+    analytics_storage.delete_account_from_vault(username)
 
     try:
         wb_conf = load_json("connector_workbuddy.json")
@@ -2610,6 +2591,7 @@ def delete_account(username):
         print(f"[Delete WB Token Error] {e}")
 
     return jsonify({"success": True, "message": f"账号【{username}】已彻底删除！"})
+
 
 @app.route("/api/connector/workbuddy/test", methods=["POST"])
 @login_required
@@ -3221,6 +3203,12 @@ def get_seo_metrics():
     if not metrics or not isinstance(metrics, dict) or "indexing" not in metrics:
         metrics = get_default_seo_metrics()
 
+    # Automatically heal and merge traffic data from persistent SQLite vault
+    try:
+        metrics = analytics_storage.heal_and_get_seo_metrics(metrics)
+    except Exception as _e:
+        print(f"[AnalyticsVault] SEO指标自愈异常: {_e}")
+
     # Automatically calculate dynamic real-time traffic
     traffic = metrics.get("traffic", {})
     traffic = calculate_dynamic_traffic(traffic)
@@ -3481,8 +3469,10 @@ def normalize_visitor_stream(stream, force_full=False):
 @login_required
 def get_visitor_insights():
     logs = load_json("visitor_logs.json")
-    if not logs or not isinstance(logs, dict):
-        logs = { "top_products": [], "top_pages": [], "realtime_stream": [] }
+    try:
+        logs = analytics_storage.heal_and_get_visitor_logs(logs)
+    except Exception as _e:
+        print(f"[AnalyticsVault] 访客日志自愈异常: {_e}")
     if normalize_visitor_stream(logs.get("realtime_stream", [])):
         save_json("visitor_logs.json", logs)
     return jsonify({"success": True, "data": logs})
@@ -3681,6 +3671,64 @@ def reset_analytics_data():
         "success": True,
         "message": "统计数据已成功清零初始化！已清空本地开发测试日志，准备迎接线上真实访客。"
     })
+
+@app.route("/api/analytics/storage_status", methods=["GET"])
+@login_required
+def get_analytics_storage_status():
+    """获取流量与访客数据持久化保险箱状态"""
+    try:
+        summary = analytics_storage.get_vault_summary()
+        return jsonify({"success": True, "vault": summary})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route("/api/analytics/export_backup", methods=["GET"])
+@login_required
+def export_analytics_backup():
+    """全量导出流量与访客数据备份 JSON 文件"""
+    try:
+        data = analytics_storage.export_full_backup_data()
+        now_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"mellgen_analytics_backup_{now_str}.json"
+        
+        response = Response(
+            json.dumps(data, ensure_ascii=False, indent=2),
+            mimetype="application/json",
+            headers={"Content-Disposition": f"attachment;filename={filename}"}
+        )
+        return response
+    except Exception as e:
+        return jsonify({"success": False, "message": f"导出备份失败: {e}"}), 500
+
+@app.route("/api/analytics/import_backup", methods=["POST"])
+@login_required
+def import_analytics_backup():
+    """从备份文件恢复流量与访客数据"""
+    try:
+        if "file" in request.files:
+            f = request.files["file"]
+            raw_content = f.read().decode("utf-8")
+            backup_data = json.loads(raw_content)
+        else:
+            backup_data = request.get_json(force=True, silent=True)
+            
+        if not backup_data or not isinstance(backup_data, dict):
+            return jsonify({"success": False, "message": "无效的备份文件数据"}), 400
+
+        # 恢复 SEO Metrics
+        if "seo_metrics" in backup_data and isinstance(backup_data["seo_metrics"], dict):
+            save_json("seo_metrics.json", backup_data["seo_metrics"])
+            
+        # 恢复 Visitor Logs
+        if "visitor_logs" in backup_data and isinstance(backup_data["visitor_logs"], dict):
+            save_json("visitor_logs.json", backup_data["visitor_logs"])
+            
+        analytics_storage.sync_active_data_to_vault()
+        analytics_storage.create_periodic_snapshot()
+        
+        return jsonify({"success": True, "message": "备份数据已成功导入并持久化同步！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"导入失败: {e}"}), 500
 
 # ---------------- OpenAPI for WorkBuddy AI Agents ----------------
 def verify_workbuddy_api_key():

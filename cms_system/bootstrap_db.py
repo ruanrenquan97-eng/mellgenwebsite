@@ -232,8 +232,16 @@ def bootstrap_settings():
                     "image": "images/ban_txt.png"
                 })
         
-    # Make sure we preserve the accounts we created
-    if "accounts" not in settings:
+    # Make sure we preserve the accounts from analytics_storage persistent vault
+    try:
+        import analytics_storage
+        saved_accounts = analytics_storage.get_all_accounts()
+        if saved_accounts:
+            settings["accounts"] = saved_accounts
+    except Exception:
+        pass
+
+    if "accounts" not in settings or not settings.get("accounts"):
         settings["accounts"] = [
             {"username": "admin", "password": "admin123", "role": "管理员", "name": "系统管理员"},
             {"username": "kefu", "password": "kefu888", "role": "客服", "name": "在线客服"}

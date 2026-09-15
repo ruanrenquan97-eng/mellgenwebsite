@@ -449,3 +449,80 @@ table th,
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
+
+/* --------------------------------------------------------------------------
+   13. 科研成果与团队介绍排版优化 (.g_kycg)
+   -------------------------------------------------------------------------- */
+.g_kycg .m_kycg .kyleft p {
+  font-size: 14.5px !important;
+  line-height: 1.75 !important;
+  color: #374151 !important;
+  letter-spacing: 0 !important;
+  text-align: justify !important;
+  word-break: normal !important;
+}
+
+.g_kycg .m_kycg .kyleft p strong {
+  font-weight: 600 !important;
+  color: #111827 !important;
+}
+
+/* --------------------------------------------------------------------------
+   14. 首页新闻资讯卡片紧凑排版与图片统一尺寸 (.g_news, .m_news)
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 769px) {
+  .g_news .m_news {
+    padding-bottom: 4.5rem !important;
+  }
+
+  .g_news .m_news dl {
+    height: 385px !important;
+    padding: 1.8rem 1.2rem 1.4rem 1.2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+  }
+
+  .g_news .m_news dl dt h4 {
+    height: 44px !important;
+    line-height: 22px !important;
+    margin-bottom: 0.8rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .g_news .m_news dl dt i {
+    width: 100% !important;
+    height: 140px !important;
+    margin-bottom: 0.8rem !important;
+    overflow: hidden !important;
+    border-radius: 4px !important;
+    display: block !important;
+  }
+
+  .g_news .m_news dl dt i img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .g_news .m_news dl dd p {
+    height: 58px !important;
+    line-height: 19px !important;
+    margin-bottom: 1rem !important;
+    font-size: 0.75rem !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 3 !important;
+  }
+}
+
+

@@ -37,3 +37,12 @@ desktop.ini
 .venv
 venv/
 ENV/
+
+# Analytics & Traffic Persistent Database Vault & Backups
+cms_system/cms_data/persistent/
+cms_system/cms_data/backups/
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm

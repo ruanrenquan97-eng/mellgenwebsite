@@ -664,15 +664,161 @@ def fetch_wechat_by_urls():
     success, msg = wechat_crawler.start_urls_batch_sync_thread(urls, default_category=category, trigger="dashboard_urls")
     return jsonify({"success": success, "message": msg})
 
-# 3. Settings API
+# 3. Settings API & Public Contact API
+@app.route("/api/public/contact", methods=["GET"])
+def api_public_contact():
+    """供前台页面/通用脚本无鉴权获取最新的联系电话、地址、邮箱与客服信息"""
+    settings_path = os.path.join(DATA_DIR, "settings.json")
+    contact_data = {
+        "phone": "0755-82926499 / 186-9197-8530",
+        "tel": "0755-82926499",
+        "mobile": "186-9197-8530",
+        "email": "61791579@qq.com",
+        "qq": "61791579",
+        "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
+        "company_name": "美尔健（深圳）生物科技有限公司"
+    }
+    if os.path.exists(settings_path):
+        try:
+            with open(settings_path, "r", encoding="utf-8") as f:
+                s = json.load(f)
+            c = s.get("contact", {})
+            tel = c.get("tel") or "0755-82926499"
+            mobile = s.get("mobile") or c.get("phone") or "186-9197-8530"
+            phone = s.get("phone") or (f"{tel} / {mobile}" if tel and mobile else (mobile or tel))
+            contact_data.update({
+                "phone": phone,
+                "tel": tel,
+                "mobile": mobile,
+                "email": s.get("email") or c.get("email") or "61791579@qq.com",
+                "qq": s.get("qq") or c.get("qq") or "61791579",
+                "address": s.get("address") or c.get("address") or "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
+                "company_name": s.get("company_name") or c.get("company_name") or "美尔健（深圳）生物科技有限公司"
+            })
+        except Exception:
+            pass
+    return jsonify({"success": True, "data": contact_data})
+
+@app.route("/api/settings/sync_phones", methods=["POST"])
+@login_required
+def api_sync_phones():
+    """一键全站电话同步接口：同步 settings.json, company_info.json, AI客服并更新全站所有 HTML"""
+    req = request.json or {}
+    phone = req.get("phone")
+    mobile = req.get("mobile")
+    tel = req.get("tel")
+    
+    settings_path = os.path.join(DATA_DIR, "settings.json")
+    settings = {}
+    if os.path.exists(settings_path):
+        with open(settings_path, "r", encoding="utf-8") as f:
+            settings = json.load(f)
+
+    if "contact" not in settings:
+        settings["contact"] = {}
+
+    if phone:
+        settings["phone"] = phone.strip()
+    if mobile:
+        settings["mobile"] = mobile.strip()
+        settings["contact"]["phone"] = mobile.strip()
+    if tel:
+        settings["contact"]["tel"] = tel.strip()
+
+    # If phone wasn't passed directly, construct or parse it
+    if not phone and (tel or mobile):
+        t = tel or settings["contact"].get("tel", "")
+        m = mobile or settings.get("mobile", "") or settings["contact"].get("phone", "")
+        if t and m:
+            settings["phone"] = f"{t} / {m}"
+        elif m:
+            settings["phone"] = m
+        elif t:
+            settings["phone"] = t
+
+    # Also sync to company_info.json
+    if cim:
+        try:
+            cinfo = cim.load_company_info()
+            if "contact" not in cinfo:
+                cinfo["contact"] = {}
+            if settings.get("phone"):
+                cinfo["contact"]["phone_display"] = settings["phone"]
+            if settings.get("mobile"):
+                cinfo["contact"]["phone"] = settings["mobile"]
+            if settings["contact"].get("tel"):
+                cinfo["contact"]["tel"] = settings["contact"]["tel"]
+            cim.save_company_info(cinfo)
+        except Exception as e:
+            print(f"[sync_phones] 同步 company_info.json 异常: {e}")
+
+    # Sync to AI Customer Service default_phones
+    if "ai_customer_service" in settings and isinstance(settings["ai_customer_service"], dict):
+        phones = []
+        if settings["contact"].get("tel"):
+            phones.append(settings["contact"]["tel"])
+        if settings.get("mobile") and settings.get("mobile") not in phones:
+            phones.append(settings.get("mobile"))
+        elif settings["contact"].get("phone") and settings["contact"].get("phone") not in phones:
+            phones.append(settings["contact"]["phone"])
+        if phones:
+            settings["ai_customer_service"]["default_phones"] = phones
+            settings["ai_customer_service"]["fallback_phone"] = " / ".join(phones)
+
+    with open(settings_path, "w", encoding="utf-8") as f:
+        json.dump(settings, f, ensure_ascii=False, indent=2)
+
+    # Trigger full site HTML sync
+    updated_pages = generator.sync_all_contact_to_site(settings)
+
+    return jsonify({
+        "success": True,
+        "message": f"全站联系电话已成功一键同步！已实时更新全站 {updated_pages} 个页面及组件。",
+        "updated_pages": updated_pages,
+        "settings": settings
+    })
+
 @app.route("/api/settings", methods=["GET", "PUT", "POST"])
 @login_required
 def handle_settings():
     settings_path = os.path.join(DATA_DIR, "settings.json")
     if request.method in ["PUT", "POST"]:
         data = request.json or {}
+        # Keep contact dict in sync
+        if "contact" not in data:
+            data["contact"] = {}
+        if data.get("phone") and not data["contact"].get("phone"):
+            data["contact"]["phone"] = data.get("mobile") or data["phone"]
+        if data.get("mobile"):
+            data["contact"]["phone"] = data["mobile"]
+            
         with open(settings_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
+            
+        # Also sync to company_info.json
+        if cim:
+            try:
+                cinfo = cim.load_company_info()
+                if "contact" not in cinfo:
+                    cinfo["contact"] = {}
+                if data.get("mobile") or data.get("phone"):
+                    cinfo["contact"]["phone"] = data.get("mobile") or data.get("phone")
+                if data.get("contact", {}).get("tel"):
+                    cinfo["contact"]["tel"] = data["contact"]["tel"]
+                if data.get("email"):
+                    cinfo["contact"]["email"] = data["email"]
+                if data.get("address"):
+                    cinfo["contact"]["address"] = data["address"]
+                cim.save_company_info(cinfo)
+            except Exception as e:
+                print(f"[handle_settings] 同步 company_info 异常: {e}")
+
+        # Auto-sync contact to all pages
+        try:
+            generator.sync_all_contact_to_site(data)
+        except Exception as e:
+            print(f"[Settings Contact Auto-Sync Error] {e}")
+
         # If AI source is enabled, automatically keep llms.txt fresh
         if data.get("allow_ai_source"):
             try:

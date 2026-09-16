@@ -1021,7 +1021,11 @@
             <input type="text" id="comp-contact-address_en" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:border-primary">
           </div>
 
-          <div class="flex justify-end pt-3 border-t border-slate-100">
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100 flex-wrap gap-2">
+            <button type="button" onclick="apiSyncAllPhones(this)" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition shadow-xs flex items-center gap-1.5 cursor-pointer">
+              <i class="fa-solid fa-bolt"></i>
+              <span>⚡ 一键全站同步联系电话</span>
+            </button>
             <button type="button" onclick="saveContactForm()" class="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold transition shadow-xs flex items-center gap-1.5">
               <i class="fa-solid fa-floppy-disk"></i>
               <span>保存修改并同步前台</span>
@@ -2241,6 +2245,17 @@
                 <label class="block text-slate-600 font-semibold mb-1">主站唯一访问域名 (URL)</label>
                 <input type="text" id="contact-domain" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-slate-50 text-slate-700 font-mono">
               </div>
+            </div>
+
+            <!-- 一键全站电话同步行动条 -->
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div class="text-xs text-emerald-800">
+                <div class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-bolt text-emerald-600"></i> 前端全站联系电话一键修改与绑定</div>
+                <div class="text-[11px] text-emerald-700 mt-0.5">修改上方电话后点击此按钮，将在 2 秒内把全站 780+ 页面（顶部Header、页脚Footer、文末TDS申领声明、联系我们、移动端抽屉及 AI 客服）全面更新并实时绑定生效！</div>
+              </div>
+              <button type="button" onclick="apiSyncAllPhones(this)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                <i class="fa-solid fa-arrows-rotate"></i> ⚡ 一键全站同步联系电话
+              </button>
             </div>
           </div>
 
@@ -12232,6 +12247,55 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         }
       } catch (e) {
         showToast("保存异常：" + e.message, "error");
+      }
+    }
+
+    async function apiSyncAllPhones(btnEl) {
+      const origHtml = btnEl ? btnEl.innerHTML : "";
+      if (btnEl) {
+        btnEl.disabled = true;
+        btnEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在全站毫秒级同步...';
+      }
+      showToast("正在执行全站联系电话一键同步，请稍候...", "info");
+
+      // 获取当前界面上的输入值
+      let phone = "";
+      let mobile = "";
+      let tel = "";
+
+      const cp = document.getElementById("contact-phone");
+      const cm = document.getElementById("contact-mobile");
+      const compP = document.getElementById("comp-contact-phone");
+      const compT = document.getElementById("comp-contact-tel");
+
+      if (cp && cp.value.trim()) phone = cp.value.trim();
+      if (cm && cm.value.trim()) mobile = cm.value.trim();
+      if (compP && compP.value.trim()) {
+        if (!mobile) mobile = compP.value.trim();
+      }
+      if (compT && compT.value.trim()) tel = compT.value.trim();
+
+      try {
+        const res = await fetch("/api/settings/sync_phones", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, mobile, tel })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(data.message || `全站联系电话已成功同步！已实时更新 ${data.updated_pages || 0} 个页面及组件。`, "success");
+          if (typeof loadAllData === "function") loadAllData();
+          if (typeof loadCompanyInfo === "function") loadCompanyInfo();
+        } else {
+          showToast(data.message || "同步失败", "error");
+        }
+      } catch (e) {
+        showToast("同步请求失败: " + e.message, "error");
+      } finally {
+        if (btnEl) {
+          btnEl.disabled = false;
+          btnEl.innerHTML = origHtml;
+        }
       }
     }
 

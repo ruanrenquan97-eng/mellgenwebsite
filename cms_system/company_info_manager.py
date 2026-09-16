@@ -411,6 +411,15 @@ def sync_contact(data=None):
                 s["qq"] = contact["qq"]
             if contact.get("address"):
                 s["address"] = contact["address"]
+            if "ai_customer_service" in s and isinstance(s["ai_customer_service"], dict):
+                phones = []
+                if phone_t:
+                    phones.append(phone_t)
+                if phone_p and phone_p not in phones:
+                    phones.append(phone_p)
+                if phones:
+                    s["ai_customer_service"]["default_phones"] = phones
+                    s["ai_customer_service"]["fallback_phone"] = " / ".join(phones)
             with open(settings_file, "w", encoding="utf-8") as f:
                 json.dump(s, f, ensure_ascii=False, indent=2)
 

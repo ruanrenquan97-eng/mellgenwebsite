@@ -8,38 +8,6 @@
   {
     "children": [
       {
-        "id": "node_2_1",
-        "name": "高渗透型重组蛋白/多肽",
-        "url": "product_tpxzzd.html"
-      },
-      {
-        "id": "node_2_2",
-        "name": "重组仿生蛋白",
-        "url": "product_zzfsdb.html"
-      },
-      {
-        "id": "node_2_3",
-        "name": "植物源活性物",
-        "url": "product_zwyhxw.html"
-      },
-      {
-        "id": "node_2_4",
-        "name": "海洋源活性物",
-        "url": "product_hyyhxw.html"
-      },
-      {
-        "id": "node_2_5",
-        "name": "婴儿菌发酵源活性物",
-        "url": "product_yejfjy.html"
-      }
-    ],
-    "id": "node_2",
-    "name": "化妆品原料",
-    "url": "product_hzpyl.html"
-  },
-  {
-    "children": [
-      {
         "id": "node_3_1",
         "name": "高渗透型重组蛋白/多肽",
         "url": "product_tpxzzd.html"

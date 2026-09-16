@@ -29,27 +29,33 @@
                 slideChangeTransitionStart: function() {
                     if (this.activeIndex == 0) { // 判断当前swiper索引，如果是第一个就停止自动轮播
                         this.autoplay.stop();
-                        video.currentTime = 0.1;
-                        video.play();
+                        if (video) {
+                            video.currentTime = 0.1;
+                            try { video.play().catch(function(){}); } catch(e) {}
+                        }
                     } else {
-                        video.currentTime = 0.1;
-                        video.pause();
+                        if (video) {
+                            video.pause();
+                        }
                     }
                 }
             }
         });
         swiper0.autoplay.stop(); // 初始化关闭自动轮播
         // 监听视频播放进度
-        document.getElementById("sVideo").ontimeupdate = function() {
-            var duration = video.duration; // 视频总时长  16.89685765...
-            var currentTime = video.currentTime; // 当前播放时长 
-            var videoEnd = duration.toString().slice(0, 2); // 截取视频总时长秒数 16
-            // 如果当前播放时长小于总时长并且大于总时长秒数就开始自动轮播，这里之所以这么判断是因为duration 和currentTime 的小数位并不能保证完全一致，所以就根据当前播放时长的整数秒是否大于总时长的整数秒
-            if (currentTime < video.duration && currentTime > videoEnd) {
-                swiper0.autoplay.start();
-            }
-        };
-        video.play();
+        if (video) {
+            video.ontimeupdate = function() {
+                var duration = video.duration;
+                var currentTime = video.currentTime;
+                if (duration && currentTime) {
+                    var videoEnd = Math.floor(duration) - 1;
+                    if (currentTime < duration && currentTime > videoEnd) {
+                        swiper0.autoplay.start();
+                    }
+                }
+            };
+            try { video.play().catch(function(){}); } catch(e) {}
+        }
     
 
    var mp401="https://mpv.videocc.net/2b8fd4c754/2/2b8fd4c754a97e032bd395c6a00acbd2_1.mp4";

@@ -1273,7 +1273,7 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
      <div class="ban_txt"> 
       <img src="./images/ban_txt.png"> 
      </div> 
-     <video controls="" id="sVideo" loop="" muted> 
+     <video autoplay="" controls="" id="sVideo" loop="" muted="" playsinline="" webkit-playsinline="" x5-playsinline=""> 
       <source src="{b['video']}" type="video/mp4"> 
      </video> 
     </div> 

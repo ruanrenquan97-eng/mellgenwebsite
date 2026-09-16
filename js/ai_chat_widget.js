@@ -620,12 +620,35 @@
     document.head.appendChild(link);
   }
 
+  function fetchContactConfig() {
+    try {
+      var contactUrl = API_BASE + "/api/public/contact";
+      if (window.fetch) {
+        fetch(contactUrl)
+          .then(function(res) { return res.json(); })
+          .then(function(json) {
+            if (json && json.success && json.data) {
+              var d = json.data;
+              var phones = [];
+              if (d.tel) phones.push(d.tel);
+              if (d.mobile && phones.indexOf(d.mobile) === -1) phones.push(d.mobile);
+              if (phones.length > 0) {
+                aiConfig.default_phones = phones;
+              }
+            }
+          })
+          .catch(function() {});
+      }
+    } catch(e) {}
+  }
+
   function init() {
     // 立即执行并多次延迟执行旧侧栏彻底清理
     removeOldSidebar();
     setTimeout(removeOldSidebar, 200);
     setTimeout(removeOldSidebar, 800);
     setTimeout(removeOldSidebar, 2000);
+    fetchContactConfig();
 
     // 监听DOM变动，防止遗留模板脚本动态添加旧客服侧栏
     try {

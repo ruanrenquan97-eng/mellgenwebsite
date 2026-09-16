@@ -6792,7 +6792,7 @@ Disallow: /cms_system/
           </div>
           <div>
             <label class="block text-slate-500 mb-1">文章分类</label>
-            <select id="art-category" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white">
+            <select id="art-category" onchange="onArticleCategoryChange(this.value)" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white">
               <option value="新闻资讯">新闻资讯</option>
               <option value="企业新闻">企业新闻</option>
               <option value="技术知识">技术知识</option>
@@ -6931,6 +6931,58 @@ Disallow: /cms_system/
           <div id="art-editor-pane-preview" class="hidden border border-slate-200 rounded bg-slate-100 p-4 max-h-[540px] overflow-y-auto flex flex-col items-center">
             <div class="w-full max-w-4xl bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-slate-200 text-slate-800" id="art-preview-body">
               <!-- Rendered preview content -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Dedicated Disclaimer & Compliance Footer Module -->
+        <div class="border border-slate-200 rounded-lg p-3.5 bg-slate-50/80 space-y-2.5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/80 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <label class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                <span>文章底部注释与合规免责声明模块 (根据内容类型自动匹配或自定义)</span>
+              </label>
+              <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-bold" id="art-disclaimer-badge">智能联动</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <label class="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer select-none">
+                <input type="checkbox" id="art-disclaimer-auto-append" checked class="w-3.5 h-3.5 rounded text-primary border-slate-300">
+                <span class="font-semibold">保存时自动附于正文底部</span>
+              </label>
+              <button type="button" onclick="insertDisclaimerToEditor()" class="px-2.5 py-1 bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-300 rounded text-xs font-semibold flex items-center gap-1 transition shadow-2xs">
+                <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                <span>一键直接插入正文末尾</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-0.5">
+            <div class="sm:col-span-1">
+              <label class="block text-slate-600 mb-1 text-[11px] font-semibold">声明模板类型选择</label>
+              <select id="art-disclaimer-type" onchange="onDisclaimerTypeChange(this.value)" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded text-xs text-slate-700 font-bold outline-none focus:border-primary">
+                <option value="auto">🤖 自动根据文章分类智能匹配 (推荐)</option>
+                <option value="lab_report">🔬 三方权威检测报告存证声明</option>
+                <option value="lab_data">🧪 实验室研究与配方应用场景说明</option>
+                <option value="tech_knowledge">📘 生物科技研发与配方交流声明</option>
+                <option value="company_news">🏛️ 企业动态与官方版权声明</option>
+                <option value="news_industry">📰 行业动态资讯与法规科普说明</option>
+                <option value="faq">💬 原料选型与业务合作指引说明</option>
+                <option value="custom">✍️ 自定义专属免责声明</option>
+                <option value="none">🚫 不添加免责声明</option>
+              </select>
+              <p class="text-[10px] text-slate-400 mt-1 leading-relaxed">
+                💡 切换文章分类时，系统会自动同步更新所选免责声明模板及卡片样式。
+              </p>
+            </div>
+
+            <div class="sm:col-span-2">
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-slate-600 text-[11px] font-semibold">免责声明具体内容 (支持自由微调编辑)</label>
+                <button type="button" onclick="resetDisclaimerText()" class="text-[11px] text-slate-400 hover:text-primary transition font-medium"><i class="fa-solid fa-rotate-right mr-0.5"></i>恢复当前模板默认</button>
+              </div>
+              <textarea id="art-disclaimer-text" rows="3" class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded text-xs text-slate-700 outline-none focus:border-primary leading-relaxed resize-y font-sans" placeholder="在此编辑或微调免责声明内容..."></textarea>
             </div>
           </div>
         </div>
@@ -11466,13 +11518,198 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       currentArticleEditorMode = mode;
     }
 
-    function formatArticleHtmlCode() {
-      const codeEditor = document.getElementById("art-code-editor");
-      if (!codeEditor || !codeEditor.value) return;
-      let val = codeEditor.value;
-      val = val.replace(/>\s*</g, '>\n<');
-      codeEditor.value = val;
-      showToast("已自动整理 HTML 换行结构", "success");
+    // ==========================================================
+    // --- Article Compliance Disclaimer & Note Presets ---
+    // ==========================================================
+    const ARTICLE_DISCLAIMER_PRESETS = {
+      "lab_report": {
+        title: "🔬 官方权威第三方检测报告·真实存证与合规声明",
+        border_color: "#059669",
+        bg_gradient: "linear-gradient(135deg,#f0fdf4 0%,#f8fafc 100%)",
+        badge_bg: "#16a34a",
+        tag: "CMA / CNAS 实验室官方存证",
+        text: "【权威检测背书】本报告所载实验数据、图表及检测结论均由具备国家 CMA 资质认定及 CNAS 实验室认可之第三方独立检验检测机构依据国家/国际标准出具，报告原件已完成官方盖章归档与防伪存证备查。\n【客观真实性保证】本报告页面仅呈现第三方权威检测所得之客观真实数据，受知识产权与技术成果保护，严禁任何机构或个人未经授权擅自盗用、篡改、断章取义或翻录。\n【同行研发交流】文中所列数据及微观机理仅供化妆品品牌方配方研发工程师、科研人员学术交流及产品立项备案评估参考，不直接作为面向终端消费者的商业疗效宣称。"
+      },
+      "lab_data": {
+        title: "🧪 实验室研究数据与配方应用场景合规说明",
+        border_color: "#2563eb",
+        bg_gradient: "linear-gradient(135deg,#eff6ff 0%,#f8fafc 100%)",
+        badge_bg: "#2563eb",
+        tag: "体外实验与机理研究模型",
+        text: "【科研模型说明】文中所列功效数据、Franz扩散池促渗速率、皮肤器官芯片模型共聚焦成像及细胞生物学评价均基于严格控制的体外/离体仿真实验环境测得。\n【研发打样参考】本数据旨在呈现美尔健生物活性原料在特定配方体系与浓度梯度下的渗透特性与协同增效表现，供品牌方配方工程师研发打样及工艺评估参考，不构成对终端消费品功效的直接保证。\n【成品合规要求】下游品牌方在推出终端化妆品时，须依据《化妆品监督管理条例》及《化妆品功效宣称评价规范》，结合具体产品配方剂型开展相应的人体功效评价或实验室测试并依法备案。"
+      },
+      "tech_knowledge": {
+        title: "📘 生物科技研发与配方工程师学术交流免责声明",
+        border_color: "#6366f1",
+        bg_gradient: "linear-gradient(135deg,#eef2ff 0%,#f8fafc 100%)",
+        badge_bg: "#6366f1",
+        tag: "学术探讨 · 研发避坑指南",
+        text: "【学术与机理探讨】本篇技术文章由美尔健生物科研团队依据国内外公开发表的权威学术文献、国家发明专利族及实验室研究成果编写，旨在与化妆品行业同行、配方工程师及生命科学研究者进行技术研讨与前沿机理交流。\n【法规与配方遵循】文中提及的 INCI 成分拆解、工艺建议、配伍禁忌及建议添加量仅供研发试验阶段技术参考。在工业化量产前，请配方师依据国家药品监督管理局（NMPA）相关标准与《化妆品安全技术规范》进行系统稳定性及安全评估。\n【知识产权保护】文中涉及的美尔健定向透皮技术、cTDP环肽序列及重组蛋白制备工艺已申请并享有国家发明专利保护。获取原料详细技术规格书（TDS）或索取研发测试样品，请联系美尔健官方客服。"
+      },
+      "company_news": {
+        title: "🏛️ 美尔健官方企业动态与知识产权版权声明",
+        border_color: "#0d9488",
+        bg_gradient: "linear-gradient(135deg,#f0fdfa 0%,#f8fafc 100%)",
+        badge_bg: "#0d9488",
+        tag: "官方权威发布 · 版权所有",
+        text: "【官方发布声明】本文由美尔健（深圳）生物科技有限公司官方发布。美尔健对文中所涉企业动态、专利授权、科研进展、战略签约及官方图文资料享有完整版权与最终解释权。\n【转载与引用规范】未经美尔健官方书面许可，任何第三方媒体、自媒体及商业机构不得擅自篡改、断章取义、抄袭或用于商业误导宣传；正当引用请注明出处来源于“美尔健生物官方平台”。\n【合作与供应约定】涉及商务合作、供货条款、打样支持及战略签约的具体细则，均以双方最终签署之正式法律合同及加盖公章的商务协议为准。"
+      },
+      "news_industry": {
+        title: "📰 行业动态资讯与政策法规科普说明",
+        border_color: "#ea580c",
+        bg_gradient: "linear-gradient(135deg,#fff7ed 0%,#f8fafc 100%)",
+        badge_bg: "#ea580c",
+        tag: "行业资讯汇编 · 政策科普",
+        text: "【资讯汇编与时效】本篇资讯汇总自国家药品监督管理局（NMPA）公开法规公告、国内外生物医药权威期刊及行业公开报道，旨在为化妆品行业从业者提供前沿技术视野与政策资讯参考。\n【非法律/商业建议】文章内容具有行业学术探讨与政策科普性质，不代表任何监管机构的官方行政裁决，亦不构成具体的法律合规认证或商业投资建议。\n【尊重原版权益】文中引用的公开资料及第三方研究数据均尽可能注明出处，若涉及知识产权或引用疑问，请及时联系美尔健官方进行核实与调整。"
+      },
+      "faq": {
+        title: "💬 原料选型、打样与商务合作指引说明",
+        border_color: "#7c3aed",
+        bg_gradient: "linear-gradient(135deg,#faf5ff 0%,#f8fafc 100%)",
+        badge_bg: "#7c3aed",
+        tag: "客户支持 · 业务指引",
+        text: "【业务指引参考】本问答整理自美尔健客户服务与技术支持中心日常咨询规范，旨在为客户提供高效便捷的原料选型、NMPA报送码索取、索样测试及供货流程指引。\n【个性化参数确认】各原料品类的现货库存、最小起订量（MOQ）、定制化浓度、特殊包装规格及随货检验报告（COA/MSDS/TDS）请以美尔健专属商务顾问的最新确认为准。\n【官方服务通道】全国官方统一服务热线：0755-82926499 / 186-9197-8530，官方企业邮箱：sales@mellgen.com。"
+      }
+    };
+
+    function getDisclaimerKeyForCategory(category, subCategory = "") {
+      const cat = (category || "").trim();
+      const sub = (subCategory || "").trim();
+      if (sub === "三方权威报告" || sub === "实验室数据研究" || cat === "三方权威报告" || cat === "实验室数据研究") {
+        return "lab_report";
+      } else if (sub === "实验室研究数据" || sub === "应用场景" || sub === "客户合作" || ["合作案例", "医美行业", "护肤品工厂", "化妆品", "健康护理行业", "功能类食品", "洗护用品", "女性护理产品"].includes(cat)) {
+        return "lab_data";
+      } else if (["技术知识", "配方技术", "技术研发"].includes(cat)) {
+        return "tech_knowledge";
+      } else if (["企业新闻", "公司新闻", "企业动态"].includes(cat)) {
+        return "company_news";
+      } else if (["新闻资讯", "行业资讯", "行业动态", "政策法规"].includes(cat)) {
+        return "news_industry";
+      } else if (["常见问答", "问答专区", "常见问题"].includes(cat)) {
+        return "faq";
+      }
+      return "tech_knowledge";
+    }
+
+    function renderDisclaimerCardHtml(typeKey, customText = "") {
+      if (typeKey === "none") return "";
+      const tmpl = ARTICLE_DISCLAIMER_PRESETS[typeKey] || ARTICLE_DISCLAIMER_PRESETS["tech_knowledge"];
+      const title = tmpl.title;
+      const border_color = tmpl.border_color;
+      const bg_gradient = tmpl.bg_gradient;
+      const badge_bg = tmpl.badge_bg;
+      const tag = tmpl.tag;
+      const text = (customText && customText.trim()) ? customText.trim() : tmpl.text;
+
+      const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+      const pHtml = paragraphs.map(p => `<p style="margin:6px 0;line-height:1.75;text-align:justify;color:#334155;font-size:12.5px;">${p}</p>`).join('');
+
+      return `<div class="article-footer-disclaimer-card" style="margin-top:36px;padding:20px 22px;background:${bg_gradient};border:1px solid #cbd5e1;border-left:4px solid ${border_color};border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.03);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(203,213,225,0.6);flex-wrap:wrap;gap:8px;">
+        <div style="font-size:14px;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:6px;">
+            <span>${title}</span>
+        </div>
+        <span style="font-size:11px;font-weight:600;background:${badge_bg};color:#ffffff;padding:2px 8px;border-radius:4px;letter-spacing:0.3px;">${tag}</span>
+    </div>
+    <div style="color:#475569;">
+        ${pHtml}
+    </div>
+    <div style="margin-top:12px;padding-top:8px;border-top:1px dashed rgba(203,213,225,0.8);display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:#64748b;flex-wrap:wrap;gap:6px;">
+        <span>美尔健（深圳）生物科技有限公司 · 研发与合规技术支持中心</span>
+        <span>热线：0755-82926499 / 186-9197-8530</span>
+    </div>
+</div>`;
+    }
+
+    function stripDisclaimerCards(html) {
+      if (!html) return "";
+      let cleaned = html;
+      cleaned = cleaned.replace(/<div class="article-footer-disclaimer-card"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+      cleaned = cleaned.replace(/<div class="article-footer-note"[\s\S]*?<\/div>/gi, '');
+      cleaned = cleaned.replace(/<!-- Verification Footer Badge -->\s*<div style="margin-top:32px;padding:16px 20px;[\s\S]*?<\/div>\s*<\/div>/gi, '');
+      return cleaned.trim();
+    }
+
+    function onArticleCategoryChange(newCat) {
+      const typeSelect = document.getElementById("art-disclaimer-type");
+      if (typeSelect && typeSelect.value === "auto") {
+        updateDisclaimerFromAutoMatch();
+      }
+    }
+
+    function updateDisclaimerFromAutoMatch() {
+      const catSelect = document.getElementById("art-category");
+      const cat = catSelect ? catSelect.value : "新闻资讯";
+      const key = getDisclaimerKeyForCategory(cat);
+      const tmpl = ARTICLE_DISCLAIMER_PRESETS[key];
+      const textArea = document.getElementById("art-disclaimer-text");
+      const badge = document.getElementById("art-disclaimer-badge");
+      if (textArea && tmpl) {
+        textArea.value = tmpl.text;
+      }
+      if (badge && tmpl) {
+        badge.innerText = `已联动：${tmpl.tag}`;
+      }
+    }
+
+    function onDisclaimerTypeChange(val) {
+      const textArea = document.getElementById("art-disclaimer-text");
+      const badge = document.getElementById("art-disclaimer-badge");
+      if (val === "auto") {
+        updateDisclaimerFromAutoMatch();
+      } else if (val === "none") {
+        if (textArea) textArea.value = "";
+        if (badge) badge.innerText = "已禁用";
+      } else if (val === "custom") {
+        if (badge) badge.innerText = "自定义内容";
+      } else {
+        const tmpl = ARTICLE_DISCLAIMER_PRESETS[val];
+        if (tmpl && textArea) {
+          textArea.value = tmpl.text;
+        }
+        if (badge && tmpl) {
+          badge.innerText = tmpl.tag;
+        }
+      }
+    }
+
+    function resetDisclaimerText() {
+      const typeSelect = document.getElementById("art-disclaimer-type");
+      const val = typeSelect ? typeSelect.value : "auto";
+      onDisclaimerTypeChange(val);
+      showToast("已重置为当前免责声明模板默认内容", "success");
+    }
+
+    function insertDisclaimerToEditor() {
+      const typeSelect = document.getElementById("art-disclaimer-type");
+      const textArea = document.getElementById("art-disclaimer-text");
+      const catSelect = document.getElementById("art-category");
+      
+      let typeKey = typeSelect ? typeSelect.value : "auto";
+      if (typeKey === "auto") {
+        const cat = catSelect ? catSelect.value : "新闻资讯";
+        typeKey = getDisclaimerKeyForCategory(cat);
+      }
+      if (typeKey === "none") {
+        showToast("当前免责声明处于禁用状态，无需插入", "info");
+        return;
+      }
+      
+      const customText = textArea ? textArea.value : "";
+      const cardHtml = renderDisclaimerCardHtml(typeKey, customText);
+      
+      let currentContent = getArticleCurrentContent();
+      currentContent = stripDisclaimerCards(currentContent);
+      
+      if (currentContent.endsWith("</div>")) {
+        const idx = currentContent.lastIndexOf("</div>");
+        currentContent = currentContent.slice(0, idx) + `\n\n    ${cardHtml}\n\n</div>`;
+      } else {
+        currentContent = currentContent + `\n\n${cardHtml}`;
+      }
+      
+      setArticleAllEditorsContent(currentContent);
+      showToast("已成功将合规免责声明卡片嵌入正文底部！", "success");
     }
 
     function openArticleModal(id = null) {
@@ -11485,6 +11722,9 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const dateInput = document.getElementById("art-date");
       const imgInput = document.getElementById("art-image");
       const descInput = document.getElementById("art-desc");
+
+      const disclaimerTypeEl = document.getElementById("art-disclaimer-type");
+      const disclaimerAutoEl = document.getElementById("art-disclaimer-auto-append");
 
       if (id) {
         const a = (cache.articles || []).find(art => art.id === id);
@@ -11500,6 +11740,10 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         if (imgInput) imgInput.value = a.image || "";
         if (descInput) descInput.value = a.desc || "";
 
+        if (disclaimerAutoEl) disclaimerAutoEl.checked = true;
+        if (disclaimerTypeEl) disclaimerTypeEl.value = a.disclaimer_type || "auto";
+        onDisclaimerTypeChange(disclaimerTypeEl ? disclaimerTypeEl.value : "auto");
+
         const contentHtml = a.content || "";
         currentArticleEditorMode = 'visual';
         setArticleAllEditorsContent(contentHtml);
@@ -11511,6 +11755,10 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10);
         if (imgInput) imgInput.value = "images/ban_txt.png";
         if (descInput) descInput.value = "";
+
+        if (disclaimerAutoEl) disclaimerAutoEl.checked = true;
+        if (disclaimerTypeEl) disclaimerTypeEl.value = "auto";
+        onDisclaimerTypeChange("auto");
 
         currentArticleEditorMode = 'visual';
         setArticleAllEditorsContent("");
@@ -11562,7 +11810,32 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const desc = descInput ? descInput.value.trim() : "";
 
       // Extract content safely from active mode
-      const content = getArticleCurrentContent();
+      let content = getArticleCurrentContent();
+
+      // Handle Disclaimer Attachment
+      const disclaimerTypeEl = document.getElementById("art-disclaimer-type");
+      const disclaimerAutoEl = document.getElementById("art-disclaimer-auto-append");
+      const disclaimerTextEl = document.getElementById("art-disclaimer-text");
+
+      const disclaimerType = disclaimerTypeEl ? disclaimerTypeEl.value : "auto";
+      const autoAppend = disclaimerAutoEl ? disclaimerAutoEl.checked : true;
+
+      if (disclaimerType !== "none" && autoAppend) {
+        let activeKey = disclaimerType;
+        if (activeKey === "auto") {
+          activeKey = getDisclaimerKeyForCategory(category);
+        }
+        const customText = disclaimerTextEl ? disclaimerTextEl.value : "";
+        const disclaimerCard = renderDisclaimerCardHtml(activeKey, customText);
+
+        content = stripDisclaimerCards(content);
+        if (content.endsWith("</div>")) {
+          const idx = content.lastIndexOf("</div>");
+          content = content.slice(0, idx) + `\n\n    ${disclaimerCard}\n\n</div>`;
+        } else {
+          content = content + `\n\n${disclaimerCard}`;
+        }
+      }
 
       const payload = {
         title,
@@ -11570,7 +11843,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         date,
         image,
         desc,
-        content
+        content,
+        disclaimer_type: disclaimerType
       };
 
       const isEdit = !!editingArticleId;

@@ -257,22 +257,30 @@ def update_global_contact_info(html_content, settings):
     clean_mobile = re.sub(r'[^\d+]', '', mobile_val)
     clean_tel = re.sub(r'[^\d+]', '', tel_val)
 
-    # 2.1 Replace in top header phone: <div class="tel rter"> <b>...</b> </div> and all variants
+    # 2.1 Replace & normalize top header phone: <div class="tel rter"> <b>...</b> </div>
+    # First handle any mangled or existing header tel blocks following lang-switch
     html_content = re.sub(
-        r'(<div class="[^"]*\btel\b[^"]*">\s*<b>)[^<]+(</b>)',
-        r'\1' + phone_slash + r'\2',
+        r'(<div class="lang-switch">[\s\S]*?</div>)\s*(?:<div class="[^"]*tel[^"]*">\s*)?(?:<b>)?\s*(?:G55|0755|186|136|[0-9\+\(\)])[^<]*</b>\s*(?:</div>)?',
+        r'\g<1>\n  <div class="tel rter">\n   <b>' + phone_slash + r'</b>\n  </div>',
         html_content
     )
+    # Second handle standard tel rter blocks
+    html_content = re.sub(
+        r'(<div class="[^"]*tel[^"]*">\s*<b>)[^<]+(</b>)',
+        r'\g<1>' + phone_slash + r'\g<2>',
+        html_content
+    )
+    # Third handle p102-top-l variants
     html_content = re.sub(
         r'(<div class="p102-top-l">[\s\S]*?<b>)[^<]+(</b>)',
-        r'\1' + phone_slash + r'\2',
+        r'\g<1>' + phone_slash + r'\g<2>',
         html_content
     )
 
     # 2.2 Replace in footer .ftel: <div class="ftel">\s*.*?\s*</div>
     html_content = re.sub(
         r'(<div class="ftel">)[\s\S]*?(</div>)',
-        r'\1\n       ' + phone_nbsp + r'\n     \2',
+        r'\g<1>\n       ' + phone_nbsp + r'\n     \g<2>',
         html_content
     )
 
@@ -394,7 +402,7 @@ def sync_all_contact_to_site(settings=None):
                             f_out.write(new_html)
                         updated_count += 1
                 except Exception as e:
-                    pass
+                    print(f"[generator error in {fp}]: {e}")
     print(f"[generator] 全站联系方式与地址清理同步完成，扫描 {total_pages} 个页面，更新了 {updated_count} 个页面。")
     return updated_count
 

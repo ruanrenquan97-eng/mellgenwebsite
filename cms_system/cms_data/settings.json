@@ -33,11 +33,11 @@
     "api_base": "https://api.deepseek.com/v1",
     "api_key": "sk-258904e0c9774447a674fddf2781f1cc",
     "default_phones": [
-      "0755-82926499",
-      "186-9197-8530"
+      "0755-88889999",
+      "188-0000-1111"
     ],
     "enabled": true,
-    "fallback_phone": "0755-82926499 / 186-9197-8530",
+    "fallback_phone": "0755-88889999 / 188-0000-1111",
     "fallback_wechat_qrcode": "/resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
     "model": "deepseek-chat",
     "preset_questions": [
@@ -143,10 +143,10 @@
   "contact": {
     "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
     "company_name": "美尔健（深圳）生物科技有限公司",
-    "email": "61791579@qq.com",
-    "phone": "186-9197-8530",
-    "qq": "61791579",
-    "tel": "0755-82926499"
+    "email": "test@mellgen.com",
+    "phone": "188-0000-1111",
+    "qq": "12345678",
+    "tel": "0755-88889999"
   },
   "copyright_text": "版权所有 © 2025-2039 美尔健（深圳）生物科技有限公司 保留一切权利",
   "cs_departments": [
@@ -157,7 +157,7 @@
   "customer_services": [],
   "detail_footer_append": "【美尔健生物严正声明】本公司所有生物高渗透多肽、重组人源化胶原蛋白及高纯活性物原料，均严格遵循国家NMPA平台化妆品原料质量安全标准与医疗器械主文档规范，支持提供批次COA检验报告与第三方检测报告，未经许可严禁盗用技术数据。",
   "domain": "https://www.mellgen.com",
-  "email": "61791579@qq.com",
+  "email": "test@mellgen.com",
   "geo_domain": "https://www.mellgen.com/",
   "geo_feeds": [
     {
@@ -199,7 +199,7 @@
       "days": 6,
       "id": "feed_tech_transdermal",
       "model": "Kimi / DeepSeek",
-      "page_name": "高效生物高渗透肽技术专题 (tptjs.html)",
+      "page_name": "高效生物cTDP促透技术专题 (tptjs.html)",
       "status": "学习中",
       "url": "helps/tptjs.html",
       "words": 3150
@@ -212,7 +212,7 @@
       "description": "深度解析美尔健第3代仿生穿膜多肽技术专利，高渗透率较传统多肽提升15倍。",
       "id": "tptjs",
       "keywords": "透皮技术,穿膜多肽,皮肤渗透吸收",
-      "name": "高效生物高渗透肽技术专题",
+      "name": "高效生物cTDP促透技术专题",
       "title": "突破生物透皮技术在皮肤修护与抗衰应用 - 美尔健生物",
       "url": "helps/tptjs.html"
     },
@@ -360,10 +360,10 @@
       "words": 2727
     }
   ],
-  "mobile": "136-9197-8530",
-  "phone": "0755-82926499 / 186-9197-8530",
+  "mobile": "188-0000-1111",
+  "phone": "0755-88889999 / 188-0000-1111",
   "police_icp": "粤公网安备 44030702003820号",
-  "qq": "",
+  "qq": "12345678",
   "seo_auto_schedule": {
     "auto_ai_geo": true,
     "auto_baidu": true,
@@ -377,7 +377,7 @@
     "run_time": "03:00",
     "server_access_log_path": ""
   },
-  "seo_description": "化妆品原料,化妆品原料,化妆品功效原料提供商，美尔健生物拥有来自各大科研院所的高效高渗透肽技术。",
+  "seo_description": "化妆品原料,化妆品原料,化妆品功效原料提供商，美尔健生物拥有来自各大科研院所的高效cTDP促透技术。",
   "seo_keywords": "化妆品原料,化妆品原料,化妆品功效原料",
   "seo_keywords_list": [
     {

@@ -338,7 +338,10 @@ def sync_contact(data=None):
     """同步联系我们信息到 helps/lxwm.html 及英文版"""
     if data is None:
         data = load_company_info()
-    contact = data.get("contact", {})
+    if isinstance(data, dict) and "contact" in data:
+        contact = data.get("contact", {})
+    else:
+        contact = data if isinstance(data, dict) else {}
     if not contact:
         return False
 

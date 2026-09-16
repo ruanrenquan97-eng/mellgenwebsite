@@ -1,0 +1,372 @@
+[
+  {
+    "id": "0e93ae84",
+    "timestamp": "2026-09-14 21:03:34",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "update_product_parameter",
+    "details": "更新产品【tptyts】参数 procurement_info.moq",
+    "success": true
+  },
+  {
+    "id": "f1c2a7fa",
+    "timestamp": "2026-09-14 21:01:10",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "update_product_detail",
+    "details": "全参数更新产品【胎盘肽羊胎素】(tptyts)",
+    "success": true
+  },
+  {
+    "id": "ffa71320",
+    "timestamp": "2026-09-14 21:00:23",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "ee7eb7a8",
+    "timestamp": "2026-09-14 20:55:27",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "update_product_detail",
+    "details": "全参数更新产品【胎盘肽羊胎素】(tptyts)",
+    "success": true
+  },
+  {
+    "id": "e09c7a20",
+    "timestamp": "2026-09-14 20:53:03",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "35732375",
+    "timestamp": "2026-09-14 20:52:25",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "e9dcba2d",
+    "timestamp": "2026-09-14 20:51:45",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "346aafe1",
+    "timestamp": "2026-09-14 20:51:26",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "82b64caf",
+    "timestamp": "2026-09-14 20:51:04",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "778489d0",
+    "timestamp": "2026-09-14 20:50:23",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "fac6ecec",
+    "timestamp": "2026-09-14 20:50:00",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "feab8912",
+    "timestamp": "2026-09-14 20:49:41",
+    "username": "admin",
+    "name": "未识别用户",
+    "role": "未知",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "d941162a",
+    "timestamp": "2026-09-14 20:28:54",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_product_categories",
+    "details": "查询产品分类目录",
+    "success": true
+  },
+  {
+    "id": "4b6f27fd",
+    "timestamp": "2026-09-14 20:28:54",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_navigation_menu",
+    "details": "获取主导航栏菜单树",
+    "success": true
+  },
+  {
+    "id": "384449af",
+    "timestamp": "2026-09-14 20:28:54",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_banners",
+    "details": "查询全站轮播图列表",
+    "success": true
+  },
+  {
+    "id": "ece02065",
+    "timestamp": "2026-09-14 20:28:54",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "4f49d15e",
+    "timestamp": "2026-09-14 20:28:54",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_product_detail",
+    "details": "查看产品详情: tptyts",
+    "success": true
+  },
+  {
+    "id": "d651f27d",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_company_full_profile",
+    "details": "查询企业全景资质荣誉与里程碑",
+    "success": true
+  },
+  {
+    "id": "b7c12232",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_geo_feeds",
+    "details": "查询GEO结构化知识源",
+    "success": true
+  },
+  {
+    "id": "81cf50d8",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_seo_keywords_ranking",
+    "details": "查询SEO核心关键词收录与排名",
+    "success": true
+  },
+  {
+    "id": "b2657c43",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_friendlinks",
+    "details": "查询友情链接列表",
+    "success": true
+  },
+  {
+    "id": "ae551429",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_pages",
+    "details": "查询网站独立单页列表",
+    "success": true
+  },
+  {
+    "id": "1f845d14",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_navigation_menu",
+    "details": "获取主导航栏菜单树",
+    "success": true
+  },
+  {
+    "id": "6a9db7da",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_banners",
+    "details": "查询全站轮播图列表",
+    "success": true
+  },
+  {
+    "id": "fe6c5d62",
+    "timestamp": "2026-09-14 20:19:06",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "update_product_parameter",
+    "details": "更新产品【tptyts】参数 rd_info.test_key",
+    "success": true
+  },
+  {
+    "id": "61f269c7",
+    "timestamp": "2026-09-14 20:16:42",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "update_product_parameter",
+    "details": "更新产品【tptyts】参数 rd_info.test_key",
+    "success": true
+  },
+  {
+    "id": "cda70924",
+    "timestamp": "2026-09-14 20:15:54",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_product_parameters_schema",
+    "details": "查询官网产品全量参数字典架构",
+    "success": true
+  },
+  {
+    "id": "b32ab109",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_qa_pairs",
+    "details": "查询AI客服问答库 (关键词: 无)",
+    "success": true
+  },
+  {
+    "id": "90952dec",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_geo_status",
+    "details": "查看GEO大模型喂养库运行状态",
+    "success": true
+  },
+  {
+    "id": "adfaedcd",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_seo_overview",
+    "details": "获取SEO概览与蜘蛛监控数据",
+    "success": true
+  },
+  {
+    "id": "a3ab2807",
+    "timestamp": "2026-09-14 10:03:12",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_company_profile",
+    "details": "查询企业基本资料与联系方式",
+    "success": true
+  },
+  {
+    "id": "aa328fea",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_company_profile",
+    "details": "查询企业基本资料与联系方式",
+    "success": true
+  },
+  {
+    "id": "920a9150",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_geo_status",
+    "details": "查看GEO大模型喂养库运行状态",
+    "success": true
+  },
+  {
+    "id": "8317e910",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "get_seo_overview",
+    "details": "获取SEO概览与蜘蛛监控数据",
+    "success": true
+  },
+  {
+    "id": "cbd51011",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "list_articles",
+    "details": "查询资讯列表 (分类: 全部, 关键词: 无)",
+    "success": true
+  },
+  {
+    "id": "4ed9d1de",
+    "timestamp": "2026-09-14 10:00:49",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "verify_mellgen_account",
+    "details": "账户身份核验通过: admin",
+    "success": true
+  },
+  {
+    "id": "453a7223",
+    "timestamp": "2026-09-12 13:33:48",
+    "username": "admin",
+    "name": "系统管理员",
+    "role": "管理员",
+    "action": "verify_mellgen_account",
+    "details": "账户身份核验通过: admin",
+    "success": true
+  }
+]

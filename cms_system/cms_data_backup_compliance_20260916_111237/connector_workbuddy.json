@@ -1,0 +1,43 @@
+{
+  "enabled": true,
+  "webhook_url": "https://example.com/test-webhook",
+  "secret_token": "test_token_123",
+  "api_key": "mb_sec_mellgen_8a7f92b3c4e1d5",
+  "events": {
+    "on_article_publish": false,
+    "on_new_inquiry": true,
+    "on_product_update": true
+  },
+  "last_tested_at": null,
+  "last_status": "not_tested",
+  "last_message": "",
+  "account_tokens": {
+    "admin": {
+      "token": "mb_tok_admin_b3033907e8664b00",
+      "username": "admin",
+      "name": "系统管理员",
+      "role": "管理员",
+      "created_at": "2026-09-12 08:20:24",
+      "last_used_at": "2026-09-14 10:03:17",
+      "enabled": true
+    },
+    "kefu": {
+      "token": "mb_tok_kefu_e25207e8e56b4596",
+      "username": "kefu",
+      "name": "在线客服",
+      "role": "客服",
+      "created_at": "2026-09-12 08:20:24",
+      "last_used_at": "2026-09-12 08:20:25",
+      "enabled": true
+    },
+    "test_persist_agent": {
+      "token": "mb_tok_testpersis_0674de1cff7b4208",
+      "username": "test_persist_agent",
+      "name": "持久化测试员",
+      "role": "业务专员",
+      "created_at": "2026-09-15 12:30:34",
+      "last_used_at": null,
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,261 @@
+[
+  {
+    "id": "tptyts",
+    "title": "胎盘肽羊胎素",
+    "nmpa": "168853-00075-4500",
+    "inci_cn": "1,2-己二醇、水解胎盘（羊）提取物、对羟基苯乙酮、水",
+    "inci_en": "1,2-HEXANEDIOL, HYDROXYACETOPHENONE, AQUA"
+  },
+  {
+    "id": "pdrnht",
+    "title": "PDRN环肽棒PRO",
+    "nmpa": "219361-00075-7512",
+    "inci_cn": "十肽-4、脱氧核糖核酸、水解 DNA、核糖核酸、水、1,2-己二醇",
+    "inci_en": "DECAPEPTIDE-4, DNA, HYDROLYZED DNA, RNA, AQUA, 1,2-HEXANEDIOL"
+  },
+  {
+    "id": "mellpr8670",
+    "title": "5D胶原蛋白 (5Dcollagen)",
+    "nmpa": "144885-00075-8580",
+    "inci_cn": "胶原、1,2-己二醇、水",
+    "inci_en": "COLLAGEN, 1,2-HEXANEDIOL, WATER"
+  },
+  {
+    "id": "tpxldb",
+    "title": "高渗透纤连蛋白 (TFNpro)",
+    "nmpa": "194980-00075-3074",
+    "inci_cn": "纤连蛋白、1,2-己二醇、水",
+    "inci_en": "FIBRONECTIN, 1,2-HEXANEDIOL, WATER"
+  },
+  {
+    "id": "qdjy",
+    "title": "医用级缺端胶原",
+    "nmpa": "208512-00075-1747",
+    "inci_cn": "缺端胶原、羟乙基脲、对羟基苯乙酮、水",
+    "inci_en": "ATELOCOLLAGEN, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "zbssb",
+    "title": "MEGCALM GPT 长白山三宝",
+    "nmpa": "196451-00075-2986",
+    "inci_cn": "黑灵芝（GANODERMA ATRUM）提取物、人参（PANAX GINSENG）根提取物、松口蘑（TRICHOLOMA MATSUTAKE）提取物、甜菜碱、1,2-己二醇、对羟基苯乙酮、水",
+    "inci_en": "GANODERMA ATRUM (MUSHROOM) EXTRACT, PANAX GINSENG ROOT EXTRACT, TRICHOLOMA MATSUTAKE EXTRACT, BETAINE, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "megpep6245",
+    "title": "MEGPEP SFF 酵母发酵滤液",
+    "nmpa": "233510-00075-1952",
+    "inci_cn": "1,2-己二醇、裂殖酵母（SCHIZOSACCHAROMYCES）菌丝体发酵产物滤液",
+    "inci_en": "1,2-HEXANEDIOL, SCHIZOSACCHAROMYCES FERMENT FILTRATE"
+  },
+  {
+    "id": "megpep",
+    "title": "MEGPEP RF50G- 促渗修复肽",
+    "nmpa": "192417-00075-1689",
+    "inci_cn": "氯化钠、寡肽-1、柠檬酸钠、1,2-己二醇、水",
+    "inci_en": "SODIUM CHLORIDE, OLIGOPEPTIDE-1, SODIUM CITRATE, 1,2-HEXANEDIOL, WATER"
+  },
+  {
+    "id": "lzdt",
+    "title": "MEGCALM GLP 灵芝多糖",
+    "nmpa": "137249-00075-6372",
+    "inci_cn": "赤芝（GANODERMA LUCIDUM）提取物、对羟基苯乙酮、水",
+    "inci_en": "GANODERMA LUCIDUM (MUSHROOM) EXTRACT, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "mellpr205",
+    "title": "MELLPRO MAP 重组贻贝黏蛋白",
+    "nmpa": "177543-00075-8859",
+    "inci_cn": "贻贝提取物、对羟基苯乙酮、1,2-己二醇、水",
+    "inci_en": "MUSSEL EXTRACT, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, WATER"
+  },
+  {
+    "id": "megzym",
+    "title": "MEGZYME 海洋溶菌酶",
+    "nmpa": "205471-00075-6889",
+    "inci_cn": "甘油、水、溶菌酶、氯化钠",
+    "inci_en": "GLYCERIN, WATER, LYSOZYME, SODIUM CHLORIDE"
+  },
+  {
+    "id": "mellpr",
+    "title": "MELLPRO 3Dcollagen 3D胶原",
+    "nmpa": "122728-00075-2599",
+    "inci_cn": "胶原、甘露糖醇",
+    "inci_en": "COLLAGEN, MANNITOL"
+  },
+  {
+    "id": "tysgdb",
+    "title": "MELLPRO rECM 童颜水光蛋白",
+    "nmpa": "219401-00075-3752",
+    "inci_cn": "水解弹性蛋白、胶原、纤连蛋白、甘氨酸、脯氨酸、1,2-己二醇、水",
+    "inci_en": "HYDROLYZED ELASTIN, COLLAGEN, FIBRONECTIN, GLYCINE, PROLINE, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "yskmyz",
+    "title": "益生抗敏因子 (桃胶多糖)",
+    "nmpa": "188810-00075-9743",
+    "inci_cn": "桃（PRUNUS PERSICA）树脂提取物、1,2-己二醇、对羟基苯乙酮、水",
+    "inci_en": "PRUNUS PERSICA (PEACH) RESIN EXTRACT, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "smndb",
+    "title": "JELFIPRO 水母黏蛋白",
+    "nmpa": "101689-00075-1293",
+    "inci_cn": "水母提取物、羟乙基脲、对羟基苯乙酮、水",
+    "inci_en": "JELLYFISH EXTRACT, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "hylfyz",
+    "title": "MEGPEP TXOD 海洋亮肤因子",
+    "nmpa": "183724-00075-3281",
+    "inci_cn": "氧化还原酶、甘氨酸、精氨酸、聚山梨醇酯-20、1,2-己二醇、水",
+    "inci_en": "OXIDO REDUCTASES, GLYCINE, ARGININE, POLYSORBATE 20, 1,2-HEXANEDIOL, WATER"
+  },
+  {
+    "id": "zzxldb",
+    "title": "重组纤连蛋白溶液 MELLPRO 500G+",
+    "nmpa": "101202-00075-7478",
+    "inci_cn": "纤连蛋白、氯化钠、甘油、1,2-己二醇、柠檬酸钠、水",
+    "inci_en": "FIBRONECTIN, SODIUM CHLORIDE, GLYCERIN, 1,2-HEXANEDIOL, SODIUM CITRATE, WATER"
+  },
+  {
+    "id": "zzjydb",
+    "title": "重组III型胶原蛋白 (RHCS)",
+    "nmpa": "132220-00075-4002",
+    "inci_cn": "1,2-己二醇、可溶性胶原、水",
+    "inci_en": "1,2-HEXANEDIOL, SOLUBLE COLLAGEN, WATER"
+  },
+  {
+    "id": "5djydb",
+    "title": "超分子5D胶原蛋白",
+    "nmpa": "218266-00075-2738",
+    "inci_cn": "胶原、十肽-4、水、1,2-己二醇",
+    "inci_en": "COLLAGEN, DECAPEPTIDE-4, AQUA, 1,2-HEXANEDIOL"
+  },
+  {
+    "id": "twdvit",
+    "title": "Vitaluxe 肽维多",
+    "nmpa": "196094-00075-2285",
+    "inci_cn": "生物素/叶酸/维生素 B12/维生素 B3/泛酸/维生素 B6/维生素 B2/维生素 B1/酵母多肽类、对羟基苯乙酮、1,2-己二醇、肌醇、水",
+    "inci_en": "BIOTIN/FOLIC ACID/CYANOCOBALAMIN/NIACINAMIDE/PANTOTHENIC ACID/PYRIDOXINE/RIBOFLAVIN/THIAMINE/YEAST POLYPEPTIDES, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, INOSITOL, WATER"
+  },
+  {
+    "id": "jnhtea",
+    "title": "聚能环肽",
+    "nmpa": "219365-00075-6463",
+    "inci_cn": "卤虫（ARTEMIA）提取物、十肽-4、环磷酸腺苷、肌醇、1,2-己二醇、水",
+    "inci_en": "ARTEMIA EXTRACT, DECAPEPTIDE-4, ADENOSINE CYCLIC PHOSPHATE, INOSITOL, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "wndbzy",
+    "title": "Snailpro 蜗牛蛋白粘液",
+    "nmpa": "196107-00075-1708",
+    "inci_cn": "蜗牛分泌物滤液、1,3-丙二醇、甘油、1,2-己二醇、对羟基苯乙酮、水",
+    "inci_en": "SNAIL SECRETION FILTRATE, PROPANEDIOL, GLYCERIN, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "fswnjy",
+    "title": "Snailpro 仿生蜗牛胶原",
+    "nmpa": "214003-00075-9587",
+    "inci_cn": "琥珀酰缺端胶原、1,3-丙二醇、甘油、1,2-己二醇、对羟基苯乙酮、水",
+    "inci_en": "SUCCINOYL ATELOCOLLAGEN, PROPANEDIOL, GLYCERIN, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "0xjydb",
+    "title": "JELFIPRO 0型胶原蛋白 (水母胶原)",
+    "nmpa": "225702-00075-8093",
+    "inci_cn": "羟乙基脲、原胶原、对羟基苯乙酮、水",
+    "inci_en": "HYDROXYETHYL UREA, PROCOLLAGEN, HYDROXYACETOPHENONE, WATER"
+  },
+  {
+    "id": "tphtct",
+    "title": "cTDP环肽",
+    "nmpa": "211755-00075-4448",
+    "inci_cn": "1,2-己二醇、十肽-4、水",
+    "inci_en": "1,2-HEXANEDIOL, DECAPEPTIDE-4, AQUA"
+  },
+  {
+    "id": "tp1jydb",
+    "title": "高渗透I型胶原蛋白",
+    "nmpa": "218266-00075-7345",
+    "inci_cn": "胶原、十肽-4、1,2-己二醇、水",
+    "inci_en": "COLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "tptxdb",
+    "title": "高渗透弹性蛋白 Telastin",
+    "nmpa": "141726-00075-2984",
+    "inci_cn": "水解弹性蛋白、1,2-己二醇、水",
+    "inci_en": "HYDROLYZED ELASTIN, 1,2-HEXANEDIOL, WATER"
+  },
+  {
+    "id": "gtlafdp",
+    "title": "寡肽类 MEGPEP AFDP",
+    "nmpa": "136348-00075-5546",
+    "inci_cn": "寡肽-2、甘露糖醇、氯化钠",
+    "inci_en": "OLIGOPEPTIDE-2, MANNITOL, SODIUM CHLORIDE"
+  },
+  {
+    "id": "lrdt",
+    "title": "鹿茸多肽",
+    "nmpa": "227102-00075-5192",
+    "inci_cn": "十肽-4、鹿茸提取物、1,2-己二醇、对羟基苯乙酮、水",
+    "inci_en": "DECAPEPTIDE-4, VELVET EXTRACT, 1,2-HEXANEDIOL, HYDROXYACETOPHENONE, AQUA"
+  },
+  {
+    "id": "tpjy",
+    "title": "胎盘胶原",
+    "nmpa": "247035-00075-1115",
+    "inci_cn": "原胶原、十肽-4、对羟基苯乙酮、1,2-己二醇、水",
+    "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "aminofree",
+    "title": "氨基酸自由 AminoFree",
+    "nmpa": "228921-00075-5873",
+    "inci_cn": "酪氨酸、丙氨酸、天冬氨酸、谷氨酸、半胱氨酸、蛋氨酸、脯氨酸、甘氨酸、胱氨酸、丝氨酸、组氨酸、苯丙氨酸、亮氨酸、谷氨酰胺、缬氨酸、苏氨酸、异亮氨酸、赖氨酸盐酸盐、精氨酸、1,2-己二醇、水",
+    "inci_en": "TYROSINE, ALANINE, ASPARTIC ACID, GLUTAMIC ACID, CYSTEINE, METHIONINE, PROLINE, GLYCINE, CYSTINE, SERINE, HISTIDINE, PHENYLALANINE, LEUCINE, GLUTAMINE, VALINE, THREONINE, ISOLEUCINE, LYSINE HCL, ARGININE, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "colamino",
+    "title": "胶原氨基酸 ColAmino",
+    "nmpa": "183931-00075-6027",
+    "inci_cn": "对羟基苯乙酮、胶原氨基酸类、水、1,2-己二醇",
+    "inci_en": "HYDROXYACETOPHENONE, COLLAGEN AMINO ACIDS, WATER, 1,2-HEXANEDIOL"
+  },
+  {
+    "id": "tpxviijy",
+    "title": "高渗透XVII型胶原蛋白",
+    "nmpa": "228500-00075-8547",
+    "inci_cn": "原胶原、十肽-4、1,2-己二醇、水",
+    "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "supercleaner",
+    "title": "Super cleaner",
+    "nmpa": "205396-00075-3290",
+    "inci_cn": "无患子（SAPINDUS MUKOROSSI）果提取物、水、北美金缕梅（HAMAMELIS VIRGINIANA）提取物、油茶（CAMELLIA OLEIFERA）籽提取物、肥皂草（SAPONARIA OFFICINALIS）叶提取物、欧洲七叶树（AESCULUS HIPPOCASTANUM）树皮提取物、蛋白酶、黄原胶、组氨酸、1,3-丙二醇、1,2-己二醇、碳酸钠、十肽-4",
+    "inci_en": "SAPINDUS MUKOROSSI FRUIT EXTRACT, AQUA, HAMAMELIS VIRGINIANA (WITCH HAZEL) EXTRACT, CAMELLIA OLEIFERA SEED EXTRACT, SAPONARIA OFFICINALIS LEAF EXTRACT, AESCULUS HIPPOCASTANUM (HORSE CHESTNUT) BARK EXTRACT, PROTEASE, XANTHAN GUM, HISTIDINE, PROPANEDIOL, 1,2-HEXANEDIOL, SODIUM CARBONATE, DECAPEPTIDE-4"
+  },
+  {
+    "id": "zwjy",
+    "title": "植物胶原",
+    "nmpa": "227104-00075-3025",
+    "inci_cn": "胶原、可溶性胶原、桃（PRUNUS PERSICA）树脂提取物、十肽-4、对羟基苯乙酮、1,2-己二醇、甘油、水",
+    "inci_en": "COLLAGEN, SOLUBLE COLLAGEN, PRUNUS PERSICA (PEACH) RESIN EXTRACT, DECAPEPTIDE-4, HYDROXYACETOPHENONE, 1,2-HEXANEDIOL, GLYCERIN, AQUA"
+  },
+  {
+    "id": "mgpdrn",
+    "title": "玫瑰PDRN环肽pro",
+    "nmpa": "237076-00075-2037",
+    "inci_cn": "十肽-4、脱氧核糖核酸、水解 DNA、核糖核酸、玫瑰（ROSA RUGOSA）花提取物、1,2-己二醇、水",
+    "inci_en": "DECAPEPTIDE-4, DNA, HYDROLYZED DNA, RNA, ROSA RUGOSA FLOWER EXTRACT, 1,2-HEXANEDIOL, AQUA"
+  },
+  {
+    "id": "4dzyshyz",
+    "title": "4D植萃止痒舒缓因子",
+    "nmpa": "227107-00075-1678",
+    "inci_cn": "紫草（LITHOSPERMUM ERYTHRORHIZON）根提取物、侧柏（THUJA ORIENTALIS）叶提取物、桃（PRUNUS PERSICA）树脂提取物、甘草酸二钾、苯氧乙醇、十肽-4、水",
+    "inci_en": "LITHOSPERMUM ERYTHRORHIZON ROOT EXTRACT, THUJA ORIENTALIS LEAF EXTRACT, PRUNUS PERSICA (PEACH) RESIN EXTRACT, DIPOTASSIUM GLYCYRRHIZATE, PHENOXYETHANOL, DECAPEPTIDE-4, AQUA"
+  }
+]

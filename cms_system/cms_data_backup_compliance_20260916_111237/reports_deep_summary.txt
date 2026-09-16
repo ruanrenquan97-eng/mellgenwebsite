@@ -1,0 +1,204 @@
+==================================================
+FILE: tpht_transdermal_penetration.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: ['报告编号：YW-JC-250612001D-01', '此报告代替之前2025年8月20日发出的报告YW-JC-250612001D，特', '此宣布报告YW-JC-250612001D作废。']
+--- INSTITUTIONS: ['本报告的最终解释为一苇堂检测科技（上海）有限公司所有。', '一苇堂检测科技（上海）有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+    结果表明：cTDP环肽在皮肤表层滞留较多，荧光信号较强，在真皮处荧光信号仍较明
+    六、试验结论
+
+==================================================
+FILE: tpht_firming_antiaging.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: tpht_safety_assessment.pdf
+Pages: 16
+--- SAMPLE NAMES: []
+--- REPORT NOS: ['报告编号：LY-CIR2025D165']
+--- INSTITUTIONS: ['绿翊（广州）技术服务有限公司', '评估单位：绿翊（广州）技术服务有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+    进行了评估，结果表明：
+
+==================================================
+FILE: tfn_barrier_repair.pdf
+Pages: 5
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: tfn_moisturizing.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: tfn_subacute_oral_toxicity.pdf
+Pages: 36
+--- SAMPLE NAMES: ['样品名称 美尔健纤连蛋白']
+--- REPORT NOS: ['饲料质量合格证号：No. 1103242400139059、No.1103242400140016', '垫料质量合格证号：No.20-SM240330073', '样品编号：240409-518001']
+--- INSTITUTIONS: ['斯坦德科创医药科技（青岛）有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+    毒性试验未观察到有害作用的剂量水平（NOAEL）为1000mg/kg BW/d。
+    毒性试验未观察到有害作用的剂量水平（NOAEL）为1000mg/kg BW/d。
+    四、试验结论
+    28 天重复剂量经口毒性试验：NOAEL 值为1000mg/kg BW/d。
+
+==================================================
+FILE: tfn_phototoxicity.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: collagen_mtt_cytotoxicity.pdf
+Pages: 12
+--- SAMPLE NAMES: ['样品名称']
+--- REPORT NOS: ['样品受理编号：C250723-032004', 'CY2507529S-1', '报告编号']
+--- INSTITUTIONS: ['斯坦德科创医药科技（青岛）有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: collagen_transdermal_penetration.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: ['报告编号：YW-JC-250612002D']
+--- INSTITUTIONS: ['本报告的最终解释为一苇堂检测科技（上海）有限公司所有。', '一苇堂检测科技（上海）有限公司']
+--- DATES: ['2025年08月']
+--- CONCLUSIONS:
+    结果表明：高渗透胶原蛋白在皮肤表层滞留较多，荧光信号较强，表明其具有一定的透
+    六、试验结论
+
+==================================================
+FILE: collagen3_firming_antiaging.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: yskm_soothing.pdf
+Pages: 5
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: yskm_toxicology.pdf
+Pages: 21
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: yskm_pesticide.pdf
+Pages: 5
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: recm_repair.pdf
+Pages: 14
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: map_transdermal_absorption.pdf
+Pages: 8
+--- SAMPLE NAMES: []
+--- REPORT NOS: ['报告编号：YW-JC-251009007A']
+--- INSTITUTIONS: ['本报告的最终解释为一苇堂检测科技（上海）有限公司所有。', '一苇堂检测科技（上海）有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+    累积透过量，评价样品的高渗透效果。实验结果显示：重组贻贝蛋白作用于皮肤模型4 h 后，
+    七、试验结论
+    累积透过量，评价样品的高渗透效果。实验结果显示：重组贻贝蛋白作用于皮肤模型4 h 后，
+
+==================================================
+FILE: map_firming_antiaging.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: placenta_firming_antiaging.pdf
+Pages: 6
+--- SAMPLE NAMES: ['样品名称 羊胎素']
+--- REPORT NOS: ['报告编号 2439388', '报告编号：2439388']
+--- INSTITUTIONS: ['广东省检迅检测科技有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+    【试验结论】
+    试方法，对羊胎素的紧致、抗皱功效进行实验室方法测试，测试结果表明：测试样品的
+    试方法，对羊胎素的紧致、抗皱功效进行实验室方法测试，测试结果表明：测试样品的
+
+==================================================
+FILE: gpt_firming_antiaging.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: txod_whitening_antioxidant.pdf
+Pages: 8
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: pdrn_firming_antiaging.pdf
+Pages: 6
+--- SAMPLE NAMES: []
+--- REPORT NOS: []
+--- INSTITUTIONS: []
+--- DATES: []
+--- CONCLUSIONS:
+
+==================================================
+FILE: lingbai_pesticide.pdf
+Pages: 3
+--- SAMPLE NAMES: ['样品名称']
+--- REPORT NOS: ['报告编号Report No.：2434120', '2434120']
+--- INSTITUTIONS: ['广东省检迅检测科技有限公司']
+--- DATES: []
+--- CONCLUSIONS:
+    本报告封面、检验结论位置或骑缝位置未盖本公司“检验检测专用章”的，报告无效；

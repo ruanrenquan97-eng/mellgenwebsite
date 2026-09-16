@@ -1,0 +1,114 @@
+[
+  {
+    "id": "feed_auto_1789520441",
+    "time": "2026-09-16 03:00:41",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+9) · 网站地图刷新 (247 URL) · IndexNow已发送 (247 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 24.53s)。"
+  },
+  {
+    "id": "feed_auto_1789347621",
+    "time": "2026-09-14 03:00:21",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 34.53s)。"
+  },
+  {
+    "id": "feed_auto_1789347622",
+    "time": "2026-09-14 03:00:22",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 30.18s)。"
+  },
+  {
+    "id": "feed_auto_1789261236",
+    "time": "2026-09-13 03:00:36",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 29.03s)。"
+  },
+  {
+    "id": "feed_auto_1789261229",
+    "time": "2026-09-13 03:00:29",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：公众号同步(+0) · 网站地图刷新 (212 URL) · IndexNow已发送 (212 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 35.74s)。"
+  },
+  {
+    "id": "feed_auto_1789197032",
+    "time": "2026-09-12 09:10:32",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：网站地图刷新 (162 URL) · IndexNow已发送 (162 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 0.44s)。"
+  },
+  {
+    "id": "feed_auto_1789197016",
+    "time": "2026-09-12 09:10:16",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：网站地图刷新 (162 URL) · IndexNow已发送 (162 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 0.93s)。"
+  },
+  {
+    "id": "feed_auto_1789196993",
+    "time": "2026-09-12 09:09:53",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：网站地图刷新 (162 URL) · IndexNow响应 HTTP 403 · 百度清单就绪 · AI模型GEO知识库更新 (耗时 0.97s)。"
+  },
+  {
+    "id": "feed_auto_1789196816",
+    "time": "2026-09-12 09:06:56",
+    "engine": "每日SEO自动化调度器",
+    "type": "cron",
+    "status": "success",
+    "detail": "每日 SEO 自动化任务完成：网站地图刷新 (162 URL) · IndexNow广播 (162 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 1.12s)。"
+  },
+  {
+    "id": "log_1789195260_5_global",
+    "time": "2026-09-12 08:41:00",
+    "engine": "国外AI大模型 (Gemini/GPT/Claude/Grok)",
+    "type": "push",
+    "status": "success",
+    "detail": "已同步生成双语知识源 /en/llms-en.txt 与 /llms.txt，已定向向 Gemini、OpenAI GPT、Claude、xAI Grok、Perplexity 广播更新。"
+  },
+  {
+    "id": "log_1789195260_4_cn",
+    "time": "2026-09-12 08:41:00",
+    "engine": "中国AI大模型 (DeepSeek/豆包/千问/元宝/Kimi/MiniMax)",
+    "type": "push",
+    "status": "success",
+    "detail": "已完成对国内 6 大主流 AI 搜索与大模型索引（DeepSeek、豆包、通义千问、腾讯元宝、Kimi、MiniMax）的语料更新广播！"
+  },
+  {
+    "id": "log_1789195260_3",
+    "time": "2026-09-12 08:41:00",
+    "engine": "微软必应 (Bing/IndexNow)",
+    "type": "push",
+    "status": "success",
+    "detail": "通过 IndexNow 协议向必应及新型检索网络提交全站 153 条URL，已即时广播通知。"
+  },
+  {
+    "id": "log_1789195260_2",
+    "time": "2026-09-12 08:41:00",
+    "engine": "Google Indexing",
+    "type": "push",
+    "status": "success",
+    "detail": "向 Googlebot 提交全站 153 条URL索引变更，Schema.org JSON-LD 微数据已就绪。"
+  },
+  {
+    "id": "log_1789195260_1",
+    "time": "2026-09-12 08:41:00",
+    "engine": "百度快速推送",
+    "type": "push",
+    "status": "success",
+    "detail": "向百度主动提交全站 153 条URL，百度响应成功，秒级收录通道畅通。"
+  }
+]

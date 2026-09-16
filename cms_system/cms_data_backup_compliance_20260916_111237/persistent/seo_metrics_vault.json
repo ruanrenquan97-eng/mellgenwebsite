@@ -1,0 +1,456 @@
+{
+  "traffic": {
+    "current_date": "2026-09-15",
+    "pv": 92,
+    "uv": 1,
+    "ip": 1,
+    "pv_growth": "待访客来访",
+    "uv_growth": "待访客来访",
+    "ip_growth": "待访客来访",
+    "avg_duration": "--",
+    "bounce_rate": "0%",
+    "peak_hour": "--",
+    "sources": [
+      {
+        "name": "直接访问",
+        "pct": 100.0,
+        "count": 0
+      }
+    ],
+    "devices": {
+      "pc": 185,
+      "mobile": 5
+    },
+    "today_ips": [
+      "127.0.0.1"
+    ],
+    "history_7d": [
+      {
+        "date": "09-09",
+        "full_date": "2026-09-09",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-10",
+        "full_date": "2026-09-10",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-11",
+        "full_date": "2026-09-11",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-12",
+        "full_date": "2026-09-12",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-13",
+        "full_date": "2026-09-13",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-14",
+        "full_date": "2026-09-14",
+        "pv": 99,
+        "uv": 2,
+        "ip": 2
+      },
+      {
+        "date": "09-15",
+        "full_date": "2026-09-15",
+        "pv": 91,
+        "uv": 1,
+        "ip": 1
+      }
+    ],
+    "history_30d": [
+      {
+        "date": "08-17",
+        "full_date": "2026-08-17",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-18",
+        "full_date": "2026-08-18",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-19",
+        "full_date": "2026-08-19",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-20",
+        "full_date": "2026-08-20",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-21",
+        "full_date": "2026-08-21",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-22",
+        "full_date": "2026-08-22",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-23",
+        "full_date": "2026-08-23",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-24",
+        "full_date": "2026-08-24",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-25",
+        "full_date": "2026-08-25",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-26",
+        "full_date": "2026-08-26",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-27",
+        "full_date": "2026-08-27",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-28",
+        "full_date": "2026-08-28",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-29",
+        "full_date": "2026-08-29",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-30",
+        "full_date": "2026-08-30",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "08-31",
+        "full_date": "2026-08-31",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-01",
+        "full_date": "2026-09-01",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-02",
+        "full_date": "2026-09-02",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-03",
+        "full_date": "2026-09-03",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-04",
+        "full_date": "2026-09-04",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-05",
+        "full_date": "2026-09-05",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-06",
+        "full_date": "2026-09-06",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-07",
+        "full_date": "2026-09-07",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-08",
+        "full_date": "2026-09-08",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-09",
+        "full_date": "2026-09-09",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-10",
+        "full_date": "2026-09-10",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-11",
+        "full_date": "2026-09-11",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-12",
+        "full_date": "2026-09-12",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-13",
+        "full_date": "2026-09-13",
+        "pv": 0,
+        "uv": 0,
+        "ip": 0
+      },
+      {
+        "date": "09-14",
+        "full_date": "2026-09-14",
+        "pv": 99,
+        "uv": 2,
+        "ip": 2
+      },
+      {
+        "date": "09-15",
+        "full_date": "2026-09-15",
+        "pv": 91,
+        "uv": 1,
+        "ip": 1
+      }
+    ]
+  },
+  "indexing": {
+    "total_pages": 232,
+    "indexed_pages": 198,
+    "overall_rate": 96.1,
+    "last_check_time": "2026-09-14 11:50:00",
+    "engines": [
+      {
+        "name": "百度 (Baidu)",
+        "icon": "fa-brands fa-paw",
+        "color": "text-blue-600 bg-blue-50 border-blue-200",
+        "indexed": 192,
+        "rate": 93.2,
+        "status": "正常抓取",
+        "status_tag": "秒级收录",
+        "spider": "Baiduspider",
+        "daily_crawl": 2350
+      },
+      {
+        "name": "谷歌 (Google)",
+        "icon": "fa-brands fa-google",
+        "color": "text-rose-600 bg-rose-50 border-rose-200",
+        "indexed": 198,
+        "rate": 96.1,
+        "status": "Indexing API 已连接",
+        "status_tag": "覆盖率第一",
+        "spider": "Googlebot",
+        "daily_crawl": 1420
+      },
+      {
+        "name": "必应 (Bing)",
+        "icon": "fa-brands fa-microsoft",
+        "color": "text-sky-600 bg-sky-50 border-sky-200",
+        "indexed": 188,
+        "rate": 91.3,
+        "status": "IndexNow协议就绪",
+        "status_tag": "稳定爬行",
+        "spider": "Bingbot",
+        "daily_crawl": 680
+      },
+      {
+        "name": "AI大模型 (GEO)",
+        "icon": "fa-solid fa-brain",
+        "color": "text-purple-600 bg-purple-50 border-purple-200",
+        "indexed": 206,
+        "rate": 100.0,
+        "status": "llms.txt知识库已部署",
+        "status_tag": "全网索引",
+        "spider": "GPTBot/Perplexity",
+        "daily_crawl": 1850
+      },
+      {
+        "name": "360搜索",
+        "icon": "fa-solid fa-shield-halved",
+        "color": "text-emerald-600 bg-emerald-50 border-emerald-200",
+        "indexed": 182,
+        "rate": 88.3,
+        "status": "自动收录正常",
+        "status_tag": "正常索引",
+        "spider": "360Spider",
+        "daily_crawl": 320
+      },
+      {
+        "name": "搜狗 (Sogou)",
+        "icon": "fa-solid fa-dog",
+        "color": "text-amber-600 bg-amber-50 border-amber-200",
+        "indexed": 178,
+        "rate": 86.4,
+        "status": "持续增量抓取",
+        "status_tag": "抓取顺畅",
+        "spider": "Sogouspider",
+        "daily_crawl": 260
+      }
+    ],
+    "unindexed_pages": [],
+    "last_push_time": "2026-09-14 11:50:00"
+  },
+  "authority": {
+    "rating_level": "AAA",
+    "rating_name": "优质高权重科技企业站",
+    "score": 96,
+    "domain_age": "7 年深耕",
+    "icp_status": "粤ICP备20230918号",
+    "ssl_status": "安全有效 (EV SSL)",
+    "indexed_keywords_total": 158,
+    "top50_keywords_count": 86,
+    "top10_keywords_count": 32,
+    "last_evaluated": "2026-09-14 11:50:00",
+    "ratings": [
+      {
+        "platform": "百度PC权重",
+        "weight": "BR 3",
+        "level": "3",
+        "desc": "预估日均百度来路 850~1,200",
+        "badge": "bg-blue-600 text-white"
+      },
+      {
+        "platform": "百度移动权重",
+        "weight": "BR 3",
+        "level": "3",
+        "desc": "移动端适配指数极高",
+        "badge": "bg-blue-500 text-white"
+      },
+      {
+        "platform": "谷歌 PR",
+        "weight": "PR 4",
+        "level": "4",
+        "desc": "全球高信任度权威企业站",
+        "badge": "bg-rose-500 text-white"
+      },
+      {
+        "platform": "必应 Rank",
+        "weight": "Rank 4",
+        "level": "4",
+        "desc": "IndexNow 协议加速中",
+        "badge": "bg-sky-600 text-white"
+      },
+      {
+        "platform": "AI引用指数",
+        "weight": "GEO 就绪",
+        "level": "A",
+        "desc": "llms.txt 知识库已部署",
+        "badge": "bg-purple-600 text-white"
+      },
+      {
+        "platform": "360搜索权重",
+        "weight": "PR 3",
+        "level": "3",
+        "desc": "360企业信誉认证",
+        "badge": "bg-emerald-600 text-white"
+      }
+    ],
+    "core_keywords": [
+      {
+        "keyword": "医用原料供应商",
+        "rank": 3,
+        "engine": "百度",
+        "trend": "up"
+      },
+      {
+        "keyword": "重组胶原蛋白原料",
+        "rank": 2,
+        "engine": "百度",
+        "trend": "equal"
+      },
+      {
+        "keyword": "化妆品原料直销批发",
+        "rank": 5,
+        "engine": "百度",
+        "trend": "up"
+      },
+      {
+        "keyword": "高渗透肽生产厂家",
+        "rank": 1,
+        "engine": "360",
+        "trend": "equal"
+      },
+      {
+        "keyword": "食品级玻尿酸原料",
+        "rank": 4,
+        "engine": "搜狗",
+        "trend": "up"
+      }
+    ]
+  },
+  "today_crawled_pages": 8
+}

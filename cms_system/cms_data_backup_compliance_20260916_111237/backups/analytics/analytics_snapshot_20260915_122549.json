@@ -1,0 +1,1436 @@
+{
+  "timestamp": "2026-09-15 12:25:49",
+  "seo_metrics": {
+    "traffic": {
+      "current_date": "2026-09-15",
+      "pv": 92,
+      "uv": 1,
+      "ip": 1,
+      "pv_growth": "待访客来访",
+      "uv_growth": "待访客来访",
+      "ip_growth": "待访客来访",
+      "avg_duration": "--",
+      "bounce_rate": "0%",
+      "peak_hour": "--",
+      "sources": [
+        {
+          "name": "直接访问",
+          "pct": 100.0,
+          "count": 0
+        }
+      ],
+      "devices": {
+        "pc": 185,
+        "mobile": 5
+      },
+      "today_ips": [
+        "127.0.0.1"
+      ],
+      "history_7d": [
+        {
+          "date": "09-09",
+          "full_date": "2026-09-09",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-10",
+          "full_date": "2026-09-10",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-11",
+          "full_date": "2026-09-11",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-12",
+          "full_date": "2026-09-12",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-13",
+          "full_date": "2026-09-13",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-14",
+          "full_date": "2026-09-14",
+          "pv": 99,
+          "uv": 2,
+          "ip": 2
+        },
+        {
+          "date": "09-15",
+          "full_date": "2026-09-15",
+          "pv": 91,
+          "uv": 1,
+          "ip": 1
+        }
+      ],
+      "history_30d": [
+        {
+          "date": "08-17",
+          "full_date": "2026-08-17",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-18",
+          "full_date": "2026-08-18",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-19",
+          "full_date": "2026-08-19",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-20",
+          "full_date": "2026-08-20",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-21",
+          "full_date": "2026-08-21",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-22",
+          "full_date": "2026-08-22",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-23",
+          "full_date": "2026-08-23",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-24",
+          "full_date": "2026-08-24",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-25",
+          "full_date": "2026-08-25",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-26",
+          "full_date": "2026-08-26",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-27",
+          "full_date": "2026-08-27",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-28",
+          "full_date": "2026-08-28",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-29",
+          "full_date": "2026-08-29",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-30",
+          "full_date": "2026-08-30",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "08-31",
+          "full_date": "2026-08-31",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-01",
+          "full_date": "2026-09-01",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-02",
+          "full_date": "2026-09-02",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-03",
+          "full_date": "2026-09-03",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-04",
+          "full_date": "2026-09-04",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-05",
+          "full_date": "2026-09-05",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-06",
+          "full_date": "2026-09-06",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-07",
+          "full_date": "2026-09-07",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-08",
+          "full_date": "2026-09-08",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-09",
+          "full_date": "2026-09-09",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-10",
+          "full_date": "2026-09-10",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-11",
+          "full_date": "2026-09-11",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-12",
+          "full_date": "2026-09-12",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-13",
+          "full_date": "2026-09-13",
+          "pv": 0,
+          "uv": 0,
+          "ip": 0
+        },
+        {
+          "date": "09-14",
+          "full_date": "2026-09-14",
+          "pv": 99,
+          "uv": 2,
+          "ip": 2
+        },
+        {
+          "date": "09-15",
+          "full_date": "2026-09-15",
+          "pv": 91,
+          "uv": 1,
+          "ip": 1
+        }
+      ]
+    },
+    "indexing": {
+      "total_pages": 232,
+      "indexed_pages": 198,
+      "overall_rate": 96.1,
+      "last_check_time": "2026-09-14 11:50:00",
+      "engines": [
+        {
+          "name": "百度 (Baidu)",
+          "icon": "fa-brands fa-paw",
+          "color": "text-blue-600 bg-blue-50 border-blue-200",
+          "indexed": 192,
+          "rate": 93.2,
+          "status": "正常抓取",
+          "status_tag": "秒级收录",
+          "spider": "Baiduspider",
+          "daily_crawl": 2350
+        },
+        {
+          "name": "谷歌 (Google)",
+          "icon": "fa-brands fa-google",
+          "color": "text-rose-600 bg-rose-50 border-rose-200",
+          "indexed": 198,
+          "rate": 96.1,
+          "status": "Indexing API 已连接",
+          "status_tag": "覆盖率第一",
+          "spider": "Googlebot",
+          "daily_crawl": 1420
+        },
+        {
+          "name": "必应 (Bing)",
+          "icon": "fa-brands fa-microsoft",
+          "color": "text-sky-600 bg-sky-50 border-sky-200",
+          "indexed": 188,
+          "rate": 91.3,
+          "status": "IndexNow协议就绪",
+          "status_tag": "稳定爬行",
+          "spider": "Bingbot",
+          "daily_crawl": 680
+        },
+        {
+          "name": "AI大模型 (GEO)",
+          "icon": "fa-solid fa-brain",
+          "color": "text-purple-600 bg-purple-50 border-purple-200",
+          "indexed": 206,
+          "rate": 100.0,
+          "status": "llms.txt知识库已部署",
+          "status_tag": "全网索引",
+          "spider": "GPTBot/Perplexity",
+          "daily_crawl": 1850
+        },
+        {
+          "name": "360搜索",
+          "icon": "fa-solid fa-shield-halved",
+          "color": "text-emerald-600 bg-emerald-50 border-emerald-200",
+          "indexed": 182,
+          "rate": 88.3,
+          "status": "自动收录正常",
+          "status_tag": "正常索引",
+          "spider": "360Spider",
+          "daily_crawl": 320
+        },
+        {
+          "name": "搜狗 (Sogou)",
+          "icon": "fa-solid fa-dog",
+          "color": "text-amber-600 bg-amber-50 border-amber-200",
+          "indexed": 178,
+          "rate": 86.4,
+          "status": "持续增量抓取",
+          "status_tag": "抓取顺畅",
+          "spider": "Sogouspider",
+          "daily_crawl": 260
+        }
+      ],
+      "unindexed_pages": [],
+      "last_push_time": "2026-09-14 11:50:00"
+    },
+    "authority": {
+      "rating_level": "AAA",
+      "rating_name": "优质高权重科技企业站",
+      "score": 96,
+      "domain_age": "7 年深耕",
+      "icp_status": "粤ICP备20230918号",
+      "ssl_status": "安全有效 (EV SSL)",
+      "indexed_keywords_total": 158,
+      "top50_keywords_count": 86,
+      "top10_keywords_count": 32,
+      "last_evaluated": "2026-09-14 11:50:00",
+      "ratings": [
+        {
+          "platform": "百度PC权重",
+          "weight": "BR 3",
+          "level": "3",
+          "desc": "预估日均百度来路 850~1,200",
+          "badge": "bg-blue-600 text-white"
+        },
+        {
+          "platform": "百度移动权重",
+          "weight": "BR 3",
+          "level": "3",
+          "desc": "移动端适配指数极高",
+          "badge": "bg-blue-500 text-white"
+        },
+        {
+          "platform": "谷歌 PR",
+          "weight": "PR 4",
+          "level": "4",
+          "desc": "全球高信任度权威企业站",
+          "badge": "bg-rose-500 text-white"
+        },
+        {
+          "platform": "必应 Rank",
+          "weight": "Rank 4",
+          "level": "4",
+          "desc": "IndexNow 协议加速中",
+          "badge": "bg-sky-600 text-white"
+        },
+        {
+          "platform": "AI引用指数",
+          "weight": "GEO 就绪",
+          "level": "A",
+          "desc": "llms.txt 知识库已部署",
+          "badge": "bg-purple-600 text-white"
+        },
+        {
+          "platform": "360搜索权重",
+          "weight": "PR 3",
+          "level": "3",
+          "desc": "360企业信誉认证",
+          "badge": "bg-emerald-600 text-white"
+        }
+      ],
+      "core_keywords": [
+        {
+          "keyword": "医用原料供应商",
+          "rank": 3,
+          "engine": "百度",
+          "trend": "up"
+        },
+        {
+          "keyword": "重组胶原蛋白原料",
+          "rank": 2,
+          "engine": "百度",
+          "trend": "equal"
+        },
+        {
+          "keyword": "化妆品原料直销批发",
+          "rank": 5,
+          "engine": "百度",
+          "trend": "up"
+        },
+        {
+          "keyword": "透皮肽生产厂家",
+          "rank": 1,
+          "engine": "360",
+          "trend": "equal"
+        },
+        {
+          "keyword": "食品级玻尿酸原料",
+          "rank": 4,
+          "engine": "搜狗",
+          "trend": "up"
+        }
+      ]
+    },
+    "today_crawled_pages": 8
+  },
+  "visitor_logs": {
+    "top_products": [
+      {
+        "id": "tptyts",
+        "title": "胎盘肽羊胎素",
+        "category": "化妆品原料",
+        "url": "products/tptyts.html",
+        "pv": 9,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒",
+        "bounce_rate": "0%",
+        "hot_pct": 0
+      },
+      {
+        "id": "pdrnht",
+        "title": "PDRN环肽棒",
+        "category": "化妆品原料",
+        "url": "products/pdrnht.html",
+        "pv": 0,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒",
+        "bounce_rate": "0%",
+        "hot_pct": 0
+      },
+      {
+        "id": "mellpr8670",
+        "title": "MELLPRO 5Dcollagen 5D 胶原",
+        "category": "透皮型重组蛋白/多肽",
+        "url": "products/mellpr8670.html",
+        "pv": 2,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒",
+        "bounce_rate": "0%",
+        "hot_pct": 0
+      },
+      {
+        "id": "tpxldb",
+        "title": "透皮纤连蛋白",
+        "category": "透皮型重组蛋白/多肽",
+        "url": "products/tpxldb.html",
+        "pv": 4,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒",
+        "bounce_rate": "0%",
+        "hot_pct": 0
+      },
+      {
+        "id": "qdjy",
+        "title": "缺端胶原",
+        "category": "重组蛋白",
+        "url": "products/qdjy.html",
+        "pv": 0,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒",
+        "bounce_rate": "0%",
+        "hot_pct": 0
+      },
+      {
+        "id": "zbssb",
+        "title": "长白山三宝",
+        "category": "植物源活性物",
+        "url": "products/zbssb.html",
+        "pv": 1,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒",
+        "bounce_rate": "0%",
+        "hot_pct": 0
+      },
+      {
+        "id": "detail_1",
+        "title": "NMN核心原料",
+        "category": "核心原料",
+        "url": "products/detail_1.html",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "product_hzpyl",
+        "title": "化妆品原料批发与定制 - 美尔健生物",
+        "category": "核心原料",
+        "url": "product_hzpyl.html",
+        "pv": 27,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "product_index",
+        "title": "透皮胶原蛋白-重组仿生蛋白-人参多肽-美尔健生物",
+        "category": "核心原料",
+        "url": "product_index.html",
+        "pv": 12,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "tphtct",
+        "title": "透皮环肽cTDP - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/tphtct.html",
+        "pv": 5,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "product_yyyl",
+        "title": "医疗级原料中心 - 美尔健生物科技",
+        "category": "核心原料",
+        "url": "product_yyyl.html",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "0xjydb",
+        "title": "JELFIPRO 0型胶原蛋白 (水母胶原) - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/0xjydb.html",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "product_tpxzzd",
+        "title": "透皮型重组蛋白/多肽-美尔健生物",
+        "category": "核心原料",
+        "url": "product_tpxzzd.html",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "5djydb",
+        "title": "5D胶原蛋白 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/5djydb.html",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "zzxldb",
+        "title": "重组纤连蛋白 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/zzxldb.html",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "gtlafdp",
+        "title": "寡肽类 MEGPEP AFDP - 重组多肽原料供应商 - 美尔健生物",
+        "category": "核心原料",
+        "url": "products/gtlafdp.html",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "zzjydb",
+        "title": "重组胶原蛋白溶液 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/zzjydb.html",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "mellpr205",
+        "title": "MELLPRO MAP 重组贻贝黏蛋白 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/mellpr205.html",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "yskmyz",
+        "title": "益生抗敏因子 (桃胶多糖) - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/yskmyz.html",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      },
+      {
+        "id": "hylfyz",
+        "title": "MEGPEP TXOD 海洋亮肤因子 - 医用原料/化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
+        "category": "核心原料",
+        "url": "products/hylfyz.html",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒",
+        "bounce_rate": "0%",
+        "hot_pct": 50
+      }
+    ],
+    "top_pages": [
+      {
+        "title": "美尔健官网首页",
+        "url": "index.html",
+        "type": "首页",
+        "pv": 18,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒"
+      },
+      {
+        "title": "产品中心 - 核心原料专区",
+        "url": "product_index.html",
+        "type": "频道页",
+        "pv": 0,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒"
+      },
+      {
+        "title": "合作案例 - 1000+品牌选用原料",
+        "url": "article_hzal.html",
+        "type": "案例页",
+        "pv": 5,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒"
+      },
+      {
+        "title": "突破生物透皮技术在修复与抗衰应用",
+        "url": "helps/tptjs.html",
+        "type": "技术专栏",
+        "pv": 2,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒"
+      },
+      {
+        "title": "联系美尔健 - 索样与业务咨询",
+        "url": "contact.html",
+        "type": "联系我们",
+        "pv": 0,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒"
+      },
+      {
+        "title": "MELLPRO 5Dcollagen 5D 胶原详情",
+        "url": "products/mellpr8670.html",
+        "type": "产品详情",
+        "pv": 0,
+        "uv": 0,
+        "avg_duration_sec": 0,
+        "avg_duration_str": "0秒"
+      },
+      {
+        "title": "【高能赋活】羊胎盘小分子寡肽提取物保湿锁水、舒缓修护与紧致抗衰功效检测-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_placenta_efficacy.html",
+        "type": "资讯文章",
+        "pv": 5,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "企业新闻-美尔健生物",
+        "url": "article_qydt.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "实验室数据研究-合作案例-美尔健（深圳）生物科技有限公司",
+        "url": "article_syssj.html",
+        "type": "资讯文章",
+        "pv": 7,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "护肤品工厂-美尔健生物",
+        "url": "article_hfpgc.html",
+        "type": "资讯文章",
+        "pv": 5,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "化妆品-美尔健生物",
+        "url": "article_hzp.html",
+        "type": "资讯文章",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "医药行业-美尔健生物",
+        "url": "article_yyxy.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "女性护理产品-美尔健生物",
+        "url": "article_nxhlcp.html",
+        "type": "资讯文章",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "洗护用品-美尔健生物",
+        "url": "article_xhyp.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "功能类食品-美尔健生物",
+        "url": "article_gnlsp.html",
+        "type": "资讯文章",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "医美行业-美尔健生物",
+        "url": "article_ymxy.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "【医疗级生物相容性】重组胶原蛋白生物相容性 5 项完整测试报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_collagen_biocompatibility.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "联系我们与原料样品申领 - 美尔健生物",
+        "url": "helps/lxwm.html",
+        "type": "页面浏览",
+        "pv": 6,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "【绿色纯净】灵柏提取物与玫瑰胶原酵素农残、苯酚与甲醇等风险物质检测报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_lingbai_rose_screening.html",
+        "type": "资讯文章",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "透皮环肽紧致、抗皱功效评估测试报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_tpht_efficacy.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "创新透皮科技！美尔健发明专利矩阵，构筑差异化技术壁垒-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/dfxtpk1260.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "新闻资讯与行业洞察 - 美尔健生物",
+        "url": "article_xwzx.html",
+        "type": "资讯文章",
+        "pv": 3,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "技术知识-美尔健生物",
+        "url": "article_cpbk.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "透皮环肽在全皮皮肤器官芯片模型中的透皮渗透吸收研究报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_tpht_penetration.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "美尔健纤连蛋白 28天重复剂量经口毒性试验报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_tfn_toxicology.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "客户合作-合作案例-美尔健（深圳）生物科技有限公司",
+        "url": "article_khhz.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "应用场景-合作案例-美尔健（深圳）生物科技有限公司",
+        "url": "article_yycj.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "实验室研究数据-合作案例-美尔健（深圳）生物科技有限公司",
+        "url": "article_sysyanjiu.html",
+        "type": "资讯文章",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "医疗级透皮吸收技术与原料标准 - 美尔健生物",
+        "url": "helps/yloemd.html",
+        "type": "页面浏览",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "关于美尔健 - 科技引领健康美",
+        "url": "helps/gymej.html",
+        "type": "页面浏览",
+        "pv": 4,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "企业相册-美尔健生物",
+        "url": "help_qyxc.html",
+        "type": "页面浏览",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "MEGCALM GPT (甘露糖六肽-1) 紧致、抗皱功效评估测试报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_gpt_efficacy.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "益生抗敏因子 舒缓功效评估测试报告-新闻资讯-美尔健（深圳）生物科技有限公司",
+        "url": "articles/lab_yskm_soothing_repair.html",
+        "type": "资讯文章",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "美尔健生物邮箱：61791579@qq.com-美尔健生物",
+        "url": "Tools/leaveword.html",
+        "type": "页面浏览",
+        "pv": 4,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "专利认证-美尔健生物",
+        "url": "help_fmzl.html",
+        "type": "页面浏览",
+        "pv": 5,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "公司资质-美尔健生物",
+        "url": "help_gszz.html",
+        "type": "页面浏览",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "荣誉证书-美尔健生物",
+        "url": "help_ryzs.html",
+        "type": "页面浏览",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "工厂介绍-美尔健生物",
+        "url": "help_gcjs.html",
+        "type": "页面浏览",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "原料介绍-美尔健生物",
+        "url": "help_yljs.html",
+        "type": "页面浏览",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "技术介绍-美尔健生物",
+        "url": "help_jsjs.html",
+        "type": "页面浏览",
+        "pv": 2,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      },
+      {
+        "title": "生产基地-美尔健生物",
+        "url": "help_scjd.html",
+        "type": "页面浏览",
+        "pv": 1,
+        "uv": 1,
+        "avg_duration_sec": 15,
+        "avg_duration_str": "15秒"
+      }
+    ],
+    "realtime_stream": [
+      {
+        "id": "v-1789467435",
+        "time": "12:17:15",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "突破生物透皮技术在皮肤修复与抗衰应用 - 美尔健生物",
+        "url": "helps/tptjs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_gcjs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467431",
+        "time": "12:17:11",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "工厂介绍-美尔健生物",
+        "url": "help_gcjs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_scjd.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467429",
+        "time": "12:17:09",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "生产基地-美尔健生物",
+        "url": "help_scjd.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_qyxc.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467425",
+        "time": "12:17:05",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "企业相册-美尔健生物",
+        "url": "help_qyxc.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_fmzl.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467413",
+        "time": "12:16:53",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "专利认证-美尔健生物",
+        "url": "help_fmzl.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/gymej.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467409",
+        "time": "12:16:49",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "专利认证-美尔健生物",
+        "url": "help_fmzl.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/gymej.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467407",
+        "time": "12:16:47",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "关于美尔健 - 科技引领健康美",
+        "url": "helps/gymej.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_jsjs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467404",
+        "time": "12:16:44",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "技术介绍-美尔健生物",
+        "url": "help_jsjs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_yljs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467330",
+        "time": "12:15:30",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "原料介绍-美尔健生物",
+        "url": "help_yljs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_jsjs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467328",
+        "time": "12:15:28",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "技术介绍-美尔健生物",
+        "url": "help_jsjs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_yljs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467325",
+        "time": "12:15:25",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "原料介绍-美尔健生物",
+        "url": "help_yljs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_gcjs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467315",
+        "time": "12:15:15",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "工厂介绍-美尔健生物",
+        "url": "help_gcjs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_ryzs.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467310",
+        "time": "12:15:10",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "荣誉证书-美尔健生物",
+        "url": "help_ryzs.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_gszz.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467307",
+        "time": "12:15:07",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "公司资质-美尔健生物",
+        "url": "help_gszz.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_fmzl.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467299",
+        "time": "12:14:59",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "专利认证-美尔健生物",
+        "url": "help_fmzl.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/lxwm.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467295",
+        "time": "12:14:55",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "专利认证-美尔健生物",
+        "url": "help_fmzl.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/lxwm.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467294",
+        "time": "12:14:54",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "联系我们与原料样品申领 - 美尔健生物",
+        "url": "helps/lxwm.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/Tools/leaveword.ht",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467291",
+        "time": "12:14:51",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物邮箱：61791579@qq.com-美尔健生物",
+        "url": "Tools/leaveword.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/lxwm.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467251",
+        "time": "12:14:11",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物邮箱：61791579@qq.com-美尔健生物",
+        "url": "Tools/leaveword.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/lxwm.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467239",
+        "time": "12:13:59",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "联系我们与原料样品申领 - 美尔健生物",
+        "url": "helps/lxwm.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/Tools/leaveword.ht",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467233",
+        "time": "12:13:53",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物邮箱：61791579@qq.com-美尔健生物",
+        "url": "Tools/leaveword.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/help_fmzl.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467118",
+        "time": "12:11:58",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "专利认证-美尔健生物",
+        "url": "help_fmzl.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/Tools/leaveword.ht",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467075",
+        "time": "12:11:15",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物邮箱：61791579@qq.com-美尔健生物",
+        "url": "Tools/leaveword.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/lxwm.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467030",
+        "time": "12:10:30",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "联系我们与原料样品申领 - 美尔健生物",
+        "url": "helps/lxwm.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/helps/gymej.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789467018",
+        "time": "12:10:18",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "关于美尔健 - 科技引领健康美",
+        "url": "helps/gymej.html",
+        "type": "页面浏览",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/index.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789466989",
+        "time": "12:09:49",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+        "url": "index.html",
+        "type": "官网首页",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/product_hzpyl.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789466665",
+        "time": "12:04:25",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+        "url": "index.html",
+        "type": "官网首页",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/product_hzpyl.html",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789466643",
+        "time": "12:04:03",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "化妆品原料批发与定制 - 美尔健生物",
+        "url": "product_hzpyl.html",
+        "type": "产品详情",
+        "duration_str": "正在浏览中...",
+        "referrer": "http://localhost:8000/",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789466626",
+        "time": "12:03:46",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+        "url": "index.html",
+        "type": "官网首页",
+        "duration_str": "正在浏览中...",
+        "referrer": "直接访问",
+        "device": "电脑端"
+      },
+      {
+        "id": "v-1789466416",
+        "time": "12:00:16",
+        "ip": "127.0.0.1",
+        "region": "本地开发测试 (127.0.0.1)",
+        "title": "美尔健生物|医用原料-化妆品原料-食品营养原料",
+        "url": "index.html",
+        "type": "官网首页",
+        "duration_str": "正在浏览中...",
+        "referrer": "直接访问",
+        "device": "电脑端"
+      }
+    ]
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "cookies": [
+    {
+      "name": "route",
+      "value": "0b0ced72658bbe1a38ced24c857b96c7",
+      "domain": "cmsn.nsw99.com",
+      "path": "/",
+      "expires": 1784124809.916956,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "route",
+      "value": "166504f7ffbffce684cf3b3a36c9820f",
+      "domain": "sson.nsw99.com",
+      "path": "/",
+      "expires": 1784124809.958211,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "08096EFAE78827337E5C4EC250981F49",
+      "domain": "sson.nsw99.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "CASTGC",
+      "value": "TGT-2280-qdospqMLvWbzMLCHkE9iDYCN0cFxb4qqDDTuci067fmLN5ZfmD-cas01.example.org",
+      "domain": "sson.nsw99.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SESSION",
+      "value": "ff440390-07e4-4dc9-9785-2275a751577c",
+      "domain": "cmsn.nsw99.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "storage_state": {
+    "cookies": [
+      {
+        "name": "route",
+        "value": "0b0ced72658bbe1a38ced24c857b96c7",
+        "domain": "cmsn.nsw99.com",
+        "path": "/",
+        "expires": 1784124809.916956,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+      },
+      {
+        "name": "route",
+        "value": "166504f7ffbffce684cf3b3a36c9820f",
+        "domain": "sson.nsw99.com",
+        "path": "/",
+        "expires": 1784124809.958211,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+      },
+      {
+        "name": "JSESSIONID",
+        "value": "08096EFAE78827337E5C4EC250981F49",
+        "domain": "sson.nsw99.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": true,
+        "secure": false,
+        "sameSite": "Lax"
+      },
+      {
+        "name": "CASTGC",
+        "value": "TGT-2280-qdospqMLvWbzMLCHkE9iDYCN0cFxb4qqDDTuci067fmLN5ZfmD-cas01.example.org",
+        "domain": "sson.nsw99.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": false,
+        "secure": false,
+        "sameSite": "Lax"
+      },
+      {
+        "name": "SESSION",
+        "value": "ff440390-07e4-4dc9-9785-2275a751577c",
+        "domain": "cmsn.nsw99.com",
+        "path": "/",
+        "expires": -1,
+        "httpOnly": true,
+        "secure": false,
+        "sameSite": "Lax"
+      }
+    ],
+    "origins": [
+      {
+        "origin": "http://cmsn.nsw99.com",
+        "localStorage": [
+          {
+            "name": "ngStorage-errorLogs",
+            "value": "[]"
+          },
+          {
+            "name": "ngStorage-userInfo",
+            "value": "{\"deptName\":\"\",\"fullCustomerName\":\"美尔健（深圳）生物科技有限公司\",\"loginTimes\":42,\"mobile\":\"13691978530\",\"nsyId\":\"47925\",\"userId\":\"20250217114823000255\",\"users\":[{\"userId\":\"20170920111941010146\",\"realName\":\"谢群\",\"roleCode\":\"ROLE-CH\",\"projectId\":\"20250217114835000264\",\"hasAssignedPermission\":null,\"id\":null,\"createBy\":\"20170526141050027893\",\"createDate\":\"2026-03-27 10:32:32\",\"updateBy\":\"20170526141050027893\",\"updateDate\":\"2026-03-27 10:32:32\",\"version\":0,\"isDeleted\":\"0\"},{\"userId\":\"20231206155511000770\",\"realName\":\"姜泽茜\",\"roleCode\":\"ROLE-BJ\",\"projectId\":\"20250217114835000264\",\"hasAssignedPermission\":null,\"id\":null,\"createBy\":\"20170526141050027893\",\"createDate\":\"2026-03-27 10:32:32\",\"updateBy\":\"20170526141050027893\",\"updateDate\":\"2026-03-27 10:32:32\",\"version\":0,\"isDeleted\":\"0\"},{\"userId\":\"20191107173433004325\",\"realName\":\"吕晋宏\",\"roleCode\":\"ROLE-BJ\",\"projectId\":\"20250217114835000264\",\"hasAssignedPermission\":null,\"id\":null,\"createBy\":\"20170526141050027893\",\"createDate\":\"2026-03-27 10:32:32\",\"updateBy\":\"20170526141050027893\",\"updateDate\":\"2026-03-27 10:32:32\",\"version\":0,\"isDeleted\":\"0\"},{\"userId\":\"20160830235999991364\",\"realName\":\"周石燕\",\"roleCode\":\"ROLE-CQ\",\"projectId\":\"20250217114835000264\",\"hasAssignedPermission\":null,\"id\":null,\"createBy\":\"20170526141050027893\",\"createDate\":\"2026-03-27 10:32:32\",\"updateBy\":\"20170526141050027893\",\"updateDate\":\"2026-03-27 10:32:32\",\"version\":0,\"isDeleted\":\"0\"},{\"userId\":\"20180412135043002484\",\"realName\":\"莫姚毅\",\"roleCode\":\"ROLE-SHKF\",\"projectId\":\"20250217114835000264\",\"hasAssignedPermission\":null,\"id\":null,\"createBy\":\"20170526141050027893\",\"createDate\":\"2026-03-27 10:32:32\",\"updateBy\":\"20170526141050027893\",\"updateDate\":\"2026-03-27 10:32:32\",\"version\":0,\"isDeleted\":\"0\"}],\"fullEnterpriseName\":\"美尔健（深圳）生物科技有限公司\",\"lastLoginIp\":\"113.97.57.53\",\"lastLoginTime\":\"2026-07-15 14:14:05\",\"yxyname\":\"阮仁全\",\"isDefault\":\"1\",\"displayLogoutBtn\":true,\"yxyemail\":\"\",\"loginIp\":\"113.97.57.53\",\"roleName\":\"企业管理员\",\"name\":\"阮仁全\",\"userType\":1,\"email\":null,\"yxymobile\":\"\"}"
+          },
+          {
+            "name": "ngStorage-menu",
+            "value": "{}"
+          },
+          {
+            "name": "ngStorage-nswAuths",
+            "value": "[{\"authority\":\"ROLE_QY_ADMIN\"},{\"authority\":\"0004006_01\"},{\"authority\":\"0003_03\"},{\"authority\":\"0006001_05\"},{\"authority\":\"0008_03\"},{\"authority\":\"0003_10\"},{\"authority\":\"0004007_02\"},{\"authority\":\"0004003_09\"},{\"authority\":\"0006003_04\"},{\"authority\":\"0004007_03\"},{\"authority\":\"0003_04\"},{\"authority\":\"0006001_01\"},{\"authority\":\"0002_13\"},{\"authority\":\"KX_004\"},{\"authority\":\"0004007_01\"},{\"authority\":\"0006001_03\"},{\"authority\":\"KX_011\"},{\"authority\":\"0002_01\"},{\"authority\":\"0003_11\"},{\"authority\":\"0006001_04\"},{\"authority\":\"0004007_04\"},{\"authority\":\"0002_02\"},{\"authority\":\"0002_08\"},{\"authority\":\"0007005_01\"},{\"authority\":\"0004003_03\"},{\"authority\":\"0004007_05\"},{\"authority\":\"0003_08\"},{\"authority\":\"0007005_02\"},{\"authority\":\"0006002_05\"},{\"authority\":\"0003_09\"},{\"authority\":\"0008_02\"},{\"authority\":\"0003_02\"},{\"authority\":\"0006002_03\"},{\"authority\":\"0004003_01\"},{\"authority\":\"0004003_06\"},{\"authority\":\"0005001_02\"},{\"authority\":\"KX_006\"},{\"authority\":\"0003_13\"},{\"authority\":\"0007002_10\"},{\"authority\":\"0002_06\"},{\"authority\":\"0002_09\"},{\"authority\":\"KX_009\"},{\"authority\":\"0003_01\"},{\"authority\":\"0008_01\"},{\"authority\":\"0002_04\"},{\"authority\":\"0002_11\"},{\"authority\":\"0002_12\"},{\"authority\":\"0006001_06\"},{\"authority\":\"0003_12\"},{\"authority\":\"0006002_01\"},{\"authority\":\"0002_05\"},{\"authority\":\"0006003_01\"},{\"authority\":\"00010_02\"},{\"authority\":\"0004003_05\"},{\"authority\":\"0004002_01\"},{\"authority\":\"0005001_01\"},{\"authority\":\"0006003_03\"},{\"authority\":\"0004001_01\"},{\"authority\":\"KX_012\"},{\"authority\":\"0006002_04\"},{\"authority\":\"0006002_02\"},{\"authority\":\"0004002_02\"},{\"authority\":\"0002_03\"},{\"authority\":\"0002_07\"},{\"authority\":\"0006001_07\"},{\"authority\":\"0004003_02\"},{\"authority\":\"0006003_02\"},{\"authority\":\"0003_06\"},{\"authority\":\"0002_10\"},{\"authority\":\"0009_01\"},{\"authority\":\"0004003_07\"},{\"authority\":\"0004003_04\"},{\"authority\":\"0005001_yr\"},{\"authority\":\"0003_05\"},{\"authority\":\"0007002_01\"},{\"authority\":\"0003_07\"},{\"authority\":\"0004003_08\"},{\"authority\":\"ccc'\"},{\"authority\":\"KX_010\"},{\"authority\":\"0006001_02\"},{\"authority\":\"00010_01\"}]"
+          },
+          {
+            "name": "ngStorage-20250217114835000264suitData",
+            "value": "{\"id\":2,\"suitType\":\"STANDARDWEBSITE\",\"suitName\":\"站舰专业版\",\"primaryAccountNumber\":1,\"subAccountNumber\":3,\"allowMultiattribute\":\"1\",\"allowFlowStatistics\":\"1\",\"allowSpiderFed\":\"1\",\"allowResourcesDownload\":\"1\",\"allowInquiryEmail\":\"1\",\"allowVipView\":\"0\",\"allowSubSite\":\"1\",\"domainNumber\":1,\"ftpType\":\"标准型\",\"ftpCapacity\":20,\"whetherFreeRecord\":\"1\",\"specialSupplyImage\":-1,\"advancedPaymentImage\":5,\"primaryNavigationNumber\":10}"
+          }
+        ]
+      }
+    ]
+  },
+  "url": "http://cmsn.nsw99.com/pccms/app/index.html#/cms/personalInfo?projId=20250217114835000264"
+}

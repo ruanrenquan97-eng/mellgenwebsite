@@ -283,7 +283,7 @@
     box-sizing: border-box !important;
   }
 
-  /* 清除浮动修复 */
+  /* 清除浮动处理 */
   .clear {
     float: none !important;
     clear: both !important;
@@ -296,7 +296,7 @@
     padding: 0 !important;
   }
 
-  /* 浮动容器修复：保证内容正常展开，绝不能设 height: 0 */
+  /* 浮动容器处理：保证内容正常展开，绝不能设 height: 0 */
   .clearafter, .clearfix, .f_cb, .f_cbli {
     float: none !important;
     display: block !important;
@@ -5689,7 +5689,7 @@
   }
 }
 
-/* PC & 全局：修复热门搜索由于英文字符折行导致与下方面包屑重叠的排版混乱问题 */
+/* PC & 全局：解决热门搜索由于英文字符折行导致与下方面包屑重叠的排版混乱问题 */
 .p102-search-1 {
   height: auto !important;
   min-height: 60px !important;
@@ -7076,7 +7076,7 @@ canvas[width="1920"] {
     text-align: center !important;
   }
 
-  /* 相册/资质图鉴卡片内部清除元素隐藏 (修复CSS网格空位) */
+  /* 相册/资质图鉴卡片内部清除元素隐藏 (解决CSS网格空位) */
   .k12-gl-gslb-3nf1-1-01-left .clear {
     display: none !important;
   }

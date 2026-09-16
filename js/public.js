@@ -403,7 +403,7 @@ $(function () {
         });
     }
 
-    // 5. 修复移动端选项卡点击交互 (解决方案、制造中心等在移动端触摸点击切换)
+    // 5. 优化移动端选项卡点击交互 (解决方案、制造中心等在移动端触摸点击切换)
     $(document).on("click touchend", ".g_fa .fafl dl", function () {
         var $this = $(this);
         var idx = $this.index();
@@ -477,7 +477,7 @@ $(function () {
         });
     }
 
-    // 8. 修复内页 Banner 图片被特定内联脚本偏移撑裂的问题
+    // 8. 解决内页 Banner 图片被特定内联脚本偏移撑裂的问题
     function fixMobileBanners() {
         if ($(window).width() <= 768) {
             $(".ty-banner-1").each(function () {

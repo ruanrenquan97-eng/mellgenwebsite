@@ -644,7 +644,7 @@ body{
     background-size: 1920px 100%;
 }
 
-/* 修复搜索栏英文字符过长折行导致与面包屑重叠问题 */
+/* 解决搜索栏英文字符过长折行导致与面包屑重叠问题 */
 .p102-search-1 {
     height: auto !important;
     min-height: 60px !important;

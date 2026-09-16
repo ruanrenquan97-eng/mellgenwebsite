@@ -34,12 +34,21 @@ app.secret_key = "mellgen_cms_secret_key_12938"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 
-WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if '' in WORKSPACE_DIR or '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
-    WORKSPACE_DIR = 'E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'
+WORKSPACE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
+    WORKSPACE_DIR = os.path.abspath(os.path.normpath('E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'))
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 UPLOAD_FOLDER = os.path.join(WORKSPACE_DIR, "resource", "images")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def is_safe_workspace_path(abs_target):
+    norm_target = os.path.abspath(abs_target)
+    norm_workspace = os.path.abspath(WORKSPACE_DIR)
+    try:
+        common = os.path.commonpath([norm_workspace, norm_target])
+        return os.path.normcase(common) == os.path.normcase(norm_workspace)
+    except Exception:
+        return False
 
 # CORS & No-Cache Support
 @app.after_request
@@ -1956,12 +1965,12 @@ def get_pages():
 @app.route("/api/pages/content", methods=["GET", "POST"])
 @login_required
 def handle_page_content():
-    page_path = request.args.get("path")
+    page_path = request.args.get("path", "").strip()
     if not page_path:
         return jsonify({"success": False, "message": "缺少页面路径参数"}), 400
         
-    abs_path = os.path.abspath(os.path.join(WORKSPACE_DIR, page_path.replace("/", os.sep)))
-    if not abs_path.startswith(WORKSPACE_DIR):
+    abs_path = os.path.abspath(os.path.join(WORKSPACE_DIR, page_path.replace("/", os.sep).lstrip("\\/")))
+    if not is_safe_workspace_path(abs_path):
         return jsonify({"success": False, "message": "越权路径访问拒绝"}), 403
         
     if request.method == "POST":
@@ -4887,7 +4896,7 @@ def api_auto_fix_tdk():
         "fixed_products": modified_count,
         "fixed_articles": 0,
         "new_score": 98,
-        "message": f"全站 TDK 深度修复与补齐完成！自动补全了 {modified_count} 款产品的SEO元数据，并重新构建了静态页面与地图！"
+        "message": f"全站 TDK 深度更新与补齐完成！自动补全了 {modified_count} 款产品的SEO元数据，并重新构建了静态页面与地图！"
     })
 
 # ----------------------------------------------------

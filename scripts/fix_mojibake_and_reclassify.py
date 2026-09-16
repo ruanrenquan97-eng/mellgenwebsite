@@ -65,7 +65,7 @@ for a in articles:
         # Accurate reclassification
         a["category"] = classify_article(a["title"], a["content"], a.get("desc", ""))
 
-print(f"[*] 修复乱码文章数: {fixed_count} 篇")
+print(f"[*] 处理乱码文章数: {fixed_count} 篇")
 
 # Print classification breakdown for WeChat articles
 wx_cats = {}
@@ -82,4 +82,4 @@ with open(articles_file, "w", encoding="utf-8") as f:
 print("[*] 正在全量编译生成所有 HTML 文章页及新闻资讯聚合页...")
 generator.publish_site()
 generator.generate_sitemap()
-print("[+] 修复与全量发布圆满完成！")
+print("[+] 修正与全量发布圆满完成！")

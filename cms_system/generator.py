@@ -857,57 +857,57 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
  <div class="k12-cx-xgcp-4pl-fx1-1-01-list"> 
    <dl> 
     <dt> 
-     <a href="../products/tphtct.html" target="_blank" title="cTDP环肽"> <img alt="cTDP环肽" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg" title="cTDP环肽"> </a> 
+     <a href="../products/tphtct.html" target="_blank" title="cTDP促透环肽"> <img alt="cTDP促透环肽" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg" title="cTDP促透环肽"> </a> 
     </dt> 
     <dd> 
-     <h4><a href="../products/tphtct.html" target="_blank" title="cTDP环肽"> cTDP环肽 </a></h4> 
+     <h4><a href="../products/tphtct.html" target="_blank" title="cTDP促透环肽"> cTDP促透环肽 </a></h4> 
      <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
-       打开皮肤吸收通道的肌肤之钥，生物透皮技术核心载体，助力10000+Da.分子高渗透吸收，功效护肤的高效促渗方案。
+       打开皮肤吸收通道的肌肤之钥，生物透皮技术核心载体，助力10000+Da.大分子高渗透吸收，功效护肤的高效促渗方案。
      </div> 
      <div class="p15-product-2-date"> 
-      <a href="../products/tphtct.html" target="_blank" title="cTDP环肽"></a> 
+      <a href="../products/tphtct.html" target="_blank" title="cTDP促透环肽"></a> 
      </div> 
     </dd> 
    </dl> 
    <dl> 
     <dt> 
-     <a href="../products/jnhtea.html" target="_blank" title="聚能环肽EAC"> <img alt="聚能环肽EAC" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_36.jpg" title="聚能环肽EAC"> </a> 
+     <a href="../products/tpxldb.html" target="_blank" title="透皮纤连蛋白 (TFNpro)"> <img alt="透皮纤连蛋白 (TFNpro)" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_30.jpg" title="透皮纤连蛋白 (TFNpro)"> </a> 
     </dt> 
     <dd> 
-     <h4><a href="../products/jnhtea.html" target="_blank" title="聚能环肽EAC"> 聚能环肽EAC </a></h4> 
+     <h4><a href="../products/tpxldb.html" target="_blank" title="透皮纤连蛋白 (TFNpro)"> 透皮纤连蛋白 (TFNpro) </a></h4> 
      <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
-       细胞能量充电宝，皮肤营养聚能环。赋能线粒体呼吸链，加速细胞微循环与胶原蛋白自主合成。
+       突破大分子透皮壁垒，专研穿膜肽紧密锚定真皮纤维网，促生胶原，修护肌底损伤。
      </div> 
      <div class="p15-product-2-date"> 
-      <a href="../products/jnhtea.html" target="_blank" title="聚能环肽EAC"></a> 
+      <a href="../products/tpxldb.html" target="_blank" title="透皮纤连蛋白 (TFNpro)"></a> 
      </div> 
     </dd> 
    </dl> 
    <dl> 
     <dt> 
-     <a href="../products/5djydb.html" target="_blank" title="5D胶原蛋白"> <img alt="5D胶原蛋白" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_32.jpg" title="5D胶原蛋白"> </a> 
+     <a href="../products/mellpr8670.html" target="_blank" title="5D胶原蛋白 (5Dcollagen)"> <img alt="5D胶原蛋白 (5Dcollagen)" src="../resource/images/b8a942ac10c0484bbb9d2eb5ab7ed6ce_13.jpg" title="5D胶原蛋白 (5Dcollagen)"> </a> 
     </dt> 
     <dd> 
-     <h4><a href="../products/5djydb.html" target="_blank" title="5D胶原蛋白"> 5D胶原蛋白 </a></h4> 
+     <h4><a href="../products/mellpr8670.html" target="_blank" title="5D胶原蛋白 (5Dcollagen)"> 5D胶原蛋白 (5Dcollagen) </a></h4> 
      <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
-       融合第三代生物透皮技术，为皮肤直补胶原蛋白，抵抗胶原蛋白流失，恢复肌肤饱满弹润。
+       含Ⅰ型、Ⅲ型、Ⅳ型、Ⅶ型及XVII型胶原组装5维网络，实现真皮、角质层与DEJ基底膜带多层修护。
      </div> 
      <div class="p15-product-2-date"> 
-      <a href="../products/5djydb.html" target="_blank" title="5D胶原蛋白"></a> 
+      <a href="../products/mellpr8670.html" target="_blank" title="5D胶原蛋白 (5Dcollagen)"></a> 
      </div> 
     </dd> 
    </dl> 
    <dl class="p14-product-clear"> 
     <dt> 
-     <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> <img alt="重组胶原蛋白溶液" src="../resource/images/bottle_zzjydb.jpg" title="重组胶原蛋白溶液"> </a> 
+     <a href="../products/yskmyz.html" target="_blank" title="益生舒缓因子 (依诺舒)"> <img alt="益生舒缓因子 (依诺舒)" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_22.jpg" title="益生舒缓因子 (依诺舒)"> </a> 
     </dt> 
     <dd> 
-     <h4><a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> 重组胶原蛋白溶液 </a></h4> 
+     <h4><a href="../products/yskmyz.html" target="_blank" title="益生舒缓因子 (依诺舒)"> 益生舒缓因子 (依诺舒) </a></h4> 
      <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
-       MELLPRO-RHC高渗透重组人Ⅰ型、Ⅲ型胶原蛋白溶液，修护基底膜带，抚平肌底干纹松弛。
+       提取天然高分支多糖分子，构建隐形透气水网膜，强韧皮肤物理屏障，长效保湿舒缓敏感。
      </div> 
      <div class="p15-product-2-date"> 
-      <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"></a> 
+      <a href="../products/yskmyz.html" target="_blank" title="益生舒缓因子 (依诺舒)"></a> 
      </div> 
     </dd> 
    </dl> 
@@ -1126,6 +1126,11 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
     # Update navigation menu
     html = update_navigation(html, nav_links, rel_path)
     
+    # Clean trailing corrupted data if multiple </html> exist
+    m_ends = list(re.finditer(r'</html>', html, re.I))
+    if len(m_ends) > 1:
+        html = html[:m_ends[0].end()]
+
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(html)
 
@@ -1615,6 +1620,34 @@ def publish_site():
                 generate_product_detail_page(p, base_product_html, settings, nav_links)
             except Exception as e:
                 print(f"[-] Error generating page for product {p['id']}: {e}")
+
+        # Handle offline product pages: redirect them to product_index.html
+        all_products_path = os.path.join(DATA_DIR, "products.json")
+        if os.path.exists(all_products_path):
+            try:
+                with open(all_products_path, "r", encoding="utf-8") as f:
+                    full_prods = json.load(f)
+                for p in full_prods:
+                    if p.get("show", True) is False or p.get("status") == "offline":
+                        pid = p.get("id")
+                        dest_path = os.path.join(WORKSPACE_DIR, "products", f"{pid}.html")
+                        redirect_html = f'''<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0;url=../product_index.html">
+<link rel="canonical" href="https://www.mellgen.com/product_index.html">
+<title>产品已下架 - 美尔健生物</title>
+<script>location.replace("../product_index.html");</script>
+</head>
+<body>
+<p>该产品已下架，正在跳转至<a href="../product_index.html">原料产品中心</a>...</p>
+</body>
+</html>'''
+                        with open(dest_path, "w", encoding="utf-8") as pf:
+                            pf.write(redirect_html)
+            except Exception as e_off:
+                print(f"[-] Notice handling offline products redirect: {e_off}")
                 
     # 3. Re-generate all article details
     template_article_path = os.path.join(WORKSPACE_DIR, "articles", "jsjjtp.html")
@@ -1644,6 +1677,13 @@ def publish_site():
         except Exception:
             pass
             
+    # 4.5. Synchronize published videos to front-end pages
+    try:
+        import video_manager
+        video_manager.sync_videos_to_html()
+    except Exception as e:
+        print(f"[-] Notice on video sync: {e}")
+
     # 5. Global footer/header/nav propagates
     update_all_footers_headers_and_nav(settings, nav_links)
     

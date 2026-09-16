@@ -106,54 +106,119 @@ def toggle_video_status(video_id):
         sync_videos_to_html()
     return new_status
 
-def build_video_html_block(video_list):
+VIDEO_TITLE_TRANSLATIONS = {
+    "工厂介绍": "Factory Introduction",
+    "5D胶原蛋白": "5D Collagen",
+    "PDRN环肽棒": "PDRN Cyclic Peptide Stick",
+    "海洋亮肤因子": "Marine Brightening Factor",
+    "聚能环肽EAC": "Poly-Energy Cyclic Peptide EAC",
+    "重组Ⅲ型胶原": "Recombinant Type III Collagen",
+    "肽维多": "Peptide Multi-Nutrient",
+    "cTDP环肽": "cTDP Transdermal Cyclic Peptide",
+    "小分子水解胶原蛋白": "Low Molecular Weight Hydrolyzed Collagen",
+    "微乳包裹": "Microemulsion Encapsulation",
+    "依克多因": "Ectoin Active Solution",
+    "cTDP环肽-讲解": "Transdermal Cyclic Peptide - Presentation",
+    "未来美妆战场，创新定制原料成为品牌核心竞争力！": "Future Beauty Battlefield: Custom Innovative Raw Materials as Core Competitiveness!",
+    "皮肤护理做不好？这里有高科技方案": "Suboptimal Skincare Results? High-Tech Bio Solutions Here",
+    "你还在用没效果的护肤品？看这里": "Still Using Ineffective Skincare? Discover Transdermal Science",
+    "美尔健生物给您拜年啦": "Mellgen Biotech Season's Greetings",
+    "2025护肤品市场千亿预热！！！": "2025 Skincare Market: 100-Billion Surge Brewing!",
+    "“中国芯”原料定制，成美妆爆款新密码！": "'China-Core' Raw Material Customization: New Secret to Beauty Blockbusters!"
+}
+
+def build_video_html_block(video_list, is_en=False):
     html_chunks = []
     html_chunks.append(' <div class="zxlb-3n-ts-02-list g_splst f_cb"> \n')
     if not video_list:
-        html_chunks.append('   <div style="width:100%;text-align:center;padding:40px 0;color:#94a3b8;font-size:14px;">暂无已发布的视频资料</div> \n')
+        msg = "No video resources published currently." if is_en else "暂无已发布的视频资料"
+        html_chunks.append(f'   <div style="width:100%;text-align:center;padding:40px 0;color:#94a3b8;font-size:14px;">{msg}</div> \n')
     else:
         for v in video_list:
-            title = v.get("title", "")
+            title_cn = v.get("title", "")
+            title = VIDEO_TITLE_TRANSLATIONS.get(title_cn, title_cn) if is_en else title_cn
             cover = v.get("cover", "")
+            if is_en:
+                if cover.startswith("./"):
+                    cover = "." + cover  # ./resource/ -> ../resource/
+                elif not cover.startswith("http") and not cover.startswith("../"):
+                    cover = "../" + cover.lstrip("/")
             video_url = v.get("video_url", "")
-            html_chunks.append('   <dl> \n    <dt> \n     <i><img alt="' + title + '" src="' + cover + '" title="' + title + '"></i> \n     <video autoplay="autoplay" controls="" height="100%" muted preload="none" src="' + video_url + '" width="100%"></video> \n    </dt> \n    <dd> \n     <h4><b>' + title + '</b></h4> \n    </dd> \n   </dl> \n')
+            html_chunks.append(f'   <dl> \n    <dt> \n     <i><img alt="{title}" src="{cover}" title="{title}"></i> \n     <video autoplay="autoplay" controls="" height="100%" muted preload="none" src="{video_url}" width="100%"></video> \n    </dt> \n    <dd> \n     <h4><b>{title}</b></h4> \n    </dd> \n   </dl> \n')
     html_chunks.append(' </div> \n <div class="clear"></div> \n')
     return "".join(html_chunks)
 
+def update_single_video_page(file_rel_path, video_list, is_en=False, pagination_html=None):
+    path = os.path.join(WORKSPACE_DIR, file_rel_path)
+    if not os.path.exists(path):
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # Clean up obsolete nodata block if present
+        content = re.sub(r'<div class="n-nodata">.*?</div>\s*', '', content, flags=re.DOTALL)
+
+        grid_pattern = re.compile(r'<div class="zxlb-3n-ts-02-list g_splst f_cb">.*?<div class="clear"></div>', re.DOTALL)
+        new_grid = build_video_html_block(video_list, is_en=is_en)
+        content = grid_pattern.sub(new_grid, content, count=1)
+
+        if pagination_html is not None:
+            pag_pattern = re.compile(r'(<div class="p102-pagination-1-main">)(.*?)(</div>)', re.DOTALL)
+            content = pag_pattern.sub(r'\1 ' + pagination_html + r' \3', content)
+
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
+    except Exception as e:
+        print(f"[-] Error updating {file_rel_path}: {e}")
+
 def sync_videos_to_html():
-    videos = [v for v in load_videos() if v.get("status") == "published"]
+    """
+    全量同步视频至前台页面：
+    已下架视频（status != 'published' 或 show == False）前台全面清除不予显示。
+    同时更新全量视频列表、分页、以及分类子页面（工厂介绍、原料介绍、技术介绍、科研团队介绍、抖音短视频）。
+    中英文版同步刷新。
+    """
+    videos = [v for v in load_videos() if v.get("status") == "published" and v.get("show", True) is not False]
     
     page1_videos = videos[:12]
-    page2_videos = videos[12:] if len(videos) > 12 else []
-    
-    grid_pattern = re.compile(r'<div class="zxlb-3n-ts-02-list g_splst f_cb">.*?<div class="clear"></div>', re.DOTALL)
-    
-    spzx_path = os.path.join(WORKSPACE_DIR, "help_spzx.html")
-    if os.path.exists(spzx_path):
-        with open(spzx_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        new_block = build_video_html_block(page1_videos)
-        content = grid_pattern.sub(new_block, content, count=1)
-        with open(spzx_path, "w", encoding="utf-8") as f:
-            f.write(content)
+    page2_videos = videos[12:24] if len(videos) > 12 else []
 
-    spzx2_path = os.path.join(WORKSPACE_DIR, "help_spzx_0002.html")
-    if os.path.exists(spzx2_path):
-        with open(spzx2_path, "r", encoding="utf-8") as f:
-            content2 = f.read()
-        new_block2 = build_video_html_block(page2_videos)
-        content2 = grid_pattern.sub(new_block2, content2, count=1)
-        with open(spzx2_path, "w", encoding="utf-8") as f:
-            f.write(content2)
+    # Pagination HTML for all-videos index pages
+    if len(videos) > 12:
+        cn_pag_p1 = '<a class="page_curr">1</a><a href="./help_spzx_0002.html">2</a><a class="page_next" href="./help_spzx_0002.html">下一页</a><a class="page_last" href="./help_spzx_0002.html">末页</a>'
+        cn_pag_p2 = '<a class="page_prev" href="./help_spzx.html">上一页</a><a href="./help_spzx.html">1</a><a class="page_curr">2</a>'
+        en_pag_p1 = '<a class="page_curr">1</a><a href="./help_spzx_0002.html">2</a><a class="page_next" href="./help_spzx_0002.html">Next</a><a class="page_last" href="./help_spzx_0002.html">Last</a>'
+        en_pag_p2 = '<a class="page_prev" href="./help_spzx.html">Prev</a><a href="./help_spzx.html">1</a><a class="page_curr">2</a>'
+    else:
+        cn_pag_p1 = ''
+        cn_pag_p2 = ''
+        en_pag_p1 = ''
+        en_pag_p2 = ''
 
+    # Category video filters
+    gcjs_videos = [v for v in videos if v.get("category") == "工厂介绍"]
+    yljs_videos = [v for v in videos if v.get("category") in ["原料介绍", "产品演示"]]
+    jsjs_videos = [v for v in videos if v.get("category") == "技术介绍"]
+    kytdjs_videos = [v for v in videos if v.get("category") == "科研团队介绍"]
     dydsp_videos = [v for v in videos if v.get("category") == "抖音短视频"]
-    dydsp_path = os.path.join(WORKSPACE_DIR, "help_dydsp.html")
-    if os.path.exists(dydsp_path):
-        with open(dydsp_path, "r", encoding="utf-8") as f:
-            content_dy = f.read()
-        new_block_dy = build_video_html_block(dydsp_videos[:12])
-        content_dy = grid_pattern.sub(new_block_dy, content_dy, count=1)
-        with open(dydsp_path, "w", encoding="utf-8") as f:
-            f.write(content_dy)
 
-    return {"success": True, "count": len(videos), "message": f"成功同步 {len(videos)} 部视频到前台视频中心！"}
+    # 1. Update Chinese pages
+    update_single_video_page("help_spzx.html", page1_videos, is_en=False, pagination_html=cn_pag_p1)
+    update_single_video_page("help_spzx_0002.html", page2_videos, is_en=False, pagination_html=cn_pag_p2)
+    update_single_video_page("help_gcjs.html", gcjs_videos, is_en=False, pagination_html='')
+    update_single_video_page("help_yljs.html", yljs_videos, is_en=False, pagination_html='')
+    update_single_video_page("help_jsjs.html", jsjs_videos, is_en=False, pagination_html='')
+    update_single_video_page("help_kytdjs.html", kytdjs_videos, is_en=False, pagination_html='')
+    update_single_video_page("help_dydsp.html", dydsp_videos, is_en=False, pagination_html='')
+
+    # 2. Update English pages
+    update_single_video_page(os.path.join("en", "help_spzx.html"), page1_videos, is_en=True, pagination_html=en_pag_p1)
+    update_single_video_page(os.path.join("en", "help_spzx_0002.html"), page2_videos, is_en=True, pagination_html=en_pag_p2)
+    update_single_video_page(os.path.join("en", "help_gcjs.html"), gcjs_videos, is_en=True, pagination_html='')
+    update_single_video_page(os.path.join("en", "help_yljs.html"), yljs_videos, is_en=True, pagination_html='')
+    update_single_video_page(os.path.join("en", "help_jsjs.html"), jsjs_videos, is_en=True, pagination_html='')
+    update_single_video_page(os.path.join("en", "help_kytdjs.html"), kytdjs_videos, is_en=True, pagination_html='')
+    update_single_video_page(os.path.join("en", "help_dydsp.html"), dydsp_videos, is_en=True, pagination_html='')
+
+    return {"success": True, "count": len(videos), "message": f"成功同步 {len(videos)} 部上架视频至前台全站（中文与英文版）！"}

@@ -838,11 +838,14 @@ $(function () {
     window.addEventListener("resize", flattenMobileFooterNav);
 })();
 
-// 视频中心海报自动注入与播放优化（解决移动端黑屏与封面丢失）
+// 视频中心海报自动注入与智能弹窗播放器（解决移动端黑屏、封面丢失与多端播放体验）
 (function() {
-    function initVideoPosters() {
+    function initVideoInteractive() {
         if (typeof $ === 'undefined') return;
-        $('.zxlb-3n-ts-02-list dl').each(function() {
+        var $videoList = $('.zxlb-3n-ts-02-list dl');
+        if (!$videoList.length) return;
+
+        $videoList.each(function() {
             var $dl = $(this);
             var $video = $dl.find('video');
             var $img = $dl.find('dt i img');
@@ -852,15 +855,88 @@ $(function () {
                     $video.attr('poster', imgSrc);
                 }
             }
+
+            // Bind click to open video modal player
+            if (!$dl.data('video-modal-bound')) {
+                $dl.data('video-modal-bound', true);
+                $dl.css('cursor', 'pointer');
+                $dl.on('click', function(e) {
+                    if (e.target && e.target.tagName === 'VIDEO' && e.target.controls) {
+                        return;
+                    }
+                    var videoSrc = $video.attr('src') || $dl.attr('data-video-src');
+                    var videoTitle = $dl.find('dd h4 b').text().trim() || $img.attr('alt') || '美尔健官方视频';
+                    if (videoSrc) {
+                        e.preventDefault();
+                        openGlobalVideoModal(videoSrc, videoTitle);
+                    }
+                });
+            }
         });
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initVideoPosters);
-    } else {
-        initVideoPosters();
+    function openGlobalVideoModal(src, title) {
+        var modalId = 'mellgen-global-video-modal';
+        var $modal = $('#' + modalId);
+        if (!$modal.length) {
+            $('body').append(
+                '<div id="' + modalId + '" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.88);backdrop-filter:blur(6px);z-index:999999;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;">' +
+                  '<div style="background:#0f172a;border:1px solid rgba(255,255,255,0.15);border-radius:16px;max-width:920px;width:100%;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.6);display:flex;flex-direction:column;">' +
+                    '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.1);color:#ffffff;">' +
+                      '<span id="' + modalId + '-title" style="font-size:14px;font-weight:bold;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>' +
+                      '<button id="' + modalId + '-close" style="background:transparent;border:none;color:#94a3b8;font-size:24px;cursor:pointer;line-height:1;padding:0 6px;margin-left:12px;" title="关闭">&times;</button>' +
+                    '</div>' +
+                    '<div style="background:#000;position:relative;padding-top:56.25%;height:0;overflow:hidden;">' +
+                      '<video id="' + modalId + '-player" controls autoplay playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;background:#000;"></video>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>'
+            );
+            $modal = $('#' + modalId);
+            $('#' + modalId + '-close').on('click', closeGlobalVideoModal);
+            $modal.on('click', function(e) {
+                if (e.target.id === modalId) {
+                    closeGlobalVideoModal();
+                }
+            });
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' && $modal.is(':visible')) {
+                    closeGlobalVideoModal();
+                }
+            });
+        }
+
+        $('#' + modalId + '-title').text(title);
+        var player = document.getElementById(modalId + '-player');
+        if (player) {
+            player.src = src;
+            player.play().catch(function() {});
+        }
+        $modal.css('display', 'flex').hide().fadeIn(200);
     }
-    setTimeout(initVideoPosters, 300);
+
+    function closeGlobalVideoModal() {
+        var modalId = 'mellgen-global-video-modal';
+        var $modal = $('#' + modalId);
+        var player = document.getElementById(modalId + '-player');
+        if (player) {
+            player.pause();
+            player.src = '';
+        }
+        if ($modal.length) {
+            $modal.fadeOut(150);
+        }
+    }
+
+    window.openGlobalVideoModal = openGlobalVideoModal;
+    window.closeGlobalVideoModal = closeGlobalVideoModal;
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initVideoInteractive);
+    } else {
+        initVideoInteractive();
+    }
+    setTimeout(initVideoInteractive, 300);
 })();
 
 // ==============================================================================

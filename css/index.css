@@ -87,37 +87,17 @@
 .sup_m p img{display:block;width:100%;height:100%}
 .g_fa{position:relative}
 .g_fa .fabg,.g_fa .fabg img{width:100%;display:block}
-.g_fa .m_fa{position:absolute;left:0;top:0;width:100%;z-index:11}
-.g_fa .faleft{float:left;width:36.4%;margin:4.2rem 0 0 8.3%;position:relative;z-index:125;}
-.g_fa .faleft h2{margin-bottom:2.7rem}
-.g_fa .faleft h2 b{font-size:2.5rem;font-weight:400;line-height:3.7rem;color:#000;display:block}
-.g_fa .faleft h2 em{font-size:1.2rem;font-weight:400;line-height:3rem;color:#404040;display:block}
-.g_fa .fafl dl{display:block;margin-bottom:1.2rem;border:1px solid #c9cacd;border-radius:1rem;position:relative}
-.g_fa .fafl dl dt{width:100%;display:block}
-.g_fa .fafl dl dt img{width:100%;display:block}
-.g_fa .fafl dl dd{position:absolute;left:0;top:0;width:100%;padding:.9rem 1.3rem 0 1rem;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-.g_fa .fafl dl dd h4 a{display:block;font-size:1.05rem;font-weight:400;line-height:2rem;color:#4a4a4a;font-weight:700}
-.g_fa .fafl dl dd h4 a:hover{font-weight:700}
-.g_fa .fafl dl dd p a{display:block;font-size:.75rem;font-weight:400;line-height:2rem;color:#4a4a4a;float:left;padding-right:.6rem}
-.g_fa .fafl dl dd span{position:absolute;width:1.6rem;height:1.6rem;right:5%;top:50%;margin-top:-.8rem;z-index:112;transition:all .3s linear 0s;display:none}
-.g_fa .fafl dl dd a:hover{font-weight:700}
-.g_fa .fafl .cur,.g_fa .fafl dl:hover{position:relative;background:#7fb435}
-.g_fa .fafl .cur dt a,.g_fa .fafl dl:hover dt a{color:#fff}
-.g_fa .fafl .cur dd a,.g_fa .fafl dl:hover dd a{color:#fff}
-.g_fa .fafl .cur dd span,.g_fa .fafl dl:hover dd span{display:block}
-.g_fa .dzoem{display:block;border:1px solid #c9cacd;border-radius:1rem;position:relative}
-.g_fa .dzoem dt{width:100%;display:block}
-.g_fa .dzoem dt img{width:100%;display:block}
-.g_fa .dzoem dd{position:absolute;left:0;top:0;width:100%;padding:.9rem 1.3rem 0 1rem;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-.g_fa .dzoem dd h4 a{display:block;font-size:1.05rem;font-weight:400;line-height:2rem;color:#4a4a4a;font-weight:700}
-.g_fa .dzoem dd h4 a:hover{font-weight:700}
-.g_fa .dzoem dd p a{display:block;font-size:.75rem;font-weight:400;line-height:2rem;color:#4a4a4a;float:left;padding-left:1.3rem;width:40%;position:relative;font-weight:700}
-.g_fa .dzoem dd p a:before{content:"";position:absolute;width:.3rem;height:.3rem;border:.1rem solid #7fb435;border-radius:50%;left:.6rem;top:50%;margin-top:-.15rem}
-.g_fa .dzoem dd p a:hover{font-weight:700;color:#7fb435}
-.g_fa .faright{width:100%;position:absolute;left:0;top:0;}
+.g_fa .m_fa{position:absolute;left:0;top:0;width:100%;height:100%;z-index:11}
+.g_fa .faleft{position:absolute;left:10%;top:50%;transform:translateY(-50%);width:44%;margin:0;z-index:125;text-align:center;}
+.g_fa .faleft h2{margin:0;text-align:center;}
+.g_fa .faleft h2 b{font-size:2.7rem;font-weight:700;line-height:4rem;color:#0f172a;display:block;text-align:center;letter-spacing:1px;}
+.g_fa .faleft h2 em{font-size:1.25rem;font-weight:400;line-height:2.6rem;color:#475569;display:block;text-align:center;margin-top:0.9rem;}
+.g_fa .fafl dl{display:none}
+.g_fa .dzoem{display:none}
+.g_fa .faright{width:100%;height:100%;position:absolute;left:0;top:0;}
 .g_fa .faright i{position:absolute;left:0;top:0;z-index:11;display:none;width:100%;}
 .g_fa .faright i img{display:block;width:100%}
-.g_fa .js-swiper-tab{position:absolute;left:0;top:0;overflow:hidden;z-index:11;width:100%;}
+.g_fa .js-swiper-tab{position:absolute;left:0;top:0;overflow:hidden;z-index:11;width:100%;height:100%;}
 .g_fa .faright em{width:100%;}
 .g_fa .faright em img{display:block;width:100%}
 

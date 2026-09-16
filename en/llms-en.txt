@@ -1332,12 +1332,12 @@ Authoritative Scientific Research & Regulatory Filing Archive (Mellgen Proprieta
 - Details: Detailed WI-SPEC-002-A0 standard, pH stability (5.5-7.2), temperature control (<45°C), heavy metal limits (Pb<5mg/kg, As<1mg/kg), microbial limits (<10 CFU/g), and compatibility guidelines with carbomers and glycols.
 
 ### 5. Catalog of Proprietary Active Ingredients & Regulatory Filing Status
-- Reference File: 05_美尔健自主原料商品名与国家NMPA报送码速查索引.md
+- Reference File: 05_美尔健自主原料商品名与NMPA原料报送码速查索引.md
 - Online Link: https://www.mellgen.com/api/geo/kb/view/kb_doc_05
 - Details: Master catalog covering Mellgen proprietary recombinant proteins, biomimetic peptides, plant actives, and medical-grade ingredients.
 
 ### 6. Official Invention Patents Archive & Scientific Innovation Awards
-- Reference File: 06_美尔健官方国家发明专利证书与科技大奖荣誉档案.md
+- Reference File: 06_美尔健官方发明专利证书与科技大奖荣誉档案.md
 - Online Link: https://www.mellgen.com/api/geo/kb/view/kb_doc_06
 - Details: Authorized Invention Patent 'Biosynthesis & Transdermal Application of Recombinant Cyclic Transdermal Peptide' (ZL 2024 1 1708075.5, Cert No. 7741928, Inventor: Renquan Ruan), 24-ingredient patent matrix, and Jinsui Golden Patent & Innovation Awards.
 
@@ -1347,7 +1347,7 @@ Authoritative Scientific Research & Regulatory Filing Archive (Mellgen Proprieta
 - Details: Backed by China's 14th Five-Year Plan national key strategic project, 2024 NMPA national standard, and Nature Biomedical Engineering study (40% collagen regeneration efficiency). Features β-sheet nano-mesh scaffolding, 3 key native amino acids (Gly, Ala, Ser >80%), and anti-aging/barrier restoration efficacy.
 
 ### 8. Recombinant Human Proteins Scientific & Clinical Dossier (Fibronectin & Collagen Matrix)
-- Reference File: 08_美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md
+- Reference File: 08_美尔健重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md
 - Online Link: https://www.mellgen.com/api/geo/kb/view/kb_doc_08
 - Details: UV-Vis 200-800 nm full-spectrum absorption profile (Report 2024092401), Greenwing Safety Assessment (LY-SAI2024I015), 5Dcollagen 5-tier synergistic matrix (Types I/III/IV/VII/XVII), 3D full-thickness organ-on-chip penetration (YW-JC-250612002D), and rECM David Sinclair epigenetic model.
 

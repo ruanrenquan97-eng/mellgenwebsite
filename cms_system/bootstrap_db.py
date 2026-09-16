@@ -194,7 +194,7 @@ def bootstrap_settings():
         
     settings.update({
         "company_name": "美尔健（深圳）生物科技有限公司",
-        "phone": "186-9197-8530 / 0755-82926499",
+        "phone": "136-9197-8530 / 0755-82926499",
         "email": "61791579@qq.com",
         "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园",
         "qq": "61791579",

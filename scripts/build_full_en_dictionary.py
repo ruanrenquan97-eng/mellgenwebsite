@@ -243,7 +243,7 @@ def build_dictionary():
         "融合第三代生物透皮技术，为皮肤直补胶原蛋白，抵抗胶原蛋白流失，恢复肌肤饱满弹润": "Integrating 3rd-generation bio-transdermal technology, directly replenishing collagen to resist loss and restore youthful plumpness.",
         "融合第三代生物透皮技术，为皮肤直补胶原蛋白，抵抗胶原蛋白流失，恢复肌肤年轻态": "Integrating 3rd-generation bio-transdermal technology, directly infusing collagen to combat aging and restore vitality.",
         "型胶原蛋白溶液，修复基底膜带，抚平肌底干纹松弛": "Collagen Solution: Repairs the basement membrane, smoothing fine lines and skin laxity.",
-        "透皮重组人源胶原蛋白": "Transdermal Recombinant Human Collagen",
+        "透皮重组胶原蛋白": "Transdermal Recombinant Human Collagen",
         "透皮重组人": "Transdermal Recombinant Human ",
         "益生舒缓因子，守护肌肤健康新防线": "Probiotic Soothing Factor: Guarding the New Frontier of Healthy Skin",
         "为Cosmetics加工厂打造专属透皮吸收解决方案": "Tailoring Proprietary Transdermal Absorption Solutions for Cosmetic Manufacturers",
@@ -258,8 +258,8 @@ def build_dictionary():
         "中国智造登顶！Mellgen BiotechTransdermal Fibronectin获得美国专利，让世界看见中国科技的透皮力量": "China Innovation on Top! Mellgen Transdermal Fibronectin Granted US Patent, Revealing China's Transdermal Power to the World",
         "中国智造登顶！Mellgen BiotechTransdermal Fibronectin获得美国专利，让世界看见中国科技的": "China Innovation on Top! Mellgen Transdermal Fibronectin Granted US Patent, Revealing China's Sci-Tech ",
         "透皮力量": "Transdermal Power",
-        "抗衰内卷终结者！Mellgen人源Recombinant Protein凭透皮黑科技重构护肤法则": "Ending Anti-Aging Clutter! Mellgen Human Recombinant Protein Restructures Skincare Rules with Transdermal Tech",
-        "抗衰内卷终结者！Mellgen人源Recombinant Protein凭": "Anti-Aging Pioneer! Mellgen Human Recombinant Protein with ",
+        "抗衰内卷终结者！Mellgen重组Recombinant Protein凭透皮黑科技重构护肤法则": "Ending Anti-Aging Clutter! Mellgen Human Recombinant Protein Restructures Skincare Rules with Transdermal Tech",
+        "抗衰内卷终结者！Mellgen重组Recombinant Protein凭": "Anti-Aging Pioneer! Mellgen Human Recombinant Protein with ",
         "透皮黑科技": "Transdermal Tech",
         "重构护肤法则": "Restructures Skincare Rules",
         "的创新之路：Mellgen Biotech探索生物透皮技术的无限可能": "The Innovation Path: Mellgen Explores the Infinite Possibilities of Bio-Transdermal Delivery",
@@ -347,8 +347,8 @@ def build_dictionary():
 
     # 4. Patents & Scientific Titles
     d.update({
-        "基于肽伴侣的透皮增强型重组人源III型胶原蛋白及其应用": "Chaperone Peptide-Based Transdermal-Enhanced Recombinant Human Type III Collagen and Applications",
-        "基于伴侣肽的透皮增强型重组人源III型胶原蛋白及其应用": "Chaperone Peptide-Based Transdermal-Enhanced Recombinant Human Type III Collagen and Applications",
+        "基于肽伴侣的透皮增强型重组重组III型胶原蛋白及其应用": "Chaperone Peptide-Based Transdermal-Enhanced Recombinant Human Type III Collagen and Applications",
+        "基于伴侣肽的透皮增强型重组重组III型胶原蛋白及其应用": "Chaperone Peptide-Based Transdermal-Enhanced Recombinant Human Type III Collagen and Applications",
         "一种基于自诱导培养基的工业发酵方法": "An Industrial Fermentation Method Based on Auto-Induction Media",
         "一种改善皮肤干燥、敏感的冻干粉剂及其制备方法": "A Freeze-Dried Powder for Improving Dry and Sensitive Skin and Its Preparation Method",
         "一种基于Jellyfish Collagen蛋白溶液制作的面膜及其制备方法": "A Facial Mask Prepared from Jellyfish Collagen Solution and Its Preparation Method",

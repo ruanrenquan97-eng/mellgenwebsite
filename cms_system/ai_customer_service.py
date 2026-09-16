@@ -25,7 +25,7 @@ DEFAULT_CONFIG = {
     "api_base": "https://api.deepseek.com/v1",
     "model": "deepseek-chat",
     "temperature": 0.2,
-    "fallback_phone": "186-9197-8530 / 0755-82926499",
+    "fallback_phone": "136-9197-8530 / 0755-82926499",
     "fallback_wechat_qrcode": "/resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
     "wechat_name": "美尔健专属客户经理",
     "working_hours": "工作日 09:00 - 18:00",
@@ -82,7 +82,7 @@ def build_contact_card(config=None, title=None):
     # 拆分多个电话以便一键拨号
     phones = [p.strip() for p in re.split(r'[/,，、|]', phone_raw) if p.strip()]
     if not phones:
-        phones = ["186-9197-8530", "0755-82926499"]
+        phones = ["136-9197-8530", "0755-82926499"]
         
     return {
         "title": title or "美尔健客户经理对接通道",
@@ -276,7 +276,7 @@ def call_llm_api(config, user_query, context_text, history=None, reach_10_turns=
 3. 【第三步：妥善、合规、有温度地输出】：以小美顾问亲切、严谨、得体的专业语言作答，条理清晰、层次分明。
 
 【严格合规纪律（广告法与化妆品条例）】：
-1. 恪守广告法与化妆品法规：严禁使用“最高、第一、顶级、绝对、绝无、唯一”等极限词；严禁宣称任何医疗疗效或药品功能（如“治疗”、“除疤”、“根治”、“消炎”、“药用”等）。美尔健所有原料均为高纯度化妆品及日用化学品活性成分，功效陈述严格限定于保湿滋润、舒缓修护、抗皱紧致、弹性饱满、改善暗沉等化妆品合规表述。
+1. 恪守广告法与化妆品法规：严禁使用“最高、第一、前沿、绝对、绝无、唯一”等极限词；严禁宣称任何医疗疗效或药品功能（如“治疗”、“除疤”、“根治”、“消炎”、“药用”等）。美尔健所有原料均为高纯度化妆品及日用化学品活性成分，功效陈述严格限定于保湿滋润、舒缓修护、抗皱紧致、弹性饱满、改善暗沉等化妆品合规表述。
 2. 外用涂抹技术定位：美尔健拥有的透皮环肽、透皮纤连蛋白等透皮技术，均为涂抹式外用促渗吸收技术，绝非医疗注射或医美水光注射，严禁提及注射。
 3. 商业机密与隐私保护：严禁透露任何非公开客户项目代号或保密合作品牌（如可肤贝、独特艾琳、BLY-MM01、COLTRIO等），恪守商业秘密。
 4. 统一服务称谓：涉及人工咨询、深度技术选型、商务报价、大宗订购或索样跟进时，统一指引联系【美尔健专属客户经理】（坚决严禁使用“人工客服”或“人工客户”字样）。
@@ -530,7 +530,7 @@ def process_chat(user_query, history=None, question_count=None):
             reply_text += manager_tip
         needs_human = True
         contact_data = build_contact_card(config, title="美尔健专属客户经理")
-    elif needs_human or "186-9197-8530" in reply_text or "微信" in reply_text:
+    elif needs_human or "136-9197-8530" in reply_text or "微信" in reply_text:
         needs_human = True
         contact_data = build_contact_card(config, title="美尔健专属客户经理")
 

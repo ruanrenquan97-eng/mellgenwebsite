@@ -35,6 +35,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 
 WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if '' in WORKSPACE_DIR or '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
+    WORKSPACE_DIR = 'E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 UPLOAD_FOLDER = os.path.join(WORKSPACE_DIR, "resource", "images")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -299,42 +301,65 @@ def add_product():
     threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True, "product": new_product})
 
-@app.route("/api/products/<product_id>", methods=["PUT"])
+@app.route("/api/products/batch-takedown", methods=["POST"])
 @login_required
-def edit_product(product_id):
-    products = load_json("products.json")
-    data = request.json
-    
-    for p in products:
-        if p["id"] == product_id:
-            p["title"] = data.get("title", p["title"]).strip()
-            p["category"] = data.get("category", p["category"])
-            p["image"] = data.get("image", p["image"])
-            p["largeImage"] = data.get("largeImage", data.get("largeImage", p.get("largeImage", "images/ban_txt.png")))
-            p["fullBanner"] = data.get("fullBanner", data.get("fullBanner", p.get("fullBanner", ""))).strip()
-            p["video"] = data.get("video", data.get("video", p.get("video", ""))).strip()
-            p["desc"] = data.get("desc", p["desc"]).strip()
-            p["content"] = data.get("content", p["content"]).strip()
-            p["specs"] = data.get("specs", p.get("specs", {}))
-            p["rd_info"] = data.get("rd_info", p.get("rd_info", {}))
-            p["procurement_info"] = data.get("procurement_info", p.get("procurement_info", {}))
-            p["marketing_info"] = data.get("marketing_info", p.get("marketing_info", {}))
-            p["referenced_lab_data"] = data.get("referenced_lab_data", p.get("referenced_lab_data", []))
-            p["disclaimer"] = data.get("disclaimer", p.get("disclaimer", "")).strip()
-            p["seoTitle"] = data.get("seoTitle", data.get("seoTitle", p.get("seoTitle", ""))).strip()
-            p["seoKeywords"] = data.get("seoKeywords", data.get("seoKeywords", p.get("seoKeywords", ""))).strip()
-            p["seoDesc"] = data.get("seoDesc", data.get("seoDesc", p.get("seoDesc", ""))).strip()
-            p["h1"] = data.get("h1", data.get("h1", p.get("h1", ""))).strip()
-            p["recommend"] = bool(data.get("recommend", p.get("recommend", False)))
-            p["top"] = bool(data.get("top", p.get("top", False)))
-            p["show"] = bool(data.get("show", p.get("show", True)))
-            p["sort"] = int(data.get("sort", p.get("sort", 50)))
-            p["date"] = data.get("date", p.get("date", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
-            save_json("products.json", products)
-            threading.Thread(target=generator.publish_site, daemon=True).start()
-            return jsonify({"success": True, "product": p})
+def batch_takedown_products():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids")
+        products = load_json("products.json") or []
+        count = 0
+        for p in products:
+            if ids is None or p.get("id") in ids:
+                p["show"] = False
+                p["status"] = "offline"
+                count += 1
+        save_json("products.json", products)
+        
+        try:
+            products_en = load_json("products_en.json") or []
+            for pen in products_en:
+                if ids is None or pen.get("id") in ids:
+                    pen["show"] = False
+                    pen["status"] = "offline"
+            save_json("products_en.json", products_en)
+        except Exception:
+            pass
             
-    return jsonify({"success": False, "message": "产品未找到"}), 404
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "count": count, "message": f"已成功一键下架 {count} 个产品，前台页面已自动触发更新！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"一键下架产品异常: {str(e)}"}), 500
+
+@app.route("/api/products/batch-publish", methods=["POST"])
+@login_required
+def batch_publish_products():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids")
+        products = load_json("products.json") or []
+        count = 0
+        for p in products:
+            if ids is None or p.get("id") in ids:
+                p["show"] = True
+                p["status"] = "published"
+                count += 1
+        save_json("products.json", products)
+        
+        try:
+            products_en = load_json("products_en.json") or []
+            for pen in products_en:
+                if ids is None or pen.get("id") in ids:
+                    pen["show"] = True
+                    pen["status"] = "published"
+            save_json("products_en.json", products_en)
+        except Exception:
+            pass
+            
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "count": count, "message": f"已成功一键上架 {count} 个产品，前台页面已自动触发更新！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"一键上架产品异常: {str(e)}"}), 500
 
 @app.route("/api/products/reorder", methods=["POST"])
 @login_required
@@ -372,6 +397,76 @@ def reorder_products():
         return jsonify({"success": True, "message": "产品排序保存成功，前台页面已自动触发更新"})
     except Exception as e:
         return jsonify({"success": False, "message": f"保存排序异常: {str(e)}"}), 500
+
+@app.route("/api/products/<product_id>/toggle-status", methods=["POST"])
+@login_required
+def toggle_product_status(product_id):
+    try:
+        products = load_json("products.json") or []
+        target = None
+        for p in products:
+            if p.get("id") == product_id:
+                new_show = not p.get("show", True)
+                p["show"] = new_show
+                p["status"] = "published" if new_show else "offline"
+                target = p
+                break
+        if not target:
+            return jsonify({"success": False, "message": "产品未找到"}), 404
+        save_json("products.json", products)
+        
+        try:
+            products_en = load_json("products_en.json") or []
+            for pen in products_en:
+                if pen.get("id") == product_id:
+                    pen["show"] = target["show"]
+                    pen["status"] = target.get("status", "published")
+            save_json("products_en.json", products_en)
+        except Exception:
+            pass
+            
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        msg = f"产品《{target.get('title')}》已{'上架' if target.get('show') else '下架'}"
+        return jsonify({"success": True, "product": target, "message": msg})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route("/api/products/<product_id>", methods=["PUT"])
+@login_required
+def edit_product(product_id):
+    products = load_json("products.json")
+    data = request.json or {}
+    
+    for p in products:
+        if p["id"] == product_id:
+            p["title"] = str(data.get("title", p.get("title", "")) or "").strip()
+            p["category"] = data.get("category", p.get("category", "化妆品原料"))
+            p["image"] = data.get("image", p.get("image", "images/ban_txt.png"))
+            p["largeImage"] = data.get("largeImage", p.get("largeImage", "images/ban_txt.png"))
+            p["fullBanner"] = str(data.get("fullBanner", p.get("fullBanner", "")) or "").strip()
+            p["video"] = str(data.get("video", p.get("video", "")) or "").strip()
+            p["desc"] = str(data.get("desc", p.get("desc", "")) or "").strip()
+            p["content"] = str(data.get("content", p.get("content", "")) or "").strip()
+            p["specs"] = data.get("specs", p.get("specs", {}))
+            p["rd_info"] = data.get("rd_info", p.get("rd_info", {}))
+            p["procurement_info"] = data.get("procurement_info", p.get("procurement_info", {}))
+            p["marketing_info"] = data.get("marketing_info", p.get("marketing_info", {}))
+            p["referenced_lab_data"] = data.get("referenced_lab_data", p.get("referenced_lab_data", []))
+            p["disclaimer"] = str(data.get("disclaimer", p.get("disclaimer", "")) or "").strip()
+            p["seoTitle"] = str(data.get("seoTitle", p.get("seoTitle", "")) or "").strip()
+            p["seoKeywords"] = str(data.get("seoKeywords", p.get("seoKeywords", "")) or "").strip()
+            p["seoDesc"] = str(data.get("seoDesc", p.get("seoDesc", "")) or "").strip()
+            p["h1"] = str(data.get("h1", p.get("h1", "")) or "").strip()
+            p["recommend"] = bool(data.get("recommend", p.get("recommend", False)))
+            p["top"] = bool(data.get("top", p.get("top", False)))
+            p["show"] = bool(data.get("show", p.get("show", True)))
+            p["sort"] = int(data.get("sort", p.get("sort", 50)) or 50)
+            p["date"] = data.get("date", p.get("date", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+            save_json("products.json", products)
+            threading.Thread(target=generator.publish_site, daemon=True).start()
+            return jsonify({"success": True, "product": p})
+            
+    return jsonify({"success": False, "message": "产品未找到"}), 404
 
 @app.route("/api/products/<product_id>", methods=["DELETE"])
 @login_required
@@ -450,51 +545,43 @@ def add_article():
     threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True, "article": new_article})
 
-@app.route("/api/articles/<article_id>", methods=["PUT"])
+@app.route("/api/articles/batch-takedown", methods=["POST"])
 @login_required
-def edit_article(article_id):
-    articles = load_json("articles.json")
-    data = request.json
-    
-    for a in articles:
-        if a["id"] == article_id:
-            a["title"] = data.get("title", a["title"]).strip()
-            a["category"] = data.get("category", a["category"])
-            a["image"] = data.get("image", a["image"])
-            a["desc"] = data.get("desc", a["desc"]).strip()
-            a["content"] = data.get("content", a["content"]).strip()
-            a["date"] = data.get("date", a["date"])
-            a["recommend"] = bool(data.get("recommend", a.get("recommend", False)))
-            a["top"] = bool(data.get("top", a.get("top", False)))
-            a["show"] = bool(data.get("show", a.get("show", True)))
-            a["sort"] = int(data.get("sort", a.get("sort", 50)))
-            save_json("articles.json", articles)
-            threading.Thread(target=generator.publish_site, daemon=True).start()
-            return jsonify({"success": True, "article": a})
-            
-    return jsonify({"success": False, "message": "文章未找到"}), 404
+def batch_takedown_articles():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids")
+        articles = load_json("articles.json") or []
+        count = 0
+        for a in articles:
+            if ids is None or a.get("id") in ids:
+                a["show"] = False
+                a["status"] = "offline"
+                count += 1
+        save_json("articles.json", articles)
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "count": count, "message": f"已成功一键下架 {count} 篇文章，前台页面已自动触发更新！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"一键下架文章异常: {str(e)}"}), 500
 
-@app.route("/api/articles/<article_id>", methods=["DELETE"])
+@app.route("/api/articles/batch-publish", methods=["POST"])
 @login_required
-def delete_article(article_id):
-    articles = load_json("articles.json")
-    original_len = len(articles)
-    
-    articles = [a for a in articles if a["id"] != article_id]
-    if len(articles) == original_len:
-        return jsonify({"success": False, "message": "文章未找到"}), 404
-        
-    save_json("articles.json", articles)
-    
-    detail_path = os.path.join(WORKSPACE_DIR, "articles", f"{article_id}.html")
-    if os.path.exists(detail_path):
-        try:
-            os.remove(detail_path)
-        except Exception:
-            pass
-            
-    threading.Thread(target=generator.publish_site, daemon=True).start()
-    return jsonify({"success": True})
+def batch_publish_articles():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids")
+        articles = load_json("articles.json") or []
+        count = 0
+        for a in articles:
+            if ids is None or a.get("id") in ids:
+                a["show"] = True
+                a["status"] = "published"
+                count += 1
+        save_json("articles.json", articles)
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "count": count, "message": f"已成功一键上架 {count} 篇文章，前台页面已自动触发更新！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"一键上架文章异常: {str(e)}"}), 500
 
 @app.route("/api/articles/reorder", methods=["POST"])
 @login_required
@@ -625,6 +712,77 @@ def regenerate_articles_frontend():
     except Exception as e:
         return jsonify({"success": False, "message": f"启动重新生成异常: {str(e)}"}), 500
 
+@app.route("/api/articles/<article_id>/toggle-status", methods=["POST"])
+@login_required
+def toggle_article_status(article_id):
+    try:
+        articles = load_json("articles.json") or []
+        target = None
+        for a in articles:
+            if a.get("id") == article_id:
+                new_show = not a.get("show", True)
+                a["show"] = new_show
+                a["status"] = "published" if new_show else "offline"
+                target = a
+                break
+        if not target:
+            return jsonify({"success": False, "message": "文章未找到"}), 404
+        save_json("articles.json", articles)
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        msg = f"文章《{target.get('title')}》已{'发布上架' if target.get('show') else '下架隐藏'}"
+        return jsonify({"success": True, "article": target, "message": msg})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route("/api/articles/<article_id>", methods=["PUT"])
+@login_required
+def edit_article(article_id):
+    articles = load_json("articles.json")
+    data = request.json or {}
+    
+    for a in articles:
+        if a["id"] == article_id:
+            a["title"] = str(data.get("title", a.get("title", "")) or "").strip()
+            a["category"] = data.get("category", a.get("category", "新闻资讯"))
+            a["image"] = data.get("image", a.get("image", "images/ban_txt.png"))
+            a["desc"] = str(data.get("desc", a.get("desc", "")) or "").strip()
+            a["content"] = str(data.get("content", a.get("content", "")) or "").strip()
+            a["date"] = data.get("date", a.get("date", datetime.datetime.now().strftime("%Y-%m-%d")))
+            a["recommend"] = bool(data.get("recommend", a.get("recommend", False)))
+            a["top"] = bool(data.get("top", a.get("top", False)))
+            a["show"] = bool(data.get("show", a.get("show", True)))
+            a["sort"] = int(data.get("sort", a.get("sort", 50)) or 50)
+            a["seoTitle"] = str(data.get("seoTitle", a.get("seoTitle", "")) or "").strip()
+            a["seoKeywords"] = str(data.get("seoKeywords", a.get("seoKeywords", "")) or "").strip()
+            a["seoDesc"] = str(data.get("seoDesc", a.get("seoDesc", "")) or "").strip()
+            save_json("articles.json", articles)
+            threading.Thread(target=generator.publish_site, daemon=True).start()
+            return jsonify({"success": True, "article": a})
+            
+    return jsonify({"success": False, "message": "文章未找到"}), 404
+
+@app.route("/api/articles/<article_id>", methods=["DELETE"])
+@login_required
+def delete_article(article_id):
+    articles = load_json("articles.json")
+    original_len = len(articles)
+    
+    articles = [a for a in articles if a["id"] != article_id]
+    if len(articles) == original_len:
+        return jsonify({"success": False, "message": "文章未找到"}), 404
+        
+    save_json("articles.json", articles)
+    
+    detail_path = os.path.join(WORKSPACE_DIR, "articles", f"{article_id}.html")
+    if os.path.exists(detail_path):
+        try:
+            os.remove(detail_path)
+        except Exception:
+            pass
+            
+    threading.Thread(target=generator.publish_site, daemon=True).start()
+    return jsonify({"success": True})
+
 
 # 2.1 WeChat Official Account Sync API
 @app.route("/api/wechat/config", methods=["GET", "POST"])
@@ -664,161 +822,15 @@ def fetch_wechat_by_urls():
     success, msg = wechat_crawler.start_urls_batch_sync_thread(urls, default_category=category, trigger="dashboard_urls")
     return jsonify({"success": success, "message": msg})
 
-# 3. Settings API & Public Contact API
-@app.route("/api/public/contact", methods=["GET"])
-def api_public_contact():
-    """供前台页面/通用脚本无鉴权获取最新的联系电话、地址、邮箱与客服信息"""
-    settings_path = os.path.join(DATA_DIR, "settings.json")
-    contact_data = {
-        "phone": "0755-82926499 / 186-9197-8530",
-        "tel": "0755-82926499",
-        "mobile": "186-9197-8530",
-        "email": "61791579@qq.com",
-        "qq": "61791579",
-        "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
-        "company_name": "美尔健（深圳）生物科技有限公司"
-    }
-    if os.path.exists(settings_path):
-        try:
-            with open(settings_path, "r", encoding="utf-8") as f:
-                s = json.load(f)
-            c = s.get("contact", {})
-            tel = c.get("tel") or "0755-82926499"
-            mobile = s.get("mobile") or c.get("phone") or "186-9197-8530"
-            phone = s.get("phone") or (f"{tel} / {mobile}" if tel and mobile else (mobile or tel))
-            contact_data.update({
-                "phone": phone,
-                "tel": tel,
-                "mobile": mobile,
-                "email": s.get("email") or c.get("email") or "61791579@qq.com",
-                "qq": s.get("qq") or c.get("qq") or "61791579",
-                "address": s.get("address") or c.get("address") or "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
-                "company_name": s.get("company_name") or c.get("company_name") or "美尔健（深圳）生物科技有限公司"
-            })
-        except Exception:
-            pass
-    return jsonify({"success": True, "data": contact_data})
-
-@app.route("/api/settings/sync_phones", methods=["POST"])
-@login_required
-def api_sync_phones():
-    """一键全站电话同步接口：同步 settings.json, company_info.json, AI客服并更新全站所有 HTML"""
-    req = request.json or {}
-    phone = req.get("phone")
-    mobile = req.get("mobile")
-    tel = req.get("tel")
-    
-    settings_path = os.path.join(DATA_DIR, "settings.json")
-    settings = {}
-    if os.path.exists(settings_path):
-        with open(settings_path, "r", encoding="utf-8") as f:
-            settings = json.load(f)
-
-    if "contact" not in settings:
-        settings["contact"] = {}
-
-    if phone:
-        settings["phone"] = phone.strip()
-    if mobile:
-        settings["mobile"] = mobile.strip()
-        settings["contact"]["phone"] = mobile.strip()
-    if tel:
-        settings["contact"]["tel"] = tel.strip()
-
-    # If phone wasn't passed directly, construct or parse it
-    if not phone and (tel or mobile):
-        t = tel or settings["contact"].get("tel", "")
-        m = mobile or settings.get("mobile", "") or settings["contact"].get("phone", "")
-        if t and m:
-            settings["phone"] = f"{t} / {m}"
-        elif m:
-            settings["phone"] = m
-        elif t:
-            settings["phone"] = t
-
-    # Also sync to company_info.json
-    if cim:
-        try:
-            cinfo = cim.load_company_info()
-            if "contact" not in cinfo:
-                cinfo["contact"] = {}
-            if settings.get("phone"):
-                cinfo["contact"]["phone_display"] = settings["phone"]
-            if settings.get("mobile"):
-                cinfo["contact"]["phone"] = settings["mobile"]
-            if settings["contact"].get("tel"):
-                cinfo["contact"]["tel"] = settings["contact"]["tel"]
-            cim.save_company_info(cinfo)
-        except Exception as e:
-            print(f"[sync_phones] 同步 company_info.json 异常: {e}")
-
-    # Sync to AI Customer Service default_phones
-    if "ai_customer_service" in settings and isinstance(settings["ai_customer_service"], dict):
-        phones = []
-        if settings["contact"].get("tel"):
-            phones.append(settings["contact"]["tel"])
-        if settings.get("mobile") and settings.get("mobile") not in phones:
-            phones.append(settings.get("mobile"))
-        elif settings["contact"].get("phone") and settings["contact"].get("phone") not in phones:
-            phones.append(settings["contact"]["phone"])
-        if phones:
-            settings["ai_customer_service"]["default_phones"] = phones
-            settings["ai_customer_service"]["fallback_phone"] = " / ".join(phones)
-
-    with open(settings_path, "w", encoding="utf-8") as f:
-        json.dump(settings, f, ensure_ascii=False, indent=2)
-
-    # Trigger full site HTML sync
-    updated_pages = generator.sync_all_contact_to_site(settings)
-
-    return jsonify({
-        "success": True,
-        "message": f"全站联系电话已成功一键同步！已实时更新全站 {updated_pages} 个页面及组件。",
-        "updated_pages": updated_pages,
-        "settings": settings
-    })
-
+# 3. Settings API
 @app.route("/api/settings", methods=["GET", "PUT", "POST"])
 @login_required
 def handle_settings():
     settings_path = os.path.join(DATA_DIR, "settings.json")
     if request.method in ["PUT", "POST"]:
         data = request.json or {}
-        # Keep contact dict in sync
-        if "contact" not in data:
-            data["contact"] = {}
-        if data.get("phone") and not data["contact"].get("phone"):
-            data["contact"]["phone"] = data.get("mobile") or data["phone"]
-        if data.get("mobile"):
-            data["contact"]["phone"] = data["mobile"]
-            
         with open(settings_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-            
-        # Also sync to company_info.json
-        if cim:
-            try:
-                cinfo = cim.load_company_info()
-                if "contact" not in cinfo:
-                    cinfo["contact"] = {}
-                if data.get("mobile") or data.get("phone"):
-                    cinfo["contact"]["phone"] = data.get("mobile") or data.get("phone")
-                if data.get("contact", {}).get("tel"):
-                    cinfo["contact"]["tel"] = data["contact"]["tel"]
-                if data.get("email"):
-                    cinfo["contact"]["email"] = data["email"]
-                if data.get("address"):
-                    cinfo["contact"]["address"] = data["address"]
-                cim.save_company_info(cinfo)
-            except Exception as e:
-                print(f"[handle_settings] 同步 company_info 异常: {e}")
-
-        # Auto-sync contact to all pages
-        try:
-            generator.sync_all_contact_to_site(data)
-        except Exception as e:
-            print(f"[Settings Contact Auto-Sync Error] {e}")
-
         # If AI source is enabled, automatically keep llms.txt fresh
         if data.get("allow_ai_source"):
             try:
@@ -986,10 +998,10 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         f"- [02. 第3代透皮环肽cTDP与穿膜促透技术机理及功效报告]({domain}/api/geo/kb/view/kb_doc_02): 中科大原创发明，发表于 Nature Biotechnology，一苇堂检测(YW-JC-250612001D-01)全皮器官芯片实测 791μm 深度透皮与绿翊安评(LY-CIR2025D165)。",
         f"- [03. 械字号医用级生物原料主文档备案与全套毒理安全报告]({domain}/api/geo/kb/view/kb_doc_03): 国家器审中心主文档(CMDE.NMPA 备案号: M2024311-000)，斯坦德科创 35页(STI-20240409-018N) 28天经口毒性实测 NOAEL 达 1000mg/kg·d，Ames 试验(HNYD250200012)阴性。",
         f"- [04. 美尔健全系生物活性原料技术规格书与配方工程避坑指南(SPEC)]({domain}/api/geo/kb/view/kb_doc_04): MELLPRO 500G- 纤连蛋白(WI-SPEC-002-A0)等全系SPEC指标、重金属/有害物质出厂限度及配方工程避坑实操。",
-        f"- [05. 美尔健自主原料全系列商品名与国家NMPA报送码速查索引]({domain}/api/geo/kb/view/kb_doc_05): 涵盖人源重组蛋白、仿生蛋白、透皮环肽、细胞营养素及械字号全系列自主原料资质索引。",
+        f"- [05. 美尔健自主原料全系列商品名与国家NMPA报送码速查索引]({domain}/api/geo/kb/view/kb_doc_05): 涵盖重组蛋白、仿生蛋白、透皮环肽、细胞营养素及械字号全系列自主原料资质索引。",
         f"- [06. 美尔健官方国家与国际发明专利族与科技大奖荣誉档案]({domain}/api/geo/kb/view/kb_doc_06): 国家发明专利《一种重组透皮环肽的生物合成方法及透皮吸收应用》(ZL 2024 1 1708075.5，证书号7741928)、中美专利族布局、24款原料专利矩阵及金穗奖专利金奖。",
         f"- [07. 美尔健重组丝素蛋白(Silk Fibroin)再生医学技术与产品宣讲指南]({domain}/api/geo/kb/view/kb_doc_07): 十四五国家重点攻关方向，2024行标颁布，浙大 Nature Biomed Eng 促胶原40%，三大黄金氨基酸超80%，β-折叠纳米网架宣讲指南。",
-        f"- [08. 美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL)]({domain}/api/geo/kb/view/kb_doc_08): 纤连蛋白紫外全谱扫描(2024092401)、5Dcollagen五重胶原协同矩阵、器官芯片实测(YW-JC-250612002D)及rECM童颜水光蛋白。",
+        f"- [08. 美尔健重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL)]({domain}/api/geo/kb/view/kb_doc_08): 纤连蛋白紫外全谱扫描(2024092401)、5Dcollagen五重胶原协同矩阵、器官芯片实测(YW-JC-250612002D)及rECM童颜水光蛋白。",
         f"- [09. 美尔健海洋仿生与特色动物活性蛋白深度档案(水母黏蛋白、羊胎素、贻贝黏蛋白、蜗牛蛋白)]({domain}/api/geo/kb/view/kb_doc_09): 水母黏蛋白17MB安评与稀释20x/100x测试，羊胎素官方动物检疫与检迅三大功效报告(紧致抗皱抑制率61.38%，舒缓抑制率22.84%)，重组贻贝黏蛋白MAP多巴结构。",
         f"- [10. 美尔健特色植萃微生态、细胞营养素与前沿透皮多肽全景档案]({domain}/api/geo/kb/view/kb_doc_10): 玫瑰PDRN环肽Pro万字深度白皮书，长白山三宝农残重金属零检出，MEGCALM PSF桃胶发酵专利，灵芝多糖微血管抗衰，Telastin透皮弹性蛋白。",
         "",
@@ -998,7 +1010,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         f"- [新闻与技术资讯]({domain}/articles/index.html): 行业科研动态、学术研究成果与原料应用指南。",
         "",
         "## 商务对接与技术服务",
-        f"- 咨询热线: {settings.get('phone', '186-9197-8530 / 0755-82926499')}",
+        f"- 咨询热线: {settings.get('phone', '136-9197-8530 / 0755-82926499')}",
         f"- 电子邮箱: {settings.get('email', '61791579@qq.com')}",
         f"- 官方网站: {domain}",
         f"- 基地地址: {settings.get('address', '广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼')}",
@@ -1024,7 +1036,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         "公司全称: 美尔健（深圳）生物科技有限公司",
         "企业定位: 专注生物多肽、医用级原料、化妆品活性原料研发、生产与定制的国家高新技术企业",
         f"官方网址: {domain}",
-        f"服务电话: {settings.get('phone', '186-9197-8530 / 0755-82926499')}",
+        f"服务电话: {settings.get('phone', '136-9197-8530 / 0755-82926499')}",
         f"联系邮箱: {settings.get('email', '61791579@qq.com')}",
         f"总部基地: {settings.get('address', '广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼')}",
         "",
@@ -1123,7 +1135,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         "Company Name: Mellgen (Shenzhen) Biotechnology Co., Ltd.",
         "Positioning: National High-Tech Enterprise dedicated to R&D, cGMP manufacturing, and custom synthesis of bioactive peptides, medical-grade raw materials, and cosmetic functional ingredients.",
         f"Official Website: {domain}/en/",
-        f"Contact Hotline: {settings.get('phone', '+86-186-9197-8530 / +86-755-82926499')}",
+        f"Contact Hotline: {settings.get('phone', '+86-136-9197-8530 / +86-755-82926499')}",
         f"Inquiry Email: {settings.get('email', '61791579@qq.com')}",
         f"Headquarters: Life Science Industrial Park, Kuichong Sub-district, Dapeng New District, Shenzhen, Guangdong, China",
         "",
@@ -1221,7 +1233,7 @@ def generate_llms_files(domain="https://www.mellgen.com/"):
         "- Details: Backed by China's 14th Five-Year Plan national key strategic project, 2024 NMPA national standard, and Nature Biomedical Engineering study (40% collagen regeneration efficiency). Features β-sheet nano-mesh scaffolding, 3 key native amino acids (Gly, Ala, Ser >80%), and anti-aging/barrier restoration efficacy.",
         "",
         "### 8. Recombinant Human Proteins Scientific & Clinical Dossier (Fibronectin & Collagen Matrix)",
-        f"- Reference File: 08_美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md",
+        f"- Reference File: 08_美尔健重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md",
         f"- Online Link: {domain}/api/geo/kb/view/kb_doc_08",
         "- Details: UV-Vis 200-800 nm full-spectrum absorption profile (Report 2024092401), Greenwing Safety Assessment (LY-SAI2024I015), 5Dcollagen 5-tier synergistic matrix (Types I/III/IV/VII/XVII), 3D full-thickness organ-on-chip penetration (YW-JC-250612002D), and rECM David Sinclair epigenetic model.",
         "",
@@ -1723,6 +1735,52 @@ def api_add_or_update_video():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
+@app.route("/api/videos/sync", methods=["POST"])
+@login_required
+def api_sync_videos():
+    try:
+        res = video_manager.sync_videos_to_html()
+        return jsonify(res)
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route("/api/videos/batch-takedown", methods=["POST"])
+@login_required
+def api_batch_takedown_videos():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids")
+        count = video_manager.batch_set_video_status("offline", video_ids=ids)
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "count": count, "message": f"已成功一键下架 {count} 部视频，前台视频页面已更新！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"一键下架视频异常: {str(e)}"}), 500
+
+@app.route("/api/videos/batch-publish", methods=["POST"])
+@login_required
+def api_batch_publish_videos():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids")
+        count = video_manager.batch_set_video_status("published", video_ids=ids)
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({"success": True, "count": count, "message": f"已成功一键上架 {count} 部视频，前台视频页面已更新！"})
+    except Exception as e:
+        return jsonify({"success": False, "message": f"一键上架视频异常: {str(e)}"}), 500
+
+@app.route("/api/videos/<video_id>/toggle-status", methods=["POST"])
+@login_required
+def api_toggle_video_status(video_id):
+    try:
+        new_status = video_manager.toggle_video_status(video_id)
+        if new_status is None:
+            return jsonify({"success": False, "message": "未找到指定视频"}), 404
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        msg = f"视频状态已切换为：{'已发布上架' if new_status == 'published' else '已下架'}"
+        return jsonify({"success": True, "status": new_status, "message": msg})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
 @app.route("/api/videos/<video_id>", methods=["PUT"])
 @login_required
 def api_update_video(video_id):
@@ -1746,15 +1804,6 @@ def api_delete_video(video_id):
             video_manager.sync_videos_to_html()
             return jsonify({"success": True, "message": "视频已成功删除并同步网页！"})
         return jsonify({"success": False, "message": "未找到指定视频"}), 404
-    except Exception as e:
-        return jsonify({"success": False, "message": str(e)}), 500
-
-@app.route("/api/videos/sync", methods=["POST"])
-@login_required
-def api_sync_videos():
-    try:
-        res = video_manager.sync_videos_to_html()
-        return jsonify(res)
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 

@@ -306,8 +306,8 @@ $(function () {
         drawerHtml += '    </ul>';
         drawerHtml += '  </div>';
         drawerHtml += '  <div class="mobile-drawer-footer">';
-        drawerHtml += '    <a href="tel:075582926499" class="mobile-drawer-tel" id="drawerTelLandline">' + (isEn ? "📞 Tel: 0755-82926499" : "📞 电话咨询：0755-82926499") + '</a>';
-        drawerHtml += '    <a href="tel:18691978530" class="mobile-drawer-tel" id="drawerTelMobile" style="background:#2b6cb0;">' + (isEn ? "📱 Hotline: 186-9197-8530" : "📱 移动专线：186-9197-8530") + '</a>';
+        drawerHtml += '    <a href="tel:0755-82926499" class="mobile-drawer-tel">📞 电话咨询：0755-82926499</a>';
+        drawerHtml += '    <a href="tel:136-9197-8530" class="mobile-drawer-tel" style="background:#2b6cb0;">📱 移动专线：136-9197-8530</a>';
         drawerHtml += '  </div>';
         drawerHtml += '</div>';
 
@@ -977,126 +977,6 @@ $(function () {
                             sessionStorage.setItem("mellgen_detected_lang", "zh");
                         });
                 });
-        }
-    } catch(e) {}
-})();
-
-// ==============================================================================
-// 11. 全站前端联系方式与后端动态实时绑定 (Dynamic Contact Info Auto-Binder)
-// 作用：从后端 /api/public/contact 异步获取最新电话、座机、手机、邮箱与地址，
-// 实时渲染并动态更新 DOM 中的顶部 Header、页脚 Footer、移动端抽屉及各类电话链接。
-// ==============================================================================
-(function() {
-    try {
-        var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
-
-        function applyContactToDOM(contact) {
-            if (!contact) return;
-            var phone = (contact.phone || "").trim();
-            var mobile = (contact.mobile || "").trim();
-            var tel = (contact.tel || "").trim();
-            var email = (contact.email || "").trim();
-            var address = (contact.address || "").trim();
-
-            if (!phone && (tel || mobile)) {
-                phone = (tel && mobile) ? (tel + " / " + mobile) : (mobile || tel);
-            }
-            if (!phone) return;
-
-            var parts = phone.split(/[\/,，、&;]+|\s{2,}/).map(function(p){ return p.trim(); }).filter(function(p){ return p.length > 0 && p !== 'nbsp'; });
-            var phoneSlash = parts.length >= 2 ? (parts[0] + " / " + parts[1]) : phone;
-            var phoneNbsp = parts.length >= 2 ? (parts[0] + "\u00a0\u00a0\u00a0" + parts[1]) : phone;
-            var cleanMobile = (mobile || (parts[1] || parts[0])).replace(/[^\d+]/g, "");
-            var cleanTel = (tel || parts[0]).replace(/[^\d+]/g, "");
-
-            // 1. 顶部 Header 电话 (PC/Mobile)
-            var topPhoneNodes = document.querySelectorAll(".tel b, .tel.rter b, .p102-top-l b, .tlogo + .tel b");
-            topPhoneNodes.forEach(function(el) {
-                if (el) el.textContent = phoneSlash;
-            });
-
-            // 2. 底部 Footer 电话
-            var ftelNodes = document.querySelectorAll(".ftel");
-            ftelNodes.forEach(function(el) {
-                if (el) el.innerHTML = phoneNbsp;
-            });
-
-            // 3. 移动端抽屉菜单电话
-            var drawerLandline = document.getElementById("drawerTelLandline");
-            if (drawerLandline) {
-                drawerLandline.href = "tel:" + cleanTel;
-                drawerLandline.textContent = isEn ? ("📞 Tel: " + (tel || parts[0])) : ("📞 电话咨询：" + (tel || parts[0]));
-            }
-            var drawerMobile = document.getElementById("drawerTelMobile");
-            if (drawerMobile) {
-                drawerMobile.href = "tel:" + cleanMobile;
-                drawerMobile.textContent = isEn ? ("📱 Hotline: " + (mobile || parts[1] || parts[0])) : ("📱 移动专线：" + (mobile || parts[1] || parts[0]));
-            }
-
-            // 4. 页面中的电话直拨链接 href="tel:..."
-            var telLinks = document.querySelectorAll('a[href^="tel:"]');
-            telLinks.forEach(function(a) {
-                if (!a.id) {
-                    a.href = "tel:" + cleanMobile;
-                }
-            });
-
-            // 5. 资讯文章文末声明中的服务热线
-            var declNodes = document.querySelectorAll("p strong");
-            declNodes.forEach(function(strong) {
-                var stText = (strong.textContent || "").trim();
-                if (stText.indexOf("声明与支持") !== -1 || stText.indexOf("Declaration and Support") !== -1) {
-                    var p = strong.parentNode;
-                    if (p) {
-                        var pText = p.innerHTML;
-                        if (isEn) {
-                            p.innerHTML = pText.replace(/(?:National Service Hotline|Hotline)[：:]\s*[\d\- /&;a-zA-Z]+/i, "National Service Hotline: " + phoneSlash);
-                        } else {
-                            p.innerHTML = pText.replace(/(?:欢迎致电全国服务热线|致电|，G55-82926499 \/ 136-9197-8530)[：:]?\s*[\d\- /&;a-zA-Z]*/, "欢迎致电全国服务热线：" + phoneSlash);
-                        }
-                    }
-                }
-            });
-
-            // 6. 联系我们页面 (helps/lxwm.html)
-            var contactH3s = document.querySelectorAll(".contact-card h3, .contact_box h3, .p102-lx-list h3");
-            contactH3s.forEach(function(h3) {
-                var txt = (h3.textContent || "").trim().toLowerCase();
-                if (txt.indexOf("服务热线") !== -1 || txt.indexOf("联系电话") !== -1 || txt.indexOf("phone") !== -1 || txt.indexOf("hotline") !== -1) {
-                    var nextSpan = h3.nextElementSibling;
-                    if (nextSpan && nextSpan.tagName.toLowerCase() === "span") {
-                        nextSpan.textContent = phoneSlash;
-                    }
-                }
-            });
-        }
-
-        // 优先使用本地缓存立即渲染，避免页面抖动
-        var cached = null;
-        try {
-            cached = JSON.parse(localStorage.getItem("mellgen_contact_cache") || "null");
-            if (cached) applyContactToDOM(cached);
-        } catch(e) {}
-
-        // 异步请求后端最新数据
-        var apiUrl = "/api/public/contact";
-        if (window.location.port === "8000" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
-            apiUrl = window.location.protocol + "//" + window.location.hostname + ":8001/api/public/contact";
-        }
-
-        if (window.fetch) {
-            fetch(apiUrl)
-                .then(function(res) {
-                    if (!res.ok) throw new Error("HTTP " + res.status);
-                    return res.json();
-                })
-                .then(function(json) {
-                    if (json && json.success && json.data) {
-                        localStorage.setItem("mellgen_contact_cache", JSON.stringify(json.data));
-                        applyContactToDOM(json.data);
-                    }
-                })
-                .catch(function() {});
         }
     } catch(e) {}
 })();

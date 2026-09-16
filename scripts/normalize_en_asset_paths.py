@@ -81,7 +81,7 @@ def normalize_file(filepath):
     content = re.sub(r'src=["\'](?:\.\./)*images/logo\.jpg["\']', f'src="{logo_path}"', content)
 
     # Replace broken tel.jpg and menu.png
-    content = re.sub(r'<h5><a href="tel:186-9197-8530"><img alt="" src="[^"]*tel\.jpg"></a></h5>', '<h5><a href="tel:186-9197-8530" style="font-size:14px;color:#1e3a8a;font-weight:bold;text-decoration:none;">📞 186-9197-8530</a></h5>', content)
+    content = re.sub(r'<h5><a href="tel:136-9197-8530"><img alt="" src="[^"]*tel\.jpg"></a></h5>', '<h5><a href="tel:136-9197-8530" style="font-size:14px;color:#1e3a8a;font-weight:bold;text-decoration:none;">📞 136-9197-8530</a></h5>', content)
     content = re.sub(r'<span class="menu_btn iconfont"><a class="downmenu"><img src="[^"]*menu\.png"></a></span>', '<span class="menu_btn iconfont"><a class="downmenu" style="font-size:24px;cursor:pointer;color:#1e3a8a;">☰</a></span>', content)
 
     # Remove broken ftico img tags

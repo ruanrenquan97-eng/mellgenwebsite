@@ -1203,252 +1203,87 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. 原料与解决方案模块 (.g_fa) - 还原电脑端左右并列排列风格 (精细缩小适配移动端)
+     7. 原料与解决方案模块 (.g_fa)
      ------------------------------------------------------------------------ */
   .g_fa {
     position: relative !important;
     height: auto !important;
-    padding: 16px 8px 20px 8px !important;
+    padding: 24px 12px 20px 12px !important;
     background: #f8fafc !important;
     overflow: hidden !important;
   }
 
-  /* 隐藏桌面端全宽的绝对底图，在移动端右侧由产品展示区直接自适应承载 */
+  /* 隐藏桌面端全宽的绝对底图 */
   .g_fa .fabg {
     display: none !important;
   }
 
-  /* m_fa 采用 Grid 网格布局：上方标题全宽跨列，下方左侧为分类卡片，右侧为产品图展示 */
   .g_fa .m_fa {
     position: relative !important;
     left: auto !important;
     top: auto !important;
     width: 100% !important;
     z-index: 1 !important;
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.52fr) minmax(0, 1fr) !important;
-    gap: 8px 7px !important;
-    align-items: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 14px !important;
   }
 
-  /* 让 faleft 的子元素 (h2, fafl, dzoem) 成为网格直接参与者 */
   .g_fa .faleft {
-    display: contents !important;
+    display: block !important;
+    width: 100% !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    text-align: center !important;
   }
 
-  /* 标题栏居中全宽通栏 */
+  /* 标题与副标题居中展示 */
   .g_fa .faleft h2 {
-    grid-column: 1 / -1 !important;
-    margin: 0 0 8px 0 !important;
+    margin: 0 !important;
     text-align: center !important;
     padding: 0 4px !important;
   }
 
   .g_fa .faleft h2 b {
-    font-size: 16.5px !important;
-    line-height: 23px !important;
+    font-size: 18px !important;
+    line-height: 26px !important;
     font-weight: 700 !important;
     color: #0f172a !important;
     display: block !important;
+    text-align: center !important;
     letter-spacing: 0.2px !important;
   }
 
   .g_fa .faleft h2 em {
-    font-size: 10.5px !important;
-    line-height: 16px !important;
-    color: #64748b !important;
-    display: block !important;
-    font-weight: 400 !important;
-    margin-top: 2px !important;
-  }
-
-  /* 左侧分类卡片列表 (Row 2, Column 1) */
-  .g_fa .fafl {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* 原料与解决方案 3个主卡片与定制OEM卡片：还原电脑端圆角、边框与高质感白底 */
-  .g_fa .fafl dl,
-  .g_fa .dzoem {
-    width: 100% !important;
-    float: none !important;
-    margin: 0 !important;
-    background: #ffffff !important;
-    border: 1px solid #dcdfe4 !important;
-    border-radius: 8px !important;
-    position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03) !important;
-    transition: all 0.25s ease !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 隐藏桌面端占位透明 spacer 图 */
-  .g_fa .fafl dl dt,
-  .g_fa .dzoem dt {
-    display: none !important;
-  }
-
-  /* 内容容器还原自然流布局 */
-  .g_fa .fafl dl dd,
-  .g_fa .dzoem dd {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    width: 100% !important;
-    padding: 6px 7px 6px 7px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 卡片标题 */
-  .g_fa .fafl dl dd h4 a,
-  .g_fa .dzoem dd h4 a {
     font-size: 11.5px !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    line-height: 16px !important;
-    display: block !important;
-    margin: 0 0 2px 0 !important;
-    padding: 0 !important;
-    border-left: none !important;
-    text-decoration: none !important;
-    transition: color 0.2s ease !important;
-  }
-
-  /* 标签段落 */
-  .g_fa .fafl dl dd p {
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.4 !important;
-  }
-
-  /* 标签项：电脑端文本横排风格，微型字号 */
-  .g_fa .fafl dl dd p a {
-    float: none !important;
-    display: inline !important;
-    padding: 0 5px 0 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    font-size: 8.5px !important;
-    line-height: 1.35 !important;
+    line-height: 18px !important;
     color: #64748b !important;
-    width: auto !important;
-    text-decoration: none !important;
-    transition: color 0.2s ease !important;
-    box-shadow: none !important;
-  }
-
-  /* 激活状态卡片 (.cur)：电脑端经典墨绿背景与白字 */
-  .g_fa .fafl .cur,
-  .g_fa .fafl dl.cur {
-    background: #7fb435 !important;
-    border-color: #7fb435 !important;
-    box-shadow: 0 2px 8px rgba(127, 180, 53, 0.3) !important;
-  }
-
-  .g_fa .fafl .cur dd h4 a,
-  .g_fa .fafl dl.cur dd h4 a {
-    color: #ffffff !important;
-  }
-
-  .g_fa .fafl .cur dd p a,
-  .g_fa .fafl dl.cur dd p a {
-    color: rgba(255, 255, 255, 0.95) !important;
-  }
-
-  /* 激活状态右侧指示小箭头 */
-  .g_fa .fafl dl dd span {
-    position: absolute !important;
-    width: 14px !important;
-    height: 14px !important;
-    right: 8px !important;
-    top: 50% !important;
-    margin-top: -7px !important;
-    z-index: 5 !important;
-    display: none !important;
-    pointer-events: none !important;
-  }
-
-  .g_fa .fafl dl dd span img {
-    width: 100% !important;
-    height: 100% !important;
     display: block !important;
+    text-align: center !important;
+    font-weight: 400 !important;
+    margin-top: 4px !important;
   }
 
-  .g_fa .fafl .cur dd span,
-  .g_fa .fafl dl.cur dd span {
-    display: block !important;
-  }
-
-  /* 原料定制OEM卡片 (Row 3, Column 1) */
+  .g_fa .fafl,
   .g_fa .dzoem {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
-    padding: 0 !important;
+    display: none !important;
   }
 
-  .g_fa .dzoem dd p {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 3px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: normal !important;
-  }
-
-  .g_fa .dzoem dd p a {
-    display: flex !important;
-    align-items: center !important;
-    float: none !important;
-    width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    font-size: 8.5px !important;
-    line-height: 1.35 !important;
-    color: #475569 !important;
-    text-decoration: none !important;
-    box-shadow: none !important;
-  }
-
-  /* 原料定制OEM小圆点前缀 (还原电脑端 ::before) */
-  .g_fa .dzoem dd p a::before {
-    content: "" !important;
-    display: inline-block !important;
-    width: 4px !important;
-    height: 4px !important;
-    min-width: 4px !important;
-    border: 1.5px solid #7fb435 !important;
-    border-radius: 50% !important;
-    margin-right: 5px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 右侧产品图与轮播展示区 (Row 2 to Row 4, Column 2)：电脑端左右并列并排展示 */
+  /* 右侧产品图与轮播展示区 */
   .g_fa .faright {
-    grid-column: 2 !important;
-    grid-row: 2 / 4 !important;
     display: flex !important;
     flex-direction: column !important;
     position: relative !important;
     width: 100% !important;
-    height: 100% !important;
-    min-height: 220px !important;
-    border-radius: 8px !important;
+    max-width: 480px !important;
+    height: 200px !important;
+    border-radius: 10px !important;
     overflow: hidden !important;
     background: #f1f5f9 !important;
     border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
     box-sizing: border-box !important;
   }
 

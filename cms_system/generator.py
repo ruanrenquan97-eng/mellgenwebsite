@@ -5,6 +5,8 @@ import shutil
 from urllib.parse import urlparse
 
 WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if '' in WORKSPACE_DIR or '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
+    WORKSPACE_DIR = 'E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 
 def load_db():
@@ -22,11 +24,13 @@ def load_db():
     
     if os.path.exists(products_path):
         with open(products_path, "r", encoding="utf-8") as f:
-            products = json.load(f)
+            all_products = json.load(f)
+        products = [p for p in all_products if p.get("show", True) is not False and p.get("status") != "offline"]
         products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
     if os.path.exists(articles_path):
         with open(articles_path, "r", encoding="utf-8") as f:
-            articles = json.load(f)
+            all_articles = json.load(f)
+        articles = [a for a in all_articles if a.get("show", True) is not False and a.get("status") != "offline"]
     if os.path.exists(settings_path):
         with open(settings_path, "r", encoding="utf-8") as f:
             settings = json.load(f)
@@ -202,163 +206,52 @@ def update_global_contact_info(html_content, settings):
         html_content
     )
     
-    # 2. Extract phone values (tel & mobile)
+    # 2. Robust phone replacement across headers, footers, and articles
     phone_val = (settings.get("phone", "") or "").strip()
-    mobile_val = (settings.get("mobile", "") or "").strip()
-    tel_val = ""
-    
-    c = settings.get("contact", {})
-    if isinstance(c, dict):
-        if not mobile_val and c.get("phone"):
-            mobile_val = c.get("phone", "").strip()
-        if not tel_val and c.get("tel"):
-            tel_val = c.get("tel", "").strip()
-
     if not phone_val:
-        if tel_val and mobile_val:
-            phone_val = f"{tel_val} / {mobile_val}"
-        elif mobile_val:
-            phone_val = mobile_val
-        elif tel_val:
-            phone_val = tel_val
-        else:
-            phone_val = "0755-82926499 / 186-9197-8530"
+        # Check contact dict
+        c = settings.get("contact", {})
+        if isinstance(c, dict):
+            p = c.get("phone", "").strip()
+            t = c.get("tel", "").strip()
+            if t and p:
+                phone_val = f"{t} / {p}"
+            elif p:
+                phone_val = p
+            elif t:
+                phone_val = t
+    if not phone_val:
+        phone_val = "0755-82926499 / 136-9197-8530"
 
     parts = [p.strip() for p in re.split(r'[/,，、&;]+|\s{2,}', phone_val) if p.strip() and p.strip() not in ['nbsp']]
     if len(parts) >= 2:
-        # Check if first and second part are identical, deduplicate
-        if parts[0] == parts[1]:
-            if tel_val and tel_val != parts[0]:
-                parts = [tel_val, parts[0]]
-            elif len(parts) > 2:
-                parts = [parts[0], parts[2]]
-            else:
-                parts = ["0755-82926499", parts[0]] if parts[0].startswith("1") else [parts[0], "186-9197-8530"]
-        phone_slash = f"{parts[0]} / {parts[1]}"
-        phone_nbsp = f"{parts[0]}&nbsp;&nbsp;&nbsp;{parts[1]}"
-        tel_num = parts[0]
-        mobile_num = parts[1]
+        phone_slash = " / ".join(parts[:2])
+        phone_nbsp = "&nbsp;&nbsp;&nbsp;".join(parts[:2])
     elif len(parts) == 1:
         phone_slash = parts[0]
         phone_nbsp = parts[0]
-        tel_num = parts[0]
-        mobile_num = mobile_val or parts[0]
     else:
         phone_slash = phone_val
         phone_nbsp = phone_val.replace(" / ", "&nbsp;&nbsp;&nbsp;")
-        tel_num = "0755-82926499"
-        mobile_num = "186-9197-8530"
 
-    if not mobile_val:
-        mobile_val = mobile_num
-    if not tel_val:
-        tel_val = tel_num
-
-    clean_mobile = re.sub(r'[^\d+]', '', mobile_val)
-    clean_tel = re.sub(r'[^\d+]', '', tel_val)
-
-    # 2.1 Replace & normalize top header phone: <div class="tel rter"> <b>...</b> </div>
-    # First handle any mangled or existing header tel blocks following lang-switch
-    html_content = re.sub(
-        r'(<div class="lang-switch">[\s\S]*?</div>)\s*(?:<div class="[^"]*tel[^"]*">\s*)?(?:<b>)?\s*(?:G55|0755|186|136|[0-9\+\(\)])[^<]*</b>\s*(?:</div>)?',
-        r'\g<1>\n  <div class="tel rter">\n   <b>' + phone_slash + r'</b>\n  </div>',
-        html_content
-    )
-    # Second handle standard tel rter blocks
-    html_content = re.sub(
-        r'(<div class="[^"]*tel[^"]*">\s*<b>)[^<]+(</b>)',
-        r'\g<1>' + phone_slash + r'\g<2>',
-        html_content
-    )
-    # Third handle p102-top-l variants
-    html_content = re.sub(
-        r'(<div class="p102-top-l">[\s\S]*?<b>)[^<]+(</b>)',
-        r'\g<1>' + phone_slash + r'\g<2>',
-        html_content
-    )
-
-    # 2.2 Replace in footer .ftel: <div class="ftel">\s*.*?\s*</div>
+    # Replace in footer .ftel: <div class="ftel">\s*.*?\s*</div>
     html_content = re.sub(
         r'(<div class="ftel">)[\s\S]*?(</div>)',
-        r'\g<1>\n       ' + phone_nbsp + r'\n     \g<2>',
+        r'\1\n       ' + phone_nbsp + r'\n     \2',
         html_content
     )
 
-    # 2.3 Replace in article declaration footer note (CN & EN)
-    # Chinese article declaration
+    # Replace in top header phone: <b>...</b> inside p102-top-l
     html_content = re.sub(
-        r'(<strong>\s*声明与支持\s*：\s*</strong>[\s\S]*?)(?:欢迎致电全国服务热线[：:]|致电[：:]|，G55-82926499 / 136-9197-8530|，[0-9\- /]+)[\d\- /&;、a-zA-Z]*(.*?)(?=</p>)',
-        r'\g<1>欢迎致电全国服务热线：' + phone_slash + r' 或添加官方微信客服。',
-        html_content
-    )
-    # English article declaration
-    html_content = re.sub(
-        r'(<strong>\s*Declaration and Support\s*:\s*</strong>[\s\S]*?)(?:National Service Hotline[：:]|Hotline[：:]|please contact our National Service Hotline[：:])\s*[\d\- /&;、a-zA-Z]*(.*?)(?=</p>)',
-        r'\g<1>please contact our National Service Hotline: ' + phone_slash + r' or reach out to our customer service manager.',
-        html_content
-    )
-    # Standalone 欢迎致电全国服务热线
-    html_content = re.sub(
-        r'(欢迎致电全国服务热线[：:])[\d\- /&;、\s]+([。，\.]|或添加)',
-        r'\g<1>' + phone_slash + r'\2',
+        r'(<div class="p102-top-l">[\s\S]*?<b>)[\d\- /&;a-zA-Z]+(</b>)',
+        r'\1' + phone_slash + r'\2',
         html_content
     )
 
-    # 2.4 Replace in OEM & Product detail hotline callouts
+    # Replace in article declaration footer note: 欢迎致电全国服务热线：...。
     html_content = re.sub(
-        r'(<em>\s*服务热线\s*[：:]\s*</em>\s*<span>)[^<]+(</span>)',
-        r'\g<1>' + phone_slash + r'\2',
-        html_content
-    )
-    html_content = re.sub(
-        r'(<em>\s*Hotline\s*[：:]\s*</em>\s*<span>)[^<]+(</span>)',
-        r'\g<1>' + phone_slash + r'\2',
-        html_content
-    )
-
-    # 2.5 Replace in Contact Us Page (helps/lxwm.html & en/helps/lxwm.html)
-    html_content = re.sub(
-        r'(<h3>\s*(?:服务热线|联系电话|咨询热线)\s*</h3>\s*<span>)[^<]+(</span>)',
-        r'\g<1>' + phone_slash + r'\2',
-        html_content
-    )
-    html_content = re.sub(
-        r'(<h3>\s*(?:Phone|Hotline|Contact Number)\s*</h3>\s*<span>)[^<]+(</span>)',
-        r'\g<1>' + phone_slash + r'\2',
-        html_content
-    )
-    html_content = re.sub(
-        r'<span>(?:186|136)[\s\-]?9197[\s\-]?8530\s*(?:<span[^>]*>\s*\((?:微信同号|微信号|WeChat[^)]*)\)\s*</span>|\((?:微信同号|微信号|WeChat[^)]*)\))</span>',
-        f'<span>{mobile_val} <span style="font-size:14px; color:#059669; font-weight:600; margin-left:4px;">(微信同号)</span></span>',
-        html_content
-    )
-    html_content = re.sub(
-        r'<span>(?:186|136)[\s\-]?9197[\s\-]?8530\s*<span[^>]*>\s*\((?:micro\s*|WeChat[^)]*)\)\s*</span></span>',
-        f'<span>{mobile_val} <span style="font-size:14px; color:#059669; font-weight:600; margin-left:4px;">(WeChat ID)</span></span>',
-        html_content
-    )
-
-    # 2.6 Replace in mobile drawer footer & tel links
-    html_content = re.sub(
-        r'(<a\s+href=")tel:[^"]*("\s+class="mobile-drawer-tel">📞\s*电话咨询：)[^<]+(</a>)',
-        r'\g<1>tel:' + clean_tel + r'\g<2>' + tel_val + r'\g<3>',
-        html_content
-    )
-    html_content = re.sub(
-        r'(<a\s+href=")tel:[^"]*("\s+class="mobile-drawer-tel"[^>]*>📱\s*移动专线：)[^<]+(</a>)',
-        r'\g<1>tel:' + clean_mobile + r'\g<2>' + mobile_val + r'\g<3>',
-        html_content
-    )
-    html_content = re.sub(
-        r'href="tel:(?:186[\s\-]?9197[\s\-]?8530|136[\s\-]?9197[\s\-]?8530|0755[\s\-]?82926499)"',
-        f'href="tel:{clean_mobile}"',
-        html_content
-    )
-
-    # 2.7 Replace schema/json-ld phone references if present
-    html_content = re.sub(
-        r'("title":\s*"(?:美尔健生物联系方式|Mellgen BiotechContact Information):)[^"]+(")',
-        r'\g<1>' + phone_slash + r'\g<2>',
+        r'(欢迎致电全国服务热线：)[\d\- /&;、]+(。)',
+        r'\1' + phone_slash + r'\2',
         html_content
     )
 
@@ -385,13 +278,11 @@ def sync_all_contact_to_site(settings=None):
             settings = {}
 
     updated_count = 0
-    total_pages = 0
     for root, dirs, files in os.walk(WORKSPACE_DIR):
         if any(x in root for x in ['.git', '.venv', 'backup', 'cms_data_backup', 'brain']):
             continue
         for f in files:
             if f.endswith('.html'):
-                total_pages += 1
                 fp = os.path.join(root, f)
                 try:
                     with open(fp, "r", encoding="utf-8", errors="ignore") as f_in:
@@ -402,8 +293,8 @@ def sync_all_contact_to_site(settings=None):
                             f_out.write(new_html)
                         updated_count += 1
                 except Exception as e:
-                    print(f"[generator error in {fp}]: {e}")
-    print(f"[generator] 全站联系方式与地址清理同步完成，扫描 {total_pages} 个页面，更新了 {updated_count} 个页面。")
+                    pass
+    print(f"[generator] 全站联系方式与地址清理同步完成，更新了 {updated_count} 个页面。")
     return updated_count
 
 
@@ -719,7 +610,7 @@ def render_product_b2b_sections(product):
     out.append('  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #174778; border-radius: 6px; padding: 20px 24px; margin-top: 25px;">')
     out.append('    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">')
     out.append('      <span style="font-size: 16px;">⚖️</span>')
-    out.append('      <h4 style="margin: 0; font-size: 14.5px; font-weight: 700; color: #1e293b; letter-spacing: 0.3px;">国家法规合规与专业同行免责声明</h4>')
+    out.append('      <h4 style="margin: 0; font-size: 14.5px; font-weight: 700; color: #1e293b; letter-spacing: 0.3px;">合规与专业同行免责声明</h4>')
     out.append('    </div>')
     
     disc_paragraphs = [p.strip() for p in disclaimer.split('\n') if p.strip()]
@@ -1167,7 +1058,7 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
     if not os.path.exists(file_path):
         return
         
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         html = f.read()
         
     subcats = get_product_subcategories(category)
@@ -1229,7 +1120,7 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
     if not os.path.exists(file_path):
         return
         
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         html = f.read()
         
     subcats = get_article_subcategories(category)
@@ -1371,7 +1262,7 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
     if not os.path.exists(index_path):
         return
         
-    with open(index_path, "r", encoding="utf-8") as f:
+    with open(index_path, "r", encoding="utf-8", errors="ignore") as f:
         html = f.read()
         
     # 1. Update Banners
@@ -1479,7 +1370,7 @@ def update_all_footers_headers_and_nav(settings, nav_links):
             if file.endswith('.html'):
                 file_path = os.path.join(root, file)
                 try:
-                    with open(file_path, "r", encoding="utf-8") as f:
+                    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
                         content = f.read()
                     
                     new_content = update_global_contact_info(content, settings)
@@ -1529,7 +1420,7 @@ def apply_page_seo(file_path, seo_title=None, seo_keywords=None, seo_description
         if settings is None:
             _, _, settings, _, _ = load_db()
 
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
             html = f.read()
         if seo_title:
             html = re.sub(r'<title>[^<]*</title>', f'<title>{seo_title}</title>', html, flags=re.I)
@@ -1580,7 +1471,7 @@ def update_sitemaps(products, articles):
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     xml += '  <url><loc>http://www.mellgen.com/</loc><priority>1.0</priority></url>\n'
     list_pages = [
-        "product_index.html", "product_tpxzzd.html", "product_zzfsdb.html", "product_zwyhxw.html", "product_hyyhxw.html", "product_yejfjy.html",
+        "product_hzpyl.html", "product_yyyl.html", "product_spyyyl.html", "product_index.html",
         "article_xwzx.html", "article_hzal.html", "article_cjwt.html", "article_qydt.html", "article_cpbk.html",
         "helps/yloemd.html", "helps/tptjs.html", "helps/gymej.html", "helps/lxwm.html"
     ]
@@ -1621,6 +1512,7 @@ def publish_site():
     # 1. Update listing pages
     product_listing_configs = [
         ("product_index.html", "原料产品中心"),
+        ("product_hzpyl.html", "化妆品原料"),
         ("product_tpxzzd.html", "高渗透型重组蛋白/多肽"),
         ("product_zwyhxw.html", "植物源活性物"),
         ("product_zzfsdb.html", "重组仿生蛋白"),
@@ -1638,25 +1530,23 @@ def publish_site():
 
     # Clean legacy pagination files & legacy medical/food files so they redirect to canonical listing pages
     pagination_redirects = [
-        ("product_yyyl.html", "./product_index.html"),
-        ("product_spyyyl.html", "./product_index.html"),
-        ("product_yyyl_0002.html", "./product_index.html"),
-        ("product_spyyyl_0002.html", "./product_index.html"),
-        ("en/product_yyyl.html", "./product_index.html"),
-        ("en/product_spyyyl.html", "./product_index.html"),
-        ("en/product_yyyl_0002.html", "./product_index.html"),
-        ("en/product_spyyyl_0002.html", "./product_index.html"),
+        ("product_yyyl.html", "./product_hzpyl.html"),
+        ("product_spyyyl.html", "./product_hzpyl.html"),
+        ("product_yyyl_0002.html", "./product_hzpyl.html"),
+        ("product_spyyyl_0002.html", "./product_hzpyl.html"),
+        ("en/product_yyyl.html", "./product_hzpyl.html"),
+        ("en/product_spyyyl.html", "./product_hzpyl.html"),
+        ("en/product_yyyl_0002.html", "./product_hzpyl.html"),
+        ("en/product_spyyyl_0002.html", "./product_hzpyl.html"),
         ("product_index_0002.html", "./product_index.html"),
         ("product_index_0003.html", "./product_index.html"),
-        ("product_hzpyl.html", "./product_index.html"),
-        ("product_hzpyl_0002.html", "./product_index.html"),
-        ("product_hzpyl_0003.html", "./product_index.html"),
+        ("product_hzpyl_0002.html", "./product_hzpyl.html"),
+        ("product_hzpyl_0003.html", "./product_hzpyl.html"),
         ("product_tpxzzd_0002.html", "./product_tpxzzd.html"),
         ("en/product_index_0002.html", "./product_index.html"),
         ("en/product_index_0003.html", "./product_index.html"),
-        ("en/product_hzpyl.html", "./product_index.html"),
-        ("en/product_hzpyl_0002.html", "./product_index.html"),
-        ("en/product_hzpyl_0003.html", "./product_index.html"),
+        ("en/product_hzpyl_0002.html", "./product_hzpyl.html"),
+        ("en/product_hzpyl_0003.html", "./product_hzpyl.html"),
         ("en/product_tpxzzd_0002.html", "./product_tpxzzd.html"),
     ]
     for rel_f, target_url in pagination_redirects:

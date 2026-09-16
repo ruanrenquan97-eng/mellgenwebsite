@@ -261,11 +261,13 @@ html[lang="en"] .sup_nav dl dd p {
 html[lang="en"] .g_fa .faleft h2 b {
   font-size: 2.1rem !important;
   line-height: 2.8rem !important;
+  text-align: center !important;
 }
 
 html[lang="en"] .g_fa .faleft h2 em {
   font-size: 0.95rem !important;
   line-height: 1.8rem !important;
+  text-align: center !important;
 }
 
 html[lang="en"] .g_fa .fafl dl dd {

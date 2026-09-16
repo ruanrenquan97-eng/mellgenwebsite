@@ -109,7 +109,7 @@ for a in articles:
     if not desc or len(desc) < 15 or "美尔健（深圳）生物科技有限公司发布：" in desc:
         soup = BeautifulSoup(content, "html.parser")
         text_clean = re.sub(r'\s+', ' ', soup.get_text()).strip()
-        text_clean = text_clean.replace("声明与支持：美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 186-9197-8530。", "").strip()
+        text_clean = text_clean.replace("声明与支持：美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。", "").strip()
         if text_clean:
             a["desc"] = text_clean[:120].strip() + "..."
         else:

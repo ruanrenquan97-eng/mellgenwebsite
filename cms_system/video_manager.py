@@ -6,6 +6,8 @@ import datetime
 import uuid
 
 WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if '' in WORKSPACE_DIR or '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
+    WORKSPACE_DIR = 'E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'
 VIDEOS_FILE = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data", "videos.json")
 
 def load_videos():
@@ -80,21 +82,46 @@ def delete_video(video_id):
         return True
     return False
 
+def batch_set_video_status(status="offline", video_ids=None):
+    videos = load_videos()
+    count = 0
+    for v in videos:
+        if video_ids is None or v.get("id") in video_ids:
+            v["status"] = status
+            count += 1
+    save_videos(videos)
+    sync_videos_to_html()
+    return count
+
+def toggle_video_status(video_id):
+    videos = load_videos()
+    new_status = None
+    for v in videos:
+        if v.get("id") == video_id:
+            v["status"] = "offline" if v.get("status") == "published" else "published"
+            new_status = v["status"]
+            break
+    if new_status is not None:
+        save_videos(videos)
+        sync_videos_to_html()
+    return new_status
+
 def build_video_html_block(video_list):
     html_chunks = []
     html_chunks.append(' <div class="zxlb-3n-ts-02-list g_splst f_cb"> \n')
-    for v in video_list:
-        title = v.get("title", "")
-        cover = v.get("cover", "")
-        video_url = v.get("video_url", "")
-        html_chunks.append('   <dl> \n    <dt> \n     <i><img alt="' + title + '" src="' + cover + '" title="' + title + '"></i> \n     <video autoplay="autoplay" controls="" height="100%" muted preload="none" src="' + video_url + '" width="100%"></video> \n    </dt> \n    <dd> \n     <h4><b>' + title + '</b></h4> \n    </dd> \n   </dl> \n')
+    if not video_list:
+        html_chunks.append('   <div style="width:100%;text-align:center;padding:40px 0;color:#94a3b8;font-size:14px;">暂无已发布的视频资料</div> \n')
+    else:
+        for v in video_list:
+            title = v.get("title", "")
+            cover = v.get("cover", "")
+            video_url = v.get("video_url", "")
+            html_chunks.append('   <dl> \n    <dt> \n     <i><img alt="' + title + '" src="' + cover + '" title="' + title + '"></i> \n     <video autoplay="autoplay" controls="" height="100%" muted preload="none" src="' + video_url + '" width="100%"></video> \n    </dt> \n    <dd> \n     <h4><b>' + title + '</b></h4> \n    </dd> \n   </dl> \n')
     html_chunks.append(' </div> \n <div class="clear"></div> \n')
     return "".join(html_chunks)
 
 def sync_videos_to_html():
     videos = [v for v in load_videos() if v.get("status") == "published"]
-    if not videos:
-        return {"success": True, "message": "暂无已发布的视频"}
     
     page1_videos = videos[:12]
     page2_videos = videos[12:] if len(videos) > 12 else []
@@ -111,7 +138,7 @@ def sync_videos_to_html():
             f.write(content)
 
     spzx2_path = os.path.join(WORKSPACE_DIR, "help_spzx_0002.html")
-    if os.path.exists(spzx2_path) and page2_videos:
+    if os.path.exists(spzx2_path):
         with open(spzx2_path, "r", encoding="utf-8") as f:
             content2 = f.read()
         new_block2 = build_video_html_block(page2_videos)
@@ -121,7 +148,7 @@ def sync_videos_to_html():
 
     dydsp_videos = [v for v in videos if v.get("category") == "抖音短视频"]
     dydsp_path = os.path.join(WORKSPACE_DIR, "help_dydsp.html")
-    if os.path.exists(dydsp_path) and dydsp_videos:
+    if os.path.exists(dydsp_path):
         with open(dydsp_path, "r", encoding="utf-8") as f:
             content_dy = f.read()
         new_block_dy = build_video_html_block(dydsp_videos[:12])

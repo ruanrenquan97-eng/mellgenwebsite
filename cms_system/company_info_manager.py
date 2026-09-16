@@ -98,7 +98,7 @@ def bootstrap_company_info():
         },
         "contact": {
             "company_name": "美尔健（深圳）生物科技有限公司",
-            "phone": "186-9197-8530",
+            "phone": "136-9197-8530",
             "tel": "0755-82926499",
             "email": "61791579@qq.com",
             "qq": "61791579",
@@ -338,10 +338,7 @@ def sync_contact(data=None):
     """同步联系我们信息到 helps/lxwm.html 及英文版"""
     if data is None:
         data = load_company_info()
-    if isinstance(data, dict) and "contact" in data:
-        contact = data.get("contact", {})
-    else:
-        contact = data if isinstance(data, dict) else {}
+    contact = data.get("contact", {})
     if not contact:
         return False
 
@@ -351,7 +348,7 @@ def sync_contact(data=None):
             with open(cn_path, "r", encoding="utf-8") as f:
                 content = f.read()
             if contact.get("phone"):
-                content = re.sub(r'<span>186-9197-8530\s*</span>\s*<span>186-9197-8530</span>', 
+                content = re.sub(r'<span>136-9197-8530\s*</span>\s*<span>136-9197-8530</span>', 
                                  f'<span>{contact["phone"]}</span>', content)
             if contact.get("qq"):
                 content = re.sub(r'<h3>\s*QQ\s*</h3>\s*<span>\d+</span>', 
@@ -414,15 +411,6 @@ def sync_contact(data=None):
                 s["qq"] = contact["qq"]
             if contact.get("address"):
                 s["address"] = contact["address"]
-            if "ai_customer_service" in s and isinstance(s["ai_customer_service"], dict):
-                phones = []
-                if phone_t:
-                    phones.append(phone_t)
-                if phone_p and phone_p not in phones:
-                    phones.append(phone_p)
-                if phones:
-                    s["ai_customer_service"]["default_phones"] = phones
-                    s["ai_customer_service"]["fallback_phone"] = " / ".join(phones)
             with open(settings_file, "w", encoding="utf-8") as f:
                 json.dump(s, f, ensure_ascii=False, indent=2)
 

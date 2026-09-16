@@ -101,24 +101,31 @@
      })
          
 
-     $(function () {
-    var ysSwiper = new Swiper('.faright .js-swiper-tab', {
-         autoplay:false,
+      $(function () {
+     var ysSwiper = new Swiper('.faright .js-swiper-tab', {
+          autoplay: {
+              delay: 3500,
+              disableOnInteraction: false
+          },
           effect: 'fade',
-         fadeEffect:{
-            crossFade: false,
-         },
-         paginationClickable: true,
-         on: {
-            slideChangeTransitionStart: function() {
-                $(".fafl dl").eq(this.activeIndex).addClass('cur').siblings('dl').removeClass('cur');
-            }
-        }
-    });
-    $(".fafl dl").on('mouseover', function(e) {
-        $(this).addClass('cur').siblings('dl').removeClass('cur');
-        ysSwiper.slideTo($(this).index());
-    });
+          fadeEffect:{
+             crossFade: false,
+          },
+          paginationClickable: true,
+          on: {
+             slideChangeTransitionStart: function() {
+                 if ($(".fafl dl").length) {
+                     $(".fafl dl").eq(this.activeIndex).addClass('cur').siblings('dl').removeClass('cur');
+                 }
+             }
+         }
+     });
+     if ($(".fafl dl").length) {
+         $(".fafl dl").on('mouseover', function(e) {
+             $(this).addClass('cur').siblings('dl').removeClass('cur');
+             ysSwiper.slideTo($(this).index());
+         });
+     }
 })
  
 

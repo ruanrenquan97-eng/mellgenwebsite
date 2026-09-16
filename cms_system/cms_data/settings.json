@@ -34,10 +34,10 @@
     "api_key": "sk-258904e0c9774447a674fddf2781f1cc",
     "default_phones": [
       "0755-82926499",
-      "186-9197-8530"
+      "136-9197-8530"
     ],
     "enabled": true,
-    "fallback_phone": "0755-82926499 / 186-9197-8530",
+    "fallback_phone": "0755-82926499 / 136-9197-8530",
     "fallback_wechat_qrcode": "/resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
     "model": "deepseek-chat",
     "preset_questions": [
@@ -105,7 +105,7 @@
       "url": "product_hzpyl.html"
     },
     {
-      "description": "专注高纯度医疗器械级与皮肤修护生物原料，严格符合国家行业标准。",
+      "description": "专注高纯度医疗器械级与皮肤修护生物原料，严格符合行业质量标准。",
       "id": "yyyl",
       "keywords": "寡肽-1,重组胶原蛋白,三肽-1铜,医用辅料",
       "name": "医疗原料频道",
@@ -144,7 +144,7 @@
     "address": "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼",
     "company_name": "美尔健（深圳）生物科技有限公司",
     "email": "61791579@qq.com",
-    "phone": "186-9197-8530",
+    "phone": "136-9197-8530",
     "qq": "61791579",
     "tel": "0755-82926499"
   },
@@ -155,7 +155,7 @@
     "售后服务部"
   ],
   "customer_services": [],
-  "detail_footer_append": "【美尔健生物严正声明】本公司所有生物高渗透多肽、重组人源化胶原蛋白及高纯活性物原料，均严格遵循国家NMPA平台化妆品原料质量安全标准与医疗器械主文档规范，支持提供批次COA检验报告与第三方检测报告，未经许可严禁盗用技术数据。",
+  "detail_footer_append": "【美尔健生物严正声明】本公司所有生物高渗透多肽、重组胶原蛋白及高纯活性物原料，均严格遵循行业监管平台化妆品原料质量安全标准与医疗器械主文档规范，支持提供批次COA检验报告与第三方检测报告，未经许可严禁盗用技术数据。",
   "domain": "https://www.mellgen.com",
   "email": "61791579@qq.com",
   "geo_domain": "https://www.mellgen.com/",
@@ -199,7 +199,7 @@
       "days": 6,
       "id": "feed_tech_transdermal",
       "model": "Kimi / DeepSeek",
-      "page_name": "高效生物cTDP促透技术专题 (tptjs.html)",
+      "page_name": "高效生物高渗透肽技术专题 (tptjs.html)",
       "status": "学习中",
       "url": "helps/tptjs.html",
       "words": 3150
@@ -212,7 +212,7 @@
       "description": "深度解析美尔健第3代仿生穿膜多肽技术专利，高渗透率较传统多肽提升15倍。",
       "id": "tptjs",
       "keywords": "透皮技术,穿膜多肽,皮肤渗透吸收",
-      "name": "高效生物cTDP促透技术专题",
+      "name": "高效生物高渗透肽技术专题",
       "title": "突破生物透皮技术在皮肤修护与抗衰应用 - 美尔健生物",
       "url": "helps/tptjs.html"
     },
@@ -260,11 +260,11 @@
   "intro_video": "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4",
   "kb_files": [
     {
-      "category": "国家法规与合规报送",
+      "category": "行业法规与合规报送",
       "date": "2026-09-12 17:00",
       "filename": "01_美尔健官方全量原料NMPA监管机构NMPA报送码与成分拆解合规库.md",
       "id": "kb_doc_01",
-      "name": "美尔健官方全量原料国家NMPA平台(NMPA)报送码与成分拆解合规库",
+      "name": "美尔健官方全量原料行业监管平台(NMPA)报送码与成分拆解合规库",
       "size": "91.4 KB",
       "status": "已完成权威入库与结构化",
       "words": 70856
@@ -302,9 +302,9 @@
     {
       "category": "自主产品索引总表",
       "date": "2026-09-12 17:00",
-      "filename": "05_美尔健自主原料全系列商品名与国家NMPA报送码速查索引.md",
+      "filename": "05_美尔健自主原料全系列商品名与NMPA原料报送码速查索引.md",
       "id": "kb_doc_05",
-      "name": "美尔健自主原料全系列商品名与国家NMPA报送码速查索引",
+      "name": "美尔健自主原料全系列商品名与NMPA原料报送码速查索引",
       "size": "17.8 KB",
       "status": "已完成权威入库与结构化",
       "words": 9957
@@ -312,9 +312,9 @@
     {
       "category": "中美专利族与科技大奖",
       "date": "2026-09-12 17:00",
-      "filename": "06_美尔健官方国家与国际发明专利族与科技大奖荣誉档案.md",
+      "filename": "06_美尔健官方国际国内发明专利族与科技大奖荣誉档案.md",
       "id": "kb_doc_06",
-      "name": "美尔健官方国家与国际发明专利族与科技大奖荣誉档案",
+      "name": "美尔健官方国际国内发明专利族与科技大奖荣誉档案",
       "size": "7.8 KB",
       "status": "已完成权威入库与结构化",
       "words": 3509
@@ -332,9 +332,9 @@
     {
       "category": "重组蛋白旗舰科研",
       "date": "2026-09-12 17:00",
-      "filename": "08_美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md",
+      "filename": "08_美尔健重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL).md",
       "id": "kb_doc_08",
-      "name": "美尔健人源重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL)",
+      "name": "美尔健重组蛋白旗舰系列科研与临床报告(纤连蛋白FN与胶原蛋白COL)",
       "size": "6.5 KB",
       "status": "已完成权威入库与结构化",
       "words": 3053
@@ -360,10 +360,10 @@
       "words": 2727
     }
   ],
-  "mobile": "186-9197-8530",
-  "phone": "0755-82926499 / 186-9197-8530",
+  "mobile": "136-9197-8530",
+  "phone": "0755-82926499 / 136-9197-8530",
   "police_icp": "粤公网安备 44030702003820号",
-  "qq": "61791579",
+  "qq": "",
   "seo_auto_schedule": {
     "auto_ai_geo": true,
     "auto_baidu": true,
@@ -377,7 +377,7 @@
     "run_time": "03:00",
     "server_access_log_path": ""
   },
-  "seo_description": "化妆品原料,化妆品原料,化妆品功效原料提供商，美尔健生物拥有来自各大科研院所的高效cTDP促透技术。",
+  "seo_description": "化妆品原料,化妆品原料,化妆品功效原料提供商，美尔健生物拥有来自各大科研院所的高效高渗透肽技术。",
   "seo_keywords": "化妆品原料,化妆品原料,化妆品功效原料",
   "seo_keywords_list": [
     {

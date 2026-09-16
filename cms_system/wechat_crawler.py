@@ -334,7 +334,7 @@ def process_wechat_html_content(raw_html, download_images=True):
     formatted_html = f"""<div class="article-body-wrapper" style="line-height:1.9;color:#333;font-size:15px;text-align:justify;">
     {body_content}
     <div class="article-footer-note" style="margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;">
-        <p style="margin:0;line-height:1.6;"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 186-9197-8530。</p>
+        <p style="margin:0;line-height:1.6;"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>
     </div>
 </div>"""
 

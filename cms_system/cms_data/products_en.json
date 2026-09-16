@@ -54,7 +54,9 @@
     "intro_image": "resource/reports/images/lab_tpht_penetration_data.jpg",
     "intro_image_tag": "Permeation Data",
     "intro_image_caption": "Franz diffusion cell transdermal permeation kinetics: cTDP stratum corneum absorption curve.",
-    "sort": 10
+    "sort": 10,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "tpxldb",
@@ -113,7 +115,9 @@
     "intro_image": "resource/reports/images/lab_tfn_penetration_barrier_data.jpg",
     "intro_image_tag": "Tissue Repair Data",
     "intro_image_caption": "TFNpro transdermal fibronectin permeation rate and epidermal barrier reconstruction data.",
-    "sort": 20
+    "sort": 20,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "mellpr8670",
@@ -170,7 +174,9 @@
     "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
     "intro_image_tag": "Structural Model",
     "intro_image_caption": "5D collagen multidimensional scaffolding microenvironment and dermal plumping matrix.",
-    "sort": 30
+    "sort": 30,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "tp1jydb",
@@ -234,7 +240,8 @@
     "intro_image": "resource/images/product_intros/intro_deep_transdermal_delivery.jpg",
     "intro_image_tag": "Transdermal Model",
     "intro_image_caption": "Type I transdermal collagen deep penetration and dermal fibril network reinforcement.",
-    "sort": 40
+    "sort": 40,
+    "status": "published"
   },
   {
     "id": "tpxviijy",
@@ -298,7 +305,8 @@
     "intro_image": "resource/images/product_intros/intro_deep_transdermal_delivery.jpg",
     "intro_image_tag": "DEJ Anchoring Mechanism",
     "intro_image_caption": "Type XVII transmembrane collagen DEJ basement membrane anchoring mechanism.",
-    "sort": 50
+    "sort": 50,
+    "status": "published"
   },
   {
     "id": "tysgdb",
@@ -355,7 +363,9 @@
     "intro_image": "resource/reports/images/lab_recm_multi_efficacy_data.jpg",
     "intro_image_tag": "Multi-Protein Expression",
     "intro_image_caption": "MELLPRO-rECM extracellular matrix synergistic multi-protein expression and tissue repair data.",
-    "sort": 60
+    "sort": 60,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "tptxdb",
@@ -416,7 +426,8 @@
     "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_extracted/page_8_img_24.jpeg",
     "diagram_caption": "Recombinant elastin Telastin reinforcing the dermal elastic network to maintain structural firmness.",
-    "sort": 70
+    "sort": 70,
+    "status": "published"
   },
   {
     "id": "megpep6245",
@@ -470,7 +481,9 @@
     "intro_image": "resource/images/product_intros/intro_zebrafish.jpg",
     "intro_image_tag": "In Vivo Data",
     "intro_image_caption": "In vivo zebrafish melanin quantitative test (significant reduction of melanin pigmentation).",
-    "sort": 80
+    "sort": 80,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "pdrnht",
@@ -527,7 +540,9 @@
     "intro_image": "resource/reports/images/lab_pdrn_triple_efficacy_data.jpg",
     "intro_image_tag": "Cell Regeneration Data",
     "intro_image_caption": "PDRN polydeoxyribonucleotide tissue microcirculation and cell vitality test data.",
-    "sort": 90
+    "sort": 90,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "mgpdrn",
@@ -591,7 +606,8 @@
     "intro_image": "resource/reports/images/lab_pdrn_triple_efficacy_data.jpg",
     "intro_image_tag": "Cell Regeneration Data",
     "intro_image_caption": "PDRN polydeoxyribonucleotide tissue microcirculation and cell vitality test data.",
-    "sort": 100
+    "sort": 100,
+    "status": "published"
   },
   {
     "id": "tptyts",
@@ -659,7 +675,8 @@
     "intro_image": "resource/images/product_intros/intro_sheep.jpg",
     "intro_image_tag": "Cellular Active Origin",
     "intro_image_caption": "Healthy sheep placenta multi-active cellular nutrient and biomimetic peptide complex.",
-    "sort": 110
+    "sort": 110,
+    "status": "published"
   },
   {
     "id": "lrdt",
@@ -723,7 +740,8 @@
     "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",
     "intro_image_tag": "Biomimetic Peptide",
     "intro_image_caption": "Biomimetic snake venom tripeptide blocking acetylcholine receptor muscle contraction.",
-    "sort": 120
+    "sort": 120,
+    "status": "published"
   },
   {
     "id": "aminofree",
@@ -787,7 +805,8 @@
     "intro_image": "resource/images/product_intros/intro_marine_yeast.jpg",
     "intro_image_tag": "Microbial Fermentation",
     "intro_image_caption": "Probiotic strain fermentation microbiome balancing and barrier building model.",
-    "sort": 130
+    "sort": 130,
+    "status": "published"
   },
   {
     "id": "colamino",
@@ -851,7 +870,8 @@
     "intro_image": "resource/images/product_intros/intro_deep_transdermal_delivery.jpg",
     "intro_image_tag": "Oligopeptide Permeation",
     "intro_image_caption": "Low molecular weight collagen oligopeptide rapid trans-stratum penetration and synthesis.",
-    "sort": 140
+    "sort": 140,
+    "status": "published"
   },
   {
     "id": "zwjy",
@@ -915,7 +935,8 @@
     "intro_image": "resource/images/product_intros/intro_peach_gum.jpg",
     "intro_image_tag": "Plant Collagen Origin",
     "intro_image_caption": "Plant cell wall hydroxyproline-rich vegetable collagen peptide extraction origin.",
-    "sort": 150
+    "sort": 150,
+    "status": "published"
   },
   {
     "id": "yskmyz",
@@ -972,7 +993,9 @@
     "intro_image": "resource/images/product_intros/intro_peach_gum.jpg",
     "intro_image_tag": "Botanical Polysaccharide",
     "intro_image_caption": "Natural wild peach gum amber crystals and targeted enzyme cleavage fermentation.",
-    "sort": 160
+    "sort": 160,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "4dzyshyz",
@@ -1036,7 +1059,8 @@
     "intro_image": "resource/reports/images/lab_yskm_soothing_repair_data.jpg",
     "intro_image_tag": "Plant Soothing Data",
     "intro_image_caption": "4D plant soothing synergistic anti-irritation and soothing experimental data.",
-    "sort": 170
+    "sort": 170,
+    "status": "published"
   },
   {
     "id": "zbssb",
@@ -1091,7 +1115,9 @@
     "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
     "intro_image_tag": "Botanical Origin",
     "intro_image_caption": "Changbai Mountain wild black ganoderma, ginseng root, and wild matsutake origin illustration.",
-    "sort": 180
+    "sort": 180,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "tpjy",
@@ -1152,7 +1178,8 @@
     "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_extracted/page_10_img_6.jpeg",
     "diagram_caption": "Placental multi-type native active procollagen (I/III/V) matrix replenishment and barrier repair.",
-    "sort": 190
+    "sort": 190,
+    "status": "published"
   },
   {
     "id": "zzxldb",
@@ -1207,7 +1234,9 @@
     "intro_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
     "intro_image_tag": "Molecular Docking",
     "intro_image_caption": "AlphaDrugs computational biology molecular docking: Recombinant fibronectin & integrin binding.",
-    "sort": 200
+    "sort": 200,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "zzjydb",
@@ -1264,7 +1293,9 @@
     "intro_image": "resource/reports/images/lab_collagen3_efficacy_data.jpg",
     "intro_image_tag": "Cell Activity Data",
     "intro_image_caption": "Fibroblast proliferation and endogenous collagen secretion enhancement experimental data.",
-    "sort": 210
+    "sort": 210,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "mellpr205",
@@ -1320,7 +1351,9 @@
     "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
     "intro_image_tag": "Elastic Recoil Model",
     "intro_image_caption": "Recombinant tropoelastin cross-linking with microfibrils rebuilding skin 3D recoil network.",
-    "sort": 220
+    "sort": 220,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "smndb",
@@ -1376,7 +1409,9 @@
     "intro_image": "resource/reports/images/lab_yskm_soothing_repair_data.jpg",
     "intro_image_tag": "Soothing Ferment Data",
     "intro_image_caption": "Stenotrophomonas ferment metabolite ROS scavenging and soothing efficacy data.",
-    "sort": 230
+    "sort": 230,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "twdvit",
@@ -1430,7 +1465,9 @@
     "intro_image": "resource/reports/images/lab_map_three_efficacy_data.jpg",
     "intro_image_tag": "Adhesive Film Data",
     "intro_image_caption": "Recombinant mussel adhesive protein (MAP) water-resistant barrier film test data.",
-    "sort": 240
+    "sort": 240,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "wndbzy",
@@ -1486,7 +1523,9 @@
     "intro_image": "resource/images/product_intros/intro_snail.jpg",
     "intro_image_tag": "Biomimetic Model",
     "intro_image_caption": "Biomimetic snail mucin glycoprotein substrate and cellular barrier repair network.",
-    "sort": 250
+    "sort": 250,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "fswnjy",
@@ -1542,7 +1581,9 @@
     "intro_image": "resource/images/product_intros/intro_snail.jpg",
     "intro_image_tag": "Biomimetic Model",
     "intro_image_caption": "Snailpro biomimetic snail secretion mucin and recombinant collagen molecular backbone.",
-    "sort": 260
+    "sort": 260,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "jnhtea",
@@ -1598,7 +1639,9 @@
     "intro_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "intro_image_tag": "Melanogenesis Inhibition",
     "intro_image_caption": "Nonapeptide-1 competitive binding to MC1R receptor inhibiting tyrosinase pathway.",
-    "sort": 270
+    "sort": 270,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "lzdt",
@@ -1652,7 +1695,9 @@
     "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
     "intro_image_tag": "Fungal Active Source",
     "intro_image_caption": "Changbai Mountain black Ganoderma lucidum polysaccharide extraction source.",
-    "sort": 280
+    "sort": 280,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "hylfyz",
@@ -1707,7 +1752,9 @@
     "intro_image": "resource/images/product_intros/intro_marine_yeast.jpg",
     "intro_image_tag": "Marine Microbial Fermentation",
     "intro_image_caption": "Coral-symbiotic marine yeast culture and natural redox enzyme system.",
-    "sort": 290
+    "sort": 290,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "0xjydb",
@@ -1763,7 +1810,9 @@
     "intro_image": "resource/images/product_intros/intro_jellyfish.jpg",
     "intro_image_tag": "Marine Biological Origin",
     "intro_image_caption": "Deep-sea Aurelia aurita jellyfish Type 0 collagen active model.",
-    "sort": 300
+    "sort": 300,
+    "show": true,
+    "status": "published"
   },
   {
     "id": "megzym",
@@ -1816,6 +1865,8 @@
     "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",
     "intro_image_tag": "Enzyme Cleavage Model",
     "intro_image_caption": "Biomimetic targeted enzyme catalytic hydrolysis and high-purity separation.",
-    "sort": 310
+    "sort": 310,
+    "show": true,
+    "status": "published"
   }
 ]

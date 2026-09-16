@@ -39,7 +39,7 @@
     welcome_message: isEn 
       ? "Hello! I am Mellgen AI Consultant. We specialize in recombinant collagen, transdermal cyclic peptides, fibronectin, and PDRN. How can I assist you with raw materials, specs, or solutions today?"
       : "您好！我是美尔健官方AI顾问小美。我们专注于重组胶原蛋白、重组纤连蛋白、透皮环肽、PDRN等高端生物原料研发与定制。请问有什么可以为您解答？",
-    default_phones: ["186-9197-8530", "0755-82926499"],
+    default_phones: ["136-9197-8530", "0755-82926499"],
     wechat_qrcode_url: "./resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
     preset_questions: isEn ? [
       "What are the specifications of Recombinant Collagen?",
@@ -620,35 +620,12 @@
     document.head.appendChild(link);
   }
 
-  function fetchContactConfig() {
-    try {
-      var contactUrl = API_BASE + "/api/public/contact";
-      if (window.fetch) {
-        fetch(contactUrl)
-          .then(function(res) { return res.json(); })
-          .then(function(json) {
-            if (json && json.success && json.data) {
-              var d = json.data;
-              var phones = [];
-              if (d.tel) phones.push(d.tel);
-              if (d.mobile && phones.indexOf(d.mobile) === -1) phones.push(d.mobile);
-              if (phones.length > 0) {
-                aiConfig.default_phones = phones;
-              }
-            }
-          })
-          .catch(function() {});
-      }
-    } catch(e) {}
-  }
-
   function init() {
     // 立即执行并多次延迟执行旧侧栏彻底清理
     removeOldSidebar();
     setTimeout(removeOldSidebar, 200);
     setTimeout(removeOldSidebar, 800);
     setTimeout(removeOldSidebar, 2000);
-    fetchContactConfig();
 
     // 监听DOM变动，防止遗留模板脚本动态添加旧客服侧栏
     try {

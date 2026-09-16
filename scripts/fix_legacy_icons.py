@@ -27,8 +27,8 @@ def fix_last_items():
 
         # Fix tel.jpg -> text / emoji
         content = re.sub(
-            r'<h5><a href="tel:186-9197-8530"><img alt="" src="\.\./images/tel\.jpg"></a></h5>',
-            '<h5><a href="tel:186-9197-8530" style="font-size:14px;color:#1e3a8a;font-weight:bold;text-decoration:none;">📞 186-9197-8530</a></h5>',
+            r'<h5><a href="tel:136-9197-8530"><img alt="" src="\.\./images/tel\.jpg"></a></h5>',
+            '<h5><a href="tel:136-9197-8530" style="font-size:14px;color:#1e3a8a;font-weight:bold;text-decoration:none;">📞 136-9197-8530</a></h5>',
             content
         )
 

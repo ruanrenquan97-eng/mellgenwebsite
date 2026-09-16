@@ -858,6 +858,45 @@ def handle_settings():
             return jsonify(json.load(f))
     return jsonify({})
 
+@app.route("/api/settings/case-visibility", methods=["GET"])
+@login_required
+def get_case_visibility():
+    settings = load_json("settings.json") if os.path.exists(os.path.join(DATA_DIR, "settings.json")) else {}
+    return jsonify({
+        "success": True,
+        "show_case_section": bool(settings.get("show_case_section", True))
+    })
+
+@app.route("/api/settings/toggle-case-visibility", methods=["POST"])
+@login_required
+def toggle_case_visibility():
+    settings_path = os.path.join(DATA_DIR, "settings.json")
+    settings = load_json("settings.json") if os.path.exists(settings_path) else {}
+    data = request.json or {}
+    
+    if "enabled" in data:
+        show_case = bool(data["enabled"])
+    else:
+        show_case = not bool(settings.get("show_case_section", True))
+        
+    settings["show_case_section"] = show_case
+    save_json("settings.json", settings)
+    
+    def run_rebuild():
+        try:
+            import generator
+            generator.publish_site()
+        except Exception as e:
+            print(f"[Toggle Case Error] Rebuilding site failed: {e}")
+            
+    threading.Thread(target=run_rebuild, daemon=True).start()
+    
+    return jsonify({
+        "success": True,
+        "show_case_section": show_case,
+        "message": "合作案例已开启前台显示并开始全站更新！" if show_case else "合作案例已关闭前台显示（前台已隐藏）并开始全站更新！"
+    })
+
 # ==========================================================
 # GEO Engine Helper Functions & Dedicated APIs
 # ==========================================================

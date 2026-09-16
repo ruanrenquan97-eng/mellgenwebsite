@@ -777,3 +777,17 @@ body{
     z-index: 2 !important;
 }
 
+/* Ensure header containers clear floats and banners always stay below header */
+.g_top, .m_top {
+    clear: both;
+}
+.g_top::after, .m_top::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.ty-banner-1, .banner {
+    clear: both !important;
+}
+
+

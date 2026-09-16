@@ -6171,6 +6171,195 @@
     bottom: 0 !important;
     z-index: 2 !important;
   }
+
+  /* ------------------------------------------------------------------------
+     桌面端产品中心卡片流 (.hyt-product-list-6) 4列标准栅格排版
+     ------------------------------------------------------------------------ */
+  .hyt-product-list {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .hyt-product-list-6 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 28px 20px !important;
+    float: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hyt-product-list-6 > .clear,
+  .hyt-product-list-6 .clear {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hyt-product-list-6 dl {
+    float: none !important;
+    width: calc((100% - 60px) / 4) !important; /* 4列等宽：3个20px间距 */
+    margin: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    border: 1px solid #dfdfdf !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .hyt-product-list-6 dl:hover {
+    border-color: #499c7c !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-5px) !important;
+  }
+
+  .hyt-product-list-6 dt {
+    width: 100% !important;
+    position: relative !important;
+    border-bottom: 1px solid #ebebeb !important;
+    background: #f8fafc !important;
+    overflow: hidden !important;
+  }
+
+  .hyt-product-list-6 dt a {
+    display: block !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .hyt-product-list-6 dt img {
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .hyt-product-list-6 dl:hover dt img {
+    transform: scale(1.04) !important;
+  }
+
+  .hyt-product-list-6 dt em {
+    position: absolute !important;
+    padding: 0 10px !important;
+    max-width: 80% !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    font-size: 12px !important;
+    color: #499c7c !important;
+    border: 1px solid #499c7c !important;
+    border-radius: 4px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    left: 12px !important;
+    top: 12px !important;
+    z-index: 2 !important;
+  }
+
+  .hyt-product-list-6 dd {
+    padding: 16px 14px 20px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .hyt-product-list-6 dd h4 {
+    height: auto !important;
+    min-height: 28px !important;
+    line-height: 28px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .hyt-product-list-6 dd h4 a {
+    display: block !important;
+    font-size: 17px !important;
+    line-height: 28px !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .hyt-product-list-6 dd h4 a:hover {
+    color: #499c7c !important;
+  }
+
+  .hyt-product-list-6 dd p {
+    font-size: 13px !important;
+    line-height: 22px !important;
+    color: #666666 !important;
+    text-align: left !important;
+    margin-top: 4px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .hyt-product-list-6 dd p a {
+    color: #499c7c !important;
+    font-weight: 500 !important;
+    margin-left: 4px !important;
+  }
+
+  /* 首页科研团队段落文字与视频中心简介文字大小完全一致且不加粗 */
+  .g_kycg .m_kycg .kyleft p,
+  .g_kycg .m_kycg .m_kyleft p {
+    font-size: 1rem !important;
+    line-height: 1.8rem !important;
+    color: #000000 !important;
+    font-weight: 400 !important;
+    text-align: justify !important;
+  }
+  .g_kycg .m_kycg .kyleft p strong,
+  .g_kycg .m_kycg .m_kyleft p strong {
+    font-weight: 400 !important;
+    color: inherit !important;
+  }
+
+  /* 案例列表 7 大行业导航条：桌面端单行完整排列，绝不折行 */
+  .g_anlst .antit {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 2.5rem !important;
+    margin-bottom: 1.6rem !important;
+  }
+  .g_anlst .antit:before,
+  .g_anlst .antit:after {
+    display: none !important;
+    content: none !important;
+  }
+  .g_anlst .antit a {
+    float: none !important;
+    padding: 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 400 !important;
+    line-height: 2.5rem !important;
+    color: #282828 !important;
+    white-space: nowrap !important;
+    transition: color 0.2s ease !important;
+  }
+  .g_anlst .antit a:hover {
+    color: #7fb435 !important;
+    font-weight: 600 !important;
+  }
 }
 
 /* 移动端内页二级导航 (.p102-fdh-3)：整齐压缩成2行（5列 x 2行 = 10项），字体精简防截断 */

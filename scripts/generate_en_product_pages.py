@@ -520,7 +520,7 @@ def update_en_product_listing_pages(products):
      </dd> 
     </dl> 
 """
-            if (i + 1) % 3 == 0 and (i + 1) < len(cat_products):
+            if (i + 1) % 4 == 0 and (i + 1) < len(cat_products):
                 list_html += "    <div class=\"clear\"></div>\n"
         list_html += "    "
 

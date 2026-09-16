@@ -17,8 +17,17 @@ import threading
 from typing import Dict, Any, Optional
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-WORKSPACE_DIR = os.path.dirname(CURRENT_DIR)
+WORKSPACE_DIR = os.path.abspath(os.path.dirname(CURRENT_DIR))
 DATA_DIR = os.path.join(CURRENT_DIR, "cms_data")
+
+def is_safe_workspace_path(abs_target: str) -> bool:
+    norm_target = os.path.abspath(abs_target)
+    norm_workspace = os.path.abspath(WORKSPACE_DIR)
+    try:
+        common = os.path.commonpath([norm_workspace, norm_target])
+        return os.path.normcase(common) == os.path.normcase(norm_workspace)
+    except Exception:
+        return False
 
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
@@ -2369,8 +2378,8 @@ def execute_get_page_content(args: dict, user: Optional[dict]) -> str:
     page_path = args.get("page_path", "").strip() or args.get("path", "").strip()
     if not page_path:
         return json.dumps({"success": False, "error": "缺少页面相对路径 page_path"}, ensure_ascii=False)
-    abs_path = os.path.abspath(os.path.join(WORKSPACE_DIR, page_path.replace("/", os.sep)))
-    if not abs_path.startswith(WORKSPACE_DIR):
+    abs_path = os.path.abspath(os.path.join(WORKSPACE_DIR, page_path.replace("/", os.sep).lstrip("\\/")))
+    if not is_safe_workspace_path(abs_path):
         return json.dumps({"success": False, "error": "越权路径访问拒绝"}, ensure_ascii=False)
     if not os.path.exists(abs_path):
         return json.dumps({"success": False, "error": f"页面文件 '{page_path}' 不存在"}, ensure_ascii=False)
@@ -2387,8 +2396,8 @@ def execute_update_page_content(args: dict, user: Optional[dict]) -> str:
     content = args.get("content", "")
     if not page_path:
         return json.dumps({"success": False, "error": "缺少页面相对路径 page_path"}, ensure_ascii=False)
-    abs_path = os.path.abspath(os.path.join(WORKSPACE_DIR, page_path.replace("/", os.sep)))
-    if not abs_path.startswith(WORKSPACE_DIR):
+    abs_path = os.path.abspath(os.path.join(WORKSPACE_DIR, page_path.replace("/", os.sep).lstrip("\\/")))
+    if not is_safe_workspace_path(abs_path):
         return json.dumps({"success": False, "error": "越权路径访问拒绝"}, ensure_ascii=False)
     try:
         with open(abs_path, "w", encoding="utf-8") as f:

@@ -994,8 +994,8 @@
     "intro_image_tag": "Botanical Polysaccharide",
     "intro_image_caption": "Natural wild peach gum amber crystals and targeted enzyme cleavage fermentation.",
     "sort": 160,
-    "show": false,
-    "status": "offline"
+    "show": true,
+    "status": "published"
   },
   {
     "id": "4dzyshyz",

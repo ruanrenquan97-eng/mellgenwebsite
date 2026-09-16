@@ -454,17 +454,18 @@ h1, h2, h3, h4, h5, h6 {
    13. 科研成果与团队介绍排版优化 (.g_kycg)
    -------------------------------------------------------------------------- */
 .g_kycg .m_kycg .kyleft p {
-  font-size: 14.5px !important;
-  line-height: 1.75 !important;
-  color: #374151 !important;
+  font-size: 1rem !important;
+  line-height: 1.8rem !important;
+  color: #000 !important;
+  font-weight: 400 !important;
   letter-spacing: 0 !important;
   text-align: justify !important;
   word-break: normal !important;
 }
 
 .g_kycg .m_kycg .kyleft p strong {
-  font-weight: 600 !important;
-  color: #111827 !important;
+  font-weight: 400 !important;
+  color: inherit !important;
 }
 
 /* --------------------------------------------------------------------------

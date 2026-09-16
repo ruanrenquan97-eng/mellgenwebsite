@@ -332,9 +332,9 @@ em{font-style:normal;}
     }
     .hyt-product-list-6 dl {
         float: left;
-        width: 31.33%;
-        margin-right: 3%;
-        margin-bottom: 35px;
+        width: 23.5%;
+        margin-right: 2%;
+        margin-bottom: 30px;
         border: 1px solid #dfdfdf;
         box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -344,7 +344,7 @@ em{font-style:normal;}
         -moz-transition: all 0.3s linear;
     }
     
-    .hyt-product-list-6 dl:nth-of-type(3n) {
+    .hyt-product-list-6 dl:nth-of-type(4n) {
         margin-right: 0;
     }
     

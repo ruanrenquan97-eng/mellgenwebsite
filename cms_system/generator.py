@@ -4,9 +4,9 @@ import json
 import shutil
 from urllib.parse import urlparse
 
-WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if '' in WORKSPACE_DIR or '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
-    WORKSPACE_DIR = 'E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'
+WORKSPACE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
+    WORKSPACE_DIR = os.path.abspath(os.path.normpath('E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'))
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
 
 def load_db():
@@ -27,13 +27,15 @@ def load_db():
             all_products = json.load(f)
         products = [p for p in all_products if p.get("show", True) is not False and p.get("status") != "offline"]
         products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
+    if os.path.exists(settings_path):
+        with open(settings_path, "r", encoding="utf-8") as f:
+            settings = json.load(f)
     if os.path.exists(articles_path):
         with open(articles_path, "r", encoding="utf-8") as f:
             all_articles = json.load(f)
         articles = [a for a in all_articles if a.get("show", True) is not False and a.get("status") != "offline"]
-    if os.path.exists(settings_path):
-        with open(settings_path, "r", encoding="utf-8") as f:
-            settings = json.load(f)
+        if settings.get("show_case_section", True) is False:
+            articles = [a for a in articles if a.get("category") != "合作案例"]
     if os.path.exists(friendlinks_path):
         with open(friendlinks_path, "r", encoding="utf-8") as f:
             friendlinks = json.load(f)
@@ -345,9 +347,18 @@ def sync_friendlinks_to_pages(friendlinks=None):
                 print(f"[-] Error syncing friendlinks to {fp}: {e}")
 
 
-def update_navigation(html_content, nav_links, file_rel_path):
+def update_navigation(html_content, nav_links, file_rel_path, settings=None):
     if not nav_links:
         return html_content
+        
+    if settings is None:
+        try:
+            with open(os.path.join(DATA_DIR, "settings.json"), "r", encoding="utf-8") as f:
+                settings = json.load(f)
+        except Exception:
+            settings = {}
+
+    show_case = settings.get("show_case_section", True) is not False
         
     # Determine directory depth relative to workspace root
     depth = len(file_rel_path.replace("\\", "/").split("/")) - 1
@@ -373,6 +384,8 @@ def update_navigation(html_content, nav_links, file_rel_path):
             nav_html += f'     <li class="is-sub-item" style="display:none;"> <a href="{child_url}" title="{child["name"]}"> &nbsp;&nbsp;├ {child["name"]} </a> </li> \n'
 
     for item in nav_links:
+        if not show_case and (item.get("name") in ["合作案例", "行业案例"] or "article_hzal" in item.get("url", "")):
+            continue
         process_item(item)
         
     nav_html += "   "
@@ -1088,7 +1101,7 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
      </dd> 
     </dl> 
 """
-        if (i + 1) % 3 == 0 and (i + 1) < len(cat_products):
+        if (i + 1) % 4 == 0 and (i + 1) < len(cat_products):
             list_html += "    <div class=\"clear\"></div>\n"
             
     list_html += "    "
@@ -1273,7 +1286,7 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
      <div class="ban_txt"> 
       <img src="./images/ban_txt.png"> 
      </div> 
-     <video autoplay="" controls="" id="sVideo" loop="" muted="" playsinline="" webkit-playsinline="" x5-playsinline=""> 
+     <video autoplay="" controls="" id="sVideo" loop="" muted="" playsinline="" webkit-playsinline="" x5-playsinline="" style="width: 100%; aspect-ratio: 1920 / 800; object-fit: cover; object-position: center;"> 
       <source src="{b['video']}" type="video/mp4"> 
      </video> 
     </div> 
@@ -1306,13 +1319,20 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
     sorted_active_articles = sorted(active_articles, key=lambda a: a.get("date", "") or "", reverse=True)
     
     # 3. Update case studies
-    cases = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("合作案例")][:10]
-    case_list_html = "\n"
-    for c in cases:
-        case_list_html += f'      <li class="swiper-slide"><a href="./{c["link"]}" target="_blank" title="{c["title"]}"><i><img alt="{c["title"]}" src="./{c["image"]}" title="{c["title"]}"><span><img alt="" src="./images/anspico.png"></span></i><em>{c["title"]}</em></a></li> \n'
-    case_list_html += "    "
-    
-    html = replace_group(r'(<ul class="f_cb swiper-wrapper">)(.*?)(</ul>\s*</div>\s*</div>\s*\n\s*</div>\s*<!-- 新闻资讯 -->)', case_list_html, html)
+    show_case = settings.get("show_case_section", True) is not False
+    if not show_case:
+        # Wrap the case section in hidden div if not already hidden
+        if '<div id="homepage-case-block"' not in html:
+            html = re.sub(r'(\s*<!-- 好原料成就品质美妆 -->[\s\S]*?)(<!-- 新闻资讯 -->)', r'\n<div id="homepage-case-block" style="display:none !important;">\n\1</div>\n\2', html)
+    else:
+        # Unwrap if previously wrapped
+        html = re.sub(r'<div id="homepage-case-block"[^>]*>\s*(\s*<!-- 好原料成就品质美妆 -->[\s\S]*?)</div>\s*(<!-- 新闻资讯 -->)', r'\1\2', html)
+        cases = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("合作案例")][:10]
+        case_list_html = "\n"
+        for c in cases:
+            case_list_html += f'      <li class="swiper-slide"><a href="./{c["link"]}" target="_blank" title="{c["title"]}"><i><img alt="{c["title"]}" src="./{c["image"]}" title="{c["title"]}"><span><img alt="" src="./images/anspico.png"></span></i><em>{c["title"]}</em></a></li> \n'
+        case_list_html += "    "
+        html = replace_group(r'(<ul class="f_cb swiper-wrapper">)(.*?)(</ul>\s*</div>\s*</div>\s*\n\s*</div>\s*<!-- 新闻资讯 -->)', case_list_html, html)
     
     # 4. Update News tabs (sorted by latest date, without date display on homepage)
     qydt_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("企业新闻")][:4]
@@ -1380,15 +1400,19 @@ def update_all_footers_headers_and_nav(settings, nav_links):
                     prefix = "../" * depth if depth > 0 else "./"
 
                     # Update footer case links (4 subcategories)
+                    show_case = settings.get("show_case_section", True) is not False
                     footer_case_pattern = r'(<dl>\s*<dt>\s*<a href="[^"]*article_hzal\.html">[^<]*</a>\s*</dt>\s*<dd class="f_cb">)[\s\S]*?(</dd>\s*</dl>)'
                     if re.search(footer_case_pattern, new_content):
-                        new_case_footer = f'''
+                        if show_case:
+                            new_case_footer = f'''
          <a href="{prefix}article_syssj.html" title="三方权威报告">三方权威报告 </a> 
          <a href="{prefix}article_sysyanjiu.html" title="实验室研究数据">实验室研究数据 </a> 
          <a href="{prefix}article_khhz.html" title="客户合作">客户合作 </a> 
          <a href="{prefix}article_yycj.html" title="应用场景">应用场景 </a> 
        '''
-                        new_content = re.sub(footer_case_pattern, r'\1' + new_case_footer + r'\2', new_content)
+                            new_content = re.sub(footer_case_pattern, r'\1' + new_case_footer + r'\2', new_content)
+                        else:
+                            new_content = re.sub(r'<dl>\s*<dt>\s*<a href="[^"]*article_hzal\.html">[^<]*</a>\s*</dt>\s*<dd class="f_cb">[\s\S]*?</dd>\s*</dl>', '', new_content)
 
                     # Update case tabs in case pages
                     if '<div class="p101a-fdh-02">' in new_content and any(k in file for k in ["hzal", "syssj", "sysyanjiu", "khhz", "yycj", "ymxy", "yyxy", "hzp", "hfpgc", "gnlsp", "xhyp", "nxhlcp"]):

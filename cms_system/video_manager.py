@@ -5,9 +5,9 @@ import re
 import datetime
 import uuid
 
-WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if '' in WORKSPACE_DIR or '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
-    WORKSPACE_DIR = 'E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'
+WORKSPACE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
+    WORKSPACE_DIR = os.path.abspath(os.path.normpath('E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'))
 VIDEOS_FILE = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data", "videos.json")
 
 def load_videos():

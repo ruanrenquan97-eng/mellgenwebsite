@@ -65,7 +65,7 @@
       "link": "",
       "title": "视频轮播",
       "type": "video",
-      "video": "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4"
+      "video": "./images/片头视频.mp4"
     },
     {
       "image": "resource/images/bfe8cc620f25444a9f4af585bb337864_2.jpg",
@@ -257,7 +257,7 @@
       "url": "article_cjwt.html"
     }
   ],
-  "intro_video": "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4",
+  "intro_video": "./images/片头视频.mp4",
   "kb_files": [
     {
       "category": "行业法规与合规报送",
@@ -464,5 +464,6 @@
   "watermark_opacity": 25,
   "watermark_position": "bottom-right",
   "watermark_text": "美尔健生物 · MELLGEN",
-  "working_hours": "周一至周五 09:00 - 18:00 (技术支持与试样咨询)"
+  "working_hours": "周一至周五 09:00 - 18:00 (技术支持与试样咨询)",
+  "show_case_section": false
 }

@@ -2047,7 +2047,7 @@
       <!-- ================== VIEW: ARTICLES LIST ================== -->
       <section id="tab-articles" class="space-y-3 hidden">
         <!-- Breadcrumb & Search Bar -->
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5 mb-2">
           <div class="flex items-center gap-1 text-slate-400 text-[10px] select-none">
             <i class="fa-solid fa-location-dot mr-1"></i>
             <span>当前位置：</span>
@@ -2057,27 +2057,40 @@
             <span>&gt;</span>
             <span class="text-slate-600 font-medium">文章列表</span>
           </div>
-          <!-- Filter & Search box -->
+          <!-- Search box -->
           <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-300 rounded px-2.5 py-1 text-xs text-slate-600">
-              <i class="fa-solid fa-filter text-[10px] text-slate-400"></i>
-              <span class="text-slate-500 font-medium">分类:</span>
-              <select id="filter-article-category" onchange="filterArticlesTable()" class="bg-transparent outline-none font-bold text-slate-700 cursor-pointer">
-                <option value="">全部分类 (全部资讯与动态)</option>
-                <option value="企业新闻">企业新闻 (公司动态)</option>
-                <option value="技术知识">技术知识</option>
-                <option value="合作案例">合作案例</option>
-                <option value="新闻资讯">新闻资讯</option>
-                <option value="常见问答">常见问答</option>
-              </select>
-            </div>
             <div class="relative">
-              <input type="text" id="search-articles" placeholder="请输入关键字查询" oninput="filterArticlesTable()" class="pl-3 pr-8 py-1 border border-slate-300 rounded text-xs outline-none bg-white w-52 text-slate-700">
+              <input type="text" id="search-articles" placeholder="请输入关键字查询文章..." oninput="filterArticlesTable()" class="pl-3 pr-8 py-1 border border-slate-300 rounded text-xs outline-none bg-white w-64 text-slate-700 focus:border-primary">
               <button onclick="filterArticlesTable()" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
               </button>
             </div>
             <button onclick="resetArticleFilters()" class="px-2 py-1 border border-slate-200 rounded bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs">重置</button>
+          </div>
+        </div>
+
+        <!-- Article Categories Filter Pills Bar -->
+        <div class="bg-white border border-slate-200 rounded-lg p-3 mb-3 shadow-xs" id="article-category-filter-box">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2 text-xs font-bold text-slate-700">
+              <i class="fa-solid fa-folder-tree text-primary"></i>
+              <span>文章分类快捷筛选</span>
+              <span class="text-slate-400 font-normal text-[11px]">(点击分类快速切换过滤列表)</span>
+            </div>
+            <!-- Quick Switch for 合作案例 -->
+            <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full px-3 py-1 text-xs">
+              <span class="text-slate-600 font-medium flex items-center gap-1.5">
+                <i class="fa-solid fa-handshake-angle text-primary"></i>
+                <span>合作案例前台展示:</span>
+              </span>
+              <button type="button" onclick="toggleCaseVisibility()" id="case-visibility-quick-btn" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold transition shadow-2xs cursor-pointer bg-emerald-100 text-emerald-800 border border-emerald-300">
+                <span id="case-visibility-quick-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="case-visibility-quick-text">前台展示中 (点击关闭)</span>
+              </button>
+            </div>
+          </div>
+          <div id="article-category-pills">
+            <!-- Dynamic Category Pills Rendered by JS -->
           </div>
         </div>
 
@@ -2091,6 +2104,15 @@
             <button onclick="openArticleModal()" class="text-slate-600 hover:text-primary">新建</button>
             <span class="text-slate-300">|</span>
             <button onclick="deleteCheckedArticles()" class="text-slate-600 hover:text-rose-500">删除</button>
+            <span class="text-slate-300">|</span>
+            <!-- Direct Category Filter in Toolbar -->
+            <div class="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-300 rounded px-2.5 py-1 text-xs text-slate-700 font-medium">
+              <i class="fa-solid fa-filter text-primary text-[10px]"></i>
+              <span class="text-slate-500 font-medium">分类筛选:</span>
+              <select id="actionbar-filter-article-category" onchange="setArticleFilterCategory(this.value)" class="bg-transparent outline-none font-bold text-slate-800 cursor-pointer">
+                <option value="">全部分类 (全部)</option>
+              </select>
+            </div>
             <span class="text-slate-300">|</span>
             <button type="button" onclick="takedownAllArticles()" class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-300 rounded font-semibold flex items-center gap-1 transition shadow-sm" title="一键全部下架所有资讯文章（前台隐藏）"><i class="fa-solid fa-arrow-down-wide-short text-amber-600"></i> <span>一键全部下架</span></button>
             <button type="button" onclick="publishAllArticles()" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 rounded font-semibold flex items-center gap-1 transition shadow-sm" title="一键全部上架所有资讯文章（前台显示）"><i class="fa-solid fa-arrow-up-wide-short text-emerald-600"></i> <span>一键全部上架</span></button>
@@ -6850,7 +6872,8 @@ Disallow: /cms_system/
 
           <!-- 1. Visual Rich Text Editor -->
           <div id="art-editor-pane-visual" class="bg-white border border-slate-200 rounded">
-            <div id="art-quill-editor" style="min-height: 280px; max-height: 480px; overflow-y: auto;"></div>
+            <div id="art-rich-visual-editor" contenteditable="true" class="p-6 min-h-[320px] max-h-[560px] overflow-y-auto text-slate-800 outline-none focus:ring-2 focus:ring-primary/20 leading-relaxed font-sans" style="font-family: inherit;"></div>
+            <div id="art-quill-editor" class="hidden" style="min-height: 280px; max-height: 480px; overflow-y: auto;"></div>
           </div>
 
           <!-- 2. HTML Source Code Editor -->
@@ -8521,6 +8544,7 @@ Disallow: /cms_system/
         renderProductsTable();
         renderProductsCategories();
         renderArticlesTable();
+        renderArticleCategoryPills();
         renderArticlesCategories();
         renderBannersEditor();
         renderOrdersTable();
@@ -10980,11 +11004,17 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       
       const searchEl = document.getElementById("search-articles");
       const q = searchEl ? searchEl.value.toLowerCase().trim() : "";
-      const catEl = document.getElementById("filter-article-category");
-      const catFilter = catEl ? catEl.value.trim() : "";
+      const catFilter = currentArticleFilterCategory;
+      const subCatFilter = currentArticleFilterSubCategory;
       const filtered = (cache.articles || []).filter(a => {
         const matchKeyword = !q || (a.title || "").toLowerCase().includes(q) || (a.desc || a.description || "").toLowerCase().includes(q);
-        const matchCategory = !catFilter || a.category === catFilter;
+        let matchCategory = true;
+        if (catFilter) {
+          matchCategory = a.category === catFilter;
+        }
+        if (matchCategory && subCatFilter) {
+          matchCategory = (a.sub_category === subCatFilter || a.cat_name === subCatFilter);
+        }
         return matchKeyword && matchCategory;
       });
       
@@ -11405,6 +11435,56 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
     let editingArticleId = null;
     let currentArticleEditorMode = 'visual'; // 'visual' | 'code' | 'preview'
 
+    function getArticleCurrentContent() {
+      const codeEditor = document.getElementById("art-code-editor");
+      const richEditor = document.getElementById("art-rich-visual-editor");
+      const previewBody = document.getElementById("art-preview-body");
+
+      if (currentArticleEditorMode === 'code') {
+        return codeEditor ? codeEditor.value : "";
+      } else if (currentArticleEditorMode === 'preview') {
+        return codeEditor && codeEditor.value ? codeEditor.value : (richEditor ? richEditor.innerHTML : "");
+      } else {
+        // visual mode
+        if (richEditor && !richEditor.classList.contains("hidden")) {
+          return richEditor.innerHTML;
+        }
+        if (quillArt && quillArt.root) {
+          const qHtml = quillArt.root.innerHTML;
+          if (qHtml && qHtml !== '<p><br></p>') return qHtml;
+        }
+        return codeEditor ? codeEditor.value : "";
+      }
+    }
+
+    function setArticleContentToMode(targetMode, content) {
+      const codeEditor = document.getElementById("art-code-editor");
+      const richEditor = document.getElementById("art-rich-visual-editor");
+      const quillEditor = document.getElementById("art-quill-editor");
+      const previewBody = document.getElementById("art-preview-body");
+      const val = content || "";
+
+      if (targetMode === 'code') {
+        if (codeEditor) codeEditor.value = val;
+      } else if (targetMode === 'preview') {
+        if (previewBody) {
+          previewBody.innerHTML = val || '<div class="text-slate-400 text-center py-8">正文内容为空</div>';
+        }
+      } else if (targetMode === 'visual') {
+        // Always populate rich visual editor for complete, faithful rendering of WeChat/HTML layouts
+        if (richEditor) {
+          richEditor.classList.remove("hidden");
+          richEditor.innerHTML = val;
+        }
+        if (quillEditor) {
+          quillEditor.classList.add("hidden");
+        }
+        if (codeEditor) {
+          codeEditor.value = val;
+        }
+      }
+    }
+
     function switchArticleEditorTab(mode) {
       const btnVisual = document.getElementById("art-tab-btn-visual");
       const btnCode = document.getElementById("art-tab-btn-code");
@@ -11412,33 +11492,12 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const paneVisual = document.getElementById("art-editor-pane-visual");
       const paneCode = document.getElementById("art-editor-pane-code");
       const panePreview = document.getElementById("art-editor-pane-preview");
-      const codeEditor = document.getElementById("art-code-editor");
-      const previewBody = document.getElementById("art-preview-body");
 
       // 1. Sync data out of current mode into buffer
-      let currentContent = "";
-      if (currentArticleEditorMode === 'code') {
-        currentContent = codeEditor ? codeEditor.value : "";
-      } else {
-        if (quillArt && quillArt.root) {
-          currentContent = quillArt.root.innerHTML;
-        } else if (codeEditor) {
-          currentContent = codeEditor.value;
-        }
-      }
+      const currentContent = getArticleCurrentContent();
 
       // 2. Load data into target mode
-      if (mode === 'code') {
-        if (codeEditor) codeEditor.value = currentContent;
-      } else if (mode === 'visual') {
-        if (quillArt && quillArt.root) {
-          quillArt.root.innerHTML = currentContent;
-        }
-      } else if (mode === 'preview') {
-        if (previewBody) {
-          previewBody.innerHTML = currentContent || '<div class="text-slate-400 text-center py-8">正文内容为空</div>';
-        }
-      }
+      setArticleContentToMode(mode, currentContent);
 
       // 3. Update tab button styles
       const activeClass = "px-3 py-1 rounded font-medium bg-white text-primary shadow-sm transition flex items-center gap-1.5";
@@ -11491,25 +11550,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const codeEditor = document.getElementById("art-code-editor");
       const previewBody = document.getElementById("art-preview-body");
 
-      // Ensure Quill editor is initialized if needed
-      if (!quillArt && window.Quill) {
-        try {
-          quillArt = new Quill('#art-quill-editor', {
-            theme: 'snow',
-            modules: {
-              toolbar: [
-                [{ 'header': [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                ['image', 'link'],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                ['clean']
-              ]
-            }
-          });
-        } catch (e) {
-          console.error("Delayed init of quillArt:", e);
-        }
-      }
+      currentArticleEditorMode = 'visual';
 
       if (id) {
         const a = cache.articles.find(art => art.id === id);
@@ -11523,13 +11564,9 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         if (descInput) descInput.value = a.desc || "";
 
         const contentHtml = a.content || "";
+        setArticleContentToMode('visual', contentHtml);
         if (codeEditor) codeEditor.value = contentHtml;
-        if (quillArt && quillArt.root) {
-          quillArt.root.innerHTML = contentHtml;
-        }
-        if (previewBody) {
-          previewBody.innerHTML = contentHtml || '<div class="text-slate-400 text-center py-8">正文内容为空</div>';
-        }
+        if (previewBody) previewBody.innerHTML = contentHtml || '<div class="text-slate-400 text-center py-8">正文内容为空</div>';
       } else {
         if (modalTitle) modalTitle.innerText = "发布新文章";
         if (idInput) { idInput.value = ""; idInput.readOnly = false; }
@@ -11538,8 +11575,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10);
         if (imgInput) imgInput.value = "images/ban_txt.png";
         if (descInput) descInput.value = "";
+        setArticleContentToMode('visual', "");
         if (codeEditor) codeEditor.value = "";
-        if (quillArt && quillArt.root) quillArt.root.innerHTML = "";
         if (previewBody) previewBody.innerHTML = "";
       }
 
@@ -11571,7 +11608,6 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const dateInput = document.getElementById("art-date");
       const imgInput = document.getElementById("art-image");
       const descInput = document.getElementById("art-desc");
-      const codeEditor = document.getElementById("art-code-editor");
 
       const title = titleInput ? titleInput.value.trim() : "";
       const id = idInput ? idInput.value.trim() : "";
@@ -11589,18 +11625,8 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const image = imgInput && imgInput.value.trim() ? imgInput.value.trim() : "images/ban_txt.png";
       const desc = descInput ? descInput.value.trim() : "";
 
-      // Extract content safely from active tab, with intelligent fallback
-      let content = "";
-      if (currentArticleEditorMode === 'code') {
-        content = codeEditor ? codeEditor.value : "";
-      } else {
-        if (quillArt && quillArt.root) {
-          content = quillArt.root.innerHTML;
-        }
-        if ((!content || content === "<p><br></p>") && codeEditor && codeEditor.value.trim()) {
-          content = codeEditor.value;
-        }
-      }
+      // Extract content safely with full fidelity
+      const content = getArticleCurrentContent();
 
       const payload = {
         title,
@@ -11703,6 +11729,120 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       }
     }
 
+    let currentArticleFilterCategory = "";
+    let currentArticleFilterSubCategory = "";
+
+    function setArticleFilterCategory(cat, subcat = "") {
+      currentArticleFilterCategory = cat || "";
+      currentArticleFilterSubCategory = subcat || "";
+
+      const sel = document.getElementById("actionbar-filter-article-category");
+      if (sel) sel.value = currentArticleFilterCategory;
+
+      articlesPage = 1;
+      renderArticleCategoryPills();
+      renderArticlesTable();
+    }
+
+    function renderArticleCategoryPills() {
+      const container = document.getElementById("article-category-pills");
+      if (!container) return;
+      if (cache.settings) {
+        updateCaseVisibilityUI(cache.settings.show_case_section);
+      }
+
+      const articles = cache.articles || [];
+      const total = articles.length;
+
+      const counts = {};
+      const subCounts = {};
+      articles.forEach(a => {
+        const c = a.category || "未分类";
+        counts[c] = (counts[c] || 0) + 1;
+        if (a.sub_category) {
+          subCounts[a.sub_category] = (subCounts[a.sub_category] || 0) + 1;
+        }
+      });
+
+      const mainCategories = ["全部", "合作案例", "技术知识", "企业新闻", "新闻资讯", "常见问答"];
+      Object.keys(counts).forEach(c => {
+        if (!mainCategories.includes(c)) mainCategories.push(c);
+      });
+
+      let html = `<div class="flex flex-wrap items-center gap-1.5">`;
+      mainCategories.forEach(cat => {
+        const isAll = cat === "全部";
+        const catKey = isAll ? "" : cat;
+        const count = isAll ? total : (counts[cat] || 0);
+        const isActive = currentArticleFilterCategory === catKey;
+
+        const btnClass = isActive
+          ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white shadow-xs transition flex items-center gap-1.5 cursor-pointer"
+          : "px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80 transition flex items-center gap-1.5 cursor-pointer";
+        const badgeClass = isActive
+          ? "bg-white/25 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold"
+          : "bg-white text-slate-600 px-1.5 py-0.5 rounded-full text-[10px] border border-slate-200 font-semibold";
+
+        html += `
+          <button type="button" onclick="setArticleFilterCategory('${catKey}')" class="${btnClass}">
+            <span>${cat}</span>
+            <span class="${badgeClass}">${count}</span>
+          </button>
+        `;
+      });
+      html += `</div>`;
+
+      // If current category has subcategories
+      if (currentArticleFilterCategory) {
+        const matchedSubs = [];
+        articles.forEach(a => {
+          if (a.category === currentArticleFilterCategory && a.sub_category && !matchedSubs.includes(a.sub_category)) {
+            matchedSubs.push(a.sub_category);
+          }
+        });
+
+        if (matchedSubs.length > 0) {
+          html += `<div class="flex flex-wrap items-center gap-1.5 pt-2 mt-2 border-t border-slate-100 w-full text-xs">`;
+          html += `<span class="text-slate-400 text-[11px] mr-1 flex items-center gap-1"><i class="fa-solid fa-turn-down text-[9px]"></i> 子分类筛选:</span>`;
+          
+          const isAllSubActive = !currentArticleFilterSubCategory;
+          html += `
+            <button type="button" onclick="setArticleFilterCategory('${currentArticleFilterCategory}', '')" class="px-2.5 py-1 rounded text-xs transition cursor-pointer ${isAllSubActive ? 'bg-primary/10 text-primary font-bold border border-primary/30' : 'bg-white hover:bg-slate-100 text-slate-600 border border-slate-200'}">
+              全部${currentArticleFilterCategory} (${counts[currentArticleFilterCategory] || 0})
+            </button>
+          `;
+
+          matchedSubs.forEach(sub => {
+            const subCount = articles.filter(a => a.category === currentArticleFilterCategory && a.sub_category === sub).length;
+            const isSubActive = currentArticleFilterSubCategory === sub;
+            html += `
+              <button type="button" onclick="setArticleFilterCategory('${currentArticleFilterCategory}', '${sub}')" class="px-2.5 py-1 rounded text-xs transition cursor-pointer ${isSubActive ? 'bg-primary/10 text-primary font-bold border border-primary/30' : 'bg-white hover:bg-slate-100 text-slate-600 border border-slate-200'}">
+                <span>${sub}</span>
+                <span class="ml-1 text-[10px] text-slate-400">(${subCount})</span>
+              </button>
+            `;
+          });
+          html += `</div>`;
+        }
+      }
+
+      container.innerHTML = html;
+
+      // Also update actionbar select dropdown options
+      const sel = document.getElementById("actionbar-filter-article-category");
+      if (sel) {
+        let optHtml = `<option value="">全部分类 (全部 ${total} 篇)</option>`;
+        mainCategories.forEach(cat => {
+          if (cat !== "全部") {
+            const cCount = counts[cat] || 0;
+            const isSel = currentArticleFilterCategory === cat ? "selected" : "";
+            optHtml += `<option value="${cat}" ${isSel}>${cat} (${cCount}篇)</option>`;
+          }
+        });
+        sel.innerHTML = optHtml;
+      }
+    }
+
     function filterArticlesTable() {
       articlesPage = 1;
       renderArticlesTable();
@@ -11710,21 +11850,15 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
 
     function resetArticleFilters() {
       const searchEl = document.getElementById("search-articles");
-      const catEl = document.getElementById("filter-article-category");
       if (searchEl) searchEl.value = "";
-      if (catEl) catEl.value = "";
-      articlesPage = 1;
-      renderArticlesTable();
+      setArticleFilterCategory("");
     }
 
     function filterArticlesByCategory(cat) {
       switchTab('articles');
-      const catEl = document.getElementById("filter-article-category");
-      if (catEl) catEl.value = cat || "";
+      setArticleFilterCategory(cat);
       const searchEl = document.getElementById("search-articles");
       if (searchEl) searchEl.value = "";
-      articlesPage = 1;
-      renderArticlesTable();
     }
 
     function filterProductsTable() {
@@ -11732,26 +11866,96 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       renderProductsTable();
     }
 
+    async function toggleCaseVisibility() {
+      try {
+        const cur = cache.settings ? (cache.settings.show_case_section !== false) : true;
+        const nextVal = !cur;
+        
+        const confirmMsg = nextVal
+          ? "确认开启【合作案例】前台显示吗？\n开启后，官网前台导航栏、首页合作案例板块及案例列表页将正常展示。"
+          : "确认关闭【合作案例】前台显示吗？\n关闭后，官网前台导航栏将移除合作案例、首页案例板块将隐藏，且前台不展示合作案例相关内容。";
+
+        if (!confirm(confirmMsg)) return;
+
+        showToast("正在切换并重新生成全站页面...", "info");
+
+        const res = await fetch("/api/settings/toggle-case-visibility", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ enabled: nextVal })
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (!cache.settings) cache.settings = {};
+          cache.settings.show_case_section = data.show_case_section;
+          updateCaseVisibilityUI(data.show_case_section);
+          renderArticlesCategories();
+          showToast(data.message || (nextVal ? "合作案例已开启前台显示" : "合作案例已关闭前台显示"), "success");
+        } else {
+          showToast(data.message || "切换失败", "error");
+        }
+      } catch (err) {
+        showToast("请求异常：" + err.message, "error");
+      }
+    }
+
+    function updateCaseVisibilityUI(showCase) {
+      const isVisible = showCase !== false;
+      const quickBtn = document.getElementById("case-visibility-quick-btn");
+      const quickDot = document.getElementById("case-visibility-quick-dot");
+      const quickText = document.getElementById("case-visibility-quick-text");
+
+      if (quickBtn && quickDot && quickText) {
+        if (isVisible) {
+          quickBtn.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold transition shadow-2xs cursor-pointer bg-emerald-100 hover:bg-emerald-200 text-emerald-800 border border-emerald-300";
+          quickDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+          quickText.innerText = "前台展示中 (点击隐藏)";
+        } else {
+          quickBtn.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold transition shadow-2xs cursor-pointer bg-rose-100 hover:bg-rose-200 text-rose-800 border border-rose-300";
+          quickDot.className = "w-2 h-2 rounded-full bg-rose-500";
+          quickText.innerText = "前台已隐藏 (点击开启)";
+        }
+      }
+    }
+
     function renderArticlesCategories() {
       const tbody = document.getElementById("articles-categories-body");
       if (!tbody) return;
       tbody.innerHTML = "";
-      const categories = ["企业新闻", "技术知识", "新闻资讯", "合作案例", "常见问答"];
+      const categories = ["合作案例", "技术知识", "企业新闻", "新闻资讯", "常见问答"];
+      const isCaseVisible = cache.settings ? (cache.settings.show_case_section !== false) : true;
+      updateCaseVisibilityUI(isCaseVisible);
+
       categories.forEach((cat, index) => {
         const count = (cache.articles || []).filter(a => a.category === cat).length;
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-50/50 transition cursor-pointer group";
-        tr.onclick = () => filterArticlesByCategory(cat);
+        tr.className = "hover:bg-slate-50/50 transition";
+        
+        let statusHtml = '';
+        if (cat === "合作案例") {
+          statusHtml = `
+            <div class="flex items-center gap-3">
+              <button type="button" onclick="event.stopPropagation(); toggleCaseVisibility();" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition cursor-pointer shadow-xs ${isCaseVisible ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-rose-50 text-rose-700 border border-rose-300 hover:bg-rose-100'}" title="点击一键切换【合作案例】前台显示/隐藏">
+                <span class="w-2 h-2 rounded-full ${isCaseVisible ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}"></span>
+                <span>${isCaseVisible ? '前台展示中 (点击关闭)' : '前台已隐藏 (点击开启)'}</span>
+              </button>
+              <span class="text-[11px] text-slate-400">关闭后官网前台导航栏、首页板块及列表全部隐藏</span>
+            </div>
+          `;
+        } else {
+          statusHtml = `<span class="inline-flex items-center gap-1.5 text-xs text-emerald-600 font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>常驻显示</span>`;
+        }
+
         tr.innerHTML = `
           <td class="p-3 text-slate-400">${index + 1}</td>
-          <td class="p-3 font-semibold text-slate-800 flex items-center gap-2">
+          <td class="p-3 font-semibold text-slate-800 flex items-center gap-2 cursor-pointer" onclick="filterArticlesByCategory('${cat}')">
             <span>${cat}</span>
-            <span class="text-[11px] text-primary opacity-0 group-hover:opacity-100 transition flex items-center gap-1 font-normal">
+            <span class="text-[11px] text-primary transition flex items-center gap-1 font-normal hover:underline">
               <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> 查看文章
             </span>
           </td>
           <td class="p-3 font-bold text-slate-700">${count} 篇文章</td>
-          <td class="p-3 text-emerald-600 font-medium"><span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span>显示中</td>
+          <td class="p-3">${statusHtml}</td>
         `;
         tbody.appendChild(tr);
       });

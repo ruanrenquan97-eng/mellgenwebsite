@@ -1,7 +1,7 @@
 {
   "traffic": {
     "current_date": "2026-09-16",
-    "pv": 276,
+    "pv": 423,
     "uv": 1,
     "ip": 1,
     "pv_growth": "待访客来访",
@@ -18,8 +18,8 @@
       }
     ],
     "devices": {
-      "pc": 460,
-      "mobile": 6
+      "pc": 606,
+      "mobile": 7
     },
     "today_ips": [
       "127.0.0.1"
@@ -70,7 +70,7 @@
       {
         "date": "09-16",
         "full_date": "2026-09-16",
-        "pv": 276,
+        "pv": 422,
         "uv": 1,
         "ip": 1
       }
@@ -282,14 +282,14 @@
       {
         "date": "09-16",
         "full_date": "2026-09-16",
-        "pv": 276,
+        "pv": 422,
         "uv": 1,
         "ip": 1
       }
     ]
   },
   "indexing": {
-    "total_pages": 244,
+    "total_pages": 242,
     "indexed_pages": 198,
     "overall_rate": 96.1,
     "last_check_time": "2026-09-14 11:50:00",

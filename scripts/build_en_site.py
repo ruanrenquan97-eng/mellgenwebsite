@@ -19,7 +19,7 @@ TRANSLATIONS = [
     ("重塑青春·锁住肌龄", "Reshaping Youth · Locking In Skin Age"),
     ("全球生物透皮技术深耕者", "Global Pioneer in Biological Transdermal Technology"),
     ("生物科技 · 世界骄傲", "Biotechnology · Global Pride"),
-    ("美尔健开创生物修复美容新时代", "Mellgen Pioneers a New Era of Bio-Repair Beauty"),
+    ("美尔健开创生物修护美容新时代", "Mellgen Pioneers a New Era of Bio-Repair Beauty"),
     ("颠覆性的第三代透皮肽融合技术", "Disruptive 3rd-Generation Transdermal Peptide Fusion Technology"),
     ("医用原料-化妆品原料-食品营养原料", "Medical Raw Materials - Cosmetic Raw Materials - Food Nutrition Ingredients"),
     ("医用原料,化妆品原料,食品营养原料", "Medical Raw Materials, Cosmetic Raw Materials, Food Nutrition Ingredients"),
@@ -72,7 +72,7 @@ TRANSLATIONS = [
 
     # Banners
     ("美尔健生物从源头做好产品", "Mellgen Biotech: Crafting Superior Products from the Source"),
-    ("突破生物透皮技术在皮肤修复与抗衰应用", "Breakthrough in Biological Transdermal Tech for Skin Repair & Anti-Aging"),
+    ("突破生物透皮技术在皮肤修护与抗衰应用", "Breakthrough in Biological Transdermal Tech for Skin Repair & Anti-Aging"),
     ("国内外1000+家品牌方携手2000+款化妆品品牌选用我们的原料", "1,000+ Global Brand Partners & 2,000+ Cosmetic Brands Choose Our Ingredients"),
 
     # Core strengths & labs

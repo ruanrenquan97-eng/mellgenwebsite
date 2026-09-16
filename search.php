@@ -119,7 +119,7 @@ var _hmt = _hmt || [];
 	       				 	                       <dd>
 	                           <h4><a class="t1-article-link" href="http:../index.html../index.htmlindex.html../index.html../index.htmlindex.htmlwww.mellgen.com../index.html../index.htmlindex.htmlproducts../index.html../index.htmlindex.htmlpdrnht.html" title="PDRN环肽棒">PDRN环肽棒<../index.html../index.htmlindex.htmla><../index.html../index.htmlindex.htmlh4>
 	                           <div class="xnznr-search-1-desc">
-	                            美尔健生物PDRN环肽棒以超分子自组装技术打破僵局，将透皮环肽与<i style='color:red'>dna<../index.html../index.htmlindex.htmli>../index.html../index.htmlindex.htmlRNA精密结合，打造“纳米级修复快车”，让基因修护成分直达肌底！	                           <../index.html../index.htmlindex.htmldiv>
+	                            美尔健生物PDRN环肽棒以超分子自组装技术打破僵局，将透皮环肽与<i style='color:red'>dna<../index.html../index.htmlindex.htmli>../index.html../index.htmlindex.htmlRNA精密结合，打造“纳米级修护快车”，让基因修护成分直达肌底！	                           <../index.html../index.htmlindex.htmldiv>
 	                       <../index.html../index.htmlindex.htmldd>
 	                   <../index.html../index.htmlindex.htmldl>
 	        	
@@ -139,7 +139,7 @@ var _hmt = _hmt || [];
 	       				 	                       <dd>
 	                           <h4><a class="t1-article-link" href="http:../index.html../index.htmlindex.html../index.html../index.htmlindex.htmlwww.mellgen.com../index.html../index.htmlindex.htmlarticles../index.html../index.htmlindex.htmlpdrnss.html" title="PDRN是什么？揭秘美尔健生物的合成生物学如何引领皮肤再生科技新纪元">PDRN是什么？揭秘美尔健生物的合成生物学如何引领皮肤再生科技新纪元<../index.html../index.htmlindex.htmla><../index.html../index.htmlindex.htmlh4>
 	                           <div class="xnznr-search-1-desc">
-	                            在现代皮肤医学和功效护肤品领域，**PDRN（多聚脱氧核糖核苷酸）**正迅速成为炙手可热的修复成分。作为一种源自鱼类或植物的<i style='color:red'>dna<../index.html../index.htmlindex.htmli>片段活性物质，它以其出色的肌肤焕活、舒缓修护和皮肤屏障维护能力，赢得全球医美和护肤界的广泛关注。那么，**PDRN到底是什么？它有什么作用？**而作为活性分子合成与透皮技术的先锋，美尔健生物又是如何通过合成生物学实现PDRN的高效、绿色产业化的？	                           <../index.html../index.htmlindex.htmldiv>
+	                            在现代皮肤医学和功效护肤品领域，**PDRN（多聚脱氧核糖核苷酸）**正迅速成为炙手可热的修护成分。作为一种源自鱼类或植物的<i style='color:red'>dna<../index.html../index.htmlindex.htmli>片段活性物质，它以其出色的肌肤焕活、舒缓修护和皮肤屏障维护能力，赢得全球医美和护肤界的广泛关注。那么，**PDRN到底是什么？它有什么作用？**而作为活性分子合成与透皮技术的先锋，美尔健生物又是如何通过合成生物学实现PDRN的高效、绿色产业化的？	                           <../index.html../index.htmlindex.htmldiv>
 	                       <../index.html../index.htmlindex.htmldd>
 	                   <../index.html../index.htmlindex.htmldl>
 	        	
@@ -149,7 +149,7 @@ var _hmt = _hmt || [];
 	       				 	                       <dd>
 	                           <h4><a class="t1-article-link" href="http:../index.html../index.htmlindex.html../index.html../index.htmlindex.htmlwww.mellgen.com../index.html../index.htmlindex.htmlarticles../index.html../index.htmlindex.htmlzlhkjz.html" title="专利黑科技：这根‘环肽棒’能钻进皮肤修<i style='color:red'>dna<../index.html../index.htmlindex.htmli>！抗衰从此开挂">专利黑科技：这根‘环肽棒’能钻进皮肤修<i style='color:red'>dna<../index.html../index.htmlindex.htmli>！抗衰从此开挂<../index.html../index.htmlindex.htmla><../index.html../index.htmlindex.htmlh4>
 	                           <div class="xnznr-search-1-desc">
-	                            当<i style='color:red'>dna<../index.html../index.htmlindex.htmli>修复遇见透皮黑科技在抗衰领域，<i style='color:red'>dna<../index.html../index.htmlindex.htmli>修护一直是“金字塔尖”的技术难题——外源性核酸分子难以穿透皮肤屏障，实验室功效难以转化为真实效果。	                           <../index.html../index.htmlindex.htmldiv>
+	                            当<i style='color:red'>dna<../index.html../index.htmlindex.htmli>修护遇见透皮黑科技在抗衰领域，<i style='color:red'>dna<../index.html../index.htmlindex.htmli>修护一直是“金字塔尖”的技术难题——外源性核酸分子难以穿透皮肤屏障，实验室功效难以转化为真实效果。	                           <../index.html../index.htmlindex.htmldiv>
 	                       <../index.html../index.htmlindex.htmldd>
 	                   <../index.html../index.htmlindex.htmldl>
 	        	

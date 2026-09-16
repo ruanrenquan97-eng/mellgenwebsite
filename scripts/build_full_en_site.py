@@ -74,7 +74,7 @@ DICT_ITEMS = [
     ("国内外1000+家品牌方携手2000+款Cosmetics品牌选用我们的原料",
      "1,000+ Global Brand Partners & 2,000+ Cosmetic Brands Choose Our Ingredients"),
 
-    ("突破生物透皮技术在皮肤修复与抗衰应用",
+    ("突破生物透皮技术在皮肤修护与抗衰应用",
      "Breakthrough in Biological Transdermal Tech for Skin Repair & Anti-Aging"),
 
     ("美尔健生物从源头做好产品",
@@ -143,7 +143,7 @@ DICT_ITEMS = [
     # Company / Brand Terms
     ("美尔健（深圳）生物科技有限公司", "Mellgen (Shenzhen) Biotechnology Co., Ltd."),
     ("美尔健生物", "Mellgen Biotech"),
-    ("美尔健开创生物修复美容新时代", "Mellgen Pioneers a New Era of Bio-Repair Beauty"),
+    ("美尔健开创生物修护美容新时代", "Mellgen Pioneers a New Era of Bio-Repair Beauty"),
     ("美尔健", "Mellgen"),
     ("重塑青春·锁住肌龄", "Reshaping Youth · Locking In Skin Age"),
     ("全球生物透皮技术深耕者", "Global Pioneer in Biological Transdermal Technology"),

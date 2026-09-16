@@ -70,10 +70,10 @@ def bootstrap_company_info():
         "production_bases": [],
         "about_company": {
             "title": "走进美尔健生物",
-            "subtitle": "开创生物修复美容新时代",
+            "subtitle": "开创生物修护美容新时代",
             "banner_img": "./resource/images/0ffdceeb65b346afb57542b0efb3fb79_2.jpg",
             "paragraphs": [
-                "美尔健（深圳）生物科技有限公司坐落于粤港澳大湾区产业创新核心区域深圳国际生物谷，由中国科学技术大学教授和博士后团队成立的一家从事透皮技术孵化，提供皮肤准确修复抗衰老解决方案的国家高新技术企业。",
+                "美尔健（深圳）生物科技有限公司坐落于粤港澳大湾区产业创新核心区域深圳国际生物谷，由中国科学技术大学教授和博士后团队成立的一家从事透皮技术孵化，提供皮肤准确修护抗衰老解决方案的国家高新技术企业。",
                 "公司依托中国科学技术大学生命科学学院和华南理工大学医学院，拥有第三代生物透皮技术，致力解决生物大分子，如蛋白多肽，多糖类的无创透皮吸收。围绕核心技术的开发与利用，我们专注“皮肤抗衰老分子”、“海洋蓝色分子”和“特色植物资源”的研究。",
                 "以合成生物学基础，基因工程、发酵工程为技术手段，开发新一代透皮增强型生物活性分子，实现蛋白质多肽，植物多糖以及微生物发酵产物等特色功效性生物资源的绿色开发与产业化，提升功效性活性分子在皮肤修护与健康护理方面的有效利用。"
             ],
@@ -322,7 +322,7 @@ def sync_about_company(data=None):
             if about.get("title"):
                 content = re.sub(r'<h3>\s*<i>.*?</i>\s*</h3>', f'<h3><i>{about["title"]}</i></h3>', content)
             if about.get("subtitle"):
-                content = re.sub(r'<em>开创生物修复美容新时代</em>', f'<em>{about["subtitle"]}</em>', content)
+                content = re.sub(r'<em>开创生物修护美容新时代</em>', f'<em>{about["subtitle"]}</em>', content)
             if about.get("paragraphs"):
                 p_html = "\n".join([f"                    <p>{p}</p>" for p in about["paragraphs"]])
                 desc_pattern = re.compile(r'<div class="desc"[^>]*>.*?</div>', re.DOTALL)

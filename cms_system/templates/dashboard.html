@@ -1243,7 +1243,7 @@
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">SEO状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">推荐</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">置顶</th>
-                <th class="p-3 min-w-[65px] text-center whitespace-nowrap">显示</th>
+                <th class="p-3 min-w-[85px] text-center whitespace-nowrap">上架状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap" title="手动输入排序数值，越小越靠前">排序</th>
                 <th class="p-3 min-w-[460px] whitespace-nowrap">操作 / 发布时间</th>
               </tr>
@@ -1635,10 +1635,10 @@
 
             <!-- Show Status (Show / Hide) -->
             <div class="flex items-center gap-3">
-              <label class="w-24 text-right font-semibold text-slate-600">显示</label>
+              <label class="w-24 text-right font-semibold text-slate-600">上架状态</label>
               <div class="flex-1 flex gap-4 text-xs font-medium">
-                <label class="flex items-center gap-1.5 cursor-pointer"><input type="radio" name="entry-prod-show" id="entry-prod-show-yes" value="true" checked class="scale-95 accent-primary"> 显示</label>
-                <label class="flex items-center gap-1.5 cursor-pointer"><input type="radio" name="entry-prod-show" id="entry-prod-show-no" value="false" class="scale-95 accent-primary"> 隐藏</label>
+                <label class="flex items-center gap-1.5 cursor-pointer"><input type="radio" name="entry-prod-show" id="entry-prod-show-yes" value="true" checked class="scale-95 accent-primary"> 已上架（前台显示）</label>
+                <label class="flex items-center gap-1.5 cursor-pointer"><input type="radio" name="entry-prod-show" id="entry-prod-show-no" value="false" class="scale-95 accent-primary"> 已下架（前台隐藏）</label>
               </div>
             </div>
 
@@ -1737,7 +1737,7 @@
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">SEO状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">推荐</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">置顶</th>
-                <th class="p-3 min-w-[65px] text-center whitespace-nowrap">显示</th>
+                <th class="p-3 min-w-[85px] text-center whitespace-nowrap">显示状态</th>
                 <th class="p-3 min-w-[75px] text-center whitespace-nowrap">排序</th>
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">产品数量</th>
                 <th class="p-3 min-w-[160px] text-center whitespace-nowrap">发布时间</th>
@@ -2152,7 +2152,7 @@
                 <th class="p-3 min-w-[90px] text-center whitespace-nowrap">SEO状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">推荐</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap">置顶</th>
-                <th class="p-3 min-w-[65px] text-center whitespace-nowrap">显示</th>
+                <th class="p-3 min-w-[85px] text-center whitespace-nowrap">上架状态</th>
                 <th class="p-3 min-w-[65px] text-center whitespace-nowrap" title="手动输入排序数值，越小越靠前">排序</th>
                 <th class="p-3 min-w-[440px] whitespace-nowrap">操作 / 发布时间</th>
               </tr>
@@ -4104,7 +4104,7 @@ Disallow: /cms_system/
                       <th class="p-3 text-center whitespace-nowrap">所属部门</th>
                       <th class="p-3 text-center whitespace-nowrap">客服类型</th>
                       <th class="p-3 text-center min-w-[65px] whitespace-nowrap">排序</th>
-                      <th class="p-3 text-center min-w-[65px] whitespace-nowrap">显示</th>
+                      <th class="p-3 text-center min-w-[85px] whitespace-nowrap">显示状态</th>
                       <th class="p-3 text-center min-w-[120px] whitespace-nowrap">创建时间</th>
                       <th class="p-3 text-center min-w-[140px] whitespace-nowrap">操作</th>
                     </tr>
@@ -4385,7 +4385,7 @@ Disallow: /cms_system/
                     <th class="p-3 w-10"><input type="checkbox" onchange="toggleAllBannersCheckboxes(this)" class="rounded scale-90 accent-primary cursor-pointer"></th>
                     <th class="p-3 w-12 text-center whitespace-nowrap">序号</th>
                     <th class="p-3 whitespace-nowrap">广告信息</th>
-                    <th class="p-3 text-center min-w-[75px] whitespace-nowrap">显示</th>
+                    <th class="p-3 text-center min-w-[85px] whitespace-nowrap">显示状态</th>
                     <th class="p-3 text-center min-w-[160px] whitespace-nowrap">发布时间</th>
                   </tr>
                 </thead>
@@ -9709,11 +9709,12 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           </td>
           <td class="p-3 text-slate-500 font-medium">${p.category}</td>
           <td class="p-3">${p.seoTitle ? '<span class="text-emerald-500 font-semibold">已设置</span>' : '<span class="text-slate-300">-</span>'}</td>
-          <td class="p-3"><input type="checkbox" onchange="toggleProductField('${p.id}', 'recommend', this.checked)" ${p.recommend ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
-          <td class="p-3"><input type="checkbox" onchange="toggleProductField('${p.id}', 'top', this.checked)" ${p.top ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
-          <td class="p-3">
-            <button onclick="toggleProductField('${p.id}', 'show', ${!p.show})" class="${p.show !== false ? 'text-emerald-500' : 'text-slate-300'}" title="切换显示状态">
-              <i class="fa-solid fa-circle text-[8px]"></i>
+          <td class="p-3 text-center"><input type="checkbox" onchange="toggleProductField('${p.id}', 'recommend', this.checked)" ${p.recommend ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
+          <td class="p-3 text-center"><input type="checkbox" onchange="toggleProductField('${p.id}', 'top', this.checked)" ${p.top ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
+          <td class="p-3 text-center whitespace-nowrap">
+            <button onclick="toggleProductField('${p.id}', 'show', ${p.show === false ? true : false})" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer shadow-xs ${p.show !== false ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200'}" title="点击切换上架/下架状态">
+              <i class="fa-solid fa-circle text-[7px] ${p.show !== false ? 'text-emerald-500' : 'text-slate-400'}"></i>
+              <span>${p.show !== false ? '已上架' : '已下架'}</span>
             </button>
           </td>
           <td class="p-3 text-center relative z-20"><input type="text" value="${p.sort || 50}" onblur="updateProductSort('${p.id}', this.value)" onkeydown="if(event.key==='Enter')this.blur()" class="sort-input w-11 px-1 py-0.5 border text-center rounded outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 text-xs bg-white text-slate-700 shadow-sm transition" title="手动输入排序数值（回车保存）"></td>
@@ -11032,11 +11033,12 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           </td>
           <td class="p-3 text-slate-500 font-medium">${a.category}</td>
           <td class="p-3">${a.seoTitle ? '<span class="text-emerald-500 font-semibold">已设置</span>' : '<span class="text-slate-300">-</span>'}</td>
-          <td class="p-3"><input type="checkbox" onchange="toggleArticleField('${a.id}', 'recommend', this.checked)" ${a.recommend ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
-          <td class="p-3"><input type="checkbox" onchange="toggleArticleField('${a.id}', 'top', this.checked)" ${a.top ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
-          <td class="p-3">
-            <button onclick="toggleArticleField('${a.id}', 'show', ${!a.show})" class="${a.show !== false ? 'text-emerald-500' : 'text-slate-300'}" title="切换显示状态">
-              <i class="fa-solid fa-circle text-[8px]"></i>
+          <td class="p-3 text-center"><input type="checkbox" onchange="toggleArticleField('${a.id}', 'recommend', this.checked)" ${a.recommend ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
+          <td class="p-3 text-center"><input type="checkbox" onchange="toggleArticleField('${a.id}', 'top', this.checked)" ${a.top ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
+          <td class="p-3 text-center whitespace-nowrap">
+            <button onclick="toggleArticleField('${a.id}', 'show', ${a.show === false ? true : false})" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer shadow-xs ${a.show !== false ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200'}" title="点击切换上架/下架状态">
+              <i class="fa-solid fa-circle text-[7px] ${a.show !== false ? 'text-emerald-500' : 'text-slate-400'}"></i>
+              <span>${a.show !== false ? '已上架' : '已下架'}</span>
             </button>
           </td>
           <td class="p-3 text-center relative z-20"><input type="text" value="${a.sort || 50}" onblur="updateArticleSort('${a.id}', this.value)" onkeydown="if(event.key==='Enter')this.blur()" class="sort-input w-11 px-1 py-0.5 border text-center rounded outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 text-xs bg-white text-slate-700 shadow-sm transition" title="手动输入排序数值（回车保存）"></td>
@@ -12828,9 +12830,10 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           <td class="p-3 text-center">${c.seo_title ? '<span class="text-emerald-500 font-semibold">已设置</span>' : '<span class="text-slate-300">-</span>'}</td>
           <td class="p-3 text-center"><input type="checkbox" onchange="toggleCategoryField('${c.id}', 'recommend', this.checked)" ${c.recommend ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
           <td class="p-3 text-center"><input type="checkbox" onchange="toggleCategoryField('${c.id}', 'top', this.checked)" ${c.top ? 'checked' : ''} class="rounded scale-90 accent-primary cursor-pointer"></td>
-          <td class="p-3 text-center">
-            <button onclick="toggleCategoryField('${c.id}', 'show', ${!c.show})" class="${c.show !== false ? 'text-emerald-500' : 'text-slate-300'}" title="切换显示状态">
-              <i class="fa-solid fa-circle text-[8px]"></i>
+          <td class="p-3 text-center whitespace-nowrap">
+            <button onclick="toggleCategoryField('${c.id}', 'show', ${!c.show})" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer shadow-xs ${c.show !== false ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200'}" title="切换显示/隐藏状态">
+              <i class="fa-solid fa-circle text-[7px] ${c.show !== false ? 'text-emerald-500' : 'text-slate-400'}"></i>
+              <span>${c.show !== false ? '已显示' : '已隐藏'}</span>
             </button>
           </td>
           <td class="p-3 text-center"><input type="text" value="${c.sort || 999}" onblur="updateCategorySort('${c.id}', this.value)" class="sort-input w-10 px-1 py-0.5 border text-center rounded outline-none focus:border-primary text-[10px] bg-white text-slate-700"></td>
@@ -13294,9 +13297,10 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
               <p class="text-[10px] text-slate-400">链接: ${b.link || '-'}</p>
             </div>
           </td>
-          <td class="p-3 text-center">
-            <button onclick="toggleAdField(${cache.settings.banners.indexOf(b)}, 'show', ${!b.show})" class="${b.show !== false ? 'text-emerald-500' : 'text-slate-300'}" title="切换显示状态">
-              <i class="fa-solid fa-circle text-[8px]"></i>
+          <td class="p-3 text-center whitespace-nowrap">
+            <button onclick="toggleAdField(${cache.settings.banners.indexOf(b)}, 'show', ${!b.show})" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer shadow-xs ${b.show !== false ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200'}" title="切换显示/隐藏状态">
+              <i class="fa-solid fa-circle text-[7px] ${b.show !== false ? 'text-emerald-500' : 'text-slate-400'}"></i>
+              <span>${b.show !== false ? '已显示' : '已隐藏'}</span>
             </button>
           </td>
           <td class="p-3 text-center font-mono text-slate-500">${b.date || '2025-02-18 16:30'}</td>
@@ -15275,9 +15279,10 @@ ${item.content_summary || '美尔健核心原料及第3代高效生物高渗透�
           <td class="p-3 text-center text-slate-650 font-medium">${item.department}</td>
           <td class="p-3 text-center text-slate-500">${item.type}</td>
           <td class="p-3 text-center"><input type="text" value="${item.sort || 99}" onblur="updateCsSort('${item.id}', this.value)" class="w-10 px-1 py-0.5 border text-center rounded outline-none focus:border-primary text-[10px] bg-white text-slate-700"></td>
-          <td class="p-3 text-center">
-            <button onclick="toggleCsField('${item.id}', 'show', ${!item.show})" class="${item.show !== false ? 'text-emerald-500' : 'text-slate-300'}" title="切换显示状态">
-              <i class="fa-solid fa-circle text-[8px]"></i>
+          <td class="p-3 text-center whitespace-nowrap">
+            <button onclick="toggleCsField('${item.id}', 'show', ${!item.show})" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer shadow-xs ${item.show !== false ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200'}" title="切换显示/隐藏状态">
+              <i class="fa-solid fa-circle text-[7px] ${item.show !== false ? 'text-emerald-500' : 'text-slate-400'}"></i>
+              <span>${item.show !== false ? '已显示' : '已隐藏'}</span>
             </button>
           </td>
           <td class="p-3 text-center font-mono text-slate-500">${item.date}</td>

@@ -87,7 +87,7 @@ REPLACEMENTS = [
     ("人群面临敏感困扰，而“敏肌抗老”赛道", "consumers face sensitivity, and the sensitive anti-aging segment "),
     ("同比暴涨", "surged year-on-year, "),
     ("成为品牌必争之地。敏感肌护理", "becoming a crucial focus for leading brands. Sensitive skin care "),
-    ("在现代皮肤医学和功效护肤品领域，多聚脱氧核糖核苷酸（PDRN）正迅速成为炙手可热的修复成分。作为一种源自鱼类或植物的DNA片段活性物质，它以其出色的肌肤焕活、舒缓修护和皮肤屏障维护能力，赢得全",
+    ("在现代皮肤医学和功效护肤品领域，多聚脱氧核糖核苷酸（PDRN）正迅速成为炙手可热的修护成分。作为一种源自鱼类或植物的DNA片段活性物质，它以其出色的肌肤焕活、舒缓修护和皮肤屏障维护能力，赢得全",
      "In modern dermatology and efficacy skincare, PDRN is rapidly becoming a sought-after restorative active, renowned for cellular revitalization, soothing repair, and skin barrier fortification."),
     ("近日，美妆博主“大嘴博士”质疑某品牌重组胶原产品“测不到胶原蛋白”，引发行业地震。消费者对功效成分的信任度跌至冰点，",
      "Recent industry discussions regarding recombinant collagen verification have prompted leading brands to insist on authentic bio-technology."),

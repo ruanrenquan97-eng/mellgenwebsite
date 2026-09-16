@@ -23,8 +23,8 @@
     "report_no": "YW-JC-250612001D-01",
     "testing_agency": "一苇堂检测科技（上海）有限公司",
     "pdf_filename": "tpht_transdermal_penetration.pdf",
-    "show": true,
-    "status": "published",
+    "show": false,
+    "status": "offline",
     "recommend": false,
     "top": false,
     "sort": 50
@@ -42,9 +42,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=2247489491&idx=1&sn=fa1b4fdc2ab178af110aa1f73834ffaa&chksm=fb4a51f0cc3dd8e632da570db263c8e92f29a36126c560155cde3a65c3cbf63ee227cf734ce0#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 10,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_1fab9a78",
@@ -76,9 +76,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV81eGpmemhmQTBNYTR4dFlvdWFuTW0wRk1LUWFNNWxyX1pwR1Y5NUtabEFOTE1qTkN1bi1FemtMZ1RFdkh3eDlxLW9nSk1XM3hzWGVCaGZMdmVWd0dZVWhHWW1fc1BycVJNSXhBVDZlVXRpMzFoaUJWMXNMOXZZYmhqRlVkNDVjUDZQN2FBZnpQa3BkS29SbjhTdGMzUWxabHRtT3VLaWFPNnlaX3VBfn4%3D&chksm=7b4996154c3e1f030c6f5fe4712559ff9d6625d262cf8c4fdde8bd3a8ec6e5f4546a95f1704f#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_6f765800",
@@ -93,9 +93,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9uUFFMVTBBNGh4aXBvd3NtdWFuTW0wRk1LUWFNNWxyX1pwR1Y5NUtabEFOTE1qTkN1bi1FemtMZ1RFc1Y1anFZbjBlSi1PUGdLYVgyWGVfaUhKUUZReEozS0IxR0FQbWlseUFKQlVwZm5KZjZWQ0NSbXBPd3dsc2JDMGQ4cUZTMGctQ3dvY2hsTnpjUGhvT3RNVEt6RjJJVDhKUlE2Mlp0aFZlajNRfn4%3D&chksm=7b49890f4c3e0019a89211421e33e09e9d064857dc0b99319734b25863fa6a3adc60ddd5a69f#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_4e8fce12",
@@ -110,9 +110,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV95aU9wWnhlRHdCR2tFTCtsdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OGpoQVYyd2N3SDZhR2pjdlp2Y21fMXRXa1BtdU4yMk45djZRaXFKY2pZQUhyRmpsZlhCMDZYRGx5d0dGV0dGMXMxY0FTVTkxREVtYWFBUjFyRF9TWC1ORFNLSmgwRHRZcm5jYkdHZ2VnYm1Bfn4%3D&chksm=7b498bae4c3e02b8d1799eb5197b493c6385d861859377c34b667bcf4c6a3d56c6446a2d453b#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "lab_map_transdermal_absorption",
@@ -138,8 +138,8 @@
     "report_no": "YW-JC-251009007A",
     "testing_agency": "一苇堂检测科技（上海）有限公司",
     "pdf_filename": "map_transdermal_absorption.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_tfn_phototox_mutagen",
@@ -165,8 +165,8 @@
     "report_no": "CH2510-001 (样品: 2510051S-001)",
     "testing_agency": "斯坦德科创生物科技（青岛）有限公司",
     "pdf_filename": "tfn_phototoxicity.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_collagen_biocompatibility",
@@ -192,8 +192,8 @@
     "report_no": "CY2507529S-1",
     "testing_agency": "斯坦德科创生物科技（青岛）有限公司",
     "pdf_filename": "collagen_mtt_cytotoxicity.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_collagen_penetration",
@@ -219,8 +219,8 @@
     "report_no": "YW-JC-250612002D",
     "testing_agency": "一苇堂检测科技（上海）有限公司",
     "pdf_filename": "collagen_transdermal_penetration.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_pdrn_triple_efficacy",
@@ -246,8 +246,8 @@
     "report_no": "2525023",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "pdrn_firming_antiaging.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_tpht_safety",
@@ -273,8 +273,8 @@
     "report_no": "LY-CIR2025D165",
     "testing_agency": "绿翊（广州）技术服务有限公司",
     "pdf_filename": "tpht_safety_assessment.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_b21386ea",
@@ -304,8 +304,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "dfxtpk1260",
@@ -318,8 +318,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mgjhfx",
@@ -332,8 +332,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jbmejs",
@@ -346,8 +346,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "2026np",
@@ -360,8 +360,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jydbxr4505",
@@ -374,8 +374,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "30klxs",
@@ -388,8 +388,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "bzjmgj",
@@ -402,8 +402,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ybyc5f",
@@ -416,8 +416,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "swydna",
@@ -430,8 +430,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "srzjms",
@@ -444,8 +444,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tpwjcx",
@@ -458,8 +458,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pyqcmm",
@@ -472,8 +472,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zsblbx",
@@ -486,8 +486,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mgjd5f",
@@ -500,8 +500,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pjdyjy",
@@ -514,8 +514,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "gbegfz",
@@ -528,8 +528,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "shlgdl",
@@ -542,8 +542,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ksnjzj561",
@@ -556,8 +556,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "twdvit",
@@ -570,8 +570,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "swtphk",
@@ -584,8 +584,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "dbhfxg",
@@ -598,8 +598,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "melipr",
@@ -612,8 +612,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "dbcsjf",
@@ -626,8 +626,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tphkjh",
@@ -640,8 +640,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "dnaxfx",
@@ -654,8 +654,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "aitpjs",
@@ -668,8 +668,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tpdfzt",
@@ -682,8 +682,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "cxtpht",
@@ -696,8 +696,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wsmagd",
@@ -710,8 +710,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hxkjkq",
@@ -724,8 +724,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "5fzksz5749",
@@ -738,8 +738,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jjpchi",
@@ -752,8 +752,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ymsgpc",
@@ -766,8 +766,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "xxmejs",
@@ -780,8 +780,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswc",
@@ -794,8 +794,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswy6483",
@@ -808,8 +808,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lchfjh",
@@ -822,8 +822,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "glhkxx",
@@ -836,8 +836,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "scsjgb",
@@ -850,8 +850,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hwsnzj",
@@ -864,8 +864,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tyyltp",
@@ -878,8 +878,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zdxjyt",
@@ -892,8 +892,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zrxflk",
@@ -906,8 +906,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "rlzhme",
@@ -920,8 +920,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "dnatur",
@@ -934,8 +934,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "xbcdbl",
@@ -948,8 +948,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jmmejy",
@@ -962,8 +962,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pfxfyx",
@@ -976,8 +976,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "rsytsf",
@@ -990,8 +990,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "gxmejs",
@@ -1004,8 +1004,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ksdxyg",
@@ -1018,8 +1018,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "kyhthb",
@@ -1032,8 +1032,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "qqscme66",
@@ -1046,8 +1046,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ksmbww",
@@ -1060,8 +1060,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "gbdyjy",
@@ -1074,8 +1074,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ylxtdj",
@@ -1088,8 +1088,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "xyjmme",
@@ -1102,8 +1102,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "fhmgyl",
@@ -1116,8 +1116,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pzxhjr",
@@ -1130,8 +1130,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hzpyld2565",
@@ -1144,8 +1144,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tptpbl",
@@ -1158,8 +1158,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "shysmy",
@@ -1172,8 +1172,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "qncbzh",
@@ -1186,8 +1186,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "qqscme7382",
@@ -1200,8 +1200,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tptpkj",
@@ -1212,8 +1212,8 @@
     "link": "articles/tptpkj.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健cTDP环肽作为高效温和的生物促渗剂，可大幅提高多肽与大分子活性成分的经皮递送效率，助力下游品牌实现功效跨越式升级。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、肌肤老化根源：打破传统胶原“只停留在角质层”的吸收困局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        随着现代护肤科技从“表层润肤”向“肌底抗衰”跃迁，消费者对胶原蛋白的抗老期望值不断提升。然而，传统大分子胶原蛋白受限于皮肤致密角质层的天然屏障，高渗透吸收率普遍不足1%，极易沦为概念性添加。针对“突破高渗透困局！中国团队发现PDRN抗老新靶点，美尔健生物环肽技术破解吸收难题”所聚焦的抗老场景，科学补充胶原的关键不仅在于成分活性，更在于能否精准打通经皮递送通路。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、多维胶原协同：高渗透促渗与三维立体网状支撑机制\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物依托专有生物技术，创新构建胶原多维递送体系。通过微囊包裹与生物促渗技术协同，将高活性胶原蛋白成分靶向输送至肌肤深层，刺激自体细胞基质分泌，实现由内而外的紧致饱满。不同于单一成分补充，该方案兼顾“即刻充盈”与“长期支撑”，帮助肌肤重塑富有弹性的微观网络结构，改善干纹、松弛等初老表征。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、多元剂型适配与前沿功效验证\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在实际配方开发中，该系列胶原原料展现出卓越的配伍宽容度与热稳定性，适配抗老精华液、高保湿面霜、次抛原液及冻干赋能粉等多种主流剂型。经实验室体外渗透测试与稳定性评价显示，添加高渗透促渗体系后的胶原有效利用度显著提升，赋能下游品牌构筑高复购、强体验的抗老爆品矩阵。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pfxfgm",
@@ -1226,8 +1226,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "1zylts",
@@ -1240,8 +1240,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jsjjtp",
@@ -1252,8 +1252,8 @@
     "link": "articles/jsjjtp.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健cTDP环肽作为高效温和的生物促渗剂，可大幅提高多肽与大分子活性成分的经皮递送效率，助力下游品牌实现功效跨越式升级。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“决赛晋级！cTDP环肽斩获「了不起的中国原料」总决赛入场券！”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tpbjgb",
@@ -1266,8 +1266,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zstyqy",
@@ -1280,8 +1280,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pb500d",
@@ -1294,8 +1294,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "swfjjs",
@@ -1308,8 +1308,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "gxcsjj",
@@ -1322,8 +1322,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tpxldb",
@@ -1336,8 +1336,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tpxlbs",
@@ -1350,8 +1350,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "dfxtpk",
@@ -1364,8 +1364,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "2025mg",
@@ -1376,8 +1376,8 @@
     "link": "articles/2025mg.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>针对换季受损、泛红与敏感肌痛点，美尔健生物基于温和生物活性物定制舒缓修护方案，多靶点强韧肌肤屏障，改善耐受力。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、脆弱肌屏障危机：从表面舒缓进阶至基底微环境修护\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        换季温差、过度清洁以及日常光损伤，导致现代都市人群敏感肌与屏障受损问题日益高发。传统修护产品往往仅停留在油脂封包与基础补水层面，难以针对肌底微环境进行深入修护。围绕“2025敏感肌护肤新趋势：天然+科技，开启修护抗衰新纪元”的深层需求，护肤逻辑亟需从“被动防御”升级为“主动重塑”，以高活性细胞外基质原料激活肌肤自愈本能。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、纤连蛋白与益生因子：多靶点强韧肌肤“微生态与物理屏障”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物重点布局的高纯度高渗透纤连蛋白（FN）与益生舒缓因子，从物理屏障与生物微生态双重维度协同发力。纤连蛋白作为细胞外基质的关键粘附蛋白，能够引导新生细胞迁移与有序排列，加速受损角质层重构；而益生菌发酵提取物则能平衡皮表微生态平衡，下调刺激因子级联反应，显著缓解泛红、刺痛与干痒不适。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、专业修护配方落地与安全性把控\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        针对敏肌配方“少即是多”的原则，美尔健生物在原料制备工艺中杜绝任何溶剂残留，纯度高、致敏性极低，非常适合用于敏感肌特护乳、修护次抛精华及术后护理辅料中。与常规修护成分相比，其在耐受性提升、角质层含水量保持及经皮水分散失（TEWL）降低方面表现出坚实的科学数据支撑。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jydbxr",
@@ -1388,8 +1388,8 @@
     "link": "articles/jydbxr.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健生物依托专有高渗透促渗平台技术，开发高活性高渗透胶原蛋白原料，深入肌底补充胶原弹力，为品牌客户提供高效协同的抗老修护配方解决方案。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、肌肤老化根源：打破传统胶原“只停留在角质层”的吸收困局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        随着现代护肤科技从“表层润肤”向“肌底抗衰”跃迁，消费者对胶原蛋白的抗老期望值不断提升。然而，传统大分子胶原蛋白受限于皮肤致密角质层的天然屏障，高渗透吸收率普遍不足1%，极易沦为概念性添加。针对“胶原蛋白信任危机背后，美尔健生物如何用「真技术」破解行业信任危机？”所聚焦的抗老场景，科学补充胶原的关键不仅在于成分活性，更在于能否精准打通经皮递送通路。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、多维胶原协同：高渗透促渗与三维立体网状支撑机制\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物依托专有生物技术，创新构建胶原多维递送体系。通过微囊包裹与生物促渗技术协同，将高活性胶原蛋白成分靶向输送至肌肤深层，刺激自体细胞基质分泌，实现由内而外的紧致饱满。不同于单一成分补充，该方案兼顾“即刻充盈”与“长期支撑”，帮助肌肤重塑富有弹性的微观网络结构，改善干纹、松弛等初老表征。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、多元剂型适配与前沿功效验证\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在实际配方开发中，该系列胶原原料展现出卓越的配伍宽容度与热稳定性，适配抗老精华液、高保湿面霜、次抛原液及冻干赋能粉等多种主流剂型。经实验室体外渗透测试与稳定性评价显示，添加高渗透促渗体系后的胶原有效利用度显著提升，赋能下游品牌构筑高复购、强体验的抗老爆品矩阵。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "pdrnss",
@@ -1400,8 +1400,8 @@
     "link": "articles/pdrnss.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕技术知识领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“PDRN是什么？揭秘美尔健生物的合成生物学如何引领皮肤再生科技新纪元”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hfpjxf",
@@ -1414,8 +1414,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "srzjcm",
@@ -1426,8 +1426,8 @@
     "link": "articles/srzjcm.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕企业新闻领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“双认证加持！美尔健生物斩获ISO 9001与FDA GMP认证，开启原料国际化新征程”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jmhzpy",
@@ -1440,8 +1440,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "qqscme",
@@ -1452,8 +1452,8 @@
     "link": "articles/qqscme.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健生物依托专有高渗透促渗平台技术，开发高活性高渗透胶原蛋白原料，深入肌底补充胶原弹力，为品牌客户提供高效协同的抗老修护配方解决方案。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、肌肤老化根源：打破传统胶原“只停留在角质层”的吸收困局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        随着现代护肤科技从“表层润肤”向“肌底抗衰”跃迁，消费者对胶原蛋白的抗老期望值不断提升。然而，传统大分子胶原蛋白受限于皮肤致密角质层的天然屏障，高渗透吸收率普遍不足1%，极易沦为概念性添加。针对“美尔健生物5D高渗透胶原蛋白获中国发明专利授权，开启活性成分高效渗透新时代！”所聚焦的抗老场景，科学补充胶原的关键不仅在于成分活性，更在于能否精准打通经皮递送通路。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、多维胶原协同：高渗透促渗与三维立体网状支撑机制\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物依托专有生物技术，创新构建胶原多维递送体系。通过微囊包裹与生物促渗技术协同，将高活性胶原蛋白成分靶向输送至肌肤深层，刺激自体细胞基质分泌，实现由内而外的紧致饱满。不同于单一成分补充，该方案兼顾“即刻充盈”与“长期支撑”，帮助肌肤重塑富有弹性的微观网络结构，改善干纹、松弛等初老表征。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、多元剂型适配与前沿功效验证\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在实际配方开发中，该系列胶原原料展现出卓越的配伍宽容度与热稳定性，适配抗老精华液、高保湿面霜、次抛原液及冻干赋能粉等多种主流剂型。经实验室体外渗透测试与稳定性评价显示，添加高渗透促渗体系后的胶原有效利用度显著提升，赋能下游品牌构筑高复购、强体验的抗老爆品矩阵。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "tysgdb",
@@ -1466,8 +1466,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zbssbh",
@@ -1480,8 +1480,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jfdxsm",
@@ -1492,8 +1492,8 @@
     "link": "articles/jfdxsm.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕常见问答领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“肌肤的 “吸收密码”，你找到了吗？”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "kxjdjd",
@@ -1506,8 +1506,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "cfddxc",
@@ -1520,8 +1520,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "5fzksz",
@@ -1532,8 +1532,8 @@
     "link": "articles/5fzksz.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>针对换季受损、泛红与敏感肌痛点，美尔健生物基于温和生物活性物定制舒缓修护方案，多靶点强韧肌肤屏障，改善耐受力。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、脆弱肌屏障危机：从表面舒缓进阶至基底微环境修护\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        换季温差、过度清洁以及日常光损伤，导致现代都市人群敏感肌与屏障受损问题日益高发。传统修护产品往往仅停留在油脂封包与基础补水层面，难以针对肌底微环境进行深入修护。围绕“温和舒缓干痒不适！揭秘「益生舒缓因子」如何赋能敏肌修护”的深层需求，护肤逻辑亟需从“被动防御”升级为“主动重塑”，以高活性细胞外基质原料激活肌肤自愈本能。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、纤连蛋白与益生因子：多靶点强韧肌肤“微生态与物理屏障”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物重点布局的高纯度高渗透纤连蛋白（FN）与益生舒缓因子，从物理屏障与生物微生态双重维度协同发力。纤连蛋白作为细胞外基质的关键粘附蛋白，能够引导新生细胞迁移与有序排列，加速受损角质层重构；而益生菌发酵提取物则能平衡皮表微生态平衡，下调刺激因子级联反应，显著缓解泛红、刺痛与干痒不适。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、专业修护配方落地与安全性把控\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        针对敏肌配方“少即是多”的原则，美尔健生物在原料制备工艺中杜绝任何溶剂残留，纯度高、致敏性极低，非常适合用于敏感肌特护乳、修护次抛精华及术后护理辅料中。与常规修护成分相比，其在耐受性提升、角质层含水量保持及经皮水分散失（TEWL）降低方面表现出坚实的科学数据支撑。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejsw2",
@@ -1544,8 +1544,8 @@
     "link": "articles/mejsw2.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕企业新闻领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“美尔健生物2025PCHi圆满收官/带你回顾精彩盛况”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zgzzdd",
@@ -1556,8 +1556,8 @@
     "link": "articles/zgzzdd.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健生物聚焦前沿蛋白生物科技，高渗透纤连蛋白具备优异的促愈与屏障修护特性，广泛赋能修护精华、面霜及术后护理等多元化功效场景。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“中国智造突围！美尔健生物高渗透纤连蛋白获美国专利授权，展现前沿科研实力”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ksxctp",
@@ -1570,8 +1570,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "5fzpb1",
@@ -1584,8 +1584,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zlhkjz",
@@ -1598,8 +1598,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ywdd5f",
@@ -1612,8 +1612,8 @@
     "date": "2025-07-02",
     "sub_category": "实验室研究数据",
     "cat_name": "实验室研究数据",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "kpsp3f",
@@ -1624,8 +1624,8 @@
     "link": "articles/kpsp3f.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕常见问答领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“科普视频｜3分钟看懂原料中蛋白的含量”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hhjfxs",
@@ -1638,8 +1638,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jzkqyy",
@@ -1652,8 +1652,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "ksnjzj",
@@ -1664,8 +1664,8 @@
     "link": "articles/ksnjzj.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕企业新闻领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“突破抗老同质化瓶颈！美尔健重组蛋白凭创新高渗透科技构筑技术优势”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "zhzpyt",
@@ -1676,8 +1676,8 @@
     "link": "articles/zhzpyt.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕技术知识领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“在化妆品源头研发的实验室里做检测，是一种怎样的体验？”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hyljld",
@@ -1690,8 +1690,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "jmwnjy",
@@ -1704,8 +1704,8 @@
     "date": "2025-07-02",
     "sub_category": "应用场景",
     "cat_name": "应用场景",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswd",
@@ -1716,8 +1716,8 @@
     "link": "articles/mejswd.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕技术知识领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“美尔健生物第三代生物透皮技术”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswy3455",
@@ -1730,8 +1730,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswz3820",
@@ -1744,8 +1744,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswy6970",
@@ -1758,8 +1758,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswy4690",
@@ -1772,8 +1772,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswx3988",
@@ -1786,8 +1786,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswz7944",
@@ -1800,8 +1800,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswx",
@@ -1814,8 +1814,8 @@
     "date": "2025-07-02",
     "sub_category": "客户合作",
     "cat_name": "客户合作",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hzpyld6689",
@@ -1826,8 +1826,8 @@
     "link": "articles/hzpyld6689.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕企业新闻领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“化妆品原料的创新之路：美尔健生物探索生物透皮技术的无限可能”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejsws",
@@ -1838,8 +1838,8 @@
     "link": "articles/mejsws.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕企业新闻领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、妆食同源大趋势：内服外调开启大健康新增长极\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        随着现代消费者健康意识的提升，“由内而外滋养健康美”的理念深入人心，功能性食品与美容护肤的边界正在加速融合。针对“美尔健生物化妆品功效原料为食品品牌注入绿色健康新动力”所展现的产业趋势，美尔健生物顺应大健康风口，依托生物发酵与小分子多糖/多肽技术，积极布局兼具高安全性、高吸收率与良好口感的化妆品活性原料体系。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、小分子生物活性物：高生物利用度与营养协同\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        相较于传统化妆品原料，美尔健生物精选日化级优质来源，通过定向酶解与温和物理纯化，获取分子量分布集中、肠道吸收更优的小分子多肽及功能多糖。其不仅具备优异的水溶性与热稳定性，易于添加于饮品、口服液、压片糖果及功能性软糖等多元形态中，更在调节机体抗氧化能力、改善水润代谢方面表现出显著的协同增效。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、严格品控与安全标准，赋能健康品牌扬帆远航\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        美尔健生物在化妆品功效原料生产过程中严格执行食品安全生产规范，配备先进的重金属、农残及微生物精密检测设备，确保批次稳定与原料纯净。凭借卓越的产品品质与完备的资质认证，为广大食品企业及大健康品牌提供源源不断的创新原料动力。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswk",
@@ -1850,8 +1850,8 @@
     "link": "articles/mejswk.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕企业新闻领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、美妆内卷时代：如何以核心技术打破同质化僵局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        当前护肤品市场竞争日趋白热化，品牌方普遍面临“新概念频出、用户留存低、代工方案雷同”的痛点。围绕“美尔健生物：科技赋能，打造高品质原料定制OEM服务”的商业实践，真正的出圈之道在于从底层原料和配方技术建立壁垒。美尔健生物凭借全产业链研发布局，为品牌客户与代工厂提供超越传统OEM的“技术+原料+功效”深度定制解决方案。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、一站式定制化服务：从原料定制开发到完整配方输出\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物拥有现代化的生物原料合成与透皮技术转化实验室，能够根据合作品牌的定位与差异化诉求，量身定制特定分子量、特定功效梯度的活性原料。技术团队不仅提供高纯原料，更深入下游配方研发体系，协助攻克成分结晶析出、气味掩盖、肤感油腻及稳定性衰减等一系列工程难题，实现产品力的大幅跃升。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、法规合规与质量保障：加速品牌新品高效上市\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在《化妆品监督管理条例》全面落地的背景下，美尔健生物为每一款定制原料建立完整的主文档备案信息、安全评估报告（安评）及功效测评数据，确保原料来源清晰、质量批次一致、合规无风险。通过端到端的紧密协作，大幅缩短品牌客户的新品研发与备案周期，抢占市场窗口期。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswz",
@@ -1862,8 +1862,8 @@
     "link": "articles/mejswz.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健生物依托专有高渗透促渗平台技术，开发高活性高渗透胶原蛋白原料，深入肌底补充胶原弹力，为品牌客户提供高效协同的抗老修护配方解决方案。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、肌肤老化根源：打破传统胶原“只停留在角质层”的吸收困局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        随着现代护肤科技从“表层润肤”向“肌底抗衰”跃迁，消费者对胶原蛋白的抗老期望值不断提升。然而，传统大分子胶原蛋白受限于皮肤致密角质层的天然屏障，高渗透吸收率普遍不足1%，极易沦为概念性添加。针对“美尔健生物：重组胶原的奥秘，解锁肌肤年轻密码”所聚焦的抗老场景，科学补充胶原的关键不仅在于成分活性，更在于能否精准打通经皮递送通路。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、多维胶原协同：高渗透促渗与三维立体网状支撑机制\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物依托专有生物技术，创新构建胶原多维递送体系。通过微囊包裹与生物促渗技术协同，将高活性胶原蛋白成分靶向输送至肌肤深层，刺激自体细胞基质分泌，实现由内而外的紧致饱满。不同于单一成分补充，该方案兼顾“即刻充盈”与“长期支撑”，帮助肌肤重塑富有弹性的微观网络结构，改善干纹、松弛等初老表征。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、多元剂型适配与前沿功效验证\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在实际配方开发中，该系列胶原原料展现出卓越的配伍宽容度与热稳定性，适配抗老精华液、高保湿面霜、次抛原液及冻干赋能粉等多种主流剂型。经实验室体外渗透测试与稳定性评价显示，添加高渗透促渗体系后的胶原有效利用度显著提升，赋能下游品牌构筑高复购、强体验的抗老爆品矩阵。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hzpyld",
@@ -1874,8 +1874,8 @@
     "link": "articles/hzpyld.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕技术知识领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“化妆品原料的绿色创新：美尔健生物助力行业可持续发展”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hzpylx",
@@ -1886,8 +1886,8 @@
     "link": "articles/hzpylx.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕技术知识领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“化妆品原料新发展：美尔健生物推动透皮技术与绿色制造的融合”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswt",
@@ -1898,8 +1898,8 @@
     "link": "articles/mejswt.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健生物依托专有高渗透促渗平台技术，开发高活性高渗透胶原蛋白原料，深入肌底补充胶原弹力，为品牌客户提供高效协同的抗老修护配方解决方案。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、肌肤老化根源：打破传统胶原“只停留在角质层”的吸收困局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        随着现代护肤科技从“表层润肤”向“肌底抗衰”跃迁，消费者对胶原蛋白的抗老期望值不断提升。然而，传统大分子胶原蛋白受限于皮肤致密角质层的天然屏障，高渗透吸收率普遍不足1%，极易沦为概念性添加。针对“美尔健生物：探索海洋奥秘，水母0型胶原赋能护肤新趋势”所聚焦的抗老场景，科学补充胶原的关键不仅在于成分活性，更在于能否精准打通经皮递送通路。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、多维胶原协同：高渗透促渗与三维立体网状支撑机制\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物依托专有生物技术，创新构建胶原多维递送体系。通过微囊包裹与生物促渗技术协同，将高活性胶原蛋白成分靶向输送至肌肤深层，刺激自体细胞基质分泌，实现由内而外的紧致饱满。不同于单一成分补充，该方案兼顾“即刻充盈”与“长期支撑”，帮助肌肤重塑富有弹性的微观网络结构，改善干纹、松弛等初老表征。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、多元剂型适配与前沿功效验证\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在实际配方开发中，该系列胶原原料展现出卓越的配伍宽容度与热稳定性，适配抗老精华液、高保湿面霜、次抛原液及冻干赋能粉等多种主流剂型。经实验室体外渗透测试与稳定性评价显示，添加高渗透促渗体系后的胶原有效利用度显著提升，赋能下游品牌构筑高复购、强体验的抗老爆品矩阵。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswg",
@@ -1910,8 +1910,8 @@
     "link": "articles/mejswg.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕技术知识领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、美妆内卷时代：如何以核心技术打破同质化僵局\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        当前护肤品市场竞争日趋白热化，品牌方普遍面临“新概念频出、用户留存低、代工方案雷同”的痛点。围绕“美尔健生物个性化原料定制OEM，满足多元化需求”的商业实践，真正的出圈之道在于从底层原料和配方技术建立壁垒。美尔健生物凭借全产业链研发布局，为品牌客户与代工厂提供超越传统OEM的“技术+原料+功效”深度定制解决方案。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、一站式定制化服务：从原料定制开发到完整配方输出\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物拥有现代化的生物原料合成与透皮技术转化实验室，能够根据合作品牌的定位与差异化诉求，量身定制特定分子量、特定功效梯度的活性原料。技术团队不仅提供高纯原料，更深入下游配方研发体系，协助攻克成分结晶析出、气味掩盖、肤感油腻及稳定性衰减等一系列工程难题，实现产品力的大幅跃升。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、法规合规与质量保障：加速品牌新品高效上市\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        在《化妆品监督管理条例》全面落地的背景下，美尔健生物为每一款定制原料建立完整的主文档备案信息、安全评估报告（安评）及功效测评数据，确保原料来源清晰、质量批次一致、合规无风险。通过端到端的紧密协作，大幅缩短品牌客户的新品研发与备案周期，抢占市场窗口期。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejsww5875",
@@ -1922,8 +1922,8 @@
     "link": "articles/mejsww5875.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕常见问答领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、行业背景与趋势洞察：前沿科技引领美业高质量发展\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        在消费升级与法规趋严的双重驱动下，中国美业与生物科技行业正迎来从“营销驱动”向“底层科技研发驱动”的深刻变革。围绕“美尔健生物：为医用领域提供创新生物活性材料解决方案”所引发的广泛关注，如何以科学严谨的实验态度、求真务实的产业转化能力推动技术落地，成为每一位行业参与者共同探索的重要课题。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、美尔健生物：深耕生物高渗透与功效活性物科研沃土\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健（深圳）生物科技有限公司自创立以来，始终将自主研发视为企业立身之本。科研团队汇聚生物化学、分子生物学、配方工程学等多学科高层次人才，在重组仿生蛋白、高渗透多肽递送、植物发酵活性物等核心领域取得了一系列具有独立知识产权的科研成果，构筑起从基础理论到工程产业化的坚实技术护城河。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、产学研医深度融合，共建开放共赢的产业生态\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        科技成果的价值在于赋能产业、服务大众。美尔健生物积极推动产学研用一体化发展，与国内知名高校及专业检测机构建立长期战略合作，持续完善原料安全性评价体系与功效验证数据库。未来，美尔健生物将继续秉承“让科技赋能健康美”的崇高使命，携手产业链各方伙伴，共同开启生物科技美业崭新篇章。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejswy",
@@ -1934,8 +1934,8 @@
     "link": "articles/mejswy.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>针对换季受损、泛红与敏感肌痛点，美尔健生物基于温和生物活性物定制舒缓修护方案，多靶点强韧肌肤屏障，改善耐受力。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、脆弱肌屏障危机：从表面舒缓进阶至基底微环境修护\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        换季温差、过度清洁以及日常光损伤，导致现代都市人群敏感肌与屏障受损问题日益高发。传统修护产品往往仅停留在油脂封包与基础补水层面，难以针对肌底微环境进行深入修护。围绕“美尔健生物：益生舒缓因子，守护肌肤健康新防线”的深层需求，护肤逻辑亟需从“被动防御”升级为“主动重塑”，以高活性细胞外基质原料激活肌肤自愈本能。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、纤连蛋白与益生因子：多靶点强韧肌肤“微生态与物理屏障”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物重点布局的高纯度高渗透纤连蛋白（FN）与益生舒缓因子，从物理屏障与生物微生态双重维度协同发力。纤连蛋白作为细胞外基质的关键粘附蛋白，能够引导新生细胞迁移与有序排列，加速受损角质层重构；而益生菌发酵提取物则能平衡皮表微生态平衡，下调刺激因子级联反应，显著缓解泛红、刺痛与干痒不适。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、专业修护配方落地与安全性把控\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        针对敏肌配方“少即是多”的原则，美尔健生物在原料制备工艺中杜绝任何溶剂残留，纯度高、致敏性极低，非常适合用于敏感肌特护乳、修护次抛精华及术后护理辅料中。与常规修护成分相比，其在耐受性提升、角质层含水量保持及经皮水分散失（TEWL）降低方面表现出坚实的科学数据支撑。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "mejsww",
@@ -1946,8 +1946,8 @@
     "link": "articles/mejsww.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕常见问答领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“美尔健生物：为化妆品加工厂打造专属高渗透吸收解决方案”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "hzpylm",
@@ -1958,8 +1958,8 @@
     "link": "articles/hzpylm.html",
     "content": "<div class=\"article-body-wrapper\" style=\"line-height:1.9;color:#333;font-size:15px;text-align:justify;\">\n    <div class=\"article-lead-box\" style=\"background:#f7f9fa;border-left:4px solid #1e88e5;padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:14px;color:#555;\">\n        <p style=\"margin:0;line-height:1.8;\"><strong style=\"color:#1e88e5;\">核心导读：</strong>美尔健（深圳）生物科技有限公司专注生物透皮技术与功效原料研发，围绕常见问答领域提供从原料开发、功效验证到一站式配方定制的专业服务。</p>\n    </div>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:24px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        一、大分子高渗透吸收痛点：如何让大分子活性物跨越角质层“砖墙”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        人体皮肤的角质层具有天然的严密屏障结构，通常分子量大于500 Da（道尔顿）的大分子多肽、蛋白及多糖极难自发穿透。传统促渗方案往往依赖酒精等有机溶剂或微针等机械手段，易破坏屏障甚至引发泛红敏感。正如“化妆品原料——美尔健生物深耕透皮技术创新，打造科学护肤新体验”所探讨的核心命题，寻求温和、可逆且高效的生物高渗透促渗新范式，已成为当前美业研发的战略制高点。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        二、cTDP环肽：可逆打开分子通道的“智能通行证”\n    </h3>\n    <p style=\"margin-bottom:18px;text-indent:2em;line-height:1.9;\">\n        美尔健生物专研的「cTDP环肽」技术，以生物仿生结构为基础，通过与细胞膜表面的特异性作用，能够可逆、短暂且安全地调节细胞间脂质排列，为大分子功效成分瞬间打开定向递送通道。该技术不破坏角质层完整性，在完成促渗使命后迅速自发恢复屏障常态，不仅促渗效率提升数倍，更显著降低配方刺激性，实现温和高效并举。\n    </p>\n\n    <h3 style=\"color:#1a237e;font-size:18px;margin-top:28px;margin-bottom:14px;border-bottom:1px solid #eef2f6;padding-bottom:8px;font-weight:bold;\">\n        三、技术赋能全品类：从核心原料到配方增效全面落地\n    </h3>\n    <p style=\"margin-bottom:20px;text-indent:2em;line-height:1.9;\">\n        cTDP环肽技术可作为通用型增效平台，广泛与重组胶原蛋白、多肽类抗衰活性物、美白多靶点分子及舒缓成分复配使用。无论是清爽的水剂、高营养乳液还是紧致安瓶，透皮技术均能显著加速活性物吸收渗透，打破配方“浮于表面、黏腻不吸收”的用户痛点，赋予终端产品肉眼可见的高渗透使用体验。\n    </p>\n\n    <div class=\"article-footer-note\" style=\"margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;\">\n        <p style=\"margin:0;line-height:1.6;\"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>\n    </div>\n</div>",
     "date": "2025-07-02",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_e902186b",
@@ -1974,9 +1974,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV8rQnJiS0loMS9JVzMxSDE5dWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OEVmVW5BV1BaU1BPa3UwV1Q1NjB5YW45QURNZnpSaHR6QkVWNFdmTlViX0dxVkhqak1nMWVCaUUyelNsUWluaEtxVFU2ek9jZm90STFDRUpXZ3llNlFjRUNZdE5Denpfa19laHZxNHJQdnpBfn4%3D&chksm=7b49b9244c3e30329e254b0284dae1d32e548eea31617f3263cdcc1e0e7a488e98b794ac9831#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_4c39b958",
@@ -1991,9 +1991,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9teWQ0RVY0Y2ZSVXh6V0lTdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OVRNLWRabTRuel9pTDBLV3QzUXFVVHhORl9fLXRwWnBsR2RxNzJmUjBPS2pzcHJINVFaS25qLXNlaFV5MUduTmpNQWQydGs2eGlrYk81Z2pYVV9ESFVSWV9kemlUSXVPc0RweHQyaVhlcml3fn4%3D&chksm=7b49b93a4c3e302ccbea4ffbc2147cdf1f5c91dd4e56c5d5b22dc0cc46d256ab05fc07254363#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_ec03e719",
@@ -2008,9 +2008,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV90OWloME1pUVVIQ25ZRk16dWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OEVmVW5BV1BaU1BPa3UwV1Q1NjB5YW45QURNZnpSaHR6QkVWNFdmTlViX0dxVkhqak1nMWVCaUUyelNsUWluaEtrU0F3REFrU3RnTkUtZV9CRl9iOXN6VVVXNzJMMWFhQUxENUtaWi0wbk1nfn4%3D&chksm=7b49b9244c3e30329e254b0284dae1d32e548eea31617f3263cdcc1e0e7a488e98b794ac9831#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "lab_collagen3_efficacy",
@@ -2036,8 +2036,8 @@
     "report_no": "2462805",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "collagen3_firming_antiaging.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_map_three_efficacy",
@@ -2063,8 +2063,8 @@
     "report_no": "2453885",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "map_firming_antiaging.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_tpht_efficacy",
@@ -2090,8 +2090,8 @@
     "report_no": "2448028",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "tpht_firming_antiaging.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_tfn_toxicology",
@@ -2117,8 +2117,8 @@
     "report_no": "STI-20240409-018N",
     "testing_agency": "斯坦德科创生物科技（青岛）有限公司",
     "pdf_filename": "tfn_subacute_oral_toxicity.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_placenta_efficacy",
@@ -2144,8 +2144,8 @@
     "report_no": "2439388",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "placenta_firming_antiaging.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_lingbai_rose_screening",
@@ -2171,8 +2171,8 @@
     "report_no": "2434120",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "lingbai_pesticide.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_tfn_four_efficacy",
@@ -2198,8 +2198,8 @@
     "report_no": "2421454",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "tfn_moisturizing.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_gpt_efficacy",
@@ -2225,8 +2225,8 @@
     "report_no": "2421453",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "gpt_firming_antiaging.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_8a41aaa3",
@@ -2241,9 +2241,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9BZXh2RTk5dzZVcHJrUS9KdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0X1J2NWZyMWNmODczRDZPMjRSbkx2dDBQaDNxcXNrUDViWjBuY05ZLWdGM0R5YzN4TDFTaGsxdmlNMHA0N0hIczNLSVI1Zk9XajBqcmU1NlY2ZTY4WDdLcl9KVHlsN0JRQzZSRy1vU1ktVV9Rfn4%3D&chksm=7b49bdf84c3e34eebe5b0d132fa65515c8f0bcffc45a24b9accfd3dedc49b281f982b29518f0#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_0f91bf65",
@@ -2258,9 +2258,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV8yaExkbjF0VEFxejgzMjVidWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0LWUzZEpzcUpTZXV2RWd0U3dVQnJmeDlGb0tzYmlqOV9lSG9SdkhYMzFfbHNPWDlwSDUxNHlFWHRVUktsNXJyYmE4MDV1bTZSSklvbVZ0OFZ5cldLeW9fN3pCeHU1Zjg2enJJMVV2b0QwZHJ3fn4%3D&chksm=7b49bcf34c3e35e539aa6a60411a6a965a973ca59752301178078dc9c016fab57a9b0d2303b7#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_8c1bb634",
@@ -2275,9 +2275,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV95V3BPVm8yK0c1YXZvT1NUdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0LWUzZEpzcUpTZXV2RWd0U3dVQnJmeDlGb0tzYmlqOV9lSG9SdkhYMzFfbHNPWDlwSDUxNHlFWHRVUktsNXJyYlpSdjdkSjVuNmtDcEFnOUVPN0NJWG5fTDdjWTloSV9PN2x3R3ZNeFprbERBfn4%3D&chksm=7b49bcf34c3e35e539aa6a60411a6a965a973ca59752301178078dc9c016fab57a9b0d2303b7#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_6a679498",
@@ -2292,9 +2292,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9uQW9iTUhyMlF1dmlJWGJYdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OTlZeHFydUk3dGtKVktveGhJaHVSQkE0OFR5anpGZzRqUjQ5VDJYdkNBVDQ0QWFBS2NWWWpiaVZlbFJkZ0tJc1h5R2dBOUVkVml0d1dXNENhUTlVSHJUbjlJLW1OdkdVMWJrR2pia09seVhRfn4%3D&chksm=7b49bca44c3e35b2c6dea77af9b316cdf940987664bee46d294d7e84e5a6c490ecc48fefff84#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_b1c318d0",
@@ -2309,9 +2309,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9nVTlRdEtzZ2tKOGJzcExpdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OW1MX3NFWlFvSEpTQXdfVk8tMHFmTEM5NXpiTXFqc1pHT1MyOWpvQ0hJTlQ3cGtsbUtJSU9TWDhHVkllSEVQY0lmb2tVVXR6U3FUbTVuS3RUZ3ZKR3ZoM2ZTXzY1RG14WU9FVzZvM3JMNnRRfn4%3D&chksm=7b49b1eb4c3e38fdd09336f1ea9008f122b5adae5abc25bd98a1a4b40d54c0f67854a2849058#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_f6984c2d",
@@ -2326,9 +2326,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9RY3lxR21SNzViRUxTNnJDdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OGRibWpGZEx3TFNnamNqZy1RcFJvY3FjOUFtNnM3U3h6LVBya1JpaTRlRmhtVWJENXJ3RldTY0R1U0N6TTVfWm8zdjNYZlI3N1NrM3laTGlwRG4tRHMzOFc5MlVNUDU2Q2ZXQTVXTGhLNU9Bfn4%3D&chksm=7b49b5ad4c3e3cbb9caf299986b0f784acf461a82c072a1acb969e98365f5c247c516b8f9175#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_86bb0747",
@@ -2343,9 +2343,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9Udk80NWtJazU2TjlRSXBkdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0XzdScnI1RDZ6TE5SRFk4U09pZGp3Y2lzRm4yYnZUem8zbktNQlZaRmtOXzF1WUVPWEhuNmxuTDAySGU2OHF6VUU1Szk5bXRfOEJJT2VVeThOLTRNZGNRQmZPbVBFVC1VU2RGVkVaTURtVTR3fn4%3D&chksm=7b49b6674c3e3f7175c30665bc3b2dc75dba4530c84af42c790dfc77056516979d8d00bf2fab#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_c5dff9d3",
@@ -2360,9 +2360,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9lZ05IQUpPYk1ES1ZlWVdGdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0XzJNcHBBN25EUklybHYzWlZkWDFJRkZZc1hIUGpnTmdpNTZWUWJsZ3BxQjlSUnJ5Z0ZuU0tmNncwV2I4TVVWbGtnYjkwSllMZVZ5YWRHYTRTb2JydVR2bVRnd1drVmphdGxCdTQ3WWxhNGpRfn4%3D&chksm=7b49b71c4c3e3e0a12b497057fa486cf6feb75e0b90231f327fceb56bfa91a8e2764eb62887c#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "lab_yskm_soothing_repair",
@@ -2388,8 +2388,8 @@
     "report_no": "2217110G1",
     "testing_agency": "广东省检迅检测科技有限公司",
     "pdf_filename": "yskm_soothing.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_recm_multi_efficacy",
@@ -2415,8 +2415,8 @@
     "report_no": "YJ-R-RTGX202307-0862",
     "testing_agency": "广东优捷检测科技有限公司 (广东省功效与安全测评研究中心)",
     "pdf_filename": "recm_repair.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_d217b6ce",
@@ -2431,9 +2431,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV95cWVHWFdnazZ3aGhYUXR6dWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0LUpoMkJwZ1JwRFdoMWsxWDZsb1U3bG1pejJPd05sVmpRc2UweVlsbk95WE9CV1R3Wk81SFdEV3pXeThOR1BEY0hyVjFKMGkybFczVWdTekFUN21EcU51SVhJRnhJTWVoVUh0clk1RnJRa0VRfn4%3D&chksm=7b49b6b04c3e3fa654985ffd3abdc81696d7f3cd5e801a516899e9d3c5ffe82429ea60ff6210#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_129dad60",
@@ -2448,9 +2448,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV8wSkFZSXlmZkNlWHpnd09WdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OWJ1VjBMQjdIMkFIbWZPdGVTQVlwSV81RlJTUTJWS2xDcm4wWlo5MTVZSjUxal9DbDMtVUNZc0pBbEdFNVJQdWprY2d1bTBEMHdZRmtZcTgxU3ZfYkc3V2JSMkxnRlFteWFUNWRZN25UU0FRfn4%3D&chksm=7b49b6b04c3e3fa640108c4e7e0e2816720b9579a5e59d85c9edf951c9ae7bc9c7ee0ca0737b#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_860b7e6c",
@@ -2465,9 +2465,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9yc09VUlVoVmIxbEk0TWt2dWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OUdyWE1UcXU0Z1ZEdkZ6RVRfVUl5a2ZTeVFERTNHOTk4cTBvcG56TFhpMHZYc0pJYzViNGg2ZEFQem5FdTk0TXRjTDlGejJXTVB2M2VQZXMtSEh4bGRFN1AyWGxjbmw0WFFBNVRuZ1VZNm5nfn4%3D&chksm=7b49b6aa4c3e3fbcc695c6174b98ee7409c46fa31206cd9c9d462f08bb00efe2d4737cd09e9f#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_34304575",
@@ -2482,9 +2482,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9sd09DWmVDeEhSaDIwbm1odWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OXBzYjFmWGMtb1ZNZy0tNWR0ZVJqMWg2VXBSa3VIVzRJUERrXzR6cHFIeGhiUkpyR2hqOGU0c0pQdF84bHY5UkFmUkxXLUxLRW1sRy11eEhuWERra2NfT0hkcnNyNzh0NjNacGxNVHRURzF3fn4%3D&chksm=7b49b67d4c3e3f6bebeb6450fe0d14c3b0716c6cb3206d082fa88b5f111c3fe6cb3da1514c4a#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_cccca32e",
@@ -2499,9 +2499,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9OWVNTbmQrN2FBSmxjdHFYdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0X3E5dE9XYW1sdVdRMjhuM2pYcXBOeDM1dUI0RGs2ZFp4ZldDQkZMX09tWWVJalRLdUdVYkR5SmxFZ3Q2SDFlbFN0cTZVTUI1eHV5UEZxM09tN1IxYTVSdEdkZ0puS0MtNTR6VC1NUkNLMHdnfn4%3D&chksm=7b49a8e84c3e21fe0950ecde150b159f1ff1aeb66cddb16feb2ea1e0412d28df2a6bcacc95ec#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_b90ac62e",
@@ -2516,9 +2516,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9RbXpQcVJJYzA2Y2czdU9YdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0LWJlelhPX3dFWlplNzF5OG05Q0wwZ2ZubmIxdHhTbVYtNWlHSXEzbF9OMzd1TGdZbERlLTdHWmoyUEFLbFJHR1RQVjRjNnFDNDN1bDJzRG5La1Z4ZjRxQ0w5c1cwb2d4V1BIY2p3Mi1hZkhRfn4%3D&chksm=7b49ad254c3e2433598015955e7123ff98c45a2160d0c3af084e8069a6125a53cfc8356e8512#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_2efc34ad",
@@ -2533,9 +2533,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV85SjhoRTlVMjByWGx1aXVPdWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OHpOcm52WkVWSmV3MnI4YWhVbEQ5MmFwTXhXMFktSFBfQmdTNHpHWWt3ZnZsc3kzcFBPUGNjUTBMMkJYaXZlUmpLam5nSFd0RmlxcXpmUXJJWmJ4WGlFeHRVWUNadWU4TUNoTkVVRTVscFdRfn4%3D&chksm=7b49afb74c3e26a15844f26205bc53ad53931f46a3df7c3b9a87b4146b76d1e1009eefc829b6#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_5c64198b",
@@ -2550,9 +2550,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9xczhJbTNYVnJpOEo3N0o0dWFuTW0wRk1LUWFNNWxyX1pwR1Y5MVY3QUZPY1hOM3RaT3BhVUZvTXM0OXRkN0R4Tk9IZDIwdllrUGtidkk3QzBUMl9SOXpPcktsNlFTUHk0ckNNRlhLN0piaXgxM2JKRW5PSmM3M056bzZfVzJER25hM1I3VHJsbG85OTVfcFJ6c3hPYW4wSGlFSjZ2V2N0TUFHdU53fn4%3D&chksm=7b49ae0e4c3e2718608853294173d4303b283b470f0b4b23e3f3868bbc66f89aab3efeb46bfd#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_cd1f6b92",
@@ -2567,9 +2567,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9iTW1ud09tcjEraVpyM3JqdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbGl2VW5rZmRtUmVTVjFXRTFnNlFkVUVDNzJzVkMxUjhZM2s2ZUxtS1NVUE1vTUVQUWRWLXF2cldPVzY3bi0yT0hvNDFDWU1BQjZNMWNCVDRwMThnRDZBMzVnYkM2SGJGN0poRlZBeWVSZHZBfn4%3D&chksm=7b49a1924c3e288411ab6ae3dba9dfff1d8fb65f547b3f28e9dbbe4571e26698b3d580f8d023#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_2d9386c3",
@@ -2584,9 +2584,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9GK2NRK1lSYnpPZER2TmZZdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbGl2VW5rZmRtUmVTVjFXRTFnNlFkVUVDNzJzVkMxUjhZM2s2ZUxtS1NVUE1vTUVQUWRWLXF2cldPVzY3bi0yT0hYWEpiTFlfUjRCTFpHUVBDOHJOWjFFdU52dENRZWRUM2NRYW5ZOWdoZE5nfn4%3D&chksm=7b49a1924c3e288411ab6ae3dba9dfff1d8fb65f547b3f28e9dbbe4571e26698b3d580f8d023#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_835f37a6",
@@ -2601,9 +2601,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9zQzBkNjlIa1IwT3p0YngwdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbXAzT3czclE3ZmtJa1VvLVZGSmg1UHJ2N3hHVmZFUW9RbVNTZ2xWOWNRYnlqMGRYelc4QTZ2dkJNd1dlSkc3cnI2emwzbWRTbzFDTG9YbjVvWHVCWTY5M3Q2ZWF1ODZPOUFUZ3pWbTExYUVnfn4%3D&chksm=7b49a1454c3e28535c353c836307c4066a15ed541f99157f9a7dc6d4078a43b0780e7dc261fa#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_6b6a2ddb",
@@ -2618,9 +2618,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9qd0hSWVBVK0VXL0VBbW5MdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbXAzT3czclE3ZmtJa1VvLVZGSmg1UHJ2N3hHVmZFUW9RbVNTZ2xWOWNRYnlqMGRYelc4QTZ2dkJNd1dlSkc3cm9qMVRhWTVpY0ozN2xiWlVjcWZ4SkZ4MGwwaVZ4U0FnTVlmRTFPZXNpTXZBfn4%3D&chksm=7b49a1454c3e28535c353c836307c4066a15ed541f99157f9a7dc6d4078a43b0780e7dc261fa#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_106d5223",
@@ -2635,9 +2635,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV8vMHNHWDQ1aFF3TUtqQ1lGdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLa1BOM0FJS0t2Q25tZzc4cWViUkQzWk5jLTJsYUNkQ1V3TVY4bGN1Y1c2LUhtV19UeXU5SVdRbW43a29oSC1Sd0hsUDhtdE5lUjdwNW5ZenRxT09LVFJhMURuZ2Q4UENQbFJlbm51bmlXcHRRfn4%3D&chksm=7b49a1054c3e2813564d0c8a1ab24ebd210f97e1230fc0ba5852fb0d7f6a78c8c35a1f88421c#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "lab_txod_whitening_antiox",
@@ -2663,8 +2663,8 @@
     "report_no": "项目编号：3490-1R",
     "testing_agency": "杭州环特生物科技股份有限公司 (Hunter Biotech)",
     "pdf_filename": "txod_whitening_antioxidant.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_643fc1dc",
@@ -2679,9 +2679,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV95cnUrTHU2WUxaK3dYYktudWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbnVPZzRodi1tYUhiR0dvZmYyUU5XZ2MxQWVsY2lKRWdWYUItakdkcWxGdE9oM2JOdTkyUVhVcHgyOVhQcDgzOFZIdkEwYnlubkxCVzVEdThUdnB6SUtwU01EYkRpdHAyMnk2YjBiSzJVUURnfn4%3D&chksm=7b49a0cb4c3e29dd0bed4ba8d486fb148ecb280a20b1b594b471de0f6dd8b7202fa528a62249#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_e1719775",
@@ -2696,9 +2696,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9XU3JQOXA4MWZDS3FuaXNidWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbnVPZzRodi1tYUhiR0dvZmYyUU5XZ2MxQWVsY2lKRWdWYUItakdkcWxGdE9oM2JOdTkyUVhVcHgyOVhQcDgzOFZqZFFSc2FlX1NZMGxZVjJ0UFpTU2h0c09HaFNQSEI3RnlEVi1IMkhhWjZ3fn4%3D&chksm=7b49a0cb4c3e29dd0bed4ba8d486fb148ecb280a20b1b594b471de0f6dd8b7202fa528a62249#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_fa691f73",
@@ -2713,9 +2713,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9LdlVTNVRneERweDVmdW1ZdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbDZESjFocUZUSEIyN2s5VklyNmZJbG5VVjlZanh3M0N3Z05vN01IT0cyOW5UbGc2M3JLY2pOdmdyMnV3cjBxdWQ2WFVxdU9DaS1kamxSSkczRkRlejN6TkJUNDdVWnZMbmEwUEpBUzA2RmtBfn4%3D&chksm=7b49a0e84c3e29fe5ec2abee9a49782715c669dd45ba51eae7c1f204862f63184093e5615bdb#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_0321991b",
@@ -2730,9 +2730,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9VSFBXNFFIUHRNa3A3VzMrdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbm8wV29QTXp3dmhYaE9kbTZhNkZqNGR2NTVNOXNaWUEtU1FncVFXWlVSVmhvMzJGVldnY0VyakxBNDE1UGlQYk91UUdOQjBGNVZES2dxbjI0MFV5TU9yZ0h0d2dtcUhiT25kWlU0SVpwaTlnfn4%3D&chksm=7b49a0ef4c3e29f9d2bd03ae95e55152f1205ca14b9fef80ef8c9cbe1d6777895d559d91aaca#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_f292f0b0",
@@ -2747,9 +2747,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV8rWmp3SWdPeFdDME1UcThQdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLa2hyYUxrQnNndmNEbDdvdlJnYTdKczRkWVduWmFfNW93b25JZkhsQktkeWZHdzVhdlVpa01UZ2hleW9RajFBMjdrTUxMSm5seG50ZkhnX01MNEY5b0ZTMGdrSXpLNnM1WjhnVjBlMDU2S2lBfn4%3D&chksm=7b49a03a4c3e292c9a93efa9221f5cc45944291ba82694e3fb4d6b40e2bf588b4a004d881a3e#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_482bf2d0",
@@ -2764,9 +2764,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV93ditnV2NqMzhhWXk0NDBRdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbk9jVmsxVE0tRERiNTgwSEM0WHJXRzdvRkZicExXSWc3Ykw4ajJfRkI1MThLM2FickRVeVpDQXhtYjN5aWpLUGJzbF92bFhkZzZpUHZMcUlNNFdWdkM0MEN2cjVNVTNQc1JMMXdPdW10Nm1Bfn4%3D&chksm=7b49a2324c3e2b242cf28393de49c5b8fb8ddcd2f490a223ed48cc12031034f31c563ff73d4f#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_a75756b4",
@@ -2781,9 +2781,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV80aXcxeG8ranBTMm1KVm5XdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbk9jVmsxVE0tRERiNTgwSEM0WHJXRzdvRkZicExXSWc3Ykw4ajJfRkI1MThLM2FickRVeVpDQXhtYjN5aWpLUGF0bFVLTFFKTnlvbmdZeDJCZkxFS01JV21uUHM0MzIzcV9sU0hFRHVwWHZ3fn4%3D&chksm=7b49a2324c3e2b242cf28393de49c5b8fb8ddcd2f490a223ed48cc12031034f31c563ff73d4f#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_9fc5707a",
@@ -2798,9 +2798,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9lc3l5WmplR1ZLQlFyNU1IdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLa1Z0cDdzWjYtTnVCcS1MVUFEMXBnREZYcmNIYzc1bXdNRTF2WDlzWkUxS3dHVUVxX19JRlplcW1KZHRnUVFERjBuM0ttVFJYSUdDaExmbGUzdjkxbDI5VkZfMnNydldvLU5RLWpvZmpPaXVnfn4%3D&chksm=7b49a4af4c3e2db9d19165837bf329b034031cb9666f8c49143546bbbdb8724d1a1b428744de#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_db6f3234",
@@ -2815,9 +2815,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9YVnB2dXFGajZuc1lwaU9tdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLa1Z0cDdzWjYtTnVCcS1MVUFEMXBnREZYcmNIYzc1bXdNRTF2WDlzWkUxS3dHVUVxX19JRlplcW1KZHRnUVFERjFIUjVjUW9FUmJPaDlHdFZiaEtiN3Y2dXg2S1dxMVJSVmVPY01pMi10aHRRfn4%3D&chksm=7b49a4af4c3e2db9d19165837bf329b034031cb9666f8c49143546bbbdb8724d1a1b428744de#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_17e0362b",
@@ -2832,9 +2832,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=2247489948&idx=1&sn=72935aa2584dd9d5c7722da0311385a8&chksm=fb4a5fbfcc3dd6a9fa9d7d5d54f87c3ddf298dc521e416035a746dd34a7f3508ac34125526aa#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_837d6b7f",
@@ -2849,9 +2849,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV9GeW9HMDJPSTJXZEphYTJDdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbG5BY1F3X0J0cFFDOWRUVXRYYmU1aXgtQ0V4UGV4OGQ2ZWtPaGo5NjV3bFlkVnVhUi1YZjRUcDhOdkg3ZXlGcjhHM2RTYkRSVGJwNkhrd3RocTFjeG5RMlp5VEJLYXNqaUZidEVQTTRTUFFBfn4%3D&chksm=7b4a50164c3dd900f8419ec28a88066d13a93eed951ffc2d9e21c04bb44ea77e804c7751d728#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_664f0950",
@@ -2866,9 +2866,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=2247489150&idx=1&sn=cd14263cf58cfee4863f2090fae6ac17&chksm=fb4a505dcc3dd94b802cfe7709193d1a8551b0f5b0360bf8e746efa9c1ece0c4449a2308f5fc#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_ffeb0d8b",
@@ -2883,9 +2883,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&tempkey=MTM5MV96eVBSNm00b05SMnhXbmowdWFuTW0wRk1LUWFNNWxyX1pwR1Y5N3dPUWhfQlBoVUZwZDNnc0dWaVhLbWxiSDBmRk9nRjdkOHB0NEV4QnNPbXZvY2VoUDJjdGZGU2s5VmxEWVdrcTVTT1BFcnR0QUQ3dE9GU0huT0NuME01N0hBN0tCRTMzd0RUNFYwNm9ud2R4ZVEyNVJod1B0RTc0bng0cDcwbFlRfn4%3D&chksm=7b4a53a44c3ddab25a50ba4bd4250b1be82746ce45675aa4bbc5d9f13a9de7c8ab9496a6024b#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "lab_yskm_toxicology_safety",
@@ -2911,8 +2911,8 @@
     "report_no": "21GC101098",
     "testing_agency": "广东省生物制品与活性成分研究所",
     "pdf_filename": "yskm_toxicology.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "lab_yskm_risk_screening",
@@ -2938,8 +2938,8 @@
     "report_no": "MPEGLRKK615777R5",
     "testing_agency": "谱尼测试集团深圳有限公司 (PONY)",
     "pdf_filename": "yskm_pesticide.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_fed12013",
@@ -2954,9 +2954,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100005154&idx=1&sn=e4115a086c1af55d014ca198be42f6e3&chksm=7b4a53014c3dda17c29421094d6ae8a58da4bab0e58c01ad41a1a4fe3946c00179b8ea53b53b#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_d3247dda",
@@ -2971,9 +2971,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100005147&idx=1&sn=2657814eff5276b4e1006018b90ef905&chksm=7b4a53384c3dda2e0589a35ab0613cab29f1bb906acd1ea1475f074ba767e29a7236cd92f531#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_b83d9f7e",
@@ -2988,9 +2988,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100005139&idx=1&sn=25fc0e24aa67f57f71cd98041f73ff33&chksm=7b4a53304c3dda266490066856f3b8ff8bdaddd51a36a4d05277a5ad30954319ec7b4ec1a33c#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_62ca942a",
@@ -3005,9 +3005,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100005120&idx=1&sn=1cf7b892e83ea60bd28c14b012e6fe0d&chksm=7b4a53234c3dda356ff6e6e5b0915a6a2060bed2f6f2b81f3b5ea6e8a2d05e89c474363eff44#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_2778f61a",
@@ -3022,9 +3022,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100005084&idx=1&sn=8ae6644b778c35e2c5c997e7896e46fe&chksm=7b4a52ff4c3ddbe936692e41b4794113cbf0fb43cf9f21970fb056ec4210e5187c9097bc2327#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_de7a1800",
@@ -3039,9 +3039,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100000276&idx=1&sn=329c044b638933967fa5153ed463ac6a&chksm=7b4a44374c3dcd211583ab1e6018c22c5fc5e4c8158cabe8df8cb1d6cb45de44bd374fd29f6c#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_1753f57d",
@@ -3056,9 +3056,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100002810&idx=1&sn=7da62fd4bfdcac8b5ab0ca599daa2855&chksm=7b4a4dd94c3dc4cf17aaefa4be17c939486548b6e994001d6bf27c22d850c22057e5e99390f2#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_4f564aac",
@@ -3073,9 +3073,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100003568&idx=1&sn=66d85d4be5b8c3fdd7fe0e2aa5ce928d&chksm=7b4a48d34c3dc1c506632ebde6c093024401c4eb549e35a7da510345dc95c7e99f1eed418f08#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_e1de30b3",
@@ -3090,9 +3090,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100003568&idx=1&sn=66d85d4be5b8c3fdd7fe0e2aa5ce928d&chksm=7b4a48d34c3dc1c506632ebde6c093024401c4eb549e35a7da510345dc95c7e99f1eed418f08#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_4ace9d1a",
@@ -3107,9 +3107,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100001865&idx=1&sn=aac85964d9aa69558a99622fd470aad7&chksm=7b4a4e6a4c3dc77c6b1dce744349eae3e1776d5f11ded09bbed1ca36a552e7f325e31272ef50#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_4a7dddf2",
@@ -3124,9 +3124,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100000070&idx=1&sn=5f228d8b7a4d5ade87a56f5b0c62fa78&chksm=7b4a47654c3dce73046341aea5a9601f5bc94111af989315b3f18e18f4b0d8b712071315874f#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "lab_tfn_penetration_barrier",
@@ -3152,8 +3152,8 @@
     "report_no": "SYXK(沪)2019-0027 (专案)",
     "testing_agency": "中国健康护理工业研究总院（上海健康护理工业研究院 生物机制评价研究中心）",
     "pdf_filename": "tfn_barrier_repair.pdf",
-    "show": true,
-    "status": "published"
+    "show": false,
+    "status": "offline"
   },
   {
     "id": "wx_2b82c43a",
@@ -3168,9 +3168,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100000061&idx=1&sn=210a1989df036af5227c65986ee35764&chksm=7b4a471e4c3dce08e80be40762fb978340f7437a1dc4e74a63f2e8ddcff6b4619a48cd2e86cd#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_25cd000c",
@@ -3185,9 +3185,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100000056&idx=1&sn=548229b616622520ddb84052087d32a4&chksm=7b4a471b4c3dce0df8eb1b35ceeaedd7c75c9a769d81b02b8a3aeab314eb30a891c72dcba157#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_f4669797",
@@ -3202,9 +3202,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100000040&idx=1&sn=51f2c9522f86b9e9ba37419f32c7d16b&chksm=7b4a470b4c3dce1d487f75288afcee690c1c59ae1571800ebfac09f60480c053da60a48d369b#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "wx_85e07069",
@@ -3219,9 +3219,9 @@
     "source_url": "http://mp.weixin.qq.com/s?__biz=MzU0NzY1NjUyNA==&mid=100000004&idx=1&sn=8a060e1d338dc6afbe8155edf780ab04&chksm=7b4a47274c3dce317f6edb0009cfbece7c5f965d72a43044afebcd9cd3330ec6158fc3eea094#rd",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "bxfhyl",
@@ -3235,9 +3235,9 @@
     "date": "2025-07-02",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "jmbpgs",
@@ -3251,9 +3251,9 @@
     "date": "2026-01-26",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   },
   {
     "id": "zlsfhy",
@@ -3267,8 +3267,8 @@
     "date": "2025-07-02",
     "recommend": false,
     "top": false,
-    "show": true,
+    "show": false,
     "sort": 50,
-    "status": "published"
+    "status": "offline"
   }
 ]

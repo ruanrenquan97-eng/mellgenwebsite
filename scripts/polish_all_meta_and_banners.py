@@ -18,7 +18,7 @@ META_REPLACEMENTS = [
     # product_index.html
     ("专注\"皮肤抗衰老分子\"、\"海洋蓝色分子\" and \"特色植物资源\"的研究, 生产Proteins质多肽药物、生物发酵制品, 功能性Cosmetics与保健食品原辅料, 医用可降解材料等多领域产品.",
      "Focusing on skin anti-aging molecules, marine blue molecules, and featured botanical resources, producing protein peptide drugs, bio-fermentation products, functional cosmetic and nutritional ingredients, and medical biodegradable materials."),
-    ("专注“皮肤衰老与修复”、“海洋仿生” and “特色植物资源”研究", "focuses on skin aging and repair, marine biomimetics, and featured botanical bio-resources"),
+    ("专注“皮肤衰老与修护”、“海洋仿生” and “特色植物资源”研究", "focuses on skin aging and repair, marine biomimetics, and featured botanical bio-resources"),
     ("专注“皮肤内源分子”、“海洋仿生分子”和“特色植物资源”的研究", "focuses on skin endogenous molecules, marine biomimetic molecules, and featured botanical resources"),
     ("可广泛用于生物医药、医疗美容、化妆品及保健食品原料、医用可降解材料等领域", "widely applicable in biomedicine, medical aesthetics, cosmetics, nutritional ingredients, and biodegradable materials"),
     ("广泛用于生物医药、医疗美容、化妆品及保健食品原料", "widely applicable in biomedicine, aesthetics, cosmetics, and nutritional ingredients"),

@@ -468,43 +468,44 @@ def generate_en_product_detail(product):
 
 def update_en_product_listing_pages(products):
     listing_files = [
-        ("en/product_hzpyl.html", "Cosmetic Raw Materials"),
-        ("en/product_yyyl.html", "Medical Raw Materials"),
-        ("en/product_spyyyl.html", "Food Nutrition Ingredients"),
         ("en/product_index.html", "All Products"),
+        ("en/product_hzpyl.html", "Cosmetic Raw Materials"),
+        ("en/product_tpxzzd.html", "Transdermal Recombinant Protein/Peptides"),
+        ("en/product_zwyhxw.html", "Plant-Derived Actives"),
+        ("en/product_zzfsdb.html", "Recombinant Biomimetic Protein"),
+        ("en/product_hyyhxw.html", "Marine-Derived Actives"),
+        ("en/product_yejfjy.html", "Infant Probiotic Fermentation Actives"),
+        ("en/product_dwyhxw.html", "Animal-Derived Actives"),
+        ("en/product_zzdb.html", "Recombinant Biomimetic Protein"),
+        ("en/product_fhyys.html", "Cell Nutrients"),
+        ("en/product_lzdt.html", "Plant-Derived Actives"),
     ]
 
     for rel_path, cat in listing_files:
         fp = os.path.join(WORKSPACE, rel_path)
         if not os.path.exists(fp):
             continue
-        with open(fp, "r", encoding="utf-8") as f:
+        with open(fp, "r", encoding="utf-8", errors="ignore") as f:
             html = f.read()
 
+        # Clean trailing corrupted data if multiple </html> exist
+        m_ends = list(re.finditer(r'</html>', html, re.I))
+        if len(m_ends) > 1:
+            html = html[:m_ends[0].end()]
+
         # Build card list
-        if cat == "All Products":
+        if cat in ["All Products", "Cosmetic Raw Materials"]:
             cat_products = products
-        elif cat == "Cosmetic Raw Materials":
-            cat_products = [p for p in products if p.get("category") in [
-                "Cosmetic Raw Materials", "Transdermal Recombinant Protein/Peptides", "Recombinant Biomimetic Protein", 
-                "Plant-Derived Actives", "Marine-Derived Actives", "Infant Probiotic Fermentation Actives",
-                "化妆品原料", "透皮型重组蛋白/多肽", "重组仿生蛋白", "植物源活性物", 
-                "海洋源活性物", "婴儿菌发酵源活性物", "植物提取物", "仿生生物原料", 
-                "仿生原料", "细胞营养素", "生物发酵原料", "生物酶", "水生原料", 
-                "动物源活性物", "焕亮因子"
+        elif cat == "Transdermal Recombinant Protein/Peptides":
+            cat_products = [p for p in products if p.get("id") in ["tphtct", "tpxldb", "mellpr8670"] or p.get("category") in [
+                "Transdermal Recombinant Protein/Peptides", "透皮型重组蛋白/多肽", "高渗透型重组蛋白/多肽"
             ]]
-        elif cat == "Medical Raw Materials":
-            cat_products = [p for p in products if p.get("category") in [
-                "Medical Raw Materials", "Recombinant Protein", "Animal-Derived Actives", "Active Antibacterial Materials",
-                "医用原料", "重组蛋白", "活性抗菌材料"
-            ]]
-        elif cat == "Food Nutrition Ingredients":
-            cat_products = [p for p in products if p.get("category") in [
-                "Food Nutrition Ingredients", "Complex Nutrients", "Infant-Derived Probiotics",
-                "食品营养原料", "桃胶多糖", "水母胶原", "灵芝黄酮", "灵芝多糖", "人参多肽", "复合营养素", "婴儿源益生菌"
+        elif cat == "Plant-Derived Actives":
+            cat_products = [p for p in products if p.get("id") in ["yskmyz"] or p.get("category") in [
+                "Plant-Derived Actives", "植物源活性物", "植物提取物"
             ]]
         else:
-            cat_products = products
+            cat_products = []
 
         cat_products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
 
@@ -532,9 +533,9 @@ def update_en_product_listing_pages(products):
         # Popular searches in header
         pop_html = '''<p> <b>Popular Searches: </b> 
     <a href="./product_hzpyl.html" title="Probiotic Soothing Factor">Probiotic Soothing Factor</a> 
-    <a href="./product_yyyl.html" title="Medical Raw Materials">Medical Raw Materials</a> 
     <a href="./product_hzpyl.html" title="Collagen">Collagen</a> 
     <a href="./product_hzpyl.html" title="Transdermal Fibronectin">Transdermal Fibronectin</a> 
+    <a href="./product_hzpyl.html" title="cTDP Cyclic Peptide">cTDP Cyclic Peptide</a> 
    </p>'''
         html = re.sub(r'<p>\s*<b>Popular Searches:.*?</b>.*?</p>', pop_html, html, flags=re.DOTALL)
         html = re.sub(r'placeholder="[^"]*"', 'placeholder="Please enter keywords to search..."', html)
@@ -544,24 +545,48 @@ def update_en_product_listing_pages(products):
 
 def main():
     print("Generating pure English product pages & updating listing pages...")
-    products, settings, nav_links = load_data()
+    products, offline_products, settings, nav_links = load_data()
     
     # Clean orphaned English product pages
-    active_pids = set(p['id'] for p in products)
+    known_pids = set(p['id'] for p in products) | set(p['id'] for p in offline_products)
     en_prod_dir = os.path.join(WORKSPACE, "en", "products")
     if os.path.exists(en_prod_dir):
         for f in os.listdir(en_prod_dir):
-            if f.endswith('.html') and f[:-5] not in active_pids:
+            if f.endswith('.html') and f[:-5] not in known_pids:
                 try:
                     os.remove(os.path.join(en_prod_dir, f))
                     print(f"[*] Cleaned orphaned English product page: {f}")
                 except Exception:
                     pass
 
+    # 1. Generate detail pages for published active products
     for p in products:
         generate_en_product_detail(p)
+
+    # 2. Generate standard redirection pages for offline products
+    for p in offline_products:
+        pid = p["id"]
+        dest_path = os.path.join(EN_DIR, "products", f"{pid}.html")
+        redirect_html = f'''<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0;url=../product_index.html">
+<link rel="canonical" href="https://www.mellgen.com/en/product_index.html">
+<title>Product Discontinued / Offline - Mellgen Biotech</title>
+<script>location.replace("../product_index.html");</script>
+</head>
+<body>
+<p>This product has been discontinued or taken offline. Redirecting to <a href="../product_index.html">Product Center</a>...</p>
+</body>
+</html>'''
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+        with open(dest_path, "w", encoding="utf-8") as f:
+            f.write(redirect_html)
+
+    # 3. Update all listing pages
     update_en_product_listing_pages(products)
-    print(f"[OK] Generated {len(products)} English product detail pages & updated listing pages!")
+    print(f"[OK] Generated {len(products)} English product detail pages, {len(offline_products)} redirect pages & updated listing pages!")
 
 if __name__ == "__main__":
     main()

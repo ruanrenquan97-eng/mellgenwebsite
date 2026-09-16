@@ -75,14 +75,15 @@ em{font-style:normal;}
             width: 100%;
             height: 100%;
             background: rgba(0, 8, 17, 0.32);
-            z-index: 1;
+            z-index: 2;
+            pointer-events: none;
         }
         
         .banner video {
             display: block;
             width: 100%;
             margin: 0 auto;
-            z-index: -1;
+            z-index: 1;
             position: relative;
         }
         

@@ -246,7 +246,7 @@
       "title": "美尔健官网首页",
       "url": "index.html",
       "type": "首页",
-      "pv": 28,
+      "pv": 30,
       "uv": 0,
       "avg_duration_sec": 0,
       "avg_duration_str": "0秒"
@@ -614,6 +614,30 @@
   ],
   "realtime_stream": [
     {
+      "id": "v-1789572851",
+      "time": "17:34:11",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "美尔健生物|化妆品原料-高渗透生物活性原料",
+      "url": "index.html",
+      "type": "官网首页",
+      "duration_str": "正在浏览中...",
+      "referrer": "直接访问",
+      "device": "电脑端"
+    },
+    {
+      "id": "v-1789572851",
+      "time": "17:34:11",
+      "ip": "127.0.0.1",
+      "region": "本地开发测试 (127.0.0.1)",
+      "title": "美尔健生物|化妆品原料-高渗透生物活性原料",
+      "url": "index.html",
+      "type": "官网首页",
+      "duration_str": "正在浏览中...",
+      "referrer": "直接访问",
+      "device": "电脑端"
+    },
+    {
       "id": "v-1789572722",
       "time": "17:32:02",
       "ip": "127.0.0.1",
@@ -947,30 +971,6 @@
       "type": "页面浏览",
       "duration_str": "正在浏览中...",
       "referrer": "http://localhost:8000/help_ryzs.html",
-      "device": "电脑端"
-    },
-    {
-      "id": "v-1789467310",
-      "time": "12:15:10",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "荣誉证书-美尔健生物",
-      "url": "help_ryzs.html",
-      "type": "页面浏览",
-      "duration_str": "正在浏览中...",
-      "referrer": "http://localhost:8000/help_gszz.html",
-      "device": "电脑端"
-    },
-    {
-      "id": "v-1789467307",
-      "time": "12:15:07",
-      "ip": "127.0.0.1",
-      "region": "本地开发测试 (127.0.0.1)",
-      "title": "公司资质-美尔健生物",
-      "url": "help_gszz.html",
-      "type": "页面浏览",
-      "duration_str": "正在浏览中...",
-      "referrer": "http://localhost:8000/help_fmzl.html",
       "device": "电脑端"
     }
   ]

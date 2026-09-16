@@ -22,14 +22,14 @@
   },
   {
     "id": "tpxldb",
-    "title": "透皮纤连蛋白 (TFNpro)",
+    "title": "高渗透纤连蛋白 (TFNpro)",
     "nmpa": "194980-00075-3074",
     "inci_cn": "纤连蛋白、1,2-己二醇、水",
     "inci_en": "FIBRONECTIN, 1,2-HEXANEDIOL, WATER"
   },
   {
     "id": "qdjy",
-    "title": "医用级缺端胶原",
+    "title": "高纯缺端胶原",
     "nmpa": "208512-00075-1747",
     "inci_cn": "缺端胶原、羟乙基脲、对羟基苯乙酮、水",
     "inci_en": "ATELOCOLLAGEN, HYDROXYETHYL UREA, HYDROXYACETOPHENONE, WATER"
@@ -50,7 +50,7 @@
   },
   {
     "id": "megpep",
-    "title": "MEGPEP RF50G- 促渗修复肽",
+    "title": "MEGPEP RF50G- 促渗修护肽",
     "nmpa": "192417-00075-1689",
     "inci_cn": "氯化钠、寡肽-1、柠檬酸钠、1,2-己二醇、水",
     "inci_en": "SODIUM CHLORIDE, OLIGOPEPTIDE-1, SODIUM CITRATE, 1,2-HEXANEDIOL, WATER"
@@ -169,21 +169,21 @@
   },
   {
     "id": "tphtct",
-    "title": "透皮环肽cTDP",
+    "title": "cTDP环肽",
     "nmpa": "211755-00075-4448",
     "inci_cn": "1,2-己二醇、十肽-4、水",
     "inci_en": "1,2-HEXANEDIOL, DECAPEPTIDE-4, AQUA"
   },
   {
     "id": "tp1jydb",
-    "title": "透皮I型胶原蛋白",
+    "title": "高渗透I型胶原蛋白",
     "nmpa": "218266-00075-7345",
     "inci_cn": "胶原、十肽-4、1,2-己二醇、水",
     "inci_en": "COLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA"
   },
   {
     "id": "tptxdb",
-    "title": "透皮弹性蛋白 Telastin",
+    "title": "高渗透弹性蛋白 Telastin",
     "nmpa": "141726-00075-2984",
     "inci_cn": "水解弹性蛋白、1,2-己二醇、水",
     "inci_en": "HYDROLYZED ELASTIN, 1,2-HEXANEDIOL, WATER"
@@ -225,7 +225,7 @@
   },
   {
     "id": "tpxviijy",
-    "title": "透皮XVII型胶原蛋白",
+    "title": "高渗透XVII型胶原蛋白",
     "nmpa": "228500-00075-8547",
     "inci_cn": "原胶原、十肽-4、1,2-己二醇、水",
     "inci_en": "PROCOLLAGEN, DECAPEPTIDE-4, 1,2-HEXANEDIOL, AQUA"

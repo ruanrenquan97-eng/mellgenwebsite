@@ -1,5 +1,23 @@
 [
   {
+    "id": "daily_1789520441_9ac532",
+    "time": "2026-09-16 03:00:41",
+    "trigger": "daemon_schedule",
+    "status": "success",
+    "summary": "公众号同步(+9) · 网站地图刷新 (247 URL) · IndexNow已发送 (247 URL) · 百度清单就绪 · AI模型GEO知识库更新 (耗时 24.53s)",
+    "details": {
+      "wechat": "微信公众号同步完成 (新增 9 篇, 保持 40 篇)",
+      "sitemap": "成功生成并更新全站 247 个 URL 至 sitemap.xml 与 sitemap.txt",
+      "indexnow": "IndexNow响应 HTTP 403 (公网密钥待验证或频控，已广播 247 条URL)",
+      "baidu": "未配置百度 Token，已生成待提交清单",
+      "pings": "Google: 已通知 · Bing: 已通知",
+      "ai_geo": "AI 大模型 GEO 知识库 (llms.txt / llms-full.txt) 语义时间戳已同步刷新",
+      "log_parse": "未设置或未找到服务器 access.log 路径，跳过自动增量解析"
+    },
+    "total_urls": 247,
+    "duration_sec": 24.53
+  },
+  {
     "id": "daily_1789347621_4812b8",
     "time": "2026-09-14 03:00:21",
     "trigger": "daemon_schedule",

@@ -143,35 +143,27 @@ def replace_group(pattern, replacement, html, group_index=2, flags=re.DOTALL):
     return html
 
 def get_product_subcategories(category):
-    if category in ["化妆品原料", "cat_hzpyl"]:
+    if category in ["化妆品原料", "cat_hzpyl", "全部", "all", "原料产品中心", "产品中心", "产品频道"]:
         return [
-            "化妆品原料", "透皮型重组蛋白/多肽", "重组仿生蛋白", "植物源活性物", 
+            "化妆品原料", "高渗透型重组蛋白/多肽", "重组仿生蛋白", "植物源活性物", 
             "海洋源活性物", "婴儿菌发酵源活性物", "植物提取物", "仿生生物原料", 
             "仿生原料", "细胞营养素", "生物发酵原料", "生物酶", "水生原料", 
             "动物源活性物", "焕亮因子"
         ]
-    elif category in ["医用原料", "cat_yyyl"]:
-        return ["医用原料", "重组蛋白", "动物源活性物", "活性抗菌材料"]
-    elif category in ["食品营养原料", "cat_spyyyl"]:
-        return ["食品营养原料", "桃胶多糖", "水母胶原", "灵芝黄酮", "灵芝多糖", "人参多肽", "复合营养素", "婴儿源益生菌"]
-    elif category in ["透皮型重组蛋白/多肽", "cat_tpxzzd"]:
-        return ["透皮型重组蛋白/多肽"]
-    elif category in ["植物源活性物", "植物提取物", "cat_zwyhxw"]:
-        return ["植物源活性物", "植物提取物"]
-    elif category in ["海洋源活性物", "cat_hyyhxw"]:
-        return ["海洋源活性物", "水生原料", "生物发酵原料", "生物酶"]
+    elif category in ["高渗透型重组蛋白/多肽", "cat_tpxzzd"]:
+        return ["高渗透型重组蛋白/多肽"]
+    elif category in ["重组仿生蛋白", "cat_zzfsdb", "重组蛋白", "cat_zzdb"]:
+        return ["重组仿生蛋白", "重组蛋白", "仿生生物原料", "仿生原料"]
+    elif category in ["植物源活性物", "植物提取物", "cat_zwyhxw", "灵芝多糖", "cat_lzdt", "桃胶多糖"]:
+        return ["植物源活性物", "植物提取物", "灵芝多糖", "桃胶多糖"]
+    elif category in ["海洋源活性物", "cat_hyyhxw", "水母胶原"]:
+        return ["海洋源活性物", "水生原料", "生物发酵原料", "生物酶", "水母胶原"]
+    elif category in ["婴儿菌发酵源活性物", "cat_yejfjy", "生物发酵原料", "cat_swfjyl"]:
+        return ["婴儿菌发酵源活性物", "生物发酵原料"]
     elif category in ["动物源活性物", "仿生生物原料", "仿生原料", "cat_dwyhxw"]:
         return ["动物源活性物", "仿生生物原料", "仿生原料"]
-    elif category in ["重组蛋白", "cat_zzdb"]:
-        return ["重组蛋白", "医用原料"]
-    elif category in ["重组仿生蛋白", "cat_zzfsdb"]:
-        return ["重组仿生蛋白", "仿生生物原料", "仿生原料"]
-    elif category in ["复合营养素", "细胞营养素", "cat_fhyys"]:
-        return ["复合营养素", "细胞营养素"]
-    elif category in ["灵芝多糖", "cat_lzdt"]:
-        return ["灵芝多糖", "食品营养原料"]
-    elif category in ["全部", "all", "原料产品中心", "产品中心", "产品频道"]:
-        return None
+    elif category in ["细胞营养素", "复合营养素", "cat_xbyys", "cat_fhyys"]:
+        return ["细胞营养素", "复合营养素"]
     return [category]
 
 def get_article_subcategories(category):
@@ -183,8 +175,8 @@ def get_article_subcategories(category):
         return ["实验室研究数据"]
     elif category == "客户合作":
         return ["客户合作"]
-    elif category in ["应用场景", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]:
-        return ["应用场景", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]
+    elif category in ["应用场景", "医美行业", "护肤品工厂", "化妆品", "健康护理行业", "功能类食品", "洗护用品", "女性护理产品"]:
+        return ["应用场景", "医美行业", "护肤品工厂", "化妆品", "健康护理行业", "功能类食品", "洗护用品", "女性护理产品"]
     elif category == "新闻资讯":
         return ["新闻资讯", "企业新闻", "技术知识", "常见问答"]
     elif category == "企业新闻":
@@ -193,21 +185,114 @@ def get_article_subcategories(category):
 
 
 def update_global_contact_info(html_content, settings):
-    html_content = html_content.replace("186-9197-8530 / 0755-82926499", settings.get("phone", ""))
-    html_content = html_content.replace("186-9197-8530&nbsp;&nbsp;&nbsp;0755-82926499", settings.get("phone", "").replace(" / ", "&nbsp;&nbsp;&nbsp;"))
-    html_content = html_content.replace("0755-82926499", settings.get("phone", "").split(" / ")[-1])
-    
-    address_val = settings.get("address", "")
+    # 1. Clean repeating '广东省' and update address cleanly
+    address_val = (settings.get("address", "") or "").strip()
+    # Normalize address_val to avoid duplicate province
     if address_val:
-        html_content = re.sub(r'广东省深圳市大鹏新区葵涌街道生命科学产业园[A-Za-z0-9栋 楼/、]*', address_val, html_content)
-        html_content = re.sub(r'深圳市大鹏新区葵涌街道(?:金业大道140号)?生命科学产业园[A-Za-z0-9栋 楼/、]*', address_val, html_content)
+        address_val = re.sub(r'^(?:广东省\s*)+', '广东省', address_val)
+    else:
+        address_val = "广东省深圳市大鹏新区葵涌街道生命科学产业园A23栋 3楼"
+
+    # Collapse any existing multiple '广东省' in HTML
+    html_content = re.sub(r'(?:广东省\s*)+', '广东省', html_content)
+    # Replace in address block
+    html_content = re.sub(
+        r'(地址：\s*)(?:广东省\s*)*(?:深圳市大鹏新区葵涌街道(?:三溪社区金业大道140号|金业大道140号)?生命科学产业园[A-Za-z0-9栋 楼/、\-]*)',
+        r'\g<1>' + address_val,
+        html_content
+    )
     
-    html_content = html_content.replace("61791579@qq.com", settings.get("email", ""))
-    html_content = html_content.replace("邮箱：61791579@qq.com", "邮箱：" + settings.get("email", ""))
-    
-    html_content = html_content.replace("61791579", settings.get("qq", ""))
-    
+    # 2. Robust phone replacement across headers, footers, and articles
+    phone_val = (settings.get("phone", "") or "").strip()
+    if not phone_val:
+        # Check contact dict
+        c = settings.get("contact", {})
+        if isinstance(c, dict):
+            p = c.get("phone", "").strip()
+            t = c.get("tel", "").strip()
+            if t and p:
+                phone_val = f"{t} / {p}"
+            elif p:
+                phone_val = p
+            elif t:
+                phone_val = t
+    if not phone_val:
+        phone_val = "0755-82926499 / 186-9197-8530"
+
+    parts = [p.strip() for p in re.split(r'[/,，、&;]+|\s{2,}', phone_val) if p.strip() and p.strip() not in ['nbsp']]
+    if len(parts) >= 2:
+        phone_slash = " / ".join(parts[:2])
+        phone_nbsp = "&nbsp;&nbsp;&nbsp;".join(parts[:2])
+    elif len(parts) == 1:
+        phone_slash = parts[0]
+        phone_nbsp = parts[0]
+    else:
+        phone_slash = phone_val
+        phone_nbsp = phone_val.replace(" / ", "&nbsp;&nbsp;&nbsp;")
+
+    # Replace in footer .ftel: <div class="ftel">\s*.*?\s*</div>
+    html_content = re.sub(
+        r'(<div class="ftel">)[\s\S]*?(</div>)',
+        r'\1\n       ' + phone_nbsp + r'\n     \2',
+        html_content
+    )
+
+    # Replace in top header phone: <b>...</b> inside p102-top-l
+    html_content = re.sub(
+        r'(<div class="p102-top-l">[\s\S]*?<b>)[\d\- /&;a-zA-Z]+(</b>)',
+        r'\1' + phone_slash + r'\2',
+        html_content
+    )
+
+    # Replace in article declaration footer note: 欢迎致电全国服务热线：...。
+    html_content = re.sub(
+        r'(欢迎致电全国服务热线：)[\d\- /&;、]+(。)',
+        r'\1' + phone_slash + r'\2',
+        html_content
+    )
+
+    # 3. Email replacement
+    email_val = (settings.get("email", "") or "").strip() or "61791579@qq.com"
+    html_content = re.sub(r'邮箱：[\w\.-]+@[\w\.-]+', '邮箱：' + email_val, html_content)
+    html_content = re.sub(r'<h3>\s*电子邮箱\s*</h3>\s*<span>[^<]+</span>', f'<h3>电子邮箱</h3>\n                    <span>{email_val}</span>', html_content)
+
+    # 4. QQ replacement
+    qq_val = (settings.get("qq", "") or "").strip() or "61791579"
+    html_content = re.sub(r'<h3>\s*QQ\s*</h3>\s*<span>\d+</span>', f'<h3>QQ</h3>\n                    <span>{qq_val}</span>', html_content)
+
     return html_content
+
+
+def sync_all_contact_to_site(settings=None):
+    """把最新的联系方式（电话、地址、邮箱、QQ）全量同步更新至整站所有 HTML 页面"""
+    if settings is None:
+        settings_path = os.path.join(DATA_DIR, "settings.json")
+        if os.path.exists(settings_path):
+            with open(settings_path, "r", encoding="utf-8") as f:
+                settings = json.load(f)
+        else:
+            settings = {}
+
+    updated_count = 0
+    for root, dirs, files in os.walk(WORKSPACE_DIR):
+        if any(x in root for x in ['.git', '.venv', 'backup', 'cms_data_backup', 'brain']):
+            continue
+        for f in files:
+            if f.endswith('.html'):
+                fp = os.path.join(root, f)
+                try:
+                    with open(fp, "r", encoding="utf-8", errors="ignore") as f_in:
+                        orig = f_in.read()
+                    new_html = update_global_contact_info(orig, settings)
+                    if new_html != orig:
+                        with open(fp, "w", encoding="utf-8") as f_out:
+                            f_out.write(new_html)
+                        updated_count += 1
+                except Exception as e:
+                    pass
+    print(f"[generator] 全站联系方式与地址清理同步完成，更新了 {updated_count} 个页面。")
+    return updated_count
+
 
 def update_friendlinks(html_content, friendlinks):
     active_links = [fl for fl in friendlinks if fl.get("show", True)]
@@ -295,7 +380,7 @@ def update_navigation(html_content, nav_links, file_rel_path):
 
 DEFAULT_DISCLAIMER = """【法规合规与专业同行免责声明】
 1. 本网页展示的所有原料产品技术参数、活性机理、科研实验数据（包括细胞实验、生化模型等体外数据）及相关文献资料，仅供化妆品品牌方研发工程师、配方师、产品策划及高校科研机构进行同行专业技术探讨与配方研发参考，并非针对终端消费者的产品功效宣称、商业承诺或医疗建议。
-2. 根据《化妆品监督管理条例》、《化妆品功效宣称评价规范》等相关法律法规，使用本原料的化妆品成品企业应独立对其终产品的安全性、稳定性和功效宣称负责，并依法完成终产品的功效宣称评价与国家药监局备案/注册申报，不得直接将本技术资料中有关原料的体外/细胞实验结论直接作为终端化妆品功效依据。
+2. 根据《化妆品监督管理条例》、《化妆品功效宣称评价规范》等相关法律法规，使用本原料的化妆品成品企业应独立对其终产品的安全性、稳定性和功效宣称负责，并依法完成终产品的功效宣称评价与国家NMPA平台备案/注册申报，不得直接将本技术资料中有关原料的体外/细胞实验结论直接作为终端化妆品功效依据。
 3. 本公司对因客户不当使用、超范围宣称或未经验证配伍导致的任何直接或间接法律与质量责任不承担连带责任。"""
 
 def render_product_b2b_sections(product):
@@ -367,13 +452,13 @@ def render_product_b2b_sections(product):
         out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">📦</span>')
         out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">采购与合规供应档案 (Procurement & Compliance)</span>')
         out.append('      </div>')
-        out.append('      <span style="color: #ccfbf1; font-size: 12px;">药监报送码 · 现货起订 · 索样支持 · 资质随货</span>')
+        out.append('      <span style="color: #ccfbf1; font-size: 12px;">NMPA报送码 · 现货起订 · 索样支持 · 资质随货</span>')
         out.append('    </div>')
         out.append('    <div style="padding: 24px;">')
         out.append('      <table style="width: 100%; border-collapse: collapse; font-size: 13.5px; color: #334155;">')
         
         proc_items = [
-            ("药监局原料报送码", proc.get("nmpa_code"), "供货包装规格", proc.get("packaging")),
+            ("NMPA监管机构原料报送码", proc.get("nmpa_code"), "供货包装规格", proc.get("packaging")),
             ("最小起订量 (MOQ)", proc.get("moq"), "供货交期", proc.get("lead_time")),
             ("储存条件", proc.get("storage"), "保质期 (Shelf Life)", proc.get("shelf_life")),
             ("研发索样支持", proc.get("sample_policy"), "随货资质报告", proc.get("qualifications")),
@@ -381,7 +466,7 @@ def render_product_b2b_sections(product):
         
         for label1, val1, label2, val2 in proc_items:
             if val1 or val2:
-                val1_display = f'<span style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: monospace; border: 1px solid #a7f3d0;">✓ {val1}</span>' if label1 == "药监局原料报送码" and val1 else (val1 or "—")
+                val1_display = f'<span style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: monospace; border: 1px solid #a7f3d0;">✓ {val1}</span>' if label1 == "NMPA监管机构原料报送码" and val1 else (val1 or "—")
                 out.append('        <tr style="border-bottom: 1px solid #f1f5f9;">')
                 out.append(f'          <td style="padding: 10px 14px; background: #f8fafc; width: 15%; font-weight: 600; color: #475569; white-space: nowrap;">{label1}</td>')
                 out.append(f'          <td style="padding: 10px 14px; width: 35%; color: #1e293b;">{val1_display}</td>')
@@ -560,12 +645,21 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
         else:
             html = re.sub(r'(<title>[^<]+</title>)', lambda m: f'{m.group(1)}\n  <meta name="description" content="{seo_desc}">', html, flags=re.I)
 
-    cat = product['category']
-    cat_filename = "product_hzpyl.html"
-    if cat in ["医用原料", "重组蛋白", "动物源活性物", "活性抗菌材料"]:
-        cat_filename = "product_yyyl.html"
-    elif cat in ["食品营养原料", "桃胶多糖", "水母胶原", "灵芝黄酮", "灵芝多糖", "人参多肽", "复合营养素", "婴儿源益生菌"]:
-        cat_filename = "product_spyyyl.html"
+    cat = product.get('category', '')
+    if cat in ["高渗透型重组蛋白/多肽"]:
+        cat_filename = "product_tpxzzd.html"
+    elif cat in ["重组仿生蛋白", "重组蛋白"]:
+        cat_filename = "product_zzfsdb.html"
+    elif cat in ["植物源活性物", "植物提取物", "灵芝多糖"]:
+        cat_filename = "product_zwyhxw.html"
+    elif cat in ["海洋源活性物", "水母胶原"]:
+        cat_filename = "product_hyyhxw.html"
+    elif cat in ["婴儿菌发酵源活性物", "生物发酵原料"]:
+        cat_filename = "product_yejfjy.html"
+    elif cat in ["动物源活性物", "仿生生物原料"]:
+        cat_filename = "product_dwyhxw.html"
+    else:
+        cat_filename = "product_hzpyl.html"
 
     # 1. Canonical & Multi-language (Hreflang)
     can_href_tags = generate_canonical_and_hreflang_tags(product.get("link", ""))
@@ -746,15 +840,15 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
  <div class="k12-cx-xgcp-4pl-fx1-1-01-list"> 
    <dl> 
     <dt> 
-     <a href="../products/tphtct.html" target="_blank" title="透皮环肽cTDP"> <img alt="透皮环肽cTDP" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg" title="透皮环肽cTDP"> </a> 
+     <a href="../products/tphtct.html" target="_blank" title="cTDP环肽"> <img alt="cTDP环肽" src="../resource/images/9b89259b4fb24ad2bcc390737279f8ff_44.jpg" title="cTDP环肽"> </a> 
     </dt> 
     <dd> 
-     <h4><a href="../products/tphtct.html" target="_blank" title="透皮环肽cTDP"> 透皮环肽cTDP </a></h4> 
+     <h4><a href="../products/tphtct.html" target="_blank" title="cTDP环肽"> cTDP环肽 </a></h4> 
      <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
-       打开皮肤吸收通道的肌肤之钥，生物透皮技术核心载体，助力10000+Da.分子透皮吸收，功效护肤的高效促渗方案。
+       打开皮肤吸收通道的肌肤之钥，生物透皮技术核心载体，助力10000+Da.分子高渗透吸收，功效护肤的高效促渗方案。
      </div> 
      <div class="p15-product-2-date"> 
-      <a href="../products/tphtct.html" target="_blank" title="透皮环肽cTDP"></a> 
+      <a href="../products/tphtct.html" target="_blank" title="cTDP环肽"></a> 
      </div> 
     </dd> 
    </dl> 
@@ -793,7 +887,7 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
     <dd> 
      <h4><a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"> 重组胶原蛋白溶液 </a></h4> 
      <div class="k12-cx-xgcp-4pl-fx1-1-01-desc">
-       MELLPRO-RHC透皮重组人Ⅰ型、Ⅲ型胶原蛋白溶液，修复基底膜带，抚平肌底干纹松弛。
+       MELLPRO-RHC高渗透重组人Ⅰ型、Ⅲ型胶原蛋白溶液，修护基底膜带，抚平肌底干纹松弛。
      </div> 
      <div class="p15-product-2-date"> 
       <a href="../products/zzjydb.html" target="_blank" title="重组胶原蛋白溶液"></a> 
@@ -832,7 +926,7 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
         cat_filename = "article_khhz.html"
     elif subcat == "应用场景":
         cat_filename = "article_yycj.html"
-    elif cat in ["合作案例", "医美行业", "护肤品工厂", "化妆品", "医药行业", "功能类食品", "洗护用品", "女性护理产品"]:
+    elif cat in ["合作案例", "医美行业", "护肤品工厂", "化妆品", "健康护理行业", "功能类食品", "洗护用品", "女性护理产品"]:
         cat_filename = "article_hzal.html"
     elif cat in ["常见问答"]:
         cat_filename = "article_cjwt.html"
@@ -1415,24 +1509,31 @@ def publish_site():
     product_listing_configs = [
         ("product_index.html", "原料产品中心"),
         ("product_hzpyl.html", "化妆品原料"),
-        ("product_yyyl.html", "医用原料"),
-        ("product_spyyyl.html", "食品营养原料"),
-        ("product_tpxzzd.html", "透皮型重组蛋白/多肽"),
+        ("product_tpxzzd.html", "高渗透型重组蛋白/多肽"),
         ("product_zwyhxw.html", "植物源活性物"),
         ("product_zzfsdb.html", "重组仿生蛋白"),
         ("product_hyyhxw.html", "海洋源活性物"),
+        ("product_yejfjy.html", "婴儿菌发酵源活性物"),
         ("product_dwyhxw.html", "动物源活性物"),
-        ("product_zzdb.html", "重组蛋白"),
-        ("product_fhyys.html", "复合营养素"),
-        ("product_lzdt.html", "灵芝多糖"),
+        ("product_zzdb.html", "重组仿生蛋白"),
+        ("product_fhyys.html", "细胞营养素"),
+        ("product_lzdt.html", "植物源活性物"),
     ]
     for page_rel, cat_name in product_listing_configs:
         page_path = os.path.join(WORKSPACE_DIR, page_rel)
         if os.path.exists(page_path):
             update_product_listing_page(page_path, cat_name, products, settings, nav_links)
 
-    # Clean legacy pagination files so they redirect to canonical listing pages
+    # Clean legacy pagination files & legacy medical/food files so they redirect to canonical listing pages
     pagination_redirects = [
+        ("product_yyyl.html", "./product_hzpyl.html"),
+        ("product_spyyyl.html", "./product_hzpyl.html"),
+        ("product_yyyl_0002.html", "./product_hzpyl.html"),
+        ("product_spyyyl_0002.html", "./product_hzpyl.html"),
+        ("en/product_yyyl.html", "./product_hzpyl.html"),
+        ("en/product_spyyyl.html", "./product_hzpyl.html"),
+        ("en/product_yyyl_0002.html", "./product_hzpyl.html"),
+        ("en/product_spyyyl_0002.html", "./product_hzpyl.html"),
         ("product_index_0002.html", "./product_index.html"),
         ("product_index_0003.html", "./product_index.html"),
         ("product_hzpyl_0002.html", "./product_hzpyl.html"),

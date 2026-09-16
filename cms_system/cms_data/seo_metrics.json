@@ -1,7 +1,7 @@
 {
   "traffic": {
-    "current_date": "2026-09-15",
-    "pv": 92,
+    "current_date": "2026-09-16",
+    "pv": 1,
     "uv": 1,
     "ip": 1,
     "pv_growth": "待访客来访",
@@ -18,20 +18,13 @@
       }
     ],
     "devices": {
-      "pc": 185,
+      "pc": 186,
       "mobile": 5
     },
     "today_ips": [
       "127.0.0.1"
     ],
     "history_7d": [
-      {
-        "date": "09-09",
-        "full_date": "2026-09-09",
-        "pv": 0,
-        "uv": 0,
-        "ip": 0
-      },
       {
         "date": "09-10",
         "full_date": "2026-09-10",
@@ -70,19 +63,19 @@
       {
         "date": "09-15",
         "full_date": "2026-09-15",
-        "pv": 91,
+        "pv": 92,
+        "uv": 1,
+        "ip": 1
+      },
+      {
+        "date": "09-16",
+        "full_date": "2026-09-16",
+        "pv": 1,
         "uv": 1,
         "ip": 1
       }
     ],
     "history_30d": [
-      {
-        "date": "08-17",
-        "full_date": "2026-08-17",
-        "pv": 0,
-        "uv": 0,
-        "ip": 0
-      },
       {
         "date": "08-18",
         "full_date": "2026-08-18",
@@ -282,14 +275,21 @@
       {
         "date": "09-15",
         "full_date": "2026-09-15",
-        "pv": 91,
+        "pv": 92,
+        "uv": 1,
+        "ip": 1
+      },
+      {
+        "date": "09-16",
+        "full_date": "2026-09-16",
+        "pv": 1,
         "uv": 1,
         "ip": 1
       }
     ]
   },
   "indexing": {
-    "total_pages": 232,
+    "total_pages": 244,
     "indexed_pages": 198,
     "overall_rate": 96.1,
     "last_check_time": "2026-09-14 11:50:00",
@@ -421,7 +421,7 @@
     ],
     "core_keywords": [
       {
-        "keyword": "医用原料供应商",
+        "keyword": "化妆品原料供应商",
         "rank": 3,
         "engine": "百度",
         "trend": "up"
@@ -439,13 +439,13 @@
         "trend": "up"
       },
       {
-        "keyword": "透皮肽生产厂家",
+        "keyword": "高渗透肽生产厂家",
         "rank": 1,
         "engine": "360",
         "trend": "equal"
       },
       {
-        "keyword": "食品级玻尿酸原料",
+        "keyword": "日化级玻尿酸原料",
         "rank": 4,
         "engine": "搜狗",
         "trend": "up"

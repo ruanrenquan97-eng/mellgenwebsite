@@ -8,9 +8,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Heroicons/FontAwesome CDN for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Quill WYSIWYG Editor -->
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+  <!-- Quill WYSIWYG Editor (Local with CDN fallback) -->
+  <link href="/css/quill.snow.css" rel="stylesheet">
+  <script src="/js/quill.min.js"></script>
+  <script>window.Quill || document.write('<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"><\/script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">')</script>
   <!-- QRCode.js for Mobile QR Code Preview -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <!-- SortableJS for smooth drag and drop table sorting -->
@@ -1304,13 +1305,13 @@
               <div class="flex-1 flex gap-2">
                 <select id="entry-prod-category" required class="flex-1 px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs text-slate-800">
                   <option value="化妆品原料">化妆品原料</option>
-                  <option value="透皮型重组蛋白/多肽">透皮型重组蛋白/多肽</option>
+                  <option value="高渗透型重组蛋白/多肽">高渗透型重组蛋白/多肽</option>
                   <option value="重组仿生蛋白">重组仿生蛋白</option>
                   <option value="植物源活性物">植物源活性物</option>
                   <option value="海洋源活性物">海洋源活性物</option>
                   <option value="婴儿菌发酵源活性物">婴儿菌发酵源活性物</option>
-                  <option value="医用原料">医用原料</option>
-                  <option value="食品营养原料">食品营养原料</option>
+                  <option value="化妆品原料">化妆品原料</option>
+                  <option value="化妆品功效原料">化妆品功效原料</option>
                 </select>
                 <button type="button" onclick="switchTab('products-categories')" class="px-3 py-1 border border-slate-200 rounded bg-slate-50 hover:bg-slate-100 font-medium text-slate-600 text-xs"><i class="fa-solid fa-list-ul text-[9px] mr-1"></i>分类</button>
               </div>
@@ -1439,17 +1440,17 @@
           <div id="form-section-procurement" class="space-y-4 hidden">
             <div class="bg-emerald-50 border border-emerald-200 p-3 rounded text-xs text-emerald-800 flex items-center gap-2">
               <i class="fa-solid fa-boxes-packing text-emerald-600 text-base shrink-0"></i>
-              <span><strong>采购供应链核心关注</strong>：药监局原料报送码是合规备案准入凭证，包装规格、起订量与保质期直接决定供应链落地。</span>
+              <span><strong>采购供应链核心关注</strong>：NMPA监管机构原料报送码是合规备案准入凭证，包装规格、起订量与保质期直接决定供应链落地。</span>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-slate-600 font-semibold mb-1 text-xs"><span class="text-rose-500 font-bold">*</span> 药监局原料安全信息报送码 (NMPA Code)</label>
+                <label class="block text-slate-600 font-semibold mb-1 text-xs"><span class="text-rose-500 font-bold">*</span> NMPA监管机构原料安全信息报送码 (NMPA Code)</label>
                 <input type="text" id="entry-prod-proc-nmpa" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs font-mono text-emerald-700 font-bold" placeholder="如: 008924-02314-8890 (已报送通过)">
               </div>
               <div>
                 <label class="block text-slate-600 font-semibold mb-1 text-xs">供货包装规格 (Packaging)</label>
-                <input type="text" id="entry-prod-proc-packaging" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs" placeholder="如: 1kg/瓶（医药级氟化避光瓶）、5kg/桶、25kg/桶">
+                <input type="text" id="entry-prod-proc-packaging" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs" placeholder="如: 1kg/瓶（高标准氟化避光瓶）、5kg/桶、25kg/桶">
               </div>
               <div>
                 <label class="block text-slate-600 font-semibold mb-1 text-xs">最小起订量 (MOQ)</label>
@@ -2101,6 +2102,16 @@
             <button type="button" onclick="openWechatSyncModal()" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 rounded transition font-medium">
               <i class="fa-brands fa-weixin text-emerald-600"></i>
               <span>微信公众号抓取同步</span>
+            </button>
+            <span class="text-slate-300">|</span>
+            <button type="button" onclick="syncArticlesFromFrontend()" title="扫描前端 articles/*.html 静态文件，将标题、分类、图片与完整文章详情正文双向同步至后台数据库" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-300 rounded transition font-medium">
+              <i class="fa-solid fa-arrows-rotate text-blue-600"></i>
+              <span>从前台静态页同步</span>
+            </button>
+            <span class="text-slate-300">|</span>
+            <button type="button" onclick="regenerateArticlesFrontend()" title="将后台数据库文章全量重新生成为前台静态网页" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-300 rounded transition font-medium">
+              <i class="fa-solid fa-wand-magic-sparkles text-purple-600"></i>
+              <span>重新生成全站文章</span>
             </button>
           </div>
           <!-- Pagination -->
@@ -2953,7 +2964,7 @@
               <i class="fa-solid fa-tags text-primary"></i>
               <span>目标关键词规划与排名跟踪</span>
             </h3>
-            <p class="text-slate-400 text-xs mt-0.5">规划核心业务关键词（医用原料、透皮肽、化妆品原料），监控百度搜索指数与实时排名位次。</p>
+            <p class="text-slate-400 text-xs mt-0.5">规划核心业务关键词（化妆品原料、高渗透肽、化妆品原料），监控百度搜索指数与实时排名位次。</p>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="checkKeywordsRank()" id="btn-check-kw-rank" class="px-3.5 py-1.5 bg-primary hover:bg-primary-dark text-white text-xs rounded font-bold transition flex items-center gap-1.5 shadow-sm">
@@ -3182,14 +3193,14 @@
               <i class="fa-solid fa-chart-line text-primary"></i>
               <span>整站 SEO 健康度体检与排名提升引擎</span>
             </h3>
-            <p class="text-slate-400 text-xs mt-0.5">全站自动化诊断 Robots 规则、Sitemap 完整性、产品与资讯 TDK 标签覆盖度，并提供一键修复提权方案。</p>
+            <p class="text-slate-400 text-xs mt-0.5">全站自动化诊断 Robots 规则、Sitemap 完整性、产品与资讯 TDK 标签覆盖度，并提供一键修护提权方案。</p>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="loadSeoRanking()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded font-bold transition flex items-center gap-1.5">
               <i class="fa-solid fa-rotate"></i> 重新执行整站SEO深度诊断
             </button>
             <button onclick="autoFixTdk()" class="px-3.5 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs rounded font-bold transition flex items-center gap-1.5 shadow-sm">
-              <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> 一键智能补齐与修复全站TDK
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> 一键智能补齐与修护全站TDK
             </button>
           </div>
         </div>
@@ -3203,7 +3214,7 @@
               <span class="font-bold text-slate-800 text-base" id="seo-rank-desc-val">您的网站 SEO 表现极佳，综合评级 AAA 级！</span>
               <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">健康度 AAA</span>
             </div>
-            <p class="text-slate-500 leading-relaxed">已部署健全的 TDK 结构与 XML Sitemap 地图文件，并通过蜘蛛喂养系统实现自动索引推送，优于 95% 的同类医药保健生物行业站！</p>
+            <p class="text-slate-500 leading-relaxed">已部署健全的 TDK 结构与 XML Sitemap 地图文件，并通过蜘蛛喂养系统实现自动索引推送，优于 95% 的同类健康护理保健生物行业站！</p>
           </div>
         </div>
 
@@ -3272,11 +3283,11 @@
               <label class="block text-slate-600 font-medium mb-1">选择投喂页面 / 产品 *</label>
               <select id="geo-feed-page-select" onchange="onGeoFeedPageSelectChange(this)" class="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-primary bg-white text-slate-700">
                 <optgroup label="重点核心页面">
-                  <option value="about.html|2680|公司简介 (about.html)|美尔健企业背景、研发基地、第3代透皮多肽技术及生产资质">公司简介 (约2680字)</option>
+                  <option value="about.html|2680|公司简介 (about.html)|美尔健企业背景、研发基地、第3代高渗透多肽技术及生产资质">公司简介 (约2680字)</option>
                   <option value="index.html|3800|网站首页 (index.html)|美尔健生物科技官方门户、三大原料板块与技术实力">网站首页 (约3800字)</option>
-                  <option value="products/cat_yyyl.html|4850|医疗级原料中心 (cat_yyyl.html)|寡肽-1、三肽-1 铜、胶原蛋白、神经酰胺等10款核心医用级生物多肽原料标准">医疗级原料中心 (约4850字)</option>
+                  <option value="products/cat_yyyl.html|4850|医疗级原料中心 (cat_yyyl.html)|寡肽-1、三肽-1 铜、胶原蛋白、神经酰胺等10款核心高纯生物多肽原料标准">医疗级原料中心 (约4850字)</option>
                   <option value="products/cat_hzpyl.html|5320|化妆品原料中心 (cat_hzpyl.html)|九肽-1、乙酰基六肽-8、二裂酵母溶胞物等11款护肤原料">化妆品原料中心 (约5320字)</option>
-                  <option value="helps/tptjs.html|3150|高效生物透皮肽技术专题 (tptjs.html)|突破生物多肽大分子透皮吸收壁垒，透皮吸收率提升10-15倍机理">透皮技术专题 (约3150字)</option>
+                  <option value="helps/tptjs.html|3150|高效生物高渗透肽技术专题 (tptjs.html)|突破生物多肽大分子高渗透吸收壁垒，高渗透吸收率提升10-15倍机理">透皮技术专题 (约3150字)</option>
                   <option value="article_hzal.html|2900|品牌合作案例 (article_hzal.html)|赋能国内外1000+美妆品牌，覆盖2000+款核心功效单品">品牌合作案例 (约2900字)</option>
                   <option value="contact.html|980|联系我们 (contact.html)|美尔健官方商务合作、技术咨询、深圳生命科学园地址">联系我们 (约980字)</option>
                 </optgroup>
@@ -3319,7 +3330,7 @@
 
           <div>
             <label class="block text-slate-600 font-medium mb-1">投喂核心语料与提示词 (AI Prompt / Training Corpus) *</label>
-            <textarea id="geo-feed-prompt-input" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-primary bg-white text-slate-700 leading-relaxed font-sans" placeholder="输入向大模型喂养的核心知识摘要、关键问答对或正文提要...">美尔健（深圳）生物科技有限公司核心背景、第3代透皮多肽技术突破、国际化妆品原料研发定制能力。</textarea>
+            <textarea id="geo-feed-prompt-input" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-primary bg-white text-slate-700 leading-relaxed font-sans" placeholder="输入向大模型喂养的核心知识摘要、关键问答对或正文提要...">美尔健（深圳）生物科技有限公司核心背景、第3代高渗透多肽技术突破、国际化妆品原料研发定制能力。</textarea>
           </div>
 
           <div class="flex items-center justify-between pt-1 border-t border-slate-200">
@@ -3924,7 +3935,7 @@ Disallow: /cms_system/
                 </div>
                 <div class="col-span-2">
                   <label class="block text-slate-600 font-bold mb-1">前台推荐引导问题列表 (每行一条)</label>
-                  <textarea id="cfg-preset-questions" rows="4" class="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-primary text-slate-800 text-xs" placeholder="重组胶原蛋白有哪些规格与型号？&#10;透皮纤连蛋白可以提供COA检测报告吗？&#10;起订量(MOQ)是多少？如何申领免费样品？&#10;你们拥有多少项核心发明专利？&#10;联系客户经理与技术支持"></textarea>
+                  <textarea id="cfg-preset-questions" rows="4" class="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-primary text-slate-800 text-xs" placeholder="重组胶原蛋白有哪些规格与型号？&#10;高渗透纤连蛋白可以提供COA检测报告吗？&#10;起订量(MOQ)是多少？如何申领免费样品？&#10;你们拥有多少项核心发明专利？&#10;联系客户经理与技术支持"></textarea>
                 </div>
               </div>
             </div>
@@ -3957,7 +3968,7 @@ Disallow: /cms_system/
               <div class="px-4 py-2 bg-emerald-50/50 border-b border-emerald-100 flex items-center gap-1.5 flex-wrap text-[11px]">
                 <span class="text-emerald-800 font-bold">快捷测试：</span>
                 <button onclick="sandboxQuickAsk('重组胶原蛋白有哪些规格型号？')" class="px-2 py-0.5 bg-white border border-emerald-200 hover:border-emerald-400 rounded text-emerald-700 transition">胶原蛋白规格 (精确命中)</button>
-                <button onclick="sandboxQuickAsk('透皮纤连蛋白可以提供COA检测报告吗？')" class="px-2 py-0.5 bg-white border border-emerald-200 hover:border-emerald-400 rounded text-emerald-700 transition">COA质检报告</button>
+                <button onclick="sandboxQuickAsk('高渗透纤连蛋白可以提供COA检测报告吗？')" class="px-2 py-0.5 bg-white border border-emerald-200 hover:border-emerald-400 rounded text-emerald-700 transition">COA质检报告</button>
                 <button onclick="sandboxQuickAsk('我想联系客户经理电话和微信')" class="px-2 py-0.5 bg-white border border-emerald-200 hover:border-emerald-400 rounded text-emerald-700 transition">联系客户经理</button>
                 <button onclick="sandboxQuickAsk('你们有多少专利？')" class="px-2 py-0.5 bg-white border border-emerald-200 hover:border-emerald-400 rounded text-emerald-700 transition">专利研发资质</button>
                 <button onclick="sandboxQuickAsk('今天北京天气怎么样？推荐一家火锅店')" class="px-2 py-0.5 bg-rose-50 border border-rose-200 hover:border-rose-400 rounded text-rose-700 transition">无关提问 (测防乱答兜底)</button>
@@ -4446,7 +4457,7 @@ Disallow: /cms_system/
             <div class="space-y-3">
               <div>
                 <label class="block text-slate-600 font-bold mb-1">导航显示名称 <span class="text-rose-500">*</span></label>
-                <input type="text" id="nav-modal-name" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary text-xs" placeholder="例如：透皮肽技术">
+                <input type="text" id="nav-modal-name" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary text-xs" placeholder="例如：高渗透肽技术">
               </div>
               <div>
                 <label class="block text-slate-600 font-bold mb-1">链接访问路径 (URL) <span class="text-rose-500">*</span></label>
@@ -4540,10 +4551,10 @@ Disallow: /cms_system/
                   <span class="text-slate-400 text-[10px]">› 官方企业站</span>
                 </div>
                 <h5 class="text-base text-[#1a0dab] hover:underline cursor-pointer font-medium leading-snug" id="serp-preview-title">
-                  美尔健生物 | 医疗原料-化妆品原料-食品营养原料
+                  美尔健生物 | 医疗原料-化妆品原料-化妆品功效原料
                 </h5>
                 <p class="text-[12px] text-[#4d5156] leading-relaxed line-clamp-3" id="serp-preview-desc">
-                  美尔健（深圳）生物科技有限公司专注高纯度医疗级原料、化妆品原料与食品营养多肽研发，拥有来自各大科研院所的高效透皮肽专利技术。
+                  美尔健（深圳）生物科技有限公司专注高纯度医疗级原料、化妆品原料与食品营养多肽研发，拥有来自各大科研院所的高效高渗透肽专利技术。
                 </p>
                 <div class="pt-2 flex flex-wrap gap-1" id="serp-preview-keywords-badges">
                   <!-- Badges -->
@@ -4851,7 +4862,7 @@ Disallow: /cms_system/
                   </span>
                   <span class="text-[9px] px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded">产品详情</span>
                 </div>
-                <p class="text-[11px] text-slate-600 leading-snug">按产品 ID 调取生物透皮机理、配方推荐与 3 大优势详情，支持 WorkBuddy 深度推理。</p>
+                <p class="text-[11px] text-slate-600 leading-snug">按产品 ID 调取生物高渗透机理、配方推荐与 3 大优势详情，支持 WorkBuddy 深度推理。</p>
               </div>
 
               <div class="wb-tool-card border border-slate-200 bg-slate-50/60 rounded-lg p-2.5 space-y-1 hover:shadow-sm transition" data-cat="products">
@@ -5075,7 +5086,7 @@ Disallow: /cms_system/
                   </span>
                   <span class="text-[9px] px-1.5 py-0.2 bg-purple-200/80 text-purple-800 rounded font-semibold">重构llms.txt</span>
                 </div>
-                <p class="text-[11px] text-slate-600 leading-snug">全量重构 /llms.txt 与 /llms-full.txt，喂养全球大模型权威透皮原料知识。</p>
+                <p class="text-[11px] text-slate-600 leading-snug">全量重构 /llms.txt 与 /llms-full.txt，喂养权威大模型权威高渗透原料知识。</p>
               </div>
 
               <!-- 模块 7: AI 客服与向量知识库 (4 tools) -->
@@ -5457,7 +5468,7 @@ Disallow: /cms_system/
                     <i class="fa-solid fa-wand-magic-sparkles text-emerald-600 text-[11px]"></i>
                     <span>auto_fix_seo_tdk</span>
                   </span>
-                  <span class="text-[9px] px-1.5 py-0.2 bg-emerald-200 text-emerald-800 rounded font-semibold">TDK智能修复</span>
+                  <span class="text-[9px] px-1.5 py-0.2 bg-emerald-200 text-emerald-800 rounded font-semibold">TDK智能修护</span>
                 </div>
                 <p class="text-[11px] text-slate-600 leading-snug">一键自动扫描并补齐全站所有产品及资讯缺失的 SEO TDK 元数据，提升搜索评分。</p>
               </div>
@@ -5709,7 +5720,7 @@ Disallow: /cms_system/
 2. 研发参数 rd_info：更新 cas 为【91079-43-5】，ph_range 更新为【5.0 - 6.8】；
 3. 采购供应 procurement_info：将 moq 更新为【500g (支持现货顺丰速递)】，packaging 更新为【500g/氟化瓶、1kg/专用桶】；
 4. 市场宣称 marketing_info：新增 claims【密集赋活焕颜, 表皮屏障强韧】；
-5. SEO参数：更新 seoKeywords 为【胎盘肽羊胎素,高纯寡肽,美尔健透皮多肽】。
+5. SEO参数：更新 seoKeywords 为【胎盘肽羊胎素,高纯寡肽,美尔健高渗透多肽】。
 请先调用 update_product_detail 直接同步写入并刷新全站静态页！”
             </div>
           </div>
@@ -6137,7 +6148,7 @@ Disallow: /cms_system/
               <!-- Title -->
               <div class="md:col-span-2 space-y-1">
                 <label class="block text-xs font-semibold text-slate-700">视频标题 <span class="text-rose-500">*</span></label>
-                <input type="text" id="vform-title" required placeholder="例如：透皮肽技术核心原理解析、5D胶原蛋白生产实录..." class="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-slate-800">
+                <input type="text" id="vform-title" required placeholder="例如：高渗透肽技术核心原理解析、5D胶原蛋白生产实录..." class="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-slate-800">
               </div>
 
               <!-- Category -->
@@ -6484,13 +6495,13 @@ Disallow: /cms_system/
               <label class="block text-slate-500 mb-1">原料分类</label>
               <select id="prod-category" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white">
                 <option value="化妆品原料">化妆品原料</option>
-                <option value="透皮型重组蛋白/多肽">透皮型重组蛋白/多肽</option>
+                <option value="高渗透型重组蛋白/多肽">高渗透型重组蛋白/多肽</option>
                 <option value="重组仿生蛋白">重组仿生蛋白</option>
                 <option value="植物源活性物">植物源活性物</option>
                 <option value="海洋源活性物">海洋源活性物</option>
                 <option value="婴儿菌发酵源活性物">婴儿菌发酵源活性物</option>
-                <option value="医用原料">医用原料</option>
-                <option value="食品营养原料">食品营养原料</option>
+                <option value="化妆品原料">化妆品原料</option>
+                <option value="化妆品功效原料">化妆品功效原料</option>
               </select>
             </div>
             <div>
@@ -6595,7 +6606,7 @@ Disallow: /cms_system/
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-slate-600 font-semibold mb-1 text-xs"><span class="text-rose-500 font-bold">*</span> 药监局原料安全信息报送码 (NMPA Code)</label>
+              <label class="block text-slate-600 font-semibold mb-1 text-xs"><span class="text-rose-500 font-bold">*</span> NMPA监管机构原料安全信息报送码 (NMPA Code)</label>
               <input type="text" id="prod-proc-nmpa" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs font-mono text-emerald-700 font-bold" placeholder="如: 008924-02314-8890 (已报送)">
             </div>
             <div>
@@ -6652,7 +6663,7 @@ Disallow: /cms_system/
 
           <div>
             <label class="block text-slate-600 font-semibold mb-1 text-xs">核心科技壁垒与作用机理 (Story & Mechanism)</label>
-            <textarea id="prod-mkt-tech" rows="2" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs resize-none" placeholder="如: 美尔健第三代定向生物透皮肽技术，靶向突破角质层致密屏障，实现活性生物分子的高效无创透皮直达基底层..."></textarea>
+            <textarea id="prod-mkt-tech" rows="2" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs resize-none" placeholder="如: 美尔健第三代定向生物高渗透肽技术，靶向突破角质层致密屏障，实现活性生物分子的高效无创高渗透直达基底层..."></textarea>
           </div>
 
           <div>
@@ -6667,7 +6678,7 @@ Disallow: /cms_system/
 
           <div>
             <label class="block text-slate-600 font-semibold mb-1 text-xs">专利技术背书与科研合作机构 (Patents & Endorsement)</label>
-            <input type="text" id="prod-mkt-patent" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs" placeholder="如: 核心透皮肽技术已获国家发明专利授权 (专利号: ZL2023xxxxxxx)；中国科学技术大学联合生命科学实验室产学研背书">
+            <input type="text" id="prod-mkt-patent" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white text-xs" placeholder="如: 核心高渗透肽技术已获国家发明专利授权 (专利号: ZL2023xxxxxxx)；中国科学技术大学联合生命科学实验室产学研背书">
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
             <button type="button" onclick="switchProdModalTab('procurement')" class="px-4 py-1.5 border border-slate-200 rounded text-slate-600 hover:bg-slate-50 text-xs flex items-center gap-1">
@@ -6749,7 +6760,7 @@ Disallow: /cms_system/
 
   <!-- ================== MODAL: ADD/EDIT ARTICLE ================== -->
   <div id="article-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-    <div class="bg-white rounded w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-slate-100">
+    <div class="bg-white rounded w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-slate-100">
       <header class="p-3.5 border-b border-slate-200 flex items-center justify-between">
         <h3 id="article-modal-title" class="font-bold text-slate-850">发布新文章</h3>
         <button onclick="closeArticleModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-sm"></i></button>
@@ -6796,8 +6807,47 @@ Disallow: /cms_system/
         </div>
 
         <div>
-          <label class="block text-slate-500 mb-1">文章详情与正文内容 (支持图文富文本)</label>
-          <div id="art-quill-editor" class="bg-white border border-slate-200 rounded"></div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-slate-700 font-bold text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-file-lines text-primary"></i>
+              <span>文章详情与正文内容 (支持图文富文本 / HTML源码 / 实时预览)</span>
+            </label>
+            <div class="flex items-center bg-slate-100 p-0.5 rounded border border-slate-200 text-xs">
+              <button type="button" id="art-tab-btn-visual" onclick="switchArticleEditorTab('visual')" class="px-3 py-1 rounded font-medium bg-white text-primary shadow-sm transition flex items-center gap-1.5">
+                <i class="fa-solid fa-pen-nib text-xs"></i>
+                <span>所见即所得富文本</span>
+              </button>
+              <button type="button" id="art-tab-btn-code" onclick="switchArticleEditorTab('code')" class="px-3 py-1 rounded font-medium text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-code text-xs"></i>
+                <span>HTML 源码编辑</span>
+              </button>
+              <button type="button" id="art-tab-btn-preview" onclick="switchArticleEditorTab('preview')" class="px-3 py-1 rounded font-medium text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-eye text-xs"></i>
+                <span>网页效果实时预览</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. Visual Rich Text Editor -->
+          <div id="art-editor-pane-visual" class="bg-white border border-slate-200 rounded">
+            <div id="art-quill-editor" style="min-height: 280px; max-height: 480px; overflow-y: auto;"></div>
+          </div>
+
+          <!-- 2. HTML Source Code Editor -->
+          <div id="art-editor-pane-code" class="hidden flex-col">
+            <div class="text-[11px] text-slate-500 bg-slate-100 px-3 py-1.5 border border-b-0 border-slate-200 rounded-t flex justify-between items-center">
+              <span><i class="fa-solid fa-circle-info text-sky-500 mr-1"></i> 支持编辑完整原始 HTML（含微信公众号排版样式、表格、内联CSS与多媒体代码），切换模式时双向自动同步</span>
+              <button type="button" onclick="formatArticleHtmlCode()" class="text-xs text-primary hover:underline font-mono"><i class="fa-solid fa-align-left mr-1"></i>简单整理换行</button>
+            </div>
+            <textarea id="art-code-editor" rows="16" class="w-full font-mono text-xs p-3.5 bg-slate-900 text-emerald-300 border border-slate-700 rounded-b outline-none focus:border-primary resize-y leading-relaxed" placeholder="<div>在此输入或粘贴文章正文 HTML 源代码...</div>"></textarea>
+          </div>
+
+          <!-- 3. Realtime Preview Pane -->
+          <div id="art-editor-pane-preview" class="hidden border border-slate-200 rounded bg-slate-50 p-4 max-h-[500px] overflow-y-auto">
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow-sm border border-slate-100 prose max-w-none text-slate-800" id="art-preview-body">
+              <!-- Rendered preview content -->
+            </div>
+          </div>
         </div>
       </div>
       <footer class="p-4 border-t border-slate-200 bg-slate-50 flex justify-end gap-2">
@@ -8827,7 +8877,7 @@ Disallow: /cms_system/
         const rankScoreEl = document.getElementById('seo-rank-score-val');
         const rankDescEl = document.getElementById('seo-rank-desc-val');
         if (rankScoreEl) rankScoreEl.innerText = `${authority.score || 96}分`;
-        if (rankDescEl) rankDescEl.innerText = `您的网站 SEO 表现极佳，综合评级 ${displayLvl}，优于 95% 的同类医药保健科技行业站！`;
+        if (rankDescEl) rankDescEl.innerText = `您的网站 SEO 表现极佳，综合评级 ${displayLvl}，优于 95% 的同类健康护理保健科技行业站！`;
       }
 
       if (cache.products && cache.articles) {
@@ -10069,7 +10119,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
     function fillDefaultDisclaimer() {
       const text = `【法规合规与专业免责声明】
 1. 本网页展示的所有原料产品技术参数、活性机理、科研实验数据（包括细胞实验、生化模型等体外数据）及相关文献资料，仅供化妆品品牌方研发工程师、配方师、产品策划及高校科研机构进行同行专业技术探讨与配方研发参考，并非针对终端消费者的产品功效宣称或商业承诺。
-2. 根据《化妆品监督管理条例》、《化妆品功效宣称评价规范》等相关法律法规，使用本原料的化妆品成品企业应独立对其终产品的安全性、稳定性和功效宣称负责，并依法完成终产品的功效宣称评价与国家药监局备案/注册申报，不得直接将本技术资料中有关原料的体外/细胞实验结论直接作为终端化妆品功效依据。
+2. 根据《化妆品监督管理条例》、《化妆品功效宣称评价规范》等相关法律法规，使用本原料的化妆品成品企业应独立对其终产品的安全性、稳定性和功效宣称负责，并依法完成终产品的功效宣称评价与国家NMPA平台备案/注册申报，不得直接将本技术资料中有关原料的体外/细胞实验结论直接作为终端化妆品功效依据。
 3. 本公司对因客户不当使用、超范围宣称或未经验证配伍导致的任何直接或间接法律与质量责任不承担连带责任。`;
       const el = document.getElementById("prod-disclaimer");
       if (el) el.value = text;
@@ -10412,7 +10462,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
 
     const DEFAULT_DISCLAIMER_TEXT = `合规与专业声明：
 1. 本网页展示的原料产品特性与实验数据（包含细胞学实验、机理模型图、文献数据等），仅供化妆品品牌方研发工程师、配方师、产品策划及高校科研机构等专业同行技术探讨与配方开发参考，不作为终端消费者的产品功效宣称或商业承诺。
-2. 根据《化妆品监督管理条例》《化妆品功效宣称评价规范》及相关法律法规，使用本原料的化妆品成品企业应当对成品安全性、稳定性及功效宣称负责，并在产品上市前依法完成功效评价及国家药监局备案/注册，请勿直接将本原料的体外/细胞实验结论直接作为终端化妆品功效结论。
+2. 根据《化妆品监督管理条例》《化妆品功效宣称评价规范》及相关法律法规，使用本原料的化妆品成品企业应当对成品安全性、稳定性及功效宣称负责，并在产品上市前依法完成功效评价及国家NMPA平台备案/注册，请勿直接将本原料的体外/细胞实验结论直接作为终端化妆品功效结论。
 3. 本公司对客户使用不当、超范围使用或未充分验证导致的任何直接或间接法律纠纷不承担连带责任。`;
 
     function fillDefaultEntryDisclaimer() {
@@ -11177,6 +11227,80 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
     // --- Article Management (Modal & Handlers) ---
     // ==========================================================
     let editingArticleId = null;
+    let currentArticleEditorMode = 'visual'; // 'visual' | 'code' | 'preview'
+
+    function switchArticleEditorTab(mode) {
+      const btnVisual = document.getElementById("art-tab-btn-visual");
+      const btnCode = document.getElementById("art-tab-btn-code");
+      const btnPreview = document.getElementById("art-tab-btn-preview");
+      const paneVisual = document.getElementById("art-editor-pane-visual");
+      const paneCode = document.getElementById("art-editor-pane-code");
+      const panePreview = document.getElementById("art-editor-pane-preview");
+      const codeEditor = document.getElementById("art-code-editor");
+      const previewBody = document.getElementById("art-preview-body");
+
+      // 1. Sync data out of current mode into buffer
+      let currentContent = "";
+      if (currentArticleEditorMode === 'code') {
+        currentContent = codeEditor ? codeEditor.value : "";
+      } else {
+        if (quillArt && quillArt.root) {
+          currentContent = quillArt.root.innerHTML;
+        } else if (codeEditor) {
+          currentContent = codeEditor.value;
+        }
+      }
+
+      // 2. Load data into target mode
+      if (mode === 'code') {
+        if (codeEditor) codeEditor.value = currentContent;
+      } else if (mode === 'visual') {
+        if (quillArt && quillArt.root) {
+          quillArt.root.innerHTML = currentContent;
+        }
+      } else if (mode === 'preview') {
+        if (previewBody) {
+          previewBody.innerHTML = currentContent || '<div class="text-slate-400 text-center py-8">正文内容为空</div>';
+        }
+      }
+
+      // 3. Update tab button styles
+      const activeClass = "px-3 py-1 rounded font-medium bg-white text-primary shadow-sm transition flex items-center gap-1.5";
+      const inactiveClass = "px-3 py-1 rounded font-medium text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5";
+
+      if (btnVisual) btnVisual.className = mode === 'visual' ? activeClass : inactiveClass;
+      if (btnCode) btnCode.className = mode === 'code' ? activeClass : inactiveClass;
+      if (btnPreview) btnPreview.className = mode === 'preview' ? activeClass : inactiveClass;
+
+      // 4. Toggle panes
+      if (paneVisual) {
+        if (mode === 'visual') paneVisual.classList.remove('hidden');
+        else paneVisual.classList.add('hidden');
+      }
+      if (paneCode) {
+        if (mode === 'code') {
+          paneCode.classList.remove('hidden');
+          paneCode.classList.add('flex');
+        } else {
+          paneCode.classList.add('hidden');
+          paneCode.classList.remove('flex');
+        }
+      }
+      if (panePreview) {
+        if (mode === 'preview') panePreview.classList.remove('hidden');
+        else panePreview.classList.add('hidden');
+      }
+
+      currentArticleEditorMode = mode;
+    }
+
+    function formatArticleHtmlCode() {
+      const codeEditor = document.getElementById("art-code-editor");
+      if (!codeEditor || !codeEditor.value) return;
+      let val = codeEditor.value;
+      val = val.replace(/></g, '>\n<');
+      codeEditor.value = val;
+    }
 
     function openArticleModal(id = null) {
       editingArticleId = id;
@@ -11188,6 +11312,28 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const dateInput = document.getElementById("art-date");
       const imgInput = document.getElementById("art-image");
       const descInput = document.getElementById("art-desc");
+      const codeEditor = document.getElementById("art-code-editor");
+      const previewBody = document.getElementById("art-preview-body");
+
+      // Ensure Quill editor is initialized if needed
+      if (!quillArt && window.Quill) {
+        try {
+          quillArt = new Quill('#art-quill-editor', {
+            theme: 'snow',
+            modules: {
+              toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                ['image', 'link'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['clean']
+              ]
+            }
+          });
+        } catch (e) {
+          console.error("Delayed init of quillArt:", e);
+        }
+      }
 
       if (id) {
         const a = cache.articles.find(art => art.id === id);
@@ -11199,7 +11345,15 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         if (dateInput) dateInput.value = a.date ? a.date.slice(0, 10) : "";
         if (imgInput) imgInput.value = a.image || "";
         if (descInput) descInput.value = a.desc || "";
-        if (quillArt) quillArt.root.innerHTML = a.content || "";
+
+        const contentHtml = a.content || "";
+        if (codeEditor) codeEditor.value = contentHtml;
+        if (quillArt && quillArt.root) {
+          quillArt.root.innerHTML = contentHtml;
+        }
+        if (previewBody) {
+          previewBody.innerHTML = contentHtml || '<div class="text-slate-400 text-center py-8">正文内容为空</div>';
+        }
       } else {
         if (modalTitle) modalTitle.innerText = "发布新文章";
         if (idInput) { idInput.value = ""; idInput.readOnly = false; }
@@ -11208,8 +11362,12 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10);
         if (imgInput) imgInput.value = "images/ban_txt.png";
         if (descInput) descInput.value = "";
-        if (quillArt) quillArt.root.innerHTML = "";
+        if (codeEditor) codeEditor.value = "";
+        if (quillArt && quillArt.root) quillArt.root.innerHTML = "";
+        if (previewBody) previewBody.innerHTML = "";
       }
+
+      switchArticleEditorTab('visual');
 
       if (modal) {
         modal.classList.remove("hidden");
@@ -11237,6 +11395,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const dateInput = document.getElementById("art-date");
       const imgInput = document.getElementById("art-image");
       const descInput = document.getElementById("art-desc");
+      const codeEditor = document.getElementById("art-code-editor");
 
       const title = titleInput ? titleInput.value.trim() : "";
       const id = idInput ? idInput.value.trim() : "";
@@ -11253,7 +11412,19 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const date = dateInput && dateInput.value ? dateInput.value : new Date().toISOString().slice(0, 10);
       const image = imgInput && imgInput.value.trim() ? imgInput.value.trim() : "images/ban_txt.png";
       const desc = descInput ? descInput.value.trim() : "";
-      const content = quillArt ? quillArt.root.innerHTML : "";
+
+      // Extract content safely from active tab, with intelligent fallback
+      let content = "";
+      if (currentArticleEditorMode === 'code') {
+        content = codeEditor ? codeEditor.value : "";
+      } else {
+        if (quillArt && quillArt.root) {
+          content = quillArt.root.innerHTML;
+        }
+        if ((!content || content === "<p><br></p>") && codeEditor && codeEditor.value.trim()) {
+          content = codeEditor.value;
+        }
+      }
 
       const payload = {
         title,
@@ -11274,7 +11445,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       }
 
       try {
-        showToast("正在保存文章...", "info");
+        showToast("正在保存文章并更新静态网页...", "info");
         const res = await fetch(url, {
           method,
           headers: { "Content-Type": "application/json" },
@@ -11282,11 +11453,54 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         });
         const result = await res.json();
         if (res.ok && result.success !== false) {
-          showToast(isEdit ? "文章修改成功！" : "文章发布成功！", "success");
+          showToast(isEdit ? "文章修改成功，前台静态页已同步更新！" : "文章发布成功，前台静态页已生成！", "success");
           closeArticleModal();
           await loadAllData();
         } else {
           showToast(result.message || "保存失败，请检查内容", "error");
+        }
+      } catch (err) {
+        showToast("网络请求异常：" + err.message, "error");
+      }
+    }
+
+    async function syncArticlesFromFrontend() {
+      if (!confirm("确定要从前台静态页 articles/*.html 同步文章到后台数据库吗？\n该操作会读取所有前台 HTML 网页的正文与元信息，更新或补充到后台数据库。")) {
+        return;
+      }
+      try {
+        showToast("正在从前台静态网页扫描并同步文章...", "info");
+        const res = await fetch("/api/articles/sync_from_frontend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        const result = await res.json();
+        if (res.ok && result.success) {
+          showToast(result.message || `同步完成！共更新 ${result.updated_count || 0} 篇，新增 ${result.inserted_count || 0} 篇`, "success");
+          await loadAllData();
+        } else {
+          showToast(result.message || "同步失败，请查看控制台", "error");
+        }
+      } catch (err) {
+        showToast("网络请求异常：" + err.message, "error");
+      }
+    }
+
+    async function regenerateArticlesFrontend() {
+      if (!confirm("确定要全量重新生成前台文章网页吗？\n该操作将使用后台数据库最新内容，重新生成所有 articles/*.html 静态页面与资讯列表。")) {
+        return;
+      }
+      try {
+        showToast("正在全量重新生成前台网页，请稍候...", "info");
+        const res = await fetch("/api/articles/regenerate_frontend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        const result = await res.json();
+        if (res.ok && result.success) {
+          showToast(result.message || "全站文章网页重新生成成功！", "success");
+        } else {
+          showToast(result.message || "生成失败，请查看控制台", "error");
         }
       } catch (err) {
         showToast("网络请求异常：" + err.message, "error");
@@ -11895,7 +12109,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           name: "化妆品原料",
           url: "product_hzpyl.html",
           children: [
-            { id: "node_2_1", name: "透皮型重组蛋白/多肽", url: "product_tpxzzd.html" },
+            { id: "node_2_1", name: "高渗透型重组蛋白/多肽", url: "product_tpxzzd.html" },
             { id: "node_2_2", name: "重组仿生蛋白", url: "product_zzfsdb.html" },
             { id: "node_2_3", name: "植物源活性物", url: "product_zwyhxw.html" },
             { id: "node_2_4", name: "海洋源活性物", url: "product_hyyhxw.html" },
@@ -11908,19 +12122,19 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           url: "product_index.html",
           children: [
             { id: "node_3_1", name: "化妆品原料", url: "product_hzpyl.html" },
-            { id: "node_3_2", name: "医用原料", url: "product_yyyl.html" },
-            { id: "node_3_3", name: "食品营养原料", url: "product_spyyyl.html" }
+            { id: "node_3_2", name: "化妆品原料", url: "product_hzpyl.html" },
+            { id: "node_3_3", name: "化妆品功效原料", url: "product_hzpyl.html" }
           ]
         },
         { id: "node_4", name: "原料OEM定制", url: "helps/yloemd.html", children: [] },
-        { id: "node_5", name: "透皮肽技术", url: "helps/tptjs.html", children: [] },
+        { id: "node_5", name: "高渗透肽技术", url: "helps/tptjs.html", children: [] },
         {
           id: "node_6",
           name: "合作案例",
           url: "article_hzal.html",
           children: [
             { id: "node_6_1", name: "医美行业", url: "article_ymxy.html" },
-            { id: "node_6_2", name: "医药行业", url: "article_yyxy.html" },
+            { id: "node_6_2", name: "健康护理行业", url: "article_yyxy.html" },
             { id: "node_6_3", name: "化妆品", url: "article_hzp.html" },
             { id: "node_6_4", name: "护肤品工厂", url: "article_hfpgc.html" },
             { id: "node_6_5", name: "功能类食品", url: "article_gnlsp.html" },
@@ -12056,7 +12270,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       };
       setVal("siteinfo-copyright", s.copyright_text || "版权所有 © 2025-2039 美尔健（深圳）生物科技有限公司 保留一切权利");
       setVal("siteinfo-video", s.intro_video || "https://mpv.videocc.net/2b8fd4c754/4/2b8fd4c7542e3fc021a08399a2581e34_1.mp4");
-      setVal("siteinfo-detail-footer", s.detail_footer_append || "【美尔健生物严正声明】本公司所有生物透皮多肽、重组人源化胶原蛋白及高纯活性物原料，均严格遵循国家药监局化妆品原料质量安全标准与药械主文档规范，支持提供批次COA检验报告与第三方检测报告，未经许可严禁盗用技术数据。");
+      setVal("siteinfo-detail-footer", s.detail_footer_append || "【美尔健生物严正声明】本公司所有生物高渗透多肽、重组人源化胶原蛋白及高纯活性物原料，均严格遵循国家NMPA平台化妆品原料质量安全标准与医疗器械主文档规范，支持提供批次COA检验报告与第三方检测报告，未经许可严禁盗用技术数据。");
       
       const wmToggle = document.getElementById("siteinfo-watermark-toggle");
       if (wmToggle) wmToggle.checked = s.watermark_enabled !== false;
@@ -13123,9 +13337,9 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const baiduVEl = document.getElementById("setting-baidu-verification");
 
       if (cache.settings) {
-        if (titleEl) titleEl.value = cache.settings.seo_title || "美尔健生物 | 医疗原料-化妆品原料-食品营养原料";
-        if (keywordsEl) keywordsEl.value = cache.settings.seo_keywords || "医疗原料,化妆品原料,食品营养原料,透皮多肽";
-        if (descEl) descEl.value = cache.settings.seo_description || "美尔健（深圳）生物科技有限公司专注高纯度医疗级原料、化妆品原料与食品营养多肽研发，拥有来自各大科研院所的高效透皮肽专利技术。";
+        if (titleEl) titleEl.value = cache.settings.seo_title || "美尔健生物 | 医疗原料-化妆品原料-化妆品功效原料";
+        if (keywordsEl) keywordsEl.value = cache.settings.seo_keywords || "医疗原料,化妆品原料,化妆品功效原料,高渗透多肽";
+        if (descEl) descEl.value = cache.settings.seo_description || "美尔健（深圳）生物科技有限公司专注高纯度医疗级原料、化妆品原料与食品营养多肽研发，拥有来自各大科研院所的高效高渗透肽专利技术。";
         if (googleVEl) googleVEl.value = cache.settings.google_site_verification || "";
         if (bingVEl) bingVEl.value = cache.settings.bing_site_verification || "";
         if (baiduVEl) baiduVEl.value = cache.settings.baidu_site_verification || "";
@@ -13138,7 +13352,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const keywordsEl = document.getElementById("setting-seo-keywords");
       const descEl = document.getElementById("setting-seo-description");
       
-      const titleVal = (titleEl && titleEl.value.trim()) || "美尔健生物 | 医疗原料-化妆品原料-食品营养原料";
+      const titleVal = (titleEl && titleEl.value.trim()) || "美尔健生物 | 医疗原料-化妆品原料-化妆品功效原料";
       const descVal = (descEl && descEl.value.trim()) || "美尔健（深圳）生物科技有限公司专注高纯度医疗级原料、化妆品原料与食品营养多肽研发...";
       const kwVal = (keywordsEl && keywordsEl.value.trim()) || "";
 
@@ -13217,12 +13431,12 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       if (!cache.settings) cache.settings = {};
       if (!cache.settings.channel_seo || cache.settings.channel_seo.length === 0) {
         cache.settings.channel_seo = [
-          {id: "home", name: "网站主首页", url: "index.html", title: "美尔健生物 | 医疗原料-化妆品原料-食品营养原料", keywords: "医疗原料,化妆品原料,食品营养原料,透皮多肽", description: "美尔健生物官网，专业医用与化妆品活性肽原料源头研发制造商。"},
+          {id: "home", name: "网站主首页", url: "index.html", title: "美尔健生物 | 医疗原料-化妆品原料-化妆品功效原料", keywords: "医疗原料,化妆品原料,化妆品功效原料,高渗透多肽", description: "美尔健生物官网，专业医用与化妆品活性肽原料源头研发制造商。"},
           {id: "hzpyl", name: "化妆品原料频道", url: "product_hzpyl.html", title: "化妆品原料批发与定制 - 美尔健生物", keywords: "九肽-1,乙酰基六肽-8,依克多因,抗衰原料", description: "提供高活性护肤抗老、淡纹、美白化妆品原料，支持第三方合规检测。"},
-          {id: "yyyl", name: "医疗原料频道", url: "product_yyyl.html", title: "医疗级原料中心 - 美尔健生物科技", keywords: "寡肽-1,重组胶原蛋白,三肽-1铜,医用辅料", description: "专注高纯度医疗器械级与皮肤修复生物原料，严格符合国家行业标准。"},
-          {id: "spyyyl", name: "食品营养原料频道", url: "product_spyyyl.html", title: "食品营养与健康原料 - 美尔健生物", keywords: "原花青素,小分子肽,营养功能原料", description: "优质食品与营养补充原料，纯天然生物提取工艺。"},
-          {id: "xwzx", name: "资讯与行业动态频道", url: "article_xwzx.html", title: "新闻资讯与行业洞察 - 美尔健生物", keywords: "透皮技术新闻,医药原料政策,美尔健动态", description: "美尔健最新企业资讯、行业法规动态与前沿生物透皮多肽技术知识。"},
-          {id: "gymej", name: "企业介绍与关于美尔健", url: "helps/gymej.html", title: "关于美尔健生物 - 专注源头品质与透皮技术研发", keywords: "美尔健简介,科研实力,透皮专利", description: "深入了解美尔健生物科技有限公司背景、专家团队与生产智造实力。"}
+          {id: "yyyl", name: "医疗原料频道", url: "product_hzpyl.html", title: "医疗级原料中心 - 美尔健生物科技", keywords: "寡肽-1,重组胶原蛋白,三肽-1铜,医用辅料", description: "专注高纯度医疗器械级与皮肤修护生物原料，严格符合国家行业标准。"},
+          {id: "spyyyl", name: "化妆品功效原料频道", url: "product_hzpyl.html", title: "食品营养与健康原料 - 美尔健生物", keywords: "原花青素,小分子肽,营养功能原料", description: "优质食品与营养补充原料，纯天然生物提取工艺。"},
+          {id: "xwzx", name: "资讯与行业动态频道", url: "article_xwzx.html", title: "新闻资讯与行业洞察 - 美尔健生物", keywords: "透皮技术新闻,生物原料政策,美尔健动态", description: "美尔健最新企业资讯、行业法规动态与前沿生物高渗透多肽技术知识。"},
+          {id: "gymej", name: "企业介绍与关于美尔健", url: "helps/gymej.html", title: "关于美尔健生物 - 专注源头品质与透皮技术研发", keywords: "美尔健简介,科研实力,高渗透专利", description: "深入了解美尔健生物科技有限公司背景、专家团队与生产智造实力。"}
         ];
       }
 
@@ -13403,11 +13617,11 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       if (!cache.settings) cache.settings = {};
       if (!cache.settings.inner_pages_seo || cache.settings.inner_pages_seo.length === 0) {
         cache.settings.inner_pages_seo = [
-          {id: "tptjs", name: "高效生物透皮肽技术专题", url: "helps/tptjs.html", title: "突破生物透皮技术在皮肤修复与抗衰应用 - 美尔健生物", keywords: "透皮技术,穿膜多肽,皮肤渗透吸收", description: "深度解析美尔健第3代仿生穿膜多肽技术专利，透皮率较传统多肽提升15倍。"},
-          {id: "yloemd", name: "医疗级透皮吸收技术说明", url: "helps/yloemd.html", title: "医疗级透皮吸收技术与原料标准 - 美尔健生物", keywords: "医疗级透皮技术,渗透促进剂,生物医用原料", description: "美尔健医疗级原料透皮促渗应用指南与实验数据全景。"},
-          {id: "gymej", name: "关于美尔健企业介绍", url: "helps/gymej.html", title: "关于美尔健 - 科技引领健康美", keywords: "美尔健生物,企业发展历程,科研基地", description: "美尔健（深圳）生物科技有限公司立足大湾区，服务全球原料采购商。"},
+          {id: "tptjs", name: "高效生物高渗透肽技术专题", url: "helps/tptjs.html", title: "突破生物透皮技术在皮肤修护与抗衰应用 - 美尔健生物", keywords: "透皮技术,穿膜多肽,皮肤渗透吸收", description: "深度解析美尔健第3代仿生穿膜多肽技术专利，高渗透率较传统多肽提升15倍。"},
+          {id: "yloemd", name: "医疗级高渗透吸收技术说明", url: "helps/yloemd.html", title: "医疗级高渗透吸收技术与原料标准 - 美尔健生物", keywords: "医疗级透皮技术,渗透促进剂,生物化妆品原料", description: "美尔健医疗级原料高渗透促渗应用指南与实验数据全景。"},
+          {id: "gymej", name: "关于美尔健企业介绍", url: "helps/gymej.html", title: "关于美尔健 - 科技引领健康美", keywords: "美尔健生物,企业发展历程,科研基地", description: "美尔健（深圳）生物科技有限公司立足大湾区，服务广大原料采购商。"},
           {id: "lxwm", name: "联系我们与技术咨询", url: "helps/lxwm.html", title: "联系我们与原料样品申领 - 美尔健生物", keywords: "美尔健联系方式,原料打样,合作咨询", description: "欢迎随时联系美尔健专业工程师，获取原料COA检测报告与免费试样。"},
-          {id: "hzal", name: "国内外品牌合作案例", url: "article_hzal.html", title: "合作案例 - 1000+品牌共同选择美尔健原料", keywords: "原料合作品牌,护肤品原料案例,OEM技术支持", description: "国内外知名医药与化妆品品牌选用美尔健核心原料成功案例汇编。"},
+          {id: "hzal", name: "国内外品牌合作案例", url: "article_hzal.html", title: "合作案例 - 1000+品牌共同选择美尔健原料", keywords: "原料合作品牌,护肤品原料案例,OEM技术支持", description: "国内外知名健康与化妆品品牌选用美尔健核心原料成功案例汇编。"},
           {id: "cjwt", name: "原料采购与常见问答", url: "article_cjwt.html", title: "常见问题解答 (FAQ) - 美尔健生物科技", keywords: "原料采购起订量,保质期与储存,质检报告", description: "解答关于美尔健原料订购、定制研发、纯度检测与物流发货的常见问题。"}
         ];
       }
@@ -13977,10 +14191,10 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       if (!cache.settings.seo_keywords_list || cache.settings.seo_keywords_list.length === 0) {
         cache.settings.seo_keywords_list = [
           {id: "kw1", keyword: "医疗级透明质酸原料", baidu_index: 380, search_volume: 1450, target_page: "products/cat_yyyl.html", ranking: 2, trend: "up"},
-          {id: "kw2", keyword: "高效生物透皮肽生产厂家", baidu_index: 320, search_volume: 1100, target_page: "helps/tptjs.html", ranking: 1, trend: "stable"},
+          {id: "kw2", keyword: "高效生物高渗透肽生产厂家", baidu_index: 320, search_volume: 1100, target_page: "helps/tptjs.html", ranking: 1, trend: "stable"},
           {id: "kw3", keyword: "医疗美容化妆品原料批发", baidu_index: 290, search_volume: 920, target_page: "products/cat_hzpyl.html", ranking: 1, trend: "stable"},
           {id: "kw4", keyword: "重组人源胶原蛋白原料供应商", baidu_index: 460, search_volume: 1800, target_page: "products/cat_yyyl.html", ranking: 3, trend: "up"},
-          {id: "kw5", keyword: "PDRN三文鱼DNA原料定制", baidu_index: 240, search_volume: 760, target_page: "product_yyyl.html", ranking: 2, trend: "up"},
+          {id: "kw5", keyword: "PDRN三文鱼DNA原料定制", baidu_index: 240, search_volume: 760, target_page: "product_hzpyl.html", ranking: 2, trend: "up"},
           {id: "kw6", keyword: "美尔健生物科技官网", baidu_index: 520, search_volume: 2600, target_page: "index.html", ranking: 1, trend: "stable"}
         ];
       }
@@ -14322,7 +14536,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           loadAllData();
         }
       } catch(e) {
-        showToast("自动修复失败: " + e.message, "error");
+        showToast("自动修护失败: " + e.message, "error");
       }
     }
 
@@ -14415,7 +14629,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           const title = p.title;
           const desc = (p.desc || "").replace(/"/g, '&quot;').replace(/\|/g, '、');
           const words = 2800 + Math.floor(Math.random() * 800);
-          return `<option value="products/${pid}.html|${words}|${title} (核心原料详情)|【美尔健核心原料】${title}。INCI与技术规范详见官网，具备GMP级纯度与透皮多肽配方适配性。${desc}">产品: ${title} (约${words}字)</option>`;
+          return `<option value="products/${pid}.html|${words}|${title} (核心原料详情)|【美尔健核心原料】${title}。INCI与技术规范详见官网，具备GMP级纯度与高渗透多肽配方适配性。${desc}">产品: ${title} (约${words}字)</option>`;
         }).join("");
       }
     }
@@ -14573,17 +14787,17 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       if (statusEl) statusEl.innerText = `${item.status} (${item.days}天)`;
       
       const structuredPrompt = `【系统指令 / System Role】:
-你是一个专业的生物科技与高端化妆品活性原料专家助手。请以美尔健（深圳）生物科技有限公司官方知识库为依据，回答关于透皮多肽技术、医用级原料及化妆品合规配方的咨询。
+你是一个专业的生物科技与高端化妆品活性原料专家助手。请以美尔健（深圳）生物科技有限公司官方知识库为依据，回答关于高渗透多肽技术、高纯原料及化妆品合规配方的咨询。
 
 【喂养知识语料 / Training Corpus】:
 网页来源: ${item.url || 'index.html'}
 网页标题: ${item.page_name}
 核心知识摘要:
-${item.content_summary || '美尔健核心原料及第3代高效生物透皮多肽技术白皮书。'}
+${item.content_summary || '美尔健核心原料及第3代高效生物高渗透多肽技术白皮书。'}
 
 【事实锚点与合规约束】:
 1. 恪守国家《化妆品监督管理条例》与《广告法》，坚决不得出现医疗性宣称词汇。
-2. 强调第3代生物透皮肽的仿生靶向穿膜技术机制与高活性保持度。
+2. 强调第3代生物高渗透肽的仿生靶向穿膜技术机制与高活性保持度。
 3. 官方技术咨询: 186-9197-8530 / 0755-82926499，官网: https://www.mellgen.com/`;
 
       if (contentEl) contentEl.innerText = structuredPrompt;
@@ -15409,7 +15623,7 @@ ${item.content_summary || '美尔健核心原料及第3代高效生物透皮多�
       // 智能推断分类
       let cat = "生物原料";
       const q = item.question;
-      if (q.includes("技术") || q.includes("原理") || q.includes("专利") || q.includes("透皮")) cat = "研发技术";
+      if (q.includes("技术") || q.includes("原理") || q.includes("专利") || q.includes("高渗透")) cat = "研发技术";
       else if (q.includes("COA") || q.includes("质检") || q.includes("备案") || q.includes("报送码") || q.includes("标准")) cat = "质检认证";
       else if (q.includes("MOQ") || q.includes("样品") || q.includes("订量") || q.includes("价格") || q.includes("合作") || q.includes("采购")) cat = "商务合作";
       else if (q.includes("美尔健") || q.includes("公司") || q.includes("地址") || q.includes("电话") || q.includes("微信")) cat = "企业介绍";

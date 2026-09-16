@@ -46,3 +46,5 @@ cms_system/cms_data/backups/
 *.sqlite3
 *.db-wal
 *.db-shm
+
+cms_system/cms_data_backup_*/

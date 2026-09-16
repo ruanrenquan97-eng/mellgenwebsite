@@ -11,7 +11,7 @@
     },
     {
       "id": "item_373ab798",
-      "title": "透皮纤连蛋白happi国际个人护理品",
+      "title": "高渗透纤连蛋白happi国际个人护理品",
       "title_en": "Transdermal Fibronectinhappi International Personal Care",
       "img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_36.jpg",
       "big_img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_36.jpg",
@@ -20,7 +20,7 @@
     },
     {
       "id": "item_d53b012f",
-      "title": "透皮纤连蛋白十大创新原料奖",
+      "title": "高渗透纤连蛋白十大创新原料奖",
       "title_en": "Transdermal FibronectinTop 10 Innovative Raw Materials Award",
       "img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_34.jpg",
       "big_img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_34.jpg",
@@ -121,7 +121,7 @@
     },
     {
       "id": "item_40aa6001",
-      "title": "生物医药促进会会员单位",
+      "title": "生物科技促进会会员单位",
       "title_en": "Member Unit of Biomedical Promotion Association",
       "img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_46.jpg",
       "big_img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_46.jpg",
@@ -168,7 +168,7 @@
     },
     {
       "id": "item_56e8cb1c",
-      "title": "美国发明专利-透皮纤连蛋白",
+      "title": "美国发明专利-高渗透纤连蛋白",
       "title_en": "USAInvention Patents-Transdermal Fibronectin",
       "img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_2.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_2.jpg",
@@ -177,7 +177,7 @@
     },
     {
       "id": "item_25183cd5",
-      "title": "发明专利-一种重组透皮环肽的生物合成方法及透皮吸收应用",
+      "title": "发明专利-一种重组cTDP环肽的生物合成方法及高渗透吸收应用",
       "title_en": "Invention Patents-Biosynthesis Method of Recombinant Transdermal Cyclic Peptides and Transdermal Applications",
       "img": "./resource/images/a46165c5b438440f86567dcdecbfe444_10.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_30.jpg",
@@ -186,7 +186,7 @@
     },
     {
       "id": "item_e14d3469",
-      "title": "发明专利-基于肽伴侣的透皮增强型重组人源III型胶原蛋白及其应用",
+      "title": "发明专利-基于肽伴侣的高渗透增强型重组人源III型胶原蛋白及其应用",
       "title_en": "Invention Patents-Chaperone Peptide-Based Transdermal-Enhanced Recombinant Human Type III Collagen and Applications",
       "img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_26.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_28.jpg",
@@ -204,7 +204,7 @@
     },
     {
       "id": "item_e1834722",
-      "title": "发明专利-一种具有透皮给药能力的融合蛋白",
+      "title": "发明专利-一种具有高渗透促透能力的融合蛋白",
       "title_en": "Invention Patents-A Fusion Protein with Transdermal Drug Delivery Capability",
       "img": "./resource/images/a46165c5b438440f86567dcdecbfe444_16.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_36.jpg",
@@ -213,7 +213,7 @@
     },
     {
       "id": "item_e3ddb8d9",
-      "title": "发明专利-一种增强透皮给药组合物及其应用",
+      "title": "发明专利-一种增强高渗透促透组合物及其应用",
       "title_en": "Invention Patents-A Transdermal Recombinant Fibronectin and Its Applications",
       "img": "./resource/images/a46165c5b438440f86567dcdecbfe444_12.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_32.jpg",
@@ -222,7 +222,7 @@
     },
     {
       "id": "item_f6571cfa",
-      "title": "发明专利-一种透皮重组纤连蛋白及其应用",
+      "title": "发明专利-一种高渗透重组纤连蛋白及其应用",
       "title_en": "Invention Patents-A Transdermal Delivery Enhancing Composition and Its Applications",
       "img": "./resource/images/0214ae84e9dd44bfb0f554bd710097b6_6.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_34.jpg",
@@ -312,7 +312,7 @@
     },
     {
       "id": "item_ee987b75",
-      "title": "发明专利-一种透皮纤连蛋白方法和应用",
+      "title": "发明专利-一种高渗透纤连蛋白方法和应用",
       "title_en": "Invention Patents-A Method and Application of Transdermal Fibronectin",
       "img": "./resource/images/91f23d7fc4474e078fbe7e0b997d4f99_6.jpg",
       "big_img": "./resource/images/08595de33a9948c7a8e8ec7a6764edf2_8.jpg",
@@ -803,12 +803,12 @@
   ],
   "about_company": {
     "title": "走进美尔健生物",
-    "subtitle": "开创生物修复美容新时代",
+    "subtitle": "开创生物修护美容新时代",
     "banner_img": "./resource/images/0ffdceeb65b346afb57542b0efb3fb79_2.jpg",
     "paragraphs": [
-      "美尔健（深圳）生物科技有限公司坐落于粤港澳大湾区产业创新核心区域深圳国际生物谷，由中国科学技术大学教授和博士后团队成立的一家从事透皮技术孵化，提供皮肤准确修复抗衰老解决方案的国家高新技术企业。",
-      "公司依托中国科学技术大学生命科学学院和华南理工大学医学院，拥有第三代生物透皮技术，致力解决生物大分子，如蛋白多肽，多糖类的无创透皮吸收。围绕核心技术的开发与利用，我们专注“皮肤抗衰老分子”、“海洋蓝色分子”和“特色植物资源”的研究。",
-      "以合成生物学基础，基因工程、发酵工程为技术手段，开发新一代透皮增强型生物活性分子，实现蛋白质多肽，植物多糖以及微生物发酵产物等特色功效性生物资源的绿色开发与产业化，提升功效性活性分子在皮肤修护与健康护理方面的有效利用。"
+      "美尔健（深圳）生物科技有限公司坐落于粤港澳大湾区产业创新核心区域深圳国际生物谷，由中国科学技术大学教授和博士后团队成立的一家从事透皮技术孵化，提供皮肤准确修护抗衰老解决方案的国家高新技术企业。",
+      "公司依托中国科学技术大学生命科学学院和华南理工大学医学院，拥有第三代生物透皮技术，致力解决生物大分子，如蛋白多肽，多糖类的无创高渗透吸收。围绕核心技术的开发与利用，我们专注“皮肤抗衰老分子”、“海洋蓝色分子”和“特色植物资源”的研究。",
+      "以合成生物学基础，基因工程、发酵工程为技术手段，开发新一代高渗透增强型生物活性分子，实现蛋白质多肽，植物多糖以及微生物发酵产物等特色功效性生物资源的绿色开发与产业化，提升功效性活性分子在皮肤修护与健康护理方面的有效利用。"
     ],
     "highlight_images": [
       "./resource/images/0ffdceeb65b346afb57542b0efb3fb79_8.jpg",
@@ -821,12 +821,12 @@
     "name": "夏总 / 研发团队",
     "title": "中国科学技术大学博士后团队领衔",
     "photo": "./resource/images/0214ae84e9dd44bfb0f554bd710097b6_4.png",
-    "intro": "美尔健由中国科学技术大学教授与博士后领衔创办，拥有二十余年深耕生物透皮肽与合成生物学经验，牵头国家级和省市级重点科研课题多项。",
+    "intro": "美尔健由中国科学技术大学教授与博士后领衔创办，拥有二十余年深耕生物高渗透肽与合成生物学经验，牵头国家级和省市级重点科研课题多项。",
     "honors": [
       "科技部创新创业领军人才",
       "中国科学家论坛科技创新典范",
       "ICIC国际化妆品科技创新奖",
-      "数十项生物透皮专利发明人"
+      "数十项生物高渗透专利发明人"
     ]
   },
   "contact": {

@@ -519,6 +519,113 @@ def reorder_articles():
     except Exception as e:
         return jsonify({"success": False, "message": f"保存排序异常: {str(e)}"}), 500
 
+@app.route("/api/articles/sync_from_frontend", methods=["POST"])
+@login_required
+def sync_articles_from_frontend():
+    try:
+        import glob
+        articles_dir = os.path.join(WORKSPACE_DIR, "articles")
+        articles = load_json("articles.json") or []
+        art_map = {a["id"]: a for a in articles if isinstance(a, dict) and "id" in a}
+        
+        added_count = 0
+        updated_count = 0
+        
+        html_files = glob.glob(os.path.join(articles_dir, "*.html"))
+        for hf in html_files:
+            aid = os.path.basename(hf).replace(".html", "")
+            with open(hf, "r", encoding="utf-8", errors="ignore") as f:
+                html = f.read()
+                
+            m_h1 = re.search(r'<h1[^>]*>([\s\S]*?)</h1>', html)
+            title = re.sub(r'<[^>]+>', '', m_h1.group(1)).strip() if m_h1 else aid
+            title = title.replace('\u200b', '').strip()
+            
+            m_date = re.search(r'发布日期：\s*(\d{4}[-.]\d{2}[-.]\d{2})', html)
+            date_str = m_date.group(1).replace('.', '-') if m_date else datetime.datetime.now().strftime("%Y-%m-%d")
+            
+            cat = "新闻资讯"
+            if "syssj" in html or "三方权威报告" in html or "sysyanjiu" in html or "实验室" in html:
+                cat = "合作案例"
+            elif "cjwt" in html or "常见问答" in html:
+                cat = "常见问答"
+            elif "cpbk" in html or "技术知识" in html:
+                cat = "技术知识"
+            elif "qydt" in html or "企业新闻" in html:
+                cat = "企业新闻"
+            elif "hzal" in html or "合作案例" in html:
+                cat = "合作案例"
+                
+            m_content = re.search(r'<div class="p102-info-content endit-content">([\s\S]*?)</div>\s*<div class="clear"></div>', html)
+            if not m_content:
+                m_content = re.search(r'<div class="p102-info-content[^"]*">([\s\S]*?)</div>\s*<div class="clear"></div>', html)
+            content = m_content.group(1).strip() if m_content else ""
+            
+            clean_text = re.sub(r'<[^>]+>', '', content).strip()
+            clean_text = re.sub(r'\s+', ' ', clean_text)
+            desc = clean_text[:140].strip() + '...' if len(clean_text) > 140 else clean_text
+            
+            image = "resource/images/ban_txt.png"
+            m_img = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', content)
+            if m_img:
+                img_src = m_img.group(1).strip()
+                while img_src.startswith('../'):
+                    img_src = img_src[3:]
+                while img_src.startswith('./'):
+                    img_src = img_src[2:]
+                image = img_src
+                
+            if aid in art_map:
+                existing = art_map[aid]
+                ex_content = existing.get("content", "").strip()
+                if not ex_content or (len(content) > 20 and len(ex_content) < 20):
+                    existing["content"] = content
+                    existing["desc"] = desc or existing.get("desc", "")
+                    updated_count += 1
+            else:
+                new_art = {
+                    "id": aid,
+                    "title": title,
+                    "author": "美尔健生物",
+                    "category": cat,
+                    "image": image,
+                    "desc": desc,
+                    "link": f"articles/{aid}.html",
+                    "content": content,
+                    "date": date_str,
+                    "recommend": False,
+                    "top": False,
+                    "show": True,
+                    "sort": 50
+                }
+                articles.append(new_art)
+                art_map[aid] = new_art
+                added_count += 1
+                
+        save_json("articles.json", articles)
+        return jsonify({
+            "success": True,
+            "message": f"成功从前台静态页同步数据！新增 {added_count} 篇，更新补全 {updated_count} 篇，当前总计 {len(articles)} 篇文章。",
+            "total": len(articles),
+            "added": added_count,
+            "updated": updated_count
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"从前台同步异常: {str(e)}"}), 500
+
+@app.route("/api/articles/regenerate_frontend", methods=["POST"])
+@login_required
+def regenerate_articles_frontend():
+    try:
+        threading.Thread(target=generator.publish_site, daemon=True).start()
+        return jsonify({
+            "success": True,
+            "message": "已在后台启动全站文章详情与前台资讯列表全量静态化生成，请稍候片刻前台即可查看！"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"启动重新生成异常: {str(e)}"}), 500
+
+
 # 2.1 WeChat Official Account Sync API
 @app.route("/api/wechat/config", methods=["GET", "POST"])
 @login_required

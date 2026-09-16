@@ -394,10 +394,32 @@ def sync_contact(data=None):
             for k in ["phone", "tel", "email", "qq", "address", "company_name"]:
                 if contact.get(k):
                     s["contact"][k] = contact[k]
+            # 同步顶层字段供全站生成器使用
+            phone_p = contact.get("phone", "").strip()
+            phone_t = contact.get("tel", "").strip()
+            if phone_t and phone_p:
+                s["phone"] = f"{phone_t} / {phone_p}"
+            elif phone_p:
+                s["phone"] = phone_p
+            elif phone_t:
+                s["phone"] = phone_t
+            if phone_p:
+                s["mobile"] = phone_p
+            if contact.get("email"):
+                s["email"] = contact["email"]
+            if contact.get("qq"):
+                s["qq"] = contact["qq"]
             if contact.get("address"):
                 s["address"] = contact["address"]
             with open(settings_file, "w", encoding="utf-8") as f:
                 json.dump(s, f, ensure_ascii=False, indent=2)
+
+            # 触发全站页面联系方式即时同步
+            try:
+                import generator
+                generator.sync_all_contact_to_site(s)
+            except Exception as _g_err:
+                print(f"[company_info_manager] 调用 generator.sync_all_contact_to_site 提示: {_g_err}")
         except Exception as e:
             print(f"[company_info_manager] 同步 settings.json 失败: {e}")
 

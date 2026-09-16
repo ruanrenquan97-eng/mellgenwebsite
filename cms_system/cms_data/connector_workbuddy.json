@@ -39,5 +39,8 @@
       "last_used_at": null,
       "enabled": true
     }
-  }
+  },
+  "production_domain": "https://www.mellgen.com",
+  "current_user": "admin",
+  "my_token": "mb_tok_admin_b3033907e8664b00"
 }

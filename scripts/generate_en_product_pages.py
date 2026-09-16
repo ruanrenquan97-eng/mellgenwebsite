@@ -15,8 +15,10 @@ NAV_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "nav.json")
 
 def load_data():
     with open(PRODUCTS_EN_PATH, "r", encoding="utf-8") as f:
-        products = json.load(f)
-    products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
+        all_products = json.load(f)
+    all_products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
+    products = [p for p in all_products if p.get("show", True) is not False and p.get("status") != "offline"]
+    offline_products = [p for p in all_products if p.get("show", True) is False or p.get("status") == "offline"]
     settings = {}
     if os.path.exists(SETTINGS_PATH):
         with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
@@ -25,7 +27,7 @@ def load_data():
     if os.path.exists(NAV_PATH):
         with open(NAV_PATH, "r", encoding="utf-8") as f:
             nav_links = json.load(f)
-    return products, settings, nav_links
+    return products, offline_products, settings, nav_links
 
 def render_b2b_dossier_en(p):
     rd = p.get("rd_info") or {}

@@ -11884,6 +11884,11 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ enabled: nextVal })
         });
+        if (!res.ok) {
+          const errText = await res.text();
+          showToast(`服务请求异常 (${res.status})，请确认后台服务已更新并正常运行`, "error");
+          return;
+        }
         const data = await res.json();
         if (data.success) {
           if (!cache.settings) cache.settings = {};
@@ -12507,7 +12512,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           ]
         },
         { id: "node_4", name: "原料OEM定制", url: "helps/yloemd.html", children: [] },
-        { id: "node_5", name: "高渗透肽技术", url: "helps/tptjs.html", children: [] },
+        { id: "node_5", name: "cTDP促渗技术", url: "helps/tptjs.html", children: [] },
         {
           id: "node_6",
           name: "合作案例",

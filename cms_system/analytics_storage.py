@@ -13,6 +13,7 @@ import sqlite3
 import datetime
 import threading
 import shutil
+import time
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 WORKSPACE_DIR = os.path.dirname(CURRENT_DIR)
@@ -140,13 +141,21 @@ def init_vault():
 
 
 def atomic_save_json(filepath, data):
-    """原子写入 JSON 文件（先写临时文件再重命名，防止进程崩溃导致文件损坏）"""
+    """原子写入 JSON 文件（先写临时文件再重命名，防止进程崩溃导致文件损坏，Windows 下带重试机制）"""
     tmp_path = filepath + ".tmp"
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         if os.path.exists(tmp_path):
-            os.replace(tmp_path, filepath)
+            for attempt in range(6):
+                try:
+                    os.replace(tmp_path, filepath)
+                    break
+                except (PermissionError, OSError):
+                    if attempt < 5:
+                        time.sleep(0.05 * (attempt + 1))
+                    else:
+                        raise
     except Exception as e:
         if os.path.exists(tmp_path):
             try:

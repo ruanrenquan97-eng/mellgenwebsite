@@ -106,27 +106,61 @@ if lan_ips:
         print(f"  - CMS后台:  http://{ip}:8001")
         print(f"  - WorkBuddy: http://{ip}:8002/mcp/sse")
 print("\n[提示] 部署在 https://www.mellgen.com 生产环境时，Nginx 会自动将 /mcp/ 反向代理至 8002 端口。")
-print("\n[*] Opening CMS Login page in your default browser...")
-
-try:
-    webbrowser.open("http://localhost:8001/login")
-except Exception:
-    pass
+if "--no-browser" not in sys.argv:
+    print("\n[*] Opening CMS Login page in your default browser...")
+    try:
+        webbrowser.open("http://localhost:8001/login")
+    except Exception:
+        pass
 
 print("\n[!] Press Ctrl+C in this terminal to shut down all servers.")
 
-# Keep running and wait for termination
+# Keep running with supervisor auto-restart
+shutting_down = False
 try:
-    while True:
-        # Check if child processes are still alive
-        if preview_process.poll() is not None:
-            print("[-] Preview server stopped unexpectedly.")
-            break
-        if cms_process.poll() is not None:
-            print("[-] CMS server stopped unexpectedly.")
-            break
+    while not shutting_down:
+        # Auto-recover preview server if stopped
+        if preview_process.poll() is not None and not shutting_down:
+            print("[*] Preview server stopped. Automatically restarting on port 8000...")
+            try:
+                preview_process = subprocess.Popen(
+                    [sys.executable, "-m", "http.server", "-b", "0.0.0.0", "8000"],
+                    cwd=WORKSPACE_DIR,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
+            except Exception as e:
+                print(f"[-] Failed to restart preview server: {e}")
+
+        # Auto-recover CMS server if stopped
+        if cms_process.poll() is not None and not shutting_down:
+            print("[*] CMS server stopped. Automatically restarting on port 8001...")
+            try:
+                time.sleep(0.5)
+                cms_process = subprocess.Popen(
+                    [sys.executable, server_script],
+                    cwd=os.path.join(WORKSPACE_DIR, "cms_system"),
+                    env=env
+                )
+            except Exception as e:
+                print(f"[-] Failed to restart CMS server: {e}")
+
+        # Auto-recover FastMCP server if stopped
+        if mcp_process and mcp_process.poll() is not None and not shutting_down:
+            print("[*] FastMCP server stopped. Automatically restarting on port 8002...")
+            try:
+                time.sleep(0.5)
+                mcp_process = subprocess.Popen(
+                    [sys.executable, mcp_script, "sse", "8002"],
+                    cwd=os.path.join(WORKSPACE_DIR, "cms_system"),
+                    env=env
+                )
+            except Exception as e:
+                print(f"[-] Failed to restart FastMCP server: {e}")
+
         time.sleep(1)
 except KeyboardInterrupt:
+    shutting_down = True
     print("\n[*] Shutting down servers gracefully...")
 finally:
     # Terminate processes

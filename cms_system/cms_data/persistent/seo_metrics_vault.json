@@ -1,7 +1,7 @@
 {
   "traffic": {
-    "current_date": "2026-09-16",
-    "pv": 499,
+    "current_date": "2026-09-17",
+    "pv": 94,
     "uv": 1,
     "ip": 1,
     "pv_growth": "待访客来访",
@@ -18,20 +18,13 @@
       }
     ],
     "devices": {
-      "pc": 682,
+      "pc": 776,
       "mobile": 7
     },
     "today_ips": [
       "127.0.0.1"
     ],
     "history_7d": [
-      {
-        "date": "09-10",
-        "full_date": "2026-09-10",
-        "pv": 0,
-        "uv": 0,
-        "ip": 0
-      },
       {
         "date": "09-11",
         "full_date": "2026-09-11",
@@ -73,16 +66,16 @@
         "pv": 499,
         "uv": 1,
         "ip": 1
+      },
+      {
+        "date": "09-17",
+        "full_date": "2026-09-17",
+        "pv": 93,
+        "uv": 1,
+        "ip": 1
       }
     ],
     "history_30d": [
-      {
-        "date": "08-18",
-        "full_date": "2026-08-18",
-        "pv": 0,
-        "uv": 0,
-        "ip": 0
-      },
       {
         "date": "08-19",
         "full_date": "2026-08-19",
@@ -285,11 +278,18 @@
         "pv": 499,
         "uv": 1,
         "ip": 1
+      },
+      {
+        "date": "09-17",
+        "full_date": "2026-09-17",
+        "pv": 93,
+        "uv": 1,
+        "ip": 1
       }
     ]
   },
   "indexing": {
-    "total_pages": 242,
+    "total_pages": 246,
     "indexed_pages": 198,
     "overall_rate": 96.1,
     "last_check_time": "2026-09-14 11:50:00",

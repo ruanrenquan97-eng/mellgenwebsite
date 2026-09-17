@@ -143,7 +143,7 @@
       "url": "product_spyyyl.html"
     },
     {
-      "description": "美尔健最新企业资讯、行业法规动态与前沿生物高渗透多肽技术知识。",
+      "description": "美尔健最新企业资讯、行业法规动态与前沿生物高渗透多肽科普研究。",
       "id": "xwzx",
       "keywords": "透皮技术新闻,生物原料政策,美尔健动态",
       "name": "资讯与行业动态频道",
@@ -487,5 +487,14 @@
   "watermark_position": "bottom-right",
   "watermark_text": "美尔健生物 · MELLGEN",
   "working_hours": "周一至周五 09:00 - 18:00 (技术支持与试样咨询)",
-  "show_case_section": false
+  "show_case_section": false,
+  "article_categories_visibility": {
+    "合作案例": false,
+    "科普研究": true,
+    "技术知识": true,
+    "检测报告": false,
+    "企业新闻": true,
+    "新闻资讯": true,
+    "常见问答": true
+  }
 }

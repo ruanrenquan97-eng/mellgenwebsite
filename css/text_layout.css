@@ -353,6 +353,13 @@ a.more {
   text-wrap: nowrap !important;
 }
 
+.sup_nav dl.on dd p {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
+}
+
 .number .numb .nmh {
   white-space: nowrap !important;
   word-break: keep-all !important;

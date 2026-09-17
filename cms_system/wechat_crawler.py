@@ -194,9 +194,11 @@ def extract_clean_digest(content_html, fallback=""):
         return fallback
     try:
         soup = BeautifulSoup(content_html, "html.parser")
-        # Remove footer note
+        # Remove footer note and disclaimer box
         for fn in soup.select(".article-footer-note"):
             fn.decompose()
+        for db in soup.select(".article-disclaimer-box"):
+            db.decompose()
         text = soup.get_text(separator=" ", strip=True)
         # Strip common wechat header slogans
         text = re.sub(r'^(点击蓝字\s*关注我们|关注我们|长按识别二维码|戳上方蓝字.*?关注我)\s*', '', text)
@@ -333,8 +335,16 @@ def process_wechat_html_content(raw_html, download_images=True):
     # Format into website template wrapper
     formatted_html = f"""<div class="article-body-wrapper" style="line-height:1.9;color:#333;font-size:15px;text-align:justify;">
     {body_content}
-    <div class="article-footer-note" style="margin-top:32px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;">
-        <p style="margin:0;line-height:1.6;"><strong>声明与支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>
+    <div class="article-footer-note" style="margin-top:28px;padding:14px 18px;background:#fafafa;border:1px dashed #dcdcdc;border-radius:6px;font-size:13px;color:#777;">
+        <p style="margin:0;line-height:1.6;"><strong>声明与技术支持：</strong>美尔健（深圳）生物科技有限公司致力于生物透皮技术与功效原料研发，如需获取原料详细规格书（TDS）、安全评估资料或定制配方打样，欢迎致电全国服务热线：0755-82926499 / 136-9197-8530。</p>
+    </div>
+    <div class="article-disclaimer-box" style="margin-top:20px;padding:15px 18px;background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #7fb435;border-radius:6px;font-size:12.5px;color:#64748b;line-height:1.8;">
+        <div style="font-weight:700;color:#1e293b;font-size:13px;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+            <span style="color:#7fb435;">⚖️</span> 版权与合规免责声明
+        </div>
+        <p style="margin:0 0 6px 0;">1. <strong>专业研发与学术参考：</strong>本站刊载之技术科普、学术文献、配方机理及实验数据探讨，仅供化妆品研发工程师、配方师及科研专业人士交流参考，不作为针对终端消费者的直接功效承诺或医疗/诊断建议。</p>
+        <p style="margin:0 0 6px 0;">2. <strong>成品合规与宣称责任：</strong>化妆品品牌商及成品制造方应依据国家法律法规（如《化妆品监督管理条例》、《化妆品功效宣称评价规范》等），独立对其终产品的安全性、稳定性及功效宣称负责，并依法完成备案申报与功效评价。</p>
+        <p style="margin:0;">3. <strong>知识产权与内容说明：</strong>本站部分内容或图片摘引自公开学术文献或专业资讯，版权归原作者所有，仅作学术分享与技术探讨。若涉及版权争议请联系核实；对于因客户不当使用或超范围宣称所引发的后果，本司不承担法律责任。</p>
     </div>
 </div>"""
 

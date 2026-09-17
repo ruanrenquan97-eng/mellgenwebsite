@@ -2,12 +2,36 @@ import os
 import re
 import json
 import shutil
+import threading
 from urllib.parse import urlparse
 
 WORKSPACE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if '\ufffd' in WORKSPACE_DIR or not os.path.exists(WORKSPACE_DIR) or not os.path.exists(os.path.join(WORKSPACE_DIR, "cms_system")):
     WORKSPACE_DIR = os.path.abspath(os.path.normpath('E:/\u79c1\u6709\u4e91/\u6211\u7684AI\u7ba1\u7406\u7cfb\u7edf/mellgen_website'))
 DATA_DIR = os.path.join(WORKSPACE_DIR, "cms_system", "cms_data")
+_publish_lock = threading.Lock()
+
+def is_online_article(a, settings=None):
+    if not isinstance(a, dict):
+        return False
+    show_val = a.get("show")
+    if show_val is False or str(show_val).strip().lower() in ["false", "0", "off", "no"]:
+        return False
+    status_val = str(a.get("status", "")).strip().lower()
+    if status_val in ["offline", "draft", "hidden", "takedown"]:
+        return False
+    if show_val is not True and str(show_val).strip().lower() not in ["true", "1", "on", "yes"] and status_val != "published":
+        return False
+        
+    if settings:
+        cat = a.get("category", "")
+        cat_vis = dict(settings.get("article_categories_visibility") or {})
+        if settings.get("show_case_section", True) is False:
+            cat_vis["合作案例"] = False
+            cat_vis["行业案例"] = False
+        if cat in cat_vis and cat_vis[cat] is False:
+            return False
+    return True
 
 def load_db():
     products_path = os.path.join(DATA_DIR, "products.json")
@@ -22,20 +46,18 @@ def load_db():
     friendlinks = []
     nav_links = []
     
+    if os.path.exists(settings_path):
+        with open(settings_path, "r", encoding="utf-8") as f:
+            settings = json.load(f)
     if os.path.exists(products_path):
         with open(products_path, "r", encoding="utf-8") as f:
             all_products = json.load(f)
         products = [p for p in all_products if p.get("show", True) is not False and p.get("status") != "offline"]
         products.sort(key=lambda x: (x.get("sort", 99999) if isinstance(x.get("sort"), (int, float)) else 99999, x.get("id", "")))
-    if os.path.exists(settings_path):
-        with open(settings_path, "r", encoding="utf-8") as f:
-            settings = json.load(f)
     if os.path.exists(articles_path):
         with open(articles_path, "r", encoding="utf-8") as f:
             all_articles = json.load(f)
-        articles = [a for a in all_articles if a.get("show", True) is not False and a.get("status") != "offline"]
-        if settings.get("show_case_section", True) is False:
-            articles = [a for a in articles if a.get("category") != "合作案例"]
+        articles = [a for a in all_articles if is_online_article(a, settings)]
     if os.path.exists(friendlinks_path):
         with open(friendlinks_path, "r", encoding="utf-8") as f:
             friendlinks = json.load(f)
@@ -173,8 +195,10 @@ def get_product_subcategories(category):
     return [category]
 
 def get_article_subcategories(category):
-    if category == "合作案例":
-        return ["合作案例", "三方权威报告", "实验室研究数据", "客户合作", "应用场景", "实验室数据研究"]
+    if category in ["检测报告", "三方权威报告", "实验室数据研究", "实验室研究数据"]:
+        return ["检测报告", "三方权威报告", "实验室数据研究", "实验室研究数据"]
+    elif category == "合作案例":
+        return ["合作案例", "三方权威报告", "实验室研究数据", "客户合作", "应用场景", "实验室数据研究", "检测报告"]
     elif category in ["三方权威报告", "实验室数据研究"]:
         return ["三方权威报告", "实验室数据研究"]
     elif category == "实验室研究数据":
@@ -184,9 +208,11 @@ def get_article_subcategories(category):
     elif category in ["应用场景", "医美行业", "护肤品工厂", "化妆品", "健康护理行业", "功能类食品", "洗护用品", "女性护理产品"]:
         return ["应用场景", "医美行业", "护肤品工厂", "化妆品", "健康护理行业", "功能类食品", "洗护用品", "女性护理产品"]
     elif category == "新闻资讯":
-        return ["新闻资讯", "企业新闻", "技术知识", "常见问答"]
+        return ["新闻资讯", "企业新闻", "科普研究", "技术知识", "常见问答"]
     elif category == "企业新闻":
         return ["企业新闻", "新闻资讯"]
+    elif category in ["科普研究", "技术知识"]:
+        return ["科普研究", "技术知识"]
     return [category]
 
 
@@ -359,6 +385,10 @@ def update_navigation(html_content, nav_links, file_rel_path, settings=None):
             settings = {}
 
     show_case = settings.get("show_case_section", True) is not False
+    cat_vis = dict(settings.get("article_categories_visibility") or {})
+    if not show_case:
+        cat_vis["合作案例"] = False
+        cat_vis["行业案例"] = False
         
     # Determine directory depth relative to workspace root
     depth = len(file_rel_path.replace("\\", "/").split("/")) - 1
@@ -370,6 +400,10 @@ def update_navigation(html_content, nav_links, file_rel_path, settings=None):
     # Flatten the tree structure to flat <li> items to fit Mellgen's style safely
     def process_item(item):
         nonlocal nav_html
+        item_name = item.get("name", "")
+        if cat_vis.get(item_name) is False:
+            return
+            
         url = item.get("url", "")
         # Resolve prefix
         if not (url.startswith("http://") or url.startswith("https://") or url.startswith("//") or url.startswith("/")):
@@ -378,6 +412,13 @@ def update_navigation(html_content, nav_links, file_rel_path, settings=None):
         
         # If there are children, render them sequentially to keep it flat but fully present
         for child in item.get("children", []):
+            if child.get("show") is False or child.get("status") == "hidden":
+                continue
+            child_name = child.get("name", "")
+            if cat_vis.get(child_name) is False:
+                continue
+            if child_name in ["三方权威报告", "实验室研究数据"] and cat_vis.get("检测报告") is False:
+                continue
             child_url = child.get("url", "")
             if not (child_url.startswith("http://") or child_url.startswith("https://") or child_url.startswith("//") or child_url.startswith("/")):
                 child_url = prefix + child_url.lstrip("./")
@@ -386,7 +427,10 @@ def update_navigation(html_content, nav_links, file_rel_path, settings=None):
     for item in nav_links:
         if item.get("show") is False or item.get("status") == "hidden":
             continue
-        if not show_case and (item.get("name") in ["合作案例", "行业案例"] or "article_hzal" in item.get("url", "")):
+        item_name = item.get("name", "")
+        if cat_vis.get(item_name) is False:
+            continue
+        if not show_case and (item_name in ["合作案例", "行业案例"] or "article_hzal" in item.get("url", "")):
             continue
         process_item(item)
         
@@ -566,11 +610,150 @@ def render_product_b2b_sections(product):
     out.append('<!-- ==================== END B2B PROFESSIONAL DOSSIER ==================== -->\n')
     return '\n'.join(out)
 
-def generate_product_detail_page(product, base_template_html, settings, nav_links):
+ARTICLE_STOPWORDS = {
+    "水", "1,2-己二醇", "丁二醇", "甘油", "苯氧乙醇", "多肽", "胶原蛋白", "重组蛋白", "蛋白",
+    "化妆品原料", "原料", "活性物", "提取物", "发酵产物", "生物原料", "高渗透型重组蛋白/多肽",
+    "重组仿生蛋白", "植物源活性物", "海洋源活性物", "复合营养素", "动物源活性物", "全水溶",
+    "十肽-4", "水溶性", "无色", "透明液体"
+}
+
+def get_product_distinctive_terms(p):
+    terms = set()
+    pid = (p.get("id") or "").strip().lower()
+    if pid:
+        terms.add(pid)
+    
+    title = (p.get("title") or "").strip()
+    if title:
+        terms.add(title.lower())
+        for part in re.split(r'[（\(\)）\s/]+', title):
+            clean = part.strip().lower()
+            if len(clean) >= 2 and clean not in ARTICLE_STOPWORDS:
+                terms.add(clean)
+                
+    inci = (p.get("specs", {}).get("INCI中文") or p.get("rd_info", {}).get("inci_cn") or "")
+    if inci:
+        for item in inci.split("、"):
+            c = item.strip().lower()
+            if len(c) >= 3 and c not in ARTICLE_STOPWORDS:
+                terms.add(c)
+                
+    mkt = p.get("marketing_info", {})
+    if isinstance(mkt, dict):
+        claims = mkt.get("claims", "")
+        for c in claims.split(","):
+            c = c.strip().lower()
+            if len(c) >= 4 and c not in ARTICLE_STOPWORDS:
+                terms.add(c)
+                
+    return [t for t in terms if t not in ARTICLE_STOPWORDS and len(t) >= 2]
+
+def get_related_articles_for_product(product, all_articles, max_count=4):
+    if not all_articles or not product:
+        return []
+    pid = (product.get("id") or "").strip().lower()
+    title = (product.get("title") or "").strip().lower()
+    
+    matched = []
+    seen_ids = set()
+    
+    for a in all_articles:
+        aid = a.get("id")
+        if not aid or aid in seen_ids:
+            continue
+            
+        rel = (a.get("related_product") or "").strip().lower()
+        if not rel or rel == "none":
+            continue
+            
+        if a.get("show") is False or a.get("status") == "offline" or a.get("status") == "deleted" or a.get("is_deleted"):
+            continue
+            
+        # Strictly verify that this article is associated with THIS product
+        if rel == pid or rel == title or (len(rel) >= 3 and (rel in pid or rel in title or pid in rel or title in rel)):
+            matched.append(a)
+            seen_ids.add(aid)
+            
+    # Sort matched articles by date descending
+    matched.sort(key=lambda x: x.get("date", ""), reverse=True)
+    return matched[:max_count]
+
+def render_product_related_articles_section(product, all_articles, is_en=False):
+    matched_articles = get_related_articles_for_product(product, all_articles, max_count=4)
+    if not matched_articles:
+        return ""
+        
+    section_title = "Recommended Reading" if is_en else "推荐阅读"
+    read_more_text = "Read More →" if is_en else "阅读全文 →"
+    prefix = "../../" if is_en else "../"
+    art_prefix = "../articles/"
+    
+    cards_html = []
+    for a in matched_articles:
+        aid = a.get("id", "")
+        atitle = a.get("title", "")
+        adesc = (a.get("desc") or "").strip()
+        clean_desc = re.sub(r'<[^>]+>', '', adesc).replace('&quot;', '"').replace('&nbsp;', ' ')
+        if len(clean_desc) > 90:
+            clean_desc = clean_desc[:88] + "..."
+            
+        aimg = a.get("image") or "resource/images/ban_txt.png"
+        if aimg.startswith("http"):
+            full_img_src = aimg
+        elif aimg.startswith("/"):
+            full_img_src = f"{prefix}{aimg.lstrip('/')}"
+        else:
+            full_img_src = f"{prefix}{aimg}"
+            
+        adate = a.get("date") or "2026"
+        acat = a.get("category") or ("Technical Insights" if is_en else "技术文献")
+        alink = f"{art_prefix}{aid}.html"
+        
+        card = f'''    <div class="product-related-article-card">
+      <a href="{alink}" target="_blank" class="product-related-article-thumb" title="{atitle}">
+        <img src="{full_img_src}" alt="{atitle}">
+        <span class="product-related-article-badge">{acat}</span>
+      </a>
+      <div class="product-related-article-body">
+        <div class="product-related-article-meta">
+          <span>📅 {adate}</span>
+          <span style="color:#0284c7;font-weight:600;">{'Science Research' if is_en else '科普研究'}</span>
+        </div>
+        <h4 class="product-related-article-title">
+          <a href="{alink}" target="_blank" title="{atitle}">{atitle}</a>
+        </h4>
+        <p class="product-related-article-desc">
+          {clean_desc}
+        </p>
+        <div class="product-related-article-more">
+          <a href="{alink}" target="_blank">
+            {read_more_text}
+          </a>
+        </div>
+      </div>
+    </div>'''
+        cards_html.append(card)
+        
+    cards_str = "\n".join(cards_html)
+    
+    section_html = f'''<!-- ==================== RECOMMENDED ARTICLES / 推荐阅读 ==================== -->
+<div class="product-related-articles-section blk blk-main" style="width:1200px;margin:35px auto 40px auto;"> 
+ <h4 class="p102-pro-content-title">{section_title}</h4> 
+ <div class="product-related-articles-list"> 
+{cards_str}
+ </div> 
+ <div class="clear"></div> 
+</div>
+<!-- ==================== END RECOMMENDED ARTICLES ==================== -->'''
+    return section_html
+
+def generate_product_detail_page(product, base_template_html, settings, nav_links, all_articles=None):
     dest_path = os.path.join(WORKSPACE_DIR, product['link'].replace('/', os.sep))
     if os.path.exists(dest_path):
-        with open(dest_path, "r", encoding="utf-8") as f:
+        with open(dest_path, "r", encoding="utf-8", errors="ignore") as f:
             html = f.read()
+        if len(html) < 1000:
+            html = base_template_html
     else:
         html = base_template_html
     
@@ -780,6 +963,14 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
         if match_fb:
             html = html[:match_fb.start(2)] + f"\n     {full_content}\n    " + html[match_fb.end(2):]
 
+    if all_articles is None:
+        art_file = os.path.join(DATA_DIR, "articles.json")
+        if os.path.exists(art_file):
+            with open(art_file, "r", encoding="utf-8") as f:
+                all_articles = json.load(f)
+        else:
+            all_articles = []
+
     # 5. Clean up & Normalize Bottom Recommendations (ensure exactly one clean block, no duplicated blocks or empty news-info blocks)
     standard_rec_block = '''<div class="k12-cx-xgcp-4pl-fx1-1-01 blk blk-main" style="width:1200px;margin:30px auto;"> 
  <h4 class="p102-pro-content-title">推荐产品</h4> 
@@ -843,8 +1034,17 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
  </div> 
  <div class="clear"></div> 
 </div>'''
-    rec_pattern = r'((?:</div>\s*){3})\s*(?:<div class=["\']k12-cx-xgcp-4pl-fx1-1-01[\s\S]*?)(?=\s*<div class=["\']g_ft f_fw["\'])'
-    html = re.sub(rec_pattern, r'\1\n  ' + standard_rec_block.replace('\\', '\\\\') + '\n\n  ', html)
+    articles_rec_block = render_product_related_articles_section(product, all_articles, is_en=False)
+    combined_rec_block = standard_rec_block
+    if articles_rec_block:
+        combined_rec_block += "\n\n  " + articles_rec_block
+
+    safe_rec_pattern = r'(<div class=["\']k12-cx-xgcp-4pl-fx1-1-01[\s\S]*?)(?=\s*<div class=["\']g_ft f_fw["\'])'
+    if re.search(safe_rec_pattern, html):
+        html = re.sub(safe_rec_pattern, combined_rec_block.replace('\\', '\\\\') + '\n\n  ', html)
+    elif '<div class="g_ft f_fw"' in html:
+        html = html.replace('<div class="g_ft f_fw"', combined_rec_block + '\n\n  <div class="g_ft f_fw"', 1)
+
 
     html = update_global_contact_info(html, settings)
     
@@ -852,10 +1052,17 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
     html = update_navigation(html, nav_links, product['link'])
     
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+    if not html or len(html) < 1000:
+        print(f"[-] Warning: generated html for product {product.get('id')} is too short ({len(html) if html else 0} chars), skipping write.")
+        return False
     with open(dest_path, "w", encoding="utf-8") as f:
         f.write(html)
+    return True
 
-def generate_article_detail_page(article, base_template_html, settings, nav_links):
+def generate_article_detail_page(article, base_template_html, settings, nav_links, all_online_articles=None):
+    if not base_template_html or len(base_template_html) < 1000:
+        print(f"[-] Error: base_template_html is missing or too short ({len(base_template_html) if base_template_html else 0} chars), skipping article {article.get('id')}.")
+        return False
     html = base_template_html
     
     art_title = f"{article['title']}-新闻资讯-{settings.get('company_name', '美尔健生物')}"
@@ -878,7 +1085,7 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
         cat_filename = "article_cjwt.html"
     elif cat in ["企业新闻"]:
         cat_filename = "article_qydt.html"
-    elif cat in ["技术知识"]:
+    elif cat in ["技术知识", "科普研究"]:
         cat_filename = "article_cpbk.html"
         
     crumbs_pattern = r'(<b>您当前的位置：</b>\s*<a href="\.\./index\.html"[^>]*>\s*首页\s*</a>\s*<span> &gt; </span>\s*<i[^>]*>\s*<a href="\.\./)([^"]+)("[^>]*>)([^<]+)(</a>)'
@@ -910,12 +1117,113 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     art_content = re.sub(r'src=["\'](?:\.\./)*resource/reports/images/', f'src="{root_prefix}resource/reports/images/', art_content)
     art_content = re.sub(r'src=["\'](?:\.\./)*images/', f'src="{root_prefix}images/', art_content)
     
+    # Ensure legal disclaimer and normalized footer note are present
+    disclaimer_html = """    <div class="article-disclaimer-box" style="margin-top:20px;padding:15px 18px;background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #7fb435;border-radius:6px;font-size:12.5px;color:#64748b;line-height:1.8;">
+        <div style="font-weight:700;color:#1e293b;font-size:13px;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+            <span style="color:#7fb435;">⚖️</span> 版权与合规免责声明
+        </div>
+        <p style="margin:0 0 6px 0;">1. <strong>专业研发与学术参考：</strong>本站刊载之技术科普、学术文献、配方机理及实验数据探讨，仅供化妆品研发工程师、配方师及科研专业人士交流参考，不作为针对终端消费者的直接功效承诺或医疗/诊断建议。</p>
+        <p style="margin:0 0 6px 0;">2. <strong>成品合规与宣称责任：</strong>化妆品品牌商及成品制造方应依据国家法律法规（如《化妆品监督管理条例》、《化妆品功效宣称评价规范》等），独立对其终产品的安全性、稳定性及功效宣称负责，并依法完成备案申报与功效评价。</p>
+        <p style="margin:0;">3. <strong>知识产权与内容说明：</strong>本站部分内容或图片摘引自公开学术文献或专业资讯，版权归原作者所有，仅作学术分享与技术探讨。若涉及版权争议请联系核实；对于因客户不当使用或超范围宣称所引发的后果，本司不承担法律责任。</p>
+    </div>"""
+
+    if "article-disclaimer-box" not in art_content:
+        if "article-footer-note" in art_content:
+            art_content = re.sub(r'(<div class="article-footer-note"[^>]*>.*?</div>)', r'\1\n' + disclaimer_html, art_content, flags=re.DOTALL)
+        else:
+            art_content += f"\n{disclaimer_html}\n"
+
+    art_content = art_content.replace("G55-82926499", "0755-82926499")
+
     if re.search(content_pattern, html, re.DOTALL):
         html = replace_group(content_pattern, f"\n     {art_content}\n    ", html)
     else:
         alt_pattern = r'(<div class="p102-info-content[^"]*">)(.*?)(</div>\s*<div class="clear"></div>)'
         if re.search(alt_pattern, html, re.DOTALL):
             html = replace_group(alt_pattern, f"\n     {art_content}\n    ", html)
+
+    # Resolve all_online_articles if not provided
+    if all_online_articles is None:
+        all_articles_path = os.path.join(DATA_DIR, "articles.json")
+        if os.path.exists(all_articles_path):
+            try:
+                with open(all_articles_path, "r", encoding="utf-8") as f:
+                    all_online_articles = [x for x in json.load(f) if is_online_article(x, settings)]
+            except Exception:
+                all_online_articles = []
+        else:
+            all_online_articles = []
+
+    # Filter strictly to other online articles
+    other_online = [x for x in (all_online_articles or []) if x.get('id') != article.get('id') and is_online_article(x, settings)]
+
+    # 1. Update Related Recommendations (相关推荐) - ONLY ONLINE ARTICLES
+    curr_cat = article.get('category')
+    curr_subcat = article.get('sub_category')
+    same_cat_arts = [x for x in other_online if (curr_subcat and x.get('sub_category') == curr_subcat) or (curr_cat and x.get('category') == curr_cat)]
+    diff_cat_arts = [x for x in other_online if x not in same_cat_arts]
+    rel_candidates = same_cat_arts + diff_cat_arts
+    selected_rel = rel_candidates[:2]
+
+    rel_pattern = r'<div class="p102-info-related">[\s\S]*?<div class="clear"></div>\s*</div>\s*</div>'
+    if selected_rel:
+        rel_html = '<div class="p102-info-related">\n <h3 class="p102-info-11-title">相关推荐</h3>\n <div class="p102-info-related-list">\n'
+        for ra in selected_rel:
+            ra_link = ra.get("link", "").replace("\\", "/")
+            if not ra_link.startswith("./") and not ra_link.startswith("../") and not ra_link.startswith("/"):
+                ra_link = "../" + ra_link
+            ra_img = (ra.get("image") or "images/ban_txt.png").replace("\\", "/")
+            if not ra_img.startswith("./") and not ra_img.startswith("../") and not ra_img.startswith("/") and not ra_img.startswith("http"):
+                ra_img = "../" + ra_img
+            ra_desc = (ra.get("desc") or "")[:70].strip()
+            rel_html += f"""    <dl> 
+     <dt> 
+      <a href="{ra_link}" title="{ra['title']}"><img alt="{ra['title']}" src="{ra_img}" title="{ra['title']}"></a> 
+     </dt> 
+     <dd> 
+      <h4><a href="{ra_link}" title="{ra['title']}">{ra['title']}</a></h4> 
+      <p> {ra_desc}... <a href="{ra_link}" title="{ra['title']}">【详情+】</a> </p> 
+     </dd> 
+    </dl>\n"""
+        rel_html += '   <div class="clear"></div>\n </div>\n</div>'
+        html = re.sub(rel_pattern, rel_html, html)
+    else:
+        # If no online articles to recommend, remove related block completely
+        html = re.sub(rel_pattern, '', html)
+
+    # 2. Update Latest News (最新资讯) - ONLY ONLINE ARTICLES
+    latest_pattern = r'<div class="p102-info-latest">[\s\S]*?</ul>\s*</div>'
+    sorted_latest = sorted(other_online, key=lambda x: x.get('date', ''), reverse=True)[:8]
+    if sorted_latest:
+        latest_html = '<div class="p102-info-latest">\n <h3 class="p102-info-12-title">最新资讯</h3>\n <ul class="clearafter">\n'
+        half = (len(sorted_latest) + 1) // 2
+        col1 = sorted_latest[:half]
+        col2 = sorted_latest[half:]
+        
+        latest_html += '    <li>\n'
+        for la in col1:
+            la_link = la.get("link", "").replace("\\", "/")
+            if not la_link.startswith("./") and not la_link.startswith("../") and not la_link.startswith("/"):
+                la_link = "../" + la_link
+            la_date = (la.get("date", "") or "").replace("-", ".")
+            latest_html += f'      <h4><a href="{la_link}" title="{la["title"]}">{la["title"]}</a><em>{la_date}</em></h4>\n'
+        latest_html += '    </li>\n'
+        
+        if col2:
+            latest_html += '    <li class="last">\n'
+            for la in col2:
+                la_link = la.get("link", "").replace("\\", "/")
+                if not la_link.startswith("./") and not la_link.startswith("../") and not la_link.startswith("/"):
+                    la_link = "../" + la_link
+                la_date = (la.get("date", "") or "").replace("-", ".")
+                latest_html += f'      <h4><a href="{la_link}" title="{la["title"]}">{la["title"]}</a><em>{la_date}</em></h4>\n'
+            latest_html += '    </li>\n'
+            
+        latest_html += '  </ul>\n</div>'
+        html = re.sub(latest_pattern, latest_html, html)
+    else:
+        # If no online articles, remove latest block completely
+        html = re.sub(latest_pattern, '', html)
 
     # 1. Canonical & Multi-language (Hreflang)
     can_href_tags = generate_canonical_and_hreflang_tags(article.get("link", ""))
@@ -993,8 +1301,12 @@ def generate_article_detail_page(article, base_template_html, settings, nav_link
     
     dest_path = os.path.join(WORKSPACE_DIR, article['link'].replace('/', os.sep))
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+    if not html or len(html) < 1000:
+        print(f"[-] Warning: generated html for article {article.get('id')} is too short ({len(html) if html else 0} chars), skipping write to {dest_path}.")
+        return False
     with open(dest_path, "w", encoding="utf-8") as f:
         f.write(html)
+    return True
 
 def update_product_listing_page(file_path, category, products, settings, nav_links):
     if not os.path.exists(file_path):
@@ -1002,6 +1314,18 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
         
     with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         html = f.read()
+
+    rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
+    if len(html) < 1000:
+        try:
+            res = subprocess.run(["git", "show", f"HEAD:{rel_path}"], cwd=WORKSPACE_DIR, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if res.returncode == 0 and len(res.stdout) >= 1000:
+                html = res.stdout.decode("utf-8", errors="ignore")
+        except Exception:
+            pass
+    if len(html) < 1000:
+        print(f"[-] Warning: base HTML for product listing {file_path} is too short ({len(html)} chars), skipping.")
+        return
         
     subcats = get_product_subcategories(category)
     if subcats is None:
@@ -1060,6 +1384,10 @@ def update_product_listing_page(file_path, category, products, settings, nav_lin
     if len(m_ends) > 1:
         html = html[:m_ends[0].end()]
 
+    if len(html) < 1000:
+        print(f"[-] Warning: generated HTML for product listing {file_path} is too short, refusing to write.")
+        return
+
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(html)
 
@@ -1069,6 +1397,18 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
         
     with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         html = f.read()
+
+    rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
+    if len(html) < 1000:
+        try:
+            res = subprocess.run(["git", "show", f"HEAD:{rel_path}"], cwd=WORKSPACE_DIR, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if res.returncode == 0 and len(res.stdout) >= 1000:
+                html = res.stdout.decode("utf-8", errors="ignore")
+        except Exception:
+            pass
+    if len(html) < 1000:
+        print(f"[-] Warning: base HTML for article listing {file_path} is too short ({len(html)} chars), skipping.")
+        return
         
     subcats = get_article_subcategories(category)
     cat_articles = [a for a in articles if (a.get('category') in subcats or a.get('sub_category') in subcats or a.get('cat_name') in subcats) and a.get('show', True)]
@@ -1161,13 +1501,41 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
         else:
             html = re.sub(h3_pattern, r'\1' + f'合作案例 · {category}' + r'\3', html)
 
+    # Update news subcategory navigation tabs (全部, 企业新闻, 科普研究, 常见问答)
+    if any(k in file_path for k in ["xwzx", "qydt", "cpbk", "cjwt"]) or category in ["新闻资讯", "企业新闻", "科普研究", "技术知识", "常见问答"]:
+        nav_pattern = r'(<div class="p101a-fdh-02-nav"[^>]*>\s*<ul[^>]*>)([\s\S]*?)(</ul>\s*</div>)'
+        
+        cur_all = ' class="cur sidenavcur"' if "xwzx" in file_path and "000" not in file_path else ""
+        cur_qydt = ' class="cur sidenavcur"' if "qydt" in file_path or category == "企业新闻" else ""
+        cur_cpbk = ' class="cur sidenavcur"' if "cpbk" in file_path or category in ["科普研究", "技术知识"] else ""
+        cur_cjwt = ' class="cur sidenavcur"' if "cjwt" in file_path or category == "常见问答" else ""
+        if not (cur_all or cur_qydt or cur_cpbk or cur_cjwt):
+            cur_all = ' class="cur sidenavcur"'
+            
+        news_tabs_html = f'''
+     <li{cur_all}><a href="./article_xwzx.html" title="全部资讯">全部</a></li>
+     <li{cur_qydt}><a href="./article_qydt.html" title="企业新闻">企业新闻</a></li>
+     <li{cur_cpbk}><a href="./article_cpbk.html" title="科普研究">科普研究</a></li>
+     <li{cur_cjwt}><a href="./article_cjwt.html" title="常见问答">常见问答</a></li>
+    '''
+        html = re.sub(nav_pattern, r'\1' + news_tabs_html + r'\3', html)
+        
+        # If cpbk, update title, H3, Baidu JSON-LD, and breadcrumb
+        if "cpbk" in file_path or category in ["科普研究", "技术知识"]:
+            html = re.sub(r'<title>.*?</title>', '<title>科普研究-美尔健生物</title>', html)
+            html = re.sub(r'(<div class="p101a-fdh-02">[\s\S]*?<h3>)([\s\S]*?)(</h3>)', r'\1科普研究\3', html)
+            crumb_pattern = r'(<div class="p102-curmbs-1"[^>]*>[\s\S]*?<b>您当前的位置：</b>[\s\S]*?<a href="[^"]*index\.html"[^>]*>\s*首页\s*</a>\s*<span>\s*&gt;\s*</span>\s*)([\s\S]*?)(</div>)'
+            new_crumb = '<i> <a href="./article_xwzx.html" title="新闻中心"> 新闻中心 </a> <span> &gt; </span> </i> <i class=""> <a href="./article_cpbk.html" title="科普研究"> 科普研究 </a> </i> '
+            html = re.sub(crumb_pattern, r'\1' + new_crumb + r'\3', html)
+            html = html.replace('"title":"技术知识-美尔健生物"', '"title":"科普研究-美尔健生物"')
+
     # Inject SEO tags into article listing page
     rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
     can_href_tags = generate_canonical_and_hreflang_tags(rel_path)
     html = inject_meta_block_into_head(html, can_href_tags, block_id="seo-canonical-hreflang")
     
     cat_title = f"{category}-美尔健生物资讯中心"
-    cat_desc = f"美尔健官方{category}专区，分享前沿生物技术知识、行业动态与问答。"
+    cat_desc = f"美尔健官方{category}专区，分享前沿生物科普研究、行业动态与问答。"
     og_tags = generate_open_graph_tags(cat_title, cat_desc, "images/ban_txt.png", rel_path, og_type="website")
     html = inject_meta_block_into_head(html, og_tags, block_id="seo-opengraph")
 
@@ -1201,33 +1569,48 @@ def update_article_listing_page(file_path, category, articles, settings, nav_lin
     # Update navigation menu
     html = update_navigation(html, nav_links, rel_path)
     
+    if len(html) < 1000:
+        print(f"[-] Warning: generated HTML for article listing {file_path} is too short ({len(html)} chars), refusing to write.")
+        return
+
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(html)
 
-def update_homepage(products, articles, settings, friendlinks, nav_links):
-    index_path = os.path.join(WORKSPACE_DIR, "index.html")
-    if not os.path.exists(index_path):
+def update_single_homepage(file_path, products, articles, settings, friendlinks, nav_links, page_name="index.html"):
+    if not os.path.exists(file_path):
         return
         
-    with open(index_path, "r", encoding="utf-8", errors="ignore") as f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         html = f.read()
+
+    rel_path = os.path.relpath(file_path, WORKSPACE_DIR).replace("\\", "/")
+    if len(html) < 1000:
+        try:
+            res = subprocess.run(["git", "show", f"HEAD:{rel_path}"], cwd=WORKSPACE_DIR, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if res.returncode == 0 and len(res.stdout) >= 1000:
+                html = res.stdout.decode("utf-8", errors="ignore")
+        except Exception:
+            pass
+    if len(html) < 1000:
+        print(f"[-] Warning: base HTML for homepage {file_path} is too short ({len(html)} chars), skipping.")
+        return
         
     # 1. Update Banners
     banner_html = "\n"
     for b in settings.get("banners", []):
-        if b["type"] == "video":
+        if b.get("type") == "video":
             banner_html += f"""    <div class="swiper-slide"> 
      <div class="ban_txt"> 
       <img src="./images/ban_txt.png"> 
      </div> 
      <video autoplay="" controls="" id="sVideo" loop="" muted="" playsinline="" webkit-playsinline="" x5-playsinline="" style="width: 100%; aspect-ratio: 1920 / 800; object-fit: cover; object-position: center;"> 
-      <source src="{b['video']}" type="video/mp4"> 
+      <source src="{b.get('video', '')}" type="video/mp4"> 
      </video> 
     </div> 
 """
         else:
             banner_html += f"""     <div class="swiper-slide" data-swiper-autoplay="3000"> 
-      <a href="./{b['link']}" title="{b['title']}"><img alt="{b['title']}" src="./{b['image']}" title="{b['title']}"></a> 
+      <a href="./{b.get('link', '')}" title="{b.get('title', '')}"><img alt="{b.get('title', '')}" src="./{b.get('image', '')}" title="{b.get('title', '')}"></a> 
      </div> 
 """
     banner_html += "   "
@@ -1244,56 +1627,107 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
     yyy_links = "\n         " + "\n          ".join([f'<a href="./{p["link"]}" title="{p["title"]}">{p["title"]} </a>' for p in yyy]) + "\n          "
     spy_links = "\n         " + "\n          ".join([f'<a href="./{p["link"]}" title="{p["title"]}">{p["title"]} </a>' for p in spy]) + "\n          "
     
-    html = replace_group(r'(化妆品原料</a></h4>\s*<p>)(.*?)(</p>)', hzp_links, html)
-    html = replace_group(r'(医用原料</a></h4>\s*<p>)(.*?)(</p>)', yyy_links, html)
-    html = replace_group(r'(食品营养原料</a></h4>\s*<p>)(.*?)(</p>)', spy_links, html)
-    
-    # Filter active articles and sort by date descending so latest articles appear first
-    active_articles = [a for a in articles if a.get("show", True)]
-    sorted_active_articles = sorted(active_articles, key=lambda a: a.get("date", "") or "", reverse=True)
-    
-    # 3. Update case studies
+    g_fa_pattern = r'(<div class="g_fa">.*?<div class="fa_links f_cb">)(.*?)(</div>.*?<div class="fa_links f_cb">)(.*?)(</div>.*?<div class="fa_links f_cb">)(.*?)(</div>.*?</div>\s*<div class="fa_b f_fw">)'
+    m_fa = re.search(g_fa_pattern, html, re.DOTALL)
+    if m_fa:
+        html = (
+            html[:m_fa.start(2)] + hzp_links +
+            html[m_fa.end(2):m_fa.start(4)] + yyy_links +
+            html[m_fa.end(4):m_fa.start(6)] + spy_links +
+            html[m_fa.end(6):]
+        )
+        
+    # 3. Update Product Carousel (idx-pro)
+    pro_list_html = "\n"
+    for i, p in enumerate(sorted_prods[:12]):
+        pro_list_html += f"""     <div class="swiper-slide"> 
+      <a href="./{p['link']}" title="{p['title']}"><img alt="{p['title']}" src="./{p['image']}"> 
+       <div class="product-item-sample-caption" style="background: #f8fafc; text-align: center; font-size: 12px; color: #475569; padding: 5px 0; border-top: 1px solid #e2e8f0; line-height: 1.5; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span style="background: #e0f2fe; color: #0284c7; font-weight: 600; font-size: 11px; padding: 1px 6px; border-radius: 3px; border: 1px solid #bae6fd;">寄样图</span>
+        <span>实物打样装规格</span>
+       </div>
+       <div class="txt"> 
+        <h3>{p['title']}</h3> 
+        <p>{p.get('desc', '')[:80]}...</p> 
+        <span><b>MORE</b><i>&gt;&gt;</i></span> 
+       </div> </a> 
+     </div> 
+"""
+    pro_list_html += "    "
+    html = replace_group(r'(<div class="idx-pro f_cb">.*?<div class="swiper-wrapper">)(.*?)(</div>\s*<div class="swiper-pagination">)', pro_list_html, html)
+        
+    # 4. Update Case Showcase (idx-anli)
     show_case = settings.get("show_case_section", True) is not False
     if not show_case:
-        # Wrap the case section in hidden div if not already hidden
-        if '<div id="homepage-case-block"' not in html:
-            html = re.sub(r'(\s*<!-- 好原料成就品质美妆 -->[\s\S]*?)(<!-- 新闻资讯 -->)', r'\n<div id="homepage-case-block" style="display:none !important;">\n\1</div>\n\2', html)
+        html = re.sub(r'<div class="idx-anli f_fw">[\s\S]*?<div class="idx-hezuo f_fw">', '<div class="idx-hezuo f_fw">', html)
     else:
-        # Unwrap if previously wrapped
-        html = re.sub(r'<div id="homepage-case-block"[^>]*>\s*(\s*<!-- 好原料成就品质美妆 -->[\s\S]*?)</div>\s*(<!-- 新闻资讯 -->)', r'\1\2', html)
-        cases = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("合作案例")][:10]
-        case_list_html = "\n"
-        for c in cases:
-            case_list_html += f'      <li class="swiper-slide"><a href="./{c["link"]}" target="_blank" title="{c["title"]}"><i><img alt="{c["title"]}" src="./{c["image"]}" title="{c["title"]}"><span><img alt="" src="./images/anspico.png"></span></i><em>{c["title"]}</em></a></li> \n'
-        case_list_html += "    "
-        html = replace_group(r'(<ul class="f_cb swiper-wrapper">)(.*?)(</ul>\s*</div>\s*</div>\s*\n\s*</div>\s*<!-- 新闻资讯 -->)', case_list_html, html)
-    
-    # 4. Update News tabs (sorted by latest date, without date display on homepage)
-    qydt_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("企业新闻")][:4]
-    cpbk_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("技术知识")][:4]
-    cjwt_news = [a for a in sorted_active_articles if a['category'] in get_article_subcategories("常见问答")][:4]
-    
-    def make_news_tab_html(news_list):
-        tab_html = "\n"
-        for n in news_list:
-            tab_html += f"""        <dl class="cur"> 
-         <a href="./{n['link']}" target="_blank" title="{n['title']}"> 
-          <dt> 
-           <h4>{n['title'][:32]}...</h4> 
-           <i><img alt="{n['title']}" src="./{n['image']}" title="{n['title']}"></i> 
-          </dt> 
-          <dd> 
-           <p>{n['desc'][:80]}...</p> 
-           <span><i><img src="./images/newmore.png"></i></span> 
-          </dd> </a> 
-        </dl> 
+        sorted_active_articles = sorted(
+            [a for a in articles if a.get('show', True)],
+            key=lambda x: x.get('date', ''),
+            reverse=True
+        )
+        cases = [a for a in sorted_active_articles if a.get('category') in get_article_subcategories("合作案例")][:10]
+        case_html = "\n"
+        for a in cases:
+            case_html += f"""     <div class="swiper-slide"> 
+      <a href="./{a['link']}" title="{a['title']}"><img alt="{a['title']}" src="./{a['image']}"> 
+       <div class="txt"> 
+        <h3>{a['title']}</h3> 
+        <p>{a.get('desc', '')[:100]}...</p> 
+        <span><b>MORE</b><i>&gt;&gt;</i></span> 
+       </div> </a> 
+     </div> 
 """
-        tab_html += "       "
-        return tab_html
+        case_html += "    "
+        html = replace_group(r'(<div class="idx-anli f_fw">.*?<div class="swiper-wrapper">)(.*?)(</div>\s*<div class="swiper-pagination">)', case_html, html)
         
-    qydt_html = make_news_tab_html(qydt_news)
-    cpbk_html = make_news_tab_html(cpbk_news)
-    cjwt_html = make_news_tab_html(cjwt_news)
+    # 5. Update News Section
+    sorted_active_articles = sorted(
+        [a for a in articles if a.get('show', True)],
+        key=lambda x: x.get('date', ''),
+        reverse=True
+    )
+    qydt_news = [a for a in sorted_active_articles if a.get('category') in get_article_subcategories("企业新闻")][:4]
+    cpbk_news = [a for a in sorted_active_articles if a.get('category') in get_article_subcategories("科普研究")][:4]
+    cjwt_news = [a for a in sorted_active_articles if a.get('category') in get_article_subcategories("常见问答")][:4]
+    
+    def render_news_block(news_list, more_link="./article_xwzx.html"):
+        if not news_list:
+            return ""
+        first = news_list[0]
+        res = f"""\n      <div class="conl f_cb"> 
+       <a href="./{first['link']}" title="{first['title']}"><img alt="{first['title']}" src="./{first['image']}"> 
+        <div class="txt"> 
+         <p>{first.get('date', '')}</p> 
+         <h3>{first['title']}</h3> 
+         <div>
+           {first.get('desc', '')[:100]}... 
+         </div> 
+        </div> </a> 
+      </div> 
+      <div class="conr f_cb"> 
+       <ul> \n"""
+        for a in news_list[1:]:
+            d_parts = a.get('date', '2025-01-01').split('-')
+            d_str = d_parts[-1] if len(d_parts) > 0 else '01'
+            m_str = f"{d_parts[0]}.{d_parts[1]}" if len(d_parts) > 1 else '2025.01'
+            res += f"""        <li> <a href="./{a['link']}" title="{a['title']}"> 
+          <div class="date"> 
+           <h3>{d_str}</h3> 
+           <p>{m_str}</p> 
+          </div> 
+          <div class="txt"> 
+           <h4>{a['title']}</h4> 
+           <p>{a.get('desc', '')[:80]}...</p> 
+          </div> </a> </li> \n"""
+        res += f"""       </ul> 
+       <a class="more" href="{more_link}" title="查看更多">MORE &gt;&gt;</a> 
+      </div> \n"""
+        return res
+        
+    qydt_html = render_news_block(qydt_news, "./article_qydt.html")
+    cpbk_html = render_news_block(cpbk_news, "./article_cpbk.html")
+    cjwt_html = render_news_block(cjwt_news, "./article_cjwt.html")
     
     news_pattern = r'(<div class="tabsnew f_cb">.*?<div class="js-swiper-tab">.*?<div class="swiper-wrapper">.*?<div class="swiper-slide">\s*<div class="newcon">)(.*?)(</div>\s*</div>\s*<div class="swiper-slide">\s*<div class="newcon">)(.*?)(</div>\s*</div>\s*<div class="swiper-slide">\s*<div class="newcon">)(.*?)(</div>\s*</div>)'
     match = re.search(news_pattern, html, re.DOTALL)
@@ -1304,18 +1738,39 @@ def update_homepage(products, articles, settings, friendlinks, nav_links):
             html[match.end(4):match.start(6)] + cjwt_html +
             html[match.end(6):]
         )
+    html = re.sub(r'(<a[^>]*href="\./article_cpbk\.html"[^>]*>[\s\S]*?<em[^>]*>).*?(</em></a>)', r'\1科普研究\2', html)
+    html = html.replace('alt="技术知识"', 'alt="科普研究"').replace('title="技术知识"', 'title="科普研究"')
         
-    # 5. Update Friendship Links
+    # 6. Update Friendship Links
     html = update_friendlinks(html, friendlinks)
     
-    # Apply contact updates
+    # 7. Apply contact updates
     html = update_global_contact_info(html, settings)
     
-    # Update navigation menu
-    html = update_navigation(html, nav_links, "index.html")
+    # 8. Update navigation menu
+    html = update_navigation(html, nav_links, page_name)
     
-    with open(index_path, "w", encoding="utf-8") as f:
+    if len(html) < 1000:
+        print(f"[-] Warning: generated HTML for homepage {file_path} is too short ({len(html)} chars), refusing to write.")
+        return
+
+    with open(file_path, "w", encoding="utf-8") as f:
         f.write(html)
+
+def update_homepage(products, articles, settings, friendlinks, nav_links):
+    index_path = os.path.join(WORKSPACE_DIR, "index.html")
+    if os.path.exists(index_path):
+        try:
+            update_single_homepage(index_path, products, articles, settings, friendlinks, nav_links, "index.html")
+        except Exception as e_idx:
+            print(f"[-] Error updating index.html homepage: {e_idx}")
+            
+    other_home = os.path.join(WORKSPACE_DIR, "mellgen_home.html")
+    if os.path.exists(other_home):
+        try:
+            update_single_homepage(other_home, products, articles, settings, friendlinks, nav_links, "mellgen_home.html")
+        except Exception as e_other:
+            print(f"[-] Error updating mellgen_home.html homepage: {e_other}")
 
 def update_all_footers_headers_and_nav(settings, nav_links):
     for root, dirs, files in os.walk(WORKSPACE_DIR):
@@ -1326,6 +1781,9 @@ def update_all_footers_headers_and_nav(settings, nav_links):
                 try:
                     with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
                         content = f.read()
+
+                    if len(content.strip()) < 500:
+                        continue
                     
                     new_content = update_global_contact_info(content, settings)
                     
@@ -1365,7 +1823,7 @@ def update_all_footers_headers_and_nav(settings, nav_links):
 
                     new_content = update_navigation(new_content, nav_links, rel_path)
                     
-                    if new_content != content:
+                    if new_content != content and len(new_content.strip()) >= 500:
                         with open(file_path, "w", encoding="utf-8") as f:
                             f.write(new_content)
                 except Exception as e:
@@ -1449,9 +1907,24 @@ def generate_sitemap():
     return update_sitemaps(products, articles)
 
 def publish_site():
+    if not _publish_lock.acquire(blocking=False):
+        print("[*] Site publishing is already in progress, skipping duplicate concurrent run.")
+        return
+    try:
+        _do_publish_site()
+    finally:
+        _publish_lock.release()
+
+def _do_publish_site():
     print("[*] Starting site regeneration and publishing...")
     products, articles, settings, friendlinks, nav_links = load_db()
     
+    # 0. Immediate Homepage update (takes < 0.05s so changes reflect immediately on front-end)
+    try:
+        update_homepage(products, articles, settings, friendlinks, nav_links)
+    except Exception as e_home0:
+        print(f"[-] Error in Step 0 homepage update: {e_home0}")
+        
     # Apply channel & innerpage SEO
     for ch in settings.get("channel_seo", []):
         ch_file = os.path.join(WORKSPACE_DIR, ch.get("url", ""))
@@ -1517,7 +1990,7 @@ def publish_site():
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_hzal.html"), "合作案例", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_cjwt.html"), "常见问答", articles, settings, nav_links)
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_qydt.html"), "企业新闻", articles, settings, nav_links)
-    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_cpbk.html"), "技术知识", articles, settings, nav_links)
+    update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_cpbk.html"), "科普研究", articles, settings, nav_links)
     
     # 合作案例 4大板块动态静态化
     update_article_listing_page(os.path.join(WORKSPACE_DIR, "article_syssj.html"), "三方权威报告", articles, settings, nav_links)
@@ -1540,15 +2013,23 @@ def publish_site():
             update_article_listing_page(lp_path, leg_cat, articles, settings, nav_links)
     
     # 2. Re-generate all product details
-    template_product_path = os.path.join(WORKSPACE_DIR, "products", "tphtct.html")
+    all_articles_for_rec = []
+    if os.path.exists(os.path.join(DATA_DIR, "articles.json")):
+        with open(os.path.join(DATA_DIR, "articles.json"), "r", encoding="utf-8") as f:
+            all_articles_for_rec = [a for a in json.load(f) if a.get("status") != "deleted" and not a.get("is_deleted")]
+
+    template_product_path = os.path.join(WORKSPACE_DIR, "cms_system", "templates", "product_detail_template.html")
+    if not os.path.exists(template_product_path) or os.path.getsize(template_product_path) < 1000:
+        template_product_path = os.path.join(WORKSPACE_DIR, "products", "tphtct.html")
     if os.path.exists(template_product_path):
         with open(template_product_path, "r", encoding="utf-8") as tf:
             base_product_html = tf.read()
-        for p in products:
-            try:
-                generate_product_detail_page(p, base_product_html, settings, nav_links)
-            except Exception as e:
-                print(f"[-] Error generating page for product {p['id']}: {e}")
+        if len(base_product_html) >= 1000:
+            for p in products:
+                try:
+                    generate_product_detail_page(p, base_product_html, settings, nav_links, all_articles=all_articles_for_rec)
+                except Exception as e:
+                    print(f"[-] Error generating page for product {p['id']}: {e}")
 
         # Handle offline product pages: redirect them to product_index.html
         all_products_path = os.path.join(DATA_DIR, "products.json")
@@ -1578,33 +2059,58 @@ def publish_site():
             except Exception as e_off:
                 print(f"[-] Notice handling offline products redirect: {e_off}")
                 
-    # 3. Re-generate all article details
-    template_article_path = os.path.join(WORKSPACE_DIR, "articles", "jsjjtp.html")
+    # 3. Re-generate all article details using dedicated template
+    template_article_path = os.path.join(WORKSPACE_DIR, "cms_system", "templates", "article_detail_template.html")
+    if not os.path.exists(template_article_path) or os.path.getsize(template_article_path) < 1000:
+        template_article_path = os.path.join(WORKSPACE_DIR, "articles", "jsjjtp.html")
     if os.path.exists(template_article_path):
         with open(template_article_path, "r", encoding="utf-8") as tf:
             base_article_html = tf.read()
-        for a in articles:
+        if len(base_article_html) >= 1000:
+            for a in articles:
+                try:
+                    generate_article_detail_page(a, base_article_html, settings, nav_links, all_online_articles=articles)
+                except Exception as e:
+                    print(f"[-] Error generating page for article {a['id']}: {e}")
+        else:
+            print(f"[-] Critical: base_article_html too short ({len(base_article_html)} chars), aborting article generation.")
+
+        # Handle offline article pages: redirect them to article_xwzx.html so offline content is never displayed
+        all_articles_path = os.path.join(DATA_DIR, "articles.json")
+        if os.path.exists(all_articles_path):
             try:
-                generate_article_detail_page(a, base_article_html, settings, nav_links)
-            except Exception as e:
-                print(f"[-] Error generating page for article {a['id']}: {e}")
+                with open(all_articles_path, "r", encoding="utf-8") as f:
+                    all_arts = json.load(f)
+                offline_arts = [a for a in all_arts if not is_online_article(a, settings)]
+                for oa in offline_arts:
+                    oa_link = oa.get("link")
+                    if oa_link:
+                        oa_file = os.path.join(WORKSPACE_DIR, oa_link.replace("/", os.sep))
+                        redirect_html = '''<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0;url=../article_xwzx.html">
+<link rel="canonical" href="https://www.mellgen.com/article_xwzx.html">
+<title>文章已下架 - 美尔健生物</title>
+<script>location.replace("../article_xwzx.html");</script>
+</head>
+<body>
+<p>该文章已下架，正在跳转至<a href="../article_xwzx.html">新闻中心</a>...</p>
+</body>
+</html>'''
+                        if os.path.exists(oa_file):
+                            with open(oa_file, "w", encoding="utf-8") as oaf:
+                                oaf.write(redirect_html)
+                        en_oa_file = os.path.join(WORKSPACE_DIR, "en", oa_link.replace("/", os.sep))
+                        if os.path.exists(en_oa_file):
+                            with open(en_oa_file, "w", encoding="utf-8") as eoaf:
+                                eoaf.write(redirect_html)
+            except Exception as e_art_off:
+                print(f"[-] Notice handling offline articles redirect: {e_art_off}")
                 
-    # 4. Update homepage structures
+    # 4. Update homepage structures (updates both index.html and mellgen_home.html)
     update_homepage(products, articles, settings, friendlinks, nav_links)
-    
-    # Update duplicate/other homepage files if they exist (like mellgen_home.html)
-    other_home = os.path.join(WORKSPACE_DIR, "mellgen_home.html")
-    if os.path.exists(other_home):
-        try:
-            with open(other_home, "r", encoding="utf-8") as f:
-                oh_html = f.read()
-            oh_html = update_friendlinks(oh_html, friendlinks)
-            oh_html = update_global_contact_info(oh_html, settings)
-            oh_html = update_navigation(oh_html, nav_links, "mellgen_home.html")
-            with open(other_home, "w", encoding="utf-8") as f:
-                f.write(oh_html)
-        except Exception:
-            pass
             
     # 4.5. Synchronize published videos to front-end pages
     try:

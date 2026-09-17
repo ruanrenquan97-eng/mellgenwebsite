@@ -8169,6 +8169,93 @@ canvas[width="1920"] {
     display: none !important;
   }
 
+  /* 6.1 产品详情页底部推荐阅读 (.product-related-articles-section) - 手机端精致双列 */
+  .product-related-articles-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 20px auto 25px !important;
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+  }
+  .product-related-articles-section h4.p102-pro-content-title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+    color: #0f172a !important;
+  }
+  .product-related-articles-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .product-related-article-card {
+    flex: none !important;
+    width: calc(50% - 5px) !important;
+    max-width: calc(50% - 5px) !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  }
+  .product-related-article-thumb {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    overflow: hidden !important;
+    display: block !important;
+  }
+  .product-related-article-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .product-related-article-badge {
+    top: 5px !important;
+    left: 5px !important;
+    font-size: 9.5px !important;
+    padding: 1px 5px !important;
+    border-radius: 3px !important;
+  }
+  .product-related-article-body {
+    padding: 8px 10px 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    box-sizing: border-box !important;
+  }
+  .product-related-article-meta {
+    font-size: 10.5px !important;
+    margin-bottom: 4px !important;
+  }
+  .product-related-article-title {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    height: 35px !important;
+    margin: 0 0 4px 0 !important;
+  }
+  .product-related-article-title a {
+    color: #1e293b !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .product-related-article-desc {
+    display: none !important;
+  }
+  .product-related-article-more {
+    display: none !important;
+  }
+
   /* 7. 分页控件手机端自适应 */
   .p102-pagination-blk, .page {
     width: 100% !important;

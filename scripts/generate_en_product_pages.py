@@ -6,12 +6,17 @@ Generate 100% Pure Professional English Product Detail Pages and Product Listing
 import os
 import re
 import json
+import sys
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EN_DIR = os.path.join(WORKSPACE, "en")
 PRODUCTS_EN_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "products_en.json")
+ARTICLES_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "articles.json")
 SETTINGS_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "settings.json")
 NAV_PATH = os.path.join(WORKSPACE, "cms_system", "cms_data", "nav.json")
+
+sys.path.insert(0, os.path.join(WORKSPACE, "cms_system"))
+from generator import render_product_related_articles_section
 
 def load_data():
     with open(PRODUCTS_EN_PATH, "r", encoding="utf-8") as f:
@@ -27,7 +32,11 @@ def load_data():
     if os.path.exists(NAV_PATH):
         with open(NAV_PATH, "r", encoding="utf-8") as f:
             nav_links = json.load(f)
-    return products, offline_products, settings, nav_links
+    articles = []
+    if os.path.exists(ARTICLES_PATH):
+        with open(ARTICLES_PATH, "r", encoding="utf-8") as f:
+            articles = json.load(f)
+    return products, offline_products, settings, nav_links, articles
 
 def render_b2b_dossier_en(p):
     rd = p.get("rd_info") or {}
@@ -207,7 +216,13 @@ def render_b2b_dossier_en(p):
     out.append('<!-- ==================== END B2B PROFESSIONAL DOSSIER ==================== -->\n')
     return '\n'.join(out)
 
-def generate_en_product_detail(product):
+def generate_en_product_detail(product, all_articles=None):
+    if all_articles is None:
+        try:
+            with open(ARTICLES_PATH, "r", encoding="utf-8") as f:
+                all_articles = json.load(f)
+        except Exception:
+            all_articles = []
     pid = product["id"]
     dest_path = os.path.join(EN_DIR, "products", f"{pid}.html")
     src_cn_path = os.path.join(WORKSPACE, "products", f"{pid}.html")
@@ -421,8 +436,16 @@ def generate_en_product_detail(product):
  </div> 
  <div class="clear"></div> 
 </div>'''
-    rec_pattern = r'((?:</div>\s*){3})\s*(?:<div class=["\']k12-cx-xgcp-4pl-fx1-1-01[\s\S]*?)(?=\s*<div class=["\']g_ft f_fw["\'])'
-    html = re.sub(rec_pattern, r'\1\n  ' + standard_rec_block_en.replace('\\', '\\\\') + '\n\n  ', html)
+    articles_rec_block_en = render_product_related_articles_section(product, all_articles, is_en=True) if all_articles else ""
+    combined_rec_block_en = standard_rec_block_en
+    if articles_rec_block_en:
+        combined_rec_block_en += "\n\n  " + articles_rec_block_en
+
+    safe_rec_pattern = r'(<div class=["\']k12-cx-xgcp-4pl-fx1-1-01[\s\S]*?)(?=\s*<div class=["\']g_ft f_fw["\'])'
+    if re.search(safe_rec_pattern, html):
+        html = re.sub(safe_rec_pattern, combined_rec_block_en.replace('\\', '\\\\') + '\n\n  ', html)
+    elif '<div class="g_ft f_fw"' in html:
+        html = html.replace('<div class="g_ft f_fw"', combined_rec_block_en + '\n\n  <div class="g_ft f_fw"', 1)
 
     # 6. Fix asset paths for en/products/ (depth = 1)
     html = re.sub(r'src=["\']\.\./images/', 'src="../../images/', html)
@@ -545,7 +568,7 @@ def update_en_product_listing_pages(products):
 
 def main():
     print("Generating pure English product pages & updating listing pages...")
-    products, offline_products, settings, nav_links = load_data()
+    products, offline_products, settings, nav_links, articles = load_data()
     
     # Clean orphaned English product pages
     known_pids = set(p['id'] for p in products) | set(p['id'] for p in offline_products)
@@ -561,7 +584,7 @@ def main():
 
     # 1. Generate detail pages for published active products
     for p in products:
-        generate_en_product_detail(p)
+        generate_en_product_detail(p, all_articles=articles)
 
     # 2. Generate standard redirection pages for offline products
     for p in offline_products:

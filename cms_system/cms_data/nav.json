@@ -54,12 +54,14 @@
       {
         "id": "node_6_1",
         "name": "三方权威报告",
-        "url": "article_syssj.html"
+        "url": "article_syssj.html",
+        "show": false
       },
       {
         "id": "node_6_2",
         "name": "实验室研究数据",
-        "url": "article_sysyanjiu.html"
+        "url": "article_sysyanjiu.html",
+        "show": false
       },
       {
         "id": "node_6_3",
@@ -86,7 +88,7 @@
       },
       {
         "id": "node_7_2",
-        "name": "技术知识",
+        "name": "科普研究",
         "url": "article_cpbk.html"
       },
       {

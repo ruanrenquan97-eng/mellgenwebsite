@@ -256,6 +256,104 @@ def dashboard():
         permissions=session.get("permissions", ["*"])
     )
 
+@app.route("/api/overview/content-stats", methods=["GET"])
+@login_required
+def get_overview_content_stats():
+    """
+    提供后台首页看板所需的全站内容资产上线统计数据：
+    包括已上线产品数、已上线文章数、已上线视频数，以及各分类分布和明细
+    """
+    try:
+        products = load_json("products.json", default=[]) or []
+        articles = load_json("articles.json", default=[]) or []
+        videos = load_json("videos.json", default=[]) or []
+
+        # 与 generator.py 及 video_manager.py 发布口径严格一致
+        online_products = [p for p in products if p.get("show", True) is not False and p.get("status") != "offline"]
+        online_articles = [a for a in articles if a.get("show", True) is not False and a.get("status") != "offline"]
+        online_videos = [v for v in videos if v.get("status") == "published" and v.get("show", True) is not False]
+
+        from collections import Counter
+        prod_cat_counts = dict(Counter(p.get("category", "未分类") for p in online_products))
+        art_cat_counts = dict(Counter(a.get("category", "未分类") for a in online_articles))
+        video_cat_counts = dict(Counter(v.get("category", "未分类") for v in online_videos))
+
+        total_p = len(products)
+        online_p = len(online_products)
+        p_ratio = round((online_p / total_p * 100), 1) if total_p > 0 else 0.0
+
+        total_a = len(articles)
+        online_a = len(online_articles)
+        a_ratio = round((online_a / total_a * 100), 1) if total_a > 0 else 0.0
+
+        total_v = len(videos)
+        online_v = len(online_videos)
+        v_ratio = round((online_v / total_v * 100), 1) if total_v > 0 else 0.0
+
+        # 清单数据供前台看板快速透视和点击跳转
+        prod_items = [{
+            "id": p.get("id"),
+            "title": p.get("title", ""),
+            "category": p.get("category", ""),
+            "link": p.get("link", f"products/{p.get('id')}.html"),
+            "date": p.get("date", "")
+        } for p in online_products]
+
+        art_items = [{
+            "id": a.get("id"),
+            "title": a.get("title", ""),
+            "category": a.get("category", ""),
+            "sub_category": a.get("sub_category", ""),
+            "link": a.get("link", f"articles/{a.get('id')}.html"),
+            "date": a.get("date", "")
+        } for a in online_articles]
+
+        video_items = [{
+            "id": v.get("id"),
+            "title": v.get("title", ""),
+            "category": v.get("category", ""),
+            "duration": v.get("duration", "01:30"),
+            "views": v.get("views", 0),
+            "video_url": v.get("video_url", ""),
+            "cover": v.get("cover", "")
+        } for v in online_videos]
+
+        return jsonify({
+            "success": True,
+            "summary": {
+                "products": {
+                    "online": online_p,
+                    "total": total_p,
+                    "offline": total_p - online_p,
+                    "ratio": p_ratio
+                },
+                "articles": {
+                    "online": online_a,
+                    "total": total_a,
+                    "offline": total_a - online_a,
+                    "ratio": a_ratio
+                },
+                "videos": {
+                    "online": online_v,
+                    "total": total_v,
+                    "offline": total_v - online_v,
+                    "ratio": v_ratio
+                }
+            },
+            "categories": {
+                "products": prod_cat_counts,
+                "articles": art_cat_counts,
+                "videos": video_cat_counts
+            },
+            "items": {
+                "products": prod_items,
+                "articles": art_items,
+                "videos": video_items
+            }
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"获取内容资产统计失败: {str(e)}"}), 500
+
 # --- API ENDPOINTS ---
 
 # 1. Products API
@@ -369,6 +467,55 @@ def batch_publish_products():
         return jsonify({"success": True, "count": count, "message": f"已成功一键上架 {count} 个产品，前台页面已自动触发更新！"})
     except Exception as e:
         return jsonify({"success": False, "message": f"一键上架产品异常: {str(e)}"}), 500
+
+@app.route("/api/products/batch-delete", methods=["POST"])
+@login_required
+def batch_delete_products():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids", [])
+        if not ids or not isinstance(ids, list):
+            return jsonify({"success": False, "message": "请指定要删除的产品ID列表"}), 400
+        
+        target_ids = set(ids)
+        products = load_json("products.json") or []
+        original_len = len(products)
+        products = [p for p in products if p.get("id") not in target_ids]
+        deleted_count = original_len - len(products)
+        
+        if deleted_count > 0:
+            save_json("products.json", products)
+            
+            try:
+                products_en = load_json("products_en.json") or []
+                products_en = [p for p in products_en if p.get("id") not in target_ids]
+                save_json("products_en.json", products_en)
+            except Exception:
+                pass
+                
+            for pid in target_ids:
+                detail_path = os.path.join(WORKSPACE_DIR, "products", f"{pid}.html")
+                if os.path.exists(detail_path):
+                    try:
+                        os.remove(detail_path)
+                    except Exception:
+                        pass
+                detail_en_path = os.path.join(WORKSPACE_DIR, "en", "products", f"{pid}.html")
+                if os.path.exists(detail_en_path):
+                    try:
+                        os.remove(detail_en_path)
+                    except Exception:
+                        pass
+                        
+            threading.Thread(target=generator.publish_site, daemon=True).start()
+            
+        return jsonify({
+            "success": True,
+            "deleted_count": deleted_count,
+            "message": f"已成功删除选中的 {deleted_count} 个产品，前台页面已自动触发更新！"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"批量删除产品异常: {str(e)}"}), 500
 
 @app.route("/api/products/reorder", methods=["POST"])
 @login_required
@@ -525,11 +672,23 @@ def get_articles():
 @login_required
 def add_article():
     articles = load_json("articles.json")
-    data = request.json
+    data = request.json or {}
     
     article_id = data.get("id", "").strip() or str(uuid.uuid4())[:8]
     article_id = secure_filename(article_id).replace(".", "_")
     link = f"articles/{article_id}.html"
+    
+    is_show = True
+    if "show" in data:
+        show_val = data.get("show")
+        if show_val is False or str(show_val).strip().lower() in ["false", "0", "off", "no"]:
+            is_show = False
+    status_val = str(data.get("status", "")).strip().lower()
+    if status_val in ["offline", "draft", "hidden", "takedown"]:
+        is_show = False
+    elif status_val == "published":
+        is_show = True
+    final_status = "published" if is_show else "offline"
     
     new_article = {
         "id": article_id,
@@ -542,8 +701,10 @@ def add_article():
         "date": data.get("date", datetime.datetime.now().strftime("%Y-%m-%d")),
         "recommend": bool(data.get("recommend", False)),
         "top": bool(data.get("top", False)),
-        "show": bool(data.get("show", True)),
-        "sort": int(data.get("sort", 50))
+        "show": is_show,
+        "status": final_status,
+        "sort": int(data.get("sort", 50) or 50),
+        "related_product": str(data.get("related_product", "") or "").strip()
     }
     
     if any(a["id"] == article_id for a in articles):
@@ -551,6 +712,10 @@ def add_article():
         
     articles.append(new_article)
     save_json("articles.json", articles)
+    try:
+        generator.update_homepage(*generator.load_db())
+    except Exception as e_h:
+        print(f"[-] Fast homepage update error: {e_h}")
     threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True, "article": new_article})
 
@@ -568,6 +733,10 @@ def batch_takedown_articles():
                 a["status"] = "offline"
                 count += 1
         save_json("articles.json", articles)
+        try:
+            generator.update_homepage(*generator.load_db())
+        except Exception as e_h:
+            print(f"[-] Fast homepage update error: {e_h}")
         threading.Thread(target=generator.publish_site, daemon=True).start()
         return jsonify({"success": True, "count": count, "message": f"已成功一键下架 {count} 篇文章，前台页面已自动触发更新！"})
     except Exception as e:
@@ -587,10 +756,61 @@ def batch_publish_articles():
                 a["status"] = "published"
                 count += 1
         save_json("articles.json", articles)
+        try:
+            generator.update_homepage(*generator.load_db())
+        except Exception as e_h:
+            print(f"[-] Fast homepage update error: {e_h}")
         threading.Thread(target=generator.publish_site, daemon=True).start()
         return jsonify({"success": True, "count": count, "message": f"已成功一键上架 {count} 篇文章，前台页面已自动触发更新！"})
     except Exception as e:
         return jsonify({"success": False, "message": f"一键上架文章异常: {str(e)}"}), 500
+
+@app.route("/api/articles/batch-delete", methods=["POST"])
+@login_required
+def batch_delete_articles():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        ids = data.get("ids", [])
+        if not ids or not isinstance(ids, list):
+            return jsonify({"success": False, "message": "请指定要删除的文章ID列表"}), 400
+        
+        target_ids = set(ids)
+        articles = load_json("articles.json") or []
+        original_len = len(articles)
+        articles = [a for a in articles if a.get("id") not in target_ids]
+        deleted_count = original_len - len(articles)
+        
+        if deleted_count > 0:
+            save_json("articles.json", articles)
+            
+            # Remove detail html files
+            for aid in target_ids:
+                detail_path = os.path.join(WORKSPACE_DIR, "articles", f"{aid}.html")
+                if os.path.exists(detail_path):
+                    try:
+                        os.remove(detail_path)
+                    except Exception:
+                        pass
+                detail_en_path = os.path.join(WORKSPACE_DIR, "en", "articles", f"{aid}.html")
+                if os.path.exists(detail_en_path):
+                    try:
+                        os.remove(detail_en_path)
+                    except Exception:
+                        pass
+                        
+            try:
+                generator.update_homepage(*generator.load_db())
+            except Exception as e_h:
+                print(f"[-] Fast homepage update error: {e_h}")
+            threading.Thread(target=generator.publish_site, daemon=True).start()
+            
+        return jsonify({
+            "success": True,
+            "deleted_count": deleted_count,
+            "message": f"已成功删除选中的 {deleted_count} 篇文章，前台页面已自动触发更新！"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"批量删除文章异常: {str(e)}"}), 500
 
 @app.route("/api/articles/reorder", methods=["POST"])
 @login_required
@@ -645,8 +865,8 @@ def sync_articles_from_frontend():
                 cat = "合作案例"
             elif "cjwt" in html or "常见问答" in html:
                 cat = "常见问答"
-            elif "cpbk" in html or "技术知识" in html:
-                cat = "技术知识"
+            elif "cpbk" in html or "科普研究" in html or "技术知识" in html:
+                cat = "科普研究"
             elif "qydt" in html or "企业新闻" in html:
                 cat = "企业新闻"
             elif "hzal" in html or "合作案例" in html:
@@ -729,7 +949,8 @@ def toggle_article_status(article_id):
         target = None
         for a in articles:
             if a.get("id") == article_id:
-                new_show = not a.get("show", True)
+                curr_online = (a.get("show") is not False and a.get("status") != "offline")
+                new_show = not curr_online
                 a["show"] = new_show
                 a["status"] = "published" if new_show else "offline"
                 target = a
@@ -737,6 +958,10 @@ def toggle_article_status(article_id):
         if not target:
             return jsonify({"success": False, "message": "文章未找到"}), 404
         save_json("articles.json", articles)
+        try:
+            generator.update_homepage(*generator.load_db())
+        except Exception as e_h:
+            print(f"[-] Fast homepage update error: {e_h}")
         threading.Thread(target=generator.publish_site, daemon=True).start()
         msg = f"文章《{target.get('title')}》已{'发布上架' if target.get('show') else '下架隐藏'}"
         return jsonify({"success": True, "article": target, "message": msg})
@@ -759,12 +984,29 @@ def edit_article(article_id):
             a["date"] = data.get("date", a.get("date", datetime.datetime.now().strftime("%Y-%m-%d")))
             a["recommend"] = bool(data.get("recommend", a.get("recommend", False)))
             a["top"] = bool(data.get("top", a.get("top", False)))
-            a["show"] = bool(data.get("show", a.get("show", True)))
+            if "show" in data or "status" in data:
+                is_show = bool(a.get("show", True))
+                if "show" in data:
+                    show_val = data.get("show")
+                    is_show = (show_val is True or str(show_val).strip().lower() in ["true", "1", "on", "yes"])
+                status_val = str(data.get("status", "")).strip().lower()
+                if status_val in ["offline", "draft", "hidden", "takedown"]:
+                    is_show = False
+                elif status_val == "published":
+                    is_show = True
+                a["show"] = is_show
+                a["status"] = "published" if is_show else "offline"
             a["sort"] = int(data.get("sort", a.get("sort", 50)) or 50)
             a["seoTitle"] = str(data.get("seoTitle", a.get("seoTitle", "")) or "").strip()
             a["seoKeywords"] = str(data.get("seoKeywords", a.get("seoKeywords", "")) or "").strip()
             a["seoDesc"] = str(data.get("seoDesc", a.get("seoDesc", "")) or "").strip()
+            if "related_product" in data:
+                a["related_product"] = str(data.get("related_product", "") or "").strip()
             save_json("articles.json", articles)
+            try:
+                generator.update_homepage(*generator.load_db())
+            except Exception as e_h:
+                print(f"[-] Fast homepage update error: {e_h}")
             threading.Thread(target=generator.publish_site, daemon=True).start()
             return jsonify({"success": True, "article": a})
             
@@ -789,6 +1031,10 @@ def delete_article(article_id):
         except Exception:
             pass
             
+    try:
+        generator.update_homepage(*generator.load_db())
+    except Exception as e_h:
+        print(f"[-] Fast homepage update error: {e_h}")
     threading.Thread(target=generator.publish_site, daemon=True).start()
     return jsonify({"success": True})
 
@@ -880,6 +1126,12 @@ def toggle_case_visibility():
         show_case = not bool(settings.get("show_case_section", True))
         
     settings["show_case_section"] = show_case
+    cat_vis = settings.get("article_categories_visibility", {})
+    if not isinstance(cat_vis, dict):
+        cat_vis = {}
+    cat_vis["合作案例"] = show_case
+    cat_vis["行业案例"] = show_case
+    settings["article_categories_visibility"] = cat_vis
     save_json("settings.json", settings)
     
     # 同步更新 nav.json 中【合作案例】节点的显隐状态
@@ -908,6 +1160,75 @@ def toggle_case_visibility():
         "show_case_section": show_case,
         "message": "合作案例已开启前台显示并开始全站更新！" if show_case else "合作案例已关闭前台显示（前台已隐藏）并开始全站更新！"
     })
+
+@app.route("/api/settings/toggle-category-visibility", methods=["POST"])
+@login_required
+def toggle_category_visibility():
+    try:
+        settings_path = os.path.join(DATA_DIR, "settings.json")
+        settings = load_json("settings.json") if os.path.exists(settings_path) else {}
+        data = request.get_json(force=True, silent=True) or {}
+        category = str(data.get("category", "")).strip()
+        if not category:
+            return jsonify({"success": False, "message": "分类名称不能为空"}), 400
+
+        cat_vis = settings.get("article_categories_visibility", {})
+        if not isinstance(cat_vis, dict):
+            cat_vis = {}
+
+        if "enabled" in data:
+            enabled = bool(data["enabled"])
+        else:
+            if category in ["合作案例", "行业案例"]:
+                cur = cat_vis.get("合作案例", settings.get("show_case_section", True))
+            else:
+                cur = cat_vis.get(category, True)
+            enabled = not cur
+
+        cat_vis[category] = enabled
+        if category in ["合作案例", "行业案例"]:
+            settings["show_case_section"] = enabled
+            cat_vis["合作案例"] = enabled
+            cat_vis["行业案例"] = enabled
+
+        settings["article_categories_visibility"] = cat_vis
+        save_json("settings.json", settings)
+
+        # 同步更新 nav.json
+        try:
+            nav_path = os.path.join(DATA_DIR, "nav.json")
+            if os.path.exists(nav_path):
+                nav_data = load_json("nav.json")
+                for n in nav_data:
+                    n_name = n.get("name", "")
+                    if n_name == category or (category in ["合作案例", "行业案例"] and (n_name in ["合作案例", "行业案例"] or "article_hzal" in n.get("url", ""))):
+                        n["show"] = enabled
+                    for child in n.get("children", []):
+                        c_name = child.get("name", "")
+                        if c_name == category or (category == "检测报告" and c_name in ["三方权威报告", "实验室研究数据"]):
+                            child["show"] = enabled
+                save_json("nav.json", nav_data)
+        except Exception as e:
+            print(f"[Toggle Category Error] Syncing nav.json failed: {e}")
+
+        def run_rebuild():
+            try:
+                import generator
+                generator.publish_site()
+            except Exception as e:
+                print(f"[Toggle Category Error] Rebuilding site failed: {e}")
+
+        threading.Thread(target=run_rebuild, daemon=True).start()
+
+        return jsonify({
+            "success": True,
+            "category": category,
+            "enabled": enabled,
+            "show_case_section": settings.get("show_case_section", True),
+            "message": f"【{category}】已{'开启' if enabled else '关闭'}前台显示并触发全站更新！"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 # ==========================================================
 # GEO Engine Helper Functions & Dedicated APIs

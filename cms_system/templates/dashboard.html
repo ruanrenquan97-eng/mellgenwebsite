@@ -6788,7 +6788,8 @@ Disallow: /cms_system/
             <select id="art-category" class="w-full px-3 py-1.5 border border-slate-200 rounded outline-none focus:border-primary bg-white">
               <option value="新闻资讯">新闻资讯</option>
               <option value="企业新闻">企业新闻</option>
-              <option value="技术知识">技术知识</option>
+              <option value="科普研究">科普研究</option>
+              <option value="技术知识" style="display:none;">技术知识 (已升级为科普研究)</option>
               <option value="合作案例">合作案例</option>
               <option value="常见问答">常见问答</option>
             </select>
@@ -11617,7 +11618,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
         }
       });
 
-      const mainCategories = ["全部", "合作案例", "技术知识", "企业新闻", "新闻资讯", "常见问答"];
+      const mainCategories = ["全部", "合作案例", "科普研究", "企业新闻", "新闻资讯", "常见问答"];
       Object.keys(counts).forEach(c => {
         if (!mainCategories.includes(c)) mainCategories.push(c);
       });
@@ -11791,7 +11792,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
       const tbody = document.getElementById("articles-categories-body");
       if (!tbody) return;
       tbody.innerHTML = "";
-      const categories = ["合作案例", "技术知识", "企业新闻", "新闻资讯", "常见问答"];
+      const categories = ["合作案例", "科普研究", "企业新闻", "新闻资讯", "常见问答"];
       const isCaseVisible = cache.settings ? (cache.settings.show_case_section !== false) : true;
       updateCaseVisibilityUI(isCaseVisible);
 
@@ -12057,7 +12058,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           cache.settings.vice_nav = [
             { id: "v1", name: "全部产品目录", url: "product_index.html", children: [] },
             { id: "v2", name: "化妆品原料", url: "product_hzpyl.html", children: [] },
-            { id: "v3", name: "技术与科研文献", url: "article_cpbk.html", children: [] },
+            { id: "v3", name: "科普研究", url: "article_cpbk.html", children: [] },
             { id: "v4", name: "索样与商务洽谈", url: "helps/lxwm.html", children: [] }
           ];
         }
@@ -12470,7 +12471,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           url: "article_xwzx.html",
           children: [
             { id: "node_7_1", name: "企业新闻", url: "article_qydt.html" },
-            { id: "node_7_2", name: "技术知识", url: "article_cpbk.html" },
+            { id: "node_7_2", name: "科普研究", url: "article_cpbk.html" },
             { id: "node_7_3", name: "常见问答", url: "article_cjwt.html" }
           ]
         },
@@ -13756,7 +13757,7 @@ Sitemap: http://www.mellgen.com/sitemap.xml`;
           {id: "hzpyl", name: "化妆品原料频道", url: "product_hzpyl.html", title: "化妆品原料批发与定制 - 美尔健生物", keywords: "九肽-1,乙酰基六肽-8,依克多因,抗衰原料", description: "提供高活性护肤抗老、淡纹、美白化妆品原料，支持第三方合规检测。"},
           {id: "yyyl", name: "医疗原料频道", url: "product_hzpyl.html", title: "医疗级原料中心 - 美尔健生物科技", keywords: "寡肽-1,重组胶原蛋白,三肽-1铜,医用辅料", description: "专注高纯度医疗器械级与皮肤修护生物原料，严格符合行业质量标准。"},
           {id: "spyyyl", name: "化妆品功效原料频道", url: "product_hzpyl.html", title: "食品营养与健康原料 - 美尔健生物", keywords: "原花青素,小分子肽,营养功能原料", description: "优质食品与营养补充原料，纯天然生物提取工艺。"},
-          {id: "xwzx", name: "资讯与行业动态频道", url: "article_xwzx.html", title: "新闻资讯与行业洞察 - 美尔健生物", keywords: "透皮技术新闻,生物原料政策,美尔健动态", description: "美尔健最新企业资讯、行业法规动态与前沿生物高渗透多肽技术知识。"},
+          {id: "xwzx", name: "资讯与行业动态频道", url: "article_xwzx.html", title: "新闻资讯与行业洞察 - 美尔健生物", keywords: "透皮技术新闻,生物原料政策,美尔健动态", description: "美尔健最新企业资讯、行业法规动态与前沿生物高渗透多肽科普研究。"},
           {id: "gymej", name: "企业介绍与关于美尔健", url: "helps/gymej.html", title: "关于美尔健生物 - 专注源头品质与透皮技术研发", keywords: "美尔健简介,科研实力,高渗透专利", description: "深入了解美尔健生物科技有限公司背景、专家团队与生产智造实力。"}
         ];
       }

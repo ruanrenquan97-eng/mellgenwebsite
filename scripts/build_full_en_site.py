@@ -420,11 +420,17 @@ def process_file(src_rel_path):
     with open(src_abs, 'r', encoding='utf-8', errors='ignore') as f:
         src_html = f.read()
 
+    # Safety Guard: Never process or overwrite empty / truncated files
+    if len(src_html.strip()) < 500:
+        print(f"[-] Warning: {src_rel_path} is too small ({len(src_html)} chars), skipping build_full_en_site.")
+        return
+
     # 1. Update Chinese file with language switcher
     depth_cn = len(src_rel_path.replace('\\', '/').split('/')) - 1
     updated_cn_html = inject_lang_switcher(src_html, is_en=False, depth=depth_cn)
-    with open(src_abs, 'w', encoding='utf-8') as f:
-        f.write(updated_cn_html)
+    if len(updated_cn_html.strip()) >= 500 and updated_cn_html != src_html:
+        with open(src_abs, 'w', encoding='utf-8') as f:
+            f.write(updated_cn_html)
 
     # 2. Build English file
     dest_abs = os.path.join(EN_DIR, src_rel_path)
@@ -435,8 +441,9 @@ def process_file(src_rel_path):
     en_html = fix_asset_paths_for_en(en_html, depth=depth_en)
     en_html = inject_lang_switcher(en_html, is_en=True, depth=depth_en)
 
-    with open(dest_abs, 'w', encoding='utf-8') as f:
-        f.write(en_html)
+    if len(en_html.strip()) >= 500:
+        with open(dest_abs, 'w', encoding='utf-8') as f:
+            f.write(en_html)
 
 def main():
     global DICT_ITEMS_SORTED

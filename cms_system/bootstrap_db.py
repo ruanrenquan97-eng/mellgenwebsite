@@ -105,6 +105,7 @@ def bootstrap_articles():
         "合作案例": "article_hzal.html",
         "常见问答": "article_cjwt.html",
         "企业新闻": "article_qydt.html",
+        "科普研究": "article_cpbk.html",
         "技术知识": "article_cpbk.html",
     }
     

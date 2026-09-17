@@ -74,7 +74,8 @@
     ],
     "id": "node_6",
     "name": "合作案例",
-    "url": "article_hzal.html"
+    "url": "article_hzal.html",
+    "show": false
   },
   {
     "children": [

@@ -48,11 +48,7 @@
     "seoTitle": "cTDP环肽 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "cTDP环肽,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "斩获行业创新大奖的自主专利闭合环状多肽促渗载体，具备极佳的耐酶解与细胞膜流动性调节特性，可携同大分子活性成分安全温和高渗透吸收。",
-    "referenced_lab_data": [
-      "lab_tpht_penetration",
-      "lab_tpht_efficacy",
-      "lab_tpht_safety"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
     "diagram_caption": "第三代生物透皮技术机理：cTDP靶向结合钠钾泵(Na+/K+-ATPase)，5分钟可逆开启毛囊与细胞间隙双通道，吸收效率提升10倍",
     "intro_image": "resource/reports/images/lab_tpht_penetration_data.jpg",
@@ -118,13 +114,7 @@
     "seoTitle": "高渗透纤连蛋白 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "高渗透纤连蛋白,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "突破大分子高渗透瓶颈的重组纤连蛋白，搭载专利穿膜促渗多肽技术，深度锚定受损表皮屏障，实现皮肤屏障急救修护与细胞外基质网状充盈。",
-    "referenced_lab_data": [
-      "lab_tfn_penetration_barrier",
-      "lab_tfn_four_efficacy",
-      "lab_tfn_toxicology",
-      "lab_tfn_phototox_mutagen",
-      "lab_tpht_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
     "diagram_caption": "高渗透重组纤连蛋白TFNpro毛细渗透吸收提升8倍与角质层屏障修护组织病理切片",
     "intro_image": "resource/reports/images/lab_tfn_penetration_barrier_data.jpg",
@@ -190,11 +180,7 @@
     "seoTitle": "MELLPRO 5Dcollagen 5D 胶原 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "MELLPRO 5Dcollagen 5D 胶原,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "涵盖I型、III型、IV型、VII型及XVII型胶原蛋白靶向生物活性肽链的5维复合重组矩阵，实现表皮与基底膜（DEJ）的多维立体支撑与紧致抗皱。",
-    "referenced_lab_data": [
-      "lab_collagen_penetration",
-      "lab_collagen_biocompatibility",
-      "lab_collagen3_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
     "diagram_caption": "5Dcollagen重组多型胶原蛋白五维立体全层网络模型（I型纤维束/II型软骨/III型网状/IV型基底膜/XVII型跨膜锁定）",
     "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
@@ -390,11 +376,7 @@
     "seoTitle": "童颜水光蛋白 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "童颜水光蛋白,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "融合多肽自组装水润机理与重组胶原蛋白的仿生生物蛋白，为表皮注入充盈玻尿酸水光感，长效促进胶原饱满弹润与透亮光采。",
-    "referenced_lab_data": [
-      "lab_recm_multi_efficacy",
-      "lab_tfn_penetration_barrier",
-      "lab_collagen_biocompatibility"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
     "diagram_caption": "童颜水光蛋白MELLPRO-rECM仿生细胞外基质全组分重构模型（胶原+纤连+弹性蛋白+整联素+层粘连蛋白）",
     "intro_image": "resource/reports/images/lab_recm_multi_efficacy_data.jpg",
@@ -513,10 +495,7 @@
     "seoTitle": "MEGPEP EXOs 酵母外泌肽 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "MEGPEP EXOs 酵母外泌肽,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "仿生酵母来源外泌体多肽微囊，天然双层磷脂质膜包裹高浓度内源生长多肽与信号分子，实现温和亲肤高渗透递送，多维赋活肌底饱满活力。",
-    "referenced_lab_data": [
-      "lab_recm_multi_efficacy",
-      "lab_tfn_penetration_barrier"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
     "diagram_caption": "复合抗老寡肽矩阵刺激成纤维细胞分泌I/III型胶原与清除自由基剂量效应曲线",
     "intro_image": "resource/images/product_intros/intro_zebrafish.jpg",
@@ -575,11 +554,7 @@
     "seoTitle": "PDRN环肽棒 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "PDRN环肽棒,化妆品原料,生物原料,美尔健生物",
     "seoDesc": "融合高纯度三文鱼精巢脱氧核糖核酸（PDRN）与美尔健专利cTDP环肽技术，双向赋能多维焕活修护与ECM胶原网状重塑，舒缓外界刺激带来的泛红干燥，抚平干纹细纹。",
-    "referenced_lab_data": [
-      "lab_pdrn_triple_efficacy",
-      "lab_pdrn_safety_assessment",
-      "lab_tpht_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
     "diagram_caption": "PDRN超分子棒状结构搭载cTDP环肽促透机制与经皮吸收实验数据（5分钟打开屏障与浓度依赖曲线）",
     "intro_image": "resource/reports/images/lab_pdrn_triple_efficacy_data.jpg",
@@ -711,11 +686,7 @@
     "top": false,
     "show": false,
     "date": "2026-09-12 03:26:06",
-    "referenced_lab_data": [
-      "lab_placenta_efficacy",
-      "lab_placenta_safety_test",
-      "lab_tpht_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
     "diagram_caption": "健康羊胚胎细胞活性精华纳米促渗递送、MMP-1基质金属蛋白酶抑制率及皮肤水润弹性临床曲线",
     "intro_image": "resource/images/product_intros/intro_sheep.jpg",
@@ -1033,11 +1004,7 @@
     "seoTitle": "益生舒缓因子/桃胶多糖 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "益生舒缓因子/桃胶多糖,植物源活性物,生物原料,美尔健生物",
     "seoDesc": "萃取自天然优质原生态桃树胶的高支化酸性杂多糖，富含L-阿拉伯糖、D-半乳糖及糖醛酸，在皮肤表面构筑‘仿生透润水合膜’，强韧敏感屏障，长效锁水舒缓。",
-    "referenced_lab_data": [
-      "lab_yskm_soothing_repair",
-      "lab_yskm_toxicology_safety",
-      "lab_yskm_risk_screening"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
     "diagram_caption": "MEGCALM PSF桃胶多糖酵母定向生物酶切前后HPLC分子量分布对比及水通道蛋白AQP3激活数据",
     "intro_image": "resource/images/product_intros/intro_peach_gum.jpg",
@@ -1161,9 +1128,7 @@
     "seoTitle": "长白山三宝 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "长白山三宝,植物源活性物,生物原料,美尔健生物",
     "seoDesc": "萃取长白山道地人参、鹿茸及五味子核心活性成分，富含高活性人参皂苷群、生物多肽与木脂素，赋予肌肤强大的抗氧化抵御力与充盈滋养能量。",
-    "referenced_lab_data": [
-      "lab_gpt_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "diagram_caption": "长白山三宝(黑灵芝+人参根+松茸)液体深层发酵物MC1R黑素生成通路阻断与酪氨酸酶抑制曲线(优于熊果苷)",
     "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
@@ -1282,11 +1247,7 @@
     "seoTitle": "重组纤连蛋白 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "重组纤连蛋白,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "采用现代生物合成技术表达的高纯度重组纤连蛋白（FN），含精准RGD黏附基序，促细胞迁移与受损表皮网架快速重建，是特殊护理期修护与屏障强韧的核心成分。",
-    "referenced_lab_data": [
-      "lab_tfn_penetration_barrier",
-      "lab_tfn_four_efficacy",
-      "lab_tfn_toxicology"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
     "diagram_caption": "AlphaDrugs人工智能分子设计平台：纤连蛋白与整联素(Integrin)分子对接模拟模型",
     "intro_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
@@ -1345,11 +1306,7 @@
     "seoTitle": "重组胶原蛋白溶液 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "重组胶原蛋白溶液,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "高纯度仿生氨基酸序列高活性重组III型胶原蛋白溶液，空间结构与人体天然胶原高度同源，促细胞附着力强，无动物源不耐受隐患，是嫩肤抗老领域的经典原料。",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_collagen3_efficacy",
-      "lab_collagen_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
     "diagram_caption": "重组III型仿生重组胶原蛋白三螺旋空间构象与细胞外基质整合素结合位点解析图",
     "intro_image": "resource/reports/images/lab_collagen3_efficacy_data.jpg",
@@ -1408,10 +1365,7 @@
     "seoTitle": "MELLPRO MAP 重组贻贝黏蛋白 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "MELLPRO MAP 重组贻贝黏蛋白,海洋源活性物,生物原料,美尔健生物",
     "seoDesc": "基因重组贻贝黏蛋白（Mussel Adhesive Protein, MAP），富含特异性多巴（DOPA）基团，具备极强的湿表面附着力、网状膜屏障形成力及非凡的舒缓泛红干敏修护性能。",
-    "referenced_lab_data": [
-      "lab_map_transdermal_absorption",
-      "lab_map_three_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
     "diagram_caption": "重组弹性蛋白原与微纤维蛋白交联构建真皮弹性回弹三维网格机制图",
     "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
@@ -1470,10 +1424,7 @@
     "seoTitle": "水母黏蛋白 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "水母黏蛋白,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "萃取自深海水母的特异性超高分子糖蛋白（Q-mucin），具备持久的高倍保水力，且天然具备抵御微尘附着与光氧化损伤的防护特性。",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_tfn_penetration_barrier"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
     "diagram_caption": "特色极端微生物发酵工程车间与百级层流无菌灌装GMP洁净区",
     "intro_image": "resource/reports/images/lab_yskm_soothing_repair_data.jpg",
@@ -1531,9 +1482,7 @@
     "seoTitle": "肽维多Vitaluxe - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "肽维多Vitaluxe,复合营养素,生物原料,美尔健生物",
     "seoDesc": "汇集肌肽、乙酰基六胜肽、棕榈酰三肽与维生素B群、VC/VE前体的多重生物营养素，协同抗糖化、抗氧化、抗光损‘三位一体’，筑牢肌肤抗疲劳防线。",
-    "referenced_lab_data": [
-      "lab_gpt_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
     "diagram_caption": "重组贻贝粘蛋白(MAP)多巴结构强效水下成膜粘附与表皮物理屏障封闭修护切片",
     "intro_image": "resource/reports/images/lab_map_three_efficacy_data.jpg",
@@ -1592,10 +1541,7 @@
     "seoTitle": "蜗牛蛋白粘液 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "蜗牛蛋白粘液,重组仿生蛋白,生物原料,美尔健生物",
     "seoDesc": "基因工程仿生合成蜗牛分泌黏液蛋白，纯化去除了天然活体蜗牛黏液中的易敏杂质，富含软骨素、天然尿囊素、小分子胶原与防御活性肽，舒缓修护与平滑粗糙效果显著。",
-    "referenced_lab_data": [
-      "lab_recm_multi_efficacy",
-      "lab_map_three_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
     "diagram_caption": "重组仿生蜗牛分泌物粘液蛋白多糖网架与表皮细胞迁移促愈合划痕实验模型",
     "intro_image": "resource/images/product_intros/intro_snail.jpg",
@@ -1654,10 +1600,7 @@
     "seoTitle": "仿生蜗牛胶原 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "仿生蜗牛胶原,重组仿生蛋白,生物原料,美尔健生物",
     "seoDesc": "融合蜗牛黏蛋白温和修护力与重组胶原蛋白充盈抗老优势的仿生复合胶原，双向赋能表皮角质修护与细胞外基质（ECM）充盈，平滑粗糙与干纹细纹。",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_recm_multi_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
     "diagram_caption": "Snailpro仿生蜗牛胶原结合EGFR受体激活细胞增殖及48小时高温热稳定性保留曲线(>95%)",
     "intro_image": "resource/images/product_intros/intro_snail.jpg",
@@ -1716,10 +1659,7 @@
     "seoTitle": "聚能环肽EAC - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "聚能环肽EAC,高渗透型重组蛋白/多肽,生物原料,美尔健生物",
     "seoDesc": "采用闭环拓扑结构空间锁定的多靶点环肽，具备抵御皮肤水解酶降解的高稳定性，精准赋能真皮弹力纤维网与原纤蛋白，重构紧致弹性轮廓。",
-    "referenced_lab_data": [
-      "lab_tpht_penetration",
-      "lab_tpht_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "diagram_caption": "九肽-1竞争性结合黑素细胞MC1R受体抑制酪氨酸酶生成通路示意图",
     "intro_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
@@ -1776,10 +1716,7 @@
     "seoTitle": "灵芝多糖 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "灵芝多糖,灵芝多糖,生物原料,美尔健生物",
     "seoDesc": "萃取自优质长白山赤芝子实体的高纯β-(1→3)(1→6)-D-葡聚糖，具备优异的肌肤保护与舒缓能力，强化表皮防御力，舒缓干燥泛红与紫外线刺激。",
-    "referenced_lab_data": [
-      "lab_lingbai_rose_screening",
-      "lab_gpt_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "diagram_caption": "长白山椴木黑灵芝活性β-葡聚糖多糖构象与体外巨噬细胞抗炎修护动力学曲线",
     "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
@@ -1838,9 +1775,7 @@
     "seoTitle": "海洋亮肤因子 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "海洋亮肤因子,海洋源活性物,生物原料,美尔健生物",
     "seoDesc": "源自深海交替假单胞菌及海洋微藻联合发酵滤液，富含天然海洋小分子胞外多糖与活性肽，多通路减少暗沉色素堆积，温和提升肌肤透亮光感。",
-    "referenced_lab_data": [
-      "lab_txod_whitening_antiox"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
     "diagram_caption": "海洋微生物共生酵母发酵氧化还原酶TXOD在斑马鱼活体模型中的淡斑与抗光老化量化图",
     "intro_image": "resource/images/product_intros/intro_marine_yeast.jpg",
@@ -1899,10 +1834,7 @@
     "seoTitle": "0型胶原蛋白 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "0型胶原蛋白,重组蛋白,生物原料,美尔健生物",
     "seoDesc": "专注于细胞起源基底膜带（DEJ）的特异性重组胶原蛋白，定向加固表皮与真皮交界处的机械锚定微结构，改善由于DEJ平坦化引起的深层垮脸与松弛下垂。",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_collagen3_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
     "diagram_caption": "JELFIPRO水母黏蛋白核心三螺旋抗光老化、细胞增殖活性(OD490nm)与血管紧张素转化酶(ACE)抑制曲线",
     "intro_image": "resource/images/product_intros/intro_jellyfish.jpg",
@@ -1959,9 +1891,7 @@
     "seoTitle": "MEGZYME mLyZ 海洋溶菌酶 - 化妆品原料供应商 - 美尔健（深圳）生物科技有限公司",
     "seoKeywords": "MEGZYME mLyZ 海洋溶菌酶,海洋源活性物,生物原料,美尔健生物",
     "seoDesc": "萃取自深海耐冷微生物的嗜冷性海洋溶菌酶，室温下催化活性高，温和维护皮肤微生态平衡，改善油痘肌闭口与出油旺盛问题。",
-    "referenced_lab_data": [
-      "lab_yskm_toxicology_safety"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
     "diagram_caption": "重组生物活性酶高密度工程菌发酵车间与GMP标准分离纯化生产线实景",
     "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",

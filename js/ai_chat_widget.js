@@ -231,7 +231,7 @@
       var aiLi = document.createElement("li");
       aiLi.className = "my-kefu-ai-chat";
       aiLi.style.cssText = "cursor: pointer; background: #059669; color: #fff; text-align: center; padding: 6px 0; border-radius: 4px; margin-bottom: 4px;";
-      aiLi.innerHTML = '<p style="margin:0; font-size:12px; font-weight:600; line-height:1.2;">🤖<br>AI客服</p>';
+      aiLi.innerHTML = '<p style="margin:0; font-size:12px; font-weight:600; line-height:1.2;">🤖<br>' + (isEn ? 'AI<br>Support' : 'AI客服') + '</p>';
       aiLi.addEventListener("click", function(e) {
         e.preventDefault();
         openChat();
@@ -276,7 +276,7 @@
     });
 
     btnClear.addEventListener("click", function() {
-      if (confirm("确定要清空当前对话记录吗？")) {
+      if (confirm(isEn ? "Are you sure you want to clear chat history?" : "确定要清空当前对话记录吗？")) {
         chatHistory = [];
         var msgContainer = document.getElementById("mg-ai-messages");
         msgContainer.innerHTML = "";
@@ -296,7 +296,7 @@
     });
 
     btnToHuman.addEventListener("click", function() {
-      sendQuestion("联系客户经理");
+      sendQuestion(isEn ? "Connect with Account Manager" : "联系客户经理");
     });
 
     qrModal.addEventListener("click", function() {
@@ -349,7 +349,7 @@
     }
 
     welcomeRow.innerHTML = 
-      '<div class="mg-msg-mini-avatar">小美</div>' +
+      '' + '<div class="mg-msg-mini-avatar">' + (isEn ? "AI" : "小美") + '</div>' + '' +
       '<div>' +
         '<div class="mg-msg-content">' + escapeHtml(aiConfig.welcome_message) + '</div>' +
         suggestionsHtml +
@@ -409,20 +409,20 @@
           if (res.code === 0 && res.data) {
             handleBotResponse(res.data);
           } else {
-            handleFallbackResponse("系统繁忙，请稍后再试或直接联系美尔健客户经理。");
+            handleFallbackResponse(isEn ? "The service is currently busy. Please try again or contact our account manager." : "系统繁忙，请稍后再试或直接联系美尔健客户经理。");
           }
         } catch(e) {
-          handleFallbackResponse("抱歉，数据解析异常，为您提供美尔健客户经理电话与微信服务。");
+          handleFallbackResponse(isEn ? "Sorry, data processing issue. Here is our account manager contact info." : "抱歉，数据解析异常，为您提供美尔健客户经理电话与微信服务。");
         }
       } else {
-        handleFallbackResponse("网络连接出现波动，如需紧急咨询请直接拨打美尔健热线联系客户经理。");
+        handleFallbackResponse(isEn ? "Network fluctuation detected. Please contact our hotline for immediate assistance." : "网络连接出现波动，如需紧急咨询请直接拨打美尔健热线联系客户经理。");
       }
     };
 
     xhr.onerror = function() {
       removeTypingIndicator(typingIndicator);
       isWaiting = false;
-      handleFallbackResponse("网络异常，无法连接智能客服服务器。请直接拨打客户经理电话或微信沟通。");
+      handleFallbackResponse(isEn ? "Network error. Please call our account manager directly." : "网络异常，无法连接智能客服服务器。请直接拨打客户经理电话或微信沟通。");
     };
 
     xhr.send(JSON.stringify(payload));
@@ -442,10 +442,10 @@
           title: "美尔健专属客户经理",
           phones: aiConfig.default_phones,
           wechat_qrcode: aiConfig.wechat_qrcode_url,
-          wechat_hint: "微信扫一扫加专属客户经理，获取一对一配方指导与专属阶梯报价"
+          wechat_hint: isEn ? "Scan to connect with your dedicated account manager for custom formulation and tiered pricing" : "微信扫一扫加专属客户经理，获取一对一配方指导与专属阶梯报价"
         };
       } else {
-        contactCard.title = "美尔健专属客户经理";
+        contactCard.title = isEn ? "Mellgen Dedicated Account Manager" : "美尔健专属客户经理";
       }
     }
 
@@ -457,11 +457,11 @@
 
   function handleFallbackResponse(errorText) {
     var fallbackCard = {
-      title: "美尔健专属客户经理支持",
+      title: isEn ? "Mellgen Dedicated Account Manager" : "美尔健专属客户经理支持",
       reason: errorText,
       phones: aiConfig.default_phones,
       wechat_qrcode: aiConfig.wechat_qrcode_url,
-      wechat_hint: "微信扫一扫加专属客户经理，极速获取样品与报价方案"
+      wechat_hint: isEn ? "Scan to connect with your dedicated account manager for fast samples and quotes" : "微信扫一扫加专属客户经理，极速获取样品与报价方案"
     };
     appendBotMessage(errorText, fallbackCard, true);
   }
@@ -504,14 +504,14 @@
         qrHtml = 
           '<div class="mg-qrcode-wrap">' +
             '<img class="mg-qrcode-img" src="' + escapeHtml(qrUrl) + '" alt="美尔健微信客服" title="点击放大二维码" />' +
-            '<div class="mg-qrcode-hint">' + escapeHtml(contactCard.wechat_hint || "微信扫一扫加专属客户经理") + '</div>' +
+            '<div class="mg-qrcode-hint">' + escapeHtml(contactCard.wechat_hint || (isEn ? "Scan WeChat QR code to connect" : "微信扫一扫加专属客户经理")) + '</div>' +
           '</div>';
       }
 
       var cardClass = needsHuman ? "mg-human-card" : "mg-human-card primary-mode";
       cardHtml = 
         '<div class="' + cardClass + '">' +
-          '<div class="mg-human-title">👨‍💼 ' + escapeHtml(contactCard.title || "客户经理对接通道") + '</div>' +
+          '<div class="mg-human-title">👨‍💼 ' + escapeHtml(contactCard.title || (isEn ? "Account Manager Channel" : "客户经理对接通道")) + '</div>' +
           '<div style="font-size:12px; color:#475569; margin-bottom:4px;">' + escapeHtml(contactCard.reason || "") + '</div>' +
           phoneListHtml +
           qrHtml +
@@ -522,7 +522,7 @@
     var formattedText = escapeHtml(text).replace(/\n/g, "<br>");
 
     row.innerHTML = 
-      '<div class="mg-msg-mini-avatar">小美</div>' +
+      '' + '<div class="mg-msg-mini-avatar">' + (isEn ? "AI" : "小美") + '</div>' + '' +
       '<div style="max-width: 100%;">' +
         '<div class="mg-msg-content">' + formattedText + '</div>' +
         cardHtml +
@@ -550,7 +550,7 @@
     row.className = "mg-msg-row mg-bot";
     row.id = "mg-temp-typing";
     row.innerHTML = 
-      '<div class="mg-msg-mini-avatar">小美</div>' +
+      '' + '<div class="mg-msg-mini-avatar">' + (isEn ? "AI" : "小美") + '</div>' + '' +
       '<div class="mg-typing-indicator">' +
         '<span class="mg-typing-dot"></span>' +
         '<span class="mg-typing-dot"></span>' +

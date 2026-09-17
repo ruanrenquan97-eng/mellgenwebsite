@@ -1,6 +1,4 @@
-/* ==========================================================================
-   美尔健生物 - 智能客服悬浮挂件样式 (AI Chat Widget)
-   ========================================================================== */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 
 :root {
   --mg-ai-primary: #059669;
@@ -14,7 +12,7 @@
   --mg-ai-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
   --mg-ai-radius: 16px;
 }
-/* 彻底移除旧版右侧悬浮侧栏，仅保留右下角AI在线客服“小美” */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .xin-2112-client-1,
 #client-2112,
 .my-kefu,
@@ -34,7 +32,7 @@
   top: -9999px !important;
 }
 
-/* 浮动呼出按钮 - 药丸胶囊型，醒目展示“AI客服” */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 #mg-ai-trigger {
   position: fixed;
   bottom: 30px;
@@ -94,7 +92,7 @@
   100% { transform: scale(1); }
 }
 
-/* 浮动回到顶部按钮 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 #mg-back-to-top {
   position: fixed;
   bottom: 92px;
@@ -146,7 +144,7 @@
   margin-top: -2px;
 }
 
-/* 首次欢迎气泡浮动提示 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 #mg-ai-bubble-hint {
   position: fixed;
   bottom: 92px;
@@ -205,7 +203,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 聊天主体窗口 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 #mg-ai-chat-window {
   position: fixed;
   bottom: 100px;
@@ -235,7 +233,7 @@
   transform: scale(1) translateY(0);
 }
 
-/* 顶部状态栏 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-ai-header {
   background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #ffffff;
@@ -319,7 +317,7 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* 快捷栏与人工切换 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-ai-notice-bar {
   background: #ecfdf5;
   border-bottom: 1px solid #d1fae5;
@@ -346,7 +344,7 @@
   background: #047857;
 }
 
-/* 消息流区域 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-ai-body {
   flex: 1;
   overflow-y: auto;
@@ -367,7 +365,7 @@
   border-radius: 4px;
 }
 
-/* 消息行 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-msg-row {
   display: flex;
   gap: 8px;
@@ -427,7 +425,7 @@
   align-self: flex-end;
 }
 
-/* 推荐问题标签卡 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-qa-suggestions {
   margin-top: 6px;
   display: flex;
@@ -462,7 +460,7 @@
   opacity: 0.6;
 }
 
-/* 转人工及官方联系专属卡片 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-human-card {
   margin-top: 10px;
   background: #ffffff;
@@ -556,7 +554,7 @@
   margin-top: 4px;
 }
 
-/* 输入区域 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-ai-footer {
   padding: 10px 14px;
   background: #ffffff;
@@ -634,7 +632,7 @@
   margin-top: 6px;
 }
 
-/* 等待中动效 (Typing Indicator) */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 .mg-typing-indicator {
   display: flex;
   align-items: center;
@@ -662,7 +660,7 @@
   40% { transform: scale(1); }
 }
 
-/* 微信二维码放大查看遮罩层 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 #mg-ai-qr-modal {
   position: fixed;
   top: 0;
@@ -690,7 +688,7 @@
   padding: 8px;
 }
 
-/* 移动端适配 */
+/* Mellgen Biotech - Official AI Support Widget Styles */
 @media (max-width: 768px) {
   #mg-ai-trigger,
   #mg-ai-bubble-hint,

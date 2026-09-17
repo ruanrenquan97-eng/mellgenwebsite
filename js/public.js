@@ -263,17 +263,16 @@ $(function () {
 
     // 3. 构建全屏抽屉菜单 (Drawer Menu)
     if (!$("#mobileDrawer").length) {
+        var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
         var drawerHtml = '';
         drawerHtml += '<div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>';
         drawerHtml += '<div class="mobile-drawer" id="mobileDrawer">';
         drawerHtml += '  <div class="mobile-drawer-header">';
-        drawerHtml += '    <h3>美尔健生物</h3>';
+        drawerHtml += '    <h3>' + (isEn ? 'Mellgen Biotech' : '美尔健生物') + '</h3>';
         drawerHtml += '    <div class="mobile-drawer-close" id="mobileDrawerClose">✕</div>';
         drawerHtml += '  </div>';
         drawerHtml += '  <div class="mobile-drawer-body">';
         drawerHtml += '    <ul class="mobile-drawer-menu">';
-
-        var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
         for (var i = 0; i < navItems.length; i++) {
             var item = navItems[i];
             var hasChildren = item.children && item.children.length > 0;
@@ -306,8 +305,8 @@ $(function () {
         drawerHtml += '    </ul>';
         drawerHtml += '  </div>';
         drawerHtml += '  <div class="mobile-drawer-footer">';
-        drawerHtml += '    <a href="tel:0755-82926499" class="mobile-drawer-tel">📞 电话咨询：0755-82926499</a>';
-        drawerHtml += '    <a href="tel:136-9197-8530" class="mobile-drawer-tel" style="background:#2b6cb0;">📱 移动专线：136-9197-8530</a>';
+        drawerHtml += '    <a href="tel:0755-82926499" class="mobile-drawer-tel">' + (isEn ? '📞 Tel: 0755-82926499' : '📞 电话咨询：0755-82926499') + '</a>';
+        drawerHtml += '    <a href="tel:136-9197-8530" class="mobile-drawer-tel" style="background:#2b6cb0;">' + (isEn ? '📱 Mobile: 136-9197-8530' : '📱 移动专线：136-9197-8530') + '</a>';
         drawerHtml += '  </div>';
         drawerHtml += '</div>';
 

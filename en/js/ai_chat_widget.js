@@ -1,15 +1,10 @@
-/**
- * 美尔健生物 - 智能客服悬浮组件 (AI Chat Widget)
- * 具备双层防幻觉、问答数据库极速直出、AI深度解答与自动转人工名片机制
- */
+
 (function() {
   'use strict';
 
-  // 防止重复加载
   if (window.__MG_AI_CHAT_INITIALIZED__) return;
   window.__MG_AI_CHAT_INITIALIZED__ = true;
 
-  // 1. 获取后端 API Base URL (兼容本地开发 8000->8001 及线上生产环境)
   function getApiBaseUrl() {
     var port = window.location.port;
     var host = window.location.hostname;
@@ -24,7 +19,6 @@
   var CHAT_ENDPOINT = API_BASE + "/api/ai_chat";
   var CONFIG_ENDPOINT = API_BASE + "/api/ai_service/config";
 
-  // 会话状态
   var sessionId = "sess_" + Math.random().toString(36).substring(2, 9) + "_" + Date.now();
   var chatHistory = [];
   var isWaiting = false;
@@ -33,12 +27,11 @@
 
   var isEn = (window.location.pathname || "").indexOf("/en/") !== -1 || (document.documentElement.lang || "").toLowerCase().indexOf("en") !== -1;
 
-  // 默认配置（后续可异步从服务端拉取更新）
   var aiConfig = {
-    service_name: isEn ? "Mellgen AI Support" : "小美客服",
+    service_name: isEn ? "Mellgen AI Support" : "Mellgen AI Support",
     welcome_message: isEn 
       ? "Hello! I am Mellgen AI Consultant. We specialize in recombinant collagen, transdermal cyclic peptides, fibronectin, and PDRN. How can I assist you with raw materials, specs, or solutions today?"
-      : "您好！我是美尔健官方AI顾问小美。我们专注于重组胶原蛋白、重组纤连蛋白、透皮环肽、PDRN等高端生物原料研发与定制。请问有什么可以为您解答？",
+      : "Hello! I am Mellgen Biotech's official AI consultant. We specialize in recombinant collagen, recombinant fibronectin, transdermal cyclic peptides, PDRN, and high-end bio-raw materials. How may I assist you today?",
     default_phones: ["136-9197-8530", "0755-82926499"],
     wechat_qrcode_url: "./resource/images/98118d91c8d74d289a05f86fc2519ad7_6.jpg",
     preset_questions: isEn ? [
@@ -48,15 +41,14 @@
       "How many patents does Mellgen hold?",
       "Connect with Account Manager"
     ] : [
-      "重组胶原蛋白有哪些规格与型号？",
-      "透皮纤连蛋白可以提供COA检测报告吗？",
-      "起订量(MOQ)是多少？如何申领免费样品？",
-      "你们拥有多少项核心发明专利？",
-      "联系客户经理与技术支持"
+      "What specifications and grades are available for recombinant collagen?",
+      "Can you provide COA and testing reports for transdermal fibronectin?",
+      "What is the MOQ? How can I request free testing samples?",
+      "How many core invention patents does Mellgen hold?",
+      "Connect with Account Manager & Tech Support"
     ]
   };
 
-  // 彻底移除旧版右侧悬浮侧栏 (#client-2112, .xin-2112-client-1, .my-kefu 等)，仅保留右下角AI在线
   function removeOldSidebar() {
     var selectors = [
       "#client-2112",
@@ -79,41 +71,36 @@
     });
   }
 
-  // 2. 插入 DOM 元素
   function createWidgetDOM() {
-    // 移除旧侧栏
     removeOldSidebar();
 
-    // 触发按钮（胶囊型醒目展示“AI客服”与“AI在线”角标）
     var trigger = document.createElement("div");
     trigger.id = "mg-ai-trigger";
     trigger.style.cssText = "position:fixed;bottom:30px;right:28px;height:52px;padding:0 20px 0 16px;border-radius:26px;background:linear-gradient(135deg,#10b981 0%,#047857 100%);box-shadow:0 8px 24px rgba(5,150,105,0.4);cursor:pointer;z-index:99998;display:flex;align-items:center;gap:10px;user-select:none;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Segoe UI',sans-serif;";
-    trigger.setAttribute("title", isEn ? "Click to chat with AI Support (Online)" : "点击咨询AI客服 (AI在线)");
+    trigger.setAttribute("title", isEn ? "Click to chat with AI Support (Online)" : "AI (AI)");
     trigger.innerHTML = 
       '<svg class="mg-ai-icon" viewBox="0 0 24 24" style="width:24px;height:24px;fill:currentColor;flex-shrink:0;">' +
         '<path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.2-1.3c1.43.76 3.05 1.3 4.8 1.3 5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>' +
       '</svg>' +
-      '<span class="mg-ai-btn-text" style="font-size:15px;font-weight:700;letter-spacing:0.5px;white-space:nowrap;color:#fff;">' + (isEn ? "AI Support" : "AI客服") + '</span>' +
-      '<span class="mg-ai-badge" style="background:#ffffff;color:#047857;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,0.1);">' + (isEn ? "Online" : "AI在线") + '</span>';
+      '<span class="mg-ai-btn-text" style="font-size:15px;font-weight:700;letter-spacing:0.5px;white-space:nowrap;color:#fff;">' + (isEn ? "AI Support" : "AI") + '</span>' +
+      '<span class="mg-ai-badge" style="background:#ffffff;color:#047857;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,0.1);">' + (isEn ? "Online" : "AI") + '</span>';
 
-    // 欢迎小气泡提示
     var hint = document.createElement("div");
     hint.id = "mg-ai-bubble-hint";
     hint.innerHTML = 
       '<div style="font-weight:600; color:#059669; font-size:13px; display:flex; align-items:center; gap:5px; margin-bottom:1px;">' +
         '<span style="display:inline-block; width:6px; height:6px; background:#10b981; border-radius:50%; flex-shrink:0;"></span>' +
-        '<span>' + (isEn ? "Mellgen AI Support" : "AI客服 · 小美") + '</span>' +
+        '<span>' + (isEn ? "Mellgen AI Support" : "AI · ") + '</span>' +
       '</div>' +
-      '<div style="font-size:12.5px; color:#374151; line-height:1.45;">' + (isEn ? "Hello! Ask me about raw material specs, COA, or turnkey formulas." : "您好！我是AI客服小美，欢迎咨询原料规格、质检COA及技术方案~") + '</div>' +
-      '<span class="mg-hint-close" title="关闭提示">&times;</span>';
+      '<div style="font-size:12.5px; color:#374151; line-height:1.45;">' + (isEn ? "Hello! Ask me about raw material specs, COA, or turnkey formulas." : "！AI，、COA~") + '</div>' +
+      '<span class="mg-hint-close" title="Close hint">&times;</span>';
 
-    // 回到顶部浮动按钮
     var backTop = document.createElement("div");
     backTop.id = "mg-back-to-top";
-    backTop.setAttribute("title", isEn ? "Back to top" : "回到顶部");
+    backTop.setAttribute("title", isEn ? "Back to top" : "Back to top");
     backTop.innerHTML = 
       '<svg viewBox="0 0 24 24" class="mg-btt-icon"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>' +
-      '<span class="mg-btt-text">' + (isEn ? "TOP" : "顶部") + '</span>';
+      '<span class="mg-btt-text">' + (isEn ? "TOP" : "TOP") + '</span>';
 
     backTop.addEventListener("click", function() {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -128,46 +115,44 @@
       }
     });
 
-    // 聊天窗口主体
     var chatWindow = document.createElement("div");
     chatWindow.id = "mg-ai-chat-window";
     chatWindow.innerHTML = 
       '<div class="mg-ai-header">' +
         '<div class="mg-ai-header-info">' +
           '<div class="mg-ai-avatar" style="background:#ffffff; color:#059669; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; border:2px solid #a7f3d0; box-shadow:0 2px 6px rgba(0,0,0,0.12);">' +
-            (isEn ? 'AI' : '小美') +
+            (isEn ? 'AI' : '') +
           '</div>' +
           '<div class="mg-ai-title-wrap">' +
             '<h4 id="mg-widget-title">' + aiConfig.service_name + '</h4>' +
-            '<div class="mg-ai-sub"><span class="mg-ai-status-dot"></span> ' + (isEn ? 'Mellgen Official AI Assistant · Online' : '美尔健官方AI顾问 · 在线') + '</div>' +
+            '<div class="mg-ai-sub"><span class="mg-ai-status-dot"></span> ' + (isEn ? 'Mellgen Official AI Assistant · Online' : 'AI · ') + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="mg-ai-header-actions">' +
-          '<button class="mg-ai-header-btn" id="mg-btn-clear" title="' + (isEn ? 'Clear history' : '清空聊天记录') + '">' +
+          '<button class="mg-ai-header-btn" id="mg-btn-clear" title="' + (isEn ? 'Clear history' : '') + '">' +
             '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1z"/></svg>' +
           '</button>' +
-          '<button class="mg-ai-header-btn" id="mg-btn-close" title="' + (isEn ? 'Minimize' : '最小化') + '">&times;</button>' +
+          '<button class="mg-ai-header-btn" id="mg-btn-close" title="' + (isEn ? 'Minimize' : '') + '">&times;</button>' +
         '</div>' +
       '</div>' +
       '<div class="mg-ai-notice-bar">' +
-        '<span>' + (isEn ? '💡 Inquire specs, COA, MOQ and sample test' : '💡 欢迎咨询原料规格、COA与技术方案') + '</span>' +
-        '<button class="mg-ai-switch-human-btn" id="mg-btn-to-human">' + (isEn ? 'Contact Sales' : '联系客户经理') + '</button>' +
+        '<span>' + (isEn ? '💡 Inquire specs, COA, MOQ and sample test' : '💡 、COA') + '</span>' +
+        '<button class="mg-ai-switch-human-btn" id="mg-btn-to-human">' + (isEn ? 'Contact Sales' : '') + '</button>' +
       '</div>' +
       '<div class="mg-ai-body" id="mg-ai-messages"></div>' +
       '<div class="mg-ai-footer">' +
         '<div class="mg-ai-input-box">' +
-          '<input type="text" class="mg-ai-input" id="mg-chat-input" placeholder="' + (isEn ? 'Ask about ingredients, specs, or COA...' : '咨询原料规格、技术方案或COA，小美为您解答...') + '" autocomplete="off" />' +
-          '<button class="mg-ai-send-btn" id="mg-btn-send" title="' + (isEn ? 'Send' : '发送消息') + '">' +
+          '<input type="text" class="mg-ai-input" id="mg-chat-input" placeholder="' + (isEn ? 'Ask about ingredients, specs, or COA...' : '、COA，...') + '" autocomplete="off" />' +
+          '<button class="mg-ai-send-btn" id="mg-btn-send" title="' + (isEn ? 'Send' : '') + '">' +
             '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>' +
           '</button>' +
         '</div>' +
-        '<div class="mg-ai-bottom-note">' + (isEn ? 'Mellgen Biotech · Official AI Support' : '美尔健生物 · 小美AI智能客服') + '</div>' +
+        '<div class="mg-ai-bottom-note">' + (isEn ? 'Mellgen Biotech · Official AI Support' : ' · AI') + '</div>' +
       '</div>';
 
-    // 微信二维码全屏预览模态框
     var qrModal = document.createElement("div");
     qrModal.id = "mg-ai-qr-modal";
-    qrModal.innerHTML = '<img id="mg-qr-modal-img" src="" alt="企业微信二维码" />';
+    qrModal.innerHTML = '<img id="mg-qr-modal-img" src="" alt="Enterprise WeChat QR Code" />';
 
     document.body.appendChild(trigger);
     document.body.appendChild(hint);
@@ -180,7 +165,6 @@
     fetchRemoteConfig();
   }
 
-  // 3. 异步拉取后台配置并动态同步欢迎语与推荐问题
   function fetchRemoteConfig() {
     var xhr = new XMLHttpRequest();
     var sep = CONFIG_ENDPOINT.indexOf("?") === -1 ? "?" : "&";
@@ -205,7 +189,6 @@
             if (cfg.preset_questions && cfg.preset_questions.length > 0) {
               aiConfig.preset_questions = cfg.preset_questions;
             }
-            // 当会话尚未进行时，立即动态重绘欢迎界面，以呈现后台实时修改的问题
             if (chatHistory.length === 0) {
               var msgContainer = document.getElementById("mg-ai-messages");
               if (msgContainer) {
@@ -220,18 +203,16 @@
     xhr.send();
   }
 
-  // 4. 挂接原生右侧悬浮栏 `#client-2112`
   function hookSidebarContact() {
     var sidebar = document.getElementById("client-2112");
     if (!sidebar) return;
 
-    // 激活或添加 "AI咨询" 按钮项
     var existingItem = sidebar.querySelector(".my-kefu-link");
     if (!existingItem) {
       var aiLi = document.createElement("li");
       aiLi.className = "my-kefu-ai-chat";
       aiLi.style.cssText = "cursor: pointer; background: #059669; color: #fff; text-align: center; padding: 6px 0; border-radius: 4px; margin-bottom: 4px;";
-      aiLi.innerHTML = '<p style="margin:0; font-size:12px; font-weight:600; line-height:1.2;">🤖<br>AI客服</p>';
+      aiLi.innerHTML = '<p style="margin:0; font-size:12px; font-weight:600; line-height:1.2;">🤖<br>' + (isEn ? 'AI<br>Support' : 'AI') + '</p>';
       aiLi.addEventListener("click", function(e) {
         e.preventDefault();
         openChat();
@@ -246,7 +227,6 @@
     }
   }
 
-  // 5. 事件绑定
   function bindEvents() {
     var trigger = document.getElementById("mg-ai-trigger");
     var hint = document.getElementById("mg-ai-bubble-hint");
@@ -276,7 +256,7 @@
     });
 
     btnClear.addEventListener("click", function() {
-      if (confirm("确定要清空当前对话记录吗？")) {
+      if (confirm(isEn ? "Are you sure you want to clear chat history?" : "Are you sure you want to clear chat history?")) {
         chatHistory = [];
         var msgContainer = document.getElementById("mg-ai-messages");
         msgContainer.innerHTML = "";
@@ -296,7 +276,7 @@
     });
 
     btnToHuman.addEventListener("click", function() {
-      sendQuestion("联系客户经理");
+      sendQuestion(isEn ? "Connect with Account Manager" : "Connect with Account Manager");
     });
 
     qrModal.addEventListener("click", function() {
@@ -330,7 +310,6 @@
     isOpen = false;
   }
 
-  // 6. 渲染欢迎语与推荐问题
   function renderWelcome() {
     var msgContainer = document.getElementById("mg-ai-messages");
     if (!msgContainer) return;
@@ -349,7 +328,7 @@
     }
 
     welcomeRow.innerHTML = 
-      '<div class="mg-msg-mini-avatar">小美</div>' +
+      '' + '<div class="mg-msg-mini-avatar">' + (isEn ? "AI" : "AI") + '</div>' + '' +
       '<div>' +
         '<div class="mg-msg-content">' + escapeHtml(aiConfig.welcome_message) + '</div>' +
         suggestionsHtml +
@@ -357,7 +336,6 @@
 
     msgContainer.appendChild(welcomeRow);
 
-    // 绑定推荐问题点击
     var chips = welcomeRow.querySelectorAll(".mg-qa-chip");
     chips.forEach(function(chip) {
       chip.addEventListener("click", function() {
@@ -369,7 +347,6 @@
     scrollToBottom();
   }
 
-  // 7. 发送消息
   function sendMessage() {
     var input = document.getElementById("mg-chat-input");
     var text = input.value.trim();
@@ -382,10 +359,8 @@
     if (!questionText || isWaiting) return;
     isWaiting = true;
 
-    // 渲染用户消息
     appendUserMessage(questionText);
 
-    // 渲染加载中指示器
     var typingIndicator = showTypingIndicator();
 
     var payload = {
@@ -409,47 +384,44 @@
           if (res.code === 0 && res.data) {
             handleBotResponse(res.data);
           } else {
-            handleFallbackResponse("系统繁忙，请稍后再试或直接联系美尔健客户经理。");
+            handleFallbackResponse(isEn ? "The service is currently busy. Please try again or contact our account manager." : "，。");
           }
         } catch(e) {
-          handleFallbackResponse("抱歉，数据解析异常，为您提供美尔健客户经理电话与微信服务。");
+          handleFallbackResponse(isEn ? "Sorry, data processing issue. Here is our account manager contact info." : "，，。");
         }
       } else {
-        handleFallbackResponse("网络连接出现波动，如需紧急咨询请直接拨打美尔健热线联系客户经理。");
+        handleFallbackResponse(isEn ? "Network fluctuation detected. Please contact our hotline for immediate assistance." : "，。");
       }
     };
 
     xhr.onerror = function() {
       removeTypingIndicator(typingIndicator);
       isWaiting = false;
-      handleFallbackResponse("网络异常，无法连接智能客服服务器。请直接拨打客户经理电话或微信沟通。");
+      handleFallbackResponse(isEn ? "Network error. Please call our account manager directly." : "，。。");
     };
 
     xhr.send(JSON.stringify(payload));
   }
 
-  // 8. 处理 Bot 响应
   function handleBotResponse(data) {
     var answer = data.answer || "";
     var contactCard = data.contact_card || null;
     var needsHuman = !!data.needs_human;
 
-    // 核心规则：若会话中客户提问达到或超过 10 条，建议联系人工客户经理
     if (userQuestionCount >= 10 || data.suggest_manager) {
       needsHuman = true;
       if (!contactCard) {
         contactCard = {
-          title: "美尔健专属客户经理",
+          title: "Mellgen Dedicated Account Manager",
           phones: aiConfig.default_phones,
           wechat_qrcode: aiConfig.wechat_qrcode_url,
-          wechat_hint: "微信扫一扫加专属客户经理，获取一对一配方指导与专属阶梯报价"
+          wechat_hint: isEn ? "Scan to connect with your dedicated account manager for custom formulation and tiered pricing" : "，"
         };
       } else {
-        contactCard.title = "美尔健专属客户经理";
+        contactCard.title = isEn ? "Mellgen Dedicated Account Manager" : "Mellgen Dedicated Account Manager";
       }
     }
 
-    // 更新前端会话上下文
     chatHistory.push({ role: "assistant", content: answer });
 
     appendBotMessage(answer, contactCard, needsHuman);
@@ -457,16 +429,15 @@
 
   function handleFallbackResponse(errorText) {
     var fallbackCard = {
-      title: "美尔健专属客户经理支持",
+      title: isEn ? "Mellgen Dedicated Account Manager" : "Mellgen Dedicated Account Manager Support",
       reason: errorText,
       phones: aiConfig.default_phones,
       wechat_qrcode: aiConfig.wechat_qrcode_url,
-      wechat_hint: "微信扫一扫加专属客户经理，极速获取样品与报价方案"
+      wechat_hint: isEn ? "Scan to connect with your dedicated account manager for fast samples and quotes" : "，"
     };
     appendBotMessage(errorText, fallbackCard, true);
   }
 
-  // 9. DOM 渲染辅助
   function appendUserMessage(text) {
     userQuestionCount++;
     var msgContainer = document.getElementById("mg-ai-messages");
@@ -503,26 +474,25 @@
       if (qrUrl) {
         qrHtml = 
           '<div class="mg-qrcode-wrap">' +
-            '<img class="mg-qrcode-img" src="' + escapeHtml(qrUrl) + '" alt="美尔健微信客服" title="点击放大二维码" />' +
-            '<div class="mg-qrcode-hint">' + escapeHtml(contactCard.wechat_hint || "微信扫一扫加专属客户经理") + '</div>' +
+            '<img class="mg-qrcode-img" src="' + escapeHtml(qrUrl) + '" alt="Mellgen WeChat Support" title="" />' +
+            '<div class="mg-qrcode-hint">' + escapeHtml(contactCard.wechat_hint || (isEn ? "Scan WeChat QR code to connect" : "")) + '</div>' +
           '</div>';
       }
 
       var cardClass = needsHuman ? "mg-human-card" : "mg-human-card primary-mode";
       cardHtml = 
         '<div class="' + cardClass + '">' +
-          '<div class="mg-human-title">👨‍💼 ' + escapeHtml(contactCard.title || "客户经理对接通道") + '</div>' +
+          '<div class="mg-human-title">👨‍💼 ' + escapeHtml(contactCard.title || (isEn ? "Account Manager Channel" : "")) + '</div>' +
           '<div style="font-size:12px; color:#475569; margin-bottom:4px;">' + escapeHtml(contactCard.reason || "") + '</div>' +
           phoneListHtml +
           qrHtml +
         '</div>';
     }
 
-    // 格式化文本换行
     var formattedText = escapeHtml(text).replace(/\n/g, "<br>");
 
     row.innerHTML = 
-      '<div class="mg-msg-mini-avatar">小美</div>' +
+      '' + '<div class="mg-msg-mini-avatar">' + (isEn ? "AI" : "AI") + '</div>' + '' +
       '<div style="max-width: 100%;">' +
         '<div class="mg-msg-content">' + formattedText + '</div>' +
         cardHtml +
@@ -530,7 +500,6 @@
 
     msgContainer.appendChild(row);
 
-    // 绑定二维码点击放大
     var qrImgs = row.querySelectorAll(".mg-qrcode-img");
     qrImgs.forEach(function(img) {
       img.addEventListener("click", function() {
@@ -550,7 +519,7 @@
     row.className = "mg-msg-row mg-bot";
     row.id = "mg-temp-typing";
     row.innerHTML = 
-      '<div class="mg-msg-mini-avatar">小美</div>' +
+      '' + '<div class="mg-msg-mini-avatar">' + (isEn ? "AI" : "AI") + '</div>' + '' +
       '<div class="mg-typing-indicator">' +
         '<span class="mg-typing-dot"></span>' +
         '<span class="mg-typing-dot"></span>' +
@@ -586,7 +555,6 @@
       .replace(/'/g, "&#039;");
   }
 
-  // 10. 自动加载关联 CSS 并启动
   function getAssetPrefix() {
     var scripts = document.getElementsByTagName("script");
     for (var i = 0; i < scripts.length; i++) {
@@ -621,13 +589,11 @@
   }
 
   function init() {
-    // 立即执行并多次延迟执行旧侧栏彻底清理
     removeOldSidebar();
     setTimeout(removeOldSidebar, 200);
     setTimeout(removeOldSidebar, 800);
     setTimeout(removeOldSidebar, 2000);
 
-    // 监听DOM变动，防止遗留模板脚本动态添加旧客服侧栏
     try {
       if (window.MutationObserver) {
         var obs = new MutationObserver(function() {
@@ -649,7 +615,6 @@
 
   init();
 
-  // 暴露公共接口供页面其他按钮调用
   window.MellgenAIChat = {
     open: openChat,
     close: closeChat,

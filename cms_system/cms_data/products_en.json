@@ -44,11 +44,7 @@
       "patents": "Chinese and US Granted Invention Patents on Cyclic Transdermal Peptide Technology"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_tpht_penetration",
-      "lab_tpht_efficacy",
-      "lab_tpht_safety"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p3_transdermal.jpg",
     "diagram_caption": "3rd-generation biological transdermal mechanism: cTDP targeting Na+/K+-ATPase to reversibly open follicular and paracellular pathways within 5 minutes, enhancing absorption 10-fold.",
     "intro_image": "resource/reports/images/lab_tpht_penetration_data.jpg",
@@ -103,13 +99,7 @@
       "patents": "US and Chinese Invention Patents on Transdermal Recombinant Fibronectin Peptides"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_tfn_penetration_barrier",
-      "lab_tfn_four_efficacy",
-      "lab_tfn_toxicology",
-      "lab_tfn_phototox_mutagen",
-      "lab_tpht_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
     "diagram_caption": "TFNpro transdermal fibronectin: 8-fold enhanced absorption and stratum corneum barrier repair histological evidence.",
     "intro_image": "resource/reports/images/lab_tfn_penetration_barrier_data.jpg",
@@ -164,11 +154,7 @@
       "patents": "Granted Chinese Invention Patent: Transdermal Multi-Type Recombinant Collagen Complex"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_collagen_penetration",
-      "lab_collagen_biocompatibility",
-      "lab_collagen3_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
     "diagram_caption": "5Dcollagen recombinant multi-type collagen 5D architectural model (Type I bundle / Type II cartilage / Type III mesh / Type IV basement membrane / Type XVII anchor).",
     "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
@@ -353,11 +339,7 @@
       "patents": "Patent-pending nano-PLLA and recombinant collagen co-dispersion platform"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_recm_multi_efficacy",
-      "lab_tfn_penetration_barrier",
-      "lab_collagen_biocompatibility"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
     "diagram_caption": "MELLPRO-rECM biomimetic extracellular matrix full-component architecture model (Collagen + Fibronectin + Elastin + Integrin + Laminin).",
     "intro_image": "resource/reports/images/lab_recm_multi_efficacy_data.jpg",
@@ -472,10 +454,7 @@
       "patents": "Proprietary bio-fermentation exosome isolation and purification platform"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_recm_multi_efficacy",
-      "lab_tfn_penetration_barrier"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
     "diagram_caption": "Composite anti-aging oligopeptide matrix stimulating Type I/III collagen secretion and ROS clearance.",
     "intro_image": "resource/images/product_intros/intro_zebrafish.jpg",
@@ -530,11 +509,7 @@
       "patents": "Patent-pending cyclic peptide delivery carrier for nucleic acid bioactive macromolecules"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_pdrn_triple_efficacy",
-      "lab_pdrn_safety_assessment",
-      "lab_tpht_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p6_ctdp_data.jpg",
     "diagram_caption": "Supramolecular rod assembly of PDRN bound with transdermal cyclic peptides: cutaneous delivery and absorption data.",
     "intro_image": "resource/reports/images/lab_pdrn_triple_efficacy_data.jpg",
@@ -665,11 +640,7 @@
     "top": false,
     "show": false,
     "date": "2026-09-12 03:26:06",
-    "referenced_lab_data": [
-      "lab_placenta_efficacy",
-      "lab_placenta_safety_test",
-      "lab_tpht_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_placenta.jpg",
     "diagram_caption": "Sheep placenta nano-transdermal delivery, MMP-1 inhibition, and skin hydration clinical curves.",
     "intro_image": "resource/images/product_intros/intro_sheep.jpg",
@@ -983,11 +954,7 @@
       "patents": "Invention Patent on High-Yield Peach Gum Polysaccharide Fermentation & Refining"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_yskm_soothing_repair",
-      "lab_yskm_toxicology_safety",
-      "lab_yskm_risk_screening"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p10_peach_gum.jpg",
     "diagram_caption": "MEGCALM PSF peach gum ferment HPLC molecular weight profile and AQP3 activation data.",
     "intro_image": "resource/images/product_intros/intro_peach_gum.jpg",
@@ -1107,9 +1074,7 @@
       "patents": "Supercritical fluid extraction and ultrasonic cell-wall disruption technology"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_gpt_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "diagram_caption": "MEGCALM GPT Changbai treasures MC1R pathway blockade and tyrosinase inhibition curve (superior to arbutin).",
     "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
@@ -1224,11 +1189,7 @@
       "patents": "Invention Patent on Industrialized Recombinant Fibronectin Biosynthesis"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_tfn_penetration_barrier",
-      "lab_tfn_four_efficacy",
-      "lab_tfn_toxicology"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
     "diagram_caption": "AlphaDrugs AI platform: Fibronectin & Integrin molecular docking simulation model.",
     "intro_image": "resource/images/brochure_diagrams/diagram_p4_docking.jpg",
@@ -1283,11 +1244,7 @@
       "patents": "Granted Chinese Invention Patent on High-Density Yeast-Expressed Recombinant Collagen"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_collagen3_efficacy",
-      "lab_collagen_penetration"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_5d_collagen.jpg",
     "diagram_caption": "Recombinant Type III humanized collagen triple-helix spatial conformation and integrin binding sites.",
     "intro_image": "resource/reports/images/lab_collagen3_efficacy_data.jpg",
@@ -1342,10 +1299,7 @@
       "patents": "Granted Invention Patent on Recombinant Mussel Adhesive Protein Synthesis"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_map_transdermal_absorption",
-      "lab_map_three_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_recm.jpg",
     "diagram_caption": "Recombinant tropoelastin cross-linking with microfibrils to build dermal elasticity 3D recoil network.",
     "intro_image": "resource/images/product_intros/intro_collagen_elastic_matrix.jpg",
@@ -1400,10 +1354,7 @@
       "patents": "Invention Patent on Deep-Sea Jellyfish Glycoprotein Extraction & Stabilization"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_tfn_penetration_barrier"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
     "diagram_caption": "Microbial fermentation pilot plant and GMP Class 100 laminar flow sterile filling area.",
     "intro_image": "resource/reports/images/lab_yskm_soothing_repair_data.jpg",
@@ -1457,9 +1408,7 @@
       "patents": "Synergistic peptide-vitamin co-stabilization micro-dispersion patent"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_gpt_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p7_tfn_repair.jpg",
     "diagram_caption": "Recombinant MAP DOPA wet-adhesion film formation and epidermal barrier shielding histology.",
     "intro_image": "resource/reports/images/lab_map_three_efficacy_data.jpg",
@@ -1514,10 +1463,7 @@
       "patents": "Invention Patent on Biomimetic Recombinant Snail Mucin Protein Preparation"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_recm_multi_efficacy",
-      "lab_map_three_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
     "diagram_caption": "Recombinant snail mucin proteoglycan scaffolding and scratch wound healing assay.",
     "intro_image": "resource/images/product_intros/intro_snail.jpg",
@@ -1572,10 +1518,7 @@
       "patents": "Patent on Snail Mucin and Recombinant Collagen Biomimetic Complex"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_recm_multi_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_snail.jpg",
     "diagram_caption": "Snailpro biomimetic snail collagen EGFR binding and 48-hour thermal stability retention (>95%).",
     "intro_image": "resource/images/product_intros/intro_snail.jpg",
@@ -1630,10 +1573,7 @@
       "patents": "Granted Chinese and US Invention Patents on Cyclic Peptide Chemical Synthesis & Skin Penetration"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_tpht_penetration",
-      "lab_tpht_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "diagram_caption": "Nonapeptide-1 competitive binding to melanocyte MC1R receptor inhibiting tyrosinase pathway.",
     "intro_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
@@ -1686,10 +1626,7 @@
       "patents": "Patented multi-stage gradient enzymolysis and membrane ultrafiltration purification"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_lingbai_rose_screening",
-      "lab_gpt_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p11_changbai.jpg",
     "diagram_caption": "Black Ganoderma beta-glucan polysaccharide conformation and anti-inflammatory kinetics.",
     "intro_image": "resource/images/product_intros/intro_changbai_treasures.jpg",
@@ -1744,9 +1681,7 @@
       "patents": "Deep-Sea Extreme Microbe Fermentation & Metabolite Fractionation Patent"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_txod_whitening_antiox"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p8_txod.jpg",
     "diagram_caption": "Marine microbial antioxidant redox enzyme TXOD in zebrafish model: melanin reduction and photoaging protection.",
     "intro_image": "resource/images/product_intros/intro_marine_yeast.jpg",
@@ -1801,10 +1736,7 @@
       "patents": "Granted Invention Patent on Recombinant Basement Membrane Collagen Complex"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_collagen_biocompatibility",
-      "lab_collagen3_efficacy"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p9_jellyfish.jpg",
     "diagram_caption": "JELFIPRO jellyfish mucin anti-photoaging, cell proliferation (OD490nm), and ACE inhibition curve.",
     "intro_image": "resource/images/product_intros/intro_jellyfish.jpg",
@@ -1857,9 +1789,7 @@
       "patents": "Patent on Deep-Sea Psychrophilic Enzyme Fermentation & Stabilization"
     },
     "disclaimer": "Regulatory & Professional Compliance Statement:\n1. The raw material characteristics and experimental data (including cytological studies, mechanism diagrams, and literature citations) presented on this webpage are intended exclusively for technical discussion and formulation R&D reference by cosmetic brand formulators, R&D engineers, product planners, and academic research institutions. They do not constitute finished consumer cosmetic efficacy claims or commercial warranties.\n2. Pursuant to the Regulations on the Supervision and Administration of Cosmetics, Standards for Cosmetic Efficacy Claim Evaluation, and relevant global cosmetic regulatory frameworks, cosmetic brand enterprises utilizing this raw material shall be solely responsible for the safety, stability, and efficacy claims of their finished consumer products, and shall independently complete efficacy evaluations and regulatory filings/registrations with the competent health authorities prior to commercial launch. Conclusions from in-vitro or cellular studies shall not be directly extrapolated as consumer claims.\n3. Mellgen Biotech assumes no joint or indirect liability for any claims or regulatory non-compliance arising from improper customer formulation, unauthorized off-label claims, or unverified applications.",
-    "referenced_lab_data": [
-      "lab_yskm_toxicology_safety"
-    ],
+    "referenced_lab_data": [],
     "diagram_image": "resource/images/brochure_diagrams/diagram_p4_facilities.jpg",
     "diagram_caption": "Recombinant active enzyme fermentation plant and GMP standard separation & purification line.",
     "intro_image": "resource/images/product_intros/intro_transdermal_microsphere.jpg",

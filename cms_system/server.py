@@ -882,6 +882,18 @@ def toggle_case_visibility():
     settings["show_case_section"] = show_case
     save_json("settings.json", settings)
     
+    # 同步更新 nav.json 中【合作案例】节点的显隐状态
+    try:
+        nav_path = os.path.join(DATA_DIR, "nav.json")
+        if os.path.exists(nav_path):
+            nav_data = load_json("nav.json")
+            for n in nav_data:
+                if n.get("name") in ["合作案例", "行业案例"] or "article_hzal" in n.get("url", ""):
+                    n["show"] = show_case
+            save_json("nav.json", nav_data)
+    except Exception as e:
+        print(f"[Toggle Case Error] Syncing nav.json failed: {e}")
+    
     def run_rebuild():
         try:
             import generator

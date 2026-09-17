@@ -384,6 +384,8 @@ def update_navigation(html_content, nav_links, file_rel_path, settings=None):
             nav_html += f'     <li class="is-sub-item" style="display:none;"> <a href="{child_url}" title="{child["name"]}"> &nbsp;&nbsp;├ {child["name"]} </a> </li> \n'
 
     for item in nav_links:
+        if item.get("show") is False or item.get("status") == "hidden":
+            continue
         if not show_case and (item.get("name") in ["合作案例", "行业案例"] or "article_hzal" in item.get("url", "")):
             continue
         process_item(item)

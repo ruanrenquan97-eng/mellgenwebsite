@@ -1691,43 +1691,35 @@ def update_single_homepage(file_path, products, articles, settings, friendlinks,
     cpbk_news = [a for a in sorted_active_articles if a.get('category') in get_article_subcategories("科普研究")][:4]
     cjwt_news = [a for a in sorted_active_articles if a.get('category') in get_article_subcategories("常见问答")][:4]
     
-    def render_news_block(news_list, more_link="./article_xwzx.html"):
+    def make_news_tab_html(news_list):
         if not news_list:
             return ""
-        first = news_list[0]
-        res = f"""\n      <div class="conl f_cb"> 
-       <a href="./{first['link']}" title="{first['title']}"><img alt="{first['title']}" src="./{first['image']}"> 
-        <div class="txt"> 
-         <p>{first.get('date', '')}</p> 
-         <h3>{first['title']}</h3> 
-         <div>
-           {first.get('desc', '')[:100]}... 
-         </div> 
-        </div> </a> 
-      </div> 
-      <div class="conr f_cb"> 
-       <ul> \n"""
-        for a in news_list[1:]:
-            d_parts = a.get('date', '2025-01-01').split('-')
-            d_str = d_parts[-1] if len(d_parts) > 0 else '01'
-            m_str = f"{d_parts[0]}.{d_parts[1]}" if len(d_parts) > 1 else '2025.01'
-            res += f"""        <li> <a href="./{a['link']}" title="{a['title']}"> 
-          <div class="date"> 
-           <h3>{d_str}</h3> 
-           <p>{m_str}</p> 
-          </div> 
-          <div class="txt"> 
-           <h4>{a['title']}</h4> 
-           <p>{a.get('desc', '')[:80]}...</p> 
-          </div> </a> </li> \n"""
-        res += f"""       </ul> 
-       <a class="more" href="{more_link}" title="查看更多">MORE &gt;&gt;</a> 
-      </div> \n"""
-        return res
+        tab_html = "\n"
+        for i, n in enumerate(news_list):
+            detail_link = "./" + n.get("link", "").replace("\\", "/").lstrip("./")
+            img_path = "./" + (n.get("image") or "images/ban_txt.png").replace("\\", "/").lstrip("./")
+            title = n.get("title", "")
+            short_title = (title[:30] + "...") if len(title) > 30 else title
+            desc = (n.get("desc") or "")[:80].strip()
+            date_val = n.get("date", "")
+            cur_cls = "cur" if i == 0 else ""
+            tab_html += f"""        <dl class="{cur_cls}"> 
+         <a href="{detail_link}" target="_blank" title="{title}"> 
+          <dt> 
+           <h4>{short_title}</h4> 
+           <i><img alt="{title}" src="{img_path}" title="{title}"></i> 
+          </dt> 
+          <dd> 
+           <p>{desc}...</p> 
+           <span><em>{date_val}</em><i><img src="./images/newmore.png"></i></span> 
+          </dd> </a> 
+        </dl> \n"""
+        tab_html += "       "
+        return tab_html
         
-    qydt_html = render_news_block(qydt_news, "./article_qydt.html")
-    cpbk_html = render_news_block(cpbk_news, "./article_cpbk.html")
-    cjwt_html = render_news_block(cjwt_news, "./article_cjwt.html")
+    qydt_html = make_news_tab_html(qydt_news)
+    cpbk_html = make_news_tab_html(cpbk_news)
+    cjwt_html = make_news_tab_html(cjwt_news)
     
     news_pattern = r'(<div class="tabsnew f_cb">.*?<div class="js-swiper-tab">.*?<div class="swiper-wrapper">.*?<div class="swiper-slide">\s*<div class="newcon">)(.*?)(</div>\s*</div>\s*<div class="swiper-slide">\s*<div class="newcon">)(.*?)(</div>\s*</div>\s*<div class="swiper-slide">\s*<div class="newcon">)(.*?)(</div>\s*</div>)'
     match = re.search(news_pattern, html, re.DOTALL)

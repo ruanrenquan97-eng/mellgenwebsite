@@ -165,7 +165,7 @@ def render_b2b_dossier_en(p):
         out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">💡</span>')
         out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">Product Planning &amp; Marketing Highlights (Marketing Highlights)</span>')
         out.append('      </div>')
-        out.append('      <span style="color: #fef3c7; font-size: 12px;">Core Mechanism · Efficacy Claims · Recommended Formats · Scientific Backing</span>')
+        out.append('      <span style="color: #fef3c7; font-size: 12px;">Core Mechanism · Key Selling Points · Recommended Formats · Scientific Backing</span>')
         out.append('    </div>')
         out.append('    <div style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">')
 
@@ -375,7 +375,7 @@ def generate_en_product_detail(product, all_articles=None):
 
     # Normalize bottom recommendation section: exactly one clean English recommendation block
     standard_rec_block_en = '''<div class="k12-cx-xgcp-4pl-fx1-1-01 blk blk-main" style="width:1200px;margin:30px auto;"> 
- <h4 class="p102-pro-content-title">Recommended Products</h4> 
+ <h4 class="p102-pro-content-title">Recommended Raw Materials</h4> 
  <div class="k12-cx-xgcp-4pl-fx1-1-01-list"> 
    <dl> 
     <dt> 

@@ -444,7 +444,7 @@ def update_navigation(html_content, nav_links, file_rel_path, settings=None):
 DEFAULT_DISCLAIMER = """【法规合规与专业同行免责声明】
 1. 本网页展示的所有原料产品技术参数、活性机理、科研实验数据（包括细胞实验、生化模型等体外数据）及相关文献资料，仅供化妆品品牌方研发工程师、配方师、产品策划及高校科研机构进行同行专业技术探讨与配方研发参考，并非针对终端消费者的产品功效宣称、商业承诺或医疗建议。
 2. 根据《化妆品监督管理条例》、《化妆品功效宣称评价规范》等相关法律法规，使用本原料的化妆品成品企业应独立对其终产品的安全性、稳定性和功效宣称负责，并依法完成终产品的功效宣称评价与国家NMPA平台备案/注册申报，不得直接将本技术资料中有关原料的体外/细胞实验结论直接作为终端化妆品功效依据。
-3. 本公司对因客户不当使用、超范围宣称或未经验证配伍导致的任何直接或间接法律与质量责任不承担连带责任。"""
+3. 本产品是原料，不可直接使用，需根据说明书要求添加。本公司对因客户不当使用、超范围宣称或未经验证配伍导致的任何直接或间接法律与质量责任不承担连带责任。"""
 
 def render_product_b2b_sections(product):
     rd = product.get("rd_info") or {}
@@ -550,7 +550,7 @@ def render_product_b2b_sections(product):
         out.append('        <span style="display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: rgba(255,255,255,0.2); border-radius: 6px; color: #fff; font-size: 14px;">💡</span>')
         out.append('        <span style="color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">产品策划与营销卖点 (Marketing Highlights)</span>')
         out.append('      </div>')
-        out.append('      <span style="color: #fef3c7; font-size: 12px;">核心机理 · 功效宣称 · 推荐剂型 · 专利科研背书</span>')
+        out.append('      <span style="color: #fef3c7; font-size: 12px;">核心机理 · 卖点梳理 · 推荐剂型 · 专利科研背书</span>')
         out.append('    </div>')
         out.append('    <div style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">')
         
@@ -973,7 +973,7 @@ def generate_product_detail_page(product, base_template_html, settings, nav_link
 
     # 5. Clean up & Normalize Bottom Recommendations (ensure exactly one clean block, no duplicated blocks or empty news-info blocks)
     standard_rec_block = '''<div class="k12-cx-xgcp-4pl-fx1-1-01 blk blk-main" style="width:1200px;margin:30px auto;"> 
- <h4 class="p102-pro-content-title">推荐产品</h4> 
+ <h4 class="p102-pro-content-title">推荐原料</h4> 
  <div class="k12-cx-xgcp-4pl-fx1-1-01-list"> 
    <dl> 
     <dt> 
